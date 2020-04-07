@@ -1,38 +1,247 @@
-.App {
-  text-align: center;
+body {
+  background-color: black;
+  background-image: linear-gradient(to top, #0D1522 0%, #0b463b 100%);
+  /*background-image: url("../assets/back.jpg");*/
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#simple-popover{
+  background-color: #00000099;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#simple-popover::before{
+  background-color: #00000099;
+}
+.MuiPopover-paper{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  padding: 0px 5px 5px 20px;
 }
 
-.App-link {
-  color: #61dafb;
+/* Print styles */
+td,
+th,
+tr,
+table {
+    /* border-top: 1px solid black; */
+    border-collapse: collapse;
+    padding: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+th.tableName{
+  width: 35%;
+  max-width: 35%;
+  font-size: medium;
+  font-weight: bold;
+  text-align: left;
+  padding-left: 18px;
 }
+
+th.date{
+  width: 65%;
+  max-width: 65%;
+  font-size: medium;
+  font-weight: bold;
+  text-align: right;
+  padding-right: 18px;
+}
+
+th.category{
+  font-weight: 900;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  text-align: center;
+  width: 300px;
+  max-width: 300px;
+}
+
+/* HEAD */
+td.quantityH,
+th.quantityH {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    font-weight: bold;
+    font-size: large;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    vertical-align: middle;
+    /* padding-left: 30px; */
+    /* padding-right: 52px; */
+    text-align: left;
+}
+
+td.detailH,
+th.detailH {
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    font-weight: bold;
+    font-size: large;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    vertical-align: middle;
+    /* padding-right: 20px; */
+    text-align: left;
+}
+
+td.priceH,
+th.priceH {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    font-weight: bold;
+    font-size: large;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    vertical-align: middle;
+    /* padding-left: 30px; */
+    /* padding-right: 52px; */
+    text-align: left;
+}
+
+td.subtotalH,
+th.subtotalH {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    font-weight: bold;
+    font-size: large;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    vertical-align: middle;
+    /* padding-left: 30px; */
+    /* padding-right: 52px; */
+    text-align: left;
+}
+
+/* BODY */
+td.quantity,
+th.quantity {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    /* word-break: break-all; */
+    font-weight: bold;
+    font-size: large;
+    vertical-align: middle;
+    /* padding-left: 30px; */
+    /* padding-right: 52px; */
+    text-align: right;
+}
+
+td.detail,
+th.detail {
+    width: 150px;
+    min-width: 150px;
+    max-width: 150px;
+    font-weight: bold;
+    vertical-align: middle;
+    /* padding-right: 20px; */
+}
+
+td.price,
+th.price {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    font-weight: bold;
+    font-size: large;
+    vertical-align: middle;
+    /* padding-left: 30px; */
+    /* padding-right: 52px; */
+    text-align: right;
+}
+
+td.subtotal,
+th.subtotal {
+    width: 50px;
+    min-width: 50px;
+    max-width: 50px;
+    font-weight: bold;
+    font-size: large;
+    vertical-align: middle;
+    /* padding-left: 30px; */
+    /* padding-right: 52px; */
+    text-align: right;
+}
+
+td.observation,
+th.observation {
+    width: 80%;
+    max-width: 80%;
+    word-break: break-all;
+    vertical-align: middle;
+    font-size: smaller;
+}
+
+/* FOOTER */
+td.total,
+th.total {
+    width: 33%;
+    max-width: 33%;
+    font-weight: bold;
+    font-size: large;
+    vertical-align: middle;
+    /* padding-left: 30px; */
+    /* padding-right: 52px; */
+    text-align: right;
+    border-top: solid 1px black;
+    /* border-bottom: solid 1px black; */
+}
+
+td.client,
+th.client {
+    width: 300px;
+    font-weight: 300;
+    font-size: medium;
+    vertical-align: middle;
+    padding-left: 30px;
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+    align-content: center;
+    font-weight: bold;
+    width: 300px;
+}
+
+.tanks{
+  text-align: center;
+  align-content: center;
+  font-weight: bold;
+  width: 300px;
+  height: 50px;
+}
+
+.footer{
+  font-size: small;
+  vertical-align: middle;
+  text-align: center;
+  border-top: solid 1px black;
+}
+
+
+.ticket, #ticket {
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    background-color: white;
+    color: black;
+}
+
+.no-break{ page-break-before: always; color: black; }

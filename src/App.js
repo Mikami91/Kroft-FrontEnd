@@ -1,26 +1,33 @@
-import React from 'react';
+// Dependencies
+import React, { Fragment } from 'react';
+// Routing
+import { Switch, Route, withRouter } from "react-router-dom";
+// Routes
+import routes from './routes/routes';
+// Assets
 import logo from './logo.svg';
+// Styles
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <Switch>
+        {routes.map((prop, key) => {
+          if (prop.path !== null ) {
+            return (
+              <Route
+                path={prop.path}
+                component={prop.component}
+                key={key}
+              />
+            );
+          }
+          return <Route component={"NoFound"} />;
+        })}
+      </Switch>
+    </Fragment>
   );
 }
 
-export default App;
+export default withRouter(App); 
