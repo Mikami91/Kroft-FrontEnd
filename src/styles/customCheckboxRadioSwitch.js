@@ -3,7 +3,7 @@ import {
   dangerColor,
   roseColor,
   grayColor
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const customCheckboxRadioSwitch = {
   checkRoot: {

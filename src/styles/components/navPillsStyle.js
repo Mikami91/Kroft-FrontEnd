@@ -1,11 +1,14 @@
+// Colors
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import {
   roseColor,
   primaryColor,
+  secondaryColor,
   infoColor,
   successColor,
   warningColor,
   dangerColor
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const navPillsStyle = theme => ({
   root: {
@@ -78,7 +81,16 @@ const navPillsStyle = theme => ({
       color: "#FFFFFF",
       backgroundColor: primaryColor,
       boxShadow:
-        "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4)"
+        "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px " + fade(secondaryColor, 0.4),
+
+    }
+  },
+  secondary: {
+    "&,&:hover": {
+      color: "#FFFFFF",
+      backgroundColor: secondaryColor,
+      boxShadow:
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px " + fade(secondaryColor, 0.4),
     }
   },
   info: {

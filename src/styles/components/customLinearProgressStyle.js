@@ -1,12 +1,13 @@
 import {
   primaryColor,
+  secondaryColor,
   warningColor,
   dangerColor,
   successColor,
   infoColor,
   roseColor,
   grayColor
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const customLinearProgressStyle = {
   root: {
@@ -19,6 +20,9 @@ const customLinearProgressStyle = {
   },
   primary: {
     backgroundColor: primaryColor
+  },
+  secondary: {
+    backgroundColor: secondaryColor
   },
   warning: {
     backgroundColor: warningColor

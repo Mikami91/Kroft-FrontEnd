@@ -1,4 +1,4 @@
-import { title } from "../material-ui.js";
+import { title } from "../../themes/theme.js";
 
 const productStyle = {
   section: {

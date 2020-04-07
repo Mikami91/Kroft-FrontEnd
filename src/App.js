@@ -17,6 +17,7 @@ function App() {
           if (prop.path !== null ) {
             return (
               <Route
+                exact
                 path={prop.path}
                 component={prop.component}
                 key={key}

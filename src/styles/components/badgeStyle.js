@@ -1,11 +1,12 @@
 import {
   primaryColor,
+  secondaryColor,
   warningColor,
   dangerColor,
   successColor,
   infoColor,
-  roseColor
-} from "../material-ui.js";
+  roseColor,
+} from "../../themes/theme.js";
 
 const badgeStyle = {
   badge: {
@@ -24,6 +25,9 @@ const badgeStyle = {
   },
   primary: {
     backgroundColor: primaryColor
+  },
+  secondary: {
+    backgroundColor: secondaryColor
   },
   warning: {
     backgroundColor: warningColor

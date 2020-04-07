@@ -89,6 +89,7 @@ CustomTabs.propTypes = {
     "danger",
     "info",
     "primary",
+    "secondary",
     "rose"
   ]),
   title: PropTypes.string,

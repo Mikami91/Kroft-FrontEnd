@@ -1,4 +1,4 @@
-import { container } from "../material-ui.js";
+import { container } from "../../themes/theme.js";
 
 import image from "assets/img/sign.jpg";
 

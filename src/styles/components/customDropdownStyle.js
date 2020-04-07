@@ -1,7 +1,9 @@
 import {
   defaultFont,
   primaryColor,
+  secondaryColor,
   primaryBoxShadow,
+  secondaryBoxShadow,
   infoColor,
   infoBoxShadow,
   successColor,
@@ -12,7 +14,7 @@ import {
   dangerBoxShadow,
   roseColor,
   roseBoxShadow
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const customDropdownStyle = theme => ({
   popperClose: {
@@ -79,6 +81,13 @@ const customDropdownStyle = theme => ({
       backgroundColor: primaryColor,
       color: "#FFFFFF",
       ...primaryBoxShadow
+    }
+  },
+  secondaryHover: {
+    "&:hover": {
+      backgroundColor: secondaryColor,
+      color: "#FFFFFF",
+      ...secondaryBoxShadow
     }
   },
   infoHover: {

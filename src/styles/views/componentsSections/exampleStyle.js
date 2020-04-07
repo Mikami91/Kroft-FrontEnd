@@ -1,4 +1,4 @@
-import { conatinerFluid } from "../material-ui.js";
+import { conatinerFluid } from "../../themes/theme.js";
 
 import imagesStyle from "../../styles/imagesStyles.js";
 

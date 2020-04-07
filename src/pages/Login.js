@@ -63,7 +63,7 @@ export default function LoginPage(props) {
                         justIcon
                         href="#pablo"
                         target="_blank"
-                        color="transparent"
+                        color="primary"
                         onClick={e => e.preventDefault()}
                       >
                         <i className={"fab fa-twitter"} />
@@ -72,7 +72,7 @@ export default function LoginPage(props) {
                         justIcon
                         href="#pablo"
                         target="_blank"
-                        color="transparent"
+                        color="secondary"
                         onClick={e => e.preventDefault()}
                       >
                         <i className={"fab fa-facebook"} />
@@ -81,7 +81,7 @@ export default function LoginPage(props) {
                         justIcon
                         href="#pablo"
                         target="_blank"
-                        color="transparent"
+                        color="info"
                         onClick={e => e.preventDefault()}
                       >
                         <i className={"fab fa-google-plus-g"} />
@@ -130,6 +130,7 @@ export default function LoginPage(props) {
                     />
                   <p className={classes.divider}>Or Be Classical</p>
                     <CustomInput
+                    white
                       labelText="Password"
                       id="pass"
                       formControlProps={{

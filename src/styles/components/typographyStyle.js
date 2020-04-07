@@ -1,11 +1,12 @@
 import {
   defaultFont,
   primaryColor,
+  secondaryColor,
   infoColor,
   successColor,
   warningColor,
   dangerColor
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const typographyStyle = {
   defaultFontStyle: {
@@ -37,6 +38,9 @@ const typographyStyle = {
   },
   primaryText: {
     color: primaryColor
+  },
+  secondaryText: {
+    color: secondaryColor
   },
   infoText: {
     color: infoColor

@@ -1,4 +1,4 @@
-import { container } from "../../material-kit-react.js";
+import { container } from "../../themes/theme.js";
 
 const signupPageStyle = {
   container: {

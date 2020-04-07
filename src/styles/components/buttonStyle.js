@@ -1,12 +1,15 @@
+// Colors
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import {
   grayColor,
   roseColor,
   primaryColor,
+  secondaryColor,
   infoColor,
   successColor,
   warningColor,
   dangerColor
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const buttonStyle = {
   button: {
@@ -77,11 +80,23 @@ const buttonStyle = {
   primary: {
     backgroundColor: primaryColor,
     boxShadow:
-      "0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12)",
+      "0 2px 2px 0 " + fade(primaryColor, 0.14)+ ", 0 3px 1px -2px " + fade(primaryColor, 0.2) + ", 0 1px 5px 0 " + fade(primaryColor, 0.12),
     "&:hover,&:focus": {
       backgroundColor: primaryColor,
       boxShadow:
-        "0 14px 26px -12px rgba(156, 39, 176, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(156, 39, 176, 0.2)"
+      "0 14px 26px -12px " + fade(primaryColor, 0.42)+ ", 0 4px 23px 0px " + fade(primaryColor, 0.12) + ", 0 8px 10px -5px " + fade(primaryColor, 0.2),
+
+    }
+  },
+  secondary: {
+    backgroundColor: secondaryColor,
+    boxShadow:
+      "0 2px 2px 0 " + fade(secondaryColor, 0.14)+ ", 0 3px 1px -2px " + fade(secondaryColor, 0.2) + ", 0 1px 5px 0 " + fade(secondaryColor, 0.12),
+    "&:hover,&:focus": {
+      backgroundColor: secondaryColor,
+      boxShadow:
+      "0 14px 26px -12px " + fade(secondaryColor, 0.42)+ ", 0 4px 23px 0px " + fade(secondaryColor, 0.12) + ", 0 8px 10px -5px " + fade(secondaryColor, 0.2),
+
     }
   },
   info: {
@@ -197,6 +212,11 @@ const buttonStyle = {
     "&$primary": {
       "&,&:focus,&:hover,&:visited": {
         color: primaryColor
+      }
+    },
+    "&$secondary": {
+      "&,&:focus,&:hover,&:visited": {
+        color: secondaryColor
       }
     },
     "&$info": {

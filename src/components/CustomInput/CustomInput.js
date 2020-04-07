@@ -21,6 +21,7 @@ export default function CustomInput(props) {
     id,
     labelProps,
     inputProps,
+    color,
     error,
     white,
     inputRootCustomClasses,
@@ -34,7 +35,7 @@ export default function CustomInput(props) {
   const underlineClasses = classNames({
     [classes.underlineError]: error,
     [classes.underlineSuccess]: success && !error,
-    [classes.underline]: true,
+    [classes.underlinePrimary]: color,
     [classes.whiteUnderline]: white
   });
   const marginTop = classNames({
@@ -78,6 +79,20 @@ export default function CustomInput(props) {
   );
 }
 
+// PropTypes
+CustomInput.defaultProps = {
+  labelText: "",
+  labelProps: {},
+  id: "",
+  inputProps: {},
+  formControlProps: {},
+  inputRootCustomClasses: "",
+  color: "primary",
+  error: false,
+  success: false,
+  white: false
+}
+
 CustomInput.propTypes = {
   labelText: PropTypes.node,
   labelProps: PropTypes.object,
@@ -85,6 +100,10 @@ CustomInput.propTypes = {
   inputProps: PropTypes.object,
   formControlProps: PropTypes.object,
   inputRootCustomClasses: PropTypes.string,
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary"
+  ]),
   error: PropTypes.bool,
   success: PropTypes.bool,
   white: PropTypes.bool

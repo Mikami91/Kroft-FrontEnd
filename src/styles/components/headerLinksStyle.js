@@ -1,4 +1,4 @@
-import { defaultFont } from "../material-ui.js";
+import { defaultFont } from "../../themes/theme.js";
 
 import tooltip from "../../styles/tooltipsStyle.js";
 

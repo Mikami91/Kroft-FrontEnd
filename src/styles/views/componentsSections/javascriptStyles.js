@@ -1,4 +1,4 @@
-import { container, title } from "../material-ui.js";
+import { container, title } from "../../themes/theme.js";
 
 import modalStyle from "../../styles/modalStyle.js";
 import tooltipsStyle from "../../styles/tooltipsStyle.js";

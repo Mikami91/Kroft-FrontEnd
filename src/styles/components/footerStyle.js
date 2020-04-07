@@ -1,4 +1,4 @@
-import { container, primaryColor } from "../material-ui.js";
+import { container, primaryColor } from "../../themes/theme.js";
 
 const footerStyle = {
   block: {

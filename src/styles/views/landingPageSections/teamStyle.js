@@ -1,4 +1,4 @@
-import { cardTitle, title } from "../material-ui.js";
+import { cardTitle, title } from "../../themes/theme.js";
 import imagesStyle from "../../styles/imagesStyles.js";
 
 const teamStyle = {

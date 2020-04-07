@@ -1,11 +1,14 @@
+// Colors
+import { fade } from '@material-ui/core/styles/colorManipulator';
 import {
   grayColor,
   primaryColor,
+  secondaryColor,
   infoColor,
   successColor,
   warningColor,
   dangerColor
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const paginationStyle = {
   pagination: {
@@ -57,7 +60,20 @@ const paginationStyle = {
       borderColor: primaryColor,
       color: "#FFFFFF",
       boxShadow:
-        "0 4px 5px 0 rgba(156, 39, 176, 0.14), 0 1px 10px 0 rgba(156, 39, 176, 0.12), 0 2px 4px -1px rgba(156, 39, 176, 0.2)"
+        "0 4px 5px 0 " + fade(primaryColor, 0.14) + ", 0 1px 10px 0 " + fade(primaryColor, 0.12) + ", 0 2px 4px -1px " + fade(primaryColor, 0.2),
+    },
+    "&:hover,&:focus": {
+      zIndex: "2",
+      cursor: "default"
+    }
+  },
+  secondary: {
+    "&,&:hover,&:focus": {
+      backgroundColor: secondaryColor,
+      borderColor: secondaryColor,
+      color: "#FFFFFF",
+      boxShadow:
+      "0 4px 5px 0 " + fade(secondaryColor, 0.14) + ", 0 1px 10px 0 " + fade(secondaryColor, 0.12) + ", 0 2px 4px -1px " + fade(secondaryColor, 0.2),
     },
     "&:hover,&:focus": {
       zIndex: "2",

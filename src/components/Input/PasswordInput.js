@@ -13,7 +13,7 @@ import styles from "../../styles/components/customInputStyle.js";
 const useStyles = makeStyles(styles);
 
 const PasswordInput = (props) => {
-    const { disabled, label, margin, name, onChange, value,  variant } = props;
+    const { disabled, label, margin, color, name, onChange, value,  variant } = props;
     // Styles
     const classes = useStyles();
     // Local States
@@ -30,10 +30,11 @@ const PasswordInput = (props) => {
             disabled={disabled}
             variant={variant}
             margin={margin}
-            className={classes.labelRoot + classes.underline}
+            className={classes.labelRoot + classes.underlinePrimary}
             fullWidth
             required
             label={label}
+            color={color}
             type={values.showPassword ? 'text' : 'password'}
             name={name}
             onChange={onChange}
@@ -64,6 +65,7 @@ PasswordInput.defaultProps = {
     label: "",
     variant: "normal",
     margin: "normal",
+    color: "primary",
     error: false,
     success: false,
     white: true
@@ -87,6 +89,10 @@ PasswordInput.propTypes = {
         "dense",
         "none", 
         "normal"
+    ]),
+    color: PropTypes.oneOf([
+        "primary",
+        "secondary"
     ]),
     error: PropTypes.bool,
     success: PropTypes.bool,

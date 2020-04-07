@@ -25,12 +25,13 @@ export default function CustomLinearProgress(props) {
 }
 
 CustomLinearProgress.defaultProps = {
-  color: "gray"
+  color: "primary"
 };
 
 CustomLinearProgress.propTypes = {
   color: PropTypes.oneOf([
     "primary",
+    "secondary",
     "warning",
     "danger",
     "success",

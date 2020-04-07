@@ -1,5 +1,6 @@
 import {
   primaryColor,
+  secondaryColor,
   warningColor,
   dangerColor,
   successColor,
@@ -7,7 +8,7 @@ import {
   roseColor,
   grayColor,
   title
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const infoStyle = {
   infoArea: {
@@ -22,6 +23,9 @@ const infoStyle = {
   },
   primary: {
     color: primaryColor
+  },
+  secondary: {
+    color: secondaryColor
   },
   warning: {
     color: warningColor

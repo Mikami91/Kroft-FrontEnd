@@ -108,12 +108,13 @@ export default function Header(props) {
 }
 
 Header.defaultProp = {
-  color: "white"
+  color: "primary"
 };
 
 Header.propTypes = {
   color: PropTypes.oneOf([
     "primary",
+    "secondary",
     "info",
     "success",
     "warning",
@@ -138,6 +139,7 @@ Header.propTypes = {
     height: PropTypes.number.isRequired,
     color: PropTypes.oneOf([
       "primary",
+      "secondary",
       "info",
       "success",
       "warning",

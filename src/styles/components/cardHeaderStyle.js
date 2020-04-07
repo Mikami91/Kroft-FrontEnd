@@ -3,8 +3,9 @@ import {
   successCardHeader,
   dangerCardHeader,
   infoCardHeader,
-  primaryCardHeader
-} from "../material-ui.js";
+  primaryCardHeader,
+  secondaryCardHeader
+} from "../../themes/theme.js";
 const cardHeaderStyle = {
   cardHeader: {
     borderRadius: "3px",
@@ -23,7 +24,8 @@ const cardHeaderStyle = {
   successCardHeader,
   dangerCardHeader,
   infoCardHeader,
-  primaryCardHeader
+  primaryCardHeader,
+  secondaryCardHeader
 };
 
 export default cardHeaderStyle;

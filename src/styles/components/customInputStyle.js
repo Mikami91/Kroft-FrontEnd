@@ -1,9 +1,10 @@
 import {
   primaryColor,
+  secondaryColor,
   dangerColor,
   successColor,
   defaultFont
-} from "../material-ui.js";
+} from "../../themes/theme.js";
 
 const customInputStyle = {
   disabled: {
@@ -11,13 +12,22 @@ const customInputStyle = {
       borderColor: "transparent !important"
     }
   },
-  underline: {
+  underlinePrimary: {
     "&:hover:not($disabled):before,&:before": {
       borderColor: "#D2D2D2 !important",
       borderWidth: "1px !important"
     },
     "&:after": {
       borderColor: primaryColor
+    }
+  },
+  underlineSecondary: {
+    "&:hover:not($disabled):before,&:before": {
+      borderColor: "#D2D2D2 !important",
+      borderWidth: "1px !important"
+    },
+    "&:after": {
+      borderColor: secondaryColor
     }
   },
   underlineError: {
@@ -46,7 +56,7 @@ const customInputStyle = {
     lineHeight: "1.42857",
     top: "10px",
     letterSpacing: "unset",
-    "& + $underline": {
+    "& + $underlinePrimary": {
       marginTop: "0px"
     }
   },
