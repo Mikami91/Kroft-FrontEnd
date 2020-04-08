@@ -4,6 +4,12 @@ const cardBodyStyle = {
     flex: "1 1 auto",
     overflowY: "auto",
     height: "70vh"
+  },
+  cardBodyLogin: {
+    padding: "0px 20px 0px 20px",
+    flex: "1 1 auto",
+    height: "auto",
+    overflowY: "auto"
   }
 };
 

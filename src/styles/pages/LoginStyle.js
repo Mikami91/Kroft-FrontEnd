@@ -1,4 +1,5 @@
-import { container } from "../../themes/theme.js";
+// Theme
+import { container, theme } from "../../themes/theme.js";
 
 const LoginStyle = {
   container: {
@@ -46,7 +47,8 @@ const LoginStyle = {
     }
   },
   form: {
-    margin: "0"
+    margin: "0",
+    textAlign: "center",
   },
   cardHeader: {
     width: "auto",
@@ -98,11 +100,15 @@ const LoginStyle = {
   cardHeaderLogin: {
     width: "auto",
     textAlign: "center",
-    marginLeft: "20px",
-    marginRight: "20px",
-    marginTop: "-40px",
-    padding: "20px 0",
-    marginBottom: "15px"
+    // marginLeft: "20px",
+    // marginRight: "20px",
+    // marginTop: "-40px",
+    // marginBottom: "15px",
+    marginLeft: theme.spacing(2.5),
+    marginRight: theme.spacing(2.5),
+    marginTop: theme.spacing(-5),
+    marginBottom: theme.spacing(1.8),
+    padding: "15px 0",
   },
   rootLogin: {
     height: '100vh',

@@ -16,7 +16,7 @@ export default function CardBody(props) {
   const classes = useStyles();
   const { className, children, ...rest } = props;
   const cardBodyClasses = classNames({
-    [classes.cardBody]: true,
+    [classes.cardBodyLogin]: true,
     [className]: className !== undefined
   });
   return (

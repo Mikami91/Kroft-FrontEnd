@@ -22,7 +22,6 @@ import CardFooter from "../../components/Card/CardFooter.js";
 // import CustomInput from "../../components/CustomInput/CustomInput.js";
 import Input from "../../components/Input/Input.js";
 import PasswordInput from '../../components/CustomInput/PasswordInput.js';
-import IconInput from '../../components/CustomInput/IconInput.js';
 import CustomTabs from '../../components/CustomTabs/CustomTabs.js';
 
 
@@ -30,7 +29,7 @@ import styles from "../../styles/pages/LoginStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function EmployeeLogin(props) {
+export default function AdminLogin(props) {
     const [state, setState] = useState({
         user: "",
         password: "",
@@ -48,13 +47,10 @@ export default function EmployeeLogin(props) {
     }
     const classes = useStyles();
     const { ...rest } = props;
-    const inputProps = {
-        step: 300,
-      };
     return (
         <form className={classes.form} id="employee-login" onSubmit={handleLogin}>
             {/* <p className={classes.divider}>Or Be Classical</p> */}
-            <IconInput
+            {/* <CustomInput
                 labelText="First Name..."
                 id="user"
                 name="user"
@@ -71,25 +67,16 @@ export default function EmployeeLogin(props) {
                         </InputAdornment>
                     )
                 }}
-            />
-            
+            /> */}
             <Input
                 variant={'standard'}
                 margin={'dense'}
                 color="primary"
                 // disabled={showProgress} 
-                label={'Usuario'}
+                label={'Correo'}
                 name="user"
                 onChange={handleChange}
                 value={state.user}
-                inputProps={{
-                    type: "text",
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                        </InputAdornment>
-                    )
-                }}
             />
             <PasswordInput
                 variant={'standard'}

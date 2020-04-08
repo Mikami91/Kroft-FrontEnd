@@ -50,8 +50,8 @@ export const transition = {
 };
 
 export const conatinerFluid = {
-  paddingRight: theme.spacing(5),
-  paddingLeft: theme.spacing(5),
+  paddingRight: theme.spacing(4),
+  paddingLeft: theme.spacing(4),
   marginRight: "auto",
   marginLeft: "auto",
   width: "auto"

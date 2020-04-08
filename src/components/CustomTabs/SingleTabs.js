@@ -19,13 +19,8 @@ import styles from "../../styles/components/customTabsStyle.js";
 const useStyles = makeStyles(styles);
 
 export default function SingleTabs(props) {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, value) => {
-    setValue(value);
-  };
   const classes = useStyles();
-  const { headerColor, plainTabs, tabs, title, rtlActive } = props;
+  const { centered, headerColor, onChange, value, plainTabs, tabs, title, rtlActive } = props;
   const cardTitle = classNames({
     [classes.cardTitle]: true,
     [classes.cardTitleRTL]: rtlActive
@@ -34,11 +29,12 @@ export default function SingleTabs(props) {
     // <Card plain={plainTabs}>
     //   <CardHeader color={headerColor} plain={plainTabs}>
         <Tabs
+          centered={centered}
           textColor={headerColor}
           value={value}
-          onChange={handleChange}
+          onChange={onChange}
           classes={{
-            root: classes.tabsRoot,
+            root: classes.tabsRoot, 
             indicator: classes.displayNone
           }}
         >
@@ -75,6 +71,7 @@ export default function SingleTabs(props) {
 }
 
 SingleTabs.propTypes = {
+  centered: PropTypes.bool,
   headerColor: PropTypes.oneOf([
     "warning",
     "success",
