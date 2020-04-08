@@ -8,12 +8,12 @@ import { amber, blue, cyan, deepOrange, deepPurple, green, indigo, lightBlue, li
 export const theme = createMuiTheme({
   palette: {
     type: "light",
-    primary: red,
-    secondary: blue,
+    primary: teal,
+    secondary: orange,
     error: pink,
   },
   typography: {
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: [
       'DIDINPro-Black',
       '-apple-system',
@@ -50,8 +50,8 @@ export const transition = {
 };
 
 export const conatinerFluid = {
-  paddingRight: "20px",
-  paddingLeft: "20px",
+  paddingRight: theme.spacing(5),
+  paddingLeft: theme.spacing(5),
   marginRight: "auto",
   marginLeft: "auto",
   width: "auto"

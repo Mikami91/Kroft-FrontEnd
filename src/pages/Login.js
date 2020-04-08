@@ -1,25 +1,30 @@
 // Dependencies
-import React from "react";
+import React, { Fragment } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
 import Email from "@material-ui/icons/Email";
 import People from "@material-ui/icons/People";
+import Lock from "@material-ui/icons/Lock";
+import Visibility from '@material-ui/icons/Visibility';
+import Dashboard from "@material-ui/icons/Dashboard";
+import Schedule from "@material-ui/icons/Schedule";
+import List from "@material-ui/icons/List";
+// Layouts
+import EmployeeLogin from '../layouts/Forms/EmployeeLogin.js'
 // core components
-import Header from "../components/Header/Header.js";
-import HeaderLinks from "../components/Header/HeaderLinks.js";
 import FooterLogin from "../components/Footer/FooterLogin.js";
 import GridContainer from "../components/Grid/GridContainer.js";
 import GridItem from "../components/Grid/GridItem.js";
-import Button from "../components/CustomButtons/Button.js";
+import NavPills from '../components/NavPills/NavPills.js';
+import SingleTabs from '../components/CustomTabs/SingleTabs.js';
 import Card from "../components/Card/Card.js";
-import CardBody from "../components/Card/CardBody.js";
 import CardHeader from "../components/Card/CardHeader.js";
+import CardBody from "../components/Card/CardBody.js";
 import CardFooter from "../components/Card/CardFooter.js";
-import CustomInput from "../components/CustomInput/CustomInput.js";
-import PasswordInput from '../components/Input/PasswordInput.js';
 
 import styles from "../styles/pages/LoginStyle.js";
 
@@ -29,138 +34,72 @@ const useStyles = makeStyles(styles);
 
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
-  setTimeout(function() {
+  setTimeout(function () {
     setCardAnimation("");
   }, 700);
   const classes = useStyles();
   const { ...rest } = props;
   return (
-    <div>
-      {/* <Header
-        absolute
-        color="primary"
-        brand="Material Kit React"
-        rightLinks={<HeaderLinks />}
-        {...rest}
-      /> */}
-      <div
-        // className={classes.pageHeader}
-        style={{
-          backgroundImage: "url(" + image + ")",
-          backgroundSize: "cover",
-          backgroundPosition: "top center"
-        }}
-      >
-        <div className={classes.container}>
-          <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={4}>
-              <Card className={classes[cardAnimaton]}>
-                <form className={classes.form}>
-                  <CardHeader color="primary" className={classes.cardHeaderLogin}>
-                    <h4>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="primary"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-twitter"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="secondary"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-facebook"} />
-                      </Button>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="info"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
-                  </CardHeader>
-                  {/* <p className={classes.divider}>Or Be Classical</p> */}
-                  <CardBody>
-                  <PasswordInput
-                        variant={'standard'} 
-                        margin={'dense'} 
-                        // disabled={showProgress} 
-                        label={'Contraseña'} 
-                        // onChange={handleChange}
-                        // value={state.password}
-                    />
-                    <CustomInput
-                      labelText="First Name..."
-                      id="first"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "text",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                    <CustomInput
-                      labelText="Email..."
-                      id="email"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "email",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Email />
-                          </InputAdornment>
-                        )
-                      }}
-                    />
-                  <p className={classes.divider}>Or Be Classical</p>
-                    <CustomInput
-                    white
-                      labelText="Password"
-                      id="pass"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        type: "password",
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <Icon className={classes.inputIconsColor}>
-                              lock
-                            </Icon>
-                          </InputAdornment>
-                        ),
-                        autoComplete: "off"
-                      }}
-                    />
-                  </CardBody>
-                  <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
-                      Get started
-                    </Button>
-                  </CardFooter>
-                </form>
-              </Card>
-            </GridItem>
-          </GridContainer>
-        </div>
-        <FooterLogin whiteFont />
-      </div>
-    </div>
+    <Fragment>
+      <Grid container component="main" className={classes.rootLogin}>
+
+        <Grid item xs={false} sm={6} md={7} className={classes.imageSide} />
+
+        <Grid item xs={12} sm={6} md={5} elevation={6} square="true" className={classes.container}>
+
+          <Card className={classes[cardAnimaton]}>
+            <CardHeader color="primary" className={classes.cardHeaderLogin}>
+              <h4>Login</h4>
+              
+            </CardHeader>
+            <CardBody>
+            <SingleTabs
+                  plainTabs
+                  headerColor="primary"
+                  tabs={[
+                      {
+                          tabName: "Profile",
+                          tabIcon: Dashboard,
+                      },
+                      {
+                          tabName: "Messages",
+                          tabIcon: Schedule,
+                      },
+                  ]}
+              />
+              <EmployeeLogin />
+            </CardBody>
+            <CardFooter>
+              <h4>Login</h4>
+            </CardFooter>
+          </Card>
+
+          <FooterLogin whiteFont />
+
+        </Grid>
+
+      </Grid>
+      {/* <div className={classes.container}>
+        <GridContainer container component="main" justify="center">
+          <Grid item xs={false} sm={6} md={7} className={classes.imageSide} />
+          <GridItem item xs={12} sm={6} md={5} elevation={6} square="true">
+            <Card className={classes[cardAnimaton]}>
+              <CardHeader color="primary" className={classes.cardHeaderLogin}>
+              <h4>Login</h4>
+              </CardHeader>
+              <CardBody>
+                <EmployeeLogin />
+              </CardBody>
+              <CardFooter>
+              <h4>Login</h4>
+              </CardFooter>
+            </Card>
+
+            <FooterLogin whiteFont />
+
+          </GridItem>
+        </GridContainer>
+      </div> */}
+    </Fragment>
   );
 }

@@ -11,8 +11,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 
 // core components
-import GridContainer from "components/Grid/GridContainer.js";
-import GridItem from "components/Grid/GridItem.js";
+import GridContainer from "../Grid/GridContainer.js";
+import GridItem from "../Grid/GridItem.js";
 
 import styles from "../../styles/components/navPillsStyle.js";
 
@@ -101,6 +101,7 @@ export default function NavPills(props) {
 
 NavPills.defaultProps = {
   active: 0,
+  tabs: [],
   color: "primary"
 };
 

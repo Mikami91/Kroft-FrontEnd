@@ -86,7 +86,27 @@ const LoginStyle = {
   },
   inputIconsColor: {
     color: "#495057"
-  }
+  },
+  imageSide: {
+    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundRepeat: 'no-repeat',
+    // backgroundColor:
+    // MyTheme.palette.type === 'dark' ? MyTheme.palette.grey[900] : MyTheme.palette.grey[50],
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+  },
+  cardHeaderLogin: {
+    width: "auto",
+    textAlign: "center",
+    marginLeft: "20px",
+    marginRight: "20px",
+    marginTop: "-40px",
+    padding: "20px 0",
+    marginBottom: "15px"
+  },
+  rootLogin: {
+    height: '100vh',
+  },
 };
 
 export default LoginStyle;

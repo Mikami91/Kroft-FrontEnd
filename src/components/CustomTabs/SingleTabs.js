@@ -18,7 +18,7 @@ import styles from "../../styles/components/customTabsStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function CustomTabs(props) {
+export default function SingleTabs(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, value) => {
@@ -31,10 +31,10 @@ export default function CustomTabs(props) {
     [classes.cardTitleRTL]: rtlActive
   });
   return (
-    <Card plain={plainTabs}>
-      <CardHeader color={headerColor} plain={plainTabs}>
-        {title !== undefined ? <div className={cardTitle}>{title}</div> : null}
+    // <Card plain={plainTabs}>
+    //   <CardHeader color={headerColor} plain={plainTabs}>
         <Tabs
+          textColor={headerColor}
           value={value}
           onChange={handleChange}
           classes={{
@@ -69,20 +69,12 @@ export default function CustomTabs(props) {
             );
           })}
         </Tabs>
-      </CardHeader>
-      <CardBody>
-        {tabs.map((prop, key) => {
-          if (key === value) {
-            return <div key={key}>{prop.tabContent}</div>;
-          }
-          return null;
-        })}
-      </CardBody>
-    </Card>
+    //   </CardHeader>
+    // </Card>
   );
 }
 
-CustomTabs.propTypes = {
+SingleTabs.propTypes = {
   headerColor: PropTypes.oneOf([
     "warning",
     "success",
@@ -97,7 +89,7 @@ CustomTabs.propTypes = {
     PropTypes.shape({
       tabName: PropTypes.string.isRequired,
       tabIcon: PropTypes.object,
-      tabContent: PropTypes.node.isRequired
+      tabContent: PropTypes.node
     })
   ),
   rtlActive: PropTypes.bool,
