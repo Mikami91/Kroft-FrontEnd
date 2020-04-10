@@ -49,6 +49,15 @@ const LoginStyle = {
   form: {
     margin: "0",
     textAlign: "center",
+    paddingTop: theme.spacing(0),
+    paddingRight: theme.spacing(1),
+    paddingBottom: theme.spacing(0),
+    paddingLeft: theme.spacing(1),
+  },
+  pinForm: {
+    display: "flex",
+    alignItems: "baseline",
+    width: "60%",
   },
   cardHeader: {
     width: "auto",
@@ -71,8 +80,8 @@ const LoginStyle = {
     fontSize: "20px"
   },
   divider: {
-    marginTop: "30px",
-    marginBottom: "0px",
+    marginTop: "25px",
+    marginBottom: "25px",
     textAlign: "center"
   },
   cardFooter: {
@@ -109,6 +118,15 @@ const LoginStyle = {
     marginTop: theme.spacing(-5),
     marginBottom: theme.spacing(1.8),
     padding: "15px 0",
+  },
+  logo: {
+    width: "100px",
+    height: "50px",
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundImage: 'url(https://source.unsplash.com/random)',
+    boxShadow:
+    "0 12px 20px -10px rgba(244, 67, 54, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(244, 67, 54, 0.2)"
   },
   rootLogin: {
     height: '100vh',

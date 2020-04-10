@@ -2,28 +2,12 @@
 import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
-import People from "@material-ui/icons/People";
-import Lock from "@material-ui/icons/Lock";
-import Visibility from '@material-ui/icons/Visibility';
-
-// @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
-import Schedule from "@material-ui/icons/Schedule";
-import List from "@material-ui/icons/List";
+import PersonIcon from '@material-ui/icons/Person';
 // core components
 import Button from "../../components/CustomButtons/Button.js";
-import CardBody from "../../components/Card/CardBody.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import CardFooter from "../../components/Card/CardFooter.js";
-// import CustomInput from "../../components/CustomInput/CustomInput.js";
-import Input from "../../components/Input/Input.js";
 import PasswordInput from '../../components/CustomInput/PasswordInput.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
-import CustomTabs from '../../components/CustomTabs/CustomTabs.js';
 
 
 import styles from "../../styles/pages/LoginStyle.js";
@@ -47,65 +31,36 @@ export default function EmployeeLogin(props) {
         alert("User: " + state.user + ", Password: " + state.password);
     }
     const classes = useStyles();
-    const { ...rest } = props;
-    const inputProps = {
-        step: 300,
-      };
     return (
         <form className={classes.form} id="employee-login" onSubmit={handleLogin}>
             {/* <p className={classes.divider}>Or Be Classical</p> */}
             <IconInput
-                labelText="First Name..."
-                id="user"
-                name="user"
-                formControlProps={{
-                    fullWidth: true
-                }}
-                onChange={handleChange}
-                value={state.user}
-                inputProps={{
-                    type: "text",
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                        </InputAdornment>
-                    )
-                }}
-            />
-            
-            <Input
                 variant={'standard'}
                 margin={'dense'}
                 color="primary"
-                // disabled={showProgress} 
+                // disabled={showProgress}
+                type="text"
                 label={'Usuario'}
                 name="user"
                 onChange={handleChange}
                 value={state.user}
-                inputProps={{
-                    type: "text",
-                    endAdornment: (
-                        <InputAdornment position="end">
-                            <People className={classes.inputIconsColor} />
-                        </InputAdornment>
-                    )
-                }}
+                required
+                icon={<PersonIcon />}
+                iconPosition="end"
             />
             <PasswordInput
                 variant={'standard'}
                 margin={'dense'}
-                // color="secondary"
+                color="primary"
                 // disabled={showProgress} 
                 label={'Contraseña'}
                 name="password"
                 onChange={handleChange}
                 value={state.password}
             />
-            {/* <CardFooter className={classes.cardFooter}> */}
-                <Button simple color="primary" size="lg" type="submit">
-                    Iniciar
-                </Button>
-            {/* </CardFooter> */}
+            <Button /*simple*/ color="primary" size="sm" type="submit">
+                Iniciar
+            </Button>
         </form>
     );
-}
+};

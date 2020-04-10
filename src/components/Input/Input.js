@@ -3,27 +3,16 @@ import React from 'react';
 import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, InputAdornment, IconButton } from "@material-ui/core";
-// Icons
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { TextField } from "@material-ui/core";
 // Styles
 import styles from "../../styles/components/customInputStyle.js";
 
 const useStyles = makeStyles(styles);
 
-const CustomInput = (props) => {
-    const { disabled, label, margin, color, name, onChange, value,  variant } = props;
+const Input = (props) => {
+    const { disabled, label, margin, color, name, onChange, placeholder, required, type, value, variant } = props;
     // Styles
     const classes = useStyles();
-    // Local States
-    const [values, setValues] = React.useState({
-        showPassword: false,
-    });
-    // Show / Hide password
-    const clickShowPassword = () => {
-        setValues({ showPassword: !values.showPassword });
-    }
 
     return (
         <TextField
@@ -32,31 +21,27 @@ const CustomInput = (props) => {
             margin={margin}
             className={classes.labelRoot + classes.underlinePrimary}
             fullWidth
-            required
+            required={required}
+            placeholder={placeholder}
             label={label}
             color={color}
-            type="text"
+            type={type}
             name={name}
             onChange={onChange}
             value={value}
-
-            // InputProps={{
-            //     endAdornment: (
-            //         <InputAdornment position="start">
-            //                 {values.showPassword ? <VisibilityOff /> : <Visibility />}
-            //         </InputAdornment>
-            //     ),
-            // }}
         />
     );
 }
 
 // PropTypes
-CustomInput.defaultProps = {
+Input.defaultProps = {
+    type: "text",
     onChange: null,
     value: "",
+    required: false,
     disabled: false,
     name: "",
+    placeholder: "",
     label: "",
     variant: "normal",
     margin: "normal",
@@ -66,23 +51,30 @@ CustomInput.defaultProps = {
     white: true
 };
 
-CustomInput.propTypes = {
+Input.propTypes = {
+    type: PropTypes.oneOf([
+        "text",
+        "number",
+        "email"
+    ]),
     onChange: PropTypes.func,
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
     ]),
+    required: PropTypes.bool,
     disabled: PropTypes.bool,
     name: PropTypes.string,
+    placeholder: PropTypes.string,
     label: PropTypes.string,
     variant: PropTypes.oneOf([
         "filled",
-        "outlined", 
+        "outlined",
         "standard"
     ]),
     margin: PropTypes.oneOf([
         "dense",
-        "none", 
+        "none",
         "normal"
     ]),
     color: PropTypes.oneOf([
@@ -94,4 +86,4 @@ CustomInput.propTypes = {
     white: PropTypes.bool
 };
 
-export default CustomInput;
+export default Input;

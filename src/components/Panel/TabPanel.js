@@ -5,7 +5,7 @@ import {  Box, Typography } from "@material-ui/core";
 
 const TabsPanel = (props) => {
 
-  const { children, value, index } = props;
+  const { children, value, index, centered } = props;
   
   return (
     <Typography
@@ -16,7 +16,7 @@ const TabsPanel = (props) => {
       aria-labelledby={`full-width-tab-${index}`}
 
     >
-      <Box p={3} /*className={style? style.rootDash : null }*/ >{children}</Box>
+      <Box p={3} style={{ textAlign: centered ? "-webkit-center" : null }}>{children}</Box>
     </Typography>
   );
 };

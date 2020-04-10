@@ -1,6 +1,5 @@
 // Theme
 import { theme } from "../../themes/theme.js";
-console.log(theme);
 
 const cardStyle = {
   card: {
@@ -25,8 +24,8 @@ const cardStyle = {
   },
   cardLogin: {
     border: "0",
-    marginBottom: "30px",
-    marginTop: "30px",
+    marginBottom: "10px",
+    marginTop: "50px",
     borderRadius: "6px",
     color: theme.palette.type === "light" ? "rgba(0, 0, 0, 0.87)" : "#fff",
     background: theme.palette.type === "light" ? "#fff" : "#424242",
@@ -40,7 +39,7 @@ const cardStyle = {
     wordWrap: "break-word",
     fontSize: ".875rem",
     transition: "all 300ms linear",
-    height: "auto",
+    height: "72vh",
   },
   cardPlain: {
     background: "transparent",

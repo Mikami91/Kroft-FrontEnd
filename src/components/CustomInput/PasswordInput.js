@@ -39,10 +39,9 @@ const PasswordInput = (props) => {
             name={name}
             onChange={onChange}
             value={value}
-
             InputProps={{
                 endAdornment: (
-                    <InputAdornment position="start">
+                    <InputAdornment position="end">
                         <IconButton
                             edge="end"
                             onClick={clickShowPassword}

@@ -9,7 +9,7 @@ export const theme = createMuiTheme({
   palette: {
     type: "light",
     primary: teal,
-    secondary: orange,
+    secondary: lightGreen,
     error: pink,
   },
   typography: {

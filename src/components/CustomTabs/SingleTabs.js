@@ -1,72 +1,58 @@
+// Dependencies
 import React from "react";
-// nodejs library that concatenates classes
-import classNames from "classnames";
 // nodejs library to set properties for components
 import PropTypes from "prop-types";
-
 // material-ui components
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Icon from "@material-ui/core/Icon";
-// core components
-import Card from "../Card/Card.js";
-import CardBody from "../Card/CardBody.js";
-import CardHeader from "../Card/CardHeader.js";
-
+// Styles
 import styles from "../../styles/components/customTabsStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function SingleTabs(props) {
   const classes = useStyles();
-  const { centered, headerColor, onChange, value, plainTabs, tabs, title, rtlActive } = props;
-  const cardTitle = classNames({
-    [classes.cardTitle]: true,
-    [classes.cardTitleRTL]: rtlActive
-  });
+  const { centered, headerColor, onChange, value, tabs } = props;
   return (
-    // <Card plain={plainTabs}>
-    //   <CardHeader color={headerColor} plain={plainTabs}>
-        <Tabs
-          centered={centered}
-          textColor={headerColor}
-          value={value}
-          onChange={onChange}
-          classes={{
-            root: classes.tabsRoot, 
-            indicator: classes.displayNone
-          }}
-        >
-          {tabs.map((prop, key) => {
-            var icon = {};
-            if (prop.tabIcon) {
-              icon = {
-                icon:
-                  typeof prop.tabIcon === "string" ? (
-                    <Icon>{prop.tabIcon}</Icon>
-                  ) : (
-                    <prop.tabIcon />
-                  )
-              };
-            }
-            return (
-              <Tab
-                classes={{
-                  root: classes.tabRootButton,
-                  label: classes.tabLabel,
-                  selected: classes.tabSelected,
-                  wrapper: classes.tabWrapper
-                }}
-                key={key}
-                label={prop.tabName}
-                {...icon}
-              />
-            );
-          })}
-        </Tabs>
-    //   </CardHeader>
-    // </Card>
+    <Tabs
+      centered={centered}
+      textColor={headerColor}
+      value={value}
+      onChange={onChange}
+      classes={{
+        root: classes.tabsRoot,
+        indicator: classes.displayNone
+      }}
+    >
+      {tabs.map((prop, key) => {
+        var icon = {};
+        if (prop.tabIcon) {
+          icon = {
+            icon:
+              typeof prop.tabIcon === "string" ? (
+                <Icon>{prop.tabIcon}</Icon>
+              ) : (
+                  <prop.tabIcon />
+                )
+          };
+        }
+        return (
+          <Tab
+            classes={{
+              root: classes.tabRootButton,
+              label: classes.tabLabel,
+              selected: classes.tabSelected,
+              wrapper: classes.tabWrapper
+            }}
+            key={key}
+            label={prop.tabName}
+            {...icon}
+          />
+        );
+      })}
+    </Tabs>
   );
 }
 
@@ -81,7 +67,6 @@ SingleTabs.propTypes = {
     "secondary",
     "rose"
   ]),
-  title: PropTypes.string,
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       tabName: PropTypes.string.isRequired,
@@ -89,6 +74,4 @@ SingleTabs.propTypes = {
       tabContent: PropTypes.node
     })
   ),
-  rtlActive: PropTypes.bool,
-  plainTabs: PropTypes.bool
 };

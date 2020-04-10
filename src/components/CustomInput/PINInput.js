@@ -3,16 +3,16 @@ import React from 'react';
 import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField, InputAdornment } from "@material-ui/core";
-// Theme
-import { theme } from '../../themes/theme.js';
+import { TextField, InputAdornment, IconButton } from "@material-ui/core";
+// Icons
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 // Styles
 import styles from "../../styles/components/customInputStyle.js";
 
 const useStyles = makeStyles(styles);
 
-const IconInput = (props) => {
-    const { disabled, icon, iconPosition, label, margin, color, name, onChange, placeholder, required, type, value, variant } = props;
+const PINInput = (props) => {
+    const { disabled, label, margin, color, name, onChange, onClick, placeholder, type, value, variant } = props;
     // Styles
     const classes = useStyles();
     return (
@@ -22,7 +22,7 @@ const IconInput = (props) => {
             margin={margin}
             className={classes.labelRoot + classes.underlinePrimary}
             fullWidth
-            required={required}
+            required
             label={label}
             placeholder={placeholder}
             color={color}
@@ -30,29 +30,33 @@ const IconInput = (props) => {
             name={name}
             onChange={onChange}
             value={value}
-            InputProps={icon !== null ? {
-                [iconPosition + "Adornment"]: (
-                    <InputAdornment position={iconPosition} style={{ color: theme.palette.type === "light" ? "#0000008a" : "#fff" }}>
-                        {icon}
+            InputProps={{
+                endAdornment: (
+                    <InputAdornment position="end">
+                        <IconButton
+                            disabled={ value.length >= 3 ? false : true }
+                            edge="end"
+                            onClick={onClick}
+                        >
+                            <CheckCircleIcon color={ value.length >= 3 ? color : "disabled"} />
+                        </IconButton>
                     </InputAdornment>
                 ),
-            } : null}
+            }}
         />
     );
 }
 
 // PropTypes
-IconInput.defaultProps = {
-    type: "text",
-    icon: {},
+PINInput.defaultProps = {
+    type: "password",
     onChange: null,
+    onClick: null,
     value: "",
-    required: false,
     disabled: false,
     name: "",
-    label: "",
     placeholder: "",
-    iconPosition: "end",
+    label: "",
     variant: "normal",
     margin: "normal",
     color: "primary",
@@ -61,35 +65,31 @@ IconInput.defaultProps = {
     white: true
 };
 
-IconInput.propTypes = {
+PINInput.propTypes = {
     type: PropTypes.oneOf([
+        "password",
         "text",
         "number",
         "email"
     ]),
-    icon: PropTypes.object,
     onChange: PropTypes.func,
+    onClick: PropTypes.func,
     value: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
     ]),
-    required: PropTypes.bool,
     disabled: PropTypes.bool,
     name: PropTypes.string,
     placeholder: PropTypes.string,
     label: PropTypes.string,
-    iconPosition: PropTypes.oneOf([
-        "start",
-        "end",
-    ]),
     variant: PropTypes.oneOf([
         "filled",
-        "outlined",
+        "outlined", 
         "standard"
     ]),
     margin: PropTypes.oneOf([
         "dense",
-        "none",
+        "none", 
         "normal"
     ]),
     color: PropTypes.oneOf([
@@ -101,4 +101,4 @@ IconInput.propTypes = {
     white: PropTypes.bool
 };
 
-export default IconInput;
+export default PINInput;
