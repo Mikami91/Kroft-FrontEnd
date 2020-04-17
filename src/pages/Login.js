@@ -56,7 +56,7 @@ export default function LoginPage(props) {
         <Grid item xs={12} sm={6} md={5} lg={4} elevation={6} square="true" className={classes.container}>
           <Card className={classes[cardAnimaton]} login>
             <CardHeader color="primary" className={classes.cardHeaderLogin}>
-              <h3>KROFT SOLUTIONS</h3>
+              <h3>KROFT SOLUTIONS (U.)</h3>
               <SingleTabs
                 centered
                 value={value}
