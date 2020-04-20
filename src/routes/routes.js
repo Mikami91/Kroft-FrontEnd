@@ -1,25 +1,25 @@
 // Pages
-import Login from "../pages/Login";
+import Dashboard from "../pages/Dashboard";
 
 const routes = [
   {
     path: "/",
     name: "Login",
-    component: Login,
+    component: Dashboard,
   },
   {
     path: "/dashboard",
     name: "Dashboard",
-    component: Login,
+    component: Dashboard,
   },{
     path: "/sales",
     name: "Sales",
-    component: Login,
+    component: Dashboard,
   },{
     path: "/collects",
     name: "Collects",
-    component: Login,
-  },
+    component: Dashboard
+  }
 ];
 
 export default routes;

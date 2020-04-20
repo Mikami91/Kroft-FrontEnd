@@ -3,7 +3,7 @@ import React from 'react';
 // Components
 import {  Box, Typography } from "@material-ui/core";
 
-const TabsPanel = (props) => {
+const TabPanel = (props) => {
 
   const { children, value, index, centered } = props;
   
@@ -21,4 +21,4 @@ const TabsPanel = (props) => {
   );
 };
 
-export default TabsPanel;
+export default TabPanel;
