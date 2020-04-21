@@ -1,8 +1,6 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-// Conecction to Store
-import { connect } from "react-redux";
 // @material-ui/Componentes
 import { CssBaseline, Drawer, Grid, Hidden } from "@material-ui/core";
 import {
@@ -13,46 +11,21 @@ import {
   ListItem,
   Typography,
 } from "@material-ui/core";
-// Components
-import NavPills from "../../components/NavPills/NavPills";
-//import SidebarList from "../../components/List/SidebarList";
-// Layouts
-//import DashAppBar from '../appBars/DashAppBar';
-// Containers
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+// Core Components
+import CustomAppBar from "../../components/AppBar/CustomAppBar";
 import TabPanel from "../../components/Panel/TabPanel";
-// Menu list
 import MenuList from "../../components/List/MenuList";
 
 const SidebarList = (props) => {
   const { value, change } = props;
   return (
-    /*<NavPills
-      color="rose"
-      horizontal={{
-        tabsGrid: { xs: 12, sm: 4, md: 4 },
-        contentGrid: { xs: 12, sm: 8, md: 8 },
-      }}
-      value={value}
-      onChange={change}
-      tabs={MenuList.map((list, key) => {
-        return {
-          tabButton: list.name,
-          tabIcon: list.icon,
-          value: key
-        };
-      })}
-    />*/
     <BottomNavigation
       showLabels
       value={value}
-      style={{
-        height: 63,
-        paddingLeft: 5,
-        paddingRight: 5,
-        display: "grid",
-        textAlign: "center",
-        lineHeight: 100,
-      }}
+      //className={style}
       onChange={change}
     >
       {MenuList.map((list, key) => {
@@ -71,7 +44,18 @@ const SidebarList = (props) => {
   );
 };
 
-const DashboardSideBar = ({ style }) => {
+// PropTypes
+SidebarList.defaultProps = {
+  value: null,
+  change: null,
+};
+
+SidebarList.propTypes = {
+  value: PropTypes.number,
+  change: PropTypes.func,
+};
+
+const Sidebar = ({ style }) => {
   // TabPanel Swipeables Views
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -93,14 +77,31 @@ const DashboardSideBar = ({ style }) => {
       <div className={style.root}>
         <CssBaseline />
 
-        {/*<DashAppBar style={style} click={handleDrawerToggle} />*/}
-        <nav className={style.drawer} aria-label="mailbox folders">
-          <Hidden smUp implementation="css">
-            <BottomNavigation style={{ "&,&:hover": {
-      color: "#FFFFFF",
-      backgroundColor: "yellow"
+        <CustomAppBar position="fixed" color="secondary">
+          <IconButton
+            edge="start"
+            //className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+          >
+            <MenuIcon />
+          </IconButton>
+          
+          <Button color="inherit">Login</Button>
+        </CustomAppBar>
 
-    } }}  onClick={handleDrawerToggle} />
+        <nav className={style.drawer}>
+          <Hidden smUp implementation="css">
+            <BottomNavigation
+              style={{
+                "&,&:hover": {
+                  color: "#FFFFFF",
+                  backgroundColor: "yellow",
+                },
+              }}
+              onClick={handleDrawerToggle}
+            />
 
             <Drawer
               variant="temporary"
@@ -133,7 +134,7 @@ const DashboardSideBar = ({ style }) => {
                 paper: style.drawerPaper,
               }}
             >
-              <div className={style}>
+              {/*<div className={style}>
                 <List
                   style={{
                     position: "fixed",
@@ -149,8 +150,8 @@ const DashboardSideBar = ({ style }) => {
                   </ListItem>
                 </List>
               </div>
-              <Divider />
-              <SidebarList value={value} change={handleChange} />
+                <Divider />*/}
+              {/*<SidebarList value={value} change={handleChange} />*/}
             </Drawer>
           </Hidden>
         </nav>
@@ -173,18 +174,11 @@ const DashboardSideBar = ({ style }) => {
   );
 };
 
-DashboardSideBar.propTypes = {
+// PropTypes
+Sidebar.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
 };
 
-// Connect to Store State
-const mapStateToProps = (state) => {
-  return {
-    // index: state.navigation.sideBarIndex
-  };
-};
-
-//export default connect(mapStateToProps, null)(DashboardSideBar);
-export default DashboardSideBar;
+export default Sidebar;

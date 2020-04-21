@@ -23,7 +23,7 @@ import CardFooter from "../components/Card/CardFooter.js";
 import TabPanel from "../components/Panel/TabPanel.js";
 import Modal from "../components/Modal/Modal.js";
 // Layouts
-import DashboardSidebar from '../layouts/Sidebars/DashboardSidebar.js';
+import Sidebar from '../layouts/Sidebars/Sidebar.js';
 // Styles
 import styles from "../styles/pages/LoginStyle.js";
 
@@ -61,7 +61,7 @@ export default function DashboardPage(props) {
         alignItems="center"
       >
         
-        <DashboardSidebar style={classes} />
+        <Sidebar style={classes} />
         
       </Grid>
     </Fragment>

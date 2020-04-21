@@ -12,23 +12,15 @@ import MenuIcon from "@material-ui/icons/Menu";
 const MyStyle = () => {};
 
 const CustomAppBar = (props) => {
-  const { position, children } = props;
+  const { position, variant, color, disableGutters, classes, children } = props;
+  console.log(children);
 
   const style = MyStyle();
 
   return (
-    <AppBar position={position}>
+    <AppBar position={position} color={color} classes={classes}>
       <Toolbar>
-        <IconButton
-          edge="start"
-          //className={classes.menuButton}
-          color="inherit"
-          aria-label="menu"
-        >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" /*className={classes.title}*/>News</Typography>
-        <Button color="inherit">Login</Button>
+        {children}
       </Toolbar>
     </AppBar>
   );
@@ -37,14 +29,35 @@ const CustomAppBar = (props) => {
 // PropTypes
 CustomAppBar.defaultProps = {
   position: "fixed",
+  variant: "regular",
+  color: "primary",
+  disableGutters: false,
+  classes: null,
   children: null,
 };
 
 CustomAppBar.propTypes = {
   position: PropTypes.oneOf([
-    "absolute" | "fixed" | "relative" | "static" | "sticky",
+    "absolute",
+    "fixed",
+    "relative",
+    "static",
+    "sticky",
   ]),
-  children: PropTypes.element,
+  variant: PropTypes.oneOf([
+      "regular",
+      "dense"
+  ]),
+  color: PropTypes.oneOf([
+    "default",
+    "inherit",
+    "primary",
+    "secondary",
+    "transparent",
+  ]),
+  disableGutters: PropTypes.bool,
+  classes: PropTypes.object,
+  children: PropTypes.node,
 };
 
 export default CustomAppBar;

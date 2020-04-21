@@ -1,4 +1,5 @@
 // Pages
+import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 
 const routes = [
@@ -8,18 +9,20 @@ const routes = [
     component: Dashboard,
   },
   {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard,
-  },{
+    path: "/Login",
+    name: "Login",
+    component: Login,
+  },
+  {
     path: "/sales",
     name: "Sales",
-    component: Dashboard,
-  },{
+    component: Login,
+  },
+  {
     path: "/collects",
     name: "Collects",
-    component: Dashboard
-  }
+    component: Login,
+  },
 ];
 
 export default routes;
