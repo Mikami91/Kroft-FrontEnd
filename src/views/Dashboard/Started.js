@@ -1,7 +1,10 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+import ChartistGraph from "react-chartist";
 // @material-ui/Componentes
+import { makeStyles } from "@material-ui/core/styles";
+import Icon from "@material-ui/core/Icon";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
@@ -11,14 +14,44 @@ import Typography from "@material-ui/core/Typography";
 import AvatarTable from "../../components/Avatar/AvatarTable.js";
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
+import CustomTabs from "../../components/CustomTabs/CustomTabs.js";
 import CustomTable from "../../components/Table/CustomTable.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
+import CardIcon from "../../components/Card/CardIcon.js";
+import CardFooter from "../../components/Card/CardFooter.js";
+import Tasks from "../../components/Tasks/Tasks.js";
+import Danger from "../../components/Typography/Danger.js"; 
+// @material-ui/icons
+import Store from "@material-ui/icons/Store";
+import Warning from "@material-ui/icons/Warning";
+import DateRange from "@material-ui/icons/DateRange";
+import LocalOffer from "@material-ui/icons/LocalOffer";
+import Update from "@material-ui/icons/Update";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import AccessTime from "@material-ui/icons/AccessTime";
+import Accessibility from "@material-ui/icons/Accessibility";
+import BugReport from "@material-ui/icons/BugReport";
+import Code from "@material-ui/icons/Code";
+import Cloud from "@material-ui/icons/Cloud";
 // Layouts
 import EmployeeAdd from '../../layouts/Forms/EmployeeAdd.js';
+// Variables
+import { bugs, website, server } from "../../variables/general.js";
+import {
+    dailySalesChart,
+    emailsSubscriptionChart,
+    completedTasksChart 
+  } from "../../variables/charts.js";
+// Styles
+import styles from '../../styles/views/Dashboard/StartedStyle.js';
 
-const Started = ({ style }) => {
+const useStyles = makeStyles(styles);
+
+
+const Started = () => {
+    const classes = useStyles();
     // TabPanel Swipeables Views
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
@@ -28,99 +61,222 @@ const Started = ({ style }) => {
 
     return (
         <Fragment>
-            <Grid
-                container
-                //   className={classes.content}
-                justify="center"
-                alignItems="center"
-                spacing={3}
-            >
-                <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={4}
-                    lg={3}
-                    xl={3}
-                    elevation={6}
-                    square="true"
-                // className={classes.container}
-                >
-                    <Card variant="cardLogin">
-                        <CardHeader color="primary" centered>
-                            <h3>Agregar Personal</h3>
+
+            <GridContainer>
+                <GridItem xs={12} sm={6} md={3}>
+                    <Card variant="cardDash">
+                        <CardHeader color="warning" stats icon>
+                            <CardIcon color="warning">
+                                <Icon>content_copy</Icon>
+                            </CardIcon>
+                            <p className={classes.cardCategory}>Used Space</p>
+                            <h3 className={classes.cardTitle}>
+                                49/50 <small>GB</small>
+                            </h3>
                         </CardHeader>
-                        <CardBody className="cardBodyLogin">
-                            <EmployeeAdd />
-                        </CardBody>
+                        <CardFooter stats>
+                            <div className={classes.stats}>
+                                <Danger>
+                                    <Warning />
+                                </Danger>
+                                <a href="#pablo" onClick={e => e.preventDefault()}>
+                                    Get more space
+                                </a>
+                            </div>
+                        </CardFooter>
                     </Card>
-
-                </Grid>
-
-                <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={8}
-                    lg={9}
-                    xl={9}
-                    elevation={6}
-                    square="true"
-                // className={classes.container}
-                >
-                    <Card variant="cardLogin">
-                        <CardHeader color="primary">
-                            <h3>Lista de Personal</h3>
+                </GridItem>
+                <GridItem xs={12} sm={6} md={3}>
+                    <Card variant="cardDash">
+                        <CardHeader color="success" stats icon>
+                            <CardIcon color="success">
+                                <Store />
+                            </CardIcon>
+                            <p className={classes.cardCategory}>Revenue</p>
+                            <h3 className={classes.cardTitle}>$34,245</h3>
                         </CardHeader>
-                        <CardBody className="cardBodyLogin">
+                        <CardFooter stats>
+                            <div className={classes.stats}>
+                                <DateRange />
+                                Last 24 Hours
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={6} md={3}>
+                    <Card variant="cardDash">
+                        <CardHeader color="danger" stats icon>
+                            <CardIcon color="danger">
+                                <Icon>info_outline</Icon>
+                            </CardIcon>
+                            <p className={classes.cardCategory}>Fixed Issues</p>
+                            <h3 className={classes.cardTitle}>75</h3>
+                        </CardHeader>
+                        <CardFooter stats>
+                            <div className={classes.stats}>
+                                <LocalOffer />
+                                Tracked from Github
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={6} md={3}>
+                    <Card variant="cardDash">
+                        <CardHeader color="info" stats icon>
+                            <CardIcon color="info">
+                                <Accessibility />
+                            </CardIcon>
+                            <p className={classes.cardCategory}>Followers</p>
+                            <h3 className={classes.cardTitle}>+245</h3>
+                        </CardHeader>
+                        <CardFooter stats>
+                            <div className={classes.stats}>
+                                <Update />
+                                Just Updated
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+            </GridContainer>
+            <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                    <Card variant="cardDash" chart>
+                        <CardHeader color="success">
+                            <ChartistGraph
+                                className="ct-chart"
+                                data={dailySalesChart.data}
+                                type="Line"
+                                options={dailySalesChart.options}
+                                listener={dailySalesChart.animation}
+                            />
+                        </CardHeader>
+                        <CardBody>
+                            <h4 className={classes.cardTitle}>Daily Sales</h4>
+                            <p className={classes.cardCategory}>
+                                <span className={classes.successText}>
+                                    <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                                </span>{" "}
+                            increase in today sales.
+                        </p>
+                        </CardBody>
+                        <CardFooter chart>
+                            <div className={classes.stats}>
+                                <AccessTime /> updated 4 minutes ago
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                    <Card variant="cardDash" chart>
+                        <CardHeader color="warning">
+                            <ChartistGraph
+                                className="ct-chart"
+                                data={emailsSubscriptionChart.data}
+                                type="Bar"
+                                options={emailsSubscriptionChart.options}
+                                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
+                                listener={emailsSubscriptionChart.animation}
+                            />
+                        </CardHeader>
+                        <CardBody>
+                            <h4 className={classes.cardTitle}>Email Subscriptions</h4>
+                            <p className={classes.cardCategory}>Last Campaign Performance</p>
+                        </CardBody>
+                        <CardFooter chart>
+                            <div className={classes.stats}>
+                                <AccessTime /> campaign sent 2 days ago
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                    <Card variant="cardDash" chart>
+                        <CardHeader color="danger">
+                            <ChartistGraph
+                                className="ct-chart"
+                                data={completedTasksChart.data}
+                                type="Line"
+                                options={completedTasksChart.options}
+                                listener={completedTasksChart.animation}
+                            />
+                        </CardHeader>
+                        <CardBody>
+                            <h4 className={classes.cardTitle}>Completed Tasks</h4>
+                            <p className={classes.cardCategory}>Last Campaign Performance</p>
+                        </CardBody>
+                        <CardFooter chart>
+                            <div className={classes.stats}>
+                                <AccessTime /> campaign sent 2 days ago
+                            </div>
+                        </CardFooter>
+                    </Card>
+                </GridItem>
+            </GridContainer>
+            <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                    <CustomTabs
+                        title="Tasks:"
+                        headerColor="primary"
+                        tabs={[
+                            {
+                                tabName: "Bugs",
+                                tabIcon: BugReport,
+                                tabContent: (
+                                    <Tasks
+                                        checkedIndexes={[0, 3]}
+                                        tasksIndexes={[0, 1, 2, 3]}
+                                        tasks={bugs}
+                                    />
+                                )
+                            },
+                            {
+                                tabName: "Website",
+                                tabIcon: Code,
+                                tabContent: (
+                                    <Tasks
+                                        checkedIndexes={[0]}
+                                        tasksIndexes={[0, 1]}
+                                        tasks={website}
+                                    />
+                                )
+                            },
+                            {
+                                tabName: "Server",
+                                tabIcon: Cloud,
+                                tabContent: (
+                                    <Tasks
+                                        checkedIndexes={[1]}
+                                        tasksIndexes={[0, 1, 2]}
+                                        tasks={server}
+                                    />
+                                )
+                            }
+                        ]}
+                    />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                    <Card variant="cardDash">
+                        <CardHeader color="warning">
+                            <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+                            <p className={classes.cardCategoryWhite}>
+                                New employees on 15th September, 2016
+                            </p>
+                        </CardHeader>
+                        <CardBody>
                             <CustomTable
-                                column={[
-                                    {
-                                        title: "ID",
-                                        field: "id",
-                                        type: "numeric",
-                                        editable: "never"
-                                    },
-                                    {
-                                        title: "Imagen",
-                                        field: "image",
-                                        editable: "never",
-                                        sorting: false,
-                                        // eslint-disable-next-line react/display-name
-                                        //   render: rowData => (
-                                        //     <AvatarTable rowData={rowData} path={path} />
-                                        //   )
-                                    },
-                                    { title: "Nombre", field: "name", type: "string" },
-                                    { title: "Apellidos", field: "lastname", type: "string" },
-                                    { title: "Usuario", field: "user", type: "string" },
-                                    { title: "PIN", field: "pin", type: "string" },
-                                    //{ title: 'Creación', field: 'created_at', editable: 'never', type: 'date' },
-                                    //{ title: 'Modificación', field: 'updated_at', editable: 'never', type: 'date' },
-                                    {
-                                        title: "Cargo",
-                                        field: "position_id",
-                                        type: "string",
-                                        //   lookup: selectList
-                                    },
-                                    {
-                                        title: "Contraseña",
-                                        field: "password_table",
-                                        editable: "onUpdate",
-                                        type: "string"
-                                    }
+                                tableHeaderColor="warning"
+                                tableHead={["ID", "Name", "Salary", "Country"]}
+                                tableData={[
+                                    ["1", "Dakota Rice", "$36,738", "Niger"],
+                                    ["2", "Minerva Hooper", "$23,789", "Curaçao"],
+                                    ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
+                                    ["4", "Philip Chaney", "$38,735", "Korea, South"]
                                 ]}
-                            //   data={EmployeesList}
-                            //   refresh={userListAction}
-                            //   updates={userUpdateAction}
-                            //   deletes={userDeleteAction}
-                            //   loading={Loading}
                             />
                         </CardBody>
                     </Card>
-                </Grid>
-            </Grid>
-
+                </GridItem>
+            </GridContainer>
 
         </Fragment>
     );

@@ -9,9 +9,9 @@ import {
 const cardHeaderStyle = {
   cardHeader: {
     borderRadius: "3px",
-    padding: "1rem 15px",
-    marginLeft: "15px",
-    marginRight: "15px",
+    padding: "1rem 20px 1rem 20px",
+    marginLeft: "20px",
+    marginRight: "20px",
     marginTop: "-30px",
     border: "0",
     marginBottom: "0"
@@ -19,6 +19,37 @@ const cardHeaderStyle = {
   cardHeaderPlain: {
     marginLeft: "0px",
     marginRight: "0px"
+  },
+  cardHeaderDense: {
+    padding: "0.1rem 20px 0.1rem 20px",
+    marginTop: "-25px",
+  },
+  cardHeaderStats: {
+    "& $cardHeaderIcon": {
+      textAlign: "right"
+    },
+    "& h1,& h2,& h3,& h4,& h5,& h6": {
+      margin: "0 !important"
+    }
+  },
+  cardHeaderIcon: {
+    "&$warningCardHeader,&$successCardHeader,&$dangerCardHeader,&$infoCardHeader,&$primaryCardHeader,&$roseCardHeader": {
+      background: "transparent",
+      boxShadow: "none"
+    },
+    "& i,& .material-icons": {
+      width: "33px",
+      height: "33px",
+      textAlign: "center",
+      lineHeight: "33px"
+    },
+    "& svg": {
+      width: "24px",
+      height: "24px",
+      textAlign: "center",
+      lineHeight: "33px",
+      margin: "5px 4px 0px"
+    }
   },
   warningCardHeader,
   successCardHeader,

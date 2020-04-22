@@ -1,5 +1,5 @@
 // Theme
-import { theme } from "../../themes/theme.js";
+import { grayColor, theme } from "../../themes/theme.js";
 
 const cardFooterStyle = {
   cardFooter: {
@@ -20,6 +20,36 @@ const cardFooterStyle = {
     paddingRight: theme.spacing(5),
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(1),
+  },
+  cardFooterProfile: {
+    marginTop: "-15px"
+  },
+  cardFooterPlain: {
+    paddingLeft: "5px",
+    paddingRight: "5px",
+    backgroundColor: "transparent"
+  },
+  cardFooterStats: {
+    borderTop: "1px solid " + grayColor[10],
+    marginTop: "20px",
+    "& svg": {
+      position: "relative",
+      top: "4px",
+      marginRight: "3px",
+      marginLeft: "3px",
+      width: "16px",
+      height: "16px"
+    },
+    "& .fab,& .fas,& .far,& .fal,& .material-icons": {
+      fontSize: "16px",
+      position: "relative",
+      top: "4px",
+      marginRight: "3px",
+      marginLeft: "3px"
+    }
+  },
+  cardFooterChart: {
+    borderTop: "1px solid " + grayColor[10]
   }
 };
 

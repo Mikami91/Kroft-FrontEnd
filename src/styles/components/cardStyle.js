@@ -93,7 +93,8 @@ const cardStyle = {
     fontSize: ".875rem",
     transition: "all 300ms linear",
     width: "100%",
-    height: "85vh",
+    height: "auto",
+    // height: "85vh",
     marginTop: "5vh",
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(2),
@@ -104,6 +105,16 @@ const cardStyle = {
   cardPlain: {
     background: "transparent",
     boxShadow: "none",
+  },
+  cardProfile: {
+    marginTop: "30px",
+    textAlign: "center"
+  },
+  cardChart: {
+    "& p": {
+      marginTop: "0px",
+      paddingTop: "0px"
+    }
   },
   cardCarousel: {
     overflow: "hidden",

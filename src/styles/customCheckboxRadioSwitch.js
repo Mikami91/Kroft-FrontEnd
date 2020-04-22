@@ -3,7 +3,7 @@ import {
   dangerColor,
   roseColor,
   grayColor
-} from "../../themes/theme.js";
+} from "../themes/theme.js";
 
 const customCheckboxRadioSwitch = {
   checkRoot: {

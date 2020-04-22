@@ -14,11 +14,14 @@ const useStyles = makeStyles(styles);
 
 export default function CardHeader(props) {
   const classes = useStyles();
-  const { className, children, color, plain, centered, ...rest } = props;
+  const { className, children, color, plain, dense, centered, stats, icon, ...rest } = props;
   const cardHeaderClasses = classNames({
     [classes.cardHeader]: true,
     [classes[color + "CardHeader"]]: color,
     [classes.cardHeaderPlain]: plain,
+    [classes.cardHeaderDense]: dense,
+    [classes.cardHeaderStats]: stats,
+    [classes.cardHeaderIcon]: icon,
     [className]: className !== undefined
   });
   return (
@@ -28,10 +31,15 @@ export default function CardHeader(props) {
   );
 }
 
+// Proptypes
+
 CardHeader.propTypes = {
   className: PropTypes.string,
   color: PropTypes.oneOf(["warning", "success", "danger", "info", "primary", "secondary"]),
   plain: PropTypes.bool,
+  dense: PropTypes.bool,
   centered: PropTypes.bool,
+  stats: PropTypes.bool,
+  icon: PropTypes.bool,
   children: PropTypes.node
 };
