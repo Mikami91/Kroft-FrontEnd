@@ -7,9 +7,9 @@ import { amber, blue, cyan, deepOrange, deepPurple, green, indigo, lightBlue, li
 // Theme
 export const theme = createMuiTheme({
   palette: {
-    type: "light",
-    primary: deepOrange,
-    secondary: lightGreen,
+    type: "dark",
+    primary: teal,
+    secondary: deepOrange,
     error: pink,
   },
   typography: {
@@ -34,15 +34,32 @@ export const theme = createMuiTheme({
 export const primaryColor = theme.palette.primary[500];
 export const secondaryColor = theme.palette.secondary[500];
 export const errorColor = theme.palette.error[500];
-// Variables
+// Colors
 export const warningColor = "#ff9800";
 export const dangerColor = "#f44336";
 export const successColor = "#4caf50";
 export const infoColor = "#00acc1";
 export const roseColor = "#e91e63";
-export const grayColor = "#999999";
+
+export const grayColor = [
+  "#999",
+  "#777",
+  "#3C4858",
+  "#AAAAAA",
+  "#D2D2D2",
+  "#DDD",
+  "#b4b4b4",
+  "#555555",
+  "#333",
+  "#a9afbb",
+  "#eee",
+  "#e7e7e7"
+];
+export const blackColor = "#000";
+export const whiteColor = "#FFF";
 
 // Global Styles
+export const drawerDash = 130; 
 export const drawerWidth = 260;
 
 export const transition = {

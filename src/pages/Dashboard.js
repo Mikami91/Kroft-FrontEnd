@@ -1,6 +1,5 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
-import SwipeableViews from "react-swipeable-views";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -9,43 +8,17 @@ import Hidden from "@material-ui/core/Hidden";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 // Layouts
-import EmployeeLogin from "../layouts/Forms/EmployeeLogin.js";
-import PinLogin from "../layouts/Forms/PinLogin.js";
-import AdminLogin from "../layouts/Forms/AdminLogin.js";
-import EmailForm from "../layouts/Forms/EmailForm.js";
-// core components
-import FooterLogin from "../components/Footer/FooterLogin.js";
-import SingleTabs from "../components/CustomTabs/SingleTabs.js";
-import Card from "../components/Card/Card.js";
-import CardHeader from "../components/Card/CardHeader.js";
-import CardBody from "../components/Card/CardBody.js";
-import CardFooter from "../components/Card/CardFooter.js";
-import TabPanel from "../components/Panel/TabPanel.js";
-import Modal from "../components/Modal/Modal.js";
-// Layouts
 import Sidebar from '../layouts/Sidebars/Sidebar.js';
+import DashAppBar from '../layouts/AppBars/DashAppBar.js';
+// core components
+import Card from "../components/Card/Card.js";
+import FooterLogin from "../components/Footer/FooterLogin.js";
 // Styles
-import styles from "../styles/pages/LoginStyle.js";
+import styles from "../styles/pages/DashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 
 export default function DashboardPage(props) {
-  // State for Panel Tabs
-  const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
-  // State for Modal
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
   // State for Card animation
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   setTimeout(function () {
@@ -54,16 +27,28 @@ export default function DashboardPage(props) {
   const classes = useStyles();
   return (
     <Fragment>
-      <Grid
+      <Sidebar />
+
+      {/* <Grid
         container
-        className={classes.rootLogin}
+        className={classes.content}
         justify="center"
         alignItems="center"
       >
-        
-        <Sidebar style={classes} />
-        
-      </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={12}
+          lg={12}
+          xl={12}
+          elevation={6}
+          square="true"
+          className={classes.container}
+        >
+          <Card variant="cardDash">{"MMM"}</Card>
+        </Grid>
+      </Grid> */}
     </Fragment>
   );
 }

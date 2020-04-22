@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 
 export default function CardHeader(props) {
   const classes = useStyles();
-  const { className, children, color, plain, ...rest } = props;
+  const { className, children, color, plain, centered, ...rest } = props;
   const cardHeaderClasses = classNames({
     [classes.cardHeader]: true,
     [classes[color + "CardHeader"]]: color,
@@ -22,7 +22,7 @@ export default function CardHeader(props) {
     [className]: className !== undefined
   });
   return (
-    <div className={cardHeaderClasses} {...rest}>
+    <div className={cardHeaderClasses} {...rest} style={{ textAlign: centered ? "center" : "" }} >
       {children}
     </div>
   );
@@ -32,5 +32,6 @@ CardHeader.propTypes = {
   className: PropTypes.string,
   color: PropTypes.oneOf(["warning", "success", "danger", "info", "primary", "secondary"]),
   plain: PropTypes.bool,
+  centered: PropTypes.bool,
   children: PropTypes.node
 };

@@ -16,8 +16,8 @@ export default function Card(props) {
   const classes = useStyles();
   const { className, variant, children, plain, carousel, ...rest } = props;
   const cardClasses = classNames({
-    [classes.card]: variant ? false : true,
-    [classes[variant]]: variant ? true : false,
+    [classes.card]: variant !== null ? false : true,
+    [classes[variant]]: variant !== null ? true : false,
     [classes.cardPlain]: plain,
     [classes.cardCarousel]: carousel,
     [className]: className !== undefined,
@@ -40,7 +40,7 @@ Card.defaultProps = {
 
 Card.propTypes = {
   className: PropTypes.string,
-  variant: PropTypes.oneOf(["cardLogin", "cardSide"]),
+  variant: PropTypes.oneOf(["cardLogin", "cardSide", "cardDash"]),
   plain: PropTypes.bool,
   carousel: PropTypes.bool,
   children: PropTypes.node,

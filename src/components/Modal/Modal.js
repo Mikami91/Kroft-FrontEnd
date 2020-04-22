@@ -27,7 +27,6 @@ Transition.displayName = "Transition";
 export default function Modal(props) {
   const classes = useStyles();
   const { open, close, scroll, fullWidth, maxWidth, title, closeText, actionText, content, form } = props;
-  console.log(props)
   return (
     <Dialog
       classes={{

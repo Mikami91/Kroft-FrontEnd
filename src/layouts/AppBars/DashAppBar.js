@@ -27,7 +27,7 @@ const DashAppBar = ({ style }) => {
   };
 
   return (
-    <CustomAppBar position="fixed" color="secondary">
+    <CustomAppBar position="fixed" color="secondary" variant="dense">
       <IconButton
         edge="start"
         //className={classes.menuButton}

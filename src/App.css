@@ -1,6 +1,6 @@
 body {
-  background-color: rgb(11, 126, 107);
-  /*background-image: linear-gradient(to top, #0D1522 0%, #0b463b 100%);*/
+  background-color: black !important;
+  background-image: linear-gradient(to top, #0D1522 0%, #0b463b 100%);
   /*background-image: url("../assets/back.jpg");*/
   background-attachment: fixed;
   background-position: center;

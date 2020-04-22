@@ -1,5 +1,18 @@
 // Theme
-import { theme } from "../../themes/theme.js";
+import { container, theme } from "../../themes/theme.js";
+
+// let width;
+
+// (function () {
+//     width = window.innerWidth;
+
+//     window.addEventListener('resize', function () {
+//        if (window.innerWidth !== width) {
+//           width = window.innerWidth;
+//           //  window.location.reload(true);
+//        }
+//     });
+// })();
 
 const cardStyle = {
   card: {
@@ -66,6 +79,28 @@ const cardStyle = {
     backgroundSize: "cover",
     backgroundPosition: "center",
   },
+  cardDash: {
+    border: "0",
+    borderRadius: "6px",
+    color: theme.palette.type === "light" ? "rgba(0, 0, 0, 0.87)" : "#fff",
+    background: theme.palette.type === "light" ? "#fff" : "#424242",
+    boxShadow:
+      "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)",
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    wordWrap: "break-word",
+    fontSize: ".875rem",
+    transition: "all 300ms linear",
+    width: "100%",
+    height: "85vh",
+    marginTop: "5vh",
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    paddingRight: theme.spacing(4),
+    paddingLeft: theme.spacing(4),
+  },
+
   cardPlain: {
     background: "transparent",
     boxShadow: "none",
