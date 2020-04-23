@@ -25,6 +25,8 @@ import Tasks from "../../components/Tasks/Tasks.js";
 import Danger from "../../components/Typography/Danger.js"; 
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import SdStorageOutlinedIcon from '@material-ui/icons/SdStorageOutlined';
 import Warning from "@material-ui/icons/Warning";
 import DateRange from "@material-ui/icons/DateRange";
 import LocalOffer from "@material-ui/icons/LocalOffer";
@@ -32,7 +34,7 @@ import Update from "@material-ui/icons/Update";
 import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import AccessTime from "@material-ui/icons/AccessTime";
 import Accessibility from "@material-ui/icons/Accessibility";
-import BugReport from "@material-ui/icons/BugReport";
+import BugReportIcon from '@material-ui/icons/BugReport';
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
 // Layouts
@@ -67,7 +69,7 @@ const Started = () => {
                     <Card variant="cardDash">
                         <CardHeader color="warning" stats icon>
                             <CardIcon color="warning">
-                                <Icon>content_copy</Icon>
+                                <SdStorageOutlinedIcon />
                             </CardIcon>
                             <p className={classes.cardCategory}>Used Space</p>
                             <h3 className={classes.cardTitle}>
@@ -107,7 +109,7 @@ const Started = () => {
                     <Card variant="cardDash">
                         <CardHeader color="danger" stats icon>
                             <CardIcon color="danger">
-                                <Icon>info_outline</Icon>
+                                <InfoOutlinedIcon />
                             </CardIcon>
                             <p className={classes.cardCategory}>Fixed Issues</p>
                             <h3 className={classes.cardTitle}>75</h3>
@@ -141,7 +143,7 @@ const Started = () => {
             <GridContainer>
                 <GridItem xs={12} sm={12} md={4}>
                     <Card variant="cardDash" chart>
-                        <CardHeader color="success">
+                        <CardHeader color="success" stats>
                             <ChartistGraph
                                 className="ct-chart"
                                 data={dailySalesChart.data}
@@ -150,9 +152,9 @@ const Started = () => {
                                 listener={dailySalesChart.animation}
                             />
                         </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>Daily Sales</h4>
-                            <p className={classes.cardCategory}>
+                        <CardBody stats>
+                            <h4 className={classes.cardTitleBody}>Daily Sales</h4>
+                            <p className={classes.cardCategoryBody}>
                                 <span className={classes.successText}>
                                     <ArrowUpward className={classes.upArrowCardCategory} /> 55%
                                 </span>{" "}
@@ -168,7 +170,7 @@ const Started = () => {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                     <Card variant="cardDash" chart>
-                        <CardHeader color="warning">
+                        <CardHeader color="warning" stats>
                             <ChartistGraph
                                 className="ct-chart"
                                 data={emailsSubscriptionChart.data}
@@ -178,9 +180,9 @@ const Started = () => {
                                 listener={emailsSubscriptionChart.animation}
                             />
                         </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-                            <p className={classes.cardCategory}>Last Campaign Performance</p>
+                        <CardBody stats>
+                            <h4 className={classes.cardTitleBody}>Email Subscriptions</h4>
+                            <p className={classes.cardCategoryBody}>Last Campaign Performance</p>
                         </CardBody>
                         <CardFooter chart>
                             <div className={classes.stats}>
@@ -191,7 +193,7 @@ const Started = () => {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={4}>
                     <Card variant="cardDash" chart>
-                        <CardHeader color="danger">
+                        <CardHeader color="danger" stats>
                             <ChartistGraph
                                 className="ct-chart"
                                 data={completedTasksChart.data}
@@ -200,9 +202,9 @@ const Started = () => {
                                 listener={completedTasksChart.animation}
                             />
                         </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>Completed Tasks</h4>
-                            <p className={classes.cardCategory}>Last Campaign Performance</p>
+                        <CardBody stats>
+                            <h4 className={classes.cardTitleBody}>Completed Tasks</h4>
+                            <p className={classes.cardCategoryBody}>Last Campaign Performance</p>
                         </CardBody>
                         <CardFooter chart>
                             <div className={classes.stats}>
@@ -220,7 +222,7 @@ const Started = () => {
                         tabs={[
                             {
                                 tabName: "Bugs",
-                                tabIcon: BugReport,
+                                tabIcon: BugReportIcon,
                                 tabContent: (
                                     <Tasks
                                         checkedIndexes={[0, 3]}
@@ -256,13 +258,13 @@ const Started = () => {
                 </GridItem>
                 <GridItem xs={12} sm={12} md={6}>
                     <Card variant="cardDash">
-                        <CardHeader color="warning">
+                        <CardHeader color="warning" stats>
                             <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
                             <p className={classes.cardCategoryWhite}>
                                 New employees on 15th September, 2016
                             </p>
                         </CardHeader>
-                        <CardBody>
+                        <CardBody stats>
                             <CustomTable
                                 tableHeaderColor="warning"
                                 tableHead={["ID", "Name", "Salary", "Country"]}

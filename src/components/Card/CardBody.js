@@ -14,9 +14,10 @@ const useStyles = makeStyles(styles);
 
 export default function CardBody(props) {
   const classes = useStyles();
-  const { className, children, ...rest } = props;
+  const { className, children, login, stats, ...rest } = props;
   const cardBodyClasses = classNames({
-    [classes.cardBodyLogin]: true,
+    [classes.cardBodyLogin]: login,
+    [classes.cardBodyStats]: stats,
     [className]: className !== undefined
   });
   return (
@@ -28,5 +29,7 @@ export default function CardBody(props) {
 
 CardBody.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node
+  children: PropTypes.node,
+  login: PropTypes.bool,
+  stats: PropTypes.bool,
 };

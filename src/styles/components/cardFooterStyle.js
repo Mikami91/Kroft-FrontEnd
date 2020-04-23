@@ -16,10 +16,11 @@ const cardFooterStyle = {
     display: "flex",
     alignItems: "center",
     backgroundColor: "transparent",
-    paddingLeft: theme.spacing(5),
-    paddingRight: theme.spacing(5),
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    padding: theme.spacing(0),
+    // paddingLeft: theme.spacing(5),
+    // paddingRight: theme.spacing(5),
+    // paddingTop: theme.spacing(1),
+    // paddingBottom: theme.spacing(1),
   },
   cardFooterProfile: {
     marginTop: "-15px"
@@ -30,6 +31,9 @@ const cardFooterStyle = {
     backgroundColor: "transparent"
   },
   cardFooterStats: {
+    paddingTop: "10px",
+    paddingLeft: theme.spacing(0),
+    paddingRight: theme.spacing(0),
     borderTop: "1px solid " + grayColor[10],
     marginTop: "20px",
     "& svg": {
@@ -49,6 +53,9 @@ const cardFooterStyle = {
     }
   },
   cardFooterChart: {
+    paddingTop: "10px",
+    paddingLeft: theme.spacing(0),
+    paddingRight: theme.spacing(0),
     borderTop: "1px solid " + grayColor[10]
   }
 };

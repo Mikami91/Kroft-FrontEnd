@@ -2,6 +2,7 @@
 import Login from "../../pages/Login";
 // Views
 import Started from '../../views/Dashboard/Started';
+import Employees from '../../views/Dashboard/Employees';
 // @material-ui/icons
 import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
 import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
@@ -11,7 +12,6 @@ import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import AssessmentRoundedIcon from '@material-ui/icons/AssessmentRounded';
 import SettingsRounded from '@material-ui/icons/SettingsRounded';
-import EmployeeLogin from '../../layouts/Forms/EmployeeLogin'
 
 const SidebarList = [
   {
@@ -22,7 +22,7 @@ const SidebarList = [
   {
     name: "Personal",
     icon: GroupRoundedIcon,
-    component: EmployeeLogin,
+    component: Employees,
   },
   {
     name: "Ambientes",

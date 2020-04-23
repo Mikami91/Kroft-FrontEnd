@@ -25,6 +25,10 @@ const cardHeaderStyle = {
     marginTop: "-25px",
   },
   cardHeaderStats: {
+    padding: "15px",
+    marginLeft: "0px",
+    marginRight: "0px",
+
     "& $cardHeaderIcon": {
       textAlign: "right"
     },
@@ -33,6 +37,11 @@ const cardHeaderStyle = {
     }
   },
   cardHeaderIcon: {
+    padding: "15px",
+    marginLeft: "0px",
+    marginRight: "0px",
+    paddingRight: "0px",
+    paddingLeft: "0px",
     "&$warningCardHeader,&$successCardHeader,&$dangerCardHeader,&$infoCardHeader,&$primaryCardHeader,&$roseCardHeader": {
       background: "transparent",
       boxShadow: "none"

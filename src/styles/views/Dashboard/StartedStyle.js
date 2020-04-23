@@ -39,7 +39,17 @@ import {
       fontSize: "14px",
       marginTop: "0",
       paddingTop: "10px",
-      marginBottom: "0"
+      marginBottom: "0",
+      textAlign: "right"
+    },
+    cardCategoryBody: {
+      color: grayColor[0],
+      margin: "0",
+      fontSize: "14px",
+      marginTop: "0",
+      paddingTop: "10px",
+      marginBottom: "10px",
+      textAlign: "left"
     },
     cardCategoryWhite: {
       color: "rgba(" + (whiteColor) + ",.62)",
@@ -49,7 +59,25 @@ import {
       marginBottom: "0"
     },
     cardTitle: {
-      color: grayColor[2],
+      // color: grayColor[2],
+      color: "orange",
+      marginTop: "0px",
+      minHeight: "auto",
+      fontWeight: "300",
+      fontSize: "25px",
+      fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
+      marginBottom: "3px",
+      textDecoration: "none",
+      "& small": {
+        color: grayColor[1],
+        fontWeight: "400",
+        lineHeight: "1"
+      },
+      textAlign: "right"
+    },
+    cardTitleBody: {
+      // color: grayColor[2],
+      color: "orange",
       marginTop: "0px",
       minHeight: "auto",
       fontWeight: "300",
@@ -60,7 +88,9 @@ import {
         color: grayColor[1],
         fontWeight: "400",
         lineHeight: "1"
-      }
+      },
+      textAlign: "left",
+      paddingTop: "10px"
     },
     cardTitleWhite: {
       color: whiteColor,
