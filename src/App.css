@@ -1,3 +1,16 @@
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}
+
 body {
   background-color: black !important;
   background-image: linear-gradient(to top, #0D1522 0%, #0b463b 100%);
@@ -7,7 +20,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
-  overflow: hidden;
   
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",

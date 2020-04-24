@@ -64,7 +64,7 @@ const Started = () => {
     return (
         <Fragment>
 
-            <GridContainer>
+            <GridContainer style={{ padding: "0px 0px 25px 0px" }}>
                 <GridItem xs={12} sm={6} md={3}>
                     <Card variant="cardDash">
                         <CardHeader color="warning" stats icon>
@@ -217,6 +217,7 @@ const Started = () => {
             <GridContainer>
                 <GridItem xs={12} sm={12} md={6}>
                     <CustomTabs
+                        // dense
                         title="Tasks:"
                         headerColor="primary"
                         tabs={[
