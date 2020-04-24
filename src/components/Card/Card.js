@@ -42,7 +42,7 @@ Card.defaultProps = {
 
 Card.propTypes = {
   className: PropTypes.string,
-  variant: PropTypes.oneOf(["card", "cardLogin", "cardSide", "cardDash"]),
+  variant: PropTypes.oneOf(["card", "cardLogin", "cardForm", "cardSide", "cardDash"]),
   plain: PropTypes.bool,
   carousel: PropTypes.bool,
   chart: PropTypes.bool,

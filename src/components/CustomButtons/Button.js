@@ -16,9 +16,11 @@ const makeComponentStyles = makeStyles(() => ({
   ...buttonStyle
 }));
 
-const RegularButton = React.forwardRef((props, ref) => {
+const RegularButton = React.forwardRef((props, ref) => { 
   const {
+    html,
     color,
+    variant,
     round,
     children,
     fullWidth,
@@ -54,7 +56,14 @@ const RegularButton = React.forwardRef((props, ref) => {
   );
 });
 
+// PropTypes
+RegularButton.defaultProps = {
+  color: "primary",
+  variant: "contained"
+}
+
 RegularButton.propTypes = {
+  html: PropTypes.string,
   color: PropTypes.oneOf([
     "primary",
     "secondary",
@@ -69,6 +78,11 @@ RegularButton.propTypes = {
     "google",
     "github",
     "transparent"
+  ]),
+  variant: PropTypes.oneOf([
+    "text",
+    "outlined",
+    "contained",
   ]),
   size: PropTypes.oneOf(["sm", "lg"]),
   simple: PropTypes.bool,

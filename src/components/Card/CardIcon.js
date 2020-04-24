@@ -14,9 +14,10 @@ const useStyles = makeStyles(styles);
 
 export default function CardIcon(props) {
   const classes = useStyles();
-  const { className, children, color, ...rest } = props;
+  const { className, children, color, avatar, ...rest } = props;
   const cardIconClasses = classNames({
     [classes.cardIcon]: true,
+    [classes.cardAvatar]: avatar,
     [classes[color + "CardHeader"]]: color,
     [className]: className !== undefined
   });
@@ -29,6 +30,7 @@ export default function CardIcon(props) {
 
 CardIcon.propTypes = {
   className: PropTypes.string,
+  avatar: PropTypes.bool,
   color: PropTypes.oneOf([
     "warning",
     "success",

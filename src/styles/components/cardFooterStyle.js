@@ -12,6 +12,17 @@ const cardFooterStyle = {
     paddingBottom: theme.spacing(0.5),
     // padding: "0.9375rem 1.875rem"
   },
+  cardFooterForm: {
+    display: "block",
+    textAlign: "center",
+    alignItems: "center",
+    backgroundColor: "transparent",
+    paddingLeft: theme.spacing(4),
+    paddingRight: theme.spacing(4),
+    paddingTop: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    // padding: "0.9375rem 1.875rem"
+  },
   cardFooterLogin: {
     display: "flex",
     alignItems: "center",

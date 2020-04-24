@@ -19,6 +19,16 @@ import {
         float: "left"
       }
     },
+    cardAvatar: {
+      "&$warningCardHeader,&$successCardHeader,&$dangerCardHeader,&$infoCardHeader,&$primaryCardHeader,&$roseCardHeader": {
+        borderRadius: "50%",
+        backgroundColor: grayColor[0],
+        padding: "24px",
+        marginTop: "-20px",
+        marginRight: "15px",
+        float: "left"
+      }
+    },
     warningCardHeader,
     successCardHeader,
     dangerCardHeader,

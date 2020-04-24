@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 
 export default function CardHeader(props) {
   const classes = useStyles();
-  const { className, children, color, plain, dense, centered, stats, icon, ...rest } = props;
+  const { className, children, color, plain, dense, centered, stats, icon, avatar, ...rest } = props;
   const cardHeaderClasses = classNames({
     [classes.cardHeader]: true,
     [classes[color + "CardHeader"]]: color,
@@ -22,6 +22,7 @@ export default function CardHeader(props) {
     [classes.cardHeaderDense]: dense,
     [classes.cardHeaderStats]: stats,
     [classes.cardHeaderIcon]: icon,
+    [classes.cardHeaderAvatar]: avatar,
     [className]: className !== undefined
   });
   return (
@@ -41,5 +42,6 @@ CardHeader.propTypes = {
   centered: PropTypes.bool,
   stats: PropTypes.bool,
   icon: PropTypes.bool,
+  avatar: PropTypes.bool,
   children: PropTypes.node
 };

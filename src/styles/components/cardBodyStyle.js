@@ -9,10 +9,10 @@ const cardBodyStyle = {
     WebkitBoxFlex: "1",
     position: "relative"
   }, 
-  cardBodyLogin: {
-    padding: "0px 20px 0px 20px",
+  cardBodyForm: {
+    padding: "0px 15px 0px 15px",
     flex: "1 1 auto",
-    height: "auto",
+    height: "auto !important", 
     overflowY: "auto"
   },
   cardBodyStats: {

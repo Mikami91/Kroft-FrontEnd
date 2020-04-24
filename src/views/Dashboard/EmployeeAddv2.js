@@ -41,14 +41,26 @@ const Employees = ({ style }) => {
                     item
                     xs={12}
                     sm={12}
-                    md={6}
-                    lg={5}
-                    xl={5}
+                    md={4}
+                    lg={3}
+                    xl={3}
                     elevation={6}
                     square="true"
                 // className={classes.container}
                 >
-                    <EmployeeAdd />
+                    <Card variant="cardLogin">
+                        <CardHeader color="primary" centered dense>
+                            <h3>Agregar Personal</h3>
+                        </CardHeader>
+                        <CardBody form>
+                            <EmployeeAdd />
+                        </CardBody>
+                        <CardFooter form>
+                            <CustomBotton form="employee-add" size="sm" type="submit">
+                                Registrar
+                            </CustomBotton>
+                        </CardFooter>
+                    </Card>
 
                 </Grid>
 
@@ -56,15 +68,15 @@ const Employees = ({ style }) => {
                     item
                     xs={12}
                     sm={12}
-                    md={6}
-                    lg={7}
-                    xl={7}
+                    md={8}
+                    lg={9}
+                    xl={9}
                     elevation={6}
                     square="true"
                 // className={classes.container}
                 >
-                    <Card variant="cardForm">
-                        <CardHeader color="info" dense>
+                    <Card variant="cardLogin">
+                        <CardHeader color="primary" dense>
                             <h3>Lista de Personal</h3>
                         </CardHeader>
                         <CardBody form>

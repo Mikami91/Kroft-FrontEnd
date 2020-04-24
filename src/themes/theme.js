@@ -7,7 +7,7 @@ import { amber, blue, cyan, deepOrange, deepPurple, green, indigo, lightBlue, li
 // Theme
 export const theme = createMuiTheme({
   palette: {
-    type: "dark",
+    type: "light",
     primary: teal,
     secondary: deepOrange,
     error: pink,

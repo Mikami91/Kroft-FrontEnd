@@ -15,6 +15,11 @@ import SettingsRounded from '@material-ui/icons/SettingsRounded';
 
 const SidebarList = [
   {
+    name: "Personal",
+    icon: GroupRoundedIcon,
+    component: Employees,
+  },
+  {
     name: "Inicio",
     icon: DashboardRoundedIcon,
     component: Started,
@@ -24,26 +29,26 @@ const SidebarList = [
     icon: GroupRoundedIcon,
     component: Employees,
   },
-  {
-    name: "Ambientes",
-    icon: DeckRoundedIcon,
-    component: Login,
-  },
-  {
-    name: "Mesas",
-    icon: TableChartRounded,
-    component: Login,
-  },
-  {
-    name: "Productos",
-    icon: FastfoodRoundedIcon,
-    component: Login,
-  },
-  {
-    name: "Ajustes",
-    icon: SettingsRounded,
-    component: Login,
-  },
+  // {
+  //   name: "Ambientes",
+  //   icon: DeckRoundedIcon,
+  //   component: Login,
+  // },
+  // {
+  //   name: "Mesas",
+  //   icon: TableChartRounded,
+  //   component: Login,
+  // },
+  // {
+  //   name: "Productos",
+  //   icon: FastfoodRoundedIcon,
+  //   component: Login,
+  // },
+  // {
+  //   name: "Ajustes",
+  //   icon: SettingsRounded,
+  //   component: Login,
+  // },
 ];
 
 export default SidebarList;

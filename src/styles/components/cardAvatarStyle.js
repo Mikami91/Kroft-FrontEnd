@@ -8,6 +8,18 @@ const cardAvatarStyle = {
       height: "auto"
     }
   },
+  cardAvatarForm: {
+    maxWidth: "130px",
+    maxHeight: "130px",
+    margin: "-50px 25px 5px",
+    borderRadius: "50%",
+    overflow: "hidden",
+    padding: "0",
+    ...boxShadow,
+    "&$cardAvatarPlain": {
+      marginTop: "0"
+    }
+  },
   cardAvatarProfile: {
     maxWidth: "130px",
     maxHeight: "130px",

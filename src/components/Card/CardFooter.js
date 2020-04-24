@@ -14,13 +14,14 @@ const useStyles = makeStyles(styles);
 
 export default function CardFooter(props) {
   const classes = useStyles();
-  const { className, children, plain, profile, stats, chart, ...rest } = props;
+  const { className, children, plain, profile, stats, chart, form, ...rest } = props;
   const cardFooterClasses = classNames({
     [classes.cardFooter]: true,
     [classes.cardFooterPlain]: plain,
     [classes.cardFooterProfile]: profile,
     [classes.cardFooterStats]: stats,
     [classes.cardFooterChart]: chart,
+    [classes.cardFooterForm]: form,
     [className]: className !== undefined
   });
   return (
@@ -36,5 +37,6 @@ CardFooter.propTypes = {
   profile: PropTypes.bool,
   stats: PropTypes.bool,
   chart: PropTypes.bool,
+  form: PropTypes.bool,
   children: PropTypes.node
 };

@@ -65,7 +65,8 @@ IconInput.propTypes = {
     type: PropTypes.oneOf([
         "text",
         "number",
-        "email"
+        "email",
+        "date"
     ]),
     icon: PropTypes.object,
     onChange: PropTypes.func,
