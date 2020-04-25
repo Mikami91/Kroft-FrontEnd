@@ -7,7 +7,7 @@ import { amber, blue, cyan, deepOrange, deepPurple, green, indigo, lightBlue, li
 // Theme
 export const theme = createMuiTheme({
   palette: {
-    type: "light",
+    type: "dark",
     primary: teal,
     secondary: deepOrange,
     error: pink,
@@ -59,7 +59,7 @@ export const blackColor = "#000";
 export const whiteColor = "#FFF";
 
 // Global Styles
-export const drawerDash = 130; 
+export const drawerDash = 115; 
 export const drawerWidth = 260;
 
 export const transition = {

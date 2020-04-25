@@ -44,7 +44,7 @@ const IconInput = (props) => {
 // PropTypes
 IconInput.defaultProps = {
     type: "text",
-    icon: {},
+    icon: [],
     onChange: null,
     value: "",
     required: false,
@@ -68,7 +68,7 @@ IconInput.propTypes = {
         "email",
         "date"
     ]),
-    icon: PropTypes.object,
+    icon: PropTypes.array,
     onChange: PropTypes.func,
     value: PropTypes.oneOfType([
         PropTypes.string,

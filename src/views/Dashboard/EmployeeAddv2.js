@@ -128,6 +128,27 @@ const Employees = ({ style }) => {
                 </Grid>
             </Grid>
 
+            {/* <PasswordInput
+                variant={'standard'}
+                margin={'dense'}
+                color="primary"
+                // disabled={showProgress} 
+                label={'Contraseña'}
+                name="password"
+                onChange={handleChange}
+                value={state.password}
+            />
+            <PasswordInput
+                variant={'standard'}
+                margin={'dense'}
+                color="primary"
+                // disabled={showProgress} 
+                label={'PIN'}
+                name="pin"
+                onChange={handleChange}
+                value={state.pin}
+            /> */}
+
 
         </Fragment>
     );

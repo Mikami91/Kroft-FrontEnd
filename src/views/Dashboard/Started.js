@@ -168,7 +168,7 @@ const Started = () => {
                         </CardFooter>
                     </Card>
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={8}>
                     <Card variant="cardDash" chart>
                         <CardHeader color="warning" stats>
                             <ChartistGraph

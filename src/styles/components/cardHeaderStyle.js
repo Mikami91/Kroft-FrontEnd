@@ -64,6 +64,7 @@ const cardHeaderStyle = {
     }
   },
   cardHeaderAvatar: {
+    zIndex: 100,
     // padding: "20px",
     marginTop: "-24px",
     marginRight: "-12px",
