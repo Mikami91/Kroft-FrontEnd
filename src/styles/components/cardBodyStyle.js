@@ -13,7 +13,7 @@ const cardBodyStyle = {
     padding: "0px 20px 0px 20px",
     flex: "1 1 auto",
     height: "auto !important", 
-    overflowY: "auto"
+    overflowY: "hidden"
   },
   cardBodyStats: {
     padding: "0px 5px 0px 5px",

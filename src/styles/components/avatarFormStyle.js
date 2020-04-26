@@ -11,7 +11,7 @@ const avatarFormStyle = {
     marginTop: "-20px",
     marginRight: "15px",
     backgroundColor: theme.palette.type === "light" ?   "#fff" : "#424242",
-    border: "1px solid" + theme.palette.type === "light" ?   "#fff" : "#424242",
+    border: theme.palette.type === "light" ?   "2px solid #fff" : "2px solid #424242",
     padding: "0",
     ...boxShadow
     // boxShadow:

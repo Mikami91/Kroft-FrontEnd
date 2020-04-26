@@ -23,11 +23,13 @@ import CardFooter from "../../components/Card/CardFooter.js";
 import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
+import SelectInput from '../../components/CustomInput/SelectInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Assets
 import image from '../../assets/img/defaults/user.png';
-
+// Varieables
+import { data } from '../../variables/JSON.js';
 
 import styles from "../../styles/pages/LoginStyle.js";
 
@@ -108,8 +110,9 @@ export default function EmployeeAdd(props) {
     // Register function
     const handleLogin = (e) => {
         e.preventDefault();
+        console.log(state);
         handleEmpty();
-    }
+    };
     const classes = useStyles();
     return (
         <form id="employee-add" onSubmit={handleLogin}>
@@ -209,7 +212,7 @@ export default function EmployeeAdd(props) {
                                 // icon={<PhoneAndroidIcon />}
                                 iconPosition="end"
                             />
-                            <IconInput
+                            {/* <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
@@ -222,6 +225,28 @@ export default function EmployeeAdd(props) {
                                 required
                                 // icon={<AssignmentIndIcon />}
                                 iconPosition="end"
+                            /> */}
+                            <SelectInput 
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                id="position"
+                                label={'Cargo'}
+                                name="position"
+                                onChange={handleChange}
+                                value={state.position}
+                                // categoryList={{
+                                //     data: data,
+                                //     key: "id",
+                                //     value: "username"
+                                // }}
+                                itemList={{
+                                    data: data,
+                                    key: "id",
+                                    value: "website"
+                                }}
+                                required
                             />
 
                         </Grid>
