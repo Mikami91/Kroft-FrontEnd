@@ -10,7 +10,7 @@ const cardBodyStyle = {
     position: "relative"
   }, 
   cardBodyForm: {
-    padding: "0px 15px 0px 15px",
+    padding: "0px 20px 0px 20px",
     flex: "1 1 auto",
     height: "auto !important", 
     overflowY: "auto"

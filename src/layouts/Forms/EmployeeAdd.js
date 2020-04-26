@@ -4,37 +4,29 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import IconButton from '@material-ui/core/IconButton';
-import CardMedia from "@material-ui/core/CardMedia";
-import Backdrop from '@material-ui/core/Backdrop';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import Tooltip from '@material-ui/core/Tooltip';
 // @material-ui/icons
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import DeleteIcon from '@material-ui/icons/Delete';
-import PersonIcon from '@material-ui/icons/Person';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
-import PaymentIcon from '@material-ui/icons/Payment';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import LockIcon from '@material-ui/icons/Lock';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+// import PersonIcon from '@material-ui/icons/Person';
+// import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+// import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
+// import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+// import PaymentIcon from '@material-ui/icons/Payment';
+// import AccountBoxIcon from '@material-ui/icons/AccountBox';
+// import LockIcon from '@material-ui/icons/Lock';
+// import VpnKeyIcon from '@material-ui/icons/VpnKey';
 // core components
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import CardAvatar from "../../components/Card/CardAvatar.js";
 import CardFooter from "../../components/Card/CardFooter.js";
-import CardIcon from "../../components/Card/CardIcon.js";
+import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
+import IconInput from '../../components/CustomInput/IconInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Assets
 import image from '../../assets/img/defaults/user.png';
-
-import Button from "../../components/CustomButtons/Button.js";
-import PasswordInput from '../../components/CustomInput/PasswordInput.js';
-import IconInput from '../../components/CustomInput/IconInput.js';
 
 
 import styles from "../../styles/pages/LoginStyle.js";
@@ -122,12 +114,11 @@ export default function EmployeeAdd(props) {
     return (
         <form id="employee-add" onSubmit={handleLogin}>
             {/* <p className={classes.divider}>Or Be Classical</p> */}
-
-
             <Card variant="cardForm">
-                <CustomLoading inside color="secondary" open={state.isUpload} />
-                <CardHeader color="success" avatar>
 
+                <CustomLoading inside color="secondary" open={state.isUpload} />
+
+                <CardHeader color="success" avatar>
                     <AvatarForm
                         image={state.image === "" ? image : state.image}
                         alt="Imagen"
@@ -143,27 +134,22 @@ export default function EmployeeAdd(props) {
                         style={{ display: 'none' }}
                     />
 
-                    <p className={classes.cardCategory} style={{ textAlign: "right", padding: "0px 8px 18px 0px" }}>
-                        {/* <Tooltip title="Eliminar imagen" arrow open={ state.image === "" ? false : true }> */}
+                    <CardIconActions>
                         <IconButton edge="start" onClick={handleEmptyImage} disabled={state.image === "" || state.isUpload ? true : false}>
                             <label>
                                 <DeleteIcon />
                             </label>
                         </IconButton>
-                        {/* </Tooltip> */}
 
-                        {/* <Tooltip title="Agregar imagen" arrow> */}
                         <IconButton edge="end" disabled={state.isUpload ? true : false} >
                             <label htmlFor="input-file">
                                 <AddAPhotoIcon />
                             </label>
                         </IconButton>
-                        {/* </Tooltip> */}
-                    </p>
+                    </CardIconActions>
                 </CardHeader>
 
                 <CardBody form>
-
                     <Grid
                         container
                         //   className={classes.content}
@@ -308,19 +294,14 @@ export default function EmployeeAdd(props) {
 
                         </Grid>
                     </Grid>
-
-
                 </CardBody>
 
                 <CardFooter form>
-
                     <CustomBotton form="employee-add" size="sm" type="submit" disabled={state.isUpload} >
                         Registrar
                     </CustomBotton>
-
                 </CardFooter>
             </Card>
-
         </form>
     );
 };
