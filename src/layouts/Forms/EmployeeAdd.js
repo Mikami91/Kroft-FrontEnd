@@ -24,6 +24,7 @@ import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
+import NumberInput from '../../components/CustomInput/NumberInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Assets
@@ -52,6 +53,7 @@ export default function EmployeeAdd(props) {
     });
     // Change State for Inputs
     const handleChange = (e) => {
+        console.log(e);
         setState({
             ...state,
             [e.target.name]: e.target.value
@@ -111,7 +113,8 @@ export default function EmployeeAdd(props) {
     const handleLogin = (e) => {
         e.preventDefault();
         console.log(state);
-        handleEmpty();
+        alert(state.salary);
+        // handleEmpty();
     };
     const classes = useStyles();
     return (
@@ -198,7 +201,7 @@ export default function EmployeeAdd(props) {
                                 // icon={<CalendarTodayIcon />}
                                 iconPosition="end"
                             />
-                            <IconInput
+                            {/* <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
@@ -211,6 +214,18 @@ export default function EmployeeAdd(props) {
                                 required
                                 // icon={<PhoneAndroidIcon />}
                                 iconPosition="end"
+                            /> */}
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                label={'Celular'}
+                                name="phone"
+                                value={state.phone}
+                                onChange={handleChange}
+                                required
+                                phone
                             />
                             {/* <IconInput
                                 variant={'standard'}
@@ -226,7 +241,7 @@ export default function EmployeeAdd(props) {
                                 // icon={<AssignmentIndIcon />}
                                 iconPosition="end"
                             /> */}
-                            <SelectInput 
+                            <SelectInput
                                 variant="standard"
                                 margin="dense"
                                 color="primary"
@@ -261,7 +276,19 @@ export default function EmployeeAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            <IconInput
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                label={'Salario'}
+                                name="salary"
+                                value={state.salary}
+                                onChange={handleChange}
+                                prefix={"Bs"}
+                                required
+                            />
+                            {/* <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
@@ -274,7 +301,7 @@ export default function EmployeeAdd(props) {
                                 required
                                 // icon={<PaymentIcon />}
                                 iconPosition="end"
-                            />
+                            /> */}
                             <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
