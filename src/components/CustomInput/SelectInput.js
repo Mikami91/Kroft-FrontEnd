@@ -1,6 +1,7 @@
 // Dependencies
 import React from 'react';
 import PropTypes from "prop-types";
+import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from '@material-ui/core/InputLabel';
@@ -9,19 +10,26 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 // Styles
-import styles from "../../styles/components/customInputStyle.js";
+import styles from "../../styles/components/selectInputStyle.js";
 
 const useStyles = makeStyles(styles);
 
 const SelectInput = (props) => {
-    const { disabled, id, label, margin, color, name, categoryList, itemList, onChange, placeholder, required, value, variant } = props;
-    console.log(itemList)
+    const { disabled, id, label, margin, color, hoverColor, name, categoryList, itemList, onChange, placeholder, required, value, variant } = props;
     // Styles
     const classes = useStyles();
+    const FormControlClasses = classNames({
+        [classes.labelRoot]: true,
+        [classes[color + "Underline"]]: color,
+    });
+    const dropdownItem = classNames({
+        [classes.dropdownItem]: true,
+        [classes[hoverColor + "Hover"]]: true,
+    });
     return (
 
         <FormControl
-            className={classes.labelRoot + classes.underlinePrimary}
+            className={FormControlClasses}
             disabled={disabled}
             variant={variant}
             margin={margin}
@@ -38,7 +46,7 @@ const SelectInput = (props) => {
                 value={value}
                 onChange={onChange}
             >
-                <MenuItem value="">
+                <MenuItem value="" className={dropdownItem}>
                     <em>Seleccionar</em>
                 </MenuItem>
 
@@ -46,20 +54,38 @@ const SelectInput = (props) => {
 
                     itemList.data.map(data => {
                         return (
-                            <MenuItem key={data[itemList.key]} value={data[itemList.key]}>{data[itemList.value]}</MenuItem>
+                            <MenuItem 
+                                key={data[itemList.key]} 
+                                value={data[itemList.key]} 
+                                className={dropdownItem}
+                            >
+                                {data[itemList.value]}
+                            </MenuItem>
                         )
                     }) :
 
                     categoryList.data.map(index => {
                         return ([
-                            <ListSubheader key={index[categoryList.key + categoryList.value]} value={index[categoryList.key]}>{index[categoryList.value]}</ListSubheader>,
+                            <ListSubheader 
+                                key={index[categoryList.key + categoryList.value]} 
+                                value={index[categoryList.key]}
+                            >
+                                {index[categoryList.value]}
+                            </ListSubheader>,
 
                             itemList.data.map(index2 => {
                                 if (index2[itemList.key] === index[categoryList.key]) {
                                     return (
-                                        <MenuItem key={index2[itemList.key]} value={index2[itemList.key]}>{index2[itemList.value]}</MenuItem>
+                                        <MenuItem 
+                                            key={index2[itemList.key]} 
+                                            value={index2[itemList.key]} 
+                                            className={dropdownItem}
+                                        >
+                                            {index2[itemList.value]}
+                                        </MenuItem>
                                     )
                                 };
+                                return null;
                             })
                         ])
                     })
@@ -93,6 +119,7 @@ SelectInput.defaultProps = {
     variant: "normal",
     margin: "normal",
     color: "primary",
+    hoverColor: "primary",
     error: false,
     success: false,
     white: true
@@ -125,6 +152,16 @@ SelectInput.propTypes = {
     color: PropTypes.oneOf([
         "primary",
         "secondary"
+    ]),
+    hoverColor: PropTypes.oneOf([
+        "black",
+        "primary",
+        "secondary",
+        "info",
+        "success",
+        "warning",
+        "danger",
+        "rose"
     ]),
     error: PropTypes.bool,
     success: PropTypes.bool,

@@ -227,12 +227,13 @@ export default function EmployeeAdd(props) {
                                 iconPosition="end"
                             /> */}
                             <SelectInput 
-                                variant={'standard'}
-                                margin={'dense'}
+                                variant="standard"
+                                margin="dense"
                                 color="primary"
+                                hoverColor="primary"
                                 // disabled={showProgress}
                                 id="position"
-                                label={'Cargo'}
+                                label="Cargo"
                                 name="position"
                                 onChange={handleChange}
                                 value={state.position}
