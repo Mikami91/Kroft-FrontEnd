@@ -1,5 +1,7 @@
 // Dependencies
 import React, { useState } from "react";
+import moment from 'moment';
+import 'moment/locale/es';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -24,6 +26,7 @@ import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
+import DateInput from '../../components/CustomInput/DateInput.js';
 import NumberInput from '../../components/CustomInput/NumberInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
@@ -36,12 +39,15 @@ import styles from "../../styles/pages/LoginStyle.js";
 
 const useStyles = makeStyles(styles);
 
+moment.locale("en");
+moment().format('l')
+
 export default function EmployeeAdd(props) {
     // Local State
     const [state, setState] = useState({
         image: '',
         name: "",
-        born: "",
+        born: null,
         phone: "",
         position: "",
         salary: "",
@@ -53,7 +59,6 @@ export default function EmployeeAdd(props) {
     });
     // Change State for Inputs
     const handleChange = (e) => {
-        console.log(e);
         setState({
             ...state,
             [e.target.name]: e.target.value
@@ -64,7 +69,7 @@ export default function EmployeeAdd(props) {
         setState({
             image: '',
             name: "",
-            born: "",
+            born: null,
             phone: "",
             position: "",
             salary: "",
@@ -111,9 +116,9 @@ export default function EmployeeAdd(props) {
     };
     // Register function
     const handleLogin = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         console.log(state);
-        alert(state.salary);
+        // alert(state.salary);
         // handleEmpty();
     };
     const classes = useStyles();
@@ -187,7 +192,21 @@ export default function EmployeeAdd(props) {
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
-                            <IconInput
+                            <DateInput
+                                 variant={'standard'}
+                                 margin={'dense'}
+                                 color="primary"
+                                 // disabled={showProgress}
+                                 type="text"
+                                 label={'Fecha de nacimiento'}
+                                 name="born"
+                                 onChange={handleChange}
+                                 value={state.born}
+                                 minDate={moment().subtract(70, 'years').calendar()}
+                                 maxDate={moment().subtract(18, 'years').calendar()}
+                                 required
+                            />
+                            {/* <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
@@ -200,20 +219,6 @@ export default function EmployeeAdd(props) {
                                 required
                                 // icon={<CalendarTodayIcon />}
                                 iconPosition="end"
-                            />
-                            {/* <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="number"
-                                label={'Celular'}
-                                name="phone"
-                                onChange={handleChange}
-                                value={state.phone}
-                                required
-                                // icon={<PhoneAndroidIcon />}
-                                iconPosition="end"
                             /> */}
                             <NumberInput
                                 variant={'standard'}
@@ -224,23 +229,10 @@ export default function EmployeeAdd(props) {
                                 name="phone"
                                 value={state.phone}
                                 onChange={handleChange}
+                                maxLength={8}
                                 required
                                 phone
                             />
-                            {/* <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Cargo'}
-                                name="position"
-                                onChange={handleChange}
-                                value={state.position}
-                                required
-                                // icon={<AssignmentIndIcon />}
-                                iconPosition="end"
-                            /> */}
                             <SelectInput
                                 variant="standard"
                                 margin="dense"
@@ -288,20 +280,6 @@ export default function EmployeeAdd(props) {
                                 prefix={"Bs"}
                                 required
                             />
-                            {/* <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="number"
-                                label={'Salario'}
-                                name="salary"
-                                onChange={handleChange}
-                                value={state.salary}
-                                required
-                                // icon={<PaymentIcon />}
-                                iconPosition="end"
-                            /> */}
                             <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
@@ -350,7 +328,7 @@ export default function EmployeeAdd(props) {
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="employee-add" size="sm" type="submit" disabled={state.isUpload} >
+                    <CustomBotton form="employee-add" size="sm" type="button" disabled={state.isUpload} onClick={handleLogin} >
                         Registrar
                     </CustomBotton>
                 </CardFooter>

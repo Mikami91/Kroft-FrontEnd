@@ -2,12 +2,42 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import NumberFormat from 'react-number-format';
-// Components core
-import BsInput from './BsInput.js';
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import { TextField } from "@material-ui/core";
+// Styles
+import styles from "../../styles/components/customInputStyle.js";
+
+const useStyles = makeStyles(styles);
+
+const RegularInput = (props) => {
+    const { disabled, label, name, value, onChange, maxLength, placeholder, required, margin, color, variant } = props;
+    // Styles
+    const classes = useStyles();
+    return (
+        <TextField
+            disabled={disabled}
+            variant={variant}
+            margin={margin}
+            className={classes.labelRoot + classes.underlinePrimary}
+            fullWidth
+            required={required}
+            label={label}
+            placeholder={placeholder}
+            color={color}
+            type={"text"}
+            name={name}
+            onChange={onChange}
+            value={value}
+            inputProps={{
+                maxLength: maxLength
+            }}
+        />
+    );
+};
 
 const NumberInput = (props) => {
-    const { prefix, displayType, phone, disabled, required, label, type, name, value, onChange, margin, placeholder, variant, color } = props;
-    console.log(props);
+    const { prefix, displayType, phone, disabled, required, label, type, name, value, onChange, maxLength, margin, placeholder, variant, color } = props;
     const e = {
         target: {}
     };
@@ -16,9 +46,9 @@ const NumberInput = (props) => {
             type={type}
             value={value}
             onValueChange={(values) => {
-                const {formattedValue, value} = values;
+                const { formattedValue, value } = values;
                 e.target["name"] = name;
-                e.target["value"] = formattedValue;
+                e.target["value"] = value;
                 return onChange(e);
             }}
             displayType={displayType}
@@ -27,19 +57,20 @@ const NumberInput = (props) => {
             allowNegative={false}
             allowEmptyFormatting={false}
             allowLeadingZeros={false}
-            decimalScale={phone? "none" : 2}
+            decimalScale={phone ? "none" : 2}
             isNumericString={true}
-            prefix={phone? "" : prefix + " "}
-
+            prefix={phone ? "" : prefix + " "}
+            // TextFiel props
             disabled={disabled}
             variant={variant}
             margin={margin}
             required={required}
             label={label}
+            maxLength={maxLength}
             name={name}
             placeholder={placeholder}
             color={color}
-            customInput={BsInput}
+            customInput={RegularInput}
         />
     );
 };
@@ -54,6 +85,7 @@ NumberInput.defaultProps = {
     name: "",
     label: "",
     value: "",
+    maxLength: null,
     disabled: false,
     required: false,
     placeholder: "",
@@ -82,6 +114,7 @@ NumberInput.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]),
+    maxLength: PropTypes.number,
     name: PropTypes.string,
     placeholder: PropTypes.string,
     label: PropTypes.string,

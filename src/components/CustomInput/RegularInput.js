@@ -9,9 +9,8 @@ import styles from "../../styles/components/customInputStyle.js";
 
 const useStyles = makeStyles(styles);
 
-const BsInput = (props) => {
-    const { disabled, label, margin, color, name, onChange, placeholder, required, value, variant } = props;
-    console.log(props);
+const RegularInput = (props) => {
+    const { disabled, label, name, value, onChange, maxLength, placeholder, required, margin, color, variant } = props;
     // Styles
     const classes = useStyles();
     return (
@@ -29,15 +28,19 @@ const BsInput = (props) => {
             name={name}
             onChange={onChange}
             value={value}
+            inputProps={{
+                maxLength: maxLength
+            }}
         />
     );
 }
 
 // PropTypes
-BsInput.defaultProps = {
+RegularInput.defaultProps = {
     type: "text",
     onChange: null,
     value: "",
+    maxLength: null,
     required: false,
     disabled: false,
     name: "",
@@ -51,7 +54,7 @@ BsInput.defaultProps = {
     white: true
 };
 
-BsInput.propTypes = {
+RegularInput.propTypes = {
     type: PropTypes.oneOf([
         "text",
         "number",
@@ -62,6 +65,7 @@ BsInput.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]),
+    maxLength: PropTypes.number,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     name: PropTypes.string,
@@ -86,4 +90,4 @@ BsInput.propTypes = {
     white: PropTypes.bool
 };
 
-export default BsInput;
+export default RegularInput;
