@@ -121,9 +121,9 @@ const selectInputStyle = {
     color: theme.palette.type === "light" ? "#424242" : "#fff",
     whiteSpace: "nowrap",
     minHeight: "unset",
-    [theme.breakpoints.down("sm")]: {
-      backgroundColor: "red"
-    }
+    // [theme.breakpoints.down("sm")]: {
+    //   backgroundColor: "red"
+    // }
 
   },
   blackHover: {

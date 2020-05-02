@@ -2,15 +2,14 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 // @material-ui/Componentes
-import { CssBaseline, Drawer, Grid, Hidden } from "@material-ui/core";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Divider,
-  List,
-  ListItem,
-  Typography,
-} from "@material-ui/core";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Drawer from "@material-ui/core/Drawer";
+import Grid from "@material-ui/core/Grid";
+import Hidden from "@material-ui/core/Hidden";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import Divider from "@material-ui/core/Divider";
+import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -45,10 +44,10 @@ const ListToRender = (props) => {
             <BottomNavigationAction
               key={key}
               //classes={{ selected: style }}
-              style={{ padding: 12 }}
-              label={<Typography /*className={style}*/>{list.name}</Typography>}
+              style={{ padding: "8px 15px 8px 15px" }}
+              label={<Typography>{list.name}</Typography>}
               value={key}
-              icon={<list.icon fontSize="large" />}
+              icon={<list.icon fontSize="default" />}
             />
           );
         })}
@@ -105,7 +104,24 @@ const Sidebar = () => {
                 <MenuIcon />
               </IconButton>
 
-              <Button color="inherit">Login V</Button>
+              <Button style={{ marginRight: "auto" }} color="inherit">Login H</Button>
+
+              <div style={{ marginLeft: "auto" }}>
+                <Button
+                  className={classes.navLink + " " + classes.navLinkActive}
+                  onClick={e => e.preventDefault()}
+                  color="inherit"
+                >
+                  <Explore className={classes.icons} /> Ventas
+                </Button>
+                <Button
+                  className={classes.navLink + " " + classes.navLinkActive}
+                  onClick={e => e.preventDefault()}
+                  color="inherit"
+                >
+                  <Face className={classes.icons} /> Cobranzas
+                </Button>
+              </div>
             </CustomAppBar>
             <Drawer
               variant="temporary"
@@ -132,21 +148,24 @@ const Sidebar = () => {
           <Hidden smDown implementation="css">
 
             <CustomAppBar position="fixed" color="primary" variant="regular">
-              <Button color="inherit">Login H</Button>
-              {/* <Button
-                className={classes.navLink + " " + classes.navLinkActive}
-                onClick={e => e.preventDefault()}
-                color="transparent"
-              >
-                <Explore className={classes.icons} /> Discover
-              </Button>
-              <Button
-                className={classes.navLink + " " + classes.navLinkActive}
-                onClick={e => e.preventDefault()}
-                color="transparent"
-              >
-                <Face className={classes.icons} /> Discover
-              </Button> */}
+              <Button style={{ marginRight: "auto" }} color="inherit">Login H</Button>
+
+              <div style={{ marginLeft: "auto" }}>
+                <Button
+                  className={classes.navLink + " " + classes.navLinkActive}
+                  onClick={e => e.preventDefault()}
+                  color="inherit"
+                >
+                  <Explore className={classes.icons} /> Ventas
+                </Button>
+                <Button
+                  className={classes.navLink + " " + classes.navLinkActive}
+                  onClick={e => e.preventDefault()}
+                  color="inherit"
+                >
+                  <Face className={classes.icons} /> Cobranzas
+                </Button>
+              </div>
             </CustomAppBar>
             <Drawer
               variant="permanent"

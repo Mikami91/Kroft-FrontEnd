@@ -33,8 +33,8 @@ import {
       width: "100%",
       height: "auto",
       marginTop: "5vh",
-      paddingTop: theme.spacing(2),
-      paddingBottom: theme.spacing(2),
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
       paddingRight: theme.spacing(0),
       paddingLeft: theme.spacing(0),
     },
@@ -61,9 +61,26 @@ import {
       },
     },
     rootMenu: {
-      flexGrow: 1,
-      marginTop: 20,
-      overflow: 'hidden'
+      [theme.breakpoints.down("xs")]: {
+        flexGrow: 1,
+        marginTop: 0,
+        overflow: 'hidden',
+      },
+      [theme.breakpoints.up("sm")]: {
+        flexGrow: 1,
+        marginTop: 20,
+        overflow: 'hidden',
+      },
+      [theme.breakpoints.up("md")]: {
+        flexGrow: 1,
+        marginTop: 15,
+        overflow: 'hidden',
+      },
+      [theme.breakpoints.up("lg")]: {
+        flexGrow: 1,
+        marginTop: 20,
+        overflow: 'hidden',
+      },
     },
 
     buttonNavDash: { 

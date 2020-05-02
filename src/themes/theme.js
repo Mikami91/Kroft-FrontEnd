@@ -59,7 +59,7 @@ export const blackColor = "#000";
 export const whiteColor = "#FFF";
 
 // Global Styles
-export const drawerDash = 115; 
+export const drawerDash = 120; 
 export const drawerWidth = 260;
 
 export const transition = {
