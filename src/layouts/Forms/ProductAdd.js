@@ -23,7 +23,7 @@ import NumberInput from '../../components/CustomInput/NumberInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Assets
-import image from '../../assets/img/defaults/user.png';
+import image from '../../assets/img/defaults/product.png';
 // Varieables
 import { data } from '../../variables/JSON.js';
 // Styles
@@ -34,18 +34,19 @@ const useStyles = makeStyles(styles);
 moment.locale("en");
 moment().format('l');
 
-export default function EmployeeAdd(props) {
+export default function ProductAdd(props) {
     // Local State
     const [state, setState] = useState({
         file: null,
+        supplier: "",
+        category: "",
+        subcategory: "",
         name: "",
-        born: null,
-        phone: "",
-        position: "",
-        salary: "",
-        user: "",
-        password: "",
-        pin: "",
+        buying_date: null,
+        expire_date: null,
+        buying_price: "",
+        selling_price: "",
+        code: "",
         isUpload: false,
         error: false
     });
@@ -60,14 +61,15 @@ export default function EmployeeAdd(props) {
     const handleEmpty = (e) => {
         setState({
             image: null,
+            supplier: "",
+            category: "",
+            subcategory: "",
             name: "",
-            born: null,
-            phone: "",
-            position: "",
-            salary: "",
-            user: "",
-            password: "",
-            pin: "",
+            buying_date: null,
+            expire_date: null,
+            buying_price: "",
+            selling_price: "",
+            code: "",
             isUpload: false,
             error: false
         });
@@ -128,11 +130,12 @@ export default function EmployeeAdd(props) {
                         image={state.file === null ? image : state.file.image}
                         alt="Imagen"
                         title="Imagen"
+                        square
                     />
                     <input
                         // disabled={state.isUpload || showProgress ? true : false}
                         accept="image/png, image/jpeg, image/jpg"
-                        id="employee-file"
+                        id="product-file"
                         type="file"
                         name="image"
                         onChange={handleImage}
@@ -147,7 +150,7 @@ export default function EmployeeAdd(props) {
                         </IconButton>
 
                         <IconButton edge="end" disabled={state.isUpload ? true : false} 
-                            onClick={() => {document.getElementById("employee-file").click()}}
+                            onClick={() => {document.getElementById("product-file").click()}}
                         >
                             <label>
                                 <AddAPhotoIcon />
@@ -174,60 +177,23 @@ export default function EmployeeAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
                                 color="primary"
+                                hoverColor="primary"
                                 // disabled={showProgress}
-                                type="text"
-                                label={'Nombre completo'}
-                                name="name"
+                                id="supplier"
+                                label="Proveedor"
+                                name="supplier"
                                 onChange={handleChange}
-                                value={state.name}
+                                value={state.supplier}
+                                itemList={{
+                                    data: data,
+                                    key: "id",
+                                    value: "website"
+                                }}
                                 required
-                                // icon={<AccountBoxIcon />}
-                                iconPosition="end"
-                            />
-                            <DateInput
-                                 variant={'standard'}
-                                 margin={'dense'}
-                                 color="primary"
-                                 // disabled={showProgress}
-                                 type="text"
-                                 label={'Fecha de nacimiento'}
-                                 name="born"
-                                 onChange={handleChange}
-                                 value={state.born}
-                                 minDate={moment().subtract(70, 'years').calendar()}
-                                 maxDate={moment().subtract(18, 'years').calendar()}
-                                 required
-                            />
-                            {/* <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Fecha de nacimiento'}
-                                name="born"
-                                onChange={handleChange}
-                                value={state.born}
-                                required
-                                // icon={<CalendarTodayIcon />}
-                                iconPosition="end"
-                            /> */}
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                label={'Celular'}
-                                name="phone"
-                                value={state.phone}
-                                onChange={handleChange}
-                                maxLength={8}
-                                required
-                                phone
                             />
                             <SelectInput
                                 variant="standard"
@@ -235,21 +201,112 @@ export default function EmployeeAdd(props) {
                                 color="primary"
                                 hoverColor="primary"
                                 // disabled={showProgress}
-                                id="position"
-                                label="Cargo"
-                                name="position"
+                                id="category"
+                                label="Categoría"
+                                name="category"
                                 onChange={handleChange}
-                                value={state.position}
-                                // categoryList={{
-                                //     data: data,
-                                //     key: "id",
-                                //     value: "username"
-                                // }}
+                                value={state.category}
                                 itemList={{
                                     data: data,
                                     key: "id",
                                     value: "website"
                                 }}
+                                required
+                            />
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                // disabled={showProgress}
+                                id="subcategory"
+                                label="Subcategoría"
+                                name="subcategory"
+                                onChange={handleChange}
+                                value={state.subcategory}
+                                itemList={{
+                                    data: data,
+                                    key: "id",
+                                    value: "website"
+                                }}
+                                required
+                            />
+                            <IconInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                type="text"
+                                label={'Nombre'}
+                                name="name"
+                                onChange={handleChange}
+                                value={state.name}
+                                required
+                                // icon={<AccountBoxIcon />}
+                                iconPosition="end"
+                            />
+
+                        </Grid>
+                        <Grid
+                            item
+                            xs={12}
+                            sm={12}
+                            md={6}
+                            lg={6}
+                            xl={6}
+                            elevation={6}
+                            square="true"
+                        >
+                            <DateInput
+                                 variant={'standard'}
+                                 margin={'dense'}
+                                 color="primary"
+                                 // disabled={showProgress}
+                                 type="text"
+                                 label={'Fecha de compra'}
+                                 name="buying_date"
+                                 onChange={handleChange}
+                                 value={state.buying_date}
+                                 minDate={moment().subtract(5, 'years').calendar()}
+                                 maxDate={moment().subtract(1, 'years').calendar()}
+                                 required
+                            />
+                            <DateInput
+                                 variant={'standard'}
+                                 margin={'dense'}
+                                 color="primary"
+                                 // disabled={showProgress}
+                                 type="text"
+                                 label={'Fecha de expiracion'}
+                                 name="expire_date"
+                                 onChange={handleChange}
+                                 value={state.expire_date}
+                                 minDate={moment().subtract(0, 'years').calendar()}
+                                 //maxDate={moment().subtract(1, 'years').calendar()}
+                                 required
+                            />
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                label={'Precio de compra'}
+                                name="buying_price"
+                                value={state.buying_price}
+                                onChange={handleChange}
+                                // maxLength={8}
+                                required
+                            />
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                label={'Precio de venta'}
+                                name="selling_price"
+                                value={state.selling_price}
+                                onChange={handleChange}
+                                // maxLength={8}
                                 required
                             />
 
@@ -264,68 +321,29 @@ export default function EmployeeAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                label={'Salario'}
-                                name="salary"
-                                value={state.salary}
-                                onChange={handleChange}
-                                prefix={"Bs"}
-                                required
-                            />
                             <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
                                 // disabled={showProgress}
                                 type="text"
-                                label={'Usuario'}
-                                name="user"
+                                label={'Codigo'}
+                                name="code"
                                 onChange={handleChange}
-                                value={state.user}
-                                required
-                                // icon={<PersonIcon />}
-                                iconPosition="end"
-                            />
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Contraseña'}
-                                name="password"
-                                onChange={handleChange}
-                                value={state.password}
-                                required
-                                // icon={<LockIcon />}
-                                iconPosition="end"
-                            />
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Pin'}
-                                name="pin"
-                                onChange={handleChange}
-                                value={state.pin}
+                                value={state.code}
                                 required
                                 // icon={<VpnKeyIcon />}
                                 iconPosition="end"
                             />
 
                         </Grid>
+
                     </Grid>
                 </CardBody>
 
                 <CardFooter form>
                     <CustomBotton form="employee-add" size="sm" type="submit" disabled={state.isUpload} >
-                        Registrar
+                        Agregar
                     </CustomBotton>
                 </CardFooter>
             </Card>

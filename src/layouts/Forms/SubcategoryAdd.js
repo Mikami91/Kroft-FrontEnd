@@ -18,12 +18,10 @@ import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
-import DateInput from '../../components/CustomInput/DateInput.js';
-import NumberInput from '../../components/CustomInput/NumberInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Assets
-import image from '../../assets/img/defaults/user.png';
+import image from '../../assets/img/defaults/table.png';
 // Varieables
 import { data } from '../../variables/JSON.js';
 // Styles
@@ -34,18 +32,12 @@ const useStyles = makeStyles(styles);
 moment.locale("en");
 moment().format('l');
 
-export default function EmployeeAdd(props) {
+export default function SubcategoryAdd(props) {
     // Local State
     const [state, setState] = useState({
         file: null,
         name: "",
-        born: null,
-        phone: "",
-        position: "",
-        salary: "",
-        user: "",
-        password: "",
-        pin: "",
+        category_id: "",
         isUpload: false,
         error: false
     });
@@ -59,15 +51,9 @@ export default function EmployeeAdd(props) {
     // Empty State values
     const handleEmpty = (e) => {
         setState({
-            image: null,
+            file: null,
             name: "",
-            born: null,
-            phone: "",
-            position: "",
-            salary: "",
-            user: "",
-            password: "",
-            pin: "",
+            category_id: "",
             isUpload: false,
             error: false
         });
@@ -111,13 +97,14 @@ export default function EmployeeAdd(props) {
     // Register function
     const handleLogin = (e) => {
         e.preventDefault();
+        alert("El nombre es: " + state.name + " el prefijo es: " + state.prefix)
         console.log(state);
         // alert(state.salary);
         // handleEmpty();
     };
     const classes = useStyles();
     return (
-        <form id="employee-add" onSubmit={handleLogin}>
+        <form id="subcategory-add" onSubmit={handleLogin}>
             {/* <p className={classes.divider}>Or Be Classical</p> */}
             <Card variant="cardForm">
 
@@ -128,11 +115,12 @@ export default function EmployeeAdd(props) {
                         image={state.file === null ? image : state.file.image}
                         alt="Imagen"
                         title="Imagen"
+                        square
                     />
                     <input
                         // disabled={state.isUpload || showProgress ? true : false}
                         accept="image/png, image/jpeg, image/jpg"
-                        id="employee-file"
+                        id="subcategory-file"
                         type="file"
                         name="image"
                         onChange={handleImage}
@@ -147,7 +135,7 @@ export default function EmployeeAdd(props) {
                         </IconButton>
 
                         <IconButton edge="end" disabled={state.isUpload ? true : false} 
-                            onClick={() => {document.getElementById("employee-file").click()}}
+                            onClick={() => {document.getElementById("subcategory-file").click()}}
                         >
                             <label>
                                 <AddAPhotoIcon />
@@ -180,7 +168,7 @@ export default function EmployeeAdd(props) {
                                 color="primary"
                                 // disabled={showProgress}
                                 type="text"
-                                label={'Nombre completo'}
+                                label={'Subcategoría'}
                                 name="name"
                                 onChange={handleChange}
                                 value={state.name}
@@ -188,58 +176,17 @@ export default function EmployeeAdd(props) {
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
-                            <DateInput
-                                 variant={'standard'}
-                                 margin={'dense'}
-                                 color="primary"
-                                 // disabled={showProgress}
-                                 type="text"
-                                 label={'Fecha de nacimiento'}
-                                 name="born"
-                                 onChange={handleChange}
-                                 value={state.born}
-                                 minDate={moment().subtract(70, 'years').calendar()}
-                                 maxDate={moment().subtract(18, 'years').calendar()}
-                                 required
-                            />
-                            {/* <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Fecha de nacimiento'}
-                                name="born"
-                                onChange={handleChange}
-                                value={state.born}
-                                required
-                                // icon={<CalendarTodayIcon />}
-                                iconPosition="end"
-                            /> */}
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                label={'Celular'}
-                                name="phone"
-                                value={state.phone}
-                                onChange={handleChange}
-                                maxLength={8}
-                                required
-                                phone
-                            />
                             <SelectInput
                                 variant="standard"
                                 margin="dense"
                                 color="primary"
                                 hoverColor="primary"
                                 // disabled={showProgress}
-                                id="position"
-                                label="Cargo"
-                                name="position"
+                                id="category_id"
+                                label="Categoría"
+                                name="category_id"
                                 onChange={handleChange}
-                                value={state.position}
+                                value={state.category_id}
                                 // categoryList={{
                                 //     data: data,
                                 //     key: "id",
@@ -252,80 +199,13 @@ export default function EmployeeAdd(props) {
                                 }}
                                 required
                             />
-
-                        </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={12}
-                            md={6}
-                            lg={6}
-                            xl={6}
-                            elevation={6}
-                            square="true"
-                        >
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                label={'Salario'}
-                                name="salary"
-                                value={state.salary}
-                                onChange={handleChange}
-                                prefix={"Bs"}
-                                required
-                            />
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Usuario'}
-                                name="user"
-                                onChange={handleChange}
-                                value={state.user}
-                                required
-                                // icon={<PersonIcon />}
-                                iconPosition="end"
-                            />
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Contraseña'}
-                                name="password"
-                                onChange={handleChange}
-                                value={state.password}
-                                required
-                                // icon={<LockIcon />}
-                                iconPosition="end"
-                            />
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Pin'}
-                                name="pin"
-                                onChange={handleChange}
-                                value={state.pin}
-                                required
-                                // icon={<VpnKeyIcon />}
-                                iconPosition="end"
-                            />
-
                         </Grid>
                     </Grid>
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="employee-add" size="sm" type="submit" disabled={state.isUpload} >
-                        Registrar
+                    <CustomBotton form="table-add" size="sm" type="submit" disabled={state.isUpload} >
+                        Agregar
                     </CustomBotton>
                 </CardFooter>
             </Card>

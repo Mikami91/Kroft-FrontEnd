@@ -12,7 +12,7 @@ import styles from "../../styles/components/customInputStyle.js";
 const useStyles = makeStyles(styles);
 
 const IconInput = (props) => {
-    const { disabled, icon, iconPosition, label, margin, color, name, onChange, placeholder, required, type, value, variant } = props;
+    const { disabled, required, type, value, name, onChange, placeholder, icon, iconPosition, label, margin, color, variant } = props;
     // Styles
     const classes = useStyles();
     return (
@@ -40,7 +40,6 @@ const IconInput = (props) => {
         />
     );
 }
-
 // PropTypes
 IconInput.defaultProps = {
     type: "text",
