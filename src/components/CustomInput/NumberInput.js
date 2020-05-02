@@ -37,7 +37,7 @@ const RegularInput = (props) => {
 };
 
 const NumberInput = (props) => {
-    const { prefix, displayType, phone, disabled, required, label, type, name, value, onChange, maxLength, margin, placeholder, variant, color } = props;
+    const { prefix, displayType, phone, disabled, required, label, type, name, value, decimal, onChange, maxLength, margin, placeholder, variant, color } = props;
     const e = {
         target: {}
     };
@@ -57,9 +57,9 @@ const NumberInput = (props) => {
             allowNegative={false}
             allowEmptyFormatting={false}
             allowLeadingZeros={false}
-            decimalScale={phone ? "none" : 2}
+            decimalScale={decimal}
             isNumericString={true}
-            prefix={phone ? "" : prefix + " "}
+            prefix={prefix + " "}
             // TextFiel props
             disabled={disabled}
             variant={variant}
@@ -78,13 +78,14 @@ const NumberInput = (props) => {
 // PropTypes
 NumberInput.defaultProps = {
     displayType: "input",
-    prefix: "Bs",
+    prefix: "",
     phone: false,
     type: "text",
     onChange: null,
     name: "",
     label: "",
     value: "",
+    decimal: 2,
     maxLength: null,
     disabled: false,
     required: false,
@@ -114,6 +115,7 @@ NumberInput.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]),
+    decimal: PropTypes.oneOf([0, 2]),
     maxLength: PropTypes.number,
     name: PropTypes.string,
     placeholder: PropTypes.string,

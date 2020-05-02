@@ -44,7 +44,7 @@ const ListToRender = (props) => {
             <BottomNavigationAction
               key={key}
               //classes={{ selected: style }}
-              style={{ padding: "8px 15px 8px 15px" }}
+              style={{ padding: "5px 15px 5px 15px" }}
               label={<Typography>{list.name}</Typography>}
               value={key}
               icon={<list.icon fontSize="default" />}

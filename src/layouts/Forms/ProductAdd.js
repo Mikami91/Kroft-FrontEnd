@@ -46,6 +46,7 @@ export default function ProductAdd(props) {
         expire_date: null,
         buying_price: "",
         selling_price: "",
+        quantity: "",
         code: "",
         isUpload: false,
         error: false
@@ -69,6 +70,7 @@ export default function ProductAdd(props) {
             expire_date: null,
             buying_price: "",
             selling_price: "",
+            quantity: "",
             code: "",
             isUpload: false,
             error: false
@@ -183,24 +185,6 @@ export default function ProductAdd(props) {
                                 color="primary"
                                 hoverColor="primary"
                                 // disabled={showProgress}
-                                id="supplier"
-                                label="Proveedor"
-                                name="supplier"
-                                onChange={handleChange}
-                                value={state.supplier}
-                                itemList={{
-                                    data: data,
-                                    key: "id",
-                                    value: "website"
-                                }}
-                                required
-                            />
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                // disabled={showProgress}
                                 id="category"
                                 label="Categoría"
                                 name="category"
@@ -245,6 +229,33 @@ export default function ProductAdd(props) {
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                label={'Precio de venta'}
+                                prefix="Bs"
+                                name="selling_price"
+                                value={state.selling_price}
+                                onChange={handleChange}
+                                decimal={2}
+                                // maxLength={8}
+                                required
+                            />
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                label={'Cantidad'}
+                                name="quantity"
+                                value={state.quantity}
+                                onChange={handleChange}
+                                maxLength={9}
+                                decimal={0}
+                                required
+                            />
 
                         </Grid>
                         <Grid
@@ -257,6 +268,24 @@ export default function ProductAdd(props) {
                             elevation={6}
                             square="true"
                         >
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                // disabled={showProgress}
+                                id="supplier"
+                                label="Proveedor"
+                                name="supplier"
+                                onChange={handleChange}
+                                value={state.supplier}
+                                itemList={{
+                                    data: data,
+                                    key: "id",
+                                    value: "website"
+                                }}
+                                required
+                            />
                             <DateInput
                                  variant={'standard'}
                                  margin={'dense'}
@@ -291,36 +320,14 @@ export default function ProductAdd(props) {
                                 color="primary"
                                 // disabled={showProgress}
                                 label={'Precio de compra'}
+                                prefix="Bs"
                                 name="buying_price"
                                 value={state.buying_price}
                                 onChange={handleChange}
+                                decimal={2}
                                 // maxLength={8}
                                 required
                             />
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                label={'Precio de venta'}
-                                name="selling_price"
-                                value={state.selling_price}
-                                onChange={handleChange}
-                                // maxLength={8}
-                                required
-                            />
-
-                        </Grid>
-                        <Grid
-                            item
-                            xs={12}
-                            sm={12}
-                            md={6}
-                            lg={6}
-                            xl={6}
-                            elevation={6}
-                            square="true"
-                        >
                             <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
@@ -335,7 +342,7 @@ export default function ProductAdd(props) {
                                 // icon={<VpnKeyIcon />}
                                 iconPosition="end"
                             />
-
+                            
                         </Grid>
 
                     </Grid>
