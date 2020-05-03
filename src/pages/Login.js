@@ -105,7 +105,7 @@ export default function LoginPage(props) {
                 ]}
               />
             </CardHeader>
-            <CardBody className="cardBodyLogin">
+            <CardBody login>
               <SwipeableViews
                 axis="x"
                 index={value}

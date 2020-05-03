@@ -1,3 +1,6 @@
+// Theme
+import { theme } from '../../themes/theme.js';
+
 const cardBodyStyle = {
   cardBody: {
     // padding: "0.9375rem 1.875rem",
@@ -20,6 +23,19 @@ const cardBodyStyle = {
     flex: "1 1 auto",
     height: "auto",
     overflowY: "auto"
+  },
+  cardBodyLogin: {
+    padding: "0px 5px 0px 5px",
+    flex: "1 1 auto",
+    [theme.breakpoints.down("sm")]: {
+      height: "auto",
+      overflowY: "auto",
+    },
+    [theme.breakpoints.up("md")]: {
+      height: "auto",
+      minHeight: "42.5vh",
+      overflowY: "auto",
+    }
   },
   cardBodyProfile: {
     marginTop: "15px"

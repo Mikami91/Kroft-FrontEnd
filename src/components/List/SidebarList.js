@@ -3,6 +3,7 @@ import Login from "../../pages/Login";
 // Views
 import Started from '../../views/Dashboard/Started';
 import Employees from '../../views/Dashboard/Employees';
+import Suppliers from '../../views/Dashboard/Suppliers';
 import Environments from '../../views/Dashboard/Environments';
 import Tables from '../../views/Dashboard/Tables';
 import Categories from '../../views/Dashboard/Categories';
@@ -28,6 +29,11 @@ const SidebarList = [
     name: "Personal",
     icon: GroupRoundedIcon,
     component: Employees,
+  },
+  {
+    name: "Proveedores",
+    icon: SettingsRounded,
+    component: Suppliers,
   },
   {
     name: "Ambientes",

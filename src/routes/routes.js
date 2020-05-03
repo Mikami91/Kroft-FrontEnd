@@ -1,22 +1,23 @@
 // Pages
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
+import Sales from "../pages/Sales";
 
 const routes = [
   {
     path: "/",
     name: "Login",
-    component: Dashboard,
+    component: Login,
   },
   {
-    path: "/Login",
-    name: "Login",
-    component: Login,
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard,
   },
   {
     path: "/sales",
     name: "Sales",
-    component: Login,
+    component: Sales,
   },
   {
     path: "/collects",
