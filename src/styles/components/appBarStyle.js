@@ -11,6 +11,11 @@ import {
 } from "../../themes/theme.js";
 
 const appBarStyle = {
+  appBar: {
+    width: "100%",
+    // backgroundColor: '#0b463b',
+    top: -1,
+  },
   dashAppBar: {
     marginLeft: drawerDash,
     [theme.breakpoints.up('md')]: {

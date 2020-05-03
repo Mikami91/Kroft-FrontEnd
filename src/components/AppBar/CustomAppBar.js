@@ -1,16 +1,13 @@
 // Dependencies
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 // @material-ui/Componentes
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Slide from '@material-ui/core/Slide';
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 // Styles
 import styles from '../../styles/components/appBarStyle';
 const useStyles = makeStyles(styles);
@@ -31,13 +28,17 @@ HideOnScroll.propTypes = {
 };
 
 const CustomAppBar = (props) => {
-  const { position, variant, color, gutters, children } = props;
+  const { position, variant, color, gutters, drawer, children } = props;
 
   const classes = useStyles();
+  const appBarClasses = classNames({
+    [classes.appBar]: true,
+    [classes.dashAppBar]: drawer,
+  });
 
   return (
     <HideOnScroll {...props}>
-    <AppBar position={position} color={color} className={classes.dashAppBar}>
+    <AppBar position={position} color={color} className={appBarClasses}>
       <Toolbar variant={variant} disableGutters={gutters} >
         {children}
       </Toolbar>
@@ -52,6 +53,7 @@ CustomAppBar.defaultProps = {
   variant: "regular",
   color: "primary",
   gutters: false,
+  drawer: false,
   children: null,
 };
 
@@ -75,6 +77,7 @@ CustomAppBar.propTypes = {
     "transparent",
   ]),
   disableGutters: PropTypes.bool,
+  drawer: PropTypes.bool,
   children: PropTypes.node,
 };
 

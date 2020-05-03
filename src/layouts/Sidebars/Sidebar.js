@@ -104,7 +104,7 @@ const Sidebar = () => {
                 <MenuIcon />
               </IconButton>
 
-              <Button style={{ marginRight: "auto" }} color="inherit">Login H</Button>
+              <Button style={{ marginRight: "auto" }} color="inherit">Login V</Button>
 
               <div style={{ marginLeft: "auto" }}>
                 <Button
@@ -147,7 +147,7 @@ const Sidebar = () => {
 
           <Hidden smDown implementation="css">
 
-            <CustomAppBar position="fixed" color="primary" variant="regular">
+            <CustomAppBar position="fixed" color="primary" variant="regular" drawer>
               <Button style={{ marginRight: "auto" }} color="inherit">Login H</Button>
 
               <div style={{ marginLeft: "auto" }}>
