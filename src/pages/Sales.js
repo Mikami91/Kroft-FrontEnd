@@ -110,11 +110,11 @@ export default function SalesPage(props) {
           {
             type: "fab",
             text: "4",
-            color: "secondary",
+            color: "primary",
             icon: KeyboardBackspaceIcon,
             size: "large",
             disabled: false,
-            onClick: () => { alert("22") }
+            onClick: () => { alert("Hola Zeny") }
           },
           {
             type: "icon",
