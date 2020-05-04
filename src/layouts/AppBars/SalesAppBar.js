@@ -1,88 +1,79 @@
 // Dependencies
-import React, { useState } from "react";
+import React from 'react';
+import classNames from "classnames";
 import PropTypes from "prop-types";
-// @material-ui/Componentes
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Typography from "@material-ui/core/Typography";
-// Core Components
-import CustomAppBar from "../../components/AppBar/CustomAppBar";
-import MultiTabs from '../../components/CustomTabs/MultiTabs';
-import Tasks from "../../components/Tasks/Tasks.js";
+// Conecction to Store
+import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
+// UI Material Components
+import Grid from "@material-ui/core/Grid";
+import { AppBar, Tab, Tabs, Typography } from "@material-ui/core";
+// Containers
+import GridContainer from '../../components/Grid/GridContainer';
+import PanelTabs from '../../components/CustomTabs/PanelTabs';
 // Variables
-import { bugs, website, server } from "../../variables/general.js";
+import { data } from '../../variables/JSON';
 // Icons
 import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 
-const SalesAppBar = ({ style }) => {
-  // TabPanel Swipeables Views
-  const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    console.log(newValue);
-  };
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+const url = 'http://kroftserver.test/images/environments/';
 
-  // Change Desktop and Mobile display
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+// Component
+const SalesAppBar = (props) => {
+  // Props
+  const { data, value, onChange, color, position, indicatorColor, textColor, variant, scrollButtons, centered } = props;
+  // Styles
 
+  // Render
   return (
-    <CustomAppBar position="fixed" color="primary" variant="regular">
-      <MultiTabs
-        centered
-        title="Tasks:"
-        headerColor="primary"
-        tabs={[
-            {
-                tabName: "Bugs",
-                tabIcon: DeckRoundedIcon,
-                tabContent: (
-                    <Tasks
-                        checkedIndexes={[0, 3]}
-                        tasksIndexes={[0, 1, 2, 3]}
-                        tasks={bugs}
-                    />
-                )
-            },
-            {
-                tabName: "Website",
-                tabIcon: DeckRoundedIcon,
-                tabContent: (
-                    <Tasks
-                        checkedIndexes={[0]}
-                        tasksIndexes={[0, 1]}
-                        tasks={website}
-                    />
-                )
-            },
-            {
-                tabName: "Server",
-                tabIcon: DeckRoundedIcon,
-                tabContent: (
-                    <Tasks
-                        checkedIndexes={[1]}
-                        tasksIndexes={[0, 1, 2]}
-                        tasks={server}
-                    />
-                )
+    <AppBar position="fixed" color="inherit" style={{ top: -1 }} >
+      {/* <Tabs
+        value={value}
+        onChange={handleChange}
+        indicatorColor="inherit"
+        textColor="inherit"
+        variant={environCount <= 5 ? 'fullWidth' : 'scrollable'}
+        scrollButtons={environCount <= 5 ? 'off' : 'auto'}
+        centered={environCount <= 5 ? true : false}
+      >
+        {data.map((index, key) => (
+
+          <Tab
+            key={key}
+            label={
+              <Typography noWrap >{index.name}</Typography>
             }
-        ]}
-      />
-    </CustomAppBar>
+            icon={<DeckRoundedIcon />}
+          />
+
+        ))}
+
+      </Tabs> */}
+    </AppBar>
   );
 };
-
 // PropTypes
 SalesAppBar.propTypes = {
-  container: PropTypes.instanceOf(
-    typeof Element === "undefined" ? Object : Element
+  headerColor: PropTypes.oneOf([
+    "warning",
+    "success",
+    "danger",
+    "info",
+    "primary",
+    "secondary",
+    "rose"
+  ]),
+  title: PropTypes.string,
+  stats: PropTypes.bool,
+  dense: PropTypes.bool,
+  tabs: PropTypes.arrayOf(
+    PropTypes.shape({
+      tabName: PropTypes.string.isRequired,
+      tabIcon: PropTypes.object,
+      tabContent: PropTypes.node.isRequired
+    })
   ),
+  rtlActive: PropTypes.bool,
+  plainTabs: PropTypes.bool
 };
-
 export default SalesAppBar;
