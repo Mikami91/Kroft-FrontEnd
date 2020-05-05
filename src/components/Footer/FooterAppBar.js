@@ -36,7 +36,7 @@ const FooterAppBar = (props) => {
 						if (index.disabled === false && index.type === 'icon') {
 							return (
 								<Tooltip key={key} placement="top" title={index.text}>
-									<IconButton edge={index.edge} onClick={index.onClick}>
+									<IconButton edge={index.edge} color={index.color} onClick={index.onClick}>
 										{<index.icon fontSize={index.size} />}
 									</IconButton>
 								</Tooltip>
@@ -84,7 +84,7 @@ const FooterAppBar = (props) => {
 						if (index.disabled === false && index.type === 'icon') {
 							return (
 								<Tooltip key={key} placement="top" title={index.text}>
-									<IconButton edge={index.edge} onClick={index.onClick}>
+									<IconButton edge={index.edge} color={index.color} onClick={index.onClick}>
 										{<index.icon fontSize={index.size} />}
 									</IconButton>
 								</Tooltip>
@@ -146,7 +146,7 @@ FooterAppBar.propTypes = {
 		icon: PropTypes.object,
 		onClick: PropTypes.func
 	}),
-	fabButton1: PropTypes.arrayOf(
+	rightButtons: PropTypes.arrayOf(
 		PropTypes.shape({
 			type: PropTypes.oneOf([ 'icon', 'fab' ]),
 			text: PropTypes.string,
@@ -158,8 +158,18 @@ FooterAppBar.propTypes = {
 			onClick: PropTypes.func
 		})
 	),
-	rightButtons: PropTypes.array,
-	leftButtons: PropTypes.array
+	leftButtons: PropTypes.arrayOf(
+		PropTypes.shape({
+			type: PropTypes.oneOf([ 'icon', 'fab' ]),
+			text: PropTypes.string,
+			color: PropTypes.oneOf([ 'default', 'inherit', 'primary', 'secondary', 'transparent' ]),
+			icon: PropTypes.array,
+			edge: PropTypes.oneOf([ 'start', 'end', false ]),
+			size: PropTypes.oneOf([ 'large', 'small', 'default' ]),
+			disabled: PropTypes.bool,
+			onClick: PropTypes.func
+		})
+	),
 };
 
 export default FooterAppBar;

@@ -24,6 +24,9 @@ const appBarStyle = {
     // backgroundColor: '#0b463b',
     top: -1,
   },
+  icons: {
+    marginRight: "3px"
+  },
   primary: {
     backgroundColor: primaryColor
   },

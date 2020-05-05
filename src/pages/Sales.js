@@ -39,7 +39,7 @@ export default function SalesPage (props) {
 	// setTimeout(function () {
 	//   setCardAnimation("");
 	// }, 700);
-	const classes = useStyles();
+	const classes = useStyles(); 
 	return (
 		<Fragment>
 			<AppBarTabs
