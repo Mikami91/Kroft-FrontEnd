@@ -19,11 +19,11 @@ const routes = [
     name: "Sales",
     component: Sales,
   },
-  {
-    path: "/collects",
-    name: "Collects",
-    component: Login,
-  },
+  // {
+  //   path: "/collects",
+  //   name: "Collects",
+  //   component: Login,
+  // },
 ];
 
 export default routes;
