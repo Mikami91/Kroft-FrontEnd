@@ -16,9 +16,12 @@ import SalesAppBar from '../layouts/AppBars/SalesAppBar.js';
 // core components
 import AppBarTabs from '../components/AppBar/AppBarTabs.js';
 import TabPanel from '../components/Panel/TabPanel';
+import GridTables from '../components/Grid/GridTables';
 import FooterAppBar from '../components/Footer/FooterAppBar.js';
 // Variables
 import { data } from '../variables/JSON';
+import { environments } from '../variables/environments';
+import { tables } from '../variables/tables';
 import { bugs, website, server } from '../variables/general.js';
 // Styles
 import styles from '../styles/pages/SalesStyle.js';
@@ -39,12 +42,12 @@ export default function SalesPage (props) {
 	// setTimeout(function () {
 	//   setCardAnimation("");
 	// }, 700);
-	const classes = useStyles(); 
+	const classes = useStyles();
 	return (
 		<Fragment>
 			<AppBarTabs
 				color="inherit"
-				data={data}
+				data={environments}
 				value={value}
 				onChange={handleChange}
 				variant="fullWidth"
@@ -53,23 +56,31 @@ export default function SalesPage (props) {
 
 			<div className={classes.rootMenu}>
 				<SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
-					{data.map((index, key) => {
+					{environments.map((index, key) => {
 						return (
 							<TabPanel key={key} value={value} index={key}>
-								<Grid container className={classes.content} justify="center" alignItems="center">
-									<Grid
+								<Grid
+									container
+									spacing={2}
+									direction="row"
+									className={classes.content}
+									justify="flex-start"
+									alignItems="flex-start"
+								>
+									{/* <Grid
 										item
-										xs={12}
-										sm={12}
-										md={12}
-										lg={12}
-										xl={12}
+										xs={4}
+										sm={3}
+										md={3}
+										lg={2}
+										xl={1}
+										direction="row"
 										elevation={6}
 										square="true"
 										className={classes.container}
-									>
-										<Button>{index.name}</Button>
-									</Grid>
+									> */}
+									<GridTables filter={index.id} data={tables} />
+									{/* </Grid> */}
 								</Grid>
 							</TabPanel>
 						);
@@ -77,7 +88,7 @@ export default function SalesPage (props) {
 				</SwipeableViews>
 			</div>
 
-      <FooterAppBar
+			<FooterAppBar
 				color="inherit"
 				variant="dense"
 				fabButton={{
@@ -106,7 +117,7 @@ export default function SalesPage (props) {
 					{
 						type: 'icon',
 						text: '4',
-						color: 'secondary',
+						color: 'default',
 						icon: Store,
 						edge: 'end',
 						size: 'large',
@@ -120,7 +131,7 @@ export default function SalesPage (props) {
 					{
 						type: 'icon',
 						text: '4',
-						color: 'secondary',
+						color: 'default',
 						icon: Store,
 						edge: 'start',
 						size: 'large',
@@ -143,7 +154,6 @@ export default function SalesPage (props) {
 					}
 				]}
 			/>
-
-      </Fragment>
-  );
+		</Fragment>
+	);
 }
