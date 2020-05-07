@@ -37,7 +37,7 @@ const FooterAppBar = (props) => {
 							return (
 								<Tooltip key={key} placement="top" title={index.text}>
 									<IconButton edge={index.edge} color={index.color} onClick={index.onClick}>
-										{<index.icon fontSize={index.size} />}
+										{<index.icon className={classes.icons} />}
 									</IconButton>
 								</Tooltip>
 							);
@@ -45,7 +45,7 @@ const FooterAppBar = (props) => {
 						if (index.disabled === true && index.type === 'icon') {
 							return (
 								<IconButton key={key} edge={index.edge} disabled>
-									{<index.icon fontSize={index.size} />}
+									{<index.icon className={classes.icons} />}
 								</IconButton>
 							);
 						} else {
@@ -54,12 +54,12 @@ const FooterAppBar = (props) => {
 									key={key}
 									disabled={index.disabled}
 									color={index.color}
-									size="small"
+									// size="small"
 									aria-label={index.label}
 									onClick={index.onClick}
 									className={classes.fabButton + ' ' + classes.rightFab}
 								>
-									<index.icon />
+									<index.icon className={classes.icons} />
 								</Fab>
 							);
 						}
@@ -70,12 +70,12 @@ const FooterAppBar = (props) => {
 					<Fab
 						disabled={fabButton.disabled}
 						color={fabButton.color}
-						size="small"
+						// size="small"
 						aria-label={fabButton.label}
 						onClick={fabButton.onClick}
 						className={classes.fabButtonFloat + ' ' + classes[fabButton.align + 'FabFloat']}
 					>
-						<fabButton.icon />
+						<fabButton.icon className={classes.icons} />
 					</Fab>
 				) : null}
 
@@ -85,7 +85,7 @@ const FooterAppBar = (props) => {
 							return (
 								<Tooltip key={key} placement="top" title={index.text}>
 									<IconButton edge={index.edge} color={index.color} onClick={index.onClick}>
-										{<index.icon fontSize={index.size} />}
+										{<index.icon className={classes.icons} />}
 									</IconButton>
 								</Tooltip>
 							);
@@ -93,7 +93,7 @@ const FooterAppBar = (props) => {
 						if (index.disabled === true && index.type === 'icon') {
 							return (
 								<IconButton key={key} edge={index.edge} disabled>
-									{<index.icon fontSize={index.size} />}
+									{<index.icon className={classes.icons} />}
 								</IconButton>
 							);
 						} else {
@@ -102,12 +102,12 @@ const FooterAppBar = (props) => {
 									key={key}
 									disabled={index.disabled}
 									color={index.color}
-									size="small"
+									// size="small"
 									aria-label={index.label}
 									onClick={index.onClick}
 									className={classes.fabButton + ' ' + classes.leftFab}
 								>
-									<index.icon />
+									<index.icon className={classes.icons} />
 								</Fab>
 							);
 						}

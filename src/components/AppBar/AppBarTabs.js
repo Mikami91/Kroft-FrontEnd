@@ -19,20 +19,20 @@ const useStyles = makeStyles(styles);
 const AppBarTabs = (props) => {
 	// Props
 	const {
-    // AppBar
-    position,
-    color,
-    drawer,
-    // Tabs
-    data,
-    value,
-    onChange,
-    indicatorColor,
-    textColor,
-    variant,
-    orientation,
-    scrollButtons,
-    centered,
+		// AppBar
+		position,
+		color,
+		drawer,
+		// Tabs
+		data,
+		value,
+		onChange,
+		indicatorColor,
+		textColor,
+		variant,
+		orientation,
+		scrollButtons,
+		centered
 	} = props;
 	// Styles
 	const classes = useStyles();
@@ -44,7 +44,7 @@ const AppBarTabs = (props) => {
 	return (
 		<AppBar position={position} color={color} className={appBarClasses} variant="elevation">
 			<Tabs
-        orientation={orientation}
+				orientation={orientation}
 				value={value}
 				onChange={onChange}
 				indicatorColor={indicatorColor}
@@ -54,7 +54,15 @@ const AppBarTabs = (props) => {
 				centered={centered}
 			>
 				{data.map((index, key) => (
-					<Tab key={key} label={<Typography noWrap>{index.name}</Typography>} icon={<DeckRoundedIcon />} />
+					<Tab
+						key={key}
+						label={
+							<Typography className={classes.text} noWrap>
+								{index.name}
+							</Typography>
+						}
+						icon={<DeckRoundedIcon className={classes.icons} />}
+					/>
 				))}
 			</Tabs>
 		</AppBar>
@@ -74,8 +82,8 @@ AppBarTabs.defaultProps = {
 	onChange: null,
 	indicatorColor: 'primary',
 	textColor: 'primary',
-  variant: 'fullWidth',
-  orientation: 'horizontal',
+	variant: 'fullWidth',
+	orientation: 'horizontal',
 	scrollButtons: 'off',
 	centered: false
 };
@@ -88,15 +96,15 @@ AppBarTabs.propTypes = {
 	// Tabs
 	data: PropTypes.arrayOf(
 		PropTypes.shape({
-			name: PropTypes.string,
+			name: PropTypes.string
 		})
 	),
 	value: PropTypes.oneOfType([ PropTypes.number, PropTypes.string ]),
 	onChange: PropTypes.func,
 	indicatorColor: PropTypes.oneOfType([ 'inherit', 'primary', 'secondary' ]),
 	textColor: PropTypes.oneOfType([ 'inherit', 'primary', 'secondary' ]),
-  variant: PropTypes.oneOf([ 'standard', 'fullWidth', 'scrollable' ]),
-  orientation: PropTypes.oneOf([ 'horizontal', 'vertical' ]),
+	variant: PropTypes.oneOf([ 'standard', 'fullWidth', 'scrollable' ]),
+	orientation: PropTypes.oneOf([ 'horizontal', 'vertical' ]),
 	scrollButtons: PropTypes.oneOfType([ 'on', 'off', 'auto', 'desktop' ]),
 	centered: PropTypes.bool
 };

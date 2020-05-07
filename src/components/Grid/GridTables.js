@@ -1,6 +1,7 @@
+// Dependencies
 import React from 'react';
-// nodejs library to set properties for components
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -22,21 +23,18 @@ import Grid from '@material-ui/core/Grid';
 // import CardFooter from '../../components/Card/CardFooter.js';
 // import Store from '@material-ui/icons/Store';
 // import DateRange from '@material-ui/icons/DateRange';
+// Styles
+import styles from '../../styles/components/gridStyle';
 // Assets
 import image from '../../assets/img/defaults/table.png';
 
-const styles = {
-	grid: {
-		position: 'relative',
-		width: '100%',
-		minHeight: '1px',
-		paddingRight: '15px',
-		paddingLeft: '15px',
-		flexBasis: 'auto'
-	}
-};
-
 const useStyles = makeStyles(styles);
+
+const imagesStyle = {
+	green: { backgroundColor: "green" },
+	red: { backgroundColor: "red" },
+	tellow: { backgroundColor: "yellow" },
+}
 
 export default function GridTables (props) {
 	const classes = useStyles();
@@ -45,6 +43,14 @@ export default function GridTables (props) {
 		// <Grid container spacing={0} direction="row" justify="center" alignItems="center">
 		data.map((index, key) => {
 			if (index.id_environment === filter) {
+
+				const gridClasses = classNames({
+					[classes.tables]: true,
+				});
+				const cardClasses = classNames({
+					[classes[ index.state === 0 ? "green" : index.state === 1 ? "red" : "yellow" ]]: true
+				});
+
 				return (
 					<Grid
 						key={key}
@@ -53,31 +59,31 @@ export default function GridTables (props) {
 						sm={3}
 						md={2}
 						lg={2}
-						xl={1}
-                        elevation={5}
+						xl={2}
+						elevation={0}
+						className={gridClasses}
 						// style={{ backgroundColor: 'red' }}
 						// square="true"
-						// className={classes.container}
 					>
+									
 						<CardActionArea>
-							<Card>
+							<Card className={cardClasses}>
 								<CardMedia
 									component="img"
 									// height="140"
-                                    // className={style.cardMedia}
-                                    style={{ width: 100, height: 100, objectPosition: 'center', margin: "auto" }}
+									className={classes.image}
 									image={image}
-									// title={index.name}
+									title={index.name}
 									//onClick={getKeyByValue(index.id)}
 								/>
-								<GridListTileBar
+								{/* <GridListTileBar
 									key={index.id}
 									titlePosition="bottom"
-									// style={{ backgroundColor: index.state === 0 ? '#00af2d' : index.state === 1 ? '#d40000' : '#fb7f00', fontSize: 10, height: 'auto' }}
-									title={index.name}
+									style={{ backgroundColor: index.state === 0 ? '#00af2d' : index.state === 1 ? '#d40000' : '#fb7f00', fontSize: 10, height: 'auto' }}
+									title={index.id}
 									actionIcon={
 										<CardActions disableSpacing style={{ padding: 0 }}>
-											{/* <Tooltip
+											<Tooltip
 												placement="bottom"
 												title={
 													index.state === 0 ? (
@@ -90,10 +96,10 @@ export default function GridTables (props) {
 												}
 											>
 												<InfoIcon style={{ color: 'white' }} fontSize="small"/>
-											</Tooltip> */}
+											</Tooltip>
 										</CardActions>
 									}
-								/>
+								/> */}
 							</Card>
 						</CardActionArea>
 

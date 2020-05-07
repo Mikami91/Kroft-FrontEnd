@@ -1,4 +1,4 @@
-import { container, primaryColor } from "../../themes/theme.js";
+import { container, primaryColor, theme } from "../../themes/theme.js";
 
 const footerStyle = {
   footerAppBar: {
@@ -101,6 +101,26 @@ const footerStyle = {
     padding: "0px",
     width: "auto"
   },
+  icons: {
+		width: '1.5rem',
+		height: '1.5rem',
+		[theme.breakpoints.only('sm')]: {
+			width: '2rem',
+			height: '2rem'
+		},
+		[theme.breakpoints.only('md')]: {
+			width: '2.5rem',
+			height: '2.5rem'
+		},
+		[theme.breakpoints.only('lg')]: {
+			width: '3rem',
+			height: '3rem'
+		},
+		[theme.breakpoints.only('xl')]: {
+			width: '3rem',
+			height: '3rem'
+		}
+	},
   icon: {
     width: "18px",
     height: "18px",

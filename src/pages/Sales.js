@@ -61,7 +61,7 @@ export default function SalesPage (props) {
 							<TabPanel key={key} value={value} index={key}>
 								<Grid
 									container
-									spacing={2}
+									spacing={0}
 									direction="row"
 									className={classes.content}
 									justify="flex-start"
