@@ -33,6 +33,7 @@ const FooterAppBar = (props) => {
 			<Toolbar variant={variant}>
 				<div style={{ marginRight: 'auto' }}>
 					{rightButtons.map((index, key) => {
+						// Icon type
 						if (index.disabled === false && index.type === 'icon') {
 							return (
 								<Tooltip key={key} placement="top" title={index.text}>
@@ -48,7 +49,26 @@ const FooterAppBar = (props) => {
 									{<index.icon className={classes.icons} />}
 								</IconButton>
 							);
-						} else {
+						}
+						// Fab type
+						if (index.disabled === false && index.type === 'fab') {
+							return (
+								<Tooltip key={key} placement="top" title={index.text}>
+									<Fab
+										key={key}
+										disabled={index.disabled}
+										color={index.color}
+										// size="small"
+										aria-label={index.label}
+										onClick={index.onClick}
+										className={classes.fabButton + ' ' + classes.rightFab}
+									>
+										<index.icon className={classes.icons} />
+									</Fab>
+								</Tooltip>
+							);
+						}
+						if (index.disabled === true && index.type === 'fab') {
 							return (
 								<Fab
 									key={key}
@@ -56,7 +76,6 @@ const FooterAppBar = (props) => {
 									color={index.color}
 									// size="small"
 									aria-label={index.label}
-									onClick={index.onClick}
 									className={classes.fabButton + ' ' + classes.rightFab}
 								>
 									<index.icon className={classes.icons} />
@@ -81,6 +100,7 @@ const FooterAppBar = (props) => {
 
 				<div style={{ marginLeft: 'auto' }}>
 					{leftButtons.map((index, key) => {
+						// Icon type
 						if (index.disabled === false && index.type === 'icon') {
 							return (
 								<Tooltip key={key} placement="top" title={index.text}>
@@ -96,7 +116,26 @@ const FooterAppBar = (props) => {
 									{<index.icon className={classes.icons} />}
 								</IconButton>
 							);
-						} else {
+						}
+						// Fab type
+						if (index.disabled === false && index.type === 'fab') {
+							return (
+								<Tooltip key={key} placement="top" title={index.text}>
+									<Fab
+										key={key}
+										disabled={index.disabled}
+										color={index.color}
+										// size="small"
+										aria-label={index.label}
+										onClick={index.onClick}
+										className={classes.fabButton + ' ' + classes.leftFab}
+									>
+										<index.icon className={classes.icons} />
+									</Fab>
+								</Tooltip>
+							);
+						}
+						if (index.disabled === true && index.type === 'fab') {
 							return (
 								<Fab
 									key={key}
@@ -104,7 +143,6 @@ const FooterAppBar = (props) => {
 									color={index.color}
 									// size="small"
 									aria-label={index.label}
-									onClick={index.onClick}
 									className={classes.fabButton + ' ' + classes.leftFab}
 								>
 									<index.icon className={classes.icons} />
@@ -169,7 +207,7 @@ FooterAppBar.propTypes = {
 			disabled: PropTypes.bool,
 			onClick: PropTypes.func
 		})
-	),
+	)
 };
 
 export default FooterAppBar;

@@ -9,8 +9,10 @@ import Hidden from '@material-ui/core/Hidden';
 // @material-ui/icons
 import Store from '@material-ui/icons/Store';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
+import PersonIcon from '@material-ui/icons/Person';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 // Layouts
 import SalesAppBar from '../layouts/AppBars/SalesAppBar.js';
 // core components
@@ -97,7 +99,7 @@ export default function SalesPage (props) {
 					label: 'Atras',
 					float: false,
 					align: 'center',
-					icon: Store,
+					icon: RefreshIcon,
 					onClick: () => {
 						alert('FAB');
 					}
@@ -105,7 +107,7 @@ export default function SalesPage (props) {
 				rightButtons={[
 					{
 						type: 'fab',
-						text: '4',
+						text: 'Salir',
 						color: 'secondary',
 						icon: KeyboardBackspaceIcon,
 						size: 'large',
@@ -116,9 +118,9 @@ export default function SalesPage (props) {
 					},
 					{
 						type: 'icon',
-						text: '4',
+						text: 'Perfil',
 						color: 'default',
-						icon: Store,
+						icon: PersonIcon,
 						edge: 'end',
 						size: 'large',
 						disabled: false,
@@ -130,9 +132,9 @@ export default function SalesPage (props) {
 				leftButtons={[
 					{
 						type: 'icon',
-						text: '4',
+						text: 'Cambiar de Mesa',
 						color: 'default',
-						icon: Store,
+						icon: SwapHorizIcon,
 						edge: 'start',
 						size: 'large',
 						disabled: false,
@@ -141,10 +143,10 @@ export default function SalesPage (props) {
 						}
 					},
 					{
-						type: 'fab',
-						text: '4',
-						color: 'secondary',
-						icon: Store,
+						type: 'icon',
+						text: 'Lista de Mesas',
+						color: 'default',
+						icon: FormatListNumberedRtlIcon,
 						edge: 'end',
 						size: 'large',
 						disabled: false,

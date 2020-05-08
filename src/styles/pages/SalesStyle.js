@@ -33,11 +33,11 @@ const SalesStyle = {
 		},
 		[theme.breakpoints.only('lg')]: {
       height: "72vh",
-      marginTop: "7vh",
+      marginTop: "7.5vh",
 		},
 		[theme.breakpoints.only('xl')]: {
       height: "72vh",
-      marginTop: "7vh",
+      marginTop: "7.8vh",
 		}
 	},
 	root: {

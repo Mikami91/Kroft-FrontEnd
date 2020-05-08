@@ -59,7 +59,7 @@ export default function GridTables (props) {
 						sm={3}
 						md={2}
 						lg={2}
-						xl={2}
+						xl={1}
 						elevation={0}
 						className={gridClasses}
 						// style={{ backgroundColor: 'red' }}

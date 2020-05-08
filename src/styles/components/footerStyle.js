@@ -14,6 +14,24 @@ const footerStyle = {
     left: 0,
     right: 0,
     margin: '0 auto',
+    width: '35px',
+		height: '35px',
+		[theme.breakpoints.only('sm')]: {
+			width: '40px',
+			height: '40px'
+		},
+		[theme.breakpoints.only('md')]: {
+			width: '45px',
+			height: '45px'
+		},
+		[theme.breakpoints.only('lg')]: {
+			width: '50px',
+			height: '50px'
+		},
+		[theme.breakpoints.only('xl')]: {
+			width: '55px',
+			height: '55px'
+		}
   },
   leftFabFloat: {
     right: "16px",
@@ -36,6 +54,24 @@ const footerStyle = {
     left: 0,
     right: 0,
     margin: '0 auto',
+    width: '35px',
+		height: '35px',
+		[theme.breakpoints.only('sm')]: {
+			width: '40px',
+			height: '40px'
+		},
+		[theme.breakpoints.only('md')]: {
+			width: '45px',
+			height: '45px'
+		},
+		[theme.breakpoints.only('lg')]: {
+			width: '50px',
+			height: '50px'
+		},
+		[theme.breakpoints.only('xl')]: {
+			width: '55px',
+			height: '55px'
+		}
   },
   leftFab: {
     marginLeft: '16px',
@@ -105,20 +141,20 @@ const footerStyle = {
 		width: '1.5rem',
 		height: '1.5rem',
 		[theme.breakpoints.only('sm')]: {
-			width: '2rem',
-			height: '2rem'
+			width: '1.8rem',
+			height: '1.8rem'
 		},
 		[theme.breakpoints.only('md')]: {
+			width: '2.2rem',
+			height: '2.2rem'
+		},
+		[theme.breakpoints.only('lg')]: {
 			width: '2.5rem',
 			height: '2.5rem'
 		},
-		[theme.breakpoints.only('lg')]: {
-			width: '3rem',
-			height: '3rem'
-		},
 		[theme.breakpoints.only('xl')]: {
-			width: '3rem',
-			height: '3rem'
+			width: '2.8rem',
+			height: '2.8rem'
 		}
 	},
   icon: {
