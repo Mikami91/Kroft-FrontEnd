@@ -5,17 +5,17 @@ import Sales from "../pages/Sales";
 
 const routes = [
   {
-    path: "/",
+    path: "https://mikami91.github.io/Kroft-FrontEnd/",
     name: "Login",
     component: Login,
   },
   {
-    path: "/dashboard",
+    path: "https://mikami91.github.io/Kroft-FrontEnd/dashboard",
     name: "Dashboard",
     component: Dashboard,
   },
   {
-    path: "/sales",
+    path: "https://mikami91.github.io/Kroft-FrontEnd/sales",
     name: "Sales",
     component: Sales,
   },
