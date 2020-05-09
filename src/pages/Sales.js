@@ -76,7 +76,7 @@ export default function SalesPage(props) {
 					align: 'center',
 					icon: RefreshIcon,
 					onClick: () => {
-						alert('TE AMO MUCHO LISBETH <3');
+						alert('Continua practicando con el PAIFE (:');
 					}
 				}}
 				rightButtons={[
