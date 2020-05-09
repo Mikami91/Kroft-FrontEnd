@@ -4,6 +4,7 @@ import {
     dangerCardHeader,
     infoCardHeader,
     primaryCardHeader,
+    secondaryCardHeader,
     roseCardHeader,
     grayColor
   } from "../../themes/theme.js";
@@ -34,6 +35,7 @@ import {
     dangerCardHeader,
     infoCardHeader,
     primaryCardHeader,
+    secondaryCardHeader,
     roseCardHeader
   };
   

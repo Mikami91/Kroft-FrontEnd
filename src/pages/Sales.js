@@ -4,34 +4,27 @@ import SwipeableViews from 'react-swipeable-views';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import Hidden from '@material-ui/core/Hidden';
 // @material-ui/icons
-import Store from '@material-ui/icons/Store';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import PersonIcon from '@material-ui/icons/Person';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl';
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
-// Layouts
-import SalesAppBar from '../layouts/AppBars/SalesAppBar.js';
 // core components
 import AppBarTabs from '../components/AppBar/AppBarTabs.js';
 import TabPanel from '../components/Panel/TabPanel';
 import GridTables from '../components/Grid/GridTables';
 import FooterAppBar from '../components/Footer/FooterAppBar.js';
 // Variables
-import { data } from '../variables/JSON';
 import { environments } from '../variables/environments';
 import { tables } from '../variables/tables';
-import { bugs, website, server } from '../variables/general.js';
 // Styles
 import styles from '../styles/pages/SalesStyle.js';
 
 const useStyles = makeStyles(styles);
 
-export default function SalesPage (props) {
-	const [ value, setValue ] = useState(0);
+export default function SalesPage(props) {
+	const [value, setValue] = useState(0);
 	const handleChange = (event, newValue) => {
 		// console.log(newValue);
 		setValue(newValue);
@@ -39,11 +32,6 @@ export default function SalesPage (props) {
 	const handleChangeIndex = (index) => {
 		setValue(index);
 	};
-	// State for Card animation
-	// const [cardAnimaton, setCardAnimation] = useState("cardHidden");
-	// setTimeout(function () {
-	//   setCardAnimation("");
-	// }, 700);
 	const classes = useStyles();
 	return (
 		<Fragment>
@@ -69,20 +57,7 @@ export default function SalesPage (props) {
 									justify="flex-start"
 									alignItems="flex-start"
 								>
-									{/* <Grid
-										item
-										xs={4}
-										sm={3}
-										md={3}
-										lg={2}
-										xl={1}
-										direction="row"
-										elevation={6}
-										square="true"
-										className={classes.container}
-									> */}
-									<GridTables filter={index.id} data={tables} />
-									{/* </Grid> */}
+									<GridTables filter={index.id} data={tables} color="primary" />
 								</Grid>
 							</TabPanel>
 						);
@@ -158,4 +133,4 @@ export default function SalesPage (props) {
 			/>
 		</Fragment>
 	);
-}
+};

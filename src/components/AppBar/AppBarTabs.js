@@ -56,6 +56,8 @@ const AppBarTabs = (props) => {
 				{data.map((index, key) => (
 					<Tab
 						key={key}
+						style={{ paddingTop: 2 }}
+
 						label={
 							<Typography className={classes.text} noWrap>
 								{index.name}

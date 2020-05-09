@@ -8,10 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-
 import { makeStyles } from '@material-ui/core/styles';
-// Icons
-import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 // Styles
 import styles from '../../styles/components/footerStyle';
 
