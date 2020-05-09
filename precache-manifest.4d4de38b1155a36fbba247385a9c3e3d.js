@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "b4455b4d1fedcdc1c533",
+    "revision": "5a6a58915a0fe5ae2d32",
     "url": "/Kroft-FrontEnd/static/css/main.9653c399.chunk.css"
   },
   {
-    "revision": "b4455b4d1fedcdc1c533",
-    "url": "/Kroft-FrontEnd/static/js/main.da229970.chunk.js"
+    "revision": "5a6a58915a0fe5ae2d32",
+    "url": "/Kroft-FrontEnd/static/js/main.e855c115.chunk.js"
   },
   {
     "revision": "feb151ab0423f96045cd",
@@ -36,7 +36,7 @@ self.__precacheManifest = [
     "url": "/Kroft-FrontEnd/static/media/logo.5d5d9eef.svg"
   },
   {
-    "revision": "5e79ec9fb5fe2a38e3b995246bf1b622",
+    "revision": "ff06ea012b4ef709c14297a0cb0a52c6",
     "url": "/Kroft-FrontEnd/index.html"
   }
 ];
