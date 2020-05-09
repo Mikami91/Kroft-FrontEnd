@@ -71,12 +71,12 @@ export default function SalesPage(props) {
 				fabButton={{
 					disabled: false,
 					color: 'primary',
-					label: 'Atras',
+					label: 'Actualizar',
 					float: false,
 					align: 'center',
 					icon: RefreshIcon,
 					onClick: () => {
-						alert('FAB');
+						alert('TE AMO MUCHO LISBETH <3');
 					}
 				}}
 				rightButtons={[
@@ -88,7 +88,7 @@ export default function SalesPage(props) {
 						size: 'large',
 						disabled: false,
 						onClick: () => {
-							alert('22');
+							alert('Salir');
 						}
 					},
 					{
@@ -100,7 +100,7 @@ export default function SalesPage(props) {
 						size: 'large',
 						disabled: false,
 						onClick: () => {
-							alert('22');
+							alert('Perfil');
 						}
 					}
 				]}
@@ -114,7 +114,7 @@ export default function SalesPage(props) {
 						size: 'large',
 						disabled: false,
 						onClick: () => {
-							alert('22');
+							alert('Cambiar de Mesa');
 						}
 					},
 					{
@@ -126,7 +126,7 @@ export default function SalesPage(props) {
 						size: 'large',
 						disabled: false,
 						onClick: () => {
-							alert('22');
+							alert('Lista de Mesas');
 						}
 					}
 				]}
