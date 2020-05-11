@@ -27,7 +27,7 @@ const FooterAppBar = (props) => {
 	// Render
 	return (
 		<AppBar position={position} color={color} className={footerClasses} variant="elevation">
-			<Toolbar variant={variant}>
+			<Toolbar variant={variant} className={classes.toolbar} >
 				<div style={{ marginRight: 'auto' }}>
 					{rightButtons.map((index, key) => {
 						// Icon type
@@ -35,7 +35,7 @@ const FooterAppBar = (props) => {
 							return (
 								<Tooltip key={key} placement="top" title={index.text}>
 									<IconButton edge={index.edge} color={index.color} onClick={index.onClick}>
-										{<index.icon className={classes.icons} />}
+										{typeof index.icon !== "undefined" ? <index.icon className={classes.icons} /> : null}
 									</IconButton>
 								</Tooltip>
 							);
@@ -43,7 +43,8 @@ const FooterAppBar = (props) => {
 						if (index.disabled === true && index.type === 'icon') {
 							return (
 								<IconButton key={key} edge={index.edge} disabled>
-									{<index.icon className={classes.icons} />}
+									{typeof index.icon !== "undefined" ? <index.icon className={classes.icons} /> : null}
+
 								</IconButton>
 							);
 						}
@@ -60,7 +61,8 @@ const FooterAppBar = (props) => {
 										onClick={index.onClick}
 										className={classes.fabButton + ' ' + classes.rightFab}
 									>
-										<index.icon className={classes.icons} />
+										{typeof index.icon !== "undefined" ? <index.icon className={classes.icons} /> : null}
+
 									</Fab>
 								</Tooltip>
 							);
@@ -75,7 +77,8 @@ const FooterAppBar = (props) => {
 									aria-label={index.label}
 									className={classes.fabButton + ' ' + classes.rightFab}
 								>
-									<index.icon className={classes.icons} />
+									{typeof index.icon !== "undefined" ? <index.icon className={classes.icons} /> : null}
+
 								</Fab>
 							);
 						}
@@ -91,7 +94,7 @@ const FooterAppBar = (props) => {
 						onClick={fabButton.onClick}
 						className={classes.fabButtonFloat + ' ' + classes[fabButton.align + 'FabFloat']}
 					>
-						<fabButton.icon className={classes.icons} />
+						{typeof fabButton.icon !== "undefined" ? <fabButton.icon className={classes.icons} /> : null}
 					</Fab>
 				) : null}
 
@@ -102,7 +105,7 @@ const FooterAppBar = (props) => {
 							return (
 								<Tooltip key={key} placement="top" title={index.text}>
 									<IconButton edge={index.edge} color={index.color} onClick={index.onClick}>
-										{<index.icon className={classes.icons} />}
+										{typeof index.icon !== "undefined" ? <index.icon className={classes.icons} /> : null}
 									</IconButton>
 								</Tooltip>
 							);
@@ -110,7 +113,7 @@ const FooterAppBar = (props) => {
 						if (index.disabled === true && index.type === 'icon') {
 							return (
 								<IconButton key={key} edge={index.edge} disabled>
-									{<index.icon className={classes.icons} />}
+									{typeof index.icon !== "undefined" ? <index.icon className={classes.icons} /> : null}
 								</IconButton>
 							);
 						}
@@ -127,7 +130,7 @@ const FooterAppBar = (props) => {
 										onClick={index.onClick}
 										className={classes.fabButton + ' ' + classes.leftFab}
 									>
-										<index.icon className={classes.icons} />
+										{typeof index.icon !== "undefined" ? <index.icon className={classes.icons} /> : null}
 									</Fab>
 								</Tooltip>
 							);
@@ -142,7 +145,7 @@ const FooterAppBar = (props) => {
 									aria-label={index.label}
 									className={classes.fabButton + ' ' + classes.leftFab}
 								>
-									<index.icon className={classes.icons} />
+									{typeof index.icon !== "undefined" ? <index.icon className={classes.icons} /> : null}
 								</Fab>
 							);
 						}
@@ -167,40 +170,40 @@ FooterAppBar.defaultProps = {
 };
 FooterAppBar.propTypes = {
 	// AppBar
-	position: PropTypes.oneOf([ 'absolute', 'fixed', 'relative', 'static', 'sticky' ]),
-	color: PropTypes.oneOf([ 'default', 'inherit', 'primary', 'secondary', 'transparent' ]),
+	position: PropTypes.oneOf(['absolute', 'fixed', 'relative', 'static', 'sticky']),
+	color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary', 'transparent']),
 	// TooolBar
-	variant: PropTypes.oneOf([ 'regular', 'dense' ]),
+	variant: PropTypes.oneOf(['regular', 'dense']),
 	// Buttons
 	fabButton: PropTypes.shape({
 		disabled: PropTypes.bool,
-		color: PropTypes.oneOf([ 'default', 'inherit', 'primary', 'secondary', 'transparent' ]),
+		color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary', 'transparent']),
 		label: PropTypes.string,
 		float: PropTypes.bool,
-		align: PropTypes.oneOf([ 'right', 'center', 'left' ]),
+		align: PropTypes.oneOf(['right', 'center', 'left']),
 		icon: PropTypes.object,
 		onClick: PropTypes.func
 	}),
 	rightButtons: PropTypes.arrayOf(
 		PropTypes.shape({
-			type: PropTypes.oneOf([ 'icon', 'fab' ]),
+			type: PropTypes.oneOf(['icon', 'fab']),
 			text: PropTypes.string,
-			color: PropTypes.oneOf([ 'default', 'inherit', 'primary', 'secondary', 'transparent' ]),
+			color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary', 'transparent']),
 			icon: PropTypes.object,
-			edge: PropTypes.oneOf([ 'start', 'end', false ]),
-			size: PropTypes.oneOf([ 'large', 'small', 'default' ]),
+			edge: PropTypes.oneOf(['start', 'end', false]),
+			size: PropTypes.oneOf(['large', 'small', 'default']),
 			disabled: PropTypes.bool,
 			onClick: PropTypes.func
 		})
 	),
 	leftButtons: PropTypes.arrayOf(
 		PropTypes.shape({
-			type: PropTypes.oneOf([ 'icon', 'fab' ]),
+			type: PropTypes.oneOf(['icon', 'fab']),
 			text: PropTypes.string,
-			color: PropTypes.oneOf([ 'default', 'inherit', 'primary', 'secondary', 'transparent' ]),
+			color: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary', 'transparent']),
 			icon: PropTypes.object,
-			edge: PropTypes.oneOf([ 'start', 'end', false ]),
-			size: PropTypes.oneOf([ 'large', 'small', 'default' ]),
+			edge: PropTypes.oneOf(['start', 'end', false]),
+			size: PropTypes.oneOf(['large', 'small', 'default']),
 			disabled: PropTypes.bool,
 			onClick: PropTypes.func
 		})

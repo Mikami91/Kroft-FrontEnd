@@ -5,18 +5,18 @@ import SwipeableViews from 'react-swipeable-views';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 // @material-ui/icons
-import UndoIcon from '@material-ui/icons/Undo';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-import PrintIcon from '@material-ui/icons/Print';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import SendIcon from '@material-ui/icons/Send';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import PersonIcon from '@material-ui/icons/Person';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl';
+import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 // core components
-import AppBarIcons from '../components/AppBar/AppBarIcons.js';
+import AppBarTabs from '../components/AppBar/AppBarTabs.js';
 import TabPanel from '../components/Panel/TabPanel';
 import GridTables from '../components/Grid/GridTables';
 import FooterAppBar from '../components/Footer/FooterAppBar.js';
 // Variables
-import { categories } from '../variables/categories';
+import { environments } from '../variables/environments';
 import { tables } from '../variables/tables';
 // Styles
 import styles from '../styles/pages/SalesStyle.js';
@@ -25,8 +25,8 @@ const useStyles = makeStyles(styles);
 
 export default function SalesPage(props) {
 	const [value, setValue] = useState(0);
-	const handleChange = (newValue) => {
-		console.log(newValue);
+	const handleChange = (event, newValue) => {
+		// console.log(newValue);
 		setValue(newValue);
 	};
 	const handleChangeIndex = (index) => {
@@ -35,10 +35,9 @@ export default function SalesPage(props) {
 	const classes = useStyles();
 	return (
 		<Fragment>
-			<AppBarIcons
+			<AppBarTabs
 				color="inherit"
-				selectColor="primary"
-				data={categories}
+				data={environments}
 				value={value}
 				onChange={handleChange}
 				variant="fullWidth"
@@ -47,7 +46,7 @@ export default function SalesPage(props) {
 
 			<div className={classes.rootMenu}>
 				<SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
-					{categories.map((index, key) => {
+					{environments.map((index, key) => {
 						return (
 							<TabPanel key={key} value={value} index={key}>
 								<Grid
@@ -71,21 +70,21 @@ export default function SalesPage(props) {
 				variant="dense"
 				fabButton={{
 					disabled: false,
-					color: 'secondary',
-					label: 'Lista de ordenes',
+					color: 'primary',
+					label: 'Actualizar',
 					float: false,
 					align: 'center',
-					icon: FormatListBulletedIcon,
+					icon: RefreshIcon,
 					onClick: () => {
-						alert('Lista de ordenes');
+						alert('Continua practicando con el PAIFE (:');
 					}
 				}}
 				rightButtons={[
 					{
 						type: 'fab',
-						text: 'Atras',
-						color: 'primary',
-						icon: UndoIcon,
+						text: 'Salir',
+						color: 'secondary',
+						icon: KeyboardBackspaceIcon,
 						size: 'large',
 						disabled: false,
 						onClick: () => {
@@ -94,52 +93,40 @@ export default function SalesPage(props) {
 					},
 					{
 						type: 'icon',
-						text: 'Impresiones',
+						text: 'Perfil',
 						color: 'default',
-						// icon: PrintIcon,
-						edge: 'start',
-						size: 'large',
-						disabled: false,
-						onClick: () => {
-							alert('Impresiones');
-						}
-					},
-				]}
-				leftButtons={[
-					{
-						type: 'icon',
-						text: 'Impresiones',
-						color: 'default',
-						icon: PrintIcon,
-						edge: 'start',
-						size: 'large',
-						disabled: false,
-						onClick: () => {
-							alert('Impresiones');
-						}
-					},
-					{
-						type: 'icon',
-						text: 'Cuenta total',
-						color: 'default',
-						icon: ListAltIcon,
-						edge: false,
-						size: 'large',
-						disabled: false,
-						onClick: () => {
-							alert('Cuenta total');
-						}
-					},
-					{
-						type: 'fab',
-						text: 'Enviar orden',
-						color: 'primary',
-						icon: SendIcon,
+						icon: PersonIcon,
 						edge: 'end',
 						size: 'large',
 						disabled: false,
 						onClick: () => {
-							alert('Enviar orden');
+							alert('Perfil');
+						}
+					}
+				]}
+				leftButtons={[
+					{
+						type: 'icon',
+						text: 'Cambiar de Mesa',
+						color: 'default',
+						icon: SwapHorizIcon,
+						edge: 'start',
+						size: 'large',
+						disabled: false,
+						onClick: () => {
+							alert('Cambiar de Mesa');
+						}
+					},
+					{
+						type: 'icon',
+						text: 'Lista de Mesas',
+						color: 'default',
+						icon: FormatListNumberedRtlIcon,
+						edge: 'end',
+						size: 'large',
+						disabled: false,
+						onClick: () => {
+							alert('Lista de Mesas');
 						}
 					}
 				]}

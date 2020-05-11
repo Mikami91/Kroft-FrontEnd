@@ -1,6 +1,10 @@
 import { container, primaryColor, theme } from "../../themes/theme.js";
 
 const footerStyle = {
+  toolbar: {
+    paddingRight: theme.spacing(1),
+    paddingLeft: theme.spacing(1),
+  },
   footerAppBar: {
     top: 'auto',
     bottom: 0,
@@ -80,6 +84,28 @@ const footerStyle = {
   rightFab: {
     marginRight: '16px',
   },
+  icons: {
+		width: '1.3rem',
+		height: '1.3rem',
+		[theme.breakpoints.only('sm')]: {
+			width: '1.6rem',
+			height: '1.6rem'
+		},
+		[theme.breakpoints.only('md')]: {
+			width: '2rem',
+			height: '2rem'
+		},
+		[theme.breakpoints.only('lg')]: {
+			width: '2.3rem',
+			height: '2.3rem'
+		},
+		[theme.breakpoints.only('xl')]: {
+			width: '2.6rem',
+			height: '2.6rem'
+		}
+	},
+
+
 
 
   block: {
@@ -137,26 +163,6 @@ const footerStyle = {
     padding: "0px",
     width: "auto"
   },
-  icons: {
-		width: '1.5rem',
-		height: '1.5rem',
-		[theme.breakpoints.only('sm')]: {
-			width: '1.8rem',
-			height: '1.8rem'
-		},
-		[theme.breakpoints.only('md')]: {
-			width: '2.2rem',
-			height: '2.2rem'
-		},
-		[theme.breakpoints.only('lg')]: {
-			width: '2.5rem',
-			height: '2.5rem'
-		},
-		[theme.breakpoints.only('xl')]: {
-			width: '2.8rem',
-			height: '2.8rem'
-		}
-	},
   icon: {
     width: "18px",
     height: "18px",
