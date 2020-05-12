@@ -28,8 +28,8 @@ const gridStyle = {
 			paddingBottom: theme.spacing(1)
 		},
 		[theme.breakpoints.only('md')]: {
-			paddingRight: theme.spacing(1.5),
-			paddingLeft: theme.spacing(1.5),
+			paddingRight: theme.spacing(1.3),
+			paddingLeft: theme.spacing(1.3),
 			paddingTop: theme.spacing(1.5),
 			paddingBottom: theme.spacing(1.5)
 		},
@@ -40,10 +40,10 @@ const gridStyle = {
 			paddingBottom: theme.spacing(2)
 		},
 		[theme.breakpoints.only('xl')]: {
-			paddingRight: theme.spacing(3),
-			paddingLeft: theme.spacing(3),
-			paddingTop: theme.spacing(4),
-			paddingBottom: theme.spacing(4)
+			paddingRight: theme.spacing(3.5),
+			paddingLeft: theme.spacing(3.5),
+			paddingTop: theme.spacing(3),
+			paddingBottom: theme.spacing(3)
 		}
 	},
 	green: {

@@ -38,6 +38,7 @@ export default function SalesPage(props) {
 			<AppBarIcons
 				color="inherit"
 				selectColor="primary"
+				hoverColor="warning"
 				data={categories}
 				value={value}
 				onChange={handleChange}
@@ -83,7 +84,7 @@ export default function SalesPage(props) {
 				rightButtons={[
 					{
 						type: 'fab',
-						text: 'Atras',
+						text: categories[value].name,
 						color: 'primary',
 						icon: UndoIcon,
 						size: 'large',

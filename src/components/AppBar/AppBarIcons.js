@@ -9,11 +9,14 @@ import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 // Icons
+import WhatshotIcon from '@material-ui/icons/Whatshot';
+import GroupWorkIcon from '@material-ui/icons/GroupWork';
 import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 // Styles
 import styles from '../../styles/components/appBarIconStyle';
@@ -33,6 +36,7 @@ const AppBarIcons = (props) => {
 		value,
 		onChange,
 		selectColor,
+		hoverColor,
 	} = props;
 	// Styles
 	const classes = useStyles();
@@ -43,26 +47,45 @@ const AppBarIcons = (props) => {
 	// Render
 	return (
 		<AppBar position={position} color={color} className={appBarClasses} variant="elevation">
-			<Toolbar className={classes.toolbar} >
-			<Grid
+			{/* <Toolbar className={classes.toolbar} > */}
+
+			<Tabs
+				value={value}
+				className={classes.gridIcons}
+				// onChange={handleChange}
+				indicatorColor={selectColor}
+				textColor={selectColor}
+				variant="scrollable"
+				scrollButtons="auto"
+				TabIndicatorProps={{
+					style: {
+						paddingBottom: -18,
+						display: "none"
+					  }
+				}}
+			>
+
+				{/* <Grid
 				container
 				spacing={1}
 				direction="row"
 				className={classes.gridIcons}
 				justify="flex-start"
 				alignItems="center"
-			>
+			> */}
+
 				{/* <BottomNavigation
 				value={value}
 				onChange={onChange}
 				showLabels
 				className={classes.root}
 			> */}
+
 				{data.map((index, key) => {
-					const actionIconClasses = classNames({
+					const imageFabClasses = classNames({
 						[classes.fabButton]: true,
-						// [classes[color + "ActionIcon"]]: color,
-						[classes[selectColor + "ActionIcon"]]: key === value
+						[classes[selectColor + "SelectFabButton"]]: key === value,
+						[classes[hoverColor + "HoverFabButton"]]: hoverColor,
 					});
 					return (
 						<Grid
@@ -74,7 +97,7 @@ const AppBarIcons = (props) => {
 							lg={1}
 							xl={1}
 							elevation={0}
-							className={classes.gridIcon}
+							className={classes.gridIcons}
 						>
 							<Fab
 								key={key}
@@ -84,9 +107,10 @@ const AppBarIcons = (props) => {
 								color={color}
 								// size="small"
 								aria-label={index.label}
-								className={actionIconClasses}
+								className={imageFabClasses}
 							>
-								<DeckRoundedIcon color={index.selectColor} className={classes.icons} />
+								<img src={index.image} alt={index.name} color={index.selectColor} className={classes.image} />
+								{/* <WhatshotIcon color={index.selectColor} className={classes.icons} /> */}
 
 							</Fab>
 							{/* <BottomNavigationAction
@@ -105,9 +129,15 @@ const AppBarIcons = (props) => {
 						</Grid>
 					);
 				})}
-			{/* </BottomNavigation> */}
-			</Grid>
-			</Toolbar>
+
+				{/* </BottomNavigation> */}
+
+				{/* </Grid> */}
+
+			</Tabs>
+
+			{/* </Toolbar> */}
+			
 			{/* <Tabs
 				orientation={orientation}
 				value={value}
@@ -148,6 +178,7 @@ AppBarIcons.defaultProps = {
 	value: '',
 	onChange: null,
 	selectColor: 'primary',
+	hoverColor: "primary"
 };
 AppBarIcons.propTypes = {
 	// AppBar
@@ -164,6 +195,7 @@ AppBarIcons.propTypes = {
 	value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	onChange: PropTypes.func,
 	selectColor: PropTypes.oneOf(['primary', 'secondary', 'warning', 'danger', 'success', 'info']),
+	hoverColor: PropTypes.oneOf(['primary', 'secondary', 'warning', 'danger', 'success', 'info']),
 };
 
 export default AppBarIcons;
