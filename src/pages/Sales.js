@@ -13,7 +13,7 @@ import SendIcon from '@material-ui/icons/Send';
 // core components
 import AppBarIcons from '../components/AppBar/AppBarIcons.js';
 import TabPanel from '../components/Panel/TabPanel';
-import GridTables from '../components/Grid/GridTables';
+import GridProducts from '../components/Grid/GridProducts';
 import FooterAppBar from '../components/Footer/FooterAppBar.js';
 // Variables
 import { categories } from '../variables/categories';
@@ -42,8 +42,6 @@ export default function SalesPage(props) {
 				data={categories}
 				value={value}
 				onChange={handleChange}
-				variant="fullWidth"
-				scrollButtons="auto"
 			/>
 
 			<div className={classes.rootMenu}>
@@ -59,7 +57,7 @@ export default function SalesPage(props) {
 									justify="flex-start"
 									alignItems="flex-start"
 								>
-									<GridTables filter={index.id} data={tables} color="primary" />
+									<GridProducts filter={index.id} data={tables} color="primary" />
 								</Grid>
 							</TabPanel>
 						);

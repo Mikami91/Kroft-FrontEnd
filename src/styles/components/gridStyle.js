@@ -46,6 +46,40 @@ const gridStyle = {
 			paddingBottom: theme.spacing(3)
 		}
 	},
+	products: {
+		position: 'relative',
+		width: '100%',
+		minHeight: '1px',
+		paddingTop: theme.spacing(2),
+		paddingRight: theme.spacing(1),
+		paddingBottom: theme.spacing(2),
+		paddingLeft: theme.spacing(1),
+		flexBasis: 'auto',
+		[theme.breakpoints.only('sm')]: {
+			paddingTop: theme.spacing(2),
+			paddingRight: theme.spacing(1.5),
+			paddingBottom: theme.spacing(2),
+			paddingLeft: theme.spacing(1.5),
+		},
+		[theme.breakpoints.only('md')]: {
+			paddingTop: theme.spacing(2.5),
+			paddingRight: theme.spacing(2),
+			paddingBottom: theme.spacing(2.5),
+			paddingLeft: theme.spacing(2),
+		},
+		[theme.breakpoints.only('lg')]: {
+			paddingTop: theme.spacing(3),
+			paddingRight: theme.spacing(2.5),
+			paddingBottom: theme.spacing(3),
+			paddingLeft: theme.spacing(2.5),
+		},
+		[theme.breakpoints.only('xl')]: {
+			paddingTop: theme.spacing(3.5),
+			paddingRight: theme.spacing(3),
+			paddingBottom: theme.spacing(3.5),
+			paddingLeft: theme.spacing(3),
+		}
+	},
 	green: {
 		backgroundImage: 'linear-gradient(90deg,' + successColor + ',' + fade(successColor, 0.7) + ')',
 		...successBoxShadow
@@ -59,7 +93,7 @@ const gridStyle = {
 		...warningBoxShadow
 	},
 	image: {
-        color: "black",
+		color: "black",
 		width: 65,
 		height: 65,
 		margin: 'auto',
@@ -81,7 +115,7 @@ const gridStyle = {
 			height: 120
 		}
 	},
-	cardNumber : {
+	cardNumber: {
 		position: "absolute",
 		padding: 2,
 		marginLeft: 8,
@@ -112,12 +146,12 @@ const gridStyle = {
 			marginTop: -25,
 		}
 	},
-	cardText : {
+	cardText: {
 		overflow: "hiden",
 		whiteSpace: "nowrap",
 		textOverflow: "ellipsis",
 		fontSize: "smaller",
-    	fontWeight: "bold",
+		fontWeight: "bold",
 		lineHeight: "1.4rem",
 		[theme.breakpoints.only('sm')]: {
 			fontSize: "small",

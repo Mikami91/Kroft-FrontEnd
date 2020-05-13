@@ -131,7 +131,7 @@ export const transition = {
 	transition: 'all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1)'
 };
 
-export const conatinerFluid = {
+export const containerFluid = {
 	paddingRight: theme.spacing(4),
 	paddingLeft: theme.spacing(4),
 	marginRight: 'auto',
@@ -139,7 +139,7 @@ export const conatinerFluid = {
 	width: 'auto'
 };
 export const container = {
-	...conatinerFluid,
+	...containerFluid,
 	'@media (min-width: 576px)': {
 		maxWidth: '540px'
 	},

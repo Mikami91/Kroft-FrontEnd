@@ -76,20 +76,20 @@ const appBarIconStyle = {
 		[theme.breakpoints.only('md')]: {
 			paddingRight: theme.spacing(1.5),
 			paddingLeft: theme.spacing(1.5),
-			marginTop: "0.2rem",
-			marginBottom: "0.2rem",
+			marginTop: "0.1rem",
+			marginBottom: "0.1rem",
 		},
 		[theme.breakpoints.only('lg')]: {
 			paddingRight: theme.spacing(1.8),
 			paddingLeft: theme.spacing(1.8),
-			marginTop: "0.3rem",
-			marginBottom: "0.3rem",
+			marginTop: "0.1rem",
+			marginBottom: "0.1rem",
 		},
 		[theme.breakpoints.only('xl')]: {
 			paddingRight: theme.spacing(2.1),
 			paddingLeft: theme.spacing(2.1),
-			marginTop: "0.4rem",
-			marginBottom: "0.4rem",
+			marginTop: "0.2rem",
+			marginBottom: "0.2rem",
 		},
 	},
 	fabButton: {

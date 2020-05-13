@@ -54,68 +54,68 @@ export const categories = [
 		image: ome
 	},
 	{
-		id: 5,
+		id: 9,
 		name: "other",
 		image: other
 	},
 	{
-		id: 6,
+		id: 10,
 		name: "pescado",
 		image: pescado
 	},
 	{
-		id:	7,
+		id:	11,
 		name: "pollo",
 		image: pollo
 	},
 	{
-		id:	8,
+		id:	12,
 		name: "vinos",
 		image: vinos
 	},
-	{
-		id: 6,
-		name: "pescado",
-		image: pescado
-	},
-	{
-		id:	7,
-		name: "pollo",
-		image: pollo
-	},
-	{
-		id:	8,
-		name: "vinos",
-		image: vinos
-	},
-	{
-		id: 6,
-		name: "pescado",
-		image: pescado
-	},
-	{
-		id:	7,
-		name: "pollo",
-		image: pollo
-	},
-	{
-		id:	8,
-		name: "vinos",
-		image: vinos
-	},
-	{
-		id: 6,
-		name: "pescado",
-		image: pescado
-	},
-	{
-		id:	7,
-		name: "pollo",
-		image: pollo
-	},
-	{
-		id:	8,
-		name: "vinos",
-		image: vinos
-	},
+	// {
+	// 	id: 6,
+	// 	name: "pescado",
+	// 	image: pescado
+	// },
+	// {
+	// 	id:	7,
+	// 	name: "pollo",
+	// 	image: pollo
+	// },
+	// {
+	// 	id:	8,
+	// 	name: "vinos",
+	// 	image: vinos
+	// },
+	// {
+	// 	id: 6,
+	// 	name: "pescado",
+	// 	image: pescado
+	// },
+	// {
+	// 	id:	7,
+	// 	name: "pollo",
+	// 	image: pollo
+	// },
+	// {
+	// 	id:	8,
+	// 	name: "vinos",
+	// 	image: vinos
+	// },
+	// {
+	// 	id: 6,
+	// 	name: "pescado",
+	// 	image: pescado
+	// },
+	// {
+	// 	id:	7,
+	// 	name: "pollo",
+	// 	image: pollo
+	// },
+	// {
+	// 	id:	8,
+	// 	name: "vinos",
+	// 	image: vinos
+	// },
 ];

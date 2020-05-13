@@ -4,20 +4,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 // @material-ui/Componentes
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Fab from '@material-ui/core/Fab';
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 // Icons
 import WhatshotIcon from '@material-ui/icons/Whatshot';
-import GroupWorkIcon from '@material-ui/icons/GroupWork';
-import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 // Styles
 import styles from '../../styles/components/appBarIconStyle';
 
@@ -47,7 +39,6 @@ const AppBarIcons = (props) => {
 	// Render
 	return (
 		<AppBar position={position} color={color} className={appBarClasses} variant="elevation">
-			{/* <Toolbar className={classes.toolbar} > */}
 
 			<Tabs
 				value={value}
@@ -58,28 +49,13 @@ const AppBarIcons = (props) => {
 				variant="scrollable"
 				scrollButtons="auto"
 				TabIndicatorProps={{
+					// indicator: false,
 					style: {
 						paddingBottom: -18,
-						display: "none"
+						display: "none",
 					  }
 				}}
 			>
-
-				{/* <Grid
-				container
-				spacing={1}
-				direction="row"
-				className={classes.gridIcons}
-				justify="flex-start"
-				alignItems="center"
-			> */}
-
-				{/* <BottomNavigation
-				value={value}
-				onChange={onChange}
-				showLabels
-				className={classes.root}
-			> */}
 
 				{data.map((index, key) => {
 					const imageFabClasses = classNames({
@@ -110,58 +86,14 @@ const AppBarIcons = (props) => {
 								className={imageFabClasses}
 							>
 								<img src={index.image} alt={index.name} color={index.selectColor} className={classes.image} />
-								{/* <WhatshotIcon color={index.selectColor} className={classes.icons} /> */}
 
 							</Fab>
-							{/* <BottomNavigationAction
-								key={key}
-								value={value}
-								onChange={() => onChange(key)}
-								showLabel
-								className={actionIconClasses}
-								label={
-									<Typography className={classes.text} noWrap>
-										{index.name}
-									</Typography>
-								}
-								icon={<DeckRoundedIcon className={classes.icons} />}
-							/> */}
 						</Grid>
 					);
 				})}
 
-				{/* </BottomNavigation> */}
-
-				{/* </Grid> */}
-
 			</Tabs>
 
-			{/* </Toolbar> */}
-			
-			{/* <Tabs
-				orientation={orientation}
-				value={value}
-				onChange={onChange}
-				indicatorColor={indicatorColor}
-				textColor={textColor}
-				variant={variant}
-				scrollButtons={scrollButtons}
-				centered={centered}
-			>
-				{data.map((index, key) => (
-					<Tab
-						key={key}
-						style={{ paddingTop: 2 }}
-
-						label={
-							<Typography className={classes.text} noWrap>
-								{index.name}
-							</Typography>
-						}
-						icon={<DeckRoundedIcon className={classes.icons} />}
-					/>
-				))}
-			</Tabs> */}
 		</AppBar>
 	);
 };
