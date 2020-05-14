@@ -5,12 +5,25 @@ import classNames from 'classnames';
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
+// import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
+import Card from '@material-ui/core/Card';
 // Core components
 import CardPrice from '../../components/Card/CardPrice.js';
-import CardHeader from '../../components/Card/CardHeader.js';
+import CardProduct from '../../components/Card/CardProduct.js';
+
+// import Card from "../../components/Card/Card.js";
+import CardHeader from "../../components/Card/CardHeader.js";
+import CardBody from "../../components/Card/CardBody.js";
+import CardIcon from "../../components/Card/CardIcon.js";
+import CardFooter from "../../components/Card/CardFooter.js";
+import Tasks from "../../components/Tasks/Tasks.js";
+import Danger from "../../components/Typography/Danger.js";
+import Warning from "@material-ui/icons/Warning";
+import Store from "@material-ui/icons/Store";
+
+
 // Styles
 import styles from '../../styles/components/gridStyle';
 // Assets
@@ -45,7 +58,16 @@ export default function GridProducts(props) {
 						className={gridClasses}
 					>
 
-						<CardActionArea>
+						<CardProduct
+							// color="success"
+							color={color}
+							prefix="Bs."
+							price={index.id}
+							name={index.name}
+						/>
+							
+
+						{/* <CardActionArea>
 							<Card className={cardClasses}>
 								<CardMedia
 									component="img"
@@ -61,10 +83,14 @@ export default function GridProducts(props) {
 									prefix="Bs."
 									text={index.id}
 								/>
+								<CardName 
+									color={color}
+									text={index.name}
+								/>
 								
 							</Card>
-						</CardActionArea>
-						
+						</CardActionArea> */}
+
 					</Grid>
 				);
 			}

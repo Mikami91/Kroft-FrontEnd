@@ -36,9 +36,9 @@ export default function SalesPage(props) {
 	return (
 		<Fragment>
 			<AppBarIcons
-				color="inherit"
-				selectColor="primary"
-				hoverColor="warning"
+				color="primary"
+				selectColor="secondary"
+				hoverColor="secondary"
 				data={categories}
 				value={value}
 				onChange={handleChange}

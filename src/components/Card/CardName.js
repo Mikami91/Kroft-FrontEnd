@@ -6,19 +6,19 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from '@material-ui/core/Typography';
 // @material-ui/icons
 // core components
-import styles from "../../styles/components/cardPriceStyle.js";
+import styles from "../../styles/components/cardNameStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function CardPrice(props) {
+export default function CardName(props) {
   const classes = useStyles();
-  const { prefix, text, color } = props;
-  const cardIconClasses = classNames({
-    [classes.cardPrice]: true,
+  const { text, color } = props;
+  const cardNameClasses = classNames({
+    [classes.cardName]: true,
     // [classes[color + "Color"]]: color,
   });
   return (
-    <div className={cardIconClasses}>
+    <div className={cardNameClasses}>
       {/* <Typography
         component="span"
         variant="subtitle2"
@@ -33,19 +33,18 @@ export default function CardPrice(props) {
         className={classes.cardText}
         color="initial"
       >
-        <span className={classes.cardPrefix}>{prefix + " "}</span>
-        {text}
+        {"Typography subtitle1 " + text}
       </Typography>
     </div>
   );
 }
 // PropTypes
-CardPrice.defaultProps = {
+CardName.defaultProps = {
   prefix: "",
   text: "",
   color: "primary",
 }
-CardPrice.propTypes = {
+CardName.propTypes = {
   prefix: PropTypes.string,
   text: PropTypes.string,
   color: PropTypes.oneOf([
