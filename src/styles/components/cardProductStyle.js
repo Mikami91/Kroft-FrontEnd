@@ -7,16 +7,22 @@ import {
     primaryCardHeader,
     secondaryCardHeader,
     roseCardHeader,
-    grayColor
+    grayColor,
+    lightColor,
+    darkColor
   } from "../../themes/theme.js";
   
   const cardProductStyle = {
     
     cardHeader: {
       width: "100%",
-      padding: "0px 8px 0px 8px",
       marginTop: "-0.5rem",
+      marginRight: "0.5rem",
       marginBottom: "-0.5rem",
+      marginLeft: "0.5rem",
+      [theme.breakpoints.up('lg')]: {
+        marginTop: "-1rem",
+      },
       zIndex: 10,
       float: "left",
     },
@@ -40,25 +46,27 @@ import {
     image: {
       // background: "brown",
       color: "black",
-      width: 65,
+      objectFit: "cover",
+      objectPosition: "center",
+      width: "90%",
       height: 65,
       margin: 'auto',
   		borderRadius: "3px",
       alignItems: 'center',
       [theme.breakpoints.only('sm')]: {
-        width: 90,
+        // width: 90,
         height: 90
       },
       [theme.breakpoints.only('md')]: {
-        width: 100,
+        // width: 100,
         height: 100
       },
       [theme.breakpoints.only('lg')]: {
-        width: 115,
+        // width: 115,
         height: 115
       },
       [theme.breakpoints.only('xl')]: {
-        width: 120,
+        // width: 120,
         height: 120
       }
     },

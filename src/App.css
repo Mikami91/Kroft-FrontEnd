@@ -14,8 +14,8 @@ html {
 
 body {
   background-color: black !important;
-  background-image: linear-gradient(to top, #0D1522 0%, #0b463b 100%);
-  /*background-image: url("../assets/back.jpg");*/
+  /* background-image: linear-gradient(to top, #0D1522 0%, #0b463b 100%); */
+  background-image: url("./assets/img/backgrounds/abstract-blur-bubble-clean-268819.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
