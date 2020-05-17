@@ -17,7 +17,7 @@ const useStyles = makeStyles(styles);
 
 export default function CardProduct(props) {
   const classes = useStyles();
-  const { prefix, price, quantity, name, color } = props;
+  const { prefix, price, quantity, name, onClick, color } = props;
   const cardClasses = classNames({
     [classes.products]: true,
   });
@@ -34,7 +34,7 @@ export default function CardProduct(props) {
             className={classes.image}
             image={image}
             title={name}
-            //onClick={getKeyByValue(index.id)}
+            onClick={onClick}
           />
           <div className={classes.cardFooter}>
             <div className={classes.name}>{"Typography " + name}</div>

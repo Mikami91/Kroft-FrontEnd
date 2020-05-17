@@ -1,5 +1,6 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
+import { Link, withRouter } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -127,6 +128,9 @@ export default function LoginPage(props) {
               )}
             </CardFooter>
           </Card>
+          <Link to="/sales">
+            Home
+          </Link>
           <FooterLogin whiteFont />
         </Grid>
       </Grid>

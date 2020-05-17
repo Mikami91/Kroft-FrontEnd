@@ -2,28 +2,29 @@
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Sales from "../pages/Sales";
-
+import Products from "../pages/Products";
+//Kroft-FrontEnd
 const routes = [
   {
-    path: "/Kroft-FrontEnd",
+    path: "/",
     name: "Login",
     component: Login,
   },
   {
-    path: "/Kroft-FrontEnd/dashboard",
+    path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
   },
   {
-    path: "/Kroft-FrontEnd/sales",
+    path: "/sales",
     name: "Sales",
     component: Sales,
   },
-  // {
-  //   path: "/collects",
-  //   name: "Collects",
-  //   component: Login,
-  // },
+  {
+    path: "/products",
+    name: "products",
+    component: Products,
+  },
 ];
 
 export default routes;

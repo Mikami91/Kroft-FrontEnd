@@ -1,34 +1,42 @@
 // Dependencies
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 // Routing
-import { Switch, Route, withRouter } from "react-router-dom";
+import {
+  MemoryRouter as Router,
+  Switch,
+  Route,
+  withRouter,
+} from "react-router-dom";
 // Routes
-import routes from './routes/routes';
+import routes from "./routes/routes";
 // Assets
-import logo from './logo.svg';
+import logo from "./logo.svg";
 // Styles
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
     <Fragment>
-      <Switch>
-        {routes.map((prop, key) => {
-          if (prop.path !== null ) {
-            return (
-              <Route
-                exact
-                path={prop.path}
-                component={prop.component}
-                key={key}
-              />
-            );
-          }
-          return <Route component={"NoFound"} />;
-        })}
-      </Switch>
+      <Router>
+        <Switch>
+          {routes.map((prop, key) => {
+            if (prop.path !== null) {
+              return (
+                <Route
+                  exact
+                  path={prop.path}
+                  component={() => <prop.component />}
+                  // component={prop.component}
+                  key={key}
+                />
+              );
+            }
+            return <Route component={"NoFound"} />;
+          })}
+        </Switch>
+      </Router>
     </Fragment>
   );
 }
 
-export default withRouter(App); 
+export default App;

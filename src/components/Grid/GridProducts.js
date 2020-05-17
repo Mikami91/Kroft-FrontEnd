@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 
 export default function GridProducts(props) {
   const classes = useStyles();
-  const { filter, data, color } = props;
+  const { filter, data, onClick, color } = props;
   return data.map((index, key) => {
     if (index.id_environment === filter) {
       const gridClasses = classNames({
@@ -40,6 +40,7 @@ export default function GridProducts(props) {
             price={index.id}
             name={index.name}
             quantity={index.id}
+            onClick={onClick}
           />
         </Grid>
       );
