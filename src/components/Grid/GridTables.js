@@ -47,14 +47,13 @@ function GridTables(props) {
         >
           {/* <Link to={{ pathname: "/products", state: { message: index.id, value: value } }} > */}
             <CardActionArea>
-              <Card className={cardClasses}>
+              <Card className={cardClasses} onClick={onClick}>
                 <CardMedia
                   component="img"
                   // height="140"
                   className={classes.image}
                   image={image}
                   title={index.name}
-                  onClick={onClick}
                 />
                 <CardNumber color={color} className={classes.cardNumber}>
                   <Typography
