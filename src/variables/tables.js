@@ -7,25 +7,25 @@ export const tables = [
 	},
 	{
 		id: 2,
-		name: 'Mesa 1',
+		name: 'Mesa 2',
 		state: 1,
 		id_environment: 1
 	},
 	{
 		id: 3,
-		name: 'Mesa 1',
+		name: 'Mesa 3',
 		state: 2,
 		id_environment: 1
 	},
 	{
 		id: 4,
-		name: 'Mesa 1',
+		name: 'Mesa 4',
 		state: 0,
 		id_environment: 1
 	},
 	{
 		id: 5,
-		name: 'Mesa 1',
+		name: 'Mesa 5',
 		state: 1,
 		id_environment: 1
 	},
@@ -37,25 +37,25 @@ export const tables = [
 	},
 	{
 		id: 7,
-		name: 'Mesa 1',
+		name: 'Mesa 2',
 		state: 2,
 		id_environment: 2
 	},
 	{
 		id: 8,
-		name: 'Mesa 1',
+		name: 'Mesa 3',
 		state: 0,
 		id_environment: 2
 	},
 	{
 		id: 9,
-		name: 'Mesa 1',
+		name: 'Mesa 4',
 		state: 1,
 		id_environment: 2
 	},
 	{
 		id: 10,
-		name: 'Mesa 1',
+		name: 'Mesa 5',
 		state: 1,
 		id_environment: 2
 	},
@@ -67,25 +67,25 @@ export const tables = [
 	},
 	{
 		id: 12,
-		name: 'Mesa 1',
+		name: 'Mesa 2',
 		state: 1,
 		id_environment: 3
 	},
 	{
 		id: 13,
-		name: 'Mesa 1',
+		name: 'Mesa 3',
 		state: 0,
 		id_environment: 3
 	},
 	{
 		id: 14,
-		name: 'Mesa 1',
+		name: 'Mesa 4',
 		state: 0,
 		id_environment: 3
 	},
 	{
 		id: 15,
-		name: 'Mesa 1',
+		name: 'Mesa 5',
 		state: 1,
 		id_environment: 3
 	},
@@ -97,25 +97,25 @@ export const tables = [
 	},
 	{
 		id: 17,
-		name: 'Mesa 1',
+		name: 'Mesa 2',
 		state: 2,
 		id_environment: 4
 	},
 	{
 		id: 18,
-		name: 'Mesa 1',
+		name: 'Mesa 3',
 		state: 2,
 		id_environment: 4
 	},
 	{
 		id: 19,
-		name: 'Mesa 1',
+		name: 'Mesa 4',
 		state: 0,
 		id_environment: 4
 	},
 	{
 		id: 20,
-		name: 'Mesa 1',
+		name: 'Mesa 5',
 		state: 1,
 		id_environment: 4
 	},
@@ -127,139 +127,139 @@ export const tables = [
 	},
 	{
 		id: 22,
-		name: 'Mesa 1',
+		name: 'Mesa 2',
 		state: 1,
 		id_environment: 5
 	},
 	{
 		id: 23,
-		name: 'Mesa 1',
+		name: 'Mesa 3',
 		state: 0,
 		id_environment: 5
 	},
 	{
 		id: 24,
-		name: 'Mesa 1',
+		name: 'Mesa 4',
 		state: 2,
 		id_environment: 5
 	},
 	{
 		id: 25,
-		name: 'Mesa 1',
+		name: 'Mesa 5',
 		state: 0,
 		id_environment: 5
 	},
 	{
 		id: 26,
-		name: 'Mesa 1',
+		name: 'Mesa 6',
 		state: 0,
 		id_environment: 5
 	},
 	{
 		id: 27,
-		name: 'Mesa 1',
+		name: 'Mesa 7',
 		state: 1,
 		id_environment: 5
 	},
 	{
 		id: 28,
-		name: 'Mesa 1',
+		name: 'Mesa 8',
 		state: 0,
 		id_environment: 5
 	},
 	{
 		id: 29,
-		name: 'Mesa 1',
+		name: 'Mesa 9',
 		state: 2,
 		id_environment: 5
 	},
 	{
 		id: 30,
-		name: 'Mesa 1',
+		name: 'Mesa 10',
 		state: 2,
 		id_environment: 5
 	},
 	{
 		id: 31,
-		name: 'Mesa 1',
+		name: 'Mesa 11',
 		state: 2,
 		id_environment: 5
 	},
 	{
 		id: 32,
-		name: 'Mesa 1',
+		name: 'Mesa 12',
 		state: 2,
 		id_environment: 5
 	},
 	{
 		id: 33,
-		name: 'Mesa 1',
+		name: 'Mesa 13',
 		state: 2,
 		id_environment: 5
 	},
 	{
 		id: 34,
-		name: 'Mesa 1',
+		name: 'Mesa 14',
 		state: 2,
 		id_environment: 5
 	},
 	{
 		id: 35,
-		name: 'Mesa 1',
+		name: 'Mesa 15',
 		state: 2,
 		id_environment: 5
 	},
 	{
 		id: 36,
-		name: 'Mesa 1',
+		name: 'Mesa 16',
 		state: 1,
 		id_environment: 5
 	},
 	{
 		id: 37,
-		name: 'Mesa 1',
+		name: 'Mesa 17',
 		state: 3,
 		id_environment: 5
 	},
 	{
 		id: 38,
-		name: 'Mesa 1',
+		name: 'Mesa 18',
 		state: 0,
 		id_environment: 5
 	},
 	{
 		id: 39,
-		name: 'Mesa 1',
+		name: 'Mesa 19',
 		state: 0,
 		id_environment: 5
 	},
 	{
 		id: 40,
-		name: 'Mesa 1',
+		name: 'Mesa 20',
 		state: 1,
 		id_environment: 5
 	},
 	{
 		id: 41,
-		name: 'Mesa 1',
+		name: 'Mesa 21',
 		state: 0,
 		id_environment: 5
 	},
 	{
 		id: 42,
-		name: 'Mesa 1',
+		name: 'Mesa 22',
 		state: 1,
 		id_environment: 5
 	},
 	{
 		id: 43,
-		name: 'Mesa 1',
+		name: 'Mesa 23',
 		state: 1,
 		id_environment: 5
 	},
 	{
 		id: 44,
-		name: 'Mesa 1',
+		name: 'Mesa 24',
 		state: 2,
 		id_environment: 5
 	},

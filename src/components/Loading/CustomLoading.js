@@ -13,12 +13,13 @@ import styles from "../../styles/components/customLoadingStyle.js";
 const useStyles = makeStyles(styles);
 
 const CustomLoadin = (props) => {
-    const { color, linear, open, inside, text } = props;
+    const { color, linear, open, inside, borderless, text } = props;
     // Styles
     const classes = useStyles();
     const BackdropClasses = classNames({
         [classes.backdrop]: true,
         [classes.inside]: inside,
+        [classes.borderless]: borderless,
     });
     return (
         <Backdrop
@@ -43,6 +44,7 @@ CustomLoadin.defaultProps = {
     color: "primary",
     open: false,
     inside: false,
+    borderless: false,
     children: ""
 };
 
@@ -54,6 +56,7 @@ CustomLoadin.propTypes = {
     ]),
     open: PropTypes.bool,
     inside: PropTypes.bool,
+    borderless: PropTypes.bool,
     children: PropTypes.string
 };
 

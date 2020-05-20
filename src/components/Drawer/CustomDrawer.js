@@ -3,13 +3,11 @@ import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
+import Button from '@material-ui/core/Button';
+// Styles
+import styles from "../../styles/components/drawerStyle.js";
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-    backgroundImage: "linear-gradient(to bottom, #0D1522 0%, #0b463b 100%);",
-  },
-});
+const useStyles = makeStyles(styles);
 
 export default function CustomDrawer(props) {
   const { direction, open, close, childrem } = props;
@@ -19,7 +17,7 @@ export default function CustomDrawer(props) {
     <Drawer
       open={open}
       onClose={close}
-      className={classes.list}
+      className={classes.drawer}
       variant="temporary"
       anchor={direction}
       ModalProps={{

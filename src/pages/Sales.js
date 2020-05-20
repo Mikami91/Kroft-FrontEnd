@@ -12,15 +12,20 @@ import PersonIcon from "@material-ui/icons/Person";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
+// Pages
+import Products from "./Products.js";
+// Layouts
+import EmployeeAdd from "../layouts/Forms/EmployeeAdd.js";
+import ChangeTable from "../layouts/Forms/ChangeTable.js";
+import DrawerList from "../layouts/DrawerList/DrawerList.js";
 // core components
 import AppBarTabs from "../components/AppBar/AppBarTabs.js";
 import TabPanel from "../components/Panel/TabPanel";
 import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomDrawer from "../components/Drawer/CustomDrawer.js";
-
-// Pages
-import Products from "./Products.js";
+import CustomModal from "../components/Modal/CustomModal.js";
+import CustomBotton from "../components/CustomButtons/Button.js";
 // Variables
 import { environments } from "../variables/environments";
 import { tables } from "../variables/tables";
@@ -30,7 +35,7 @@ import styles from "../styles/pages/SalesStyle.js";
 const useStyles = makeStyles(styles);
 
 function SalesPage(props) {
-  console.log(props.location);
+  // console.log(props.location);
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     // console.log(newValue);
@@ -152,7 +157,7 @@ function SalesPage(props) {
             edge: "end",
             size: "large",
             disabled: false,
-            onClick: handleOpenProfile
+            onClick: handleOpenProfile,
           },
         ]}
         leftButtons={[
@@ -164,7 +169,7 @@ function SalesPage(props) {
             edge: "start",
             size: "large",
             disabled: false,
-            onClick: handleOpenChangeTables
+            onClick: handleOpenChangeTables,
           },
           {
             type: "icon",
@@ -189,33 +194,43 @@ function SalesPage(props) {
         <Products handleClose={handleCloseProducts} />
       </Modal>
 
-	  <Modal
-        visible={openProfile}
-        width="50%"
-        height="50%"
-        effect="fadeInUp"
-        onClickAway={handleCloseProfile}
-      >
-        <p>Perfil de usuario</p>
-      </Modal>
+      <CustomModal
+        open={openProfile}
+        close={handleCloseProfile}
+        title="Perfil de usuario"
+        content={<EmployeeAdd />}
+        maxWidth="sm"
+        fullWidth
+      />
 
-	  <Modal
-        visible={openChangeTables}
-        width="50%"
-        height="50%"
-        effect="fadeInUp"
-        onClickAway={handleCloseChangeTables}
-      >
-        <p>Cambio de mesas</p>
-      </Modal>
+      <CustomModal
+        open={openChangeTables}
+        close={handleCloseChangeTables}
+        title="Cambio de mesas"
+        content={<ChangeTable environments={environments} tables={tables} />}
+        footer={
+          <CustomBotton
+            form="table-add"
+            size="sm"
+            type="submit"
+            // disabled={state.isUpload}
+          >
+            Cambiar
+          </CustomBotton>
+        }
+        maxWidth="sm"
+        fullWidth
+      />
 
-      <CustomDrawer
-        direction="left"
+      <DrawerList
+        direction="right"
         open={openDrawer}
         close={handleCloseDrawer}
-      >
-        
-      </CustomDrawer>
+        categoryList={environments} 
+        itemList={tables}
+        filter="id_environment"
+      />
+
     </Fragment>
   );
 }

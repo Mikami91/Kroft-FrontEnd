@@ -30,7 +30,7 @@ const IconInput = (props) => {
             name={name}
             onChange={onChange}
             value={value}
-            InputProps={icon !== null ? {
+            InputProps={Object.keys(icon).length >= 1 ? {
                 [iconPosition + "Adornment"]: (
                     <InputAdornment position={iconPosition} style={{ color: theme.palette.type === "light" ? "#0000008a" : "#fff" }}>
                         {icon}
@@ -43,7 +43,7 @@ const IconInput = (props) => {
 // PropTypes
 IconInput.defaultProps = {
     type: "text",
-    icon: [],
+    icon: {},
     onChange: null,
     value: "",
     required: false,
@@ -67,7 +67,7 @@ IconInput.propTypes = {
         "email",
         "date"
     ]),
-    icon: PropTypes.array,
+    icon: PropTypes.object,
     onChange: PropTypes.func,
     value: PropTypes.oneOfType([
         PropTypes.string,

@@ -17,6 +17,9 @@ import { theme } from "../../themes/theme.js";
         width: "100%",
         height: "auto",
         borderRadius: 6
+    },
+    borderless: {
+      borderRadius: 0
     }
   };
   

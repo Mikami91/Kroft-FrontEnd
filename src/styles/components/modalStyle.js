@@ -32,8 +32,9 @@ const modalStyle = {
         float: "right"
     },
     modalClose: {
-        width: "16px",
-        height: "16px"
+        width: "24px",
+        height: "24px",
+        // marginTop: 5,
     },
     modalBody: {
         paddingTop: "24px",
@@ -45,7 +46,8 @@ const modalStyle = {
     modalFooter: {
         padding: "15px",
         textAlign: "right",
-        paddingTop: "0",
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
         margin: "0"
     },
     modalFooterCenter: {

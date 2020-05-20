@@ -6,8 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Slide from "@material-ui/core/Slide";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import IconButton from "@material-ui/core/IconButton";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
+// @material-ui/icons
+import Close from "@material-ui/icons/Close";
 // Styles
 import styles from "../../styles/components/modalStyle.js";
 
@@ -24,6 +27,7 @@ export default function CustomModal(props) {
   const {
     open,
     close,
+    closeIcon,
     scroll,
     fullWidth,
     maxWidth,
@@ -33,10 +37,12 @@ export default function CustomModal(props) {
   } = props;
   return (
     <Dialog
-      classes={{
-        // root: classes.center,
-        // paper: classes.modal,
-      }}
+      classes={
+        {
+          // root: classes.center,
+          // paper: classes.modal,
+        }
+      }
       open={open}
       scroll={scroll}
       maxWidth={maxWidth}
@@ -45,14 +51,21 @@ export default function CustomModal(props) {
       keepMounted
       onClose={close}
     >
-
-{title}
-{content}
-{footer}
-      {/* <DialogTitle>{title}</DialogTitle>
+      <DialogTitle className={classes.modalHeader}>
+        {closeIcon === true ? <IconButton
+          className={classes.modalCloseButton}
+          key="close"
+          aria-label="Close"
+          color="inherit"
+          onClick={close}
+        >
+          <Close className={classes.modalClose} />
+        </IconButton> : null }
+        {/* <h4 className={classes.modalTitle}>{title}</h4> */}
+        {title}
+      </DialogTitle>
       <DialogContent className={classes.modalBody}>{content}</DialogContent>
-      <DialogActions className={classes.modalFooter}>{footer}</DialogActions> */}
-    
+      <DialogActions className={classes.modalFooter}>{footer}</DialogActions>
     </Dialog>
   );
 }
@@ -61,21 +74,23 @@ export default function CustomModal(props) {
 CustomModal.defaultProps = {
   open: false,
   close: null,
+  closeIcon: true,
   scroll: "body",
   fullWidth: false,
   maxWidth: "md",
   title: "Titulo...",
-  content: "Contenido...",
-  footer: "Footer...",
+  content: null,
+  footer: null,
 };
 
 CustomModal.propTypes = {
   open: PropTypes.bool,
   close: PropTypes.func,
+  closeIcon: PropTypes.bool,
   scroll: PropTypes.oneOf(["body", "paper"]),
   fullWidth: PropTypes.bool,
   maxWidth: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs", false]),
-  title: PropTypes.object,
+  title: PropTypes.string,
   content: PropTypes.object,
   footer: PropTypes.object,
 };

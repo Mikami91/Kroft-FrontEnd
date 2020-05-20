@@ -74,10 +74,10 @@ const SelectInput = (props) => {
                             </ListSubheader>,
 
                             itemList.data.map(index2 => {
-                                if (index2[itemList.key] === index[categoryList.key]) {
+                                if (index2[itemList.filter] === index[categoryList.key]) {
                                     return (
                                         <MenuItem 
-                                            key={index2[itemList.key]} 
+                                            key={index2[itemList.key + "item"]} 
                                             value={index2[itemList.key]} 
                                             className={dropdownItem}
                                         >
@@ -108,7 +108,8 @@ SelectInput.defaultProps = {
     itemList: {
         data: [],
         key: "id",
-        value: "name"
+        value: "name",
+        filter: "",
     },
     value: "",
     required: false,

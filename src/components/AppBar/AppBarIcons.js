@@ -48,6 +48,7 @@ const AppBarIcons = (props) => {
 				textColor={selectColor}
 				variant="scrollable"
 				scrollButtons="auto"
+				indicator="false"
 				TabIndicatorProps={{
 					// indicator: false,
 					style: {
