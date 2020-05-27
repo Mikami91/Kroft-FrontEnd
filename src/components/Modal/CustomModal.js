@@ -64,7 +64,7 @@ export default function CustomModal(props) {
         {/* <h4 className={classes.modalTitle}>{title}</h4> */}
         {title}
       </DialogTitle>
-      <DialogContent className={classes.modalBody}>{content}</DialogContent>
+      <DialogContent >{content}</DialogContent>
       <DialogActions className={classes.modalFooter}>{footer}</DialogActions>
     </Dialog>
   );

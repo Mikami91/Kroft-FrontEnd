@@ -12,8 +12,8 @@ import PersonIcon from "@material-ui/icons/Person";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
-// Pages
-import Products from "./Products.js";
+// Views
+import Products from "../views/Sales/Products.js";
 // Layouts
 import EmployeeAdd from "../layouts/Forms/EmployeeAdd.js";
 import ChangeTable from "../layouts/Forms/ChangeTable.js";
@@ -189,15 +189,24 @@ function SalesPage(props) {
         ]}
       />
 
-      <Modal
+      {/* <Modal
         visible={openProducts}
         width="100%"
         height="100%"
         effect="fadeInUp"
         onClickAway={handleCloseProducts}
+        style={{ backgroundColor: "red" }}
       >
         <Products handleClose={handleCloseProducts} />
-      </Modal>
+      </Modal> */}
+
+      <Products
+        value={value}
+        open={openProducts}
+        close={handleCloseProducts}
+        maxWidth="xl"
+        fullWidth
+      />
 
       <CustomModal
         open={openProfile}
