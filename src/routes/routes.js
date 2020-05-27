@@ -5,23 +5,44 @@ import Sales from "../pages/Sales";
 import Products from "../pages/Products";
 //Kroft-FrontEnd
 const routes = [
+  // {
+  //   path: "/",
+  //   name: "Login",
+  //   component: Login,
+  // },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   component: Dashboard,
+  // },
+  // {
+  //   path: "/sales",
+  //   name: "Sales",
+  //   component: Sales,
+  // },
+  // {
+  //   path: "/products",
+  //   name: "products",
+  //   component: Products,
+  // },
+
   {
-    path: "/",
+    path: "/Kroft-FrontEnd/",
     name: "Login",
     component: Login,
   },
   {
-    path: "/dashboard",
+    path: "/Kroft-FrontEnd/dashboard",
     name: "Dashboard",
     component: Dashboard,
   },
   {
-    path: "/sales",
+    path: "/Kroft-FrontEnd/sales",
     name: "Sales",
     component: Sales,
   },
   {
-    path: "/products",
+    path: "/Kroft-FrontEnd/products",
     name: "products",
     component: Products,
   },

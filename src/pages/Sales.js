@@ -159,6 +159,11 @@ function SalesPage(props) {
             disabled: false,
             onClick: handleOpenProfile,
           },
+          {
+            type: "text",
+            text: "Typography",
+            color: "default",
+          },
         ]}
         leftButtons={[
           {

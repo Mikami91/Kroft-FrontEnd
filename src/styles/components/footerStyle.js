@@ -37,6 +37,18 @@ const footerStyle = {
 			height: '55px'
 		}
   },
+  contentRight: {
+    marginRight: "auto",
+    display: "inline-flex",
+    alignItems: "center",
+    padding: "0px 4px 0px 4px",
+  },
+  contentLeft: {
+    marginLetf: "auto",
+    display: "inline-flex",
+    alignItems: "center",
+    padding: "0px 4px 0px 4px",
+  },
   leftFabFloat: {
     right: "16px",
     margin: '0',
@@ -102,6 +114,37 @@ const footerStyle = {
 		[theme.breakpoints.only('xl')]: {
 			width: '2.6rem',
 			height: '2.6rem'
+		}
+  },
+  text: {
+    color: "#fff",
+    margin: "0px 10px 0px 10px",
+		overflow: "hiden",
+		whiteSpace: "nowrap",
+		textOverflow: "ellipsis",
+		fontSize: "smaller",
+		fontWeight: "500",
+    lineHeight: "1.4rem",
+    maxWidth: "0rem",
+		[theme.breakpoints.only('sm')]: {
+			fontSize: "small",
+      lineHeight: "1.5rem",
+      maxWidth: "5rem",
+		},
+		[theme.breakpoints.only('md')]: {
+			fontSize: "medium",
+      lineHeight: "1.6rem",
+      maxWidth: "6rem",
+		},
+		[theme.breakpoints.only('lg')]: {
+			fontSize: "medium",
+      lineHeight: "1.9rem",
+      maxWidth: "9rem",
+		},
+		[theme.breakpoints.only('xl')]: {
+			fontSize: "larger",
+      lineHeight: "2rem",
+      maxWidth: "10rem",
 		}
 	},
 

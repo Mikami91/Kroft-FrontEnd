@@ -7,6 +7,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Fab from "@material-ui/core/Fab";
 import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
 import { makeStyles } from "@material-ui/core/styles";
 // Styles
@@ -14,8 +15,73 @@ import styles from "../../styles/components/footerStyle";
 
 const useStyles = makeStyles(styles);
 
-// Component
-const FooterAppBar = (props) => {
+// Childs Components
+function IconChlid(props) {
+  const { index } = props;
+  const classes = useStyles();
+  if (index.disabled) {
+    return (
+      <IconButton edge={index.edge} disabled>
+        <index.icon className={classes.icons} />
+      </IconButton>
+    );
+  } else {
+    return (
+      <Tooltip placement="top" title={index.text}>
+        <IconButton
+          edge={index.edge}
+          color={index.color}
+          onClick={index.onClick}
+        >
+          <index.icon className={classes.icons} />
+        </IconButton>
+      </Tooltip>
+    );
+  }
+}
+function FabChild(props) {
+  const { index, align } = props;
+  const classes = useStyles();
+  if (index.disabled) {
+    return (
+      <Fab
+        disabled
+        color={index.color}
+        // size="small"
+        aria-label={index.label}
+        className={classes.fabButton + " " + classes[align]}
+      >
+        <index.icon className={classes.icons} />
+      </Fab>
+    );
+  } else {
+    return (
+      <Tooltip placement="top" title={index.text}>
+        <Fab
+          color={index.color}
+          // size="small"
+          aria-label={index.label}
+          onClick={index.onClick}
+          className={classes.fabButton + " " + classes[align]}
+        >
+          <index.icon className={classes.icons} />
+        </Fab>
+      </Tooltip>
+    );
+  }
+}
+function TextChlid(props) {
+  const { index } = props;
+  const classes = useStyles();
+  return (
+    <Typography className={classes.text} noWrap>
+      {index.text}
+    </Typography>
+  );
+}
+
+// Parent Component
+function FooterAppBar(props) {
   // Props
   const {
     fabButton,
@@ -41,73 +107,25 @@ const FooterAppBar = (props) => {
       variant="elevation"
     >
       <Toolbar variant={variant} className={classes.toolbar}>
-        <div style={{ marginRight: "auto" }}>
+        <div className={classes.contentRight}>
           {rightButtons.map((index, key) => {
             // Icon type
-            if (index.disabled === false && index.type === "icon") {
-              return (
-                  <Tooltip key={key} placement="top" title={index.text}>
-                    <IconButton
-                      edge={index.edge}
-                      color={index.color}
-                      onClick={index.onClick}
-                    >
-                      {typeof index.icon !== "undefined" ? (
-                        <index.icon className={classes.icons} />
-                      ) : null}
-                    </IconButton>
-                  </Tooltip>
-              );
-            }
-            if (index.disabled === true && index.type === "icon") {
-              return (
-                <IconButton key={key} edge={index.edge} disabled>
-                  {typeof index.icon !== "undefined" ? (
-                    <index.icon className={classes.icons} />
-                  ) : null}
-                </IconButton>
-              );
+            if (index.type === "icon" && typeof index.icon !== "undefined") {
+              return <IconChlid key={key} index={index} />;
             }
             // Fab type
-            if (index.disabled === false && index.type === "fab") {
-              return (
-                <Tooltip key={key} placement="top" title={index.text}>
-                  <Fab
-                    key={key}
-                    disabled={index.disabled}
-                    color={index.color}
-                    // size="small"
-                    aria-label={index.label}
-                    onClick={index.onClick}
-                    className={classes.fabButton + " " + classes.rightFab}
-                  >
-                    {typeof index.icon !== "undefined" ? (
-                      <index.icon className={classes.icons} />
-                    ) : null}
-                  </Fab>
-                </Tooltip>
-              );
+            if (index.type === "fab" && typeof index.icon !== "undefined") {
+              return <FabChild key={key} index={index} align="rightFab" />;
             }
-            if (index.disabled === true && index.type === "fab") {
-              return (
-                <Fab
-                  key={key}
-                  disabled={index.disabled}
-                  color={index.color}
-                  // size="small"
-                  aria-label={index.label}
-                  className={classes.fabButton + " " + classes.rightFab}
-                >
-                  {typeof index.icon !== "undefined" ? (
-                    <index.icon className={classes.icons} />
-                  ) : null}
-                </Fab>
-              );
+            // Text type
+            if (index.type === "text") {
+              return <TextChlid key={key} index={index} />;
             }
           })}
         </div>
 
-        {Object.keys(fabButton).length >= 1 ? (
+        {Object.keys(fabButton).length >= 1 &&
+        typeof fabButton.icon !== "undefined" ? (
           <Fab
             disabled={fabButton.disabled}
             color={fabButton.color}
@@ -120,74 +138,23 @@ const FooterAppBar = (props) => {
               classes[fabButton.align + "FabFloat"]
             }
           >
-            {typeof fabButton.icon !== "undefined" ? (
-              <fabButton.icon className={classes.icons} />
-            ) : null}
+            <fabButton.icon className={classes.icons} />
           </Fab>
         ) : null}
 
-        <div style={{ marginLeft: "auto" }}>
+        <div className={classes.contentLeft}>
           {leftButtons.map((index, key) => {
             // Icon type
-            if (index.disabled === false && index.type === "icon") {
-              return (
-                <Tooltip key={key} placement="top" title={index.text}>
-                  <IconButton
-                    edge={index.edge}
-                    color={index.color}
-                    onClick={index.onClick}
-                  >
-                    {typeof index.icon !== "undefined" ? (
-                      <index.icon className={classes.icons} />
-                    ) : null}
-                  </IconButton>
-                </Tooltip>
-              );
-            }
-            if (index.disabled === true && index.type === "icon") {
-              return (
-                <IconButton key={key} edge={index.edge} disabled>
-                  {typeof index.icon !== "undefined" ? (
-                    <index.icon className={classes.icons} />
-                  ) : null}
-                </IconButton>
-              );
+            if (index.type === "icon" && typeof index.icon !== "undefined") {
+              return <IconChlid key={key} index={index} />;
             }
             // Fab type
-            if (index.disabled === false && index.type === "fab") {
-              return (
-                <Tooltip key={key} placement="top" title={index.text}>
-                  <Fab
-                    key={key}
-                    disabled={index.disabled}
-                    color={index.color}
-                    // size="small"
-                    aria-label={index.label}
-                    onClick={index.onClick}
-                    className={classes.fabButton + " " + classes.leftFab}
-                  >
-                    {typeof index.icon !== "undefined" ? (
-                      <index.icon className={classes.icons} />
-                    ) : null}
-                  </Fab>
-                </Tooltip>
-              );
+            if (index.type === "fab" && typeof index.icon !== "undefined") {
+              return <FabChild key={key} index={index} align="leftFab" />;
             }
-            if (index.disabled === true && index.type === "fab") {
-              return (
-                <Fab
-                  key={key}
-                  disabled={index.disabled}
-                  color={index.color}
-                  // size="small"
-                  aria-label={index.label}
-                  className={classes.fabButton + " " + classes.leftFab}
-                >
-                  {typeof index.icon !== "undefined" ? (
-                    <index.icon className={classes.icons} />
-                  ) : null}
-                </Fab>
-              );
+            // Text type
+            if (index.type === "text") {
+              return <TextChlid key={key} index={index} />;
             }
           })}
         </div>
@@ -195,7 +162,6 @@ const FooterAppBar = (props) => {
     </AppBar>
   );
 };
-
 // PropTypes
 FooterAppBar.defaultProps = {
   // AppBar
@@ -244,7 +210,7 @@ FooterAppBar.propTypes = {
   }),
   rightButtons: PropTypes.arrayOf(
     PropTypes.shape({
-      type: PropTypes.oneOf(["icon", "fab"]),
+      type: PropTypes.oneOf(["icon", "fab", "text"]),
       text: PropTypes.string,
       color: PropTypes.oneOf([
         "default",
@@ -262,7 +228,7 @@ FooterAppBar.propTypes = {
   ),
   leftButtons: PropTypes.arrayOf(
     PropTypes.shape({
-      type: PropTypes.oneOf(["icon", "fab"]),
+      type: PropTypes.oneOf(["icon", "fab", "text"]),
       text: PropTypes.string,
       color: PropTypes.oneOf([
         "default",

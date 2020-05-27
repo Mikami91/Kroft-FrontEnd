@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 // @material-ui/core components
@@ -15,38 +15,42 @@ const useStyles = makeStyles(styles);
 export default function GridProducts(props) {
   const classes = useStyles();
   const { filter, data, onClick, color } = props;
-  return data.map((index, key) => {
-    if (index.id_environment === filter) {
-      const gridClasses = classNames({
-        [classes.products]: true,
-      });
+  // Using useMemo hook
+  return useMemo(() => {
+    // Render
+    return data.map((index, key) => {
+      if (index.id_environment === filter) {
+        const gridClasses = classNames({
+          [classes.products]: true,
+        });
 
-      return (
-        <Grid
-          key={key}
-          item
-          xs={4}
-          sm={3}
-          md={2}
-          lg={2}
-          xl={2}
-          elevation={0}
-          className={gridClasses}
-        >
-          <CardProduct
-            // color="success"
-            color={color}
-            prefix="Bs."
-            price={index.id}
-            name={index.name}
-            quantity={index.id}
-            onClick={onClick}
-          />
-        </Grid>
-      );
-    }
-    return null;
-  });
+        return (
+          <Grid
+            key={key}
+            item
+            xs={4}
+            sm={3}
+            md={2}
+            lg={2}
+            xl={2}
+            elevation={0}
+            className={gridClasses}
+          >
+            <CardProduct
+              // color="success"
+              color={color}
+              prefix="Bs."
+              price={index.id}
+              name={index.name}
+              quantity={index.id}
+              onClick={onClick}
+            />
+          </Grid>
+        );
+      }
+      return null;
+    });
+  }, [data]);
 }
 // Proptypes
 GridProducts.defaultProps = {

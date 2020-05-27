@@ -128,7 +128,7 @@ export default function LoginPage(props) {
               )}
             </CardFooter>
           </Card>
-          <Link to="/sales">
+          <Link to="/Kroft-FrontEnd/sales">
             Home
           </Link>
           <FooterLogin whiteFont />

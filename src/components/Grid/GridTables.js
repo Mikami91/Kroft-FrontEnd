@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useMemo } from "react";
 // import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
@@ -22,30 +22,33 @@ const useStyles = makeStyles(styles);
 function GridTables(props) {
   const classes = useStyles();
   const { value, filter, data, onClick, color } = props;
-  return data.map((index, key) => {
-    if (index.id_environment === filter) {
-      const gridClasses = classNames({
-        [classes.tables]: true,
-      });
-      const cardClasses = classNames({
-        [classes[
-          index.state === 0 ? "green" : index.state === 1 ? "red" : "yellow"
-        ]]: true,
-      });
+  // Using useMemo hook
+  return useMemo(() => {
+    // Render
+    return data.map((index, key) => {
+      if (index.id_environment === filter) {
+        const gridClasses = classNames({
+          [classes.tables]: true,
+        });
+        const cardClasses = classNames({
+          [classes[
+            index.state === 0 ? "green" : index.state === 1 ? "red" : "yellow"
+          ]]: true,
+        });
 
-      return (
-        <Grid
-          key={key}
-          item
-          xs={4}
-          sm={3}
-          md={2}
-          lg={2}
-          xl={2}
-          elevation={0}
-          className={gridClasses}
-        >
-          {/* <Link to={{ pathname: "/products", state: { message: index.id, value: value } }} > */}
+        return (
+          <Grid
+            key={key}
+            item
+            xs={4}
+            sm={3}
+            md={2}
+            lg={2}
+            xl={2}
+            elevation={0}
+            className={gridClasses}
+          >
+            {/* <Link to={{ pathname: "/products", state: { message: index.id, value: value } }} > */}
             <CardActionArea>
               <Card className={cardClasses} onClick={onClick}>
                 <CardMedia
@@ -67,13 +70,14 @@ function GridTables(props) {
                 </CardNumber>
               </Card>
             </CardActionArea>
-          {/* </Link> */}
-        </Grid>
-      );
-    }
-    return null;
-  });
-};
+            {/* </Link> */}
+          </Grid>
+        );
+      }
+      return null;
+    });
+  }, [data]);
+}
 // Proptypes
 GridTables.defaultProps = {
   filter: "",

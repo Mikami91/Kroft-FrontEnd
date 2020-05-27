@@ -17,7 +17,7 @@ import "./App.css";
 function App() {
   return (
     <Fragment>
-      <Router>
+      {/* <Router> */}
         <Switch>
           {routes.map((prop, key) => {
             if (prop.path !== null) {
@@ -34,7 +34,7 @@ function App() {
             return <Route component={"NoFound"} />;
           })}
         </Switch>
-      </Router>
+      {/* </Router> */}
     </Fragment>
   );
 }
