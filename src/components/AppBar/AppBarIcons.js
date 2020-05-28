@@ -36,75 +36,75 @@ const AppBarIcons = (props) => {
     [classes.appBar]: true,
     [classes.dashAppBar]: drawer,
   });
-    // Render
-    return (
-      <AppBar
-        position={position}
-        color={color}
-        className={appBarClasses}
-        variant="elevation"
+  // Render
+  return (
+    <AppBar
+      position={position}
+      color={color}
+      className={appBarClasses}
+      variant="elevation"
+    >
+      <Tabs
+        value={value}
+        className={classes.gridIcons}
+        // onChange={handleChange}
+        indicatorColor={selectColor}
+        textColor={selectColor}
+        variant="scrollable"
+        scrollButtons="auto"
+        indicator="false"
+        TabIndicatorProps={{
+          // indicator: false,
+          style: {
+            paddingBottom: -18,
+            display: "none",
+          },
+        }}
       >
-        <Tabs
-          value={value}
-          className={classes.gridIcons}
-          // onChange={handleChange}
-          indicatorColor={selectColor}
-          textColor={selectColor}
-          variant="scrollable"
-          scrollButtons="auto"
-          indicator="false"
-          TabIndicatorProps={{
-            // indicator: false,
-            style: {
-              paddingBottom: -18,
-              display: "none",
-            },
-          }}
-        >
-          {data.map((index, key) => {
-            // Using useMemo hook
-            return useMemo(() => {
-              const imageFabClasses = classNames({
-                [classes.fabButton]: true,
-                [classes[selectColor + "SelectFabButton"]]: key === value,
-                [classes[hoverColor + "HoverFabButton"]]: hoverColor,
-			  });
-              return (
-                <Grid
+        {data.map((index, key) => {
+          // Using useMemo hook
+          return useMemo(() => {
+            const imageFabClasses = classNames({
+              [classes.fabButton]: true,
+              [classes[selectColor + "SelectFabButton"]]: key === value,
+              [classes[hoverColor + "HoverFabButton"]]: hoverColor,
+            });
+            return (
+              <Grid
+                key={key}
+                item
+                xs={2}
+                sm={1}
+                md={1}
+                lg={1}
+                xl={1}
+                elevation={0}
+                className={classes.gridIcons}
+              >
+                <Fab
                   key={key}
-                  item
-                  xs={2}
-                  sm={1}
-                  md={1}
-                  lg={1}
-                  xl={1}
-                  elevation={0}
-                  className={classes.gridIcons}
+                  disabled={index.disabled}
+                  value={value}
+                  onClick={() => onChange(key)}
+                  color={color}
+                  // size="small"
+                  aria-label={index.label}
+                  className={imageFabClasses}
                 >
-                  <Fab
-                    key={key}
-                    disabled={index.disabled}
-                    value={value}
-                    onClick={() => onChange(key)}
-                    color={color}
-                    // size="small"
-                    aria-label={index.label}
-                    className={imageFabClasses}
-                  >
-                    <img
-                      src={index.image}
-                      alt={index.name}
-                      color={index.selectColor}
-                      className={classes.image}
-                    />
-                  </Fab>
-                </Grid>
-              );
-            }, [data, value]);
-          })}
-        </Tabs>
-      </AppBar>
-    );
+                  <img
+                    src={index.image}
+                    alt={index.name}
+                    color={index.selectColor}
+                    className={classes.image}
+                  />
+                </Fab>
+              </Grid>
+            );
+          }, [data, value]);
+        })}
+      </Tabs>
+    </AppBar>
+  );
 };
 
 // PropTypes
