@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "3552275e12b67abefeac",
+    "revision": "8abd84079af161099c38",
     "url": "/Kroft-FrontEnd/static/css/main.0e5a5145.chunk.css"
   },
   {
-    "revision": "3552275e12b67abefeac",
-    "url": "/Kroft-FrontEnd/static/js/main.d3cb04d0.chunk.js"
+    "revision": "8abd84079af161099c38",
+    "url": "/Kroft-FrontEnd/static/js/main.9450ab13.chunk.js"
   },
   {
     "revision": "feb151ab0423f96045cd",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "/Kroft-FrontEnd/static/media/abstract-blur-bubble-clean-268819.d7186927.jpg"
   },
   {
-    "revision": "f695d3cd6b8bab7969a5d44ac6f8d36c",
+    "revision": "0b5443a94a4f232d860f8e10cb42da32",
     "url": "/Kroft-FrontEnd/index.html"
   }
 ];
