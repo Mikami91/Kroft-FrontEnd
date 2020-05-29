@@ -123,11 +123,11 @@ AppBarTabs.propTypes = {
   ),
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func,
-  indicatorColor: PropTypes.oneOfType(["inherit", "primary", "secondary"]),
-  textColor: PropTypes.oneOfType(["inherit", "primary", "secondary"]),
+  indicatorColor: PropTypes.oneOf(["inherit", "primary", "secondary"]),
+  textColor: PropTypes.oneOf(["inherit", "primary", "secondary"]),
   variant: PropTypes.oneOf(["standard", "fullWidth", "scrollable"]),
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
-  scrollButtons: PropTypes.oneOfType(["on", "off", "auto", "desktop"]),
+  scrollButtons: PropTypes.oneOf(["on", "off", "auto", "desktop"]),
   centered: PropTypes.bool,
 };
 
