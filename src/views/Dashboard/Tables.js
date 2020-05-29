@@ -12,100 +12,116 @@ import AvatarTable from "../../components/Avatar/AvatarTable.js";
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomTable from "../../components/Table/CustomTable.js";
-import CustomBotton from '../../components/CustomButtons/Button.js'
+import CustomBotton from "../../components/CustomButtons/Button.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 // Layouts
-import TableAdd from '../../layouts/Forms/TableAdd.js';
+import TableAdd from "../../layouts/Forms/TableAdd.js";
 
-const Tables = ({ style }) => {
-    // TabPanel Swipeables Views
-    const [value, setValue] = useState(0);
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-        console.log(newValue);
-    };
+function Tables(props) {
+  // TabPanel Swipeables Views
+  const [value, setValue] = useState(0);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    console.log(newValue);
+  };
 
-    return (
-        <Fragment>
-            <Grid
-                container
-                //   className={classes.content}
-                justify="center"
-                alignItems="flex-start"
-                spacing={3}
-            >
-                <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={6}
-                    lg={4}
-                    xl={4}
-                    elevation={6}
-                    square="true"
-                // className={classes.container}
-                >
-                    <TableAdd />
+  return (
+    <Fragment>
+      <Grid
+        container
+        //   className={classes.content}
+        justify="center"
+        alignItems="flex-start"
+        spacing={3}
+      >
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          lg={4}
+          xl={4}
+          elevation={6}
+          square="true"
+          // className={classes.container}
+        >
+          <TableAdd />
+        </Grid>
 
-                </Grid>
-
-                <Grid
-                    item
-                    xs={12}
-                    sm={12}
-                    md={6}
-                    lg={8}
-                    xl={8}
-                    elevation={6}
-                    square="true"
-                // className={classes.container}
-                >
-                    <Card variant="cardForm">
-                        <CardHeader color="info" dense>
-                            <h3>Lista de Mesas</h3>
-                        </CardHeader>
-                        <CardBody form>
-                            <CustomTable
-                                column={[
-                                    { title: 'ID', field: 'id', type: 'numeric', editable: 'never', },
-                                    {
-                                        title: 'Imagen',
-                                        field: 'image',
-                                        editable: 'never',
-                                        sorting: false,
-                                        // render: rowData => (
-                                        //     <AvatarTable rowData={rowData} path={path} />
-                                        // )
-                                    },
-                                    { title: 'Mesa', field: 'name', type: 'string' },
-                                    { title: 'Ambiente', field: 'environment_id', type: 'string' },
-                                    { title: 'Creación', field: 'created_at', editable: 'never', type: 'date' },
-                                    { title: 'Modificación', field: 'updated_at', editable: 'never', type: 'date' },
-                                ]}
-                            //   data={EmployeesList}
-                            //   refresh={userListAction}
-                            //   updates={userUpdateAction}
-                            //   deletes={userDeleteAction}
-                            //   loading={Loading}
-                            />
-                        </CardBody>
-                    </Card>
-                </Grid>
-            </Grid>
-
-
-        </Fragment>
-    );
-};
+        <Grid
+          item
+          xs={12}
+          sm={12}
+          md={6}
+          lg={8}
+          xl={8}
+          elevation={6}
+          square="true"
+          // className={classes.container}
+        >
+          <Card variant="cardForm">
+            <CardHeader color="info" dense>
+              <h3>Lista de Mesas</h3>
+            </CardHeader>
+            <CardBody form>
+              <CustomTable
+                column={[
+                  {
+                    title: "ID",
+                    field: "id",
+                    type: "numeric",
+                    editable: "never",
+                  },
+                  {
+                    title: "Imagen",
+                    field: "image",
+                    editable: "never",
+                    sorting: false,
+                    // render: rowData => (
+                    //     <AvatarTable rowData={rowData} path={path} />
+                    // )
+                  },
+                  { title: "Mesa", field: "name", type: "string" },
+                  {
+                    title: "Ambiente",
+                    field: "environment_id",
+                    type: "string",
+                  },
+                  {
+                    title: "Creación",
+                    field: "created_at",
+                    editable: "never",
+                    type: "date",
+                  },
+                  {
+                    title: "Modificación",
+                    field: "updated_at",
+                    editable: "never",
+                    type: "date",
+                  },
+                ]}
+                //   data={EmployeesList}
+                //   refresh={userListAction}
+                //   updates={userUpdateAction}
+                //   deletes={userDeleteAction}
+                //   loading={Loading}
+              />
+            </CardBody>
+          </Card>
+        </Grid>
+      </Grid>
+    </Fragment>
+  );
+}
 
 // PropTypes
 Tables.propTypes = {
-    container: PropTypes.instanceOf(
-        typeof Element === "undefined" ? Object : Element
-    ),
+  container: PropTypes.instanceOf(
+    typeof Element === "undefined" ? Object : Element
+  ),
 };
 
 export default Tables;

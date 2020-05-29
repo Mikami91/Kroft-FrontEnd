@@ -58,13 +58,13 @@ function Products(props) {
           TransitionComponent={Transition}
         >
           <AppBarIcons
-              color="primary"
-              selectColor="secondary"
-              hoverColor="secondary"
-              data={categories}
-              value={value}
-              onChange={handleChangeIndex}
-            />
+            color="primary"
+            selectColor="secondary"
+            hoverColor="secondary"
+            data={categories}
+            value={value}
+            onChange={handleChangeIndex}
+          />
           {console.log("REner")}
           <DialogContent className={classes.content}>
             <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>

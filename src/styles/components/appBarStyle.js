@@ -24,6 +24,16 @@ const appBarStyle = {
 		// backgroundColor: '#0b463b',
 		top: -1
 	},
+	contentRight: {
+		marginRight: "auto",
+		display: "inline-flex",
+		alignItems: "center",
+	  },
+	  contentLeft: {
+		marginLetf: "auto",
+		display: "inline-flex",
+		alignItems: "center",
+	  },
 	icons: {
 		width: '1.5rem',
 		height: '1.5rem',

@@ -20,7 +20,7 @@ import CardFooter from "../../components/Card/CardFooter.js";
 // Layouts
 import EmployeeAdd from '../../layouts/Forms/EmployeeAdd.js';
 
-const Employees = ({ style }) => {
+function Employees(props) {
     // TabPanel Swipeables Views
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
