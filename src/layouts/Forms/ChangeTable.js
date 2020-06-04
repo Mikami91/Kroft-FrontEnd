@@ -17,7 +17,7 @@ import CardFooter from "../../components/Card/CardFooter.js";
 import CardIconActions from "../../components/Card/CardIconActions.js";
 import AvatarForm from "../../components/Avatar/Avatarform.js";
 import IconInput from "../../components/CustomInput/IconInput.js";
-import SelectInput from "../../components/CustomInput/SelectInput.js";
+import ExpansionList from "../../components/CustomInput/ExpansionList.js";
 import CustomBotton from "../../components/CustomButtons/Button.js";
 import CustomLoading from "../../components/Loading/CustomLoading.js";
 // Assets
@@ -83,7 +83,7 @@ export default function ChangeTable(props) {
   //   };
   const classes = useStyles();
   return (
-    <form id="table-add" /*onSubmit={handleLogin}*/>
+    <form id="table-change" /*onSubmit={handleLogin}*/>
       {/* <Card variant="cardForm"> */}
         <CustomLoading inside borderless color="secondary" open={state.isFetch} />
 
@@ -94,6 +94,7 @@ export default function ChangeTable(props) {
             justify="center"
             alignItems="flex-start"
             spacing={2}
+            direction="row"
           >
             <Grid
               item
@@ -105,7 +106,7 @@ export default function ChangeTable(props) {
               elevation={6}
               square="true"
             >
-              <SelectInput
+              <ExpansionList
                 variant="standard"
                 margin="dense"
                 color="primary"
@@ -129,7 +130,18 @@ export default function ChangeTable(props) {
                 }}
                 required
               />
-              <SelectInput
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              md={6}
+              lg={6}
+              xl={6}
+              elevation={6}
+              square="true"
+            >
+              <ExpansionList
                 variant="standard"
                 margin="dense"
                 color="primary"

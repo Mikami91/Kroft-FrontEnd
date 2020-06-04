@@ -126,6 +126,21 @@ const selectInputStyle = {
     // }
 
   },
+  root: {
+    width: "100%",
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
+  },
+  list: {
+    borderRadius: 6,
+  },
+  collapse: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+    paddingRight: theme.spacing(1),
+    paddingLeft: theme.spacing(5),
+    borderRadius: 6,
+  },
   blackHover: {
     "&:hover": {
       boxShadow:

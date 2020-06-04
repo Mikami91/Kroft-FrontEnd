@@ -140,7 +140,7 @@ function SalesPage(props) {
         rightButtons={[
           {
             type: "fab",
-            text: "/",
+            text: "/Kroft-FrontEnd/",
             color: "secondary",
             icon: KeyboardBackspaceIcon,
             size: "large",
@@ -222,16 +222,53 @@ function SalesPage(props) {
         close={handleCloseChangeTables}
         title="Cambio de mesas"
         content={<ChangeTable environments={environments} tables={tables} />}
-        footer={
-          <CustomBotton
-            form="table-add"
-            size="sm"
-            type="submit"
-            // disabled={state.isUpload}
-          >
-            Cambiar
-          </CustomBotton>
-        }
+        centerButtons={[
+          {
+            type: "fab",
+            text: "/Kroft-FrontEnd/",
+            color: "secondary",
+            icon: SwapHorizIcon,
+            size: "large",
+            disabled: false,
+          },
+        ]}
+        rightButtons={[
+          {
+            type: "button",
+            text: "primary",
+            color: "warning",
+            icon: PersonIcon,
+            edge: "end",
+            size: "small",
+            variant: "outlined",
+            disabled: false,
+            onClick: handleOpenProfile,
+          },
+          {
+            type: "text",
+            text: "Typography",
+            color: "default",
+          },
+        ]}
+        leftButtons={[
+          {
+            type: "text",
+            text: "Typography",
+            color: "default",
+          },
+          {
+            type: "button",
+            text: "Perfil",
+            color: "info",
+            icon: PersonIcon,
+            edge: "start",
+            size: "large",
+            variant: "outlined",
+            disabled: false,
+            onClick: handleOpenProfile,
+          },
+        ]}
+        scroll="paper"
         maxWidth="sm"
         fullWidth
       />
@@ -240,11 +277,10 @@ function SalesPage(props) {
         direction="right"
         open={openDrawer}
         close={handleCloseDrawer}
-        categoryList={environments} 
+        categoryList={environments}
         itemList={tables}
         filter="id_environment"
       />
-
     </Fragment>
   );
 }

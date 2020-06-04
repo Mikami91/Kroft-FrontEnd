@@ -2,6 +2,10 @@
 import { container, theme } from "../../themes/theme.js";
 
 const LoginStyle = {
+  rootLogin: {
+    widht: "100%",
+    height: "100vh",
+  },
   container: {
     ...container,
     zIndex: "2",
@@ -17,8 +21,8 @@ const LoginStyle = {
     color: "#FFFFFF",
     paddingRight: "0px",
     height: "100%",
-    paddingTop: "11.5vh",
-    paddingBottom: "3.5vh",
+    paddingTop: "5vh",
+    paddingBottom: "5vh",
   },
   cardHidden: {
     opacity: "0",
@@ -128,10 +132,6 @@ const LoginStyle = {
     backgroundImage: "url(https://source.unsplash.com/random)",
     boxShadow:
       "0 12px 20px -10px rgba(244, 67, 54, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(244, 67, 54, 0.2)",
-  },
-  rootLogin: {
-    widht: "100%",
-    height: "100vh",
   },
 };
 

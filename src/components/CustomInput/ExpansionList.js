@@ -1,0 +1,118 @@
+// Dependencies
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import Collapse from "@material-ui/core/Collapse";
+// Icons
+import DeckRoundedIcon from "@material-ui/icons/DeckRounded";
+import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+// Styles
+import styles from "../../styles/components/selectInputStyle.js";
+
+// Make styles
+const useStyles = makeStyles(styles);
+
+function ExpansionList(props) {
+  const {
+    disabled,
+    id,
+    label,
+    margin,
+    color,
+    hoverColor,
+    name,
+    categoryList,
+    itemList,
+    onChange,
+    placeholder,
+    required,
+    value,
+    variant,
+  } = props;
+  const classes = useStyles();
+  const listItem = classNames({
+    [classes.list]: true,
+    [classes[hoverColor + "Hover"]]: true,
+  });
+  const collapseItem = classNames({
+    [classes.collapse]: true,
+    [classes.secondaryHover]: true,
+  });
+  // Local States
+  const [open, setOpen] = useState(null);
+  const handleClick = (key) => {
+    setOpen(key === open ? false : key);
+  };
+
+  return (
+    <List
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+      className={classes.root}
+    >
+      {categoryList.data.map((index) => {
+        return [
+          <ListItem
+            button
+            className={listItem}
+            key={index[categoryList.key] + "ListItem"}
+            value={index[categoryList.key]}
+            onClick={() => handleClick(index[categoryList.key])}
+          >
+            <ListItemIcon key={index[categoryList.key] + "ListItemIcon"}>
+              <DeckRoundedIcon />
+            </ListItemIcon>
+            <ListItemText primary={index[categoryList.value]} />
+            {open === index[categoryList.key] ? <ExpandLess /> : <ExpandMore />}
+          </ListItem>,
+
+          itemList.data.map((index2) => {
+            if (index2[itemList.filter] === index[categoryList.key]) {
+              return (
+                <Collapse
+                  in={open === index[categoryList.key]}
+                  timeout="auto"
+                  unmountOnExit
+                  key={index2[itemList.key + "Collapse"]}
+                  value={index2[itemList.key]}
+                >
+                  <List
+                    component="div"
+                    disablePadding
+                    key={index2[itemList.key + "List"]}
+                  >
+                    <ListItem
+                      button
+                      key={index2[itemList.key] + "ListItem2"}
+                      className={collapseItem}
+                      onClick={() => alert(index2[itemList.value])}
+                    >
+                      <ListItemIcon>
+                        <TableChartRoundedIcon />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={index2[itemList.value]}
+                        // secondary="Mikami"
+                      />
+                    </ListItem>
+                  </List>
+                </Collapse>
+              );
+            }
+            return null;
+          }),
+        ];
+      })}
+    </List>
+  );
+}
+
+export default ExpansionList;

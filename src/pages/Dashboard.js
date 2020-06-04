@@ -19,6 +19,8 @@ import Sidebar from "../layouts/Sidebars/Sidebar.js";
 import CustomAppBar from "../components/AppBar/CustomAppBar";
 import TabPanel from "../components/Panel/TabPanel";
 import SidebarList from "../components/List/SidebarList";
+// Assets
+import logo from "../assets/img/brands/kroft-horizontal.svg";
 // Styles
 import styles from "../styles/pages/DashboardStyle.js";
 
@@ -186,7 +188,18 @@ export default function DashboardPage(props) {
                 paper: classes.drawerPaper,
               }}
             >
-              <Typography className={classes.titleH}>KROFT H</Typography>
+              {/* <Typography className={classes.titleH}>KROFT H</Typography> */}
+              <img
+                alt="Logo"
+                src={logo}
+                style={{
+                  width: "100%",
+                  height: "15%",
+                  padding: 10,
+                  backgroundColor: "#aaaaaa",
+                }}
+              />
+
               <Divider />
               <Sidebar value={value} change={handleChange} />
             </Drawer>

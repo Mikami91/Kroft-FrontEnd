@@ -26,8 +26,9 @@ const cardFooterStyle = {
   cardFooterLogin: {
     display: "flex",
     alignItems: "center",
-    backgroundColor: "transparent",
+    background: theme.palette.type === "light" ? "#fff" : "#424242",
     padding: theme.spacing(0),
+    borderRadius: "6px",
     // paddingLeft: theme.spacing(5),
     // paddingRight: theme.spacing(5),
     // paddingTop: theme.spacing(1),

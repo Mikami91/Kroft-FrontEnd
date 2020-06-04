@@ -23,6 +23,8 @@ import CardBody from "../components/Card/CardBody.js";
 import CardFooter from "../components/Card/CardFooter.js";
 import TabPanel from "../components/Panel/TabPanel.js";
 import Modal from "../components/Modal/Modal.js";
+// Assets
+import logo from "../assets/img/brands/kroft-vertical.svg";
 // Styles
 import styles from "../styles/pages/LoginStyle.js";
 
@@ -59,7 +61,6 @@ export default function LoginPage(props) {
         justify="center"
         alignItems="center"
       >
-        
         <Hidden only={["xs", "sm", "md"]}>
           <Grid
             item
@@ -87,7 +88,13 @@ export default function LoginPage(props) {
         >
           <Card className={classes[cardAnimaton]} variant="cardLogin">
             <CardHeader color="primary" className={classes.cardHeaderLogin}>
-              <h3>KROFT SOLUTIONS</h3>
+              <img
+                alt="Logo"
+                src={logo}
+                style={{ width: "70%", height: "30%" }}
+              />
+            </CardHeader>
+            <CardBody login>
               <SingleTabs
                 centered
                 value={value}
@@ -105,8 +112,6 @@ export default function LoginPage(props) {
                   },
                 ]}
               />
-            </CardHeader>
-            <CardBody login>
               <SwipeableViews
                 axis="x"
                 index={value}
@@ -128,9 +133,9 @@ export default function LoginPage(props) {
               )}
             </CardFooter>
           </Card>
-          <Link to="/Kroft-FrontEnd/sales">
+          {/* <Link to="/Kroft-FrontEnd/sales">
             Home
-          </Link>
+          </Link> */}
           <FooterLogin whiteFont />
         </Grid>
       </Grid>

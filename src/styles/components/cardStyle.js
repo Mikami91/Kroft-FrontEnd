@@ -38,7 +38,7 @@ const cardStyle = {
   },
   cardLogin: {
     border: "0",
-    marginBottom: "15px",
+    marginBottom: "10px",
     marginTop: "45px",
     borderRadius: "6px",
     color: theme.palette.type === "light" ? "rgba(0, 0, 0, 0.87)" : "#fff",
@@ -78,7 +78,7 @@ const cardStyle = {
   cardSide: {
     border: "0",
     marginBottom: "0px",
-    marginTop: "-40px",
+    marginTop: "0px",
     borderRadius: "6px",
     color: theme.palette.type === "light" ? "rgba(0, 0, 0, 0.87)" : "#fff",
     background: theme.palette.type === "light" ? "#fff" : "#424242",
