@@ -17,7 +17,8 @@ import Products from "../views/Sales/Products.js";
 // Layouts
 import EmployeeAdd from "../layouts/Forms/EmployeeAdd.js";
 import ChangeTable from "../layouts/Forms/ChangeTable.js";
-import DrawerList from "../layouts/DrawerList/DrawerList.js";
+import DrawerList from "../layouts/Drawers/DrawerList.js";
+import DrawerProducts from "../layouts/Drawers/DrawerProducts.js";
 // core components
 import AppBarTabs from "../components/AppBar/AppBarTabs.js";
 import TabPanel from "../components/Panel/TabPanel";
@@ -189,25 +190,6 @@ function SalesPage(props) {
         ]}
       />
 
-      {/* <Modal
-        visible={openProducts}
-        width="100%"
-        height="100%"
-        effect="fadeInUp"
-        onClickAway={handleCloseProducts}
-        style={{ backgroundColor: "red" }}
-      >
-        <Products handleClose={handleCloseProducts} />
-      </Modal> */}
-
-      <Products
-        value={value}
-        open={openProducts}
-        close={handleCloseProducts}
-        maxWidth="xl"
-        fullWidth
-      />
-
       <CustomModal
         open={openProfile}
         close={handleCloseProfile}
@@ -281,6 +263,14 @@ function SalesPage(props) {
         itemList={tables}
         filter="id_environment"
       />
+
+      <DrawerProducts
+        direction="bottom"
+        variant="temporary"
+        open={openProducts}
+        close={handleCloseProducts}
+      />
+
     </Fragment>
   );
 }

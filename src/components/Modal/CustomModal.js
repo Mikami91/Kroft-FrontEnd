@@ -1,9 +1,9 @@
 // Dependencies
-import React, { forwardRef } from "react";
+import React, { forwardRef, useMemo } from "react";
 import PropTypes from "prop-types";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Slide from "@material-ui/core/Slide";
+import Zoom from "@material-ui/core/Zoom";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import IconButton from "@material-ui/core/IconButton";
@@ -23,7 +23,7 @@ const useStyles = makeStyles(styles);
 
 // Childs Components
 const Transition = forwardRef(function Transition(props, ref) {
-  return <Slide direction="down" ref={ref} {...props} />;
+  return <Zoom ref={ref} {...props} />;
 });
 
 Transition.displayName = "Transition";
@@ -43,104 +43,108 @@ export default function CustomModal(props) {
     rightButtons,
     leftButtons,
   } = props;
-  return (
-    <Dialog
-      classes={
-        {
-          // root: classes.center,
-          // paper: classes.modal,
+  // Using useMemo hook
+  return useMemo(() => {
+    // Render
+    return (
+      <Dialog
+        classes={
+          {
+            // root: classes.center,
+            // paper: classes.modal,
+          }
         }
-      }
-      open={open}
-      scroll={scroll}
-      maxWidth={maxWidth}
-      fullWidth={fullWidth}
-      TransitionComponent={Transition}
-      keepMounted
-      onClose={close}
-    >
-      <DialogTitle className={classes.modalHeader}>
-        {closeIcon === true ? (
-          <IconButton
-            className={classes.modalCloseButton}
-            key="close"
-            aria-label="Close"
-            color="inherit"
-            onClick={close}
-          >
-            <Close className={classes.modalClose} />
-          </IconButton>
-        ) : null}
-        {/* <h4 className={classes.modalTitle}>{title}</h4> */}
-        {title}
-      </DialogTitle>
-      <DialogContent>{content}</DialogContent>
-      <DialogActions className={classes.modalFooter}>
-        <div className={classes.contentRight}>
-          {rightButtons.map((index, key) => {
-            // Button type
-            if (index.type === "button") {
-              return <DialogButton key={key} index={index} />;
-            }
-            // Icon type
-            if (index.type === "icon" && typeof index.icon == "undefined") {
-              return <DialogIcon key={key} index={index} />;
-            }
-            // Fab type
-            if (index.type === "fab" && typeof index.icon !== "undefined") {
-              return <DialogFab key={key} index={index} align="rightFab" />;
-            }
-            // Text type
-            if (index.type === "text") {
-              return <DialogText  key={key} index={index} />;
-            }
-          })}
-        </div>
+        open={open}
+        scroll={scroll}
+        maxWidth={maxWidth}
+        fullWidth={fullWidth}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={close}
+      >
+        <DialogTitle className={classes.modalHeader}>
+          {closeIcon === true ? (
+            <IconButton
+              className={classes.modalCloseButton}
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={close}
+            >
+              <Close className={classes.modalClose} />
+            </IconButton>
+          ) : null}
+          {/* <h4 className={classes.modalTitle}>{title}</h4> */}
+          {title}
+        </DialogTitle>
+        <DialogContent>{content}</DialogContent>
+        <DialogActions className={classes.modalFooter}>
+          <div className={classes.contentRight}>
+            {rightButtons.map((index, key) => {
+              // Button type
+              if (index.type === "button") {
+                return <DialogButton key={key} index={index} />;
+              }
+              // Icon type
+              if (index.type === "icon" && typeof index.icon == "undefined") {
+                return <DialogIcon key={key} index={index} />;
+              }
+              // Fab type
+              if (index.type === "fab" && typeof index.icon !== "undefined") {
+                return <DialogFab key={key} index={index} align="rightFab" />;
+              }
+              // Text type
+              if (index.type === "text") {
+                return <DialogText key={key} index={index} />;
+              }
+            })}
+          </div>
 
-        <div className={classes.contentCenter}>
-          {centerButtons.map((index, key) => {
-            // Button type
-            if (index.type === "button") {
-              return <DialogButton key={key} index={index} />;
-            }
-            // Icon type
-            if (index.type === "icon" && typeof index.icon !== "undefined") {
-              return <DialogIcon key={key} index={index} />;
-            }
-            // Fab type
-            if (index.type === "fab" && typeof index.icon !== "undefined") {
-              return <DialogFab key={key} index={index} align="centerFab" />;
-            }
-            // Text type
-            if (index.type === "text") {
-              return <DialogText  key={key} index={index} />;
-            }
-          })}
-        </div>
+          <div className={classes.contentCenter}>
+            {centerButtons.map((index, key) => {
+              // Button type
+              if (index.type === "button") {
+                return <DialogButton key={key} index={index} />;
+              }
+              // Icon type
+              if (index.type === "icon" && typeof index.icon !== "undefined") {
+                return <DialogIcon key={key} index={index} />;
+              }
+              // Fab type
+              if (index.type === "fab" && typeof index.icon !== "undefined") {
+                return <DialogFab key={key} index={index} align="centerFab" />;
+              }
+              // Text type
+              if (index.type === "text") {
+                return <DialogText key={key} index={index} />;
+              }
+            })}
+          </div>
 
-        <div className={classes.contentLeft}>
-          {leftButtons.map((index, key) => {
-            // Button type
-            if (index.type === "button") {
-              return <DialogButton key={key} index={index} />;
-            }
-            // Icon type
-            if (index.type === "icon" && typeof index.icon !== "undefined") {
-              return <DialogIcon key={key} index={index} />;
-            }
-            // Fab type
-            if (index.type === "fab" && typeof index.icon !== "undefined") {
-              return <DialogFab key={key} index={index} align="leftFab" />;
-            }
-            // Text type
-            if (index.type === "text") {
-              return <DialogText  key={key} index={index} />;
-            }
-          })}
-        </div>
-      </DialogActions>
-    </Dialog>
-  );
+          <div className={classes.contentLeft}>
+            {leftButtons.map((index, key) => {
+              // Button type
+              if (index.type === "button") {
+                return <DialogButton key={key} index={index} />;
+              }
+              // Icon type
+              if (index.type === "icon" && typeof index.icon !== "undefined") {
+                return <DialogIcon key={key} index={index} />;
+              }
+              // Fab type
+              if (index.type === "fab" && typeof index.icon !== "undefined") {
+                return <DialogFab key={key} index={index} align="leftFab" />;
+              }
+              // Text type
+              if (index.type === "text") {
+                return <DialogText key={key} index={index} />;
+              }
+            })}
+          </div>
+        </DialogActions>
+      </Dialog>
+    );
+  }, [open]);
 }
 // PropTypes
 CustomModal.defaultProps = {

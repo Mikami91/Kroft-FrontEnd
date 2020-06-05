@@ -126,8 +126,8 @@ export default function ChangeTable(props) {
                   data: tables,
                   key: "id",
                   value: "name",
-                  filter: "id_environment",
                 }}
+                filter="id_environment"
                 required
               />
             </Grid>
@@ -155,14 +155,14 @@ export default function ChangeTable(props) {
                 categoryList={{
                   data: environments,
                   key: "id",
-                  value: "name",
+                  value: "id",
                 }}
                 itemList={{
                   data: tables,
                   key: "id",
                   value: "name",
-                  filter: "id_environment",
                 }}
+                filter="id_environment"
                 required
               />
             </Grid>

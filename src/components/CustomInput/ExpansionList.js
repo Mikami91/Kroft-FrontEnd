@@ -31,6 +31,7 @@ function ExpansionList(props) {
     name,
     categoryList,
     itemList,
+    filter,
     onChange,
     placeholder,
     required,
@@ -63,35 +64,30 @@ function ExpansionList(props) {
           <ListItem
             button
             className={listItem}
-            key={index[categoryList.key] + "ListItem"}
-            value={index[categoryList.key]}
-            onClick={() => handleClick(index[categoryList.key])}
+            key={index.id + "ListItem"}
+            value={index.id}
+            onClick={() => handleClick(index.id)}
           >
-            <ListItemIcon key={index[categoryList.key] + "ListItemIcon"}>
+            <ListItemIcon>
               <DeckRoundedIcon />
             </ListItemIcon>
             <ListItemText primary={index[categoryList.value]} />
-            {open === index[categoryList.key] ? <ExpandLess /> : <ExpandMore />}
+            {open === index.id ? <ExpandLess /> : <ExpandMore />}
           </ListItem>,
 
           itemList.data.map((index2) => {
-            if (index2[itemList.filter] === index[categoryList.key]) {
+            if (index2[filter] === index[categoryList.key]) {
               return (
                 <Collapse
-                  in={open === index[categoryList.key]}
+                  in={open === index.id}
                   timeout="auto"
                   unmountOnExit
-                  key={index2[itemList.key + "Collapse"]}
+                  key={index2.id + "Collapse"}
                   value={index2[itemList.key]}
                 >
-                  <List
-                    component="div"
-                    disablePadding
-                    key={index2[itemList.key + "List"]}
-                  >
+                  <List component="div" disablePadding>
                     <ListItem
                       button
-                      key={index2[itemList.key] + "ListItem2"}
                       className={collapseItem}
                       onClick={() => alert(index2[itemList.value])}
                     >
@@ -100,7 +96,7 @@ function ExpansionList(props) {
                       </ListItemIcon>
                       <ListItemText
                         primary={index2[itemList.value]}
-                        // secondary="Mikami"
+                        secondary={index.name}
                       />
                     </ListItem>
                   </List>

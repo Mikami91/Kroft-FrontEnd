@@ -12,7 +12,7 @@ const ProductsStyle = {
     border: "0",
     borderRadius: "6px",
     color: theme.palette.type === "light" ? "rgba(0, 0, 0, 0.87)" : "#fff",
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    // backgroundImage: "url(https://source.unsplash.com/random)",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
     backgroundSize: "cover",
