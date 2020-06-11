@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Kroft-FrontEnd/precache-manifest.5d07d0b5c969c83ee29e9e522f7bce44.js"
+  "/Kroft-FrontEnd/precache-manifest.d2b3dfef358f2eddf74b9196f125ea6c.js"
 );
 
 workbox.clientsClaim();
