@@ -4,23 +4,30 @@ import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 // UI Material Components
 import Drawer from "@material-ui/core/Drawer";
+import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import AppBarIcons from "../../components/AppBar/AppBarIcons.js";
 import FooterAppBar from "../../components/Footer/FooterAppBar.js";
 import TabPanel from "../../components/Panel/TabPanel";
-import Grid from "@material-ui/core/Grid";
 import GridProducts from "../../components/Grid/GridProducts";
 import CustomModal from "../../components/Modal/CustomModal.js";
+import CustomTableList from "../../components/Table/CustomTableList.js";
 // Icons
 import UndoIcon from "@material-ui/icons/Undo";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
+import InfoIcon from '@material-ui/icons/Info';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import DeleteIcon from '@material-ui/icons/Delete';
 import PrintIcon from "@material-ui/icons/Print";
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SendIcon from "@material-ui/icons/Send";
 // Variables
 import { tables } from "../../variables/tables";
 import { categories } from "../../variables/categories";
+import { animes } from "../../variables/animes";
 // Styles
 import styles from "../../styles/components/drawerStyle.js";
 
@@ -45,6 +52,9 @@ function DrawerProducts(props) {
   const [openTotal, setOpenTotal] = useState(false);
   const handleOpenTotal = () => setOpenTotal(true);
   const handleCloseTotal = () => setOpenTotal(false);
+
+  const handleOnClick = (arg) => alert(arg);
+
   const classes = useStyles();
   // Using useMemo hook
   return useMemo(() => {
@@ -159,8 +169,114 @@ function DrawerProducts(props) {
           open={openOrders}
           close={handleCloseOrders}
           title="Lista de ordenes"
-          // content={<EmployeeAdd />}
-          maxWidth="sm"
+          content={
+            <CustomTableList
+              padding="none"
+              header={[
+                {
+                  text: 'Obser.',
+                  align: 'center'
+                },
+                {
+                  text: 'Producto',
+                  align: 'left',
+                  colSpan: 2
+                },
+                {
+                  text: '-',
+                  align: 'center'
+                },
+                {
+                  text: 'Cant.',
+                  align: 'center'
+                },
+                {
+                  text: '+',
+                  align: 'center'
+                },
+                {
+                  text: 'Eliminar',
+                  align: 'center'
+                },
+              ]}
+              columns={[
+                {
+                  field: 'observation',
+                  type: 'icon',
+                  size: 'medium',
+                  align: 'center',
+                  icon: InfoIcon,
+                  iconColor: 'primary',
+                  onClick: handleOnClick
+                },
+                {
+                  field: 'name',
+                  type: 'text',
+                  align: 'left',
+                  colSpan: 2
+                },
+                {
+                  field: 'rest',
+                  type: 'icon',
+                  size: 'medium',
+                  align: 'center',
+                  icon: ChevronLeftIcon,
+                  iconSize: 'large',
+                  onClick: handleOnClick
+                },
+                {
+                  field: 'id',
+                  type: 'text',
+                  align: 'center'
+                },
+                {
+                  field: 'plus',
+                  type: 'icon',
+                  size: 'medium',
+                  align: 'center',
+                  icon: ChevronRightIcon,
+                  iconSize: 'large',
+                  onClick: handleOnClick
+                },
+                {
+                  field: 'delete',
+                  type: 'icon',
+                  size: 'medium',
+                  align: 'center',
+                  icon: DeleteIcon,
+                  iconColor: 'secondary',
+                  onClick: handleOnClick
+                },
+              ]}
+              data={animes}
+            />
+          }
+          rightButtons={[
+            {
+              type: "button",
+              text: "Eliminar",
+              color: "secondary",
+              variant: 'contained',
+              icon: DeleteSweepIcon,
+            },
+          ]}
+          centerButtons={[
+            {
+              type: "text",
+              text: "Monto Total",
+            },
+          ]}
+          leftButtons={[
+            {
+              type: "button",
+              text: "Aceptar",
+              color: "primary",
+              variant: 'contained',
+              icon: PrintIcon
+            },
+          ]}
+          scroll="paper"
+          maxWidth="md"
           fullWidth
         />
 

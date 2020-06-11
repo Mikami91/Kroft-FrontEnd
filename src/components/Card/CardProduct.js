@@ -35,6 +35,7 @@ export default function CardProduct(props) {
             image={image}
             title={name}
             onClick={onClick}
+            loading="lazy"
           />
           <div className={classes.cardFooter}>
             <div className={classes.name}>{"Typography " + name}</div>

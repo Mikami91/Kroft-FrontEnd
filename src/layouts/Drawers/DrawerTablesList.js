@@ -1,9 +1,6 @@
 // Dependencies
 import React, { Fragment, useMemo } from "react";
 import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
-// Conecction to Store
-import { connect } from "react-redux";
 // UI Material Components
 import {
   Avatar,
@@ -18,19 +15,15 @@ import {
   makeStyles,
   Tooltip,
 } from "@material-ui/core";
-// core components
-import CustomDrawer from "../../components/Drawer/CustomDrawer.js";
 // Icons
 import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
 import KeyboardArrowRightRoundedIcon from "@material-ui/icons/KeyboardArrowRightRounded";
 // Styles
 import styles from "../../styles/components/drawerStyle.js";
-// Actions Creators
-// import { dialogProductList } from '../../redux/actions/actionsCreators';
 
 const useStyles = makeStyles(styles);
 
-function DrawerList(props) {
+function DrawerTablesList(props) {
   const {
     direction,
     variant,
@@ -154,7 +147,7 @@ function DrawerList(props) {
   }, [open]);
 }
 // PropTypes
-DrawerList.defaultProps = {
+DrawerTablesList.defaultProps = {
   direction: "left",
   variant: "temporary",
   open: false,
@@ -165,7 +158,7 @@ DrawerList.defaultProps = {
   dialogProduct: {},
   isEmpty: {},
 };
-DrawerList.propTypes = {
+DrawerTablesList.propTypes = {
   direction: PropTypes.oneOf(["left", "right", "top", "bottom"]),
   variant: PropTypes.oneOf(["permanent", "persistent", "temporary"]),
   open: PropTypes.bool,
@@ -177,24 +170,4 @@ DrawerList.propTypes = {
   isEmpty: PropTypes.object,
 };
 
-// // Connect to Store state
-// const mapstateToProps = state => {
-//   const { table, environment, product } = state;
-//   return {
-//     ListEnvironments: environment.payload.filter(dataList => dataList.state === 1),
-//     ListTables: table.payload,
-//     isEmpty: product.dialogProductList.environments,
-//     showProgress: table.isFetch || table.isLoading,
-//   }
-// }
-
-// // Functions to dispatching
-// const dialogProduct = (payload) => (dialogProductList(payload));
-
-// // binding an object full of action creators
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ dialogProduct }, dispatch);
-// };
-
-// export default connect(null, null)(DrawerList);
-export default DrawerList;
+export default DrawerTablesList;

@@ -16,106 +16,106 @@ export const categories = [
 	{
 		id: 1,
 		name: 'Almuerzos',
-		image: almuerzo
+		photo: almuerzo
 	},
 	{
 		id: 2,
 		name: "bebidas",
-		image: bebidas
+		photo: bebidas
 	},
 	{
 		id: 3,
 		name: "carne",
-		image: carne
+		photo: carne
 	},
 	{
 		id: 4,
 		name: "cervezas",
-		image: cervezas
+		photo: cervezas
 	},
 	{
 		id: 5,
 		name: "drink",
-		image: drink
+		photo: drink
 	},
 	{
 		id: 6,
 		name: "juice",
-		image: juice
+		photo: juice
 	},
 	{
 		id:	7,
 		name: "monte",
-		image: monte
+		photo: monte
 	},
 	{
 		id:	8,
 		name: "ome",
-		image: ome
+		photo: ome
 	},
 	{
 		id: 9,
 		name: "other",
-		image: other
+		photo: other
 	},
 	{
 		id: 10,
 		name: "pescado",
-		image: pescado
+		photo: pescado
 	},
 	{
 		id:	11,
 		name: "pollo",
-		image: pollo
+		photo: pollo
 	},
 	{
 		id:	12,
 		name: "vinos",
-		image: vinos
+		photo: vinos
 	},
 	// {
 	// 	id: 6,
 	// 	name: "pescado",
-	// 	image: pescado
+	// 	photo: pescado
 	// },
 	// {
 	// 	id:	7,
 	// 	name: "pollo",
-	// 	image: pollo
+	// 	photo: pollo
 	// },
 	// {
 	// 	id:	8,
 	// 	name: "vinos",
-	// 	image: vinos
+	// 	photo: vinos
 	// },
 	// {
 	// 	id: 6,
 	// 	name: "pescado",
-	// 	image: pescado
+	// 	photo: pescado
 	// },
 	// {
 	// 	id:	7,
 	// 	name: "pollo",
-	// 	image: pollo
+	// 	photo: pollo
 	// },
 	// {
 	// 	id:	8,
 	// 	name: "vinos",
-	// 	image: vinos
+	// 	photo: vinos
 	// },
 	// {
 	// 	id: 6,
 	// 	name: "pescado",
-	// 	image: pescado
+	// 	photo: pescado
 	// },
 	// {
 	// 	id:	7,
 	// 	name: "pollo",
-	// 	image: pollo
+	// 	photo: pollo
 	// },
 	// {
 	// 	id:	8,
 	// 	name: "vinos",
-	// 	image: vinos
+	// 	photo: vinos
 	// },
 ];

@@ -2,7 +2,6 @@
 import React, { Fragment, useState } from "react";
 import { withRouter } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
-import Modal from "react-awesome-modal";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -17,7 +16,7 @@ import Products from "../views/Sales/Products.js";
 // Layouts
 import EmployeeAdd from "../layouts/Forms/EmployeeAdd.js";
 import ChangeTable from "../layouts/Forms/ChangeTable.js";
-import DrawerList from "../layouts/Drawers/DrawerList.js";
+import DrawerList from "../layouts/Drawers/DrawerTablesList.js";
 import DrawerProducts from "../layouts/Drawers/DrawerProducts.js";
 // core components
 import AppBarTabs from "../components/AppBar/AppBarTabs.js";
@@ -46,7 +45,7 @@ function SalesPage(props) {
     setValue(index);
   };
   // State for Modal Products
-  const [openProducts, setOpenProducts] = useState(false);
+  const [openProducts, setOpenProducts] = useState(true);
   const handleOpenProducts = () => {
     setOpenProducts(true);
   };

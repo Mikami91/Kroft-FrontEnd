@@ -92,7 +92,7 @@ const AppBarIcons = (props) => {
                   className={imageFabClasses}
                 >
                   <img
-                    src={index.image}
+                    src={index.photo}
                     alt={index.name}
                     color={index.selectColor}
                     className={classes.image}

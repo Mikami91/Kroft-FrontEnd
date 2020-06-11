@@ -57,6 +57,7 @@ function GridTables(props) {
                   className={classes.image}
                   image={image}
                   title={index.name}
+                  loading="lazy"
                 />
                 <CardNumber color={color} className={classes.cardNumber}>
                   <Typography
