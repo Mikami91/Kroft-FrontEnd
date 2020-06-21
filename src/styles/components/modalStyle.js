@@ -56,7 +56,7 @@ const modalStyle = {
   },
 
   contentRight: {
-    marginRight: "auto",
+    marginLeft: "auto",
     display: "inline-flex",
     alignItems: "center",
     padding: "0px 4px 0px 4px",
@@ -69,7 +69,7 @@ const modalStyle = {
     padding: "0px 4px 0px 4px",
   },
   contentLeft: {
-    marginLetf: "auto",
+    marginRight: "auto",
     display: "inline-flex",
     alignItems: "center",
     padding: "0px 4px 0px 4px",

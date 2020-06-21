@@ -15,6 +15,7 @@ import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 import TableChartRounded from '@material-ui/icons/TableChartRounded';
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
+import PersonAddRoundedIcon from '@material-ui/icons/PersonAddRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import AssessmentRoundedIcon from '@material-ui/icons/AssessmentRounded';
 import SettingsRounded from '@material-ui/icons/SettingsRounded';
@@ -31,54 +32,81 @@ const SidebarList = [
     component: Employees,
   },
   {
-    name: "Proveedores",
-    icon: SettingsRounded,
-    component: Suppliers,
-  },
-  {
     name: "Ambientes",
     icon: DeckRoundedIcon,
     component: Environments,
-  },
-  {
-    name: "Mesas",
-    icon: TableChartRounded,
-    component: Tables,
-  },
-  {
-    name: "Categorías",
-    icon: DescriptionRoundedIcon,
-    component: Categories,
-  },
-  {
-    name: "Subcategorías",
-    icon: AssessmentRoundedIcon,
-    component: Subcategories,
   },
   {
     name: "Productos",
     icon: FastfoodRoundedIcon,
     component: Products,
   },
+  {
+    name: "Proveedores",
+    icon: PersonAddRoundedIcon,
+    component: Suppliers,
+  },
+  // {
+  //   name: "Mesas",
+  //   icon: TableChartRounded,
+  //   component: Tables,
+  // },
+  {
+    name: "Reportes",
+    icon: DescriptionRoundedIcon,
+    component: "Reportes",
+  },
+  {
+    name: "Almacenes",
+    icon: AssessmentRoundedIcon,
+    component: "Almacenes",
+  },
+  {
+    name: "Ajustes",
+    icon: SettingsRounded,
+    component: "Ajustes",
+  },
+
+
+  // {
+  //   name: "Inicio",
+  //   icon: DashboardRoundedIcon,
+  //   component: Started,
+  // },
+  // {
+  //   name: "Personal",
+  //   icon: GroupRoundedIcon,
+  //   component: Employees,
+  // },
+  // {
+  //   name: "Proveedores",
+  //   icon: SettingsRounded,
+  //   component: Suppliers,
+  // },
   // {
   //   name: "Ambientes",
   //   icon: DeckRoundedIcon,
-  //   component: Login,
+  //   component: Environments,
   // },
   // {
   //   name: "Mesas",
   //   icon: TableChartRounded,
-  //   component: Login,
+  //   component: Tables,
+  // },
+  // {
+  //   name: "Categorías",
+  //   icon: DescriptionRoundedIcon,
+  //   component: Categories,
+  // },
+  // {
+  //   name: "Subcategorías",
+  //   icon: AssessmentRoundedIcon,
+  //   component: Subcategories,
   // },
   // {
   //   name: "Productos",
   //   icon: FastfoodRoundedIcon,
-  //   component: Login,
-  // },
-  // {
-  //   name: "Ajustes",
-  //   icon: SettingsRounded,
-  //   component: Login,
+  //   component: Products,
   // },
 ];
 

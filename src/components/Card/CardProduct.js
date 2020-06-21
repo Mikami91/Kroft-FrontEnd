@@ -8,6 +8,8 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Card from "@material-ui/core/Card";
 import Badge from "@material-ui/core/Badge";
+// Core Components
+import CustomText from "../Typography/CustomText";
 // Styles
 import styles from "../../styles/components/cardProductStyle";
 // Assets
@@ -17,7 +19,7 @@ const useStyles = makeStyles(styles);
 
 export default function CardProduct(props) {
   const classes = useStyles();
-  const { prefix, price, quantity, name, onClick, color } = props;
+  const { photo, name, prefix, price, quantity, onClick, color } = props;
   const cardClasses = classNames({
     [classes.products]: true,
   });
@@ -25,20 +27,21 @@ export default function CardProduct(props) {
     <Badge badgeContent={quantity} color={color}>
       <CardActionArea>
         <Card className={cardClasses}>
-          <div className={classes.cardHeader}>
-            <h3 className={classes.price}>{prefix + " " + price}</h3>
-          </div>
+          {/* <div className={classes.cardHeader}> */}
+          {/* </div> */}
           <CardMedia
             component="img"
             // height="140"
             className={classes.image}
-            image={image}
+            image={photo}
             title={name}
             onClick={onClick}
             loading="lazy"
           />
           <div className={classes.cardFooter}>
-            <div className={classes.name}>{"Typography " + name}</div>
+            {/* <h3 className={classes.name}>{name}</h3> */}
+            <h3 className={classes.price}>{prefix + " " + price}</h3>
+            <CustomText text={name} color="default" adjust={true} />
           </div>
         </Card>
       </CardActionArea>
@@ -47,17 +50,19 @@ export default function CardProduct(props) {
 }
 // Proptypes
 CardProduct.defaultProps = {
+  photo: image,
+  name: "",
   filter: "",
   price: "",
   quantity: 0,
-  name: "",
   color: "primary",
 };
 CardProduct.propTypes = {
+  photo: PropTypes.string,
+  name: PropTypes.string,
   prefix: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   price: PropTypes.number,
   quantity: PropTypes.number,
-  name: PropTypes.string,
   color: PropTypes.oneOf([
     "primary",
     "secondary",

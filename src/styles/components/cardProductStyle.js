@@ -27,9 +27,12 @@ import {
       float: "left",
     },
     price: {
-      color: theme.palette.type === "light" ? "#424242" : "#ff9800",
+      color: theme.palette.type === "light" ? "#000" : "#ff9800",
       minHeight: "auto",
       fontSize: "0.8rem",
+      textAlign: "left",
+      // position: "absolute",
+      margin: "auto 0",
       [theme.breakpoints.only('sm')]: {
         fontSize: "1rem",
       },
@@ -48,7 +51,7 @@ import {
       color: "black",
       objectFit: "cover",
       objectPosition: "center",
-      width: "90%",
+      width: "100%",
       height: 65,
       margin: 'auto',
   		borderRadius: "3px",
@@ -73,6 +76,7 @@ import {
     cardFooter: {
       overflow: "hidden",
       textOverflow: "ellipsis",
+      wordBreak: "break-word",
       display: "-webkit-box",
       "-webkit-line-clamp": 1,
       [theme.breakpoints.up('md')]: {

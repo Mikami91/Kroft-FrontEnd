@@ -16,25 +16,28 @@ import CustomTableList from "../../components/Table/CustomTableList.js";
 // Icons
 import UndoIcon from "@material-ui/icons/Undo";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
-import InfoIcon from '@material-ui/icons/Info';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import DeleteIcon from '@material-ui/icons/Delete';
+import InfoIcon from "@material-ui/icons/Info";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import DeleteIcon from "@material-ui/icons/Delete";
 import PrintIcon from "@material-ui/icons/Print";
-import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
+import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SendIcon from "@material-ui/icons/Send";
+// Assets
+import image from '../../assets/img/backgrounds/productbackground.jpg';
 // Variables
 import { tables } from "../../variables/tables";
 import { categories } from "../../variables/categories";
 import { animes } from "../../variables/animes";
+import { products } from "../../variables/products";
 // Styles
 import styles from "../../styles/components/drawerStyle.js";
 
 const useStyles = makeStyles(styles);
 
 function DrawerProducts(props) {
-  const { direction, variant, open, close } = props;
+  const { direction, variant, open, close, background } = props;
   // Categories index State
   const [value, setValue] = useState(0);
   const handleChangeIndex = (index) => {
@@ -78,8 +81,8 @@ function DrawerProducts(props) {
           value={value}
           onChange={handleChangeIndex}
         />
-
-        <div className={classes.content}>
+        {/* https://source.unsplash.com/random */}
+        <div className={classes.content} style={{ backgroundImage: `url(${background})` }}>
           <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
             {categories.map((index, key) => {
               return (
@@ -93,8 +96,9 @@ function DrawerProducts(props) {
                     alignItems="flex-start"
                   >
                     <GridProducts
+                      data={products}
+                      keyData="id_category"
                       filter={index.id}
-                      data={tables}
                       //   onClick={handleOpenList}
                       color="secondary"
                     />
@@ -117,10 +121,10 @@ function DrawerProducts(props) {
             icon: FormatListBulletedIcon,
             onClick: handleOpenOrders,
           }}
-          rightButtons={[
+          leftButtons={[
             {
               type: "fab",
-              text: "/sales",
+              text: "/Kroft-FrontEnd/sales",
               value: "",
               color: "primary",
               icon: UndoIcon,
@@ -129,7 +133,7 @@ function DrawerProducts(props) {
               onClick: close,
             },
           ]}
-          leftButtons={[
+          rightButtons={[
             {
               type: "icon",
               text: "Impresiones",
@@ -166,6 +170,7 @@ function DrawerProducts(props) {
         />
 
         <CustomModal
+          // background={"https://source.unsplash.com/random"}
           open={openOrders}
           close={handleCloseOrders}
           title="Lista de ordenes"
@@ -174,105 +179,132 @@ function DrawerProducts(props) {
               padding="none"
               header={[
                 {
-                  text: 'Obser.',
-                  align: 'center'
+                  text: "Obser.",
+                  align: "center",
                 },
                 {
-                  text: 'Producto',
-                  align: 'left',
-                  colSpan: 2
+                  text: "Producto",
+                  align: "left",
+                  colSpan: 2,
                 },
                 {
-                  text: '-',
-                  align: 'center'
+                  text: "P./U.",
+                  align: "center",
                 },
                 {
-                  text: 'Cant.',
-                  align: 'center'
+                  text: "-",
+                  align: "center",
                 },
                 {
-                  text: '+',
-                  align: 'center'
+                  text: "Cant.",
+                  align: "center",
                 },
                 {
-                  text: 'Eliminar',
-                  align: 'center'
+                  text: "+",
+                  align: "center",
+                },
+                {
+                  text: "Eliminar",
+                  align: "center",
                 },
               ]}
               columns={[
                 {
-                  field: 'observation',
-                  type: 'icon',
-                  size: 'medium',
-                  align: 'center',
+                  field: "observation",
+                  type: "icon",
+                  size: "medium",
+                  align: "center",
                   icon: InfoIcon,
-                  iconColor: 'primary',
-                  onClick: handleOnClick
+                  iconColor: "primary",
+                  onClick: handleOnClick,
                 },
                 {
-                  field: 'name',
-                  type: 'text',
-                  align: 'left',
-                  colSpan: 2
+                  field: "name",
+                  type: "text",
+                  align: "left",
+                  color: "default",
+                  colSpan: 2,
                 },
                 {
-                  field: 'rest',
-                  type: 'icon',
-                  size: 'medium',
-                  align: 'center',
+                  field: "price",
+                  type: "text",
+                  align: "center",
+                  variant: "h6",
+                  color: "warning",
+                },
+                {
+                  field: "rest",
+                  type: "icon",
+                  size: "medium",
+                  align: "center",
                   icon: ChevronLeftIcon,
-                  iconSize: 'large',
-                  onClick: handleOnClick
+                  iconSize: "large",
+                  onClick: handleOnClick,
                 },
                 {
-                  field: 'id',
-                  type: 'text',
-                  align: 'center'
+                  field: "quantity",
+                  type: "text",
+                  align: "center",
+                  variant: "h6",
+                  color: "warning",
                 },
                 {
-                  field: 'plus',
-                  type: 'icon',
-                  size: 'medium',
-                  align: 'center',
+                  field: "plus",
+                  type: "icon",
+                  size: "medium",
+                  align: "center",
                   icon: ChevronRightIcon,
-                  iconSize: 'large',
-                  onClick: handleOnClick
+                  iconSize: "large",
+                  onClick: handleOnClick,
                 },
                 {
-                  field: 'delete',
-                  type: 'icon',
-                  size: 'medium',
-                  align: 'center',
+                  field: "delete",
+                  type: "icon",
+                  size: "medium",
+                  align: "center",
                   icon: DeleteIcon,
-                  iconColor: 'secondary',
-                  onClick: handleOnClick
+                  iconColor: "secondary",
+                  onClick: handleOnClick,
                 },
               ]}
               data={animes}
             />
           }
-          rightButtons={[
+          leftButtons={[
             {
               type: "button",
               text: "Eliminar",
-              color: "secondary",
-              variant: 'contained',
+              color: "danger",
+              variant: "contained",
               icon: DeleteSweepIcon,
             },
           ]}
           centerButtons={[
             {
               type: "text",
-              text: "Monto Total",
+              text: "Total:",
+              align: "left",
+              margin: true,
+              variant: "h6",
+              display: "inline",
+            },
+            {
+              type: "text",
+              text: " 258 Bs.",
+              align: "right",
+              margin: true,
+              variant: "h6",
+              color: "warning",
+              display: "inline",
             },
           ]}
-          leftButtons={[
+          rightButtons={[
             {
               type: "button",
               text: "Aceptar",
-              color: "primary",
-              variant: 'contained',
-              icon: PrintIcon
+              color: "success",
+              variant: "contained",
+              icon: PrintIcon,
             },
           ]}
           scroll="paper"
@@ -284,7 +316,52 @@ function DrawerProducts(props) {
           open={openPrints}
           close={handleClosePrints}
           title="Historial de impresiones"
-          // content={<EmployeeAdd />}
+          content={
+            <CustomTableList
+              padding="none"
+              header={[
+                {
+                  text: "ID",
+                  align: "center",
+                },
+                {
+                  text: "Producto",
+                  align: "left",
+                  colSpan: 2,
+                },
+                {
+                  text: "Acccion",
+                  align: "center",
+                },
+              ]}
+              columns={[
+                {
+                  field: "id",
+                  type: "text",
+                  align: "center",
+                  color: "default",
+                  colSpan: 1,
+                },
+                {
+                  field: "name",
+                  type: "text",
+                  align: "left",
+                  color: "default",
+                  colSpan: 2,
+                },
+                {
+                  field: "delete",
+                  type: "icon",
+                  size: "medium",
+                  align: "center",
+                  icon: PrintIcon,
+                  iconColor: "default",
+                  onClick: handleOnClick,
+                },
+              ]}
+              data={animes}
+            />
+          }
           maxWidth="sm"
           fullWidth
         />
@@ -293,7 +370,87 @@ function DrawerProducts(props) {
           open={openTotal}
           close={handleCloseTotal}
           title="Cuenta total"
-          // content={<EmployeeAdd />}
+          content={
+            <CustomTableList
+              padding="default"
+              header={[
+                {
+                  text: "ID",
+                  align: "center",
+                },
+                {
+                  text: "Producto",
+                  align: "left",
+                  colSpan: 2,
+                },
+                {
+                  text: "P./U.",
+                  align: "right",
+                },
+                {
+                  text: "Cantidad",
+                  align: "right",
+                },
+              ]}
+              columns={[
+                {
+                  field: "id",
+                  type: "text",
+                  align: "center",
+                  color: "default",
+                },
+                {
+                  field: "name",
+                  type: "text",
+                  align: "left",
+                  color: "default",
+                  colSpan: 2,
+                },
+                {
+                  field: "price",
+                  type: "text",
+                  align: "right",
+                  variant: "h6",
+                  color: "warning",
+                },
+                {
+                  field: "quantity",
+                  type: "text",
+                  align: "right",
+                  variant: "h6",
+                  color: "warning",
+                },
+              ]}
+              data={animes}
+            />
+          }
+          leftButtons={[
+            {
+              field: "delete",
+              type: "icon",
+              size: "medium",
+              align: "center",
+              icon: DeleteIcon,
+              iconColor: "secondary",
+              onClick: handleOnClick,
+            },
+          ]}
+          rightButtons={[
+            {
+              type: "text",
+              text: "Total:",
+              variant: "h6",
+              margin: true,
+              // color: "warning",
+            },
+            {
+              type: "text",
+              text: "258 Bs.",
+              variant: "h6",
+              margin: true,
+              color: "warning",
+            },
+          ]}
           maxWidth="sm"
           fullWidth
         />
@@ -307,12 +464,14 @@ DrawerProducts.defaultProps = {
   variant: "temporary",
   open: false,
   close: null,
+  background: "",
 };
 DrawerProducts.propTypes = {
   direction: PropTypes.oneOf(["left", "right", "top", "bottom"]),
   variant: PropTypes.oneOf(["permanent", "persistent", "temporary"]),
   open: PropTypes.bool,
   close: PropTypes.func,
+  background: PropTypes.string,
 };
 
 export default DrawerProducts;

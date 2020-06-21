@@ -2,6 +2,7 @@
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Sales from "../pages/Sales";
+import Collects from "../pages/Collects";
 import Products from "../pages/Products";
 //Kroft-FrontEnd
 const routes = [
@@ -40,6 +41,11 @@ const routes = [
     path: "/Kroft-FrontEnd/sales",
     name: "Sales",
     component: Sales,
+  },
+  {
+    path: "/Kroft-FrontEnd/collects",
+    name: "Collects",
+    component: Collects,
   },
   {
     path: "/Kroft-FrontEnd/products",

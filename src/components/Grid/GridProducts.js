@@ -14,12 +14,12 @@ const useStyles = makeStyles(styles);
 
 export default function GridProducts(props) {
   const classes = useStyles();
-  const { filter, data, onClick, color } = props;
+  const { data, keyData, filter, onClick, color } = props;
   // Using useMemo hook
   return useMemo(() => {
     // Render
     return data.map((index, key) => {
-      if (index.id_environment === filter) {
+      if (index[keyData] === filter) {
         const gridClasses = classNames({
           [classes.products]: true,
         });
@@ -40,10 +40,13 @@ export default function GridProducts(props) {
               // color="success"
               color={color}
               prefix="Bs."
-              price={index.id}
+              price={index.price}
+              photo={index.photo}
               name={index.name}
               quantity={index.id}
               onClick={onClick}
+
+              keyi={key}
             />
           </Grid>
         );
@@ -54,13 +57,15 @@ export default function GridProducts(props) {
 }
 // Proptypes
 GridProducts.defaultProps = {
-  filter: "",
   data: [],
+  keyData: "",
+  filter: "",
   color: "primary",
 };
 GridProducts.propTypes = {
-  filter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   data: PropTypes.array,
+  keyData: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  filter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   color: PropTypes.oneOf([
     "primary",
     "secondary",

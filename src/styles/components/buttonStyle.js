@@ -125,10 +125,10 @@ const buttonStyle = {
     },
   },
   leftFab: {
-    marginLeft: "16px",
+    marginRight: "16px",
   },
   rightFab: {
-    marginRight: "16px",
+    marginLeft: "16px",
   },
   
   fullWidth: {

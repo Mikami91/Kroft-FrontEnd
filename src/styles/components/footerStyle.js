@@ -38,13 +38,13 @@ const footerStyle = {
 		}
   },
   contentRight: {
-    marginRight: "auto",
+    marginLeft: "auto",
     display: "inline-flex",
     alignItems: "center",
     padding: "0px 4px 0px 4px",
   },
   contentLeft: {
-    marginLetf: "auto",
+    marginRight: "auto",
     display: "inline-flex",
     alignItems: "center",
     padding: "0px 4px 0px 4px",
@@ -90,11 +90,11 @@ const footerStyle = {
 		}
   },
   leftFab: {
-    marginLeft: '16px',
+    marginRight: '16px',
 
   },
   rightFab: {
-    marginRight: '16px',
+    marginLeft: '16px',
   },
   icons: {
 		width: '1.3rem',

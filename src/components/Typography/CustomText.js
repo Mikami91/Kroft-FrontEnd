@@ -11,9 +11,20 @@ const useStyles = makeStyles(styles);
 
 export default function CustomText(props) {
   const classes = useStyles();
-  const { text, variant, color, autoSize, align, margin, noWrap, display } = props.index;
+  const {
+    text,
+    variant,
+    color,
+    align,
+    autoSize,
+    adjust,
+    margin,
+    noWrap,
+    display,
+  } = props;
   const TextClasses = classNames({
     [classes.text]: autoSize,
+    [classes.adjustText]: adjust,
     [classes.margin]: margin,
     [classes[color + "Text"]]: true,
   });
@@ -33,10 +44,11 @@ export default function CustomText(props) {
 // Proptypes
 CustomText.defaultProps = {
   text: "",
-  color: "default",
-  autoSize: false,
   align: "inherit",
+  autoSize: false,
+  adjust: false,
   margin: false,
+  color: "default",
   variant: "inherit",
   noWrap: false,
   display: "initial",
@@ -45,6 +57,7 @@ CustomText.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   align: PropTypes.oneOf(["inherit", "left", "center", "right", "justify"]),
   autoSize: PropTypes.bool,
+  adjust: PropTypes.bool,
   margin: PropTypes.bool,
   color: PropTypes.oneOf([
     "default",

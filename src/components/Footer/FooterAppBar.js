@@ -115,8 +115,8 @@ function FooterAppBar(props) {
       variant="elevation"
     >
       <Toolbar variant={variant} className={classes.toolbar}>
-        <div className={classes.contentRight}>
-          {rightButtons.map((index, key) => {
+        <div className={classes.contentLeft}>
+          {leftButtons.map((index, key) => {
             // Button type
             if (index.type === "button") {
               return <DialogButton key={key} index={index} />;
@@ -127,7 +127,7 @@ function FooterAppBar(props) {
             }
             // Fab type
             if (index.type === "fab" && typeof index.icon !== "undefined") {
-              return <DialogFab key={key} index={index} align="right" />;
+              return <DialogFab key={key} index={index} align="left" />;
             }
             // Text type
             if (index.type === "text") {
@@ -154,8 +154,8 @@ function FooterAppBar(props) {
           </Fab>
         ) : null}
 
-        <div className={classes.contentLeft}>
-          {leftButtons.map((index, key) => {
+        <div className={classes.contentRight}>
+          {rightButtons.map((index, key) => {
             // Button type
             if (index.type === "button") {
               return <DialogButton key={key} index={index} />;
@@ -166,7 +166,7 @@ function FooterAppBar(props) {
             }
             // Fab type
             if (index.type === "fab" && typeof index.icon !== "undefined") {
-              return <DialogFab key={key} index={index} align="left" />;
+              return <DialogFab key={key} index={index} align="right" />;
             }
             // Text type
             if (index.type === "text") {

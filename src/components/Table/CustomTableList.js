@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 // Core Components
-import Text from '../Typography/Warning'
+import CustomText from '../Typography/CustomText';
 // Styles
 // import "../../styles/index.css";
 // Containers
@@ -52,9 +52,7 @@ function CustomTableList(props) {
                       size={col.size}
                       colSpan={col.colSpan}
                     >
-                      <Text>
-                        {index[col.field]}
-                      </Text>
+                      <CustomText text={index[col.field]} variant={col.variant} color={col.color} />
                     </TableCell>
                   );
                 } else {

@@ -119,7 +119,9 @@ export default function LoginPage(props) {
               >
                 <TabPanel value={value} index={0} centered>
                   <EmployeeLogin />
-                  <p className={classes.divider}>Inicio rápido</p>
+                  <Link to="/Kroft-FrontEnd/collects">
+                    <p className={classes.divider}>Inicio rápido</p>
+                  </Link>
                   <PinLogin />
                 </TabPanel>
                 <TabPanel value={value} index={1}>

@@ -155,7 +155,7 @@ export default function ChangeTable(props) {
                 categoryList={{
                   data: environments,
                   key: "id",
-                  value: "id",
+                  value: "name",
                 }}
                 itemList={{
                   data: tables,

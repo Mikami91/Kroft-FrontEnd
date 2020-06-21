@@ -10,8 +10,11 @@ import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import PersonIcon from "@material-ui/icons/Person";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
+import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
-import TableChartIcon from '@material-ui/icons/TableChart';
+
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
 // Views
 import Products from "../views/Sales/Products.js";
 // Layouts
@@ -27,8 +30,9 @@ import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomDrawer from "../components/Drawer/CustomDrawer.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomBotton from "../components/CustomButtons/Button.js";
-// Assets
-import image from '../assets/img/backgrounds/productbackground.jpg'
+
+import IconInput from "../components/CustomInput/IconInput.js";
+
 // Variables
 import { environments } from "../variables/environments";
 import { tables } from "../variables/tables";
@@ -37,7 +41,7 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SalesPage(props) {
+function CollectsPage(props) {
   // console.log(props.location);
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -48,9 +52,10 @@ function SalesPage(props) {
     setValue(index);
   };
   // State for Modal Products
-  const [openProducts, setOpenProducts] = useState(true);
+  const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = () => {
-    setOpenProducts(true);
+    setOpenProducts(false);
+    // setOpenProducts(true);
   };
   const handleCloseProducts = () => {
     setOpenProducts(false);
@@ -116,7 +121,7 @@ function SalesPage(props) {
                     value={value}
                     filter={index.id}
                     data={tables}
-                    onClick={handleOpenProducts}
+                    onClick={handleOpenChangeTables}
                     color="primary"
                   />
                 </Grid>
@@ -138,7 +143,7 @@ function SalesPage(props) {
           icon: RefreshIcon,
           onClick: () => null,
         }}
-        leftButtons={[
+        rightButtons={[
           {
             type: "fab",
             text: "/Kroft-FrontEnd/",
@@ -162,23 +167,11 @@ function SalesPage(props) {
           },
           {
             type: "text",
-            text: "Mesero N°",
-            color: "white",
-            margin: true,
-            autoSize: true,
+            text: "Cajero N°",
+            color: "default",
           },
         ]}
-        rightButtons={[
-          {
-            type: "icon",
-            text: "Cambiar de Mesa",
-            color: "default",
-            icon: SwapHorizIcon,
-            edge: "start",
-            size: "large",
-            disabled: false,
-            onClick: handleOpenChangeTables,
-          },
+        leftButtons={[
           {
             type: "icon",
             text: "Lista de Mesas",
@@ -204,52 +197,75 @@ function SalesPage(props) {
       <CustomModal
         open={openChangeTables}
         close={handleCloseChangeTables}
-        title="Cambio de mesas"
-        content={<ChangeTable environments={environments} tables={tables} />}
+        title="Cuenta total"
+        content={
+          <Fragment>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              <Grid item xs={12}>
+                <IconInput
+                  variant={"standard"}
+                  margin={"dense"}
+                  color="primary"
+                  // disabled={showProgress}
+                  type="numeric"
+                  label={"Bolivianos"}
+                  name="user"
+                  onChange={handleChange}
+                  // value={state.user}
+                  required
+                  icon={<CreditCardIcon />}
+                  iconPosition="end"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <IconInput
+                  variant={"standard"}
+                  margin={"dense"}
+                  color="primary"
+                  // disabled={showProgress}
+                  type="numeric"
+                  label={"Dolares"}
+                  name="user"
+                  onChange={handleChange}
+                  // value={state.user}
+                  required
+                  icon={<AttachMoneyIcon />}
+                  iconPosition="end"
+                />
+              </Grid>
+            </Grid>
+          </Fragment>
+        }
+        rightButtons={[
+          {
+            type: "text",
+            text: "Total: 258 Bs.",
+            color: "default",
+          },
+        ]}
         centerButtons={[
           {
-            type: "fab",
-            text: "/Kroft-FrontEnd/",
-            color: "primary",
-            icon: SwapHorizIcon,
-            size: "large",
-            disabled: false,
+            type: "text",
+            text: "Cambio: 100 Bs.",
+            color: "default",
           },
         ]}
         leftButtons={[
           {
             type: "button",
-            text: "Mesa N° 1",
-            color: "danger",
-            icon: TableChartIcon,
-            edge: "end",
-            size: "small",
-            variant: "contained",
-            disabled: false,
-            onClick: handleOpenProfile,
-          },
-          // {
-          //   type: "text",
-          //   text: "Typography",
-          //   color: "default",
-          // },
-        ]}
-        rightButtons={[
-          // {
-          //   type: "text",
-          //   text: "Typography",
-          //   color: "default",
-          // },
-          {
-            type: "button",
-            text: "Mesa N° 2",
+            text: "Cobrar",
             color: "success",
-            icon: TableChartIcon,
+            icon: DoneRoundedIcon,
             edge: "start",
             size: "large",
             variant: "contained",
             disabled: false,
-            onClick: handleOpenProfile,
+            onClick: null,
           },
         ]}
         scroll="paper"
@@ -269,13 +285,11 @@ function SalesPage(props) {
       <DrawerProducts
         direction="bottom"
         variant="temporary"
-        background={image}
         open={openProducts}
         close={handleCloseProducts}
       />
-
     </Fragment>
   );
 }
 
-export default withRouter(SalesPage);
+export default withRouter(CollectsPage);

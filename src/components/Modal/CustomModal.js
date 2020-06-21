@@ -42,6 +42,7 @@ export default function CustomModal(props) {
     centerButtons,
     rightButtons,
     leftButtons,
+    background,
   } = props;
   // Using useMemo hook
   return useMemo(() => {
@@ -77,10 +78,10 @@ export default function CustomModal(props) {
           {/* <h4 className={classes.modalTitle}>{title}</h4> */}
           {title}
         </DialogTitle>
-        <DialogContent>{content}</DialogContent>
+        <DialogContent style={{ backgroundImage: `url(${background})` }}>{content}</DialogContent>
         <DialogActions className={classes.modalFooter}>
-          <div className={classes.contentRight}>
-            {rightButtons.map((index, key) => {
+          <div className={classes.contentLeft}>
+            {leftButtons.map((index, key) => {
               // Button type
               if (index.type === "button") {
                 return <DialogButton key={key} index={index} />;
@@ -91,7 +92,7 @@ export default function CustomModal(props) {
               }
               // Fab type
               if (index.type === "fab" && typeof index.icon !== "undefined") {
-                return <DialogFab key={key} index={index} align="rightFab" />;
+                return <DialogFab key={key} index={index} align="leftFab" />;
               }
               // Text type
               if (index.type === "text") {
@@ -121,8 +122,8 @@ export default function CustomModal(props) {
             })}
           </div>
 
-          <div className={classes.contentLeft}>
-            {leftButtons.map((index, key) => {
+          <div className={classes.contentRight}>
+            {rightButtons.map((index, key) => {
               // Button type
               if (index.type === "button") {
                 return <DialogButton key={key} index={index} />;
@@ -133,7 +134,7 @@ export default function CustomModal(props) {
               }
               // Fab type
               if (index.type === "fab" && typeof index.icon !== "undefined") {
-                return <DialogFab key={key} index={index} align="leftFab" />;
+                return <DialogFab key={key} index={index} align="rightFab" />;
               }
               // Text type
               if (index.type === "text") {
@@ -157,6 +158,7 @@ CustomModal.defaultProps = {
   title: "Titulo...",
   content: null,
   footer: null,
+  background: "",
   // Buttons
   fabButton: {},
   centerButtons: [],
@@ -190,4 +192,5 @@ CustomModal.propTypes = {
       icon: PropTypes.object,
     })
   ),
+  background: PropTypes.string,
 };
