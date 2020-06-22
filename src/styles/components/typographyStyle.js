@@ -104,7 +104,7 @@ const typographyStyle = {
     color: theme.palette.type === "light" ? "#424242" : "#fff",
     fontWeight: "bold",
     minHeight: "auto",
-    fontSize: "0.6rem",
+    fontSize: "0.7rem",
     [theme.breakpoints.only("sm")]: {
       fontSize: "0.8rem",
     },

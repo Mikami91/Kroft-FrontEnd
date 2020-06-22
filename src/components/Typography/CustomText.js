@@ -33,7 +33,6 @@ export default function CustomText(props) {
       variant={variant}
       className={TextClasses}
       align={align}
-      margin={margin}
       noWrap={noWrap}
       display={display}
     >

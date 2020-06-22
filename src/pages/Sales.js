@@ -163,7 +163,7 @@ function SalesPage(props) {
           {
             type: "text",
             text: "Mesero N°",
-            color: "white",
+            color: "inherit",
             margin: true,
             autoSize: true,
           },

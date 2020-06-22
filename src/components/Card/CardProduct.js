@@ -60,7 +60,7 @@ CardProduct.propTypes = {
   photo: PropTypes.string,
   name: PropTypes.string,
   prefix: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  price: PropTypes.number,
+  price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   quantity: PropTypes.number,
   color: PropTypes.oneOf([
     "primary",

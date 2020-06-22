@@ -359,7 +359,7 @@ function DrawerProducts(props) {
                   size: "medium",
                   align: "center",
                   icon: PrintIcon,
-                  iconColor: "default",
+                  iconColor: "inherit",
                   onClick: handleOnClick,
                 },
               ]}

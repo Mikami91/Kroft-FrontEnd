@@ -78,7 +78,6 @@ function DrawerTablesList(props) {
           keepMounted: true, // Better open performance on mobile.
         }}
       >
-        {console.log("%c Render", "color: teal")}
         <List className={classes.drawer}>
           {categoryList.map((index) => {
             // Using useMemo hook
