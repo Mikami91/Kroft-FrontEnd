@@ -25,7 +25,7 @@ export default function CardProduct(props) {
   });
   return (
     <Badge badgeContent={quantity} color={color}>
-      <CardActionArea>
+      <CardActionArea onClick={onClick}>
         <Card className={cardClasses}>
           {/* <div className={classes.cardHeader}> */}
           {/* </div> */}
@@ -35,7 +35,6 @@ export default function CardProduct(props) {
             className={classes.image}
             image={photo}
             title={name}
-            onClick={onClick}
             loading="lazy"
           />
           <div className={classes.cardFooter}>

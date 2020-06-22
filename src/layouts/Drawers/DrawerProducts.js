@@ -25,7 +25,7 @@ import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SendIcon from "@material-ui/icons/Send";
 // Assets
-import image from '../../assets/img/backgrounds/productbackground.jpg';
+import image from "../../assets/img/backgrounds/productbackground.jpg";
 // Variables
 import { tables } from "../../variables/tables";
 import { categories } from "../../variables/categories";
@@ -82,7 +82,10 @@ function DrawerProducts(props) {
           onChange={handleChangeIndex}
         />
         {/* https://source.unsplash.com/random */}
-        <div className={classes.content} style={{ backgroundImage: `url(${background})` }}>
+        <div
+          className={classes.content}
+          style={{ backgroundImage: `url(${background})` }}
+        >
           <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
             {categories.map((index, key) => {
               return (
@@ -97,9 +100,10 @@ function DrawerProducts(props) {
                   >
                     <GridProducts
                       data={products}
-                      keyData="id_category"
+                      keyCategory="id_category"
+                      keySubcategory="id_subcategory"
                       filter={index.id}
-                      //   onClick={handleOpenList}
+                      onClick={handleOpenTotal}
                       color="secondary"
                     />
                   </Grid>
