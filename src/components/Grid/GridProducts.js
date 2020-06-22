@@ -9,6 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import CardProduct from "../../components/Card/CardProduct.js";
 import CustomModal from "../../components/Modal/CustomModal.js";
 import GridSubProducts from "../../components/Grid/GridSubProducts";
+// Assets
+import image from "../../assets/img/defaults/product.png";
 // Styles
 import styles from "../../styles/components/gridStyle";
 
@@ -61,20 +63,29 @@ export default function GridProducts(props) {
                 elevation={0}
                 className={gridClasses}
               >
-                <CardProduct
-                  // color="success"
-                  color={color}
-                  prefix="Bs."
-                  price={index.price}
-                  photo={index.photo}
-                  name={index.name}
-                  quantity={index.id}
-                  onClick={
-                    index[keySubcategory] === null
-                      ? onClick
-                      : () => handleOpenSub(index.name, index[keySubcategory])
-                  }
-                />
+                {index[keySubcategory] === null ? (
+                  <CardProduct
+                    color={color}
+                    prefix={"Bs."}
+                    price={index.price}
+                    photo={index.photo}
+                    name={index.name}
+                    quantity={index.id}
+                    onClick={onClick}
+                  />
+                ) : (
+                  <CardProduct
+                    color={color}
+                    prefix={""}
+                    price={""}
+                    photo={image}
+                    name={index.name}
+                    quantity={index.id}
+                    onClick={() =>
+                      handleOpenSub(index.name, index[keySubcategory])
+                    }
+                  />
+                )}
               </Grid>
             );
           }
@@ -90,7 +101,7 @@ export default function GridProducts(props) {
               data={subCategory.payload}
               keyData="id_subcategory"
               filter={subCategory.key}
-              // onClick={handleOpenTotal}
+              onClick={onClick}
               color="secondary"
             />
           }
