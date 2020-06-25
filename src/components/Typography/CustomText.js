@@ -23,7 +23,7 @@ export default function CustomText(props) {
     display,
   } = props;
   const TextClasses = classNames({
-    [classes.text]: autoSize,
+    // [classes.text]: autoSize,
     [classes.adjustText]: adjust,
     [classes.margin]: margin,
     [classes[color + "Text"]]: true,
@@ -60,6 +60,7 @@ CustomText.propTypes = {
   margin: PropTypes.bool,
   color: PropTypes.oneOf([
     "default",
+    "inherit",
     "white",
     "warning",
     "success",

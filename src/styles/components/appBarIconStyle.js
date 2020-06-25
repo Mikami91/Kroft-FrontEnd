@@ -100,6 +100,14 @@ const appBarIconStyle = {
       marginBottom: "0.2rem",
     },
   },
+  adjustContent: {
+    marginTop: "0rem",
+    marginBottom: "0rem",
+    overflow: "hidden",
+    whiteSpace: "nowrap",
+    textOverflow: "ellipsis",
+    width: "100%",
+  },
   fabButton: {
     background: theme.palette.type === "light" ? "#fff" : "#424242",
     position: "relative",
@@ -128,7 +136,7 @@ const appBarIconStyle = {
       height: "4.2rem",
     },
   },
-  image2: {
+  imageIcon: {
     objectFit: "cover",
     objectPosition: "center",
     width: "1.8rem",
@@ -150,26 +158,26 @@ const appBarIconStyle = {
       height: "4rem",
     },
   },
-  image: {
+  imageButton: {
     objectFit: "cover",
     objectPosition: "center",
-    width: "2.2rem",
-    height: "2.2rem",
+    width: "2rem",
+    height: "2rem",
     [theme.breakpoints.only("sm")]: {
-      width: "2.6rem",
-      height: "2.6rem",
+      width: "2rem",
+      height: "2rem",
     },
     [theme.breakpoints.only("md")]: {
-      width: "3.2rem",
-      height: "3.2rem",
+      width: "2.2rem",
+      height: "2.2rem",
     },
     [theme.breakpoints.only("lg")]: {
-      width: "4.3rem",
-      height: "4.3rem",
+      width: "2.2rem",
+      height: "2.2rem",
     },
     [theme.breakpoints.only("xl")]: {
-      width: "4.8rem",
-      height: "4.8rem",
+      width: "2.4rem",
+      height: "2.4rem",
     },
   },
   // Select

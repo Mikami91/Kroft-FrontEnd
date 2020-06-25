@@ -7,7 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import AppBarIcons from "../../components/AppBar/AppBarIcons.js";
+import AppBarButtonNav from "../../components/AppBar/AppBarButtonNav.js";
 import FooterAppBar from "../../components/Footer/FooterAppBar.js";
 import TabPanel from "../../components/Panel/TabPanel";
 import GridProducts from "../../components/Grid/GridProducts";
@@ -40,7 +40,7 @@ function DrawerProducts(props) {
   const { direction, variant, open, close, background } = props;
   // Categories index State
   const [value, setValue] = useState(0);
-  const handleChangeIndex = (newValue) => {
+  const handleChangeIndex = (e, newValue) => {
     setValue(newValue);
   };
   // State for Modal Orders
@@ -73,13 +73,14 @@ function DrawerProducts(props) {
           keepMounted: true,
         }}
       >
-        <AppBarIcons
+        <AppBarButtonNav
           color="inherit"
           selectColor="secondary"
           hoverColor="secondary"
           data={categories}
           value={value}
           onChange={handleChangeIndex}
+          iconType="img"
         />
         {/* https://source.unsplash.com/random */}
         <div

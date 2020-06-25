@@ -12,11 +12,14 @@ import pescado from '../assets/img/categories/pescado.png';
 import pollo from '../assets/img/categories/pollo.png';
 import vinos from '../assets/img/categories/vinos.png';
 
+import WhatshotIcon from "@material-ui/icons/Whatshot";
+
+
 export const categories = [
 	{
 		id: 1,
 		name: 'Almuerzos',
-		photo: almuerzo
+		photo: WhatshotIcon
 	},
 	{
 		id: 2,
@@ -31,7 +34,7 @@ export const categories = [
 	{
 		id: 4,
 		name: "cervezas",
-		photo: cervezas
+		photo: "cervezas"
 	},
 	{
 		id: 5,

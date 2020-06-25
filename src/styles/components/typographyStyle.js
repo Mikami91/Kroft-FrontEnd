@@ -15,6 +15,24 @@ const typographyStyle = {
     ...defaultFont,
     fontSize: "14px",
   },
+  adjustText: {
+    color: theme.palette.type === "light" ? "#424242" : "#fff",
+    fontWeight: "bold",
+    minHeight: "auto",
+    fontSize: "0.7rem",
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "0.8rem",
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "1rem",
+    },
+    [theme.breakpoints.only("lg")]: {
+      fontSize: "1.1rem",
+    },
+    [theme.breakpoints.only("xl")]: {
+      fontSize: "1.2rem",
+    },
+  },
   defaultHeaderMargins: {
     marginTop: "20px",
     marginBottom: "10px",
@@ -59,6 +77,12 @@ const typographyStyle = {
   whiteText: {
     color: whiteColor,
   },
+  defaultText: {
+    color: theme.palette.type === "light" ? "#424242" : "#fff",
+  },
+  inheritText: {
+    color: "inherit",
+  },
   margin: {
     marginLeft: "0.2rem",
     marginRight: "0.2rem",
@@ -99,25 +123,7 @@ const typographyStyle = {
       lineHeight: "2rem",
       maxWidth: "10rem",
     },
-  },
-  adjustText: {
-    color: theme.palette.type === "light" ? "#424242" : "#fff",
-    fontWeight: "bold",
-    minHeight: "auto",
-    fontSize: "0.7rem",
-    [theme.breakpoints.only("sm")]: {
-      fontSize: "0.8rem",
-    },
-    [theme.breakpoints.only("md")]: {
-      fontSize: "1rem",
-    },
-    [theme.breakpoints.only("lg")]: {
-      fontSize: "1.1rem",
-    },
-    [theme.breakpoints.only("xl")]: {
-      fontSize: "1.2rem",
-    },
-  },
+  }
 };
 
 export default typographyStyle;
