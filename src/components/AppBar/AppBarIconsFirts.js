@@ -8,8 +8,6 @@ import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 import Tabs from "@material-ui/core/Tabs";
 import { makeStyles } from "@material-ui/core/styles";
-// Core Components
-import CustomText from "../../components/Typography/CustomText";
 // Icons
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 // Styles
@@ -97,11 +95,9 @@ const AppBarIcons = (props) => {
                     src={index.photo}
                     alt={index.name}
                     color={index.selectColor}
-                    className={classes.image2}
+                    className={classes.image}
                   />
                 </Fab>
-                <br />
-                <CustomText text={index.name} adjust />
               </Grid>
             );
           }, [data, value]);

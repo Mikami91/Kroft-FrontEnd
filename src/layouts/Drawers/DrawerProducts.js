@@ -40,8 +40,8 @@ function DrawerProducts(props) {
   const { direction, variant, open, close, background } = props;
   // Categories index State
   const [value, setValue] = useState(0);
-  const handleChangeIndex = (index) => {
-    setValue(index);
+  const handleChangeIndex = (newValue) => {
+    setValue(newValue);
   };
   // State for Modal Orders
   const [openOrders, setOpenOrders] = useState(false);
@@ -74,7 +74,7 @@ function DrawerProducts(props) {
         }}
       >
         <AppBarIcons
-          color="primary"
+          color="inherit"
           selectColor="secondary"
           hoverColor="secondary"
           data={categories}

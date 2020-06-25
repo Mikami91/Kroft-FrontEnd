@@ -33,15 +33,15 @@ import {
       width: "auto",
       height: "100vh",
       overflowY: "auto",
-      marginTop: "2.5rem",
-      marginBottom: "-6rem",
       alignContent: "flex-start",
       paddingTop: 0,
       paddingBottom: "9.5rem",
       paddingRight: 0,
       paddingLeft: 0,
+      marginTop: "3.2rem",
+      marginBottom: "-6rem",
       [theme.breakpoints.only("sm")]: {
-        marginTop: "3rem",
+        marginTop: "3.4rem",
       },
       [theme.breakpoints.only("md")]: {
         marginTop: "4rem",

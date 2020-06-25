@@ -4,9 +4,17 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 // @material-ui/Componentes
 import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
+import CardActionArea from "@material-ui/core/CardActionArea";
 import Fab from "@material-ui/core/Fab";
 import Tabs from "@material-ui/core/Tabs";
+
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 // Core Components
 import CustomText from "../../components/Typography/CustomText";
@@ -18,7 +26,7 @@ import styles from "../../styles/components/appBarIconStyle";
 const useStyles = makeStyles(styles);
 
 // Component
-const AppBarIcons = (props) => {
+const AppBarIcons2 = (props) => {
   // Props
   const {
     // AppBar
@@ -46,22 +54,13 @@ const AppBarIcons = (props) => {
       className={appBarClasses}
       variant="elevation"
     >
-      <Tabs
-        value={value}
-        className={classes.gridIcons}
-        // onChange={handleChange}
-        indicatorColor={selectColor}
-        textColor={selectColor}
-        variant="scrollable"
-        scrollButtons="auto"
-        indicator="false"
-        TabIndicatorProps={{
-          // indicator: false,
-          style: {
-            paddingBottom: -18,
-            display: "none",
-          },
-        }}
+      {/* <Toolbar> */}
+      <Grid
+        container
+        direction="row"
+        justify="center"
+        alignItems="center"
+        spacing={1}
       >
         {data.map((index, key) => {
           // Using useMemo hook
@@ -80,39 +79,40 @@ const AppBarIcons = (props) => {
                 md={1}
                 lg={1}
                 xl={1}
-                elevation={0}
+                elevation={1}
                 className={classes.gridIcons}
               >
-                <Fab
-                  key={key}
-                  disabled={index.disabled}
-                  value={value}
-                  onClick={() => onChange(key)}
-                  color={color}
-                  // size="small"
-                  aria-label={index.label}
-                  className={imageFabClasses}
-                >
-                  <img
-                    src={index.photo}
-                    alt={index.name}
-                    color={index.selectColor}
-                    className={classes.image2}
-                  />
-                </Fab>
-                <br />
-                <CustomText text={index.name} adjust />
+                    <Fab
+                      key={key}
+                      disabled={index.disabled}
+                      value={value}
+                      onClick={() => onChange(key)}
+                      color={color}
+                      // size="small"
+                      aria-label={index.label}
+                      className={imageFabClasses}
+                    >
+                      <img
+                        src={index.photo}
+                        alt={index.name}
+                        color={index.selectColor}
+                        className={classes.image2}
+                      />
+                    </Fab>
+                    <br/>
+                    <CustomText text={index.name} adjust />
               </Grid>
             );
           }, [data, value]);
         })}
-      </Tabs>
+      </Grid>
+      {/* </Toolbar> */}
     </AppBar>
   );
 };
 
 // PropTypes
-AppBarIcons.defaultProps = {
+AppBarIcons2.defaultProps = {
   // AppBar
   position: "fixed",
   color: "primary",
@@ -125,7 +125,7 @@ AppBarIcons.defaultProps = {
   selectColor: "primary",
   hoverColor: "primary",
 };
-AppBarIcons.propTypes = {
+AppBarIcons2.propTypes = {
   // AppBar
   position: PropTypes.oneOf([
     "absolute",
@@ -169,4 +169,4 @@ AppBarIcons.propTypes = {
   ]),
 };
 
-export default AppBarIcons;
+export default AppBarIcons2;
