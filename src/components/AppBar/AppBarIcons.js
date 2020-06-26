@@ -87,7 +87,7 @@ const AppBarIcons = (props) => {
                   key={key}
                   disabled={index.disabled}
                   value={value}
-                  onClick={() => onChange(key)}
+                  onClick={(e) => onChange(e, key)}
                   color={color}
                   // size="small"
                   aria-label={index.label}

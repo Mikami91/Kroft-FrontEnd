@@ -7,7 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import AppBarButtonNav from "../../components/AppBar/AppBarButtonNav.js";
+import AppBarIcons from "../../components/AppBar/AppBarIcons.js";
 import FooterAppBar from "../../components/Footer/FooterAppBar.js";
 import TabPanel from "../../components/Panel/TabPanel";
 import GridProducts from "../../components/Grid/GridProducts";
@@ -73,14 +73,13 @@ function DrawerProducts(props) {
           keepMounted: true,
         }}
       >
-        <AppBarButtonNav
+        <AppBarIcons
           color="inherit"
           selectColor="secondary"
           hoverColor="secondary"
           data={categories}
           value={value}
           onChange={handleChangeIndex}
-          iconType="img"
         />
         {/* https://source.unsplash.com/random */}
         <div
@@ -456,6 +455,7 @@ function DrawerProducts(props) {
               color: "warning",
             },
           ]}
+          scroll="paper"
           maxWidth="sm"
           fullWidth
         />

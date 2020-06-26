@@ -1,10 +1,10 @@
 // Assets
 import almuerzo from '../assets/img/categories/almuerzo.png';
-import bebidas from '../assets/img/categories/bebidas.png';
-import carne from '../assets/img/categories/carne.png';
-import cervezas from '../assets/img/categories/cervezas.png';
-import drink from '../assets/img/categories/drink.png';
-import juice from '../assets/img/categories/juice.png';
+import bebidas from '../assets/img/categories/food-and-restaurant (7).svg';
+import carne from '../assets/img/categories/food-and-restaurant (2).svg';
+import cervezas from '../assets/img/categories/food-and-restaurant (4).svg';
+import drink from '../assets/img/categories/food-and-restaurant1.svg';
+import juice from '../assets/img/categories/cake-piece.svg';
 import monte from '../assets/img/categories/monte.png';
 import ome from '../assets/img/categories/ome.png';
 import other from '../assets/img/categories/other.png';
@@ -12,14 +12,11 @@ import pescado from '../assets/img/categories/pescado.png';
 import pollo from '../assets/img/categories/pollo.png';
 import vinos from '../assets/img/categories/vinos.png';
 
-import WhatshotIcon from "@material-ui/icons/Whatshot";
-
-
 export const categories = [
 	{
 		id: 1,
 		name: 'Almuerzos',
-		photo: WhatshotIcon
+		photo: almuerzo
 	},
 	{
 		id: 2,
@@ -34,7 +31,7 @@ export const categories = [
 	{
 		id: 4,
 		name: "cervezas",
-		photo: "cervezas"
+		photo: cervezas
 	},
 	{
 		id: 5,

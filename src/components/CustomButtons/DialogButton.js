@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import Hidden from "@material-ui/core/Hidden";
 import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
 // Styles
 import styles from "../../styles/components/buttonStyle.js";
 
@@ -19,19 +21,33 @@ function DialogButton(props) {
     [classes[color + "Text"]]: color && variant !== "contained",
     [classes.disabled]: disabled,
   });
-  return (
-    <Button
-      disabled={disabled}
-      variant={variant}
-      //   color={color}
-      className={btnClasses}
-      endIcon={typeof icon !== "undefined" ? createElement(icon) : null}
-      onClick={onClick}
-      html={html}
-    >
-      {text}
-    </Button>
-  );
+  return [
+    <Hidden mdUp>
+      <IconButton
+        aria-label={text}
+        disabled={disabled}
+        variant={variant}
+        className={btnClasses}
+        onClick={onClick}
+        html={html}
+      >
+        {typeof icon !== "undefined" ? createElement(icon) : null}
+      </IconButton>
+    </Hidden>,
+
+    <Hidden smDown>
+      <Button
+        disabled={disabled}
+        variant={variant}
+        className={btnClasses}
+        endIcon={typeof icon !== "undefined" ? createElement(icon) : null}
+        onClick={onClick}
+        html={html}
+      >
+        {text}
+      </Button>
+    </Hidden>,
+  ];
 }
 // PropTypes
 DialogButton.defaultProps = {
