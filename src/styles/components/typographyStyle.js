@@ -94,7 +94,7 @@ const typographyStyle = {
     color: "#777",
   },
   text: {
-    color: "#fff",
+    // color: "#fff",
     margin: "0px 10px 0px 10px",
     overflow: "hidden",
     whiteSpace: "nowrap",
@@ -123,7 +123,10 @@ const typographyStyle = {
       lineHeight: "2rem",
       maxWidth: "10rem",
     },
-  }
+  },
+  bold: {
+    fontWeight: "bold",
+  } 
 };
 
 export default typographyStyle;

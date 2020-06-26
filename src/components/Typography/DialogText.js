@@ -9,13 +9,14 @@ import styles from "../../styles/components/typographyStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function CustomText(props) {
+export default function DialogText(props) {
   const classes = useStyles();
-  const { text, variant, color, autoSize, align, margin, noWrap, display } = props.index;
+  const { text, variant, color, autoSize, align, margin, bold, noWrap, display } = props.index;
   const TextClasses = classNames({
     [classes.text]: autoSize,
     [classes.margin]: margin,
     [classes[color + "Text"]]: true,
+    [classes.bold]: bold,
   });
   return (
     <Typography
@@ -30,22 +31,25 @@ export default function CustomText(props) {
   );
 }
 // Proptypes
-CustomText.defaultProps = {
+DialogText.defaultProps = {
   text: "",
   color: "default",
   autoSize: false,
   align: "inherit",
   margin: false,
   variant: "inherit",
+  bold: false,
   noWrap: false,
   display: "initial",
 };
-CustomText.propTypes = {
+DialogText.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   align: PropTypes.oneOf(["inherit", "left", "center", "right", "justify"]),
   autoSize: PropTypes.bool,
   margin: PropTypes.bool,
+  bold: PropTypes.bool,
   color: PropTypes.oneOf([
+    "inherit",
     "default",
     "white",
     "warning",

@@ -13,7 +13,7 @@ import styles from "../../styles/components/buttonStyle.js";
 const useStyles = makeStyles(styles);
 
 function DialogButton(props) {
-  const { disabled, variant, color, onClick, html, text, icon } = props.index;
+  const { disabled, variant, color, onClick, html, text, icon, key } = props.index;
   const classes = useStyles();
   const btnClasses = classNames({
     [classes.dialogButton]: true,
@@ -22,7 +22,7 @@ function DialogButton(props) {
     [classes.disabled]: disabled,
   });
   return [
-    <Hidden mdUp>
+    <Hidden mdUp key={key + "small"}>
       <IconButton
         aria-label={text}
         disabled={disabled}
@@ -35,7 +35,7 @@ function DialogButton(props) {
       </IconButton>
     </Hidden>,
 
-    <Hidden smDown>
+    <Hidden smDown key={key+ "large"}>
       <Button
         disabled={disabled}
         variant={variant}

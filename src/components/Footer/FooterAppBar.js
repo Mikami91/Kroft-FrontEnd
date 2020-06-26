@@ -131,7 +131,7 @@ function FooterAppBar(props) {
             }
             // Text type
             if (index.type === "text") {
-              return <DialogText  key={key} index={index} />;
+              return <DialogText key={key} index={index} />;
             }
           })}
         </div>
@@ -170,7 +170,7 @@ function FooterAppBar(props) {
             }
             // Text type
             if (index.type === "text") {
-              return <DialogText  key={key} index={index} />;
+              return <DialogText key={key} index={index} />;
             }
           })}
         </div>
@@ -229,11 +229,15 @@ FooterAppBar.propTypes = {
       type: PropTypes.oneOf(["icon", "fab", "text"]),
       text: PropTypes.string,
       color: PropTypes.oneOf([
-        "default",
         "inherit",
+        "default",
+        "white",
+        "warning",
+        "success",
+        "danger",
+        "info",
         "primary",
         "secondary",
-        "transparent",
       ]),
       icon: PropTypes.object,
       edge: PropTypes.oneOf(["start", "end", false]),
@@ -247,11 +251,15 @@ FooterAppBar.propTypes = {
       type: PropTypes.oneOf(["icon", "fab", "text"]),
       text: PropTypes.string,
       color: PropTypes.oneOf([
-        "default",
         "inherit",
+        "default",
+        "white",
+        "warning",
+        "success",
+        "danger",
+        "info",
         "primary",
         "secondary",
-        "transparent",
       ]),
       icon: PropTypes.object,
       edge: PropTypes.oneOf(["start", "end", false]),

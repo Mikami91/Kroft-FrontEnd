@@ -19,6 +19,7 @@ export default function CustomText(props) {
     autoSize,
     adjust,
     margin,
+    bold,
     noWrap,
     display,
   } = props;
@@ -27,6 +28,7 @@ export default function CustomText(props) {
     [classes.adjustText]: adjust,
     [classes.margin]: margin,
     [classes[color + "Text"]]: true,
+    [classes.bold]: bold,
   });
   return (
     <Typography
@@ -49,6 +51,7 @@ CustomText.defaultProps = {
   margin: false,
   color: "default",
   variant: "inherit",
+  bold: false,
   noWrap: false,
   display: "initial",
 };
@@ -58,6 +61,7 @@ CustomText.propTypes = {
   autoSize: PropTypes.bool,
   adjust: PropTypes.bool,
   margin: PropTypes.bool,
+  bold: PropTypes.bool,
   color: PropTypes.oneOf([
     "default",
     "inherit",

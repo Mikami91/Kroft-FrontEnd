@@ -136,6 +136,22 @@ function DrawerProducts(props) {
               disabled: false,
               onClick: close,
             },
+            {
+              type: "text",
+              text: "Total:",
+              color: "inherit",
+              variant: "h4",
+              margin: true,
+              bold: true,
+            },
+            {
+              type: "text",
+              text: "Bs. 285",
+              variant: "h4",
+              color: "warning",
+              margin: true,
+              bold: true,
+            },
           ]}
           rightButtons={[
             {
