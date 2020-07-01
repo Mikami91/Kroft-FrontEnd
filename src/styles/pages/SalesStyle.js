@@ -41,7 +41,7 @@ const SalesStyle = {
       marginTop: "2.5rem",
     },
     [theme.breakpoints.only("xl")]: {
-      marginTop: "2.5rem",
+      marginTop: "3.5rem",
     },
   },
   root: {

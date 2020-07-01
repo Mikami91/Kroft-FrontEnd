@@ -24,6 +24,9 @@ import PrintIcon from "@material-ui/icons/Print";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SendIcon from "@material-ui/icons/Send";
+
+import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
+
 // Assets
 import image from "../../assets/img/backgrounds/productbackground.jpg";
 // Variables
@@ -37,7 +40,7 @@ import styles from "../../styles/components/drawerStyle.js";
 const useStyles = makeStyles(styles);
 
 function DrawerProducts(props) {
-  const { direction, variant, open, close, background } = props;
+  const { direction, variant, open, close, background, table } = props;
   // Categories index State
   const [value, setValue] = useState(0);
   const handleChangeIndex = (e, newValue) => {
@@ -116,6 +119,13 @@ function DrawerProducts(props) {
         <FooterAppBar
           color="inherit"
           variant="dense"
+          floatChip={{
+            primary: table.name,
+            secondary: table.environment_name,
+            color: table.state === 0 ? "success" : table.state === 1 ? "danger" : table.state === 2 ? "warning" : "gray",
+            type: "icon",
+            icon: TableChartRoundedIcon
+          }}
           fabButton={{
             disabled: false,
             color: "secondary",
@@ -142,14 +152,16 @@ function DrawerProducts(props) {
               color: "inherit",
               variant: "h4",
               margin: true,
+              large: true,
               bold: true,
             },
             {
               type: "text",
-              text: "Bs. 285",
+              text: `Bs. ${table.amount}`,
               variant: "h4",
               color: "warning",
               margin: true,
+              large: true,
               bold: true,
             },
           ]}

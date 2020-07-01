@@ -11,6 +11,15 @@ const footerStyle = {
     position: "fixed",
     // backgroundColor: '#0b463b',
   },
+  floatChip: {
+    position: 'absolute',
+    zIndex: 1,
+    top: "-3.5rem",
+    left: 10,
+    right: 0,
+    margin: '0 auto',
+    width: 'auto',
+  },
   fabButtonFloat: {
     position: 'absolute',
     zIndex: 1,

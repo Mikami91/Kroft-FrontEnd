@@ -11,12 +11,13 @@ const useStyles = makeStyles(styles);
 
 export default function DialogText(props) {
   const classes = useStyles();
-  const { text, variant, color, autoSize, align, margin, bold, noWrap, display } = props.index;
+  const { text, variant, color, autoSize, large, align, margin, bold, noWrap, display } = props.index;
   const TextClasses = classNames({
     [classes.text]: autoSize,
+    [classes.largeText]: large,
     [classes.margin]: margin,
     [classes[color + "Text"]]: true,
-    [classes.bold]: bold,
+    [classes.bold]: bold, 
   });
   return (
     <Typography
@@ -35,6 +36,7 @@ DialogText.defaultProps = {
   text: "",
   color: "default",
   autoSize: false,
+  large: false,
   align: "inherit",
   margin: false,
   variant: "inherit",
@@ -46,6 +48,7 @@ DialogText.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   align: PropTypes.oneOf(["inherit", "left", "center", "right", "justify"]),
   autoSize: PropTypes.bool,
+  large: PropTypes.bool,
   margin: PropTypes.bool,
   bold: PropTypes.bool,
   color: PropTypes.oneOf([

@@ -33,6 +33,24 @@ const typographyStyle = {
       fontSize: "1.2rem",
     },
   },
+  largeText: {
+    color: theme.palette.type === "light" ? "#424242" : "#fff",
+    fontWeight: "bold",
+    minHeight: "auto",
+    fontSize: "1rem",
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "1.3rem",
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "1.7rem",
+    },
+    [theme.breakpoints.only("lg")]: {
+      fontSize: "1.8rem",
+    },
+    [theme.breakpoints.only("xl")]: {
+      fontSize: "1.9rem",
+    },
+  },
   defaultHeaderMargins: {
     marginTop: "20px",
     marginBottom: "10px",

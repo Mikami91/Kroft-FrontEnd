@@ -21,12 +21,12 @@ const useStyles = makeStyles(styles);
 
 function GridTables(props) {
   const classes = useStyles();
-  const { value, filter, data, onClick, color } = props;
+  const { value, filter, data, keyData, onClick, color } = props;
   // Using useMemo hook
   return useMemo(() => {
     // Render
     return data.map((index, key) => {
-      if (index.id_environment === filter) {
+      if (index[keyData] === filter) {
         const gridClasses = classNames({
           [classes.tables]: true,
         });
@@ -50,7 +50,7 @@ function GridTables(props) {
           >
             {/* <Link to={{ pathname: "/products", state: { message: index.id, value: value } }} > */}
             <CardActionArea>
-              <Card className={cardClasses} onClick={onClick}>
+              <Card className={cardClasses} onClick={() => onClick(index)}>
                 <CardMedia
                   component="img"
                   // height="140"
@@ -83,12 +83,17 @@ function GridTables(props) {
 GridTables.defaultProps = {
   filter: "",
   data: [],
+  keyData: "",
   onClick: null,
   color: "primary",
 };
 GridTables.propTypes = {
   filter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   data: PropTypes.array,
+  keyData: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   onClick: PropTypes.func,
   color: PropTypes.oneOf([
     "primary",

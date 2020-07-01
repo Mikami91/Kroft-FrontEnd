@@ -41,16 +41,26 @@ function SalesPage(props) {
   // console.log(props.location);
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
-    // console.log(newValue);
     setValue(newValue);
   };
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+  // State Current Table
+  const [currentTable, setCurrentTable] = useState({
+    id: null,
+    name: "",
+    prefix: "",
+    amount: 0,
+    state: null,
+    environment_id: null,
+    environment_name: "",
+  });
   // State for Modal Products
   const [openProducts, setOpenProducts] = useState(true);
-  const handleOpenProducts = () => {
+  const handleOpenProducts = (args) => {
     setOpenProducts(true);
+    setCurrentTable(args);
   };
   const handleCloseProducts = () => {
     setOpenProducts(false);
@@ -114,6 +124,7 @@ function SalesPage(props) {
                 >
                   <GridTables
                     value={value}
+                    keyData={"environment_id"}
                     filter={index.id}
                     data={tables}
                     onClick={handleOpenProducts}
@@ -272,6 +283,7 @@ function SalesPage(props) {
         background={image}
         open={openProducts}
         close={handleCloseProducts}
+        table={currentTable}
       />
 
     </Fragment>

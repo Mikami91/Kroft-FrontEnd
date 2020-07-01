@@ -16,6 +16,7 @@ import DialogButton from "../CustomButtons/DialogButton";
 import DialogIcon from "../CustomButtons/DialogIcon";
 import DialogFab from "../CustomButtons/DialogFab";
 import DialogText from "../Typography/DialogText";
+import FloatChip from "../../components/Chip/FloatChip";
 // Styles
 import styles from "../../styles/components/footerStyle";
 
@@ -92,6 +93,7 @@ const useStyles = makeStyles(styles);
 function FooterAppBar(props) {
   // Props
   const {
+    floatChip,
     fabButton,
     rightButtons,
     leftButtons,
@@ -115,6 +117,11 @@ function FooterAppBar(props) {
       variant="elevation"
     >
       <Toolbar variant={variant} className={classes.toolbar}>
+
+        {typeof floatChip !== "undefined" ? <div className={classes.floatChip}>
+          <FloatChip {...floatChip} />
+        </div> : null}
+
         <div className={classes.contentLeft}>
           {leftButtons.map((index, key) => {
             // Button type
@@ -137,22 +144,22 @@ function FooterAppBar(props) {
         </div>
 
         {Object.keys(fabButton).length >= 1 &&
-        typeof fabButton.icon !== "undefined" ? (
-          <Fab
-            disabled={fabButton.disabled}
-            color={fabButton.color}
-            // size="small"
-            aria-label={fabButton.label}
-            onClick={fabButton.onClick}
-            className={
-              classes.fabButtonFloat +
-              " " +
-              classes[fabButton.align + "FabFloat"]
-            }
-          >
-            <fabButton.icon className={classes.icons} />
-          </Fab>
-        ) : null}
+          typeof fabButton.icon !== "undefined" ? (
+            <Fab
+              disabled={fabButton.disabled}
+              color={fabButton.color}
+              // size="small"
+              aria-label={fabButton.label}
+              onClick={fabButton.onClick}
+              className={
+                classes.fabButtonFloat +
+                " " +
+                classes[fabButton.align + "FabFloat"]
+              }
+            >
+              <fabButton.icon className={classes.icons} />
+            </Fab>
+          ) : null}
 
         <div className={classes.contentRight}>
           {rightButtons.map((index, key) => {

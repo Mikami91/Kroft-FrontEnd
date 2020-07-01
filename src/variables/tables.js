@@ -2,265 +2,397 @@ export const tables = [
 	{
 		id: 1,
 		name: 'Mesa 1',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 1
+		amount: 0,
+		environment_id: 1,
+		environment_name: "Principal",
 	},
 	{
 		id: 2,
 		name: 'Mesa 2',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 1
+		amount: 45,
+		environment_id: 1,
+		environment_name: "Principal",
 	},
 	{
 		id: 3,
 		name: 'Mesa 3',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 1
+		amount: 250,
+		environment_id: 1,
+		environment_name: "Principal",
 	},
 	{
 		id: 4,
 		name: 'Mesa 4',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 1
+		amount: 0,
+		environment_id: 1,
+		environment_name: "Principal",
 	},
 	{
 		id: 5,
 		name: 'Mesa 5',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 1
+		amount: 45,
+		environment_id: 1,
+		environment_name: "Principal",
 	},
 	{
 		id: 6,
 		name: 'Mesa 1',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 2
+		amount: 0,
+		environment_id: 2,
+		environment_name: "Jardin",
 	},
 	{
 		id: 7,
 		name: 'Mesa 2',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 2
+		amount: 250,
+		environment_id: 2,
+		environment_name: "Jardin",
 	},
 	{
 		id: 8,
 		name: 'Mesa 3',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 2
+		amount: 0,
+		environment_id: 2,
+		environment_name: "Jardin",
 	},
 	{
 		id: 9,
 		name: 'Mesa 4',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 2
+		amount: 45,
+		environment_id: 2,
+		environment_name: "Jardin",
 	},
 	{
 		id: 10,
 		name: 'Mesa 5',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 2
+		amount: 45,
+		environment_id: 2,
+		environment_name: "Jardin",
 	},
 	{
 		id: 11,
 		name: 'Mesa 1',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 3
+		amount: 250,
+		environment_id: 3,
+		environment_name: "Pahuichi",
 	},
 	{
 		id: 12,
 		name: 'Mesa 2',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 3
+		amount: 45,
+		environment_id: 3,
+		environment_name: "Pahuichi",
 	},
 	{
 		id: 13,
 		name: 'Mesa 3',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 3
+		amount: 45,
+		environment_id: 3,
+		environment_name: "Pahuichi",
 	},
 	{
 		id: 14,
 		name: 'Mesa 4',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 3
+		amount: 0,
+		environment_id: 3,
+		environment_name: "Pahuichi",
 	},
 	{
 		id: 15,
 		name: 'Mesa 5',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 3
+		amount: 45,
+		environment_id: 3,
+		environment_name: "Pahuichi",
 	},
 	{
 		id: 16,
 		name: 'Mesa 1',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 4
+		amount: 0,
+		environment_id: 4,
+		environment_name: "Mirador",
 	},
 	{
 		id: 17,
 		name: 'Mesa 2',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 4
+		amount: 250,
+		environment_id: 4,
+		environment_name: "Mirador",
 	},
 	{
 		id: 18,
 		name: 'Mesa 3',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 4
+		amount: 250,
+		environment_id: 4,
+		environment_name: "Mirador",
 	},
 	{
 		id: 19,
 		name: 'Mesa 4',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 4
+		amount: 0,
+		environment_id: 4,
+		environment_name: "Mirador",
 	},
 	{
 		id: 20,
 		name: 'Mesa 5',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 4
+		amount: 45,
+		environment_id: 4,
+		environment_name: "Mirador",
 	},
 	{
 		id: 21,
 		name: 'Mesa 1',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 22,
 		name: 'Mesa 2',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 23,
 		name: 'Mesa 3',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 24,
 		name: 'Mesa 4',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 250,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 25,
 		name: 'Mesa 5',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 26,
 		name: 'Mesa 6',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 27,
 		name: 'Mesa 7',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 28,
 		name: 'Mesa 8',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 29,
 		name: 'Mesa 9',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 250,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 30,
 		name: 'Mesa 10',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 250,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 31,
 		name: 'Mesa 11',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 250,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 32,
 		name: 'Mesa 12',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 250,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 33,
 		name: 'Mesa 13',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 250,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 34,
 		name: 'Mesa 14',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 250,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 35,
 		name: 'Mesa 15',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 250,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 36,
 		name: 'Mesa 16',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 37,
 		name: 'Mesa 17',
+		prefix: "Prefijo",
 		state: 3,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 38,
 		name: 'Mesa 18',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 39,
 		name: 'Mesa 19',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 40,
 		name: 'Mesa 20',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 41,
 		name: 'Mesa 21',
+		prefix: "Prefijo",
 		state: 0,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 42,
 		name: 'Mesa 22',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 43,
 		name: 'Mesa 23',
+		prefix: "Prefijo",
 		state: 1,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 	{
 		id: 44,
 		name: 'Mesa 24',
+		prefix: "Prefijo",
 		state: 2,
-		id_environment: 5
+		amount: 45,
+		environment_id: 5,
+		environment_name: "Corredor",
 	},
 ];
