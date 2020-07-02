@@ -21,7 +21,6 @@ import Products from "../views/Sales/Products.js";
 import EmployeeAdd from "../layouts/Forms/EmployeeAdd.js";
 import ChangeTable from "../layouts/Forms/ChangeTable.js";
 import DrawerList from "../layouts/Drawers/DrawerTablesList.js";
-import DrawerProducts from "../layouts/Drawers/DrawerProducts.js";
 // core components
 import AppBarTabs from "../components/AppBar/AppBarTabs.js";
 import TabPanel from "../components/Panel/TabPanel";
@@ -45,12 +44,21 @@ function CollectsPage(props) {
   // console.log(props.location);
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
-    // console.log(newValue);
     setValue(newValue);
   };
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+  // State Current Table
+  const [currentTable, setCurrentTable] = useState({
+    id: null,
+    name: "",
+    prefix: "",
+    amount: 0,
+    state: null,
+    environment_id: null,
+    environment_name: "",
+  });
   // State for Modal Products
   const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = () => {
@@ -119,8 +127,9 @@ function CollectsPage(props) {
                 >
                   <GridTables
                     value={value}
-                    filter={index.id}
                     data={tables}
+                    keyData={"environment_id"}
+                    filter={index.id}
                     onClick={handleOpenChangeTables}
                     color="primary"
                   />
@@ -143,7 +152,7 @@ function CollectsPage(props) {
           icon: RefreshIcon,
           onClick: () => null,
         }}
-        rightButtons={[
+        leftButtons={[
           {
             type: "fab",
             text: "/Kroft-FrontEnd/",
@@ -163,7 +172,7 @@ function CollectsPage(props) {
             edge: "end",
             size: "large",
             disabled: false,
-            onClick: handleOpenProfile,
+            onClick: null,
           },
           {
             type: "text",
@@ -171,7 +180,7 @@ function CollectsPage(props) {
             color: "default",
           },
         ]}
-        leftButtons={[
+        rightButtons={[
           {
             type: "icon",
             text: "Lista de Mesas",
@@ -197,7 +206,7 @@ function CollectsPage(props) {
       <CustomModal
         open={openChangeTables}
         close={handleCloseChangeTables}
-        title="Cuenta total"
+        title="Total: Bs. 258"
         content={
           <Fragment>
             <Grid
@@ -241,25 +250,33 @@ function CollectsPage(props) {
             </Grid>
           </Fragment>
         }
-        rightButtons={[
+        leftButtons={[
           {
             type: "text",
-            text: "Total: 258 Bs.",
-            color: "default",
+            text: "Cambio:",
+            align: "left",
+            margin: true,
+            variant: "h6",
+            display: "inline",
+          },
+          {
+            type: "text",
+            text: "Bs. 258",
+            align: "right",
+            margin: true,
+            variant: "h6",
+            color: "success",
+            display: "inline",
           },
         ]}
         centerButtons={[
-          {
-            type: "text",
-            text: "Cambio: 100 Bs.",
-            color: "default",
-          },
+          
         ]}
-        leftButtons={[
+        rightButtons={[
           {
             type: "button",
             text: "Cobrar",
-            color: "success",
+            color: "primary",
             icon: DoneRoundedIcon,
             edge: "start",
             size: "large",
@@ -279,15 +296,9 @@ function CollectsPage(props) {
         close={handleCloseDrawer}
         categoryList={environments}
         itemList={tables}
-        filter="id_environment"
+        filter="environment_id"
       />
 
-      <DrawerProducts
-        direction="bottom"
-        variant="temporary"
-        open={openProducts}
-        close={handleCloseProducts}
-      />
     </Fragment>
   );
 }

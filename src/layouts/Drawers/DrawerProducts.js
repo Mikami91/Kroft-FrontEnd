@@ -334,7 +334,7 @@ function DrawerProducts(props) {
             {
               type: "button",
               text: "Aceptar",
-              color: "success",
+              color: "primary",
               variant: "contained",
               icon: PrintIcon,
             },

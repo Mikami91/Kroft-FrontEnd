@@ -1,5 +1,6 @@
 import {
   theme,
+  boxShadow,
   primaryColor,
   secondaryColor,
   warningColor,
@@ -19,12 +20,29 @@ const chipStyle = {
     margin: 0,
     padding: 4,
     borderRadius: "25px 7px 7px 25px",
+    border: "solid 1px #777",
+    ...boxShadow,
   },
   listItem: {
     margin: 0, paddingLeft: 0, paddingTop: 0, paddingBottom: 0,
   },
   listItemText: {
     margin: 0, padding: 0
+  },
+  listItemAvatar: {
+    minWidth: '2.5rem',
+    [theme.breakpoints.only('sm')]: {
+      minWidth: '2.8rem',
+    },
+    [theme.breakpoints.only('md')]: {
+      minWidth: '3rem',
+    },
+    [theme.breakpoints.only('lg')]: {
+      minWidth: '3.4rem',
+    },
+    [theme.breakpoints.only('xl')]: {
+      minWidth: '3.8rem',
+    }
   },
   avatar: {
     color: "#fff",

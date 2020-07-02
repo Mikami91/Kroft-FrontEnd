@@ -26,7 +26,7 @@ function FloatChip(props) {
     return (
         <div className={classes.chip}>
             <ListItem className={classes.listItem}>
-                <ListItemAvatar>
+                <ListItemAvatar className={classes.listItemAvatar}>
                     <Avatar className={avatarClasses}>
                         {icon !== null ? createElement(icon) : null}
                     </Avatar>

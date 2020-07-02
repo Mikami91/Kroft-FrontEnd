@@ -57,7 +57,7 @@ function SalesPage(props) {
     environment_name: "",
   });
   // State for Modal Products
-  const [openProducts, setOpenProducts] = useState(true);
+  const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = (args) => {
     setOpenProducts(true);
     setCurrentTable(args);
@@ -169,7 +169,7 @@ function SalesPage(props) {
             edge: "end",
             size: "large",
             disabled: false,
-            onClick: handleOpenProfile,
+            onClick: null,
           },
           {
             type: "text",
@@ -274,7 +274,7 @@ function SalesPage(props) {
         close={handleCloseDrawer}
         categoryList={environments}
         itemList={tables}
-        filter="id_environment"
+        filter="environment_id"
       />
 
       <DrawerProducts

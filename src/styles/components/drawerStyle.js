@@ -39,7 +39,7 @@ import {
       paddingRight: 0,
       paddingLeft: 0,
       marginTop: "3.2rem",
-      marginBottom: "-6rem",
+      marginBottom: "-4rem",
       [theme.breakpoints.only("sm")]: {
         marginTop: "3.4rem",
       },

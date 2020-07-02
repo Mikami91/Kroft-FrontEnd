@@ -66,7 +66,7 @@ function GridTables(props) {
                     className={classes.cardText}
                     color="initial"
                   >
-                    {index.id}
+                    {index.name}
                   </Typography>
                 </CardNumber>
               </Card>
