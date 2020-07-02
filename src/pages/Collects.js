@@ -178,6 +178,8 @@ function CollectsPage(props) {
             type: "text",
             text: "Cajero N°",
             color: "default",
+            margin: true,
+            autoSize: true,
           },
         ]}
         rightButtons={[
@@ -197,7 +199,9 @@ function CollectsPage(props) {
       <CustomModal
         open={openProfile}
         close={handleCloseProfile}
-        title="Perfil de usuario"
+        title={{
+          text: "Perfil de Usuario",
+        }}
         content={<EmployeeAdd />}
         maxWidth="sm"
         fullWidth
@@ -206,7 +210,19 @@ function CollectsPage(props) {
       <CustomModal
         open={openChangeTables}
         close={handleCloseChangeTables}
-        title="Total: Bs. 258"
+        title={{
+          text: "Total:",
+          margin: true,
+          bold: true,
+          large: true,
+        }}
+        subtitle={{
+          text: "Bs. 258",
+          color: "warning",
+          margin: true,
+          bold: true,
+          large: true,
+        }}
         content={
           <Fragment>
             <Grid
@@ -221,7 +237,7 @@ function CollectsPage(props) {
                   margin={"dense"}
                   color="primary"
                   // disabled={showProgress}
-                  type="numeric"
+                  type="number"
                   label={"Bolivianos"}
                   name="user"
                   onChange={handleChange}
@@ -237,7 +253,7 @@ function CollectsPage(props) {
                   margin={"dense"}
                   color="primary"
                   // disabled={showProgress}
-                  type="numeric"
+                  type="number"
                   label={"Dolares"}
                   name="user"
                   onChange={handleChange}
@@ -256,17 +272,19 @@ function CollectsPage(props) {
             text: "Cambio:",
             align: "left",
             margin: true,
-            variant: "h6",
             display: "inline",
+            bold: true,
+            variant: "body1",
           },
           {
             type: "text",
             text: "Bs. 258",
             align: "right",
             margin: true,
-            variant: "h6",
             color: "success",
             display: "inline",
+            bold: true,
+            variant: "body1",
           },
         ]}
         centerButtons={[

@@ -95,7 +95,9 @@ export default function GridProducts(props) {
         <CustomModal
           open={subCategory.open}
           close={handleCloseSub}
-          title={subCategory.name}
+          title={{
+            text: subCategory.name,
+          }}
           content={
             <GridSubProducts
               data={subCategory.payload}

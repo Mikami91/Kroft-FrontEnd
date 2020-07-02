@@ -14,6 +14,7 @@ import DialogButton from "../CustomButtons/DialogButton";
 import DialogIcon from "../CustomButtons/DialogIcon";
 import DialogFab from "../CustomButtons/DialogFab";
 import DialogText from "../Typography/DialogText";
+import CustomText from "../Typography/CustomText";
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
 // Styles
@@ -38,6 +39,7 @@ export default function CustomModal(props) {
     fullWidth,
     maxWidth,
     title,
+    subtitle,
     content,
     centerButtons,
     rightButtons,
@@ -64,19 +66,25 @@ export default function CustomModal(props) {
         onClose={close}
       >
         <DialogTitle className={classes.modalHeader}>
-          {closeIcon === true ? (
-            <IconButton
-              className={classes.modalCloseButton}
-              key="close"
-              aria-label="Close"
-              color="inherit"
-              onClick={close}
-            >
-              <Close className={classes.modalClose} />
-            </IconButton>
-          ) : null}
-          {/* <h4 className={classes.modalTitle}>{title}</h4> */}
-          {title}
+          <div className={classes.contentTitle}>
+            <div className={classes.contentTitleText}>
+              <CustomText {...title} />
+              {typeof subtitle !== "undefined" ? <CustomText {...subtitle} /> : null}
+            </div>
+            <div className={classes.contentTitleButton}>
+              {closeIcon === true ? (
+                <IconButton
+                  className={classes.modalCloseButton}
+                  key="close"
+                  aria-label="Close"
+                  color="inherit"
+                  onClick={close}
+                >
+                  <Close className={classes.modalClose} />
+                </IconButton>
+              ) : null}
+            </div>
+          </div>
         </DialogTitle>
         <DialogContent style={{ backgroundImage: `url(${background})` }}>{content}</DialogContent>
         <DialogActions className={classes.modalFooter}>
@@ -155,7 +163,7 @@ CustomModal.defaultProps = {
   scroll: "body",
   fullWidth: false,
   maxWidth: "md",
-  title: "Titulo...",
+  title: {},
   content: null,
   footer: null,
   background: "",
@@ -172,7 +180,7 @@ CustomModal.propTypes = {
   scroll: PropTypes.oneOf(["body", "paper"]),
   fullWidth: PropTypes.bool,
   maxWidth: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs", false]),
-  title: PropTypes.string,
+  title: PropTypes.object,
   content: PropTypes.object,
   rightButtons: PropTypes.arrayOf(
     PropTypes.shape({

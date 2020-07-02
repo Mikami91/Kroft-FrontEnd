@@ -12,13 +12,31 @@ const modalStyle = {
     padding: theme.spacing(2),
     minHeight: "16.43px",
   },
-  modalTitle: {
+  contentTitle: {
+    display: "inline-flex",
+    alignContent: "flex-start",
+    alignItems: "center",
+    width: "100%",
+  },
+  contentTitleText: {
+    display: "block",
+    alignContent: "flex-start",
+    alignItems: "center",
     margin: "0",
     lineHeight: "1.42857143",
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    wordBreak: "break-word",
+    textOverflow: "ellipsis",
+    width: "90%",
+  },
+  contentTitleButton: {
+    width: "10%",
+    textAlign: "right",
   },
   modalCloseButton: {
     // color: "#999999",
-    // marginTop: "-12px",
+    // marginTop: "-24px",
     WebkitAppearance: "none",
     padding: "0",
     cursor: "pointer",
@@ -29,12 +47,14 @@ const modalStyle = {
     textShadow: "none",
     fontWeight: "700",
     lineHeight: "1",
-    float: "right",
+    marginTop: -4,
+    // float: "right",
+    // position: "absolute",
+    // right: "16px"
   },
   modalClose: {
     width: "24px",
     height: "24px",
-    // marginTop: 5,
   },
   modalBody: {
     paddingTop: "24px",

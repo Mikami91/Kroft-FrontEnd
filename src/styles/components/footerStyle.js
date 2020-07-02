@@ -14,11 +14,23 @@ const footerStyle = {
   floatChip: {
     position: 'absolute',
     zIndex: 1,
-    top: "-3.5rem",
     left: 10,
     right: 0,
     margin: '0 auto',
     width: 'auto',
+    top: "-3.5rem",
+    [theme.breakpoints.only('sm')]: {
+      top: "-3.7rem",
+		},
+		[theme.breakpoints.only('md')]: {
+      top: "-4.2rem",
+		},
+		[theme.breakpoints.only('lg')]: {
+      top: "-4.3rem",
+		},
+		[theme.breakpoints.only('xl')]: {
+      top: "-4.5rem",
+		}
   },
   fabButtonFloat: {
     position: 'absolute',

@@ -57,7 +57,7 @@ function SalesPage(props) {
     environment_name: "",
   });
   // State for Modal Products
-  const [openProducts, setOpenProducts] = useState(false);
+  const [openProducts, setOpenProducts] = useState(true);
   const handleOpenProducts = (args) => {
     setOpenProducts(true);
     setCurrentTable(args);
@@ -206,7 +206,9 @@ function SalesPage(props) {
       <CustomModal
         open={openProfile}
         close={handleCloseProfile}
-        title="Perfil de usuario"
+        title={{
+          text: "Perfil de Usuario",
+        }}
         content={<EmployeeAdd />}
         maxWidth="sm"
         fullWidth
@@ -215,7 +217,9 @@ function SalesPage(props) {
       <CustomModal
         open={openChangeTables}
         close={handleCloseChangeTables}
-        title="Cambio de mesas"
+        title={{
+          text: "Cambio de mesas",
+        }}
         content={<ChangeTable environments={environments} tables={tables} />}
         centerButtons={[
           {

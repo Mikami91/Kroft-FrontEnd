@@ -1,7 +1,7 @@
 export const products = [
   {
     id: 1,
-    name: "Pique de Surubi entero",
+    name: "Pique de Surubi entero, Pique de Surubi entero",
     state: 0,
     id_category: 1,
     id_subcategory: 7,

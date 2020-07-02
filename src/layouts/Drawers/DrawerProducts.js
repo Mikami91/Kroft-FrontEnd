@@ -205,7 +205,9 @@ function DrawerProducts(props) {
           // background={"https://source.unsplash.com/random"}
           open={openOrders}
           close={handleCloseOrders}
-          title="Lista de ordenes"
+          title={{
+            text: "Lista de ordenes",
+          }}
           content={
             <CustomTableList
               padding="none"
@@ -347,7 +349,9 @@ function DrawerProducts(props) {
         <CustomModal
           open={openPrints}
           close={handleClosePrints}
-          title="Historial de impresiones"
+          title={{
+            text: "Historial de impresiones",
+          }}
           content={
             <CustomTableList
               padding="none"
@@ -401,7 +405,9 @@ function DrawerProducts(props) {
         <CustomModal
           open={openTotal}
           close={handleCloseTotal}
-          title="Cuenta total"
+          title={{
+            text: "Cuenta total",
+          }}
           content={
             <CustomTableList
               padding="default"
