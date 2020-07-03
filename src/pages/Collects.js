@@ -271,21 +271,21 @@ function CollectsPage(props) {
           {
             type: "text",
             text: "Cambio:",
+            size: "default",
             align: "left",
             margin: true,
             display: "inline",
             bold: true,
-            variant: "body1",
           },
           {
             type: "text",
             text: "Bs. 258",
+            size: "default",
             align: "right",
             margin: true,
             color: "success",
             display: "inline",
             bold: true,
-            variant: "body1",
           },
         ]}
         centerButtons={[

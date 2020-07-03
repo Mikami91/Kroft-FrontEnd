@@ -25,12 +25,12 @@ const appBarStyle = {
 		top: -1
 	},
 	contentRight: {
-		marginRight: "auto",
+		marginLetf: "auto",
 		display: "inline-flex",
 		alignItems: "center",
 	  },
 	  contentLeft: {
-		marginLetf: "auto",
+		marginRight: "auto",
 		display: "inline-flex",
 		alignItems: "center",
 	  },

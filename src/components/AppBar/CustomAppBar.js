@@ -94,21 +94,6 @@ function CustomAppBar(props) {
     <HideOnScroll {...props}>
       <AppBar position={position} color={color} className={appBarClasses}>
         <Toolbar variant={variant} disableGutters={gutters}>
-          <div className={classes.contentRight}>
-            {rightButtons.map((index, key) => {
-              // Icon type
-              if (index.type === "icon" && typeof index.icon !== "undefined") {
-                return <IconChlid key={key} index={index} />;
-              }
-              // Button type
-              if (
-                index.type === "button" &&
-                typeof index.text !== "undefined"
-              ) {
-                return <ButtonChlid key={key} index={index} />;
-              }
-            })}
-          </div>
 
           <div className={classes.contentLeft}>
             {leftButtons.map((index, key) => {
@@ -125,6 +110,23 @@ function CustomAppBar(props) {
               }
             })}
           </div>
+
+          <div className={classes.contentRight}>
+            {rightButtons.map((index, key) => {
+              // Icon type
+              if (index.type === "icon" && typeof index.icon !== "undefined") {
+                return <IconChlid key={key} index={index} />;
+              }
+              // Button type
+              if (
+                index.type === "button" &&
+                typeof index.text !== "undefined"
+              ) {
+                return <ButtonChlid key={key} index={index} />;
+              }
+            })}
+          </div>
+
         </Toolbar>
       </AppBar>
     </HideOnScroll>
@@ -141,8 +143,8 @@ CustomAppBar.defaultProps = {
   gutters: false,
   drawer: false,
   // Buttons
-  rightButtons: [],
   leftButtons: [],
+  rightButtons: [],
 };
 
 CustomAppBar.propTypes = {
@@ -166,7 +168,7 @@ CustomAppBar.propTypes = {
   disableGutters: PropTypes.bool,
   drawer: PropTypes.bool,
   // Buttons
-  rightButtons: PropTypes.arrayOf(
+  leftButtons: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.oneOf(["icon", "button"]),
       text: PropTypes.string,
@@ -185,7 +187,7 @@ CustomAppBar.propTypes = {
       onClick: PropTypes.func,
     })
   ),
-  leftButtons: PropTypes.arrayOf(
+  rightButtons: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.oneOf(["icon", "button"]),
       text: PropTypes.string,
