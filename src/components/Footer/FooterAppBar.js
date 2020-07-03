@@ -248,7 +248,7 @@ FooterAppBar.propTypes = {
       ]),
       icon: PropTypes.object,
       edge: PropTypes.oneOf(["start", "end", false]),
-      size: PropTypes.oneOf(["large", "small", "default"]),
+      size: PropTypes.oneOf(["large", "medium", "small", "default"]),
       disabled: PropTypes.bool,
       onClick: PropTypes.func,
     })
@@ -270,7 +270,7 @@ FooterAppBar.propTypes = {
       ]),
       icon: PropTypes.object,
       edge: PropTypes.oneOf(["start", "end", false]),
-      size: PropTypes.oneOf(["large", "small", "default"]),
+      size: PropTypes.oneOf(["large", "medium", "small", "default"]),
       disabled: PropTypes.bool,
       onClick: PropTypes.func,
     })

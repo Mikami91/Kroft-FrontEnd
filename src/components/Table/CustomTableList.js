@@ -51,8 +51,8 @@ function CustomTableList(props) {
                       padding={col.padding}
                       size={col.size}
                       colSpan={col.colSpan}
-                    >
-                      <CustomText text={index[col.field]} variant={col.variant} color={col.color} />
+                    > 
+                      <CustomText text={index[col.field]} size={col.fontSize} color={col.color} />
                     </TableCell>
                   );
                 } else {
@@ -107,7 +107,8 @@ CustomTableList.propTypes = {
     PropTypes.shape({
       field: PropTypes.string,
       type: PropTypes.oneOf(["text", "icon"]),
-      size: PropTypes.oneOf(["small", "medium"]),
+      size: PropTypes.oneOf(["medium", "small"]),
+      fontSize: PropTypes.oneOf(["large", "medium", "small", "default"]),
       align: PropTypes.oneOf(["inherit", "right", "center", "left"]),
       colSpan: PropTypes.number,
       icon: PropTypes.object,

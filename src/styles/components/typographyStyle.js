@@ -33,7 +33,29 @@ const typographyStyle = {
       fontSize: "1.2rem",
     },
   },
-  mediumText: {
+  defaultSizeText: {
+    color: theme.palette.type === "light" ? "#424242" : "#fff",
+    fontWeight: "bold",
+    minHeight: "auto",
+    fontSize: "smaller",
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "small",
+      lineHeight: "1.5rem",
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "medium",
+      lineHeight: "1.6rem",
+    },
+    [theme.breakpoints.only("lg")]: {
+      fontSize: "large",
+      lineHeight: "1.9rem",
+    },
+    [theme.breakpoints.only("xl")]: {
+      fontSize: "larger",
+      lineHeight: "2rem",
+    },
+  },
+  mediumSizeText: {
     color: theme.palette.type === "light" ? "#424242" : "#fff",
     fontWeight: "bold",
     minHeight: "auto",
@@ -51,7 +73,7 @@ const typographyStyle = {
       fontSize: "1.7rem",
     },
   }, 
-  largeText: {
+  largeSizeText: {
     color: theme.palette.type === "light" ? "#424242" : "#fff",
     fontWeight: "bold",
     minHeight: "auto",

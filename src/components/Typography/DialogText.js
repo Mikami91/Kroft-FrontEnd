@@ -14,7 +14,7 @@ export default function DialogText(props) {
   const { text, variant, color, autoSize, size, align, margin, bold, noWrap, display } = props.index;
   const TextClasses = classNames({
     [classes.text]: autoSize,
-    [classes[size + "Text"]]: true,
+    [classes[size + "SizeText"]]: true,
     [classes.margin]: margin,
     [classes[color + "Text"]]: true,
     [classes.bold]: bold, 
@@ -36,7 +36,7 @@ DialogText.defaultProps = {
   text: "",
   color: "default",
   autoSize: false,
-  size: false,
+  size: "default",
   align: "inherit",
   margin: false,
   variant: "inherit",
@@ -48,7 +48,7 @@ DialogText.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   align: PropTypes.oneOf(["inherit", "left", "center", "right", "justify"]),
   autoSize: PropTypes.bool,
-  size: PropTypes.oneOf([false, "medium", "large"]),
+  size: PropTypes.oneOf(["default", "medium", "large"]),
   margin: PropTypes.bool,
   bold: PropTypes.bool,
   color: PropTypes.oneOf([

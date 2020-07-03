@@ -157,7 +157,6 @@ function DrawerProducts(props) {
             {
               type: "text",
               text: `Bs. ${table.amount}`,
-              variant: "h4",
               color: "warning",
               margin: true,
               size: "medium",
@@ -255,6 +254,7 @@ function DrawerProducts(props) {
                 {
                   field: "name",
                   type: "text",
+                  fontSize: "default",
                   align: "left",
                   color: "default",
                   colSpan: 2,
@@ -262,8 +262,8 @@ function DrawerProducts(props) {
                 {
                   field: "price",
                   type: "text",
+                  fontSize: "default",
                   align: "center",
-                  variant: "h6",
                   color: "warning",
                 },
                 {
@@ -278,8 +278,8 @@ function DrawerProducts(props) {
                 {
                   field: "quantity",
                   type: "text",
+                  fontSize: "default",
                   align: "center",
-                  variant: "h6",
                   color: "warning",
                 },
                 {
@@ -399,6 +399,7 @@ function DrawerProducts(props) {
               data={animes}
             />
           }
+          variant="paper"
           maxWidth="sm"
           fullWidth
         />
