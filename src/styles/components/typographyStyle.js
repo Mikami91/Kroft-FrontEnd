@@ -33,13 +33,31 @@ const typographyStyle = {
       fontSize: "1.2rem",
     },
   },
-  largeText: {
+  mediumText: {
     color: theme.palette.type === "light" ? "#424242" : "#fff",
     fontWeight: "bold",
     minHeight: "auto",
     fontSize: "1rem",
     [theme.breakpoints.only("sm")]: {
-      fontSize: "1.3rem",
+      fontSize: "1.2rem",
+    },
+    [theme.breakpoints.only("md")]: {
+      fontSize: "1.5rem",
+    },
+    [theme.breakpoints.only("lg")]: {
+      fontSize: "1.6rem",
+    },
+    [theme.breakpoints.only("xl")]: {
+      fontSize: "1.7rem",
+    },
+  }, 
+  largeText: {
+    color: theme.palette.type === "light" ? "#424242" : "#fff",
+    fontWeight: "bold",
+    minHeight: "auto",
+    fontSize: "1.2rem",
+    [theme.breakpoints.only("sm")]: {
+      fontSize: "1.4rem",
     },
     [theme.breakpoints.only("md")]: {
       fontSize: "1.7rem",
@@ -50,7 +68,7 @@ const typographyStyle = {
     [theme.breakpoints.only("xl")]: {
       fontSize: "1.9rem",
     },
-  },
+  }, 
   defaultHeaderMargins: {
     marginTop: "20px",
     marginBottom: "10px",

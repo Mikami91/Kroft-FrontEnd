@@ -150,9 +150,8 @@ function DrawerProducts(props) {
               type: "text",
               text: "Total:",
               color: "inherit",
-              variant: "h4",
               margin: true,
-              large: true,
+              size: "medium",
               bold: true,
             },
             {
@@ -161,7 +160,7 @@ function DrawerProducts(props) {
               variant: "h4",
               color: "warning",
               margin: true,
-              large: true,
+              size: "medium",
               bold: true,
             },
           ]}
@@ -207,6 +206,7 @@ function DrawerProducts(props) {
           close={handleCloseOrders}
           title={{
             text: "Lista de ordenes",
+            size: "medium",
           }}
           content={
             <CustomTableList
@@ -319,7 +319,7 @@ function DrawerProducts(props) {
               text: "Total:",
               align: "left",
               margin: true,
-              variant: "h6",
+              size: "medium",
               display: "inline",
             },
             {
@@ -327,7 +327,7 @@ function DrawerProducts(props) {
               text: " 258 Bs.",
               align: "right",
               margin: true,
-              variant: "h6",
+              size: "medium",
               color: "warning",
               display: "inline",
             },
@@ -351,6 +351,7 @@ function DrawerProducts(props) {
           close={handleClosePrints}
           title={{
             text: "Historial de impresiones",
+            size: "medium",
           }}
           content={
             <CustomTableList
@@ -407,6 +408,7 @@ function DrawerProducts(props) {
           close={handleCloseTotal}
           title={{
             text: "Cuenta total",
+            size: "medium",
           }}
           content={
             <CustomTableList
@@ -477,14 +479,14 @@ function DrawerProducts(props) {
             {
               type: "text",
               text: "Total:",
-              variant: "h6",
+              size: "medium",
               margin: true,
               // color: "warning",
             },
             {
               type: "text",
               text: "258 Bs.",
-              variant: "h6",
+              size: "medium",
               margin: true,
               color: "warning",
             },

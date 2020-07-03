@@ -201,6 +201,7 @@ function CollectsPage(props) {
         close={handleCloseProfile}
         title={{
           text: "Perfil de Usuario",
+          size: "medium",
         }}
         content={<EmployeeAdd />}
         maxWidth="sm"
@@ -213,15 +214,15 @@ function CollectsPage(props) {
         title={{
           text: "Total:",
           margin: true,
+          size: "medium",
           bold: true,
-          large: true,
         }}
         subtitle={{
           text: "Bs. 258",
           color: "warning",
           margin: true,
+          size: "medium",
           bold: true,
-          large: true,
         }}
         content={
           <Fragment>

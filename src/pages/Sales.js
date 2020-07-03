@@ -208,6 +208,7 @@ function SalesPage(props) {
         close={handleCloseProfile}
         title={{
           text: "Perfil de Usuario",
+          size: "medium",
         }}
         content={<EmployeeAdd />}
         maxWidth="sm"
@@ -219,6 +220,7 @@ function SalesPage(props) {
         close={handleCloseChangeTables}
         title={{
           text: "Cambio de mesas",
+          size: "medium",
         }}
         content={<ChangeTable environments={environments} tables={tables} />}
         centerButtons={[

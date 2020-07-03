@@ -97,6 +97,7 @@ export default function GridProducts(props) {
           close={handleCloseSub}
           title={{
             text: subCategory.name,
+            size: "medium",
           }}
           content={
             <GridSubProducts
