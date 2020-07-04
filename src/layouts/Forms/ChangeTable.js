@@ -5,25 +5,9 @@ import "moment/locale/es";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-// @material-ui/icons
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
-import DeleteIcon from "@material-ui/icons/Delete";
 // core components
-import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
-import CardIconActions from "../../components/Card/CardIconActions.js";
-import AvatarForm from "../../components/Avatar/Avatarform.js";
-import IconInput from "../../components/CustomInput/IconInput.js";
 import ExpansionList from "../../components/CustomInput/ExpansionList.js";
-import CustomBotton from "../../components/CustomButtons/Button.js";
 import CustomLoading from "../../components/Loading/CustomLoading.js";
-// Assets
-import image from "../../assets/img/defaults/table.png";
-// Varieables
-import { data } from "../../variables/JSON.js";
 // Styles
 import styles from "../../styles/pages/LoginStyle.js";
 // Make styles
@@ -127,7 +111,7 @@ export default function ChangeTable(props) {
                   key: "id",
                   value: "name",
                 }}
-                filter="id_environment"
+                filter="environment_id"
                 required
               />
             </Grid>
@@ -162,7 +146,7 @@ export default function ChangeTable(props) {
                   key: "id",
                   value: "name",
                 }}
-                filter="id_environment"
+                filter="environment_id"
                 required
               />
             </Grid>

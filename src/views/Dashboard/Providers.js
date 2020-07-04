@@ -6,14 +6,13 @@ import SwipeableViews from "react-swipeable-views";
 import TabPanel from "../../components/Panel/TabPanel";
 import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
-import SubProducts from "../../layouts/sub-views/Products";
-import Categories from "../../layouts/sub-views/Categories";
-import Subcategories from "../../layouts/sub-views/Subcategories";
+import SubProviders from "../../layouts/sub-views/Providers";
+import Suppliers from "../../layouts/sub-views/Suppliers";
 // Icons
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
-import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
+import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
 
-function Products(props) {
+function Providers(props) {
   // TabPanel Swipeables Views
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -26,13 +25,10 @@ function Products(props) {
 
         <SwipeableViews index={value} onChangeIndex={handleChange}>
           <TabPanel sub value={value} index={0}>
-            <SubProducts />
+            <SubProviders />
           </TabPanel>
           <TabPanel sub value={value} index={1}>
-            <Categories />
-          </TabPanel>
-          <TabPanel sub value={value} index={2}>
-            <Subcategories />
+            <Suppliers />
           </TabPanel>
         </SwipeableViews>
 
@@ -44,16 +40,12 @@ function Products(props) {
           change={handleChange}
           tabs={[
             {
-              text: "Productos",
+              text: "Proveedores",
               icon: FastfoodRoundedIcon,
             },
             {
-              text: "Categorías",
-              icon: CategoryRoundedIcon,
-            },
-            {
-              text: "Subcategorías",
-              icon: CategoryRoundedIcon,
+              text: "Insumos",
+              icon: PeopleRoundedIcon,
             },
           ]}
           tabsColor="secondary"
@@ -64,10 +56,10 @@ function Products(props) {
   }, [value]);
 }
 // PropTypes
-Products.propTypes = {
+Providers.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
 };
 
-export default Products;
+export default Providers;

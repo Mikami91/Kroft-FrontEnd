@@ -3,31 +3,15 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Typography from "@material-ui/core/Typography";
 // Core Components
-import AvatarTable from "../../components/Avatar/AvatarTable.js";
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomTable from "../../components/Table/CustomTable.js";
-import CustomBotton from "../../components/CustomButtons/Button.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
 // Layouts
-import TableAdd from "../../layouts/Forms/TableAdd.js";
+import SupplierAdd from "../Forms/SupplierAdd.js";
 
-function Tables(props) {
-  // TabPanel Swipeables Views
-  const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    console.log(newValue);
-  };
-
+function Suppliers(props) {
   return (
     <Fragment>
       <Grid
@@ -42,13 +26,13 @@ function Tables(props) {
           xs={12}
           sm={12}
           md={6}
-          lg={4}
-          xl={4}
+          lg={5}
+          xl={5}
           elevation={6}
           square="true"
           // className={classes.container}
         >
-          <TableAdd />
+          <SupplierAdd />
         </Grid>
 
         <Grid
@@ -56,15 +40,15 @@ function Tables(props) {
           xs={12}
           sm={12}
           md={6}
-          lg={8}
-          xl={8}
+          lg={7}
+          xl={7}
           elevation={6}
           square="true"
           // className={classes.container}
         >
           <Card variant="cardForm">
-            <CardHeader color="info" dense>
-              <h3>Lista de Mesas</h3>
+            <CardHeader color="primary" dense>
+              <h3>Lista de Insumos</h3>
             </CardHeader>
             <CardBody form>
               <CustomTable
@@ -84,23 +68,19 @@ function Tables(props) {
                     //     <AvatarTable rowData={rowData} path={path} />
                     // )
                   },
-                  { title: "Mesa", field: "name", type: "string" },
+                  { title: "Producto", field: "name", type: "string" },
+                  { title: "Precio Bs.", field: "price", type: "numeric" },
+                  //{ title: 'Cantidad', field: 'quantity', type: 'numeric' },
+                  { title: "Codigo", field: "code", type: "string" },
                   {
-                    title: "Ambiente",
-                    field: "environment_id",
-                    type: "string",
+                    title: "Categoría",
+                    field: "category_id",
+                    type: "string" /*lookup: selectListCategories*/,
                   },
                   {
-                    title: "Creación",
-                    field: "created_at",
-                    editable: "never",
-                    type: "date",
-                  },
-                  {
-                    title: "Modificación",
-                    field: "updated_at",
-                    editable: "never",
-                    type: "date",
+                    title: "Subcategoría",
+                    field: "subcategory_id",
+                    type: "string" /*lookup: selectListSubcategories*/,
                   },
                 ]}
                 //   data={EmployeesList}
@@ -116,12 +96,11 @@ function Tables(props) {
     </Fragment>
   );
 }
-
 // PropTypes
-Tables.propTypes = {
+Suppliers.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
 };
 
-export default Tables;
+export default Suppliers;

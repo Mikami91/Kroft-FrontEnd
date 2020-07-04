@@ -23,7 +23,7 @@ import NumberInput from '../../components/CustomInput/NumberInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Assets
-import image from '../../assets/img/defaults/product.png';
+import image from '../../assets/img/defaults/user.png';
 // Varieables
 import { data } from '../../variables/JSON.js';
 // Styles
@@ -34,20 +34,16 @@ const useStyles = makeStyles(styles);
 moment.locale("en");
 moment().format('l');
 
-export default function SupplierAdd(props) {
+export default function ProviderAdd(props) {
     // Local State
     const [state, setState] = useState({
         file: null,
-        supplier: "",
-        category: "",
-        subcategory: "",
         name: "",
-        buying_date: null,
-        expire_date: null,
-        buying_price: "",
-        selling_price: "",
-        quantity: "",
-        code: "",
+        email: "",
+        phone: "",
+        address: "",
+        city: "",
+        shop_name: "",
         isUpload: false,
         error: false
     });
@@ -61,17 +57,13 @@ export default function SupplierAdd(props) {
     // Empty State values
     const handleEmpty = (e) => {
         setState({
-            image: null,
-            supplier: "",
-            category: "",
-            subcategory: "",
+            file: null,
             name: "",
-            buying_date: null,
-            expire_date: null,
-            buying_price: "",
-            selling_price: "",
-            quantity: "",
-            code: "",
+            email: "",
+            phone: "",
+            address: "",
+            city: "",
+            shop_name: "",
             isUpload: false,
             error: false
         });
@@ -121,7 +113,7 @@ export default function SupplierAdd(props) {
     };
     const classes = useStyles();
     return (
-        <form id="employee-add" onSubmit={handleLogin}>
+        <form id="supplier-add" onSubmit={handleLogin}>
             {/* <p className={classes.divider}>Or Be Classical</p> */}
             <Card variant="cardForm">
 
@@ -132,12 +124,11 @@ export default function SupplierAdd(props) {
                         image={state.file === null ? image : state.file.image}
                         alt="Imagen"
                         title="Imagen"
-                        square
                     />
                     <input
                         // disabled={state.isUpload || showProgress ? true : false}
                         accept="image/png, image/jpeg, image/jpg"
-                        id="product-file"
+                        id="supplier-file"
                         type="file"
                         name="image"
                         onChange={handleImage}
@@ -152,7 +143,7 @@ export default function SupplierAdd(props) {
                         </IconButton>
 
                         <IconButton edge="end" disabled={state.isUpload ? true : false} 
-                            onClick={() => {document.getElementById("product-file").click()}}
+                            onClick={() => {document.getElementById("supplier-file").click()}}
                         >
                             <label>
                                 <AddAPhotoIcon />
@@ -179,52 +170,30 @@ export default function SupplierAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                // disabled={showProgress}
-                                id="category"
-                                label="Categoría"
-                                name="category"
-                                onChange={handleChange}
-                                value={state.category}
-                                itemList={{
-                                    data: data,
-                                    key: "id",
-                                    value: "website"
-                                }}
-                                required
-                            />
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                // disabled={showProgress}
-                                id="subcategory"
-                                label="Subcategoría"
-                                name="subcategory"
-                                onChange={handleChange}
-                                value={state.subcategory}
-                                itemList={{
-                                    data: data,
-                                    key: "id",
-                                    value: "website"
-                                }}
-                                required
-                            />
                             <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
                                 // disabled={showProgress}
                                 type="text"
-                                label={'Nombre'}
+                                label={'Nombre completo'}
                                 name="name"
                                 onChange={handleChange}
                                 value={state.name}
+                                required
+                                // icon={<AccountBoxIcon />}
+                                iconPosition="end"
+                            />
+                            <IconInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                type="email"
+                                label={'Correo electronico'}
+                                name="email"
+                                onChange={handleChange}
+                                value={state.email}
                                 required
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
@@ -234,27 +203,13 @@ export default function SupplierAdd(props) {
                                 margin={'dense'}
                                 color="primary"
                                 // disabled={showProgress}
-                                label={'Precio de venta'}
-                                prefix="Bs"
-                                name="selling_price"
-                                value={state.selling_price}
+                                label={'Celular'}
+                                name="phone"
+                                value={state.phone}
                                 onChange={handleChange}
-                                decimal={2}
-                                // maxLength={8}
+                                maxLength={8}
                                 required
-                            />
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                label={'Cantidad'}
-                                name="quantity"
-                                value={state.quantity}
-                                onChange={handleChange}
-                                maxLength={9}
-                                decimal={0}
-                                required
+                                phone
                             />
 
                         </Grid>
@@ -274,58 +229,16 @@ export default function SupplierAdd(props) {
                                 color="primary"
                                 hoverColor="primary"
                                 // disabled={showProgress}
-                                id="supplier"
-                                label="Proveedor"
-                                name="supplier"
+                                id="city"
+                                label="Ciudad"
+                                name="city"
                                 onChange={handleChange}
-                                value={state.supplier}
+                                value={state.city}
                                 itemList={{
                                     data: data,
                                     key: "id",
                                     value: "website"
                                 }}
-                                required
-                            />
-                            <DateInput
-                                 variant={'standard'}
-                                 margin={'dense'}
-                                 color="primary"
-                                 // disabled={showProgress}
-                                 type="text"
-                                 label={'Fecha de compra'}
-                                 name="buying_date"
-                                 onChange={handleChange}
-                                 value={state.buying_date}
-                                 minDate={moment().subtract(5, 'years').calendar()}
-                                 maxDate={moment().subtract(1, 'years').calendar()}
-                                 required
-                            />
-                            <DateInput
-                                 variant={'standard'}
-                                 margin={'dense'}
-                                 color="primary"
-                                 // disabled={showProgress}
-                                 type="text"
-                                 label={'Fecha de expiracion'}
-                                 name="expire_date"
-                                 onChange={handleChange}
-                                 value={state.expire_date}
-                                 minDate={moment().subtract(0, 'years').calendar()}
-                                 //maxDate={moment().subtract(1, 'years').calendar()}
-                                 required
-                            />
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                label={'Precio de compra'}
-                                prefix="Bs"
-                                name="buying_price"
-                                value={state.buying_price}
-                                onChange={handleChange}
-                                decimal={2}
-                                // maxLength={8}
                                 required
                             />
                             <IconInput
@@ -334,23 +247,36 @@ export default function SupplierAdd(props) {
                                 color="primary"
                                 // disabled={showProgress}
                                 type="text"
-                                label={'Codigo'}
-                                name="code"
+                                label={'Direccion'}
+                                name="address"
                                 onChange={handleChange}
-                                value={state.code}
+                                value={state.address}
                                 required
-                                // icon={<VpnKeyIcon />}
+                                // icon={<PersonIcon />}
                                 iconPosition="end"
                             />
-                            
-                        </Grid>
+                            <IconInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                type="text"
+                                label={'Nombre de tienda'}
+                                name="shop_name"
+                                onChange={handleChange}
+                                value={state.shop_name}
+                                required
+                                // icon={<LockIcon />}
+                                iconPosition="end"
+                            />
 
+                        </Grid>
                     </Grid>
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="employee-add" size="sm" type="submit" disabled={state.isUpload} >
-                        Agregar
+                    <CustomBotton form="supplier-add" size="sm" type="submit" disabled={state.isUpload} >
+                        Registrar
                     </CustomBotton>
                 </CardFooter>
             </Card>

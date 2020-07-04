@@ -103,8 +103,8 @@ function DrawerProducts(props) {
                   >
                     <GridProducts
                       data={products}
-                      keyCategory="id_category"
-                      keySubcategory="id_subcategory"
+                      keyCategory="category_id"
+                      keySubcategory="subcategory_id"
                       filter={index.id}
                       onClick={handleOpenTotal}
                       color="secondary"

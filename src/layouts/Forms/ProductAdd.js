@@ -268,7 +268,7 @@ export default function ProductAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            <SelectInput
+                            {/* <SelectInput
                                 variant="standard"
                                 margin="dense"
                                 color="primary"
@@ -285,7 +285,7 @@ export default function ProductAdd(props) {
                                     value: "website"
                                 }}
                                 required
-                            />
+                            /> */}
                             <DateInput
                                  variant={'standard'}
                                  margin={'dense'}

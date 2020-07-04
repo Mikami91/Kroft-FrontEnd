@@ -4,15 +4,14 @@ import PropTypes from "prop-types";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
 // Core Components
-import CustomTable from "../../components/Table/CustomTable.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
+import CustomTable from "../../components/Table/CustomTable.js";
 // Layouts
-import EmployeeAdd from '../../layouts/Forms/EmployeeAdd.js';
+import EmployeeAdd from '../Forms/EmployeeAdd.js';
 
 function Employees(props) {
-
     return (
         <Fragment>
             <Grid
@@ -100,6 +99,7 @@ function Employees(props) {
                     </Card>
                 </Grid>
             </Grid>
+
 
         </Fragment>
     );

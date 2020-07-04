@@ -57,7 +57,7 @@ function SalesPage(props) {
     environment_name: "",
   });
   // State for Modal Products
-  const [openProducts, setOpenProducts] = useState(true);
+  const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = (args) => {
     setOpenProducts(true);
     setCurrentTable(args);

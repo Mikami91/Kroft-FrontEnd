@@ -1,118 +1,60 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useMemo } from "react";
 import PropTypes from "prop-types";
-// @material-ui/Componentes
-import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Typography from "@material-ui/core/Typography";
+import SwipeableViews from "react-swipeable-views";
 // Core Components
-import AvatarTable from "../../components/Avatar/AvatarTable.js";
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
-import CustomTable from "../../components/Table/CustomTable.js";
-import CustomBotton from "../../components/CustomButtons/Button.js";
-import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
-// Layouts
-import EnvironmentAdd from "../../layouts/Forms/EnvironmentAdd.js";
+import TabPanel from "../../components/Panel/TabPanel";
+import FooterTabBar from "../../components/Footer/FooterTabBar.js";
+// Sub-Views
+import SubEnvironments from "../../layouts/sub-views/Environments";
+import SubTables from "../../layouts/sub-views/Tables";
+// Icons
+import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
+import TableChartRounded from '@material-ui/icons/TableChartRounded';
 
 function Environments(props) {
   // TabPanel Swipeables Views
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log(newValue);
   };
 
-  return (
-    <Fragment>
-      <Grid
-        container
-        //   className={classes.content}
-        justify="center"
-        alignItems="flex-start"
-        spacing={3}
-      >
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          lg={4}
-          xl={4}
-          elevation={6}
-          square="true"
-          // className={classes.container}
-        >
-          <EnvironmentAdd />
-        </Grid>
+  return useMemo(() => {
+    return (
+      <Fragment>
 
-        <Grid
-          item
-          xs={12}
-          sm={12}
-          md={6}
-          lg={8}
-          xl={8}
-          elevation={6}
-          square="true"
-          // className={classes.container}
-        >
-          <Card variant="cardForm">
-            <CardHeader color="info" dense>
-              <h3>Lista de Ambientes</h3>
-            </CardHeader>
-            <CardBody form>
-              <CustomTable
-                column={[
-                  {
-                    title: "ID",
-                    field: "id",
-                    type: "numeric",
-                    editable: "never",
-                  },
-                  {
-                    title: "Imagen",
-                    field: "image",
-                    editable: "never",
-                    sorting: false,
-                    // render: rowData => (
-                    //     <AvatarTable rowData={rowData} path={path} />
-                    // )
-                  },
-                  { title: "Ambiente", field: "name", type: "string" },
-                  { title: "Prefijo", field: "prefix", type: "string" },
-                  {
-                    title: "Creación",
-                    field: "created_at",
-                    editable: "never",
-                    type: "date",
-                  },
-                  {
-                    title: "Modificación",
-                    field: "updated_at",
-                    editable: "never",
-                    type: "date",
-                  },
-                ]}
-                //   data={EmployeesList}
-                //   refresh={userListAction}
-                //   updates={userUpdateAction}
-                //   deletes={userDeleteAction}
-                //   loading={Loading}
-              />
-            </CardBody>
-          </Card>
-        </Grid>
-      </Grid>
-    </Fragment>
-  );
+        <SwipeableViews index={value} onChangeIndex={handleChange}>
+          <TabPanel sub value={value} index={0}>
+            <SubEnvironments />
+          </TabPanel>
+          <TabPanel sub value={value} index={1}>
+            <SubTables />
+          </TabPanel>
+        </SwipeableViews>
+
+        <FooterTabBar
+          witdh="dash"
+          color="inherit"
+          variant="dense"
+          value={value}
+          change={handleChange}
+          tabs={[
+            {
+              text: "Ambientes",
+              icon: DeckRoundedIcon,
+            },
+            {
+              text: "Mesas",
+              icon: TableChartRounded,
+            },
+          ]}
+          tabsColor="secondary"
+        />
+
+      </Fragment>
+    );
+  }, [value]);
 }
-
 // PropTypes
 Environments.propTypes = {
   container: PropTypes.instanceOf(

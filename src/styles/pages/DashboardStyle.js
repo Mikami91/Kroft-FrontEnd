@@ -59,14 +59,22 @@ const DashboardStyle = (theme) => ({
     // background: theme.palette.type === "light" ? "#fff" : "#424242",
     position: "relative",
     display: "flex",
-    flexDirection: "column",
+
+
+
+    // flexDirection: "column",
+    
+    
+    
+    
     wordWrap: "break-word",
     fontSize: ".875rem",
     transition: "all 300ms linear",
     width: "100%",
     overflowY: "auto",
     marginTop: "2.5rem",
-    marginBottom: "-10.5rem",
+    // marginBottom: "-10.5rem",
+    marginBottom: "-7.5rem",
     alignContent: "flex-start",
     paddingTop: 0,
     paddingBottom: "10rem",

@@ -3,30 +3,17 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Typography from "@material-ui/core/Typography";
 // Core Components
-import AvatarTable from "../../components/Avatar/AvatarTable.js";
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomTable from "../../components/Table/CustomTable.js";
-import CustomBotton from "../../components/CustomButtons/Button.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
 // Layouts
-import CategoryAdd from "../../layouts/Forms/CategoryAdd.js";
+import ProductAdd from "../Forms/ProductAdd.js";
+// Variants
+import { products } from "../../variables/products";
 
-function Categories(props) {
-  // TabPanel Swipeables Views
-  const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    console.log(newValue);
-  };
+function Products(props) {
 
   return (
     <Fragment>
@@ -48,7 +35,7 @@ function Categories(props) {
           square="true"
           // className={classes.container}
         >
-          <CategoryAdd />
+          <ProductAdd />
         </Grid>
 
         <Grid
@@ -63,8 +50,8 @@ function Categories(props) {
           // className={classes.container}
         >
           <Card variant="cardForm">
-            <CardHeader color="info" dense>
-              <h3>Lista de Categorías</h3>
+            <CardHeader color="primary" dense>
+              <h3>Lista de Productos</h3>
             </CardHeader>
             <CardBody form>
               <CustomTable
@@ -84,20 +71,22 @@ function Categories(props) {
                     //     <AvatarTable rowData={rowData} path={path} />
                     // )
                   },
-                  { title: "Categoría", field: "name", type: "string" },
+                  { title: "Producto", field: "name", type: "string" },
+                  { title: "Precio Bs.", field: "price", type: "numeric" },
+                  //{ title: 'Cantidad', field: 'quantity', type: 'numeric' },
+                  { title: "Codigo", field: "code", type: "string" },
                   {
-                    title: "Impresión",
-                    field: "print_id",
-                    type: "string" /*lookup: selectListPrints*/,
+                    title: "Categoría",
+                    field: "category_id",
+                    type: "string" /*lookup: selectListCategories*/,
                   },
                   {
-                    title: "Creación",
-                    field: "created_at",
-                    editable: "never",
-                    type: "date",
+                    title: "Subcategoría",
+                    field: "subcategory_id",
+                    type: "string" /*lookup: selectListSubcategories*/,
                   },
                 ]}
-                //   data={EmployeesList}
+                  data={products}
                 //   refresh={userListAction}
                 //   updates={userUpdateAction}
                 //   deletes={userDeleteAction}
@@ -110,12 +99,11 @@ function Categories(props) {
     </Fragment>
   );
 }
-
 // PropTypes
-Categories.propTypes = {
+Products.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
 };
 
-export default Categories;
+export default Products;

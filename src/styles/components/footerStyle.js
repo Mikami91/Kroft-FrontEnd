@@ -1,6 +1,21 @@
-import { container, primaryColor, theme } from "../../themes/theme.js";
+import { drawerDash, drawerWidth, container, primaryColor, secondaryColor, theme } from "../../themes/theme.js";
 
 const footerStyle = {
+  fullWidth: {
+    width: "100%",
+  },
+  dashWidth: {
+    marginLeft: drawerDash,
+		[theme.breakpoints.up('md')]: {
+			width: `calc(100% - ${drawerDash}px)`
+		},
+  },
+  drawerWidth: {
+    marginLeft: drawerWidth,
+		[theme.breakpoints.up('md')]: {
+			width: `calc(100% - ${drawerWidth}px)`
+		},
+  },
   toolbar: {
     paddingRight: theme.spacing(1),
     paddingLeft: theme.spacing(1),
@@ -10,6 +25,20 @@ const footerStyle = {
     bottom: 0,
     position: "fixed",
     // backgroundColor: '#0b463b',
+  },
+  buttonNavigation: {
+    justifyContent: "space-evenly",
+    backgroundColor: "transparent",
+  },
+  primarySelectButtonNav: {
+    "&:selected": {
+      color: primaryColor,
+    },
+  },
+  secondarySelectButtonNav: {
+    "&:selected": {
+      color: secondaryColor,
+    },
   },
   floatChip: {
     position: 'absolute',

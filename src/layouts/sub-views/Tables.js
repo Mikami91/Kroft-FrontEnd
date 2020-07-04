@@ -3,31 +3,15 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
-import Typography from "@material-ui/core/Typography";
 // Core Components
-import AvatarTable from "../../components/Avatar/AvatarTable.js";
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomTable from "../../components/Table/CustomTable.js";
-import CustomBotton from "../../components/CustomButtons/Button.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
 // Layouts
-import SubcategoryAdd from "../../layouts/Forms/SubcategoryAdd.js";
+import TableAdd from "../Forms/TableAdd.js";
 
-function Subcategories(props) {
-  // TabPanel Swipeables Views
-  const [value, setValue] = useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    console.log(newValue);
-  };
-
+function Tables(props) {
   return (
     <Fragment>
       <Grid
@@ -46,9 +30,9 @@ function Subcategories(props) {
           xl={4}
           elevation={6}
           square="true"
-          // className={classes.container}
+        // className={classes.container}
         >
-          <SubcategoryAdd />
+          <TableAdd />
         </Grid>
 
         <Grid
@@ -60,11 +44,11 @@ function Subcategories(props) {
           xl={8}
           elevation={6}
           square="true"
-          // className={classes.container}
+        // className={classes.container}
         >
           <Card variant="cardForm">
-            <CardHeader color="info" dense>
-              <h3>Lista de Subcategorías</h3>
+            <CardHeader color="primary" dense>
+              <h3>Lista de Mesas</h3>
             </CardHeader>
             <CardBody form>
               <CustomTable
@@ -84,11 +68,11 @@ function Subcategories(props) {
                     //     <AvatarTable rowData={rowData} path={path} />
                     // )
                   },
-                  { title: "Subcategoría", field: "name", type: "string" },
+                  { title: "Mesa", field: "name", type: "string" },
                   {
-                    title: "Categoría",
-                    field: "category_id",
-                    type: "string" /*lookup: selectListCategories*/,
+                    title: "Ambiente",
+                    field: "environment_id",
+                    type: "string",
                   },
                   {
                     title: "Creación",
@@ -103,11 +87,11 @@ function Subcategories(props) {
                     type: "date",
                   },
                 ]}
-                //   data={EmployeesList}
-                //   refresh={userListAction}
-                //   updates={userUpdateAction}
-                //   deletes={userDeleteAction}
-                //   loading={Loading}
+              //   data={EmployeesList}
+              //   refresh={userListAction}
+              //   updates={userUpdateAction}
+              //   deletes={userDeleteAction}
+              //   loading={Loading}
               />
             </CardBody>
           </Card>
@@ -116,12 +100,11 @@ function Subcategories(props) {
     </Fragment>
   );
 }
-
 // PropTypes
-Subcategories.propTypes = {
+Tables.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
 };
 
-export default Subcategories;
+export default Tables;

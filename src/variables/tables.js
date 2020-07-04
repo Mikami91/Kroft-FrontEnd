@@ -2,6 +2,7 @@ export const tables = [
 	{
 		id: 1,
 		name: 'Mesa 1',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 0,
@@ -11,6 +12,7 @@ export const tables = [
 	{
 		id: 2,
 		name: 'Mesa 2',
+		number: 2,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -20,6 +22,7 @@ export const tables = [
 	{
 		id: 3,
 		name: 'Mesa 3',
+		number: 3,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -29,6 +32,7 @@ export const tables = [
 	{
 		id: 4,
 		name: 'Mesa 4',
+		number: 4,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 0,
@@ -38,6 +42,7 @@ export const tables = [
 	{
 		id: 5,
 		name: 'Mesa 5',
+		number: 5,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -47,6 +52,7 @@ export const tables = [
 	{
 		id: 6,
 		name: 'Mesa 1',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 0,
@@ -56,6 +62,7 @@ export const tables = [
 	{
 		id: 7,
 		name: 'Mesa 2',
+		number: 2,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -65,6 +72,7 @@ export const tables = [
 	{
 		id: 8,
 		name: 'Mesa 3',
+		number: 3,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 0,
@@ -74,6 +82,7 @@ export const tables = [
 	{
 		id: 9,
 		name: 'Mesa 4',
+		number: 4,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -83,6 +92,7 @@ export const tables = [
 	{
 		id: 10,
 		name: 'Mesa 5',
+		number: 5,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -92,6 +102,7 @@ export const tables = [
 	{
 		id: 11,
 		name: 'Mesa 1',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -101,6 +112,7 @@ export const tables = [
 	{
 		id: 12,
 		name: 'Mesa 2',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -110,6 +122,7 @@ export const tables = [
 	{
 		id: 13,
 		name: 'Mesa 3',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -119,6 +132,7 @@ export const tables = [
 	{
 		id: 14,
 		name: 'Mesa 4',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 0,
@@ -128,6 +142,7 @@ export const tables = [
 	{
 		id: 15,
 		name: 'Mesa 5',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -137,6 +152,7 @@ export const tables = [
 	{
 		id: 16,
 		name: 'Mesa 1',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 0,
@@ -146,6 +162,7 @@ export const tables = [
 	{
 		id: 17,
 		name: 'Mesa 2',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -155,6 +172,7 @@ export const tables = [
 	{
 		id: 18,
 		name: 'Mesa 3',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -164,6 +182,7 @@ export const tables = [
 	{
 		id: 19,
 		name: 'Mesa 4',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 0,
@@ -173,6 +192,7 @@ export const tables = [
 	{
 		id: 20,
 		name: 'Mesa 5',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -182,6 +202,7 @@ export const tables = [
 	{
 		id: 21,
 		name: 'Mesa 1',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -191,6 +212,7 @@ export const tables = [
 	{
 		id: 22,
 		name: 'Mesa 2',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -200,6 +222,7 @@ export const tables = [
 	{
 		id: 23,
 		name: 'Mesa 3',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -209,6 +232,7 @@ export const tables = [
 	{
 		id: 24,
 		name: 'Mesa 4',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -218,6 +242,7 @@ export const tables = [
 	{
 		id: 25,
 		name: 'Mesa 5',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -227,6 +252,7 @@ export const tables = [
 	{
 		id: 26,
 		name: 'Mesa 6',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -236,6 +262,7 @@ export const tables = [
 	{
 		id: 27,
 		name: 'Mesa 7',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -245,6 +272,7 @@ export const tables = [
 	{
 		id: 28,
 		name: 'Mesa 8',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -254,6 +282,7 @@ export const tables = [
 	{
 		id: 29,
 		name: 'Mesa 9',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -263,6 +292,7 @@ export const tables = [
 	{
 		id: 30,
 		name: 'Mesa 10',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -272,6 +302,7 @@ export const tables = [
 	{
 		id: 31,
 		name: 'Mesa 11',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -281,6 +312,7 @@ export const tables = [
 	{
 		id: 32,
 		name: 'Mesa 12',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -290,6 +322,7 @@ export const tables = [
 	{
 		id: 33,
 		name: 'Mesa 13',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -299,6 +332,7 @@ export const tables = [
 	{
 		id: 34,
 		name: 'Mesa 14',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -308,6 +342,7 @@ export const tables = [
 	{
 		id: 35,
 		name: 'Mesa 15',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 250,
@@ -317,6 +352,7 @@ export const tables = [
 	{
 		id: 36,
 		name: 'Mesa 16',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -326,6 +362,7 @@ export const tables = [
 	{
 		id: 37,
 		name: 'Mesa 17',
+		number: 1,
 		prefix: "Prefijo",
 		state: 3,
 		amount: 45,
@@ -335,6 +372,7 @@ export const tables = [
 	{
 		id: 38,
 		name: 'Mesa 18',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -344,6 +382,7 @@ export const tables = [
 	{
 		id: 39,
 		name: 'Mesa 19',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -353,6 +392,7 @@ export const tables = [
 	{
 		id: 40,
 		name: 'Mesa 20',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -362,6 +402,7 @@ export const tables = [
 	{
 		id: 41,
 		name: 'Mesa 21',
+		number: 1,
 		prefix: "Prefijo",
 		state: 0,
 		amount: 45,
@@ -371,6 +412,7 @@ export const tables = [
 	{
 		id: 42,
 		name: 'Mesa 22',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -380,6 +422,7 @@ export const tables = [
 	{
 		id: 43,
 		name: 'Mesa 23',
+		number: 1,
 		prefix: "Prefijo",
 		state: 1,
 		amount: 45,
@@ -389,6 +432,7 @@ export const tables = [
 	{
 		id: 44,
 		name: 'Mesa 24',
+		number: 1,
 		prefix: "Prefijo",
 		state: 2,
 		amount: 45,

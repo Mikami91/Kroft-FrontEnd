@@ -21,7 +21,7 @@ import SelectInput from '../../components/CustomInput/SelectInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Assets
-import image from '../../assets/img/defaults/table.png';
+import image from '../../assets/img/defaults/category.png';
 // Varieables
 import { data } from '../../variables/JSON.js';
 // Styles

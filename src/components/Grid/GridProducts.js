@@ -102,7 +102,7 @@ export default function GridProducts(props) {
           content={
             <GridSubProducts
               data={subCategory.payload}
-              keyData="id_subcategory"
+              keyData="subcategory_id"
               filter={subCategory.key}
               onClick={onClick}
               color="secondary"

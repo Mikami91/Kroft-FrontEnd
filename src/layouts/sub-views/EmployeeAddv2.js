@@ -18,7 +18,7 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 // Layouts
-import EmployeeAdd from '../../layouts/Forms/EmployeeAdd.js';
+import EmployeeAdd from '../Forms/EmployeeAdd.js';
 
 const Employees = ({ style }) => {
     // TabPanel Swipeables Views

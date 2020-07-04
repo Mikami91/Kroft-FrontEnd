@@ -3,7 +3,6 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import ChartistGraph from "react-chartist";
 // @material-ui/Componentes
-import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 // Core Components
 import GridItem from "../../components/Grid/GridItem.js";
@@ -48,16 +47,8 @@ function Started(props) {
 
   return (
     <Fragment>
-
-      <Grid
-        container
-        justify="center"
-        alignItems="flex-start"
-        spacing={2}
-        direction="row"
-      >
-
-        <Grid item xs={12} sm={6} md={3}>
+      <GridContainer style={{ padding: "0px 0px 25px 0px" }}>
+        <GridItem xs={12} sm={6} md={3}>
           <Card variant="cardDash">
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
@@ -79,8 +70,8 @@ function Started(props) {
               </div>
             </CardFooter>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
           <Card variant="cardDash">
             <CardHeader color="success" stats icon>
               <CardIcon color="success">
@@ -96,8 +87,8 @@ function Started(props) {
               </div>
             </CardFooter>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
           <Card variant="cardDash">
             <CardHeader color="danger" stats icon>
               <CardIcon color="danger">
@@ -113,8 +104,8 @@ function Started(props) {
               </div>
             </CardFooter>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        </GridItem>
+        <GridItem xs={12} sm={6} md={3}>
           <Card variant="cardDash">
             <CardHeader color="info" stats icon>
               <CardIcon color="info">
@@ -130,9 +121,10 @@ function Started(props) {
               </div>
             </CardFooter>
           </Card>
-        </Grid>
-
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={4}>
           <Card variant="cardDash" chart>
             <CardHeader color="success" stats>
               <ChartistGraph
@@ -158,9 +150,8 @@ function Started(props) {
               </div>
             </CardFooter>
           </Card>
-        </Grid>
-
-        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+        </GridItem>
+        <GridItem xs={12} sm={12} md={8}>
           <Card variant="cardDash" chart>
             <CardHeader color="warning" stats>
               <ChartistGraph
@@ -184,10 +175,98 @@ function Started(props) {
               </div>
             </CardFooter>
           </Card>
-        </Grid>
-
-      </Grid>
-
+        </GridItem>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card variant="cardDash" chart>
+            <CardHeader color="danger" stats>
+              <ChartistGraph
+                className="ct-chart"
+                data={completedTasksChart.data}
+                type="Line"
+                options={completedTasksChart.options}
+                listener={completedTasksChart.animation}
+              />
+            </CardHeader>
+            <CardBody stats>
+              <h4 className={classes.cardTitleBody}>Completed Tasks</h4>
+              <p className={classes.cardCategoryBody}>
+                Last Campaign Performance
+              </p>
+            </CardBody>
+            <CardFooter chart>
+              <div className={classes.stats}>
+                <AccessTime /> campaign sent 2 days ago
+              </div>
+            </CardFooter>
+          </Card>
+        </GridItem>
+      </GridContainer>
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomTabs
+            // dense
+            title="Tasks:"
+            headerColor="primary"
+            tabs={[
+              {
+                tabName: "Bugs",
+                tabIcon: BugReportIcon,
+                tabContent: (
+                  <Tasks
+                    checkedIndexes={[0, 3]}
+                    tasksIndexes={[0, 1, 2, 3]}
+                    tasks={bugs}
+                  />
+                ),
+              },
+              {
+                tabName: "Website",
+                tabIcon: Code,
+                tabContent: (
+                  <Tasks
+                    checkedIndexes={[0]}
+                    tasksIndexes={[0, 1]}
+                    tasks={website}
+                  />
+                ),
+              },
+              {
+                tabName: "Server",
+                tabIcon: Cloud,
+                tabContent: (
+                  <Tasks
+                    checkedIndexes={[1]}
+                    tasksIndexes={[0, 1, 2]}
+                    tasks={server}
+                  />
+                ),
+              },
+            ]}
+          />
+        </GridItem>
+        <GridItem xs={12} sm={12} md={6}>
+          <Card variant="cardDash">
+            <CardHeader color="warning" stats>
+              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
+              <p className={classes.cardCategoryWhite}>
+                New employees on 15th September, 2016
+              </p>
+            </CardHeader>
+            <CardBody stats>
+              <CustomTable
+                tableHeaderColor="warning"
+                tableHead={["ID", "Name", "Salary", "Country"]}
+                tableData={[
+                  ["1", "Dakota Rice", "$36,738", "Niger"],
+                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
+                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
+                  ["4", "Philip Chaney", "$38,735", "Korea, South"],
+                ]}
+              />
+            </CardBody>
+          </Card>
+        </GridItem>
+      </GridContainer>
     </Fragment>
   );
 }

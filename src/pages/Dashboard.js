@@ -64,7 +64,7 @@ export default function DashboardPage(props) {
               color="primary"
               variant="dense"
               drawer
-              rightButtons={[
+              leftButtons={[
                 {
                   type: "icon",
                   text: "Menu",
@@ -84,7 +84,7 @@ export default function DashboardPage(props) {
                   onClick: null,
                 },
               ]}
-              leftButtons={[
+              rightButtons={[
                 {
                   type: "button",
                   text: "Ventas",
@@ -142,7 +142,7 @@ export default function DashboardPage(props) {
               color="primary"
               variant="regular"
               drawer
-              rightButtons={[
+              leftButtons={[
                 {
                   type: "button",
                   text: "Perfil",
@@ -154,7 +154,7 @@ export default function DashboardPage(props) {
                   onClick: null,
                 },
               ]}
-              leftButtons={[
+              rightButtons={[
                 {
                   type: "button",
                   text: "Ventas",
@@ -211,8 +211,6 @@ export default function DashboardPage(props) {
         <div className={classes.rootMenu}>
           {SidebarList.map((list, key) => {
             return useMemo(() => {
-              console.log("render");
-
               return (
                 <TabPanel key={key} value={value} index={key} classes={classes}>
                   <Grid

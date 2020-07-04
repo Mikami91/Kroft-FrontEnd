@@ -93,6 +93,7 @@ const useStyles = makeStyles(styles);
 function FooterAppBar(props) {
   // Props
   const {
+    witdh,
     floatChip,
     fabButton,
     rightButtons,
@@ -105,8 +106,9 @@ function FooterAppBar(props) {
   // Styles
   const classes = useStyles();
   const footerClasses = classNames({
+    [classes[witdh + "Width"]]: true,
     [classes.footerAppBar]: true,
-    [classes.footerLogin]: drawer,
+    [classes.footerLogin]: drawer, 
   });
   // Render
   return (
@@ -188,6 +190,7 @@ function FooterAppBar(props) {
 // PropTypes
 FooterAppBar.defaultProps = {
   // AppBar
+  witdh: "full",
   position: "fixed",
   color: "primary",
   // TooolBar
@@ -199,6 +202,7 @@ FooterAppBar.defaultProps = {
 };
 FooterAppBar.propTypes = {
   // AppBar
+  witdh: PropTypes.oneOf(["full", "dash", "drawer"]),
   position: PropTypes.oneOf([
     "absolute",
     "fixed",
