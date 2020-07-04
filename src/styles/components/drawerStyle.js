@@ -47,10 +47,10 @@ import {
         marginTop: "4rem",
       },
       [theme.breakpoints.only("lg")]: {
-        marginTop: "4.5rem",
+        marginTop: "5.1rem",
       },
       [theme.breakpoints.only("xl")]: {
-        marginTop: "5.5rem",
+        marginTop: "5.6rem",
       },
     },
     drawer: {
