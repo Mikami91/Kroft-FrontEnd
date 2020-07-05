@@ -13,12 +13,14 @@ import styles from "../../styles/components/buttonStyle.js";
 const useStyles = makeStyles(styles);
 
 function DialogButton(props) {
-  const { disabled, variant, color, onClick, html, text, icon, key } = props.index;
+  const { disabled, variant, margin, color, onClick, html, text, icon, key } = props.index;
   const classes = useStyles();
   const btnClasses = classNames({
     [classes.dialogButton]: true,
     [classes[color]]: color && variant === "contained",
     [classes[color + "Text"]]: color && variant !== "contained",
+    [classes.margin]: margin,
+
     [classes.disabled]: disabled,
   });
   return [
@@ -37,6 +39,7 @@ function DialogButton(props) {
 
     <Hidden smDown key={key+ "large"}>
       <Button
+        type="submit"
         disabled={disabled}
         variant={variant}
         className={btnClasses}
@@ -53,6 +56,7 @@ function DialogButton(props) {
 DialogButton.defaultProps = {
   disabled: false,
   variant: "contained",
+  margin: false,
   color: "primary",
   icon: null,
   onClick: null,
@@ -62,6 +66,7 @@ DialogButton.defaultProps = {
 DialogButton.propTypes = {
   disabled: PropTypes.bool,
   variant: PropTypes.oneOf(["text", "outlined", "contained"]),
+  margin: PropTypes.bool,
   color: PropTypes.oneOf([
     "primary",
     "secondary",

@@ -9,6 +9,7 @@ import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+import SendRoundedIcon from '@material-ui/icons/SendRounded';
 // Layouts
 import EmployeeLogin from "../layouts/Forms/EmployeeLogin.js";
 import PinLogin from "../layouts/Forms/PinLogin.js";
@@ -23,6 +24,7 @@ import CardBody from "../components/Card/CardBody.js";
 import CardFooter from "../components/Card/CardFooter.js";
 import TabPanel from "../components/Panel/TabPanel.js";
 import Modal from "../components/Modal/Modal.js";
+import CustomModal from "../components/Modal/CustomModal.js";
 // Assets
 import logo from "../assets/img/brands/kroft-vertical.svg";
 // Styles
@@ -61,12 +63,12 @@ export default function LoginPage(props) {
         justify="center"
         alignItems="center"
       >
-        <Hidden only={["xs", "sm", "md"]}>
+        <Hidden only={["xs", "sm"]}>
           <Grid
             item
             xs={false}
             sm={false}
-            md={false}
+            md={8}
             lg={8}
             xl={9}
             className={classes.containerSide}
@@ -79,7 +81,7 @@ export default function LoginPage(props) {
           item
           xs={12}
           sm={9}
-          md={8}
+          md={4}
           lg={4}
           xl={3}
           elevation={6}
@@ -142,7 +144,7 @@ export default function LoginPage(props) {
         </Grid>
       </Grid>
 
-      <Modal
+      {/* <Modal
         open={open}
         close={handleClose}
         scroll="body"
@@ -153,6 +155,45 @@ export default function LoginPage(props) {
         actionText="Enviar"
         content={<EmailForm />}
         form="email-form"
+      /> */}
+
+      <CustomModal
+        open={open}
+        close={handleClose}
+        title={{
+          text: "Ingresa tu correo electronicos",
+          size: "medium",
+        }}
+        content={<EmailForm />}
+        rightButtons={[
+          {
+            type: "button",
+            text: "Cancelar",
+            color: "transparent",
+            edge: "start",
+            size: "large",
+            variant: "contained",
+            margin: true,
+            disabled: false,
+            onClick: handleClose,
+          },
+          {
+            type: "button",
+            text: "Enviar",
+            color: "primary",
+            icon: SendRoundedIcon,
+            edge: "start",
+            size: "large",
+            variant: "contained",
+            margin: true,
+            disabled: false,
+            html: "email-form",
+            onClick: null,
+          },
+        ]}
+        // scroll="paper"
+        maxWidth="sm"
+        fullWidth
       />
     </Fragment>
   );

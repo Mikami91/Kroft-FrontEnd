@@ -75,6 +75,9 @@ const buttonStyle = {
       },
     },
   },
+  margin: {
+    margin: theme.spacing(1),
+  },
   dialogButton: {
     color: "#FFFFFF",
   },
