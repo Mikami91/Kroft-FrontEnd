@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -9,26 +9,50 @@ import PersonIcon from "@material-ui/icons/Person";
 import Button from "../../components/CustomButtons/Button.js";
 import PasswordInput from "../../components/CustomInput/PasswordInput.js";
 import IconInput from "../../components/CustomInput/IconInput.js";
-
+// Styles
 import styles from "../../styles/pages/LoginStyle.js";
+// Functions
+import { employeeLogin } from "../../functions/employeeFunctions";
 
 const useStyles = makeStyles(styles);
 
 export default function EmployeeLogin(props) {
+  // Local state
   const [state, setState] = useState({
     user: "",
     password: "",
     error: false,
   });
+  // Inputs changes
   const handleChange = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
+  // Hooks
+  let history = useHistory();
+  // Function
   const handleLogin = (e) => {
     e.preventDefault();
-    alert("User: " + state.user + ", Password: " + state.password);
+    employeeLogin(state).then((response) => {
+      if (typeof response !== 'undefined') {
+        if (response.success === true) {
+
+          switch (response.data.rol_id) {
+            case 1:
+              history.push('/Kroft-FrontEnd/sales');
+              break;
+            case 2:
+              history.push('/Kroft-FrontEnd/collects');
+              break;
+          
+            default:
+              break;
+          }
+        }
+      }
+    });
   };
   const classes = useStyles();
   return (
@@ -58,11 +82,9 @@ export default function EmployeeLogin(props) {
         onChange={handleChange}
         value={state.password}
       />
-      <Link to="/Kroft-FrontEnd/sales">
         <Button /*simple*/ color="primary" size="sm" type="submit">
           Iniciar
         </Button>
-      </Link>
     </form>
   );
 }

@@ -1,7 +1,9 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect, useMemo } from "react";
 import { withRouter } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -28,17 +30,21 @@ import CustomDrawer from "../components/Drawer/CustomDrawer.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomBotton from "../components/CustomButtons/Button.js";
 // Assets
-import image from '../assets/img/backgrounds/productbackground.jpg'
+import image from '../assets/img/backgrounds/productbackground.jpg';
+// Functions
+import { environmentShow } from "../functions/environmentFunctions";
+import { tableShow } from "../functions/tableFunctions";
 // Variables
-import { environments } from "../variables/environments";
-import { tables } from "../variables/tables";
+// import { environments } from "../variables/environments";
+// import { tables } from "../variables/tables";
 // Styles
 import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SalesPage(props) {
-  // console.log(props.location);
+function SalesPage({ environments, tables }) {
+  const [state, setState] = useState(true);
+  // Change environments state
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -52,10 +58,11 @@ function SalesPage(props) {
     name: "",
     prefix: "",
     amount: 0,
-    state: null,
+    is_busy: null,
     environment_id: null,
     environment_name: "",
   });
+
   // State for Modal Products
   const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = (args) => {
@@ -65,6 +72,7 @@ function SalesPage(props) {
   const handleCloseProducts = () => {
     setOpenProducts(false);
   };
+
   // State for Modal Profile
   const [openProfile, setOpenProfile] = useState(false);
   const handleOpenProfile = () => {
@@ -73,6 +81,7 @@ function SalesPage(props) {
   const handleCloseProfile = () => {
     setOpenProfile(false);
   };
+
   // State for Modal Change Tables
   const [openChangeTables, setOpenChangeTables] = useState(false);
   const handleOpenChangeTables = () => {
@@ -81,6 +90,7 @@ function SalesPage(props) {
   const handleCloseChangeTables = () => {
     setOpenChangeTables(false);
   };
+
   // State for Drawer
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
@@ -89,13 +99,27 @@ function SalesPage(props) {
   const handleCloseDrawer = () => {
     setOpenDrawer(false);
   };
-  // // UseEffect
+
+  useMemo(() => {
+    environmentShow();
+    tableShow();
+    setState(false);
+  }, [state]);
+
   // useEffect(() => {
-  // 	if (typeof props.location.state !== "undefined") {
-  // 		setValue(props.location.state.value);
-  // 	}
-  // 	return null;
-  //   }, [value]);
+  //   if (state === true) {
+  //     environmentShow();
+  //     setState(false);
+  //   }
+  // })
+
+  // Refresh fetches
+  const handleRefresh = () => {
+    // Environments list fetch
+    environmentShow();
+    // Tables list fetch
+    tableShow();
+  }
   // Styles
   const classes = useStyles();
   return (
@@ -147,7 +171,7 @@ function SalesPage(props) {
           float: false,
           align: "center",
           icon: RefreshIcon,
-          onClick: () => null,
+          onClick: handleRefresh,
         }}
         leftButtons={[
           {
@@ -173,7 +197,7 @@ function SalesPage(props) {
           },
           {
             type: "text",
-            text: "Mesero N°",
+            text: localStorage.getItem('user'),
             color: "default",
             margin: true,
             autoSize: true,
@@ -295,5 +319,13 @@ function SalesPage(props) {
     </Fragment>
   );
 }
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { table, environment } = state;
+  return {
+    environments: environment.payload.filter(dataList => dataList.state === 1),
+    tables: table.payload.filter(dataList => dataList.state === 1),
+  }
+};
 
-export default withRouter(SalesPage);
+export default withRouter(connect(mapStateToProps, null)(SalesPage));

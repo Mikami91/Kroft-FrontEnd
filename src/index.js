@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, HashRouter } from "react-router-dom";
 // Redux
 import { Provider } from 'react-redux';
-// import store from '../src/redux/store.js';
+import store from '../src/redux/store.js';
 // Date Picker
 import DateFnsUtils from '@date-io/date-fns';
 import esLocale from "date-fns/locale/es";
@@ -20,15 +20,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  // <Provider store={store}>
-  <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esLocale}>
-    <MuiThemeProvider theme={theme} >
-      <Router history={HashRouter}>
-        <App />
-      </Router>
-    </MuiThemeProvider>
-  </MuiPickersUtilsProvider>
-  // </Provider>
+  <Provider store={store}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esLocale}>
+      <MuiThemeProvider theme={theme} >
+        <Router history={HashRouter}>
+          <App />
+        </Router>
+      </MuiThemeProvider>
+    </MuiPickersUtilsProvider>
+  </Provider>
   ,
   document.getElementById('root')
 );

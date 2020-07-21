@@ -32,7 +32,7 @@ function GridTables(props) {
         });
         const cardClasses = classNames({
           [classes[
-            index.state === 0 ? "green" : index.state === 1 ? "red" : "yellow"
+            index.is_busy === 0 ? "green" : index.is_busy === 1 ? "red" : "yellow"
           ]]: true,
         });
 

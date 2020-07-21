@@ -1,6 +1,5 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
-import { Link, withRouter } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -121,9 +120,6 @@ export default function LoginPage(props) {
               >
                 <TabPanel value={value} index={0} centered>
                   <EmployeeLogin />
-                  <Link to="/Kroft-FrontEnd/collects">
-                    <p className={classes.divider}>Inicio rápido</p>
-                  </Link>
                   <PinLogin />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
@@ -161,7 +157,7 @@ export default function LoginPage(props) {
         open={open}
         close={handleClose}
         title={{
-          text: "Ingresa tu correo electronicos",
+          text: "Ingresa tu correo electrónico",
           size: "medium",
         }}
         content={<EmailForm />}

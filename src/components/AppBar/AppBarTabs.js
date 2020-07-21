@@ -59,7 +59,7 @@ const AppBarTabs = (props) => {
         centered={centered}
       >
         {data.map((index, key) => {
-          return useMemo(() => {
+          // return useMemo(() => {
             return (
               <Tab
                 key={key}
@@ -72,7 +72,7 @@ const AppBarTabs = (props) => {
                 icon={<DeckRoundedIcon className={classes.icons} />}
               />
             );
-          }, [data]);
+          // }, [data]);
         })}
       </Tabs>
     </AppBar>
