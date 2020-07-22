@@ -1,20 +1,20 @@
 // Fetchs
 import { loginFetch, loginPinFetch } from './fetchs/employeeFetch';
-// Store
-import store from '../redux/store';
 // Actions Creators
-import { employeeData } from "../redux/actions/creators/employeeCreator";
+import { payload, loading } from "../redux/actions/creators/employeeCreator";
 
 /*::::::::::::::::::::LOGIN::::::::::::::::::::*/
 export async function employeeLogin(data) {
+    loading(true);
     try {
         const response = await loginFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    store.dispatch(employeeData(response.data.data));
+                    payload(response.data.data);
                     localStorage.setItem('user', response.data.data.user);
                     localStorage.setItem('token', response.data.token);
+                    loading(false);
                     break;
 
                 case false:
@@ -25,8 +25,9 @@ export async function employeeLogin(data) {
                         let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
                         alert(messageError);
                     }
+                    loading(false);
                     break;
-            
+
                 default:
                     break;
             }
@@ -34,6 +35,7 @@ export async function employeeLogin(data) {
         return response.data;
 
     } catch (error) {
+        loading(false);
         return error.message;
     };
 };
@@ -58,7 +60,7 @@ export async function employeeLoginPin(data) {
                         alert(messageError);
                     }
                     break;
-            
+
                 default:
                     break;
             }

@@ -17,9 +17,7 @@ export const EMPLOYEE_DIALOG = 'EMPLOYEE_DIALOG';
 // List
 export const ENVIRONMENT_LIST = 'ENVIRONMENT_LIST';
 // Loading
-export const ENVIRONMENT_LOADING = 'ENVIRONMENT_FETCH';
-// Fetch
-export const ENVIRONMENT_FETCH = 'ENVIRONMENT_FETCH';
+export const ENVIRONMENT_LOADING = 'ENVIRONMENT_LOADING';
 
 
 /*::::::::::::::::::::TABLE::::::::::::::::::::*/
@@ -27,5 +25,3 @@ export const ENVIRONMENT_FETCH = 'ENVIRONMENT_FETCH';
 export const TABLE_LIST = 'TABLE_LIST';
 // Loading
 export const TABLE_LOADING = 'TABLE_FETCH';
-// Fetch
-export const TABLE_FETCH = 'TABLE_FETCH';

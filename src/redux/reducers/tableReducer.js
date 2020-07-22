@@ -1,9 +1,10 @@
 // Action types
-import { TABLE_LIST } from '../actions/actionsTypes';
+import { TABLE_LIST, TABLE_LOADING } from '../actions/actionsTypes';
 
 // Default State
 const tableState = {
   payload: [],
+  loading: false,
 };
 
 export function tableReducer(state = tableState, action) {
@@ -13,6 +14,12 @@ export function tableReducer(state = tableState, action) {
       return {
         ...state,
         payload: action.payload
+      };
+
+    case TABLE_LOADING:
+      return {
+        ...state,
+        loading: action.value
       };
 
     default:

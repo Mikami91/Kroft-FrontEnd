@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Fragment, useState, useEffect, useMemo } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
@@ -28,7 +28,7 @@ import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomDrawer from "../components/Drawer/CustomDrawer.js";
 import CustomModal from "../components/Modal/CustomModal.js";
-import CustomBotton from "../components/CustomButtons/Button.js";
+import CustomLoading from '../components/Loading/CustomLoading'
 // Assets
 import image from '../assets/img/backgrounds/productbackground.jpg';
 // Functions
@@ -42,8 +42,9 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SalesPage({ environments, tables }) {
-  const [state, setState] = useState(true);
+function SalesPage({ environments, tables, loading }) {
+  // Loading payloads state
+  const [is_payload, set_is_payload] = useState(false);
   // Change environments state
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -100,30 +101,30 @@ function SalesPage({ environments, tables }) {
     setOpenDrawer(false);
   };
 
-  useMemo(() => {
-    environmentShow();
-    tableShow();
-    setState(false);
-  }, [state]);
-
-  // useEffect(() => {
-  //   if (state === true) {
-  //     environmentShow();
-  //     setState(false);
-  //   }
-  // })
-
   // Refresh fetches
   const handleRefresh = () => {
-    // Environments list fetch
     environmentShow();
-    // Tables list fetch
     tableShow();
   }
+
+  // Payloads
+  useEffect(() => {
+    if (is_payload === false) {
+
+      handleRefresh();
+
+      // Change is_payload state
+      set_is_payload(true);
+    }
+  });
+
   // Styles
   const classes = useStyles();
   return (
     <Fragment>
+
+      <CustomLoading open={loading} />
+
       <AppBarTabs
         color="inherit"
         data={environments}
@@ -324,6 +325,7 @@ const mapStateToProps = (state) => {
   const { table, environment } = state;
   return {
     environments: environment.payload.filter(dataList => dataList.state === 1),
+    loading: environment.loading,
     tables: table.payload.filter(dataList => dataList.state === 1),
   }
 };

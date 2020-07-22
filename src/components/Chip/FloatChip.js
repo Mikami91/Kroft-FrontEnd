@@ -51,8 +51,14 @@ FloatChip.defaultProps = {
     icon: null,
   };
   FloatChip.propTypes = {
-    primary: PropTypes.string,
-    secondary: PropTypes.string,
+    primary: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+    secondary: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
     type: PropTypes.oneOf([ "icon", "img" ]),
     icon: PropTypes.object,
     color: PropTypes.oneOf([

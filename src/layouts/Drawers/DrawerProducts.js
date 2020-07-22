@@ -41,7 +41,6 @@ const useStyles = makeStyles(styles);
 
 function DrawerProducts(props) {
   const { direction, variant, open, close, background, table } = props;
-  console.log(table)
   // Categories index State
   const [value, setValue] = useState(0);
   const handleChangeIndex = (e, newValue) => {
@@ -121,8 +120,8 @@ function DrawerProducts(props) {
           color="inherit"
           variant="dense"
           floatChip={{
-            primary: table.name,
-            secondary: table.number,
+            primary: `${table.name} ${table.number}`,
+            secondary: table.environment_name,
             color: table.is_busy === 0 ? "success" : table.is_busy === 1 ? "danger" : table.is_busy === 2 ? "warning" : "gray",
             type: "icon",
             icon: TableChartRoundedIcon

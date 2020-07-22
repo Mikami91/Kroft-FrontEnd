@@ -93,13 +93,13 @@ function DrawerTablesList(props) {
 
                   {itemList.map((index2) =>
                     index2[filter] === index.id ? (
-                      <ListItem key={index2.name}>
+                      <ListItem key={index2.id}>
                         <ListItemAvatar>
                           <Avatar
                             className={
-                              index2.state === 0
+                              index2.is_busy === 0
                                 ? classes.success
-                                : index2.state === 1
+                                : index2.is_busy === 1
                                 ? classes.danger
                                 : classes.warning
                             }
@@ -110,11 +110,11 @@ function DrawerTablesList(props) {
                         </ListItemAvatar>
 
                         <ListItemText
-                          primary={index2.name}
+                          primary={`${index2.name} ${index2.number}`}
                           secondary={
-                            index2.state === 0
+                            index2.is_busy === 0
                               ? "Disponible"
-                              : index2.state === 1
+                              : index2.is_busy === 1
                               ? "Ocupado"
                               : "Por cobrar"
                           }

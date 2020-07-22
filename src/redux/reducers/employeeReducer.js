@@ -1,9 +1,10 @@
 // Action types
-import { EMPLOYEE_DATA } from '../actions/actionsTypes';
+import { EMPLOYEE_DATA, EMPLOYEE_LOADING } from '../actions/actionsTypes';
 
 // Default State
 const employeeState = {
   payload: [],
+  loading: false,
 };
 
 export function employeeReducer(state = employeeState, action) {
@@ -13,6 +14,12 @@ export function employeeReducer(state = employeeState, action) {
       return {
         ...state,
         payload: action.payload
+      };
+
+    case EMPLOYEE_LOADING:
+      return {
+        ...state,
+        loading: action.value
       };
 
     default:

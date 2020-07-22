@@ -1,9 +1,10 @@
 // Action types
-import { ENVIRONMENT_LIST } from '../actions/actionsTypes';
+import { ENVIRONMENT_LIST, ENVIRONMENT_LOADING } from '../actions/actionsTypes';
 
 // Default State
 const environmentState = {
   payload: [],
+  loading: false,
 };
 
 export function environmentReducer(state = environmentState, action) {
@@ -13,6 +14,12 @@ export function environmentReducer(state = environmentState, action) {
       return {
         ...state,
         payload: action.payload
+      };
+
+    case ENVIRONMENT_LOADING:
+      return {
+        ...state,
+        loading: action.value
       };
 
     default:
