@@ -1,10 +1,10 @@
 // Fetchs
-import { showFetch } from './fetchs/tableFetch';
+import { showFetch } from './fetchs/subcategoryFetch';
 // Actions Creators
-import { payload, loading } from "../redux/actions/creators/tableCreator";
+import { payload, loading } from "../redux/actions/creators/subcategoryCreator";
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function tableShow() {
+export async function subcategoryShow() {
     loading(true);
     try {
         const response = await showFetch();

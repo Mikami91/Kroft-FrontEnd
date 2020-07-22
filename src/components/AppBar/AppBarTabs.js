@@ -8,6 +8,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+// API
+import { API } from '../../API/index';
 // Icons
 import DeckRoundedIcon from "@material-ui/icons/DeckRounded";
 // Styles
@@ -25,6 +27,8 @@ const AppBarTabs = (props) => {
     drawer,
     // Tabs
     data,
+    iconType,
+    environmentFolder,
     value,
     onChange,
     indicatorColor,
@@ -60,18 +64,24 @@ const AppBarTabs = (props) => {
       >
         {data.map((index, key) => {
           // return useMemo(() => {
-            return (
-              <Tab
-                key={key}
-                style={{ paddingTop: 2 }}
-                label={
-                  <Typography className={classes.text} noWrap>
-                    {index.name}
-                  </Typography>
-                }
-                icon={<DeckRoundedIcon className={classes.icons} />}
-              />
-            );
+          return (
+            <Tab
+              key={key}
+              style={{ paddingTop: 2 }}
+              label={
+                <Typography className={classes.text} noWrap>
+                  {index.name}
+                </Typography>
+              }
+              icon={iconType === "icon" ? <DeckRoundedIcon className={classes.icons} /> :
+                <img
+                  src={API + environmentFolder + index.photo}
+                  alt={index.name}
+                  color={index.selectColor}
+                  className={classes.images}
+                />}
+            />
+          );
           // }, [data]);
         })}
       </Tabs>
@@ -88,6 +98,8 @@ AppBarTabs.defaultProps = {
   drawer: false,
   // Tabs
   data: [],
+  iconType: "icon",
+  environmentFolder: "",
   value: "",
   onChange: null,
   indicatorColor: "primary",
@@ -121,6 +133,8 @@ AppBarTabs.propTypes = {
       name: PropTypes.string,
     })
   ),
+  iconType: PropTypes.oneOf(["icon", "img"]),
+  environmentFolder: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func,
   indicatorColor: PropTypes.oneOf(["inherit", "primary", "secondary"]),

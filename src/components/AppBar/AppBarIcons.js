@@ -10,6 +10,8 @@ import Tabs from "@material-ui/core/Tabs";
 import { makeStyles } from "@material-ui/core/styles";
 // Core Components
 import CustomText from "../../components/Typography/CustomText";
+// API
+import { API } from '../../API/index';
 // Icons
 import WhatshotIcon from "@material-ui/icons/Whatshot";
 // Styles
@@ -27,6 +29,7 @@ const AppBarIcons = (props) => {
     drawer,
     // Tabs
     data,
+    categoryFolder,
     value,
     onChange,
     selectColor,
@@ -65,7 +68,7 @@ const AppBarIcons = (props) => {
       >
         {data.map((index, key) => {
           // Using useMemo hook
-          return useMemo(() => {
+          // return useMemo(() => {
             const imageFabClasses = classNames({
               [classes.fabButton]: true,
               [classes[selectColor + "SelectFabButton"]]: key === value,
@@ -94,7 +97,7 @@ const AppBarIcons = (props) => {
                   className={imageFabClasses}
                 >
                   <img
-                    src={index.photo}
+                    src={API + categoryFolder + index.photo}
                     alt={index.name}
                     color={index.selectColor}
                     className={classes.imageIcon}
@@ -104,7 +107,7 @@ const AppBarIcons = (props) => {
                 <CustomText text={index.name} adjust />
               </Grid>
             );
-          }, [data, value]);
+          // }, [data, value]);
         })}
       </Tabs>
     </AppBar>
@@ -120,6 +123,7 @@ AppBarIcons.defaultProps = {
   drawer: false,
   // Tabs
   data: [],
+  categoryFolder: "",
   value: "",
   onChange: null,
   selectColor: "primary",
@@ -149,6 +153,7 @@ AppBarIcons.propTypes = {
       name: PropTypes.string,
     })
   ),
+  categoryFolder: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func,
   selectColor: PropTypes.oneOf([

@@ -12,10 +12,10 @@ export const table_list = (payload) => {
 }
 export const payload = (payload) => store.dispatch(table_list(payload));
 
-export const table_loading = (payload) => {
+export const table_loading = (value) => {
   return {
     type: TABLE_LOADING,
-    payload: payload
+    value: value
   };
 }
-export const loading = (payload) => store.dispatch(table_loading(payload));
+export const loading = (value) => store.dispatch(table_loading(value));

@@ -1,7 +1,9 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -28,7 +30,10 @@ import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomDrawer from "../components/Drawer/CustomDrawer.js";
 import CustomModal from "../components/Modal/CustomModal.js";
-import CustomBotton from "../components/CustomButtons/Button.js";
+import CustomLoading from '../components/Loading/CustomLoading';
+// Functions
+import { environmentShow } from "../functions/environmentFunctions";
+import { tableShow } from "../functions/tableFunctions";
 
 import IconInput from "../components/CustomInput/IconInput.js";
 
@@ -40,15 +45,19 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function CollectsPage(props) {
-  // console.log(props.location);
+function CollectsPage({ environments, tables, loading }) {
+  // Loading payloads state
+  const [is_payload, set_is_payload] = useState(false);
   const [value, setValue] = useState(0);
+
+  // Change environments state
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
   // State Current Table
   const [currentTable, setCurrentTable] = useState({
     id: null,
@@ -59,6 +68,7 @@ function CollectsPage(props) {
     environment_id: null,
     environment_name: "",
   });
+
   // State for Modal Products
   const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = () => {
@@ -68,6 +78,7 @@ function CollectsPage(props) {
   const handleCloseProducts = () => {
     setOpenProducts(false);
   };
+
   // State for Modal Profile
   const [openProfile, setOpenProfile] = useState(false);
   const handleOpenProfile = () => {
@@ -76,6 +87,7 @@ function CollectsPage(props) {
   const handleCloseProfile = () => {
     setOpenProfile(false);
   };
+
   // State for Modal Change Tables
   const [openChangeTables, setOpenChangeTables] = useState(false);
   const handleOpenChangeTables = () => {
@@ -84,6 +96,7 @@ function CollectsPage(props) {
   const handleCloseChangeTables = () => {
     setOpenChangeTables(false);
   };
+
   // State for Drawer
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
@@ -92,20 +105,36 @@ function CollectsPage(props) {
   const handleCloseDrawer = () => {
     setOpenDrawer(false);
   };
-  // // UseEffect
-  // useEffect(() => {
-  // 	if (typeof props.location.state !== "undefined") {
-  // 		setValue(props.location.state.value);
-  // 	}
-  // 	return null;
-  //   }, [value]);
+
+  // Refresh fetches
+  const handleRefresh = () => {
+    environmentShow();
+    tableShow();
+  }
+
+  // Payloads
+  useEffect(() => {
+    if (is_payload === false) {
+
+      handleRefresh();
+
+      // Change is_payload state
+      set_is_payload(true);
+    }
+  }, [is_payload, environments, tables]);
+
   // Styles
   const classes = useStyles();
   return (
     <Fragment>
+
+      <CustomLoading open={loading} />
+
       <AppBarTabs
         color="inherit"
         data={environments}
+        iconType="img"
+        environmentFolder="images/environments/"
         value={value}
         onChange={handleChange}
         variant="fullWidth"
@@ -150,7 +179,7 @@ function CollectsPage(props) {
           float: false,
           align: "center",
           icon: RefreshIcon,
-          onClick: () => null,
+          onClick: handleRefresh,
         }}
         leftButtons={[
           {
@@ -176,7 +205,7 @@ function CollectsPage(props) {
           },
           {
             type: "text",
-            text: "Cajero N°",
+            text: localStorage.getItem('user'),
             color: "default",
             margin: true,
             autoSize: true,
@@ -289,7 +318,7 @@ function CollectsPage(props) {
           },
         ]}
         centerButtons={[
-          
+
         ]}
         rightButtons={[
           {
@@ -321,5 +350,14 @@ function CollectsPage(props) {
     </Fragment>
   );
 }
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { table, environment } = state;
+  return {
+    environments: environment.payload.filter(dataList => dataList.state === 1),
+    loading: environment.loading,
+    tables: table.payload.filter(dataList => dataList.state === 1),
+  }
+};
 
-export default withRouter(CollectsPage);
+export default withRouter(connect(mapStateToProps, null)(CollectsPage));

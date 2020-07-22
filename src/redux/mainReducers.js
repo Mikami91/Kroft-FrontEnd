@@ -4,12 +4,18 @@ import { combineReducers } from 'redux';
 import { employeeReducer } from './reducers/employeeReducer';
 import { environmentReducer } from './reducers/environmentReducer';
 import { tableReducer } from './reducers/tableReducer';
+import { categoryReducer } from './reducers/categoryReducer';
+import { subcategoryReducer } from './reducers/subcategoryReducer';
+import { productReducer } from './reducers/productReducer';
 
 // Combine Reducer
 export const mainReducer = combineReducers({
     employee: employeeReducer,
     environment: environmentReducer,
     table: tableReducer,
+    category: categoryReducer,
+    subcategory: subcategoryReducer,
+    product: productReducer,
   });
 
 /*export default function mainReducer(state = {}, action) {

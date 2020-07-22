@@ -54,6 +54,27 @@ const appBarStyle = {
 			height: '3.5rem'
 		}
 	},
+	images: {
+		borderRadius: 6,
+		width: '3rem',
+		height: '1.5rem',
+		[theme.breakpoints.only('sm')]: {
+			width: '4rem',
+			height: '2rem'
+		},
+		[theme.breakpoints.only('md')]: {
+			width: '5rem',
+			height: '2.5rem'
+		},
+		[theme.breakpoints.only('lg')]: {
+			width: '6rem',
+			height: '3rem'
+		},
+		[theme.breakpoints.only('xl')]: {
+			width: '7rem',
+			height: '3.5rem'
+		}
+	},
 	text: {
 		fontSize: 'smaller',
 		[theme.breakpoints.only('sm')]: {

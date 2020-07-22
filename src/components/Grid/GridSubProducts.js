@@ -7,13 +7,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 // Core components
 import CardProduct from "../Card/CardProduct.js";
+// API
+import { API } from '../../API/index';
+// Assets
+import image from "../../assets/img/defaults/product.png";
 // Styles
 import styles from "../../styles/components/gridStyle";
 
 const useStyles = makeStyles(styles);
 
 export default function GridSubProducts(props) {
-  const { data, keyData, filter, onClick, color } = props;
+  const { data, keyData, filter, productFolder, onClick, color } = props;
   // Styles
   const classes = useStyles();
   const gridClasses = classNames({
@@ -49,7 +53,7 @@ export default function GridSubProducts(props) {
                   color={color}
                   prefix="Bs."
                   price={index.price}
-                  photo={index.photo}
+                  photo={API + productFolder + index.photo}
                   name={index.name}
                   quantity={index.id}
                   onClick={onClick}
@@ -69,6 +73,7 @@ GridSubProducts.defaultProps = {
   data: [],
   keyData: "",
   filter: "",
+  productFolder: "",
   onClick: null,
   color: "primary",
 };
@@ -76,6 +81,7 @@ GridSubProducts.propTypes = {
   data: PropTypes.array,
   keyData: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   filter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  productFolder: PropTypes.string,
   onClick: PropTypes.func,
   color: PropTypes.oneOf([
     "primary",

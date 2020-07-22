@@ -28,12 +28,15 @@ import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomDrawer from "../components/Drawer/CustomDrawer.js";
 import CustomModal from "../components/Modal/CustomModal.js";
-import CustomLoading from '../components/Loading/CustomLoading'
+import CustomLoading from '../components/Loading/CustomLoading';
 // Assets
 import image from '../assets/img/backgrounds/productbackground.jpg';
 // Functions
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
+import { categoryShow } from "../functions/categoryFunctions";
+import { subcategoryShow } from "../functions/subcategoryFunctions";
+import { productShow } from "../functions/productFunctions";
 // Variables
 // import { environments } from "../variables/environments";
 // import { tables } from "../variables/tables";
@@ -45,6 +48,7 @@ const useStyles = makeStyles(styles);
 function SalesPage({ environments, tables, loading }) {
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
+
   // Change environments state
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -53,6 +57,7 @@ function SalesPage({ environments, tables, loading }) {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
   // State Current Table
   const [currentTable, setCurrentTable] = useState({
     id: null,
@@ -105,6 +110,9 @@ function SalesPage({ environments, tables, loading }) {
   const handleRefresh = () => {
     environmentShow();
     tableShow();
+    categoryShow();
+    subcategoryShow();
+    productShow();
   }
 
   // Payloads
@@ -116,7 +124,7 @@ function SalesPage({ environments, tables, loading }) {
       // Change is_payload state
       set_is_payload(true);
     }
-  });
+  }, [is_payload, environments, tables]);
 
   // Styles
   const classes = useStyles();
@@ -128,6 +136,8 @@ function SalesPage({ environments, tables, loading }) {
       <AppBarTabs
         color="inherit"
         data={environments}
+        iconType="img"
+        environmentFolder="images/environments/"
         value={value}
         onChange={handleChange}
         variant="fullWidth"

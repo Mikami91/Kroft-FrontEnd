@@ -24,4 +24,25 @@ export const ENVIRONMENT_LOADING = 'ENVIRONMENT_LOADING';
 // List
 export const TABLE_LIST = 'TABLE_LIST';
 // Loading
-export const TABLE_LOADING = 'TABLE_FETCH';
+export const TABLE_LOADING = 'TABLE_LOADING';
+
+
+/*::::::::::::::::::::CATEGORY::::::::::::::::::::*/
+// List
+export const CATEGORY_LIST = 'CATEGORY_LIST';
+// Loading
+export const CATEGORY_LOADING = 'CATEGORY_LOADING';
+
+
+/*::::::::::::::::::::SUB CATEGORY::::::::::::::::::::*/
+// List
+export const SUB_CATEGORY_LIST = 'SUB_CATEGORY_LIST';
+// Loading
+export const SUB_CATEGORY_LOADING = 'SUB_CATEGORY_LOADING';
+
+
+/*::::::::::::::::::::PRODUCT::::::::::::::::::::*/
+// List
+export const PRODUCT_LIST = 'PRODUCT_LIST';
+// Loading
+export const PRODUCT_LOADING = 'PRODUCT_LOADING';

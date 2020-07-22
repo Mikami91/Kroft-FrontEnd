@@ -2,12 +2,12 @@
 import { customFetch } from "./CustomFetch";
 // APIs
 import {
-    table_create,
-    table_index,
-    table_show,
-    table_update,
-    table_state,
-    table_delete,
+    category_create,
+    category_index,
+    category_show,
+    category_update,
+    category_state,
+    category_delete,
 } from '../../API';
 
 
@@ -16,7 +16,7 @@ export const showFetch = () => {
     return customFetch({
         method: 'GET',
         token: true,
-        url: table_show,
+        url: category_show,
     });
 };
 

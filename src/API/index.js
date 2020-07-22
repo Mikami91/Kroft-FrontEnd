@@ -28,3 +28,27 @@ export const table_show = "api/table_show";
 export const table_update = "api/table_update";
 export const table_state = "api/table_state";
 export const table_delete = "api/table_delete";
+
+/*::::::::::::::::::::CATEGORY::::::::::::::::::::*/
+export const category_create = "api/category_create";
+export const category_index = "api/category_index";
+export const category_show = "api/category_show";
+export const category_update = "api/category_update";
+export const category_state = "api/category_state";
+export const category_delete = "api/category_delete";
+
+/*::::::::::::::::::::SUB CATEGORY::::::::::::::::::::*/
+export const sub_category_create = "api/sub_category_create";
+export const sub_category_index = "api/sub_category_index";
+export const sub_category_show = "api/sub_category_show";
+export const sub_category_update = "api/sub_category_update";
+export const sub_category_state = "api/sub_category_state";
+export const sub_category_delete = "api/sub_category_delete";
+
+/*::::::::::::::::::::PRODUCT::::::::::::::::::::*/
+export const product_create = "api/product_create";
+export const product_index = "api/product_index";
+export const product_show = "api/product_show";
+export const product_update = "api/product_update";
+export const product_state = "api/product_state";
+export const product_delete = "api/product_delete";

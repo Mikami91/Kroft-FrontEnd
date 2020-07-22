@@ -1,10 +1,10 @@
 // Fetchs
-import { showFetch } from './fetchs/tableFetch';
+import { showFetch } from './fetchs/productFetch';
 // Actions Creators
-import { payload, loading } from "../redux/actions/creators/tableCreator";
+import { payload, loading } from "../redux/actions/creators/productCreator";
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function tableShow() {
+export async function productShow() {
     loading(true);
     try {
         const response = await showFetch();

@@ -9,6 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import CardProduct from "../../components/Card/CardProduct.js";
 import CustomModal from "../../components/Modal/CustomModal.js";
 import GridSubProducts from "../../components/Grid/GridSubProducts";
+// API
+import { API } from '../../API/index';
 // Assets
 import image from "../../assets/img/defaults/product.png";
 // Styles
@@ -17,7 +19,7 @@ import styles from "../../styles/components/gridStyle";
 const useStyles = makeStyles(styles);
 
 export default function GridProducts(props) {
-  const { data, keyCategory, keySubcategory, filter, onClick, color } = props;
+  const { data, keyCategory, keySubcategory, filter, subcategoryFolder, productFolder, onClick, color } = props;
   // State for Modal Subcategories
   const [subCategory, setSubCategory] = useState({
     open: false,
@@ -68,24 +70,24 @@ export default function GridProducts(props) {
                     color={color}
                     prefix={"Bs."}
                     price={index.price}
-                    photo={index.photo}
+                    photo={API + productFolder + index.photo}
                     name={index.name}
                     quantity={index.id}
                     onClick={onClick}
                   />
                 ) : (
-                  <CardProduct
-                    color={color}
-                    prefix={""}
-                    price={""}
-                    photo={image}
-                    name={index.name}
-                    quantity={index.id}
-                    onClick={() =>
-                      handleOpenSub(index.name, index[keySubcategory])
-                    }
-                  />
-                )}
+                    <CardProduct
+                      color={color}
+                      prefix={""}
+                      price={""}
+                      photo={API + subcategoryFolder + index.sub_category_photo}
+                      name={index.sub_category_name}
+                      quantity={index.id}
+                      onClick={() =>
+                        handleOpenSub(index.sub_category_name, index[keySubcategory])
+                      }
+                    />
+                  )}
               </Grid>
             );
           }
@@ -102,8 +104,9 @@ export default function GridProducts(props) {
           content={
             <GridSubProducts
               data={subCategory.payload}
-              keyData="subcategory_id"
+              keyData="sub_category_id"
               filter={subCategory.key}
+              productFolder="images/products/"
               onClick={onClick}
               color="secondary"
             />
@@ -122,6 +125,8 @@ GridProducts.defaultProps = {
   keyCategory: "",
   keySubcategory: "",
   filter: "",
+  subcategoryFolder: "",
+  productFolder: "",
   onClick: null,
   color: "primary",
 };
@@ -130,6 +135,8 @@ GridProducts.propTypes = {
   keyCategory: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   keySubcategory: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   filter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  subcategoryFolder: PropTypes.string,
+  productFolder: PropTypes.string,
   onClick: PropTypes.func,
   color: PropTypes.oneOf([
     "primary",

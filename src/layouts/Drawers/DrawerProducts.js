@@ -2,6 +2,8 @@
 import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
+// Conecction to Store
+import { connect } from 'react-redux';
 // UI Material Components
 import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
@@ -29,18 +31,26 @@ import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
 
 // Assets
 import image from "../../assets/img/backgrounds/productbackground.jpg";
+
+
 // Variables
-import { tables } from "../../variables/tables";
-import { categories } from "../../variables/categories";
+// import { tables } from "../../variables/tables";
+// import { categories } from "../../variables/categories";
 import { animes } from "../../variables/animes";
-import { products } from "../../variables/products";
+// import { products } from "../../variables/products";
+
+
 // Styles
 import styles from "../../styles/components/drawerStyle.js";
 
 const useStyles = makeStyles(styles);
 
 function DrawerProducts(props) {
-  const { direction, variant, open, close, background, table } = props;
+  const {
+    /* Redux */
+    categories, subcategories, products, loading,
+    /* Props */
+    direction, variant, open, close, background, table } = props;
   // Categories index State
   const [value, setValue] = useState(0);
   const handleChangeIndex = (e, newValue) => {
@@ -81,6 +91,7 @@ function DrawerProducts(props) {
           selectColor="secondary"
           hoverColor="secondary"
           data={categories}
+          categoryFolder="images/categories/"
           value={value}
           onChange={handleChangeIndex}
         />
@@ -104,8 +115,10 @@ function DrawerProducts(props) {
                     <GridProducts
                       data={products}
                       keyCategory="category_id"
-                      keySubcategory="subcategory_id"
+                      keySubcategory="sub_category_id"
                       filter={index.id}
+                      subcategoryFolder="images/sub_categories/"
+                      productFolder="images/products/"
                       onClick={handleOpenTotal}
                       color="secondary"
                     />
@@ -515,5 +528,14 @@ DrawerProducts.propTypes = {
   close: PropTypes.func,
   background: PropTypes.string,
 };
-
-export default DrawerProducts;
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { category, subcategory, product } = state;
+  return {
+    categories: category.payload.filter(dataList => dataList.state === 1),
+    loading: category.loading,
+    subcategories: subcategory.payload.filter(dataList => dataList.state === 1),
+    products: product.payload.filter(dataList => dataList.state === 1),
+  }
+};
+export default connect(mapStateToProps, null)(DrawerProducts);
