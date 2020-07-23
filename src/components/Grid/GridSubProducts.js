@@ -17,7 +17,7 @@ import styles from "../../styles/components/gridStyle";
 const useStyles = makeStyles(styles);
 
 export default function GridSubProducts(props) {
-  const { data, keyData, filter, productFolder, onClick, color } = props;
+  const { data, keyData, filter, imagePath, onClick, color } = props;
   // Styles
   const classes = useStyles();
   const gridClasses = classNames({
@@ -53,7 +53,7 @@ export default function GridSubProducts(props) {
                   color={color}
                   prefix="Bs."
                   price={index.price}
-                  photo={API + productFolder + index.photo}
+                  photo={API + imagePath + index.photo}
                   name={index.name}
                   quantity={index.id}
                   onClick={onClick}
@@ -73,7 +73,7 @@ GridSubProducts.defaultProps = {
   data: [],
   keyData: "",
   filter: "",
-  productFolder: "",
+  imagePath: "",
   onClick: null,
   color: "primary",
 };
@@ -81,7 +81,7 @@ GridSubProducts.propTypes = {
   data: PropTypes.array,
   keyData: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   filter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  productFolder: PropTypes.string,
+  imagePath: PropTypes.string,
   onClick: PropTypes.func,
   color: PropTypes.oneOf([
     "primary",

@@ -28,7 +28,7 @@ const AppBarTabs = (props) => {
     // Tabs
     data,
     iconType,
-    environmentFolder,
+    imagePath,
     value,
     onChange,
     indicatorColor,
@@ -75,7 +75,7 @@ const AppBarTabs = (props) => {
               }
               icon={iconType === "icon" ? <DeckRoundedIcon className={classes.icons} /> :
                 <img
-                  src={API + environmentFolder + index.photo}
+                  src={API + imagePath + index.photo}
                   alt={index.name}
                   color={index.selectColor}
                   className={classes.images}
@@ -99,7 +99,7 @@ AppBarTabs.defaultProps = {
   // Tabs
   data: [],
   iconType: "icon",
-  environmentFolder: "",
+  imagePath: "",
   value: "",
   onChange: null,
   indicatorColor: "primary",
@@ -134,7 +134,7 @@ AppBarTabs.propTypes = {
     })
   ),
   iconType: PropTypes.oneOf(["icon", "img"]),
-  environmentFolder: PropTypes.string,
+  imagePath: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func,
   indicatorColor: PropTypes.oneOf(["inherit", "primary", "secondary"]),

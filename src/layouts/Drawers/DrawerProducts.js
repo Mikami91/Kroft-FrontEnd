@@ -91,7 +91,7 @@ function DrawerProducts(props) {
           selectColor="secondary"
           hoverColor="secondary"
           data={categories}
-          categoryFolder="images/categories/"
+          imagePath="images/categories/"
           value={value}
           onChange={handleChangeIndex}
         />
@@ -117,8 +117,8 @@ function DrawerProducts(props) {
                       keyCategory="category_id"
                       keySubcategory="sub_category_id"
                       filter={index.id}
-                      subcategoryFolder="images/sub_categories/"
-                      productFolder="images/products/"
+                      imagePath="images/products/"
+                      imagePath2="images/sub_categories/"
                       onClick={handleOpenTotal}
                       color="secondary"
                     />

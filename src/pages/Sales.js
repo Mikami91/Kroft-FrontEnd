@@ -137,7 +137,7 @@ function SalesPage({ environments, tables, loading }) {
         color="inherit"
         data={environments}
         iconType="img"
-        environmentFolder="images/environments/"
+        imagePath="images/environments/"
         value={value}
         onChange={handleChange}
         variant="fullWidth"

@@ -19,7 +19,7 @@ import styles from "../../styles/components/gridStyle";
 const useStyles = makeStyles(styles);
 
 export default function GridProducts(props) {
-  const { data, keyCategory, keySubcategory, filter, subcategoryFolder, productFolder, onClick, color } = props;
+  const { data, keyCategory, keySubcategory, filter, imagePath, imagePath2, onClick, color } = props;
   // State for Modal Subcategories
   const [subCategory, setSubCategory] = useState({
     open: false,
@@ -70,7 +70,7 @@ export default function GridProducts(props) {
                     color={color}
                     prefix={"Bs."}
                     price={index.price}
-                    photo={API + productFolder + index.photo}
+                    photo={API + imagePath + index.photo}
                     name={index.name}
                     quantity={index.id}
                     onClick={onClick}
@@ -80,7 +80,7 @@ export default function GridProducts(props) {
                       color={color}
                       prefix={""}
                       price={""}
-                      photo={API + subcategoryFolder + index.sub_category_photo}
+                      photo={API + imagePath2 + index.sub_category_photo}
                       name={index.sub_category_name}
                       quantity={index.id}
                       onClick={() =>
@@ -106,7 +106,7 @@ export default function GridProducts(props) {
               data={subCategory.payload}
               keyData="sub_category_id"
               filter={subCategory.key}
-              productFolder="images/products/"
+              imagePath="images/products/"
               onClick={onClick}
               color="secondary"
             />
@@ -125,8 +125,8 @@ GridProducts.defaultProps = {
   keyCategory: "",
   keySubcategory: "",
   filter: "",
-  subcategoryFolder: "",
-  productFolder: "",
+  imagePath: "",
+  imagePath2: "",
   onClick: null,
   color: "primary",
 };
@@ -135,8 +135,8 @@ GridProducts.propTypes = {
   keyCategory: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   keySubcategory: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   filter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  subcategoryFolder: PropTypes.string,
-  productFolder: PropTypes.string,
+  imagePath: PropTypes.string,
+  imagePath2: PropTypes.string,
   onClick: PropTypes.func,
   color: PropTypes.oneOf([
     "primary",

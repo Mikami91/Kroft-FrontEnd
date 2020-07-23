@@ -29,7 +29,7 @@ const AppBarIcons = (props) => {
     drawer,
     // Tabs
     data,
-    categoryFolder,
+    imagePath,
     value,
     onChange,
     selectColor,
@@ -97,7 +97,7 @@ const AppBarIcons = (props) => {
                   className={imageFabClasses}
                 >
                   <img
-                    src={API + categoryFolder + index.photo}
+                    src={API + imagePath + index.photo}
                     alt={index.name}
                     color={index.selectColor}
                     className={classes.imageIcon}
@@ -123,7 +123,7 @@ AppBarIcons.defaultProps = {
   drawer: false,
   // Tabs
   data: [],
-  categoryFolder: "",
+  imagePath: "",
   value: "",
   onChange: null,
   selectColor: "primary",
@@ -153,7 +153,7 @@ AppBarIcons.propTypes = {
       name: PropTypes.string,
     })
   ),
-  categoryFolder: PropTypes.string,
+  imagePath: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onChange: PropTypes.func,
   selectColor: PropTypes.oneOf([
