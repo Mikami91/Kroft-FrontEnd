@@ -315,6 +315,7 @@ function SalesPage({ environments, tables, loading }) {
         close={handleCloseDrawer}
         categoryList={environments}
         itemList={tables}
+        itemOnClick={handleOpenProducts}
         filter="environment_id"
       />
 

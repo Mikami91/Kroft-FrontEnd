@@ -72,8 +72,7 @@ function CollectsPage({ environments, tables, loading }) {
   // State for Modal Products
   const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = () => {
-    setOpenProducts(false);
-    // setOpenProducts(true);
+    setOpenProducts(true);
   };
   const handleCloseProducts = () => {
     setOpenProducts(false);
@@ -134,7 +133,7 @@ function CollectsPage({ environments, tables, loading }) {
         color="inherit"
         data={environments}
         iconType="img"
-        environmentFolder="images/environments/"
+        imagePath="images/environments/"
         value={value}
         onChange={handleChange}
         variant="fullWidth"
@@ -344,6 +343,7 @@ function CollectsPage({ environments, tables, loading }) {
         close={handleCloseDrawer}
         categoryList={environments}
         itemList={tables}
+        itemOnClick={handleOpenProducts}
         filter="environment_id"
       />
 

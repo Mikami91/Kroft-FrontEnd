@@ -31,6 +31,7 @@ function DrawerTablesList(props) {
     close,
     categoryList,
     itemList,
+    itemOnClick,
     filter,
     dialogProduct,
     isEmpty,
@@ -125,8 +126,7 @@ function DrawerTablesList(props) {
                             <IconButton
                               edge="end"
                               aria-label="Ir"
-                              onClick={close}
-                              // onClick={() => handleOpen(index2)}
+                              onClick={() => itemOnClick(index2)}
                             >
                               <KeyboardArrowRightRoundedIcon />
                             </IconButton>
@@ -153,6 +153,7 @@ DrawerTablesList.defaultProps = {
   close: null,
   categoryList: [],
   itemList: [],
+  itemOnClick: null,
   filter: "id",
   dialogProduct: {},
   isEmpty: {},
@@ -164,6 +165,7 @@ DrawerTablesList.propTypes = {
   close: PropTypes.func,
   categoryList: PropTypes.array,
   itemList: PropTypes.array,
+  itemOnClick: PropTypes.func,
   filter: PropTypes.string,
   dialogProduct: PropTypes.object,
   isEmpty: PropTypes.object,
