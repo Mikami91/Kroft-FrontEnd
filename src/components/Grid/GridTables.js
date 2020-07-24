@@ -48,7 +48,6 @@ function GridTables(props) {
             elevation={0}
             className={gridClasses}
           >
-            {/* <Link to={{ pathname: "/products", state: { message: index.id, value: value } }} > */}
             <CardActionArea>
               <Card className={cardClasses} onClick={() => onClick(index)}>
                 <CardMedia
@@ -71,7 +70,6 @@ function GridTables(props) {
                 </CardNumber>
               </Card>
             </CardActionArea>
-            {/* </Link> */}
           </Grid>
         );
       }

@@ -23,10 +23,15 @@ export function productReducer(state = productState, action) {
 
     case PRODUCT_ORDERS:
 
+      // Check is exist function
+      // Way 1
+      // const is_exist = (array_to_search, value_to_check, value_to_find) => array_to_search.some(index => index[value_to_check] === value_to_find);
+
+      // Way 2: optimize
+
       // variables to return
       let exist = false;
       let index = null;
-      // Check is exist function
       const is_exist = (array_to_search, value_to_check, value_to_find) => {
         // Search...
         for (let i = 0; i < array_to_search.length; i++) {
@@ -41,20 +46,19 @@ export function productReducer(state = productState, action) {
         };
       };
 
-      // Check if Environment ID exist
+      // console.log(is_exist(state.orders, 'environment_id', action.payload.environment_id));
+      // console.log(state.orders[index]);
+
+      // If Environment ID exist
       if (typeof is_exist(state.orders, 'environment_id', action.payload.environment_id) !== "undefined") {
 
         if (exist === true) {
 
-          // Copy initial state
-          let newState = { ...state };
-          // Find value want to update
-          let array = newState.orders[index].tables;
-          // Check if Table ID exist
-          let is_exist_table = array.findIndex(i => i.table_id === action.payload.id);
-          // If not exist
+          let array = state.orders[index].tables;
+          var is_exist_table = array.findIndex(i => i.table_id === action.payload.id)
+          // here you can check specific property for an object whether it exist in your array or not
+
           if (is_exist_table === -1) {
-            // Push array in to new state
             array.push({
               // Add Table info
               table_id: action.payload.id,
@@ -63,11 +67,8 @@ export function productReducer(state = productState, action) {
               // Add products array
               products: [],
             });
-            // Return updated state
-            return newState;
-
           }
-          // If exist
+
           else return state;
 
         }

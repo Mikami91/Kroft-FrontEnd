@@ -51,27 +51,33 @@ function DrawerProducts(props) {
     categories, subcategories, products, loading,
     /* Props */
     direction, variant, open, close, background, table } = props;
+
   // Categories index State
   const [value, setValue] = useState(0);
   const handleChangeIndex = (e, newValue) => {
     setValue(newValue);
   };
+
   // State for Modal Orders
   const [openOrders, setOpenOrders] = useState(false);
   const handleOpenOrders = () => setOpenOrders(true);
   const handleCloseOrders = () => setOpenOrders(false);
+  
   // State for Modal Prints
   const [openPrints, setOpenPrints] = useState(false);
   const handleOpenPrints = () => setOpenPrints(true);
   const handleClosePrints = () => setOpenPrints(false);
+  
   // State for Modal Total Amount
   const [openTotal, setOpenTotal] = useState(false);
   const handleOpenTotal = () => setOpenTotal(true);
   const handleCloseTotal = () => setOpenTotal(false);
 
   const handleOnClick = (arg) => alert(arg);
-
+  
+  // Styles
   const classes = useStyles();
+  
   // Using useMemo hook
   return useMemo(() => {
     // Render

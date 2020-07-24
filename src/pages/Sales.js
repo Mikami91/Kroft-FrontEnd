@@ -4,6 +4,9 @@ import { withRouter } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
 import { connect } from 'react-redux';
+// Actions Creators
+import { bindActionCreators } from 'redux';
+import { orders } from '../redux/actions/creators/productCreator';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -74,6 +77,7 @@ function SalesPage({ environments, tables, loading }) {
   const handleOpenProducts = (args) => {
     setOpenProducts(true);
     setCurrentTable(args);
+    setOrders(args);
   };
   const handleCloseProducts = () => {
     setOpenProducts(false);
@@ -340,5 +344,11 @@ const mapStateToProps = (state) => {
     tables: table.payload.filter(dataList => dataList.state === 1),
   }
 };
+// Functions to dispatching
+const setOrders = (payload) => (orders(payload));
+// Binding an object full of action creators
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ setOrders }, dispatch);
+};
 
-export default withRouter(connect(mapStateToProps, null)(SalesPage));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SalesPage));
