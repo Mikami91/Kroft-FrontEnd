@@ -1,5 +1,6 @@
 // Action types
 import { PRODUCT_LIST, SET_TABLES, PRODUCT_ORDERS, PRODUCT_LOADING } from '../actions/actionsTypes';
+import { quantity } from 'chartist';
 
 // Default State
 const productState = {
@@ -90,6 +91,40 @@ export function productReducer(state = productState, action) {
           }
         ]
       };
+
+    case PRODUCT_ORDERS:
+      // Catch index Enrironment
+      let environment = is_exist(state.orders, 'environment_id', action.payload.environment_id);
+      // Catch index Table
+      let table = is_exist(state.orders[environment.index].tables, 'table_id', action.payload.table_id);
+
+      console.log(environment);
+      console.log(table);
+
+      // Copy initial state
+      let newState = { ...state };
+      // Find value want to update
+      let array = newState.orders[environment.index].tables[table.index].products;
+      // Check if Product ID exist
+      let is_exist_product = array.findIndex(i => i.product_id === action.payload.id);
+      // If not exist
+      if (is_exist_product === -1) {
+        // Push array in to new state
+        array.push({
+          // Add Product info
+          product_id: action.payload.id,
+          product_name: action.payload.name,
+          product_price: action.payload.price,
+          product_quantity: 1,
+        });
+        // Return updated state
+        return newState;
+      } else {
+        // If exist add quantity
+        array[is_exist_product].product_quantity += 1;
+        return newState
+      }
+
 
     case PRODUCT_LOADING:
       return {

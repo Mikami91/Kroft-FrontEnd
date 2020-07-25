@@ -73,7 +73,7 @@ export default function GridProducts(props) {
                     photo={API + imagePath + index.photo}
                     name={index.name}
                     quantity={index.id}
-                    onClick={onClick}
+                    onClick={() => onClick(index)}
                   />
                 ) : (
                     <CardProduct

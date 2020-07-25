@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
 import { connect } from 'react-redux';
+// Actions Creators
+import { bindActionCreators } from 'redux';
+import { orders } from '../../redux/actions/creators/productCreator';
 // UI Material Components
 import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
@@ -26,19 +29,16 @@ import PrintIcon from "@material-ui/icons/Print";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SendIcon from "@material-ui/icons/Send";
-
 import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
 
 // Assets
 import image from "../../assets/img/backgrounds/productbackground.jpg";
-
 
 // Variables
 // import { tables } from "../../variables/tables";
 // import { categories } from "../../variables/categories";
 import { animes } from "../../variables/animes";
 // import { products } from "../../variables/products";
-
 
 // Styles
 import styles from "../../styles/components/drawerStyle.js";
@@ -59,25 +59,34 @@ function DrawerProducts(props) {
   };
 
   // State for Modal Orders
-  const [openOrders, setOpenOrders] = useState(false);
-  const handleOpenOrders = () => setOpenOrders(true);
-  const handleCloseOrders = () => setOpenOrders(false);
-  
+  const [openTableOrders, setOpenTableOrders] = useState(false);
+  const handleOpenOrders = () => setOpenTableOrders(true);
+  const handleCloseOrders = () => setOpenTableOrders(false);
+
   // State for Modal Prints
   const [openPrints, setOpenPrints] = useState(false);
   const handleOpenPrints = () => setOpenPrints(true);
   const handleClosePrints = () => setOpenPrints(false);
-  
+
   // State for Modal Total Amount
   const [openTotal, setOpenTotal] = useState(false);
   const handleOpenTotal = () => setOpenTotal(true);
   const handleCloseTotal = () => setOpenTotal(false);
 
+  // Order make function
+  const handleSetOrder = (arg) => {
+    set_orders({
+      table_id: table.id,
+      environment_id: table.environment_id,
+      ...arg
+    });
+  };
+
   const handleOnClick = (arg) => alert(arg);
-  
+
   // Styles
   const classes = useStyles();
-  
+
   // Using useMemo hook
   return useMemo(() => {
     // Render
@@ -125,7 +134,7 @@ function DrawerProducts(props) {
                       filter={index.id}
                       imagePath="images/products/"
                       imagePath2="images/sub_categories/"
-                      onClick={handleOpenTotal}
+                      onClick={handleSetOrder}
                       color="secondary"
                     />
                   </Grid>
@@ -220,7 +229,7 @@ function DrawerProducts(props) {
 
         <CustomModal
           // background={"https://source.unsplash.com/random"}
-          open={openOrders}
+          open={openTableOrders}
           close={handleCloseOrders}
           title={{
             text: "Lista de ordenes",
@@ -517,7 +526,7 @@ function DrawerProducts(props) {
         />
       </Drawer>
     );
-  }, [open, openOrders, openPrints, openTotal, value]);
+  }, [open, openTableOrders, openPrints, openTotal, value]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {
@@ -544,4 +553,10 @@ const mapStateToProps = (state) => {
     products: product.payload.filter(dataList => dataList.state === 1),
   }
 };
-export default connect(mapStateToProps, null)(DrawerProducts);
+// Functions to dispatching
+const set_orders = (payload) => (orders(payload));
+// Binding an object full of action creators
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ set_orders }, dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerProducts);

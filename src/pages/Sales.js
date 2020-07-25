@@ -77,7 +77,7 @@ function SalesPage({ environments, tables, loading }) {
   const handleOpenProducts = (args) => {
     setOpenProducts(true);
     setCurrentTable(args);
-    setTables(args);
+    set_tables(args);
   };
   const handleCloseProducts = () => {
     setOpenProducts(false);
@@ -345,10 +345,10 @@ const mapStateToProps = (state) => {
   }
 };
 // Functions to dispatching
-const setTables = (payload) => (tables(payload));
+const set_tables = (payload) => (tables(payload));
 // Binding an object full of action creators
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setTables }, dispatch);
+    return bindActionCreators({ set_tables }, dispatch);
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SalesPage));
