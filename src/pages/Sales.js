@@ -6,7 +6,7 @@ import SwipeableViews from "react-swipeable-views";
 import { connect } from 'react-redux';
 // Actions Creators
 import { bindActionCreators } from 'redux';
-import { orders } from '../redux/actions/creators/productCreator';
+import { tables } from '../redux/actions/creators/productCreator';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -77,7 +77,7 @@ function SalesPage({ environments, tables, loading }) {
   const handleOpenProducts = (args) => {
     setOpenProducts(true);
     setCurrentTable(args);
-    setOrders(args);
+    setTables(args);
   };
   const handleCloseProducts = () => {
     setOpenProducts(false);
@@ -345,10 +345,10 @@ const mapStateToProps = (state) => {
   }
 };
 // Functions to dispatching
-const setOrders = (payload) => (orders(payload));
+const setTables = (payload) => (tables(payload));
 // Binding an object full of action creators
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ setOrders }, dispatch);
+    return bindActionCreators({ setTables }, dispatch);
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SalesPage));

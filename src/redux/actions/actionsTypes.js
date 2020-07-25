@@ -44,7 +44,9 @@ export const SUB_CATEGORY_LOADING = 'SUB_CATEGORY_LOADING';
 /*::::::::::::::::::::PRODUCT::::::::::::::::::::*/
 // List
 export const PRODUCT_LIST = 'PRODUCT_LIST';
-// Orders
+// Tables ready to orders
+export const SET_TABLES = 'SET_TABLES';
+// Orders for Products
 export const PRODUCT_ORDERS = 'PRODUCT_ORDERS';
 // Loading
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';

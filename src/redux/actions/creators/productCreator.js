@@ -1,7 +1,7 @@
 // Store
 import store from '../../store';
 // Action types
-import { PRODUCT_LIST, PRODUCT_ORDERS, PRODUCT_LOADING } from '../actionsTypes';
+import { PRODUCT_LIST, SET_TABLES, PRODUCT_ORDERS, PRODUCT_LOADING } from '../actionsTypes';
 
 
 export const product_list = (payload) => {
@@ -11,6 +11,14 @@ export const product_list = (payload) => {
   };
 }
 export const payload = (payload) => store.dispatch(product_list(payload));
+
+export const set_tables = (payload) => {
+  return {
+    type: SET_TABLES,
+    payload: payload
+  };
+}
+export const tables = (payload) => store.dispatch(set_tables(payload));
 
 export const product_orders = (payload) => {
   return {
