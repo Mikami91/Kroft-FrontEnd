@@ -23,19 +23,21 @@ function GridSubProducts(props) {
     // Redux
     orders_list, current,
     // props 
-    data, keyData, filter, imagePath, onClick, color, renderRefresh } = props;
+    data, keyData, filter, imagePath, onClick, color, orders, renderRefresh } = props;
 
-  const products_orders = useMemo(() => {
-    let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
-    let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
-    return orders_list[env_index].tables[table_index].products;
-  }, [orders_list, current]);
+  // const products_orders = useMemo(() => {
+  //   let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
+  //   let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
+  //   return orders_list[env_index].tables[table_index].products;
+  // }, [orders_list, current]);
 
   // Search Product ID in Orders list and return his quantity
   const handleQuantity = (product_id) => {
-    for (let index = 0; index < products_orders.length; index++) {
-      if (products_orders[index].product_id === product_id) {
-        return products_orders[index].product_quantity;
+    if (Array.isArray(orders) && orders.length) {
+      for (let index = 0; index < orders.length; index++) {
+        if (orders[index].product_id === product_id) {
+          return orders[index].product_quantity;
+        }
       }
     }
   };

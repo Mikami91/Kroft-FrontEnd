@@ -148,6 +148,7 @@ function DrawerProducts(props) {
                       imagePath2="images/sub_categories/"
                       onClick={handleSetOrder}
                       color="secondary"
+                      orders={orders_array}
                       renderRefresh={global_quantity}
                     />
                   </Grid>
@@ -294,7 +295,7 @@ function DrawerProducts(props) {
                   onClick: handleOnClick,
                 },
                 {
-                  field: "name",
+                  field: "product_name",
                   type: "text",
                   fontSize: "default",
                   align: "left",
@@ -302,7 +303,7 @@ function DrawerProducts(props) {
                   colSpan: 2,
                 },
                 {
-                  field: "price",
+                  field: "product_price",
                   type: "text",
                   fontSize: "default",
                   align: "center",
@@ -318,7 +319,7 @@ function DrawerProducts(props) {
                   onClick: handleOnClick,
                 },
                 {
-                  field: "quantity",
+                  field: "product_quantity",
                   type: "text",
                   fontSize: "default",
                   align: "center",
@@ -343,7 +344,7 @@ function DrawerProducts(props) {
                   onClick: handleOnClick,
                 },
               ]}
-              data={animes}
+              data={orders_array}
             />
           }
           leftButtons={[

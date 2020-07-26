@@ -25,7 +25,7 @@ function GridProducts(props) {
     // Redux
     orders_list, current,
     // props
-    data, keyCategory, keySubcategory, filter, imagePath, imagePath2, onClick, color, renderRefresh } = props;
+    data, keyCategory, keySubcategory, filter, imagePath, imagePath2, onClick, color, renderRefresh, orders } = props;
 
   // State for Modal Subcategories
   const [subCategory, setSubCategory] = useState({
@@ -67,7 +67,7 @@ function GridProducts(props) {
 
   // Find if Product Orders has SubCategory ID
   const found_sub_category_id = (sub_category_id) => {
-    let found = products_orders.some(index => index.sub_category_id === sub_category_id);
+    let found = orders.some(index => index.sub_category_id === sub_category_id);
     if (found === true) {
       return 1;
     } else {
@@ -146,6 +146,7 @@ function GridProducts(props) {
               imagePath="images/products/"
               onClick={onClick}
               color="secondary"
+              orders={orders}
               renderRefresh={renderRefresh}
             />
           }
