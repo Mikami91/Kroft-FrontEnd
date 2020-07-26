@@ -143,6 +143,7 @@ function DrawerProducts(props) {
                       imagePath2="images/sub_categories/"
                       onClick={handleSetOrder}
                       color="secondary"
+                      renderRefresh={global_quantity}
                     />
                   </Grid>
                 </TabPanel>

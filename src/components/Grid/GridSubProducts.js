@@ -2,6 +2,8 @@
 import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -16,13 +18,34 @@ import styles from "../../styles/components/gridStyle";
 
 const useStyles = makeStyles(styles);
 
-export default function GridSubProducts(props) {
-  const { data, keyData, filter, imagePath, onClick, color } = props;
+function GridSubProducts(props) {
+  const {
+    // Redux
+    orders_list, current,
+    // props 
+    data, keyData, filter, imagePath, onClick, color, renderRefresh } = props;
+
+  const products_orders = useMemo(() => {
+    let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
+    let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
+    return orders_list[env_index].tables[table_index].products;
+  }, [orders_list, current]);
+
+  // Search Product ID in Orders list and return his quantity
+  const handleQuantity = (product_id) => {
+    for (let index = 0; index < products_orders.length; index++) {
+      if (products_orders[index].product_id === product_id) {
+        return products_orders[index].product_quantity;
+      }
+    }
+  };
+
   // Styles
   const classes = useStyles();
   const gridClasses = classNames({
     [classes.products]: true,
   });
+
   // Using useMemo hook
   return useMemo(() => {
     // Render
@@ -55,8 +78,8 @@ export default function GridSubProducts(props) {
                   price={index.price}
                   photo={API + imagePath + index.photo}
                   name={index.name}
-                  quantity={index.id}
-                  onClick={onClick}
+                  quantity={handleQuantity(index.id)}
+                  onClick={() => onClick(index)}
                   keyi={key}
                 />
               </Grid>
@@ -66,7 +89,7 @@ export default function GridSubProducts(props) {
         })}
       </Grid>
     );
-  }, [data]);
+  }, [data, renderRefresh]);
 }
 // Proptypes
 GridSubProducts.defaultProps = {
@@ -76,6 +99,7 @@ GridSubProducts.defaultProps = {
   imagePath: "",
   onClick: null,
   color: "primary",
+  renderRefresh: null,
 };
 GridSubProducts.propTypes = {
   data: PropTypes.array,
@@ -92,4 +116,19 @@ GridSubProducts.propTypes = {
     "info",
     "rose",
   ]),
+  renderRefresh: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 };
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { product } = state;
+  return {
+    orders_list: product.orders,
+    current: product.current,
+  }
+};
+export default connect(mapStateToProps, null)(GridSubProducts);

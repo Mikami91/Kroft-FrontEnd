@@ -25,9 +25,9 @@ function CardProduct(props) {
   const classes = useStyles();
   const {
     // Redux
-    orders_list, current,
+    orders_list,
     // Props
-    photo, name, prefix, price, quantity, onClick, color } = props;
+    photo, name, prefix, price, quantity, onClick, color, variant } = props;
   const cardClasses = classNames({
     [classes.products]: true,
   });
@@ -35,7 +35,7 @@ function CardProduct(props) {
   // Using useMemo hook
   return useMemo(() => {
     return (
-      <Badge badgeContent={quantity} color={color}>
+      <Badge badgeContent={quantity} color={color} variant={variant} max={99}>
         <CardActionArea onClick={onClick}>
           <Card className={cardClasses}>
             {/* <div className={classes.cardHeader}> */}
@@ -57,7 +57,7 @@ function CardProduct(props) {
         </CardActionArea>
       </Badge>
     );
-  }, [quantity, orders_list]);
+  }, [quantity]);
 }
 // Proptypes
 CardProduct.defaultProps = {
@@ -67,6 +67,7 @@ CardProduct.defaultProps = {
   price: "",
   quantity: 0,
   color: "primary",
+  variant: "standard",
 };
 CardProduct.propTypes = {
   photo: PropTypes.string,
@@ -83,13 +84,16 @@ CardProduct.propTypes = {
     "info",
     "rose",
   ]),
+  variant: PropTypes.oneOf([
+    "standard",
+    "dot",
+  ]),
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
   const { product } = state;
   return {
     orders_list: product.orders,
-    current: product.current,
   }
 };
 export default connect(mapStateToProps, null)(CardProduct);

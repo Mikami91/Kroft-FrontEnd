@@ -45,6 +45,7 @@ export default function CustomModal(props) {
     rightButtons,
     leftButtons,
     background,
+    renderRefresh,
   } = props;
   // Using useMemo hook
   return useMemo(() => {
@@ -153,7 +154,7 @@ export default function CustomModal(props) {
         </DialogActions>
       </Dialog>
     );
-  }, [open]);
+  }, [open, renderRefresh]);
 }
 // PropTypes
 CustomModal.defaultProps = {
@@ -167,6 +168,7 @@ CustomModal.defaultProps = {
   content: null,
   footer: null,
   background: "",
+  renderRefresh: null,
   // Buttons
   fabButton: {},
   centerButtons: [],
@@ -201,4 +203,10 @@ CustomModal.propTypes = {
     })
   ),
   background: PropTypes.string,
+  renderRefresh: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 };

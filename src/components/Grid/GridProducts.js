@@ -25,7 +25,7 @@ function GridProducts(props) {
     // Redux
     orders_list, current,
     // props
-    data, keyCategory, keySubcategory, filter, imagePath, imagePath2, onClick, color } = props;
+    data, keyCategory, keySubcategory, filter, imagePath, imagePath2, onClick, color, renderRefresh } = props;
 
   // State for Modal Subcategories
   const [subCategory, setSubCategory] = useState({
@@ -64,6 +64,16 @@ function GridProducts(props) {
       }
     }
   };
+
+  // Find if Product Orders has SubCategory ID
+  const found_sub_category_id = (sub_category_id) => {
+    let found = products_orders.some(index => index.sub_category_id === sub_category_id);
+    if (found === true) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 
   // Styles
   const classes = useStyles();
@@ -107,12 +117,12 @@ function GridProducts(props) {
                       price={""}
                       photo={API + imagePath2 + index.sub_category_photo}
                       name={index.sub_category_name}
-                      quantity={handleQuantity(index.id)}
-
+                      quantity={found_sub_category_id(index.sub_category_id)}
                       // quantity={index.id}
                       onClick={() =>
                         handleOpenSub(index.sub_category_name, index[keySubcategory])
                       }
+                      variant="dot"
                     />
                   )}
               </Grid>
@@ -136,15 +146,17 @@ function GridProducts(props) {
               imagePath="images/products/"
               onClick={onClick}
               color="secondary"
+              renderRefresh={renderRefresh}
             />
           }
+          renderRefresh={renderRefresh}
           scroll="paper"
           maxWidth="md"
           fullWidth
         />
       </Fragment>
     );
-  }, [data, subCategory.open]);
+  }, [data, subCategory.open, renderRefresh]);
 }
 // Proptypes
 GridProducts.defaultProps = {
@@ -156,6 +168,7 @@ GridProducts.defaultProps = {
   imagePath2: "",
   onClick: null,
   color: "primary",
+  renderRefresh: null,
 };
 GridProducts.propTypes = {
   data: PropTypes.array,
@@ -173,6 +186,12 @@ GridProducts.propTypes = {
     "danger",
     "info",
     "rose",
+  ]),
+  renderRefresh: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+    PropTypes.object,
   ]),
 };
 

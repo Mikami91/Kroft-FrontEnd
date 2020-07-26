@@ -141,6 +141,9 @@ export function productReducer(state = productState, action) {
           product_name: action.payload.name,
           product_price: action.payload.price,
           product_quantity: 1,
+          print_category_id: action.payload.print_category_id,
+          category_id: action.payload.category_id,
+          sub_category_id: action.payload.sub_category_id,
         });
         // Return updated state
         return newState;
