@@ -2,10 +2,13 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/Componentes
 import AppBar from "@material-ui/core/AppBar";
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
+import Badge from '@material-ui/core/Badge';
 import Tabs from "@material-ui/core/Tabs";
 import { makeStyles } from "@material-ui/core/styles";
 // Core Components
@@ -34,7 +37,20 @@ const AppBarIcons = (props) => {
     onChange,
     selectColor,
     hoverColor,
+    // Orders array
+    orders,
   } = props;
+
+  // Find if Product Orders has SubCategory ID
+  const found_category_id = (category_id) => {
+    let found = orders.some(index => index.category_id === category_id);
+    if (found === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // Styles
   const classes = useStyles();
   const appBarClasses = classNames({
@@ -69,22 +85,31 @@ const AppBarIcons = (props) => {
         {data.map((index, key) => {
           // Using useMemo hook
           // return useMemo(() => {
-            const imageFabClasses = classNames({
-              [classes.fabButton]: true,
-              [classes[selectColor + "SelectFabButton"]]: key === value,
-              [classes[hoverColor + "HoverFabButton"]]: hoverColor,
-            });
-            return (
-              <Grid
-                key={key}
-                item
-                xs={2}
-                sm={1}
-                md={1}
-                lg={1}
-                xl={1}
-                elevation={0}
-                className={classes.gridIcons}
+          const imageFabClasses = classNames({
+            [classes.fabButton]: true,
+            [classes[selectColor + "SelectFabButton"]]: key === value,
+            [classes[hoverColor + "HoverFabButton"]]: hoverColor,
+          });
+          return (
+            <Grid
+              key={key}
+              item
+              xs={2}
+              sm={1}
+              md={1}
+              lg={1}
+              xl={1}
+              elevation={0}
+              className={classes.gridIcons}
+            >
+              <Badge
+                color="secondary"
+                variant="dot"
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                invisible={!found_category_id(index.id)}
               >
                 <Fab
                   key={key}
@@ -103,10 +128,11 @@ const AppBarIcons = (props) => {
                     className={classes.imageIcon}
                   />
                 </Fab>
-                <br />
-                <CustomText text={index.name} adjust />
-              </Grid>
-            );
+              </Badge>
+              <br />
+              <CustomText text={index.name} adjust />
+            </Grid>
+          );
           // }, [data, value]);
         })}
       </Tabs>
@@ -173,5 +199,11 @@ AppBarIcons.propTypes = {
     "info",
   ]),
 };
-
-export default AppBarIcons;
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { product } = state;
+  return {
+    orders_list: product.orders,
+  }
+};
+export default connect(mapStateToProps, null)(AppBarIcons);

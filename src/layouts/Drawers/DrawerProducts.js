@@ -82,11 +82,15 @@ function DrawerProducts(props) {
     });
   };
 
+  // Generate Products orders array and calculate Global Quantity function
+  let orders_array = [];
   let global_quantity = 0;
   if (open === true) {
     let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
     let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
     global_quantity = orders_list[env_index].tables[table_index].global_quantity;
+    orders_array = orders_list[env_index].tables[table_index].products; 
+    // return orders_array;
   }
 
   const handleOnClick = (arg) => alert(arg);
@@ -116,6 +120,7 @@ function DrawerProducts(props) {
           imagePath="images/categories/"
           value={value}
           onChange={handleChangeIndex}
+          orders={orders_array}
         />
         {/* https://source.unsplash.com/random */}
         <div
