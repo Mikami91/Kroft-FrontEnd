@@ -2,6 +2,8 @@
 import React, { Fragment, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -18,8 +20,13 @@ import styles from "../../styles/components/gridStyle";
 
 const useStyles = makeStyles(styles);
 
-export default function GridProducts(props) {
-  const { data, keyCategory, keySubcategory, filter, imagePath, imagePath2, onClick, color } = props;
+function GridProducts(props) {
+  const {
+    // Redux
+    orders_list, current,
+    // props
+    data, keyCategory, keySubcategory, filter, imagePath, imagePath2, onClick, color } = props;
+
   // State for Modal Subcategories
   const [subCategory, setSubCategory] = useState({
     open: false,
@@ -41,11 +48,29 @@ export default function GridProducts(props) {
       key: null,
       payload: [],
     });
+
+  const products_orders = useMemo(() => {
+    let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
+    let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
+    return orders_list[env_index].tables[table_index].products;
+  }, [orders_list, current]);
+
+
+  // Search Product ID in Orders list and return his quantity
+  const handleQuantity = (product_id) => {
+    for (let index = 0; index < products_orders.length; index++) {
+      if (products_orders[index].product_id === product_id) {
+        return products_orders[index].product_quantity;
+      }
+    }
+  };
+
   // Styles
   const classes = useStyles();
   const gridClasses = classNames({
     [classes.products]: true,
   });
+
   // Using useMemo hook
   return useMemo(() => {
     // Render
@@ -72,7 +97,7 @@ export default function GridProducts(props) {
                     price={index.price}
                     photo={API + imagePath + index.photo}
                     name={index.name}
-                    quantity={index.id}
+                    quantity={handleQuantity(index.id)}
                     onClick={() => onClick(index)}
                   />
                 ) : (
@@ -82,7 +107,9 @@ export default function GridProducts(props) {
                       price={""}
                       photo={API + imagePath2 + index.sub_category_photo}
                       name={index.sub_category_name}
-                      quantity={index.id}
+                      quantity={handleQuantity(index.id)}
+
+                      // quantity={index.id}
                       onClick={() =>
                         handleOpenSub(index.sub_category_name, index[keySubcategory])
                       }
@@ -148,3 +175,13 @@ GridProducts.propTypes = {
     "rose",
   ]),
 };
+
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { product } = state;
+  return {
+    orders_list: product.orders,
+    current: product.current,
+  }
+};
+export default connect(mapStateToProps, null)(GridProducts);

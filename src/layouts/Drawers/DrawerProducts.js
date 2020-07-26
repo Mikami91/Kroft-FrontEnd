@@ -48,7 +48,7 @@ const useStyles = makeStyles(styles);
 function DrawerProducts(props) {
   const {
     /* Redux */
-    categories, subcategories, products, loading,
+    categories, subcategories, products, orders_list, current, loading,
     /* Props */
     direction, variant, open, close, background, table } = props;
 
@@ -76,11 +76,18 @@ function DrawerProducts(props) {
   // Order make function
   const handleSetOrder = (arg) => {
     set_orders({
-      table_id: table.id,
-      environment_id: table.environment_id,
+      table_id: current.table_id,
+      environment_id: current.environment_id,
       ...arg
     });
   };
+
+  let global_quantity = 0;
+  if (open === true) {
+    let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
+    let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
+    global_quantity = orders_list[env_index].tables[table_index].global_quantity;
+  }
 
   const handleOnClick = (arg) => alert(arg);
 
@@ -158,6 +165,7 @@ function DrawerProducts(props) {
             disabled: false,
             color: "secondary",
             label: "Lista de ordenes",
+            quantity: global_quantity,
             float: false,
             align: "center",
             icon: FormatListBulletedIcon,
@@ -526,7 +534,7 @@ function DrawerProducts(props) {
         />
       </Drawer>
     );
-  }, [open, openTableOrders, openPrints, openTotal, value]);
+  }, [open, openTableOrders, openPrints, openTotal, value, global_quantity]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {
@@ -551,6 +559,8 @@ const mapStateToProps = (state) => {
     loading: category.loading,
     subcategories: subcategory.payload.filter(dataList => dataList.state === 1),
     products: product.payload.filter(dataList => dataList.state === 1),
+    orders_list: product.orders,
+    current: product.current,
   }
 };
 // Functions to dispatching

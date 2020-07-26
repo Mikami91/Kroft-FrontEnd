@@ -6,6 +6,10 @@ import { quantity } from 'chartist';
 const productState = {
   payload: [],
   orders: [],
+  current: {
+    environment_id: null,
+    table_id: null,
+  },
   loading: false,
 };
 
@@ -40,8 +44,14 @@ export function productReducer(state = productState, action) {
       // Check if Environment ID exist
       if (typeof is_exist(state.orders, 'environment_id', action.payload.environment_id) !== "undefined") {
         if (exist === true) {
-          // Copy initial state
-          let newState = { ...state };
+          // Copy initial state and update current object
+          let newState = {
+            ...state,
+            current: {
+              environment_id: action.payload.environment_id,
+              table_id: action.payload.id,
+            }
+          };
           // Find value want to update
           let array = newState.orders[index].tables;
           // Check if Table ID exist
@@ -56,6 +66,7 @@ export function productReducer(state = productState, action) {
               table_is_busy: action.payload.is_busy,
               table_number: action.payload.number,
               table_amount: action.payload.amount,
+              global_quantity: 0,
               // Add products array
               products: [],
             });
@@ -63,12 +74,23 @@ export function productReducer(state = productState, action) {
             return newState;
           }
           // If exist
-          else return state;
+          else return {
+            // Return initial state with current object update
+            ...state,
+            current: {
+              environment_id: action.payload.environment_id,
+              table_id: action.payload.id,
+            }
+          };
         }
       }
       // If not exist
       return {
         ...state,
+        current: {
+          environment_id: action.payload.environment_id,
+          table_id: action.payload.id,
+        },
         orders: [
           ...state.orders,
           {
@@ -84,6 +106,7 @@ export function productReducer(state = productState, action) {
                 table_is_busy: action.payload.is_busy,
                 table_number: action.payload.number,
                 table_amount: action.payload.amount,
+                global_quantity: 0,
                 // Add products array
                 products: [],
               }
@@ -105,6 +128,8 @@ export function productReducer(state = productState, action) {
       let newState = { ...state };
       // Find value want to update
       let array = newState.orders[environment.index].tables[table.index].products;
+      // Plus global quantity
+      newState.orders[environment.index].tables[table.index].global_quantity += 1;
       // Check if Product ID exist
       let is_exist_product = array.findIndex(i => i.product_id === action.payload.id);
       // If not exist

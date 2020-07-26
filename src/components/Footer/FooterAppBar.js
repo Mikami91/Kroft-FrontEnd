@@ -7,6 +7,7 @@ import { Link, withRouter } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Fab from "@material-ui/core/Fab";
+import Badge from '@material-ui/core/Badge';
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -108,7 +109,7 @@ function FooterAppBar(props) {
   const footerClasses = classNames({
     [classes[witdh + "Width"]]: true,
     [classes.footerAppBar]: true,
-    [classes.footerLogin]: drawer, 
+    [classes.footerLogin]: drawer,
   });
   // Render
   return (
@@ -159,7 +160,9 @@ function FooterAppBar(props) {
                 classes[fabButton.align + "FabFloat"]
               }
             >
-              <fabButton.icon className={classes.icons} />
+              <Badge color="primary" badgeContent={fabButton.quantity}>
+                <fabButton.icon className={classes.icons} />
+              </Badge>
             </Fab>
           ) : null}
 
