@@ -6,7 +6,7 @@ import SwipeableViews from "react-swipeable-views";
 import { connect } from 'react-redux';
 // Actions Creators
 import { bindActionCreators } from 'redux';
-import { orders, more, less } from '../../redux/actions/creators/productCreator';
+import { orders, more, less, remove } from '../../redux/actions/creators/productCreator';
 // UI Material Components
 import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
@@ -97,6 +97,9 @@ function DrawerProducts(props) {
 
   // Add Product quantity
   const handleLessQuantity = (product_id) => less_quantity({product_id: product_id});
+
+  // Add Product quantity
+  const handleRemoveProduct = (product_id) => remove_product({product_id: product_id});
 
   const handleOnClick = (arg) => alert(arg);
 
@@ -346,7 +349,7 @@ function DrawerProducts(props) {
                   align: "center",
                   icon: DeleteIcon,
                   iconColor: "secondary",
-                  onClick: handleOnClick,
+                  onClick: handleRemoveProduct,
                 },
               ]}
               data={product_orders_list}
@@ -579,8 +582,9 @@ const mapStateToProps = (state) => {
 };
 // Functions to dispatching
 const set_orders = (payload) => (orders(payload));
-const more_quantity = (payload) => (more(payload));
-const less_quantity = (payload) => (less(payload));
+const more_quantity = (id) => (more(id));
+const less_quantity = (id) => (less(id));
+const remove_product = (id) => (remove(id));
 // Binding an object full of action creators
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ set_orders }, dispatch);

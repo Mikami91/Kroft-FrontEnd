@@ -1,5 +1,5 @@
 // Action types
-import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, MORE_QUANTITY, LESS_QUANTITY, PRODUCT_LOADING } from '../actions/actionsTypes';
+import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, MORE_QUANTITY, LESS_QUANTITY, REMOVE_PRODUCT, PRODUCT_LOADING } from '../actions/actionsTypes';
 import { quantity } from 'chartist';
 
 // Default State
@@ -216,7 +216,7 @@ export function productReducer(state = productState, action) {
       new_state.orders[env_index].tables[table_index].global_quantity += 1;
 
       let product_array1 = new_state.orders[env_index].tables[table_index].products;
-      let current_product1 = product_array1.findIndex(i => i.product_id === action.payload.product_id);
+      let current_product1 = product_array1.findIndex(i => i.product_id === action.id.product_id);
       // Add quantity
       product_array1[current_product1].product_quantity += 1;
       // Return update state
@@ -225,13 +225,30 @@ export function productReducer(state = productState, action) {
     case LESS_QUANTITY:
 
       let product_array2 = new_state.orders[env_index].tables[table_index].products;
-      let current_product2 = product_array2.findIndex(i => i.product_id === action.payload.product_id);
+      let current_product2 = product_array2.findIndex(i => i.product_id === action.id.product_id);
       // Rest quantity
       if (product_array2[current_product2].product_quantity > 1) {
         product_array2[current_product2].product_quantity -= 1;
         // Rest to global quantity
         new_state.orders[env_index].tables[table_index].global_quantity -= 1;
       }
+      // Return update state
+      return new_state;
+
+    case REMOVE_PRODUCT:
+
+      let product_array3 = new_state.orders[env_index].tables[table_index].products;
+      let current_product3 = product_array3.findIndex(i => i.product_id === action.id.product_id);
+
+      // Remove product quantity
+      let product_quantity = product_array3[current_product3].product_quantity;
+
+      // Rest remove Product quantity to global quantity
+      new_state.orders[env_index].tables[table_index].global_quantity -= product_quantity;
+
+      // Remove Product from Orders array
+      product_array3.splice(current_product3, 1);
+
       // Return update state
       return new_state;
 
