@@ -1,5 +1,5 @@
 // Action types
-import { PRODUCT_LIST, SET_TABLES, PRODUCT_ORDERS, PRODUCT_LOADING } from '../actions/actionsTypes';
+import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, PRODUCT_LOADING } from '../actions/actionsTypes';
 import { quantity } from 'chartist';
 
 // Default State
@@ -7,8 +7,11 @@ const productState = {
   payload: [],
   orders: [],
   current: {
+    open: false,
     environment_id: null,
     table_id: null,
+    env_index: null,
+    table_index: null
   },
   loading: false,
 };
@@ -26,12 +29,38 @@ const is_exist = (array_to_search, value_to_check, value_to_find) => {
       return {
         exist: exist,
         index: index,
+        id: array_to_search[i][value_to_check]
       };
     }
   };
 };
 
+// Cath the last index from objects array
+let env_index = -1;
+const lastIndexOfEnv = (array, field, key) => {
+  for (let index = 0; index < array.length; index++) {
+    if (array[index][field] === key) {
+      return env_index = index;
+    }
+  }
+  return -1;
+};
+
+let table_index = -1;
+const lastIndexOfTable = (array, field, key) => {
+  for (let index = 0; index < array.length; index++) {
+    if (array[index][field] === key) {
+      return table_index = index;
+    }
+  }
+  return -1;
+};
+
+
 export function productReducer(state = productState, action) {
+
+  // Copy initial state
+  let new_state = { ...state };
 
   switch (action.type) {
     case PRODUCT_LIST:
@@ -40,20 +69,24 @@ export function productReducer(state = productState, action) {
         payload: action.payload
       };
 
-    case SET_TABLES:
+    case OPEN_PRODUCTS:
       // Check if Environment ID exist
       if (typeof is_exist(state.orders, 'environment_id', action.payload.environment_id) !== "undefined") {
         if (exist === true) {
-          // Copy initial state and update current object
-          let newState = {
+          // Call new state and update current object
+          new_state = {
             ...state,
+            // Update the current values
             current: {
+              open: true,
               environment_id: action.payload.environment_id,
               table_id: action.payload.id,
+              env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
+              table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
             }
           };
           // Find value want to update
-          let array = newState.orders[index].tables;
+          let array = new_state.orders[index].tables;
           // Check if Table ID exist
           let is_exist_table = array.findIndex(i => i.table_id === action.payload.id);
           // If not exist
@@ -71,65 +104,89 @@ export function productReducer(state = productState, action) {
               products: [],
             });
             // Return updated state
-            return newState;
+            return {
+              ...new_state,
+              // Update the current values
+              current: {
+                open: true,
+                environment_id: action.payload.environment_id,
+                table_id: action.payload.id,
+                env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
+                table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
+              }
+            };
           }
           // If exist
           else return {
-            // Return initial state with current object update
+            // Return initial state
             ...state,
+            // Update the current values
             current: {
+              open: true,
               environment_id: action.payload.environment_id,
               table_id: action.payload.id,
+              env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
+              table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
             }
           };
         }
       }
       // If not exist
+
+      // Call new state
+      new_state.orders.push({
+        // Add Environment info
+        environment_id: action.payload.environment_id,
+        environment_name: action.payload.environment_name,
+        // Add tables array
+        tables: [
+          {
+            // Add Table info
+            table_id: action.payload.id,
+            table_name: action.payload.name,
+            table_is_busy: action.payload.is_busy,
+            table_number: action.payload.number,
+            table_amount: action.payload.amount,
+            global_quantity: 0,
+            // Add products array
+            products: [],
+          }
+        ]
+      });
+
+      return {
+        ...state,
+        // Update the current values
+        current: {
+          open: true,
+          environment_id: action.payload.environment_id,
+          table_id: action.payload.id,
+          env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
+          table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
+        },
+      };
+
+    case CLOSE_PRODUCTS:
+
       return {
         ...state,
         current: {
-          environment_id: action.payload.environment_id,
-          table_id: action.payload.id,
-        },
-        orders: [
-          ...state.orders,
-          {
-            // Add Environment info
-            environment_id: action.payload.environment_id,
-            environment_name: action.payload.environment_name,
-
-            tables: [
-              {
-                // Add Table info
-                table_id: action.payload.id,
-                table_name: action.payload.name,
-                table_is_busy: action.payload.is_busy,
-                table_number: action.payload.number,
-                table_amount: action.payload.amount,
-                global_quantity: 0,
-                // Add products array
-                products: [],
-              }
-            ]
-          }
-        ]
+          open: false,
+          environment_id: null,
+          table_id: null,
+          env_index: null,
+          table_index: null
+        }
       };
 
     case PRODUCT_ORDERS:
-      // Catch index Enrironment
-      let environment = is_exist(state.orders, 'environment_id', action.payload.environment_id);
-      // Catch index Table
-      let table = is_exist(state.orders[environment.index].tables, 'table_id', action.payload.table_id);
 
-      console.log(environment);
-      console.log(table);
-
-      // Copy initial state
-      let newState = { ...state };
+      // Call new state
+      new_state = { ...state };
       // Find value want to update
-      let array = newState.orders[environment.index].tables[table.index].products;
+      let array = new_state.orders[env_index].tables[table_index].products;
       // Plus global quantity
-      newState.orders[environment.index].tables[table.index].global_quantity += 1;
+      new_state.orders[env_index].tables[table_index].global_quantity += 1;
       // Check if Product ID exist
       let is_exist_product = array.findIndex(i => i.product_id === action.payload.id);
       // If not exist
@@ -146,11 +203,11 @@ export function productReducer(state = productState, action) {
           sub_category_id: action.payload.sub_category_id,
         });
         // Return updated state
-        return newState;
+        return new_state;
       } else {
-        // If exist add quantity
+        // If exist add quantity to current product
         array[is_exist_product].product_quantity += 1;
-        return newState
+        return new_state
       }
 
 

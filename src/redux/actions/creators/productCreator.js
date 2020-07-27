@@ -1,7 +1,7 @@
 // Store
 import store from '../../store';
 // Action types
-import { PRODUCT_LIST, SET_TABLES, PRODUCT_ORDERS, PRODUCT_LOADING } from '../actionsTypes';
+import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, PRODUCT_LOADING } from '../actionsTypes';
 
 
 export const product_list = (payload) => {
@@ -12,13 +12,20 @@ export const product_list = (payload) => {
 }
 export const payload = (payload) => store.dispatch(product_list(payload));
 
-export const set_tables = (payload) => {
+export const open_products = (payload) => {
   return {
-    type: SET_TABLES,
+    type: OPEN_PRODUCTS,
     payload: payload
   };
 }
-export const tables = (payload) => store.dispatch(set_tables(payload));
+export const open = (payload) => store.dispatch(open_products(payload));
+
+export const close_products = () => {
+  return {
+    type: CLOSE_PRODUCTS,
+  };
+}
+export const close = () => store.dispatch(close_products());
 
 export const product_orders = (payload) => {
   return {

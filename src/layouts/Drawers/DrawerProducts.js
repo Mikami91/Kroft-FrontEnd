@@ -75,23 +75,22 @@ function DrawerProducts(props) {
 
   // Order make function
   const handleSetOrder = (arg) => {
-    set_orders({
-      table_id: current.table_id,
-      environment_id: current.environment_id,
-      ...arg
-    });
+    set_orders(arg);
   };
 
-  // Generate Products orders array and calculate Global Quantity function
-  let orders_array = [];
+  // Products Orders List
+  let product_orders_list = [];
+  
+  // calculate Global quantity from current Table
   let global_quantity = 0;
+
   if (open === true) {
-    let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
-    let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
-    global_quantity = orders_list[env_index].tables[table_index].global_quantity;
-    orders_array = orders_list[env_index].tables[table_index].products; 
-    // return orders_array;
-  }
+    if (current.env_index !== null && current.table_index !== null) {
+      let current_location = orders_list[current.env_index].tables[current.table_index];
+      product_orders_list = current_location.products;
+      global_quantity = current_location.global_quantity;
+    };
+  };
 
   const handleOnClick = (arg) => alert(arg);
 
@@ -120,7 +119,7 @@ function DrawerProducts(props) {
           imagePath="images/categories/"
           value={value}
           onChange={handleChangeIndex}
-          orders={orders_array}
+          orders={product_orders_list}
         />
         {/* https://source.unsplash.com/random */}
         <div
@@ -148,7 +147,7 @@ function DrawerProducts(props) {
                       imagePath2="images/sub_categories/"
                       onClick={handleSetOrder}
                       color="secondary"
-                      orders={orders_array}
+                      orders={product_orders_list}
                       renderRefresh={global_quantity}
                     />
                   </Grid>
@@ -344,7 +343,7 @@ function DrawerProducts(props) {
                   onClick: handleOnClick,
                 },
               ]}
-              data={orders_array}
+              data={product_orders_list}
             />
           }
           leftButtons={[
@@ -541,7 +540,7 @@ function DrawerProducts(props) {
         />
       </Drawer>
     );
-  }, [open, openTableOrders, openPrints, openTotal, value, global_quantity]);
+  }, [open, openTableOrders, openPrints, openTotal, value, current, global_quantity]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {

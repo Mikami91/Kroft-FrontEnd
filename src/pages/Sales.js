@@ -6,7 +6,7 @@ import SwipeableViews from "react-swipeable-views";
 import { connect } from 'react-redux';
 // Actions Creators
 import { bindActionCreators } from 'redux';
-import { tables } from '../redux/actions/creators/productCreator';
+import { open, close } from '../redux/actions/creators/productCreator';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -48,7 +48,7 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SalesPage({ environments, tables, loading }) {
+function SalesPage({ environments, tables, current, close_products, loading }) {
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
 
@@ -73,14 +73,14 @@ function SalesPage({ environments, tables, loading }) {
   });
 
   // State for Modal Products
-  const [openProducts, setOpenProducts] = useState(false);
+  // const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = (args) => {
-    setOpenProducts(true);
+    // setOpenProducts(true);
     setCurrentTable(args);
-    set_tables(args);
+    open_products(args);
   };
   const handleCloseProducts = () => {
-    setOpenProducts(false);
+    close_products();
   };
 
   // State for Modal Profile
@@ -327,7 +327,7 @@ function SalesPage({ environments, tables, loading }) {
         direction="bottom"
         variant="temporary"
         background={image}
-        open={openProducts}
+        open={current.open}
         close={handleCloseProducts}
         table={currentTable}
       />
@@ -337,18 +337,20 @@ function SalesPage({ environments, tables, loading }) {
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { table, environment } = state;
+  const { table, environment, product } = state;
   return {
     environments: environment.payload.filter(dataList => dataList.state === 1),
     loading: environment.loading,
     tables: table.payload.filter(dataList => dataList.state === 1),
+    current: product.current,
   }
 };
 // Functions to dispatching
-const set_tables = (payload) => (tables(payload));
+const open_products = (payload) => (open(payload));
+const close_products = (value) => (close(value));
 // Binding an object full of action creators
 function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ set_tables }, dispatch);
+  return bindActionCreators({ open_products, close_products }, dispatch);
 };
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SalesPage));
