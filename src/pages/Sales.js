@@ -48,7 +48,7 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SalesPage({ environments, tables, current, close_products, loading }) {
+function SalesPage({ environments, tables, orders_list, current, close_products, loading }) {
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
 
@@ -130,8 +130,18 @@ function SalesPage({ environments, tables, current, close_products, loading }) {
     }
   }, [is_payload, environments, tables]);
 
+  // Products Orders List
+  let product_orders_list = [];
+
+  // if (open === true) {
+  if (current.env_index !== null && current.table_index !== null) {
+    let current_location = orders_list[current.env_index].tables[current.table_index];
+    product_orders_list = current_location.products;
+  };
+
   // Styles
   const classes = useStyles();
+
   return (
     <Fragment>
 
@@ -140,12 +150,13 @@ function SalesPage({ environments, tables, current, close_products, loading }) {
       <AppBarTabs
         color="inherit"
         data={environments}
-        iconType="img"
+        iconType="icon"
         imagePath="images/environments/"
         value={value}
         onChange={handleChange}
         variant="fullWidth"
         scrollButtons="auto"
+        orders={product_orders_list}
       />
 
       <div className={classes.rootMenu}>
@@ -342,6 +353,7 @@ const mapStateToProps = (state) => {
     environments: environment.payload.filter(dataList => dataList.state === 1),
     loading: environment.loading,
     tables: table.payload.filter(dataList => dataList.state === 1),
+    orders_list: product.orders,
     current: product.current,
   }
 };

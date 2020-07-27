@@ -33,13 +33,13 @@ function GridSubProducts(props) {
 
   // Search Product ID in Orders list and return his quantity
   const handleQuantity = (product_id) => {
-    if (Array.isArray(orders) && orders.length) {
+    // if (Array.isArray(orders) && orders.length) {
       for (let index = 0; index < orders.length; index++) {
         if (orders[index].product_id === product_id) {
           return orders[index].product_quantity;
         }
       }
-    }
+    // }
   };
 
   // Styles

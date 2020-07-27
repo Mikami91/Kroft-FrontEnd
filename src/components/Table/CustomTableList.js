@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useMemo } from "react";
 import PropTypes from "prop-types";
 // UI Material Components
 import {
@@ -20,68 +20,72 @@ import CustomText from '../Typography/CustomText';
 // import ObservationPopover from '../popovers/ObservationPopover';
 
 function CustomTableList(props) {
-  const { size, padding, sticky, header, columns, data } = props;
+  const { size, padding, sticky, header, columns, data, renderRefresh } = props;
 
-  return (
-    <Fragment>
-      <Table size={size} padding={padding} stickyHeader={sticky}>
-        <TableHead>
-          <TableRow>
-            {header.map((index, key) => (
-              <TableCell
-                key={key + "head"}
-                align={index.align}
-                colSpan={index.colSpan}
-              >
-                {index.text}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
 
-        <TableBody>
-          {data.map((index, key) => (
-            <TableRow key={key + "row"}>
-              {columns.map((col) => {
-                if (col.type === "text") {
-                  return (
-                    <TableCell
-                      key={key + "cell-" + col.field}
-                      align={col.align}
-                      padding={col.padding}
-                      size={col.size}
-                      colSpan={col.colSpan}
-                    > 
-                      <CustomText text={index[col.field]} size={col.fontSize} color={col.color} />
-                    </TableCell>
-                  );
-                } else {
-                  return (
-                    <TableCell
-                      key={key + "icon-" + col.field}
-                      align={col.align}
-                      padding={col.padding}
-                      size={col.size}
-                      colSpan={col.colSpan}
-                    >
-                      <IconButton onClick={() => col.onClick(index.name)}>
-                        <col.icon
-                          fontSize={col.iconSize}
-                          color={col.iconColor}
-                        />
-                      </IconButton>
-                    </TableCell>
-                  );
-                }
-              })}
+  // Using useMemo hook
+  return useMemo(() => {
+    return (
+      <Fragment>
+        <Table size={size} padding={padding} stickyHeader={sticky}>
+          <TableHead>
+            <TableRow>
+              {header.map((index, key) => (
+                <TableCell
+                  key={key + "head"}
+                  align={index.align}
+                  colSpan={index.colSpan}
+                >
+                  {index.text}
+                </TableCell>
+              ))}
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
 
-      {/* <ObservationPopover state={state} close={handleClose} style={style} /> */}
-    </Fragment>
-  );
+          <TableBody>
+            {data.map((index, key) => (
+              <TableRow key={key + "row"}>
+                {columns.map((col) => {
+                  if (col.type === "text") {
+                    return (
+                      <TableCell
+                        key={key + "cell-" + col.field}
+                        align={col.align}
+                        padding={col.padding}
+                        size={col.size}
+                        colSpan={col.colSpan}
+                      >
+                        <CustomText text={index[col.field]} size={col.fontSize} color={col.color} />
+                      </TableCell>
+                    );
+                  } else {
+                    return (
+                      <TableCell
+                        key={key + "icon-" + col.field}
+                        align={col.align}
+                        padding={col.padding}
+                        size={col.size}
+                        colSpan={col.colSpan}
+                      >
+                        <IconButton onClick={() => col.onClick(index.product_id)}>
+                          <col.icon
+                            fontSize={col.iconSize}
+                            color={col.iconColor}
+                          />
+                        </IconButton>
+                      </TableCell>
+                    );
+                  }
+                })}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+
+        {/* <ObservationPopover state={state} close={handleClose} style={style} /> */}
+      </Fragment>
+    );
+  }, [renderRefresh]);
 }
 // PropTypes
 CustomTableList.defaultProps = {
@@ -91,6 +95,7 @@ CustomTableList.defaultProps = {
   header: [],
   columns: [],
   data: [],
+  renderRefresh: null,
 };
 CustomTableList.propTypes = {
   size: PropTypes.oneOf(["small", "medium"]),
@@ -118,6 +123,12 @@ CustomTableList.propTypes = {
     })
   ),
   data: PropTypes.array,
+  renderRefresh: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 };
 
 export default CustomTableList;

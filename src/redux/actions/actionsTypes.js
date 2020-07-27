@@ -50,5 +50,9 @@ export const OPEN_PRODUCTS = 'OPEN_PRODUCTS';
 export const CLOSE_PRODUCTS = 'CLOSE_PRODUCTS';
 // Orders for Products
 export const PRODUCT_ORDERS = 'PRODUCT_ORDERS';
+// Add quantity of Product
+export const MORE_QUANTITY = 'MORE_QUANTITY';
+// Rest quantity of Product
+export const LESS_QUANTITY = 'LESS_QUANTITY';
 // Loading
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';

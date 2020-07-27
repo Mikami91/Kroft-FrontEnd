@@ -2,10 +2,13 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/Componentes
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Badge from '@material-ui/core/Badge';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 // API
@@ -18,7 +21,7 @@ import styles from "../../styles/components/appBarStyle";
 const useStyles = makeStyles(styles);
 
 // Component
-const AppBarTabs = (props) => {
+function AppBarTabs(props) {
   // Props
   const {
     // AppBar
@@ -37,13 +40,36 @@ const AppBarTabs = (props) => {
     orientation,
     scrollButtons,
     centered,
+    // Orders array
+    orders,
+    // Redux
+    orders_list
   } = props;
+
+  // Find if Product Orders has SubCategory ID
+  const found_environment_id = (environment_id) => {
+
+    // if (orders_list.lenght > 0) {
+    //   let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
+    //   let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
+    //   orders_list[env_index].tables[table_index].global_quantity;
+    // }
+
+    let found = orders.some(index => index.environment_id === environment_id);
+    if (found === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   // Styles
   const classes = useStyles();
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes.dashAppBar]: drawer,
   });
+
   // Render
   return (
     <AppBar
@@ -73,13 +99,36 @@ const AppBarTabs = (props) => {
                   {index.name}
                 </Typography>
               }
-              icon={iconType === "icon" ? <DeckRoundedIcon className={classes.icons} /> :
-                <img
-                  src={API + imagePath + index.photo}
-                  alt={index.name}
-                  color={index.selectColor}
-                  className={classes.images}
-                />}
+              icon={iconType === "icon" ?
+                <Badge
+                  color="secondary"
+                  variant="dot"
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                  invisible={!found_environment_id(index.id)}
+                >
+                  <DeckRoundedIcon className={classes.icons} />
+                </Badge>
+                :
+                <Badge
+                  color="secondary"
+                  variant="dot"
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                  invisible={!found_environment_id(index.id)}
+                >
+                  <img
+                    src={API + imagePath + index.photo}
+                    alt={index.name}
+                    color={index.selectColor}
+                    className={classes.images}
+                  />
+                </Badge>
+              }
             />
           );
           // }, [data]);
@@ -144,5 +193,14 @@ AppBarTabs.propTypes = {
   scrollButtons: PropTypes.oneOf(["on", "off", "auto", "desktop"]),
   centered: PropTypes.bool,
 };
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { table, environment, product } = state;
+  return {
+    environments: environment.payload.filter(dataList => dataList.state === 1),
+    loading: environment.loading,
+    orders_list: product.orders,
+  }
+};
 
-export default AppBarTabs;
+export default connect(mapStateToProps, null)(AppBarTabs);

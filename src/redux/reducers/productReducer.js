@@ -1,5 +1,5 @@
 // Action types
-import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, PRODUCT_LOADING } from '../actions/actionsTypes';
+import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, MORE_QUANTITY, LESS_QUANTITY, PRODUCT_LOADING } from '../actions/actionsTypes';
 import { quantity } from 'chartist';
 
 // Default State
@@ -181,8 +181,6 @@ export function productReducer(state = productState, action) {
 
     case PRODUCT_ORDERS:
 
-      // Call new state
-      new_state = { ...state };
       // Find value want to update
       let array = new_state.orders[env_index].tables[table_index].products;
       // Plus global quantity
@@ -201,6 +199,8 @@ export function productReducer(state = productState, action) {
           print_category_id: action.payload.print_category_id,
           category_id: action.payload.category_id,
           sub_category_id: action.payload.sub_category_id,
+          environment_id: state.current.environment_id,
+          table_id: state.current.table_id,
         });
         // Return updated state
         return new_state;
@@ -210,6 +210,30 @@ export function productReducer(state = productState, action) {
         return new_state
       }
 
+    case MORE_QUANTITY:
+
+      // Add to global quantity
+      new_state.orders[env_index].tables[table_index].global_quantity += 1;
+
+      let product_array1 = new_state.orders[env_index].tables[table_index].products;
+      let current_product1 = product_array1.findIndex(i => i.product_id === action.payload.product_id);
+      // Add quantity
+      product_array1[current_product1].product_quantity += 1;
+      // Return update state
+      return new_state;
+
+    case LESS_QUANTITY:
+
+      let product_array2 = new_state.orders[env_index].tables[table_index].products;
+      let current_product2 = product_array2.findIndex(i => i.product_id === action.payload.product_id);
+      // Rest quantity
+      if (product_array2[current_product2].product_quantity > 1) {
+        product_array2[current_product2].product_quantity -= 1;
+        // Rest to global quantity
+        new_state.orders[env_index].tables[table_index].global_quantity -= 1;
+      }
+      // Return update state
+      return new_state;
 
     case PRODUCT_LOADING:
       return {
