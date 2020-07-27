@@ -47,6 +47,7 @@ export default function CustomModal(props) {
     background,
     renderRefresh,
   } = props;
+  
   // Using useMemo hook
   return useMemo(() => {
     // Render

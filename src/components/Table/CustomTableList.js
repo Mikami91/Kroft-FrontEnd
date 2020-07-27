@@ -22,7 +22,8 @@ import CustomText from '../Typography/CustomText';
 function CustomTableList(props) {
   const { size, padding, sticky, header, columns, data, renderRefresh } = props;
 
-
+  console.log(renderRefresh);
+  
   // Using useMemo hook
   return useMemo(() => {
     return (

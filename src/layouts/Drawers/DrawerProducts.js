@@ -390,6 +390,7 @@ function DrawerProducts(props) {
               icon: PrintIcon,
             },
           ]}
+          renderRefresh={[openTableOrders, global_quantity]}
           scroll="paper"
           maxWidth="md"
           fullWidth
