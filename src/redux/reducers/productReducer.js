@@ -1,5 +1,5 @@
 // Action types
-import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, MORE_QUANTITY, LESS_QUANTITY, REMOVE_PRODUCT, PRODUCT_LOADING } from '../actions/actionsTypes';
+import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, MORE_QUANTITY, LESS_QUANTITY, REMOVE_PRODUCT, ADD_OBSERVATION, DELETE_OBSERVATION, PRODUCT_LOADING } from '../actions/actionsTypes';
 import { quantity } from 'chartist';
 
 // Default State
@@ -196,6 +196,7 @@ export function productReducer(state = productState, action) {
           product_name: action.payload.name,
           product_price: action.payload.price,
           product_quantity: 1,
+          product_observation: "",
           print_category_id: action.payload.print_category_id,
           category_id: action.payload.category_id,
           sub_category_id: action.payload.sub_category_id,
@@ -250,6 +251,18 @@ export function productReducer(state = productState, action) {
       product_array3.splice(current_product3, 1);
 
       // Return update state
+      return new_state;
+
+    case ADD_OBSERVATION:
+      let product_array4 = new_state.orders[env_index].tables[table_index].products;
+      let current_product4 = product_array4.findIndex(i => i.product_id === action.payload.product_id);
+      product_array4[current_product4].product_observation = action.payload.observation;
+      return new_state;
+
+    case DELETE_OBSERVATION:
+      let product_array5 = new_state.orders[env_index].tables[table_index].products;
+      let current_product5 = product_array5.findIndex(i => i.product_id === action.payload.product_id);
+      product_array5[current_product5].product_observation = "";
       return new_state;
 
     case PRODUCT_LOADING:

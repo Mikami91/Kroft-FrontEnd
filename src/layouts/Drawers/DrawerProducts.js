@@ -6,10 +6,13 @@ import SwipeableViews from "react-swipeable-views";
 import { connect } from 'react-redux';
 // Actions Creators
 import { bindActionCreators } from 'redux';
-import { orders, more, less, remove } from '../../redux/actions/creators/productCreator';
+import { orders, more, less, remove, add_obs, delete_obs } from '../../redux/actions/creators/productCreator';
 // UI Material Components
 import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
+import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import AppBarIcons from "../../components/AppBar/AppBarIcons.js";
@@ -18,6 +21,8 @@ import TabPanel from "../../components/Panel/TabPanel";
 import GridProducts from "../../components/Grid/GridProducts";
 import CustomModal from "../../components/Modal/CustomModal.js";
 import CustomTableList from "../../components/Table/CustomTableList.js";
+import ObservationPopover from '../../components/Popover/ObservationPopover';
+import CustomInput from '../../components/CustomInput/CustomInput';
 // Icons
 import UndoIcon from "@material-ui/icons/Undo";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
@@ -30,6 +35,8 @@ import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SendIcon from "@material-ui/icons/Send";
 import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
+import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 
 // Assets
 import image from "../../assets/img/backgrounds/productbackground.jpg";
@@ -93,15 +100,52 @@ function DrawerProducts(props) {
   };
 
   // Add Product quantity
-  const handleMoreQuantity = (product_id) => more_quantity({product_id: product_id});
+  const handleMoreQuantity = (product_id) => more_quantity({ product_id: product_id });
 
   // Add Product quantity
-  const handleLessQuantity = (product_id) => less_quantity({product_id: product_id});
+  const handleLessQuantity = (product_id) => less_quantity({ product_id: product_id });
 
   // Add Product quantity
-  const handleRemoveProduct = (product_id) => remove_product({product_id: product_id});
+  const handleRemoveProduct = (product_id) => remove_product({ product_id: product_id });
 
-  const handleOnClick = (arg) => alert(arg);
+  // Open and Close Popopver
+  const [state, setState] = useState({
+    open: false,
+    anchorEl: null,
+    product_id: null,
+    observation: ''
+  });
+
+  const handleOpen = (e, id, observation) => {
+    console.log(e, id);
+    setState({
+      open: true,
+      anchorEl: e.currentTarget,
+      product_id: id,
+      observation: observation
+    });
+  };
+  const handleClose = () => {
+    setState({
+      open: false,
+      anchorEl: null,
+      product_id: null,
+      observation: ''
+    });
+  };
+  // Delete observation
+  const handleDelete = () => {
+    delete_obs({ product_id: state.product_id });
+    handleClose();
+  }
+
+  // Save observation
+  const handleSave = () => {
+    add_obs({ product_id: state.product_id, observation: document.getElementById('textarea').value });
+    handleClose();
+  }
+
+  const handleOnClick = (e) => console.log(e.currentTarget);
 
   // Styles
   const classes = useStyles();
@@ -300,7 +344,8 @@ function DrawerProducts(props) {
                   align: "center",
                   icon: InfoIcon,
                   iconColor: "primary",
-                  onClick: handleOnClick,
+                  variant: "pop",
+                  onClick: handleOpen,
                 },
                 {
                   field: "product_name",
@@ -549,9 +594,49 @@ function DrawerProducts(props) {
           maxWidth="sm"
           fullWidth
         />
+
+        <ObservationPopover
+          state={state}
+          handleClose={handleClose}
+          content={
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}>
+              <TextField
+                autoFocus={typeof state.observation === 'undefined' ? true : false}
+                id="textarea"
+                label="Observación"
+                multiline
+                rowsMax="4"
+                inputProps={{ maxLength: 40 }}
+                name="observation"
+                defaultValue={state.observation}
+                margin="normal"
+                variant="outlined"
+              />
+              <Tooltip placement="bottom" title="Cancelar">
+                <IconButton aria-label="Cancelar" color="inherit" onClick={handleClose}>
+                  <CancelRoundedIcon fontSize="large" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip placement="bottom" title="Eliminar">
+                <IconButton aria-label="Eliminar" color="inherit" onClick={handleDelete}>
+                  <DeleteIcon fontSize="large" />
+                </IconButton>
+              </Tooltip>
+              <Tooltip placement="bottom" title="Guardar">
+                <IconButton aria-label="Guardar" color="inherit" onClick={handleSave}>
+                  <CheckCircleRoundedIcon fontSize="large" />
+                </IconButton>
+              </Tooltip>
+            </div>
+          }
+        />
+
       </Drawer>
     );
-  }, [open, openTableOrders, openPrints, openTotal, value, current, global_quantity]);
+  }, [open, openTableOrders, openPrints, openTotal, value, current, global_quantity, state.open]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {

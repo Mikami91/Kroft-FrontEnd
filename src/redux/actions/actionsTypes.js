@@ -56,5 +56,9 @@ export const MORE_QUANTITY = 'MORE_QUANTITY';
 export const LESS_QUANTITY = 'LESS_QUANTITY';
 // Remove Product from the orders array
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
+// Add observation of Product
+export const ADD_OBSERVATION = 'ADD_OBSERVATION';
+// delete observation of Product
+export const DELETE_OBSERVATION = 'DELETE_OBSERVATION';
 // Loading
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';

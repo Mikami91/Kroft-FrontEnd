@@ -22,8 +22,17 @@ import CustomText from '../Typography/CustomText';
 function CustomTableList(props) {
   const { size, padding, sticky, header, columns, data, renderRefresh } = props;
 
-  console.log(renderRefresh);
-  
+  // Popover state
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   // Using useMemo hook
   return useMemo(() => {
     return (
@@ -68,7 +77,7 @@ function CustomTableList(props) {
                         size={col.size}
                         colSpan={col.colSpan}
                       >
-                        <IconButton onClick={() => col.onClick(index.product_id)}>
+                        <IconButton aria-describedby={col.variant === "pop" ? "simple-popover" : key + "icon"} onClick={col.variant === "pop" ? (event) => col.onClick(event, index.product_id, index.product_observation) : (event) => col.onClick(index.product_id)}>
                           <col.icon
                             fontSize={col.iconSize}
                             color={col.iconColor}
@@ -83,7 +92,8 @@ function CustomTableList(props) {
           </TableBody>
         </Table>
 
-        {/* <ObservationPopover state={state} close={handleClose} style={style} /> */}
+
+
       </Fragment>
     );
   }, [renderRefresh]);
