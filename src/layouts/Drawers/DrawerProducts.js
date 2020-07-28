@@ -88,14 +88,16 @@ function DrawerProducts(props) {
   // Products Orders List
   let product_orders_list = [];
 
-  // calculate Global quantity from current Table
+  // calculate Global quantity and global amount from current Table
   let global_quantity = 0;
+  let global_amount = 0;
 
   if (open === true) {
     if (current.env_index !== null && current.table_index !== null) {
       let current_location = orders_list[current.env_index].tables[current.table_index];
       product_orders_list = current_location.products;
       global_quantity = current_location.global_quantity;
+      global_amount = current_location.global_amount;
     };
   };
 
@@ -144,6 +146,11 @@ function DrawerProducts(props) {
     add_obs({ product_id: state.product_id, observation: document.getElementById('textarea').value });
     handleClose();
   }
+
+  // Send Orders List
+  const handleSendOrder = () => {
+    console.log(product_orders_list);
+  };
 
   const handleOnClick = (e) => console.log(e.currentTarget);
 
@@ -398,7 +405,7 @@ function DrawerProducts(props) {
                 },
               ]}
               data={product_orders_list}
-              renderRefresh={global_quantity}
+              renderRefresh={[global_quantity, state.observation]}
             />
           }
           leftButtons={[
@@ -421,7 +428,7 @@ function DrawerProducts(props) {
             },
             {
               type: "text",
-              text: " 258 Bs.",
+              text: `${global_amount} Bs.`,
               align: "right",
               margin: true,
               size: "medium",
@@ -436,6 +443,7 @@ function DrawerProducts(props) {
               color: "primary",
               variant: "contained",
               icon: PrintIcon,
+              onClick: handleSendOrder
             },
           ]}
           renderRefresh={[openTableOrders, global_quantity]}
@@ -615,18 +623,20 @@ function DrawerProducts(props) {
                 margin="normal"
                 variant="outlined"
               />
-              <Tooltip placement="bottom" title="Cancelar">
+              <Tooltip placement="bottom" title="Cancelar" arrow>
                 <IconButton aria-label="Cancelar" color="inherit" onClick={handleClose}>
                   <CancelRoundedIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
-              <Tooltip placement="bottom" title="Eliminar">
-                <IconButton aria-label="Eliminar" color="inherit" onClick={handleDelete}>
-                  <DeleteIcon fontSize="large" />
-                </IconButton>
+              <Tooltip placement="bottom" title="Eliminar" arrow>
+                <span>
+                  <IconButton aria-label="Eliminar" color="secondary" disabled={state.observation === "" ? true : false} onClick={handleDelete}>
+                    <DeleteIcon fontSize="large" />
+                  </IconButton>
+                </span>
               </Tooltip>
-              <Tooltip placement="bottom" title="Guardar">
-                <IconButton aria-label="Guardar" color="inherit" onClick={handleSave}>
+              <Tooltip placement="bottom" title="Guardar" arrow>
+                <IconButton aria-label="Guardar" color="primary" onClick={handleSave}>
                   <CheckCircleRoundedIcon fontSize="large" />
                 </IconButton>
               </Tooltip>

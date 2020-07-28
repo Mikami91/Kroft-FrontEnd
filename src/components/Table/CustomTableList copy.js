@@ -78,19 +78,10 @@ function CustomTableList(props) {
                         colSpan={col.colSpan}
                       >
                         <IconButton aria-describedby={col.variant === "pop" ? "simple-popover" : key + "icon"} onClick={col.variant === "pop" ? (event) => col.onClick(event, index.product_id, index.product_observation) : (event) => col.onClick(index.product_id)}>
-
-                          {col.variant === "pop" ?
-                            <Badge color="secondary" variant="dot" invisible={index.product_observation === "" ? true : false}>
-                              <col.icon
-                                fontSize={col.iconSize}
-                                color={col.iconColor}
-                              />
-                            </Badge> :
-                            <col.icon
-                              fontSize={col.iconSize}
-                              color={col.iconColor}
-                            />}
-
+                          <col.icon
+                            fontSize={col.iconSize}
+                            color={col.iconColor}
+                          />
                         </IconButton>
                       </TableCell>
                     );
@@ -100,6 +91,8 @@ function CustomTableList(props) {
             ))}
           </TableBody>
         </Table>
+
+
 
       </Fragment>
     );

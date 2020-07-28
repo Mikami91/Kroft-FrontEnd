@@ -56,6 +56,13 @@ const lastIndexOfTable = (array, field, key) => {
   return -1;
 };
 
+let global_amount = 0;
+let global_amount_sum = (array) => {
+  array.reduce(function (prev, current) {
+    return global_amount = prev + +current.product_price * current.product_quantity;
+  }, 0);
+}
+
 
 export function productReducer(state = productState, action) {
 
@@ -100,6 +107,7 @@ export function productReducer(state = productState, action) {
               table_number: action.payload.number,
               table_amount: action.payload.amount,
               global_quantity: 0,
+              global_amount: 0,
               // Add products array
               products: [],
             });
@@ -148,6 +156,7 @@ export function productReducer(state = productState, action) {
             table_number: action.payload.number,
             table_amount: action.payload.amount,
             global_quantity: 0,
+            global_amount: 0,
             // Add products array
             products: [],
           }
@@ -203,23 +212,35 @@ export function productReducer(state = productState, action) {
           environment_id: state.current.environment_id,
           table_id: state.current.table_id,
         });
+
+        // Sum global amount
+        global_amount_sum(array);
+        new_state.orders[env_index].tables[table_index].global_amount = global_amount;
+
         // Return updated state
         return new_state;
+
       } else {
         // If exist add quantity to current product
         array[is_exist_product].product_quantity += 1;
+
+        // Sum global amount
+        global_amount_sum(array);
+        new_state.orders[env_index].tables[table_index].global_amount = global_amount;
+
         return new_state
       }
 
     case MORE_QUANTITY:
 
-      // Add to global quantity
-      new_state.orders[env_index].tables[table_index].global_quantity += 1;
-
       let product_array1 = new_state.orders[env_index].tables[table_index].products;
       let current_product1 = product_array1.findIndex(i => i.product_id === action.id.product_id);
       // Add quantity
       product_array1[current_product1].product_quantity += 1;
+      // Add to global quantity and global amount
+      global_amount_sum(product_array1);
+      new_state.orders[env_index].tables[table_index].global_quantity += 1;
+      new_state.orders[env_index].tables[table_index].global_amount = global_amount;
       // Return update state
       return new_state;
 
@@ -230,8 +251,10 @@ export function productReducer(state = productState, action) {
       // Rest quantity
       if (product_array2[current_product2].product_quantity > 1) {
         product_array2[current_product2].product_quantity -= 1;
-        // Rest to global quantity
+        // Rest to global quantity and global amount
+        global_amount_sum(product_array2);
         new_state.orders[env_index].tables[table_index].global_quantity -= 1;
+        new_state.orders[env_index].tables[table_index].global_amount = global_amount;
       }
       // Return update state
       return new_state;
@@ -241,14 +264,16 @@ export function productReducer(state = productState, action) {
       let product_array3 = new_state.orders[env_index].tables[table_index].products;
       let current_product3 = product_array3.findIndex(i => i.product_id === action.id.product_id);
 
-      // Remove product quantity
+      // Cath remove product quantity
       let product_quantity = product_array3[current_product3].product_quantity;
-
-      // Rest remove Product quantity to global quantity
-      new_state.orders[env_index].tables[table_index].global_quantity -= product_quantity;
 
       // Remove Product from Orders array
       product_array3.splice(current_product3, 1);
+
+      // Rest to global quantity and global amount
+      global_amount_sum(product_array3);
+      new_state.orders[env_index].tables[table_index].global_quantity -= product_quantity;
+      new_state.orders[env_index].tables[table_index].global_amount = global_amount;
 
       // Return update state
       return new_state;
