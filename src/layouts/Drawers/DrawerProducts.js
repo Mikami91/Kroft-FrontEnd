@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, Fragment } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import NumberFormat from 'react-number-format';
@@ -23,7 +23,7 @@ import GridProducts from "../../components/Grid/GridProducts";
 import CustomModal from "../../components/Modal/CustomModal.js";
 import CustomTableList from "../../components/Table/CustomTableList.js";
 import ObservationPopover from '../../components/Popover/ObservationPopover';
-import CustomInput from '../../components/CustomInput/CustomInput';
+import CustomPopover from '../../components/Popover/CustomPopover';
 // Icons
 import UndoIcon from "@material-ui/icons/Undo";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
@@ -111,7 +111,7 @@ function DrawerProducts(props) {
   // Add Product quantity
   const handleRemoveProduct = (product_id) => remove_product({ product_id: product_id });
 
-  // Open and Close Popopver
+  // Open and Close Observation Popopver
   const [state, setState] = useState({
     open: false,
     anchorEl: null,
@@ -119,8 +119,7 @@ function DrawerProducts(props) {
     observation: ''
   });
 
-  const handleOpen = (e, id, observation) => {
-    console.log(e, id);
+  const handleOpenObservation = (e, id, observation) => {
     setState({
       open: true,
       anchorEl: e.currentTarget,
@@ -128,7 +127,7 @@ function DrawerProducts(props) {
       observation: observation
     });
   };
-  const handleClose = () => {
+  const handleCloseObservation = () => {
     setState({
       open: false,
       anchorEl: null,
@@ -139,19 +138,39 @@ function DrawerProducts(props) {
   // Delete observation
   const handleDelete = () => {
     delete_obs({ product_id: state.product_id });
-    handleClose();
+    handleCloseObservation();
   }
 
   // Save observation
   const handleSave = () => {
     add_obs({ product_id: state.product_id, observation: document.getElementById('textarea').value });
-    handleClose();
+    handleCloseObservation();
   }
+
+  // Open and Close Confirmation Popopver
+  const [state2, setState2] = useState({
+    open: false,
+    anchorEl: null,
+  });
+
+  const handleOpenConfirmation = (e) => {
+    console.log(e);
+    setState2({
+      open: true,
+      anchorEl: e.currentTarget,
+    });
+  };
+  const handleCloseConfirmation = () => {
+    setState2({
+      open: false,
+      anchorEl: null,
+    });
+  };
 
   // Delete Orders List
   const handleDeleteOrders = () => {
     delete_all();
-    handleCloseOrders();
+    handleCloseConfirmation();
   };
 
   // Send Orders List
@@ -375,7 +394,7 @@ function DrawerProducts(props) {
                   icon: InfoIcon,
                   iconColor: "primary",
                   variant: "pop",
-                  onClick: handleOpen,
+                  onClick: handleOpenObservation,
                 },
                 {
                   field: "product_name",
@@ -438,7 +457,7 @@ function DrawerProducts(props) {
               color: "danger",
               variant: "contained",
               icon: DeleteSweepIcon,
-              onClick: handleDeleteOrders,
+              onClick: handleOpenConfirmation,
             },
           ]}
           centerButtons={[
@@ -644,7 +663,7 @@ function DrawerProducts(props) {
 
         <ObservationPopover
           state={state}
-          handleClose={handleClose}
+          handleClose={handleCloseObservation}
           content={
             <div style={{
               display: 'flex',
@@ -663,7 +682,7 @@ function DrawerProducts(props) {
                 variant="outlined"
               />
               <Tooltip placement="bottom" title="Cancelar" arrow>
-                <IconButton aria-label="Cancelar" color="inherit" onClick={handleClose}>
+                <IconButton aria-label="Cancelar" color="inherit" onClick={handleCloseObservation}>
                   <CancelRoundedIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
@@ -683,9 +702,35 @@ function DrawerProducts(props) {
           }
         />
 
+        <CustomPopover
+          state={state2}
+          handleClose={handleCloseConfirmation}
+          content={
+            <Fragment>
+              <p>¿Eliminar toda la lista?</p>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+              }}>
+                <Tooltip placement="bottom" title="Cancelar" arrow>
+                  <IconButton aria-label="Cancelar" color="inherit" onClick={handleCloseConfirmation}>
+                    <CancelRoundedIcon fontSize="large" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip placement="bottom" title="Eliminar" arrow>
+                  <IconButton aria-label="Eliminar" color="secondary" onClick={handleDeleteOrders}>
+                    <DeleteIcon fontSize="large" />
+                  </IconButton>
+                </Tooltip>
+              </div>
+
+            </Fragment>
+          }
+        />
+
       </Drawer>
     );
-  }, [open, openTableOrders, openPrints, openTotal, value, current, global_quantity, state.open]);
+  }, [open, openTableOrders, openPrints, openTotal, value, current, global_quantity, state.open, state2.open]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {

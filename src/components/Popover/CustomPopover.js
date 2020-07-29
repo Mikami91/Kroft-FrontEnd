@@ -1,0 +1,27 @@
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Popover from '@material-ui/core/Popover';
+
+export default function CustomPopover(props) {
+
+    const { state, handleClose, content } = props;
+
+    return (
+        <Popover
+            id="simple-popover"
+            open={state.open}
+            anchorEl={state.anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+            }}
+            transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+            }}
+        >
+            {content}
+        </Popover>
+    );
+}
