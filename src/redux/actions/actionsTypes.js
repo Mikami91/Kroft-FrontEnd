@@ -64,3 +64,10 @@ export const DELETE_OBSERVATION = 'DELETE_OBSERVATION';
 export const DELETE_ORDERS = 'DELETE_ORDERS';
 // Loading
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';
+
+
+/*::::::::::::::::::::ORDER::::::::::::::::::::*/
+// List
+export const ORDER_LIST = 'ORDER_LIST';
+// Loading
+export const ORDER_LOADING = 'ORDER_LOADING';

@@ -7,6 +7,7 @@ import { tableReducer } from './reducers/tableReducer';
 import { categoryReducer } from './reducers/categoryReducer';
 import { subcategoryReducer } from './reducers/subcategoryReducer';
 import { productReducer } from './reducers/productReducer';
+import { orderReducer } from './reducers/orderReducer';
 
 // Combine Reducer
 export const mainReducer = combineReducers({
@@ -16,6 +17,7 @@ export const mainReducer = combineReducers({
     category: categoryReducer,
     subcategory: subcategoryReducer,
     product: productReducer,
+    orders: orderReducer,
   });
 
 /*export default function mainReducer(state = {}, action) {

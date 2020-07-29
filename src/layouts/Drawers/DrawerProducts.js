@@ -24,6 +24,7 @@ import CustomModal from "../../components/Modal/CustomModal.js";
 import CustomTableList from "../../components/Table/CustomTableList.js";
 import ObservationPopover from '../../components/Popover/ObservationPopover';
 import CustomPopover from '../../components/Popover/CustomPopover';
+import CustomLoading from '../../components/Loading/CustomLoading';
 // Icons
 import UndoIcon from "@material-ui/icons/Undo";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
@@ -38,6 +39,8 @@ import SendIcon from "@material-ui/icons/Send";
 import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
+// Functions
+import { orderCreate } from '../../functions/orderFunctions';
 
 // Assets
 import image from "../../assets/img/backgrounds/productbackground.jpg";
@@ -56,7 +59,7 @@ const useStyles = makeStyles(styles);
 function DrawerProducts(props) {
   const {
     /* Redux */
-    categories, subcategories, products, orders_list, current, loading,
+    categories, subcategories, products, orders_list, current, loading, order_loading,
     /* Props */
     direction, variant, open, close, background, table } = props;
 
@@ -175,7 +178,23 @@ function DrawerProducts(props) {
 
   // Send Orders List
   const handleSendOrder = () => {
-    console.log(product_orders_list);
+    let data = {
+      employee_id: localStorage.getItem('employee_id'),
+      table_id: current.table_id,
+      total_amount: global_amount,
+      products: product_orders_list
+    }
+    handleCloseOrders();
+    orderCreate(data).then((response) => {
+      if (typeof response !== 'undefined') {
+        if (response.success === true) {
+          // Delete Orders List
+          delete_all();
+          // Close Product Orders Table
+          handleCloseOrders();
+        }
+      }
+    });
   };
 
   const handleOnClick = (e) => console.log(e.currentTarget);
@@ -197,6 +216,9 @@ function DrawerProducts(props) {
           keepMounted: true,
         }}
       >
+
+        <CustomLoading open={order_loading} />
+
         <AppBarIcons
           color="inherit"
           selectColor="secondary"
@@ -730,7 +752,7 @@ function DrawerProducts(props) {
 
       </Drawer>
     );
-  }, [open, openTableOrders, openPrints, openTotal, value, current, global_quantity, state.open, state2.open]);
+  }, [open, openTableOrders, openPrints, openTotal, value, current, global_quantity, state.open, state2.open, order_loading]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {
@@ -749,7 +771,7 @@ DrawerProducts.propTypes = {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { category, subcategory, product } = state;
+  const { category, subcategory, product, orders } = state;
   return {
     categories: category.payload.filter(dataList => dataList.state === 1),
     loading: category.loading,
@@ -757,6 +779,7 @@ const mapStateToProps = (state) => {
     products: product.payload.filter(dataList => dataList.state === 1),
     orders_list: product.orders,
     current: product.current,
+    order_loading: orders.loading
   }
 };
 // Functions to dispatching

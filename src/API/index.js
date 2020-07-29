@@ -52,3 +52,11 @@ export const product_show = "api/product_show";
 export const product_update = "api/product_update";
 export const product_state = "api/product_state";
 export const product_delete = "api/product_delete";
+
+/*::::::::::::::::::::ORDER::::::::::::::::::::*/
+export const order_create = "api/order_create";
+export const order_index = "api/order_index";
+export const order_show = "api/order_show";
+export const order_update = "api/order_update";
+export const order_state = "api/order_state";
+export const order_delete = "api/order_delete";

@@ -40,6 +40,7 @@ import { tableShow } from "../functions/tableFunctions";
 import { categoryShow } from "../functions/categoryFunctions";
 import { subcategoryShow } from "../functions/subcategoryFunctions";
 import { productShow } from "../functions/productFunctions";
+import { orderShow } from "../functions/orderFunctions";
 // Variables
 // import { environments } from "../variables/environments";
 // import { tables } from "../variables/tables";
@@ -117,6 +118,7 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
     categoryShow();
     subcategoryShow();
     productShow();
+    orderShow();
   }
 
   // Payloads

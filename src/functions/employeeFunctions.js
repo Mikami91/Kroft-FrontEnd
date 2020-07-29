@@ -13,6 +13,7 @@ export async function employeeLogin(data) {
                 case true:
                     payload(response.data.data);
                     localStorage.setItem('user', response.data.data.user);
+                    localStorage.setItem('employee_id', response.data.data.id);
                     localStorage.setItem('token', response.data.token);
                     loading(false);
                     break;
