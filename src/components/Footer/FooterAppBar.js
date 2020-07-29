@@ -241,7 +241,11 @@ FooterAppBar.propTypes = {
   rightButtons: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.oneOf(["icon", "fab", "text"]),
-      text: PropTypes.string,
+      text: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.array,
+      ]),
       color: PropTypes.oneOf([
         "inherit",
         "default",
@@ -263,7 +267,11 @@ FooterAppBar.propTypes = {
   leftButtons: PropTypes.arrayOf(
     PropTypes.shape({
       type: PropTypes.oneOf(["icon", "fab", "text"]),
-      text: PropTypes.string,
+      text: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+        PropTypes.array,
+      ]),
       color: PropTypes.oneOf([
         "inherit",
         "default",

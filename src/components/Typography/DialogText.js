@@ -11,16 +11,17 @@ const useStyles = makeStyles(styles);
 
 export default function DialogText(props) {
   const classes = useStyles();
-  const { text, variant, color, autoSize, size, align, margin, bold, noWrap, display } = props.index;
+  const { key, text, variant, color, autoSize, size, align, margin, bold, noWrap, display } = props.index;
   const TextClasses = classNames({
     [classes.text]: autoSize,
     [classes[size + "SizeText"]]: true,
     [classes.margin]: margin,
     [classes[color + "Text"]]: true,
-    [classes.bold]: bold, 
+    [classes.bold]: bold,
   });
   return (
     <Typography
+      key={key}
       variant={variant}
       className={TextClasses}
       align={align}

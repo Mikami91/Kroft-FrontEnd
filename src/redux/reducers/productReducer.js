@@ -1,6 +1,17 @@
 // Action types
-import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, MORE_QUANTITY, LESS_QUANTITY, REMOVE_PRODUCT, ADD_OBSERVATION, DELETE_OBSERVATION, PRODUCT_LOADING } from '../actions/actionsTypes';
-import { quantity } from 'chartist';
+import {
+  PRODUCT_LIST,
+  OPEN_PRODUCTS,
+  CLOSE_PRODUCTS,
+  PRODUCT_ORDERS,
+  MORE_QUANTITY,
+  LESS_QUANTITY,
+  REMOVE_PRODUCT,
+  ADD_OBSERVATION,
+  DELETE_OBSERVATION,
+  DELETE_ORDERS,
+  PRODUCT_LOADING
+} from '../actions/actionsTypes';
 
 // Default State
 const productState = {
@@ -288,6 +299,17 @@ export function productReducer(state = productState, action) {
       let product_array5 = new_state.orders[env_index].tables[table_index].products;
       let current_product5 = product_array5.findIndex(i => i.product_id === action.payload.product_id);
       product_array5[current_product5].product_observation = "";
+      return new_state;
+
+    case DELETE_ORDERS:
+
+      new_state.orders[env_index].tables[table_index].products = [];
+
+      // Update to global quantity and global amount
+      new_state.orders[env_index].tables[table_index].global_quantity = 0;
+      new_state.orders[env_index].tables[table_index].global_amount = 0;
+
+      // Return update state
       return new_state;
 
     case PRODUCT_LOADING:

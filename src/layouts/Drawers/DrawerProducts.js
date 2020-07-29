@@ -2,11 +2,12 @@
 import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
+import NumberFormat from 'react-number-format';
 // Conecction to Store
 import { connect } from 'react-redux';
 // Actions Creators
 import { bindActionCreators } from 'redux';
-import { orders, more, less, remove, add_obs, delete_obs } from '../../redux/actions/creators/productCreator';
+import { orders, more, less, remove, add_obs, delete_obs, delete_all } from '../../redux/actions/creators/productCreator';
 // UI Material Components
 import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
@@ -147,6 +148,12 @@ function DrawerProducts(props) {
     handleClose();
   }
 
+  // Delete Orders List
+  const handleDeleteOrders = () => {
+    delete_all();
+    handleCloseOrders();
+  };
+
   // Send Orders List
   const handleSendOrder = () => {
     console.log(product_orders_list);
@@ -228,7 +235,7 @@ function DrawerProducts(props) {
             icon: TableChartRoundedIcon
           }}
           fabButton={{
-            disabled: false,
+            disabled: global_quantity <= 0 ? true : false,
             color: "secondary",
             label: "Lista de ordenes",
             quantity: global_quantity,
@@ -258,7 +265,23 @@ function DrawerProducts(props) {
             },
             {
               type: "text",
-              text: `Bs. ${table.amount}`,
+              text:
+                [<NumberFormat
+                  key={999}
+                  value={table.amount}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                  allowNegative={false}
+                  allowEmptyFormatting={false}
+                  allowLeadingZeros={false}
+                  decimalScale={2}
+                  isNumericString={true}
+                  renderText={value =>
+                    <span>
+                      Bs. {value}
+                    </span>
+                  }
+                />],
               color: "warning",
               margin: true,
               size: "medium",
@@ -415,6 +438,7 @@ function DrawerProducts(props) {
               color: "danger",
               variant: "contained",
               icon: DeleteSweepIcon,
+              onClick: handleDeleteOrders,
             },
           ]}
           centerButtons={[
@@ -428,7 +452,22 @@ function DrawerProducts(props) {
             },
             {
               type: "text",
-              text: `${global_amount} Bs.`,
+              text: [<NumberFormat
+                key={9999}
+                value={global_amount}
+                displayType={'text'}
+                thousandSeparator={true}
+                allowNegative={false}
+                allowEmptyFormatting={false}
+                allowLeadingZeros={false}
+                decimalScale={2}
+                isNumericString={true}
+                renderText={value =>
+                  <span>
+                    Bs. {value}
+                  </span>
+                }
+              />],
               align: "right",
               margin: true,
               size: "medium",

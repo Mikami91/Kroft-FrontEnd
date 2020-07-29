@@ -60,5 +60,7 @@ export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const ADD_OBSERVATION = 'ADD_OBSERVATION';
 // delete observation of Product
 export const DELETE_OBSERVATION = 'DELETE_OBSERVATION';
+// Delete Products Orders
+export const DELETE_ORDERS = 'DELETE_ORDERS';
 // Loading
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';

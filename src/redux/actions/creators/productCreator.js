@@ -1,7 +1,19 @@
 // Store
 import store from '../../store';
 // Action types
-import { PRODUCT_LIST, OPEN_PRODUCTS, CLOSE_PRODUCTS, PRODUCT_ORDERS, MORE_QUANTITY, LESS_QUANTITY, REMOVE_PRODUCT, ADD_OBSERVATION, DELETE_OBSERVATION, PRODUCT_LOADING } from '../actionsTypes';
+import {
+  PRODUCT_LIST,
+  OPEN_PRODUCTS,
+  CLOSE_PRODUCTS,
+  PRODUCT_ORDERS,
+  MORE_QUANTITY,
+  LESS_QUANTITY,
+  REMOVE_PRODUCT,
+  ADD_OBSERVATION,
+  DELETE_OBSERVATION,
+  DELETE_ORDERS,
+  PRODUCT_LOADING
+} from '../actionsTypes';
 
 
 export const product_list = (payload) => {
@@ -74,6 +86,13 @@ export const delete_observation = (payload) => {
   };
 }
 export const delete_obs = (payload) => store.dispatch(delete_observation(payload));
+
+export const delete_orders = () => {
+  return {
+    type: DELETE_ORDERS,
+  };
+}
+export const delete_all = () => store.dispatch(delete_orders());
 
 export const product_loading = (value) => {
   return {
