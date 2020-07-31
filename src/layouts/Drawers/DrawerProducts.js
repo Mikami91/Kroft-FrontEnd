@@ -22,6 +22,7 @@ import TabPanel from "../../components/Panel/TabPanel";
 import GridProducts from "../../components/Grid/GridProducts";
 import CustomModal from "../../components/Modal/CustomModal.js";
 import CustomTableList from "../../components/Table/CustomTableList.js";
+import CustomTableFilter from "../../components/Table/CustomTableFilter.js";
 import ObservationPopover from '../../components/Popover/ObservationPopover';
 import CustomPopover from '../../components/Popover/CustomPopover';
 import CustomLoading from '../../components/Loading/CustomLoading';
@@ -59,7 +60,7 @@ const useStyles = makeStyles(styles);
 function DrawerProducts(props) {
   const {
     /* Redux */
-    categories, subcategories, products, orders_list, current, loading, order_loading,
+    categories, subcategories, products, orders_list, current, loading, orders_payload, orders_detail_payload, order_loading,
     /* Props */
     direction, variant, open, close, background, table } = props;
 
@@ -174,6 +175,7 @@ function DrawerProducts(props) {
   const handleDeleteOrders = () => {
     delete_all();
     handleCloseConfirmation();
+    handleCloseOrders();
   };
 
   // Send Orders List
@@ -217,7 +219,7 @@ function DrawerProducts(props) {
         }}
       >
 
-        <CustomLoading open={order_loading} />
+        <CustomLoading open={order_loading} text="Enviando orden..." />
 
         <AppBarIcons
           color="inherit"
@@ -337,7 +339,7 @@ function DrawerProducts(props) {
               icon: PrintIcon,
               edge: "start",
               size: "large",
-              disabled: false,
+              disabled: table.amount >= 0 ? true : false,
               onClick: handleOpenPrints,
             },
             {
@@ -347,7 +349,7 @@ function DrawerProducts(props) {
               icon: ListAltIcon,
               edge: false,
               size: "large",
-              disabled: false,
+              disabled: table.amount >= 0 ? true : false,
               onClick: handleOpenTotal,
             },
             {
@@ -357,7 +359,7 @@ function DrawerProducts(props) {
               icon: SendIcon,
               edge: "end",
               size: "large",
-              disabled: false,
+              disabled: table.amount >= 0 ? true : false,
               onClick: () => {
                 alert("Enviar orden");
               },
@@ -598,7 +600,7 @@ function DrawerProducts(props) {
             size: "medium",
           }}
           content={
-            <CustomTableList
+            <CustomTableFilter
               padding="default"
               header={[
                 {
@@ -627,28 +629,31 @@ function DrawerProducts(props) {
                   color: "default",
                 },
                 {
-                  field: "name",
+                  field: "product_name",
                   type: "text",
                   align: "left",
                   color: "default",
                   colSpan: 2,
                 },
                 {
-                  field: "price",
+                  field: "product_price",
                   type: "text",
                   align: "right",
                   variant: "h6",
                   color: "warning",
                 },
                 {
-                  field: "quantity",
+                  field: "product_quantity",
                   type: "text",
                   align: "right",
                   variant: "h6",
                   color: "warning",
                 },
               ]}
-              data={animes}
+              data={orders_detail_payload}
+              key_field="table_id"
+              filter={current.table_id}
+              renderRefresh={[global_quantity, state.observation]}
             />
           }
           leftButtons={[
@@ -666,16 +671,33 @@ function DrawerProducts(props) {
             {
               type: "text",
               text: "Total:",
-              size: "medium",
               margin: true,
-              // color: "warning",
+              size: "medium",
+              bold: true,
             },
             {
               type: "text",
-              text: "258 Bs.",
-              size: "medium",
-              margin: true,
+              text:
+                [<NumberFormat
+                  key={999}
+                  value={table.amount}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                  allowNegative={false}
+                  allowEmptyFormatting={false}
+                  allowLeadingZeros={false}
+                  decimalScale={2}
+                  isNumericString={true}
+                  renderText={value =>
+                    <span>
+                      Bs. {value}
+                    </span>
+                  }
+                />],
               color: "warning",
+              margin: true,
+              size: "medium",
+              bold: true,
             },
           ]}
           scroll="paper"
@@ -779,7 +801,9 @@ const mapStateToProps = (state) => {
     products: product.payload.filter(dataList => dataList.state === 1),
     orders_list: product.orders,
     current: product.current,
-    order_loading: orders.loading
+    orders_payload: orders.payload,
+    orders_detail_payload: orders.orders_detail,
+    order_loading: orders.loading,
   }
 };
 // Functions to dispatching

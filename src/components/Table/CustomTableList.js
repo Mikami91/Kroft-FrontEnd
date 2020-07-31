@@ -22,17 +22,6 @@ import CustomText from '../Typography/CustomText';
 function CustomTableList(props) {
   const { size, padding, sticky, header, columns, data, renderRefresh } = props;
 
-  // Popover state
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   // Using useMemo hook
   return useMemo(() => {
     return (

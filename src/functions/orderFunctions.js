@@ -1,7 +1,7 @@
 // Fetchs
 import { createFetch, showFetch } from './fetchs/orderFetch';
 // Actions Creators
-import { payload, loading } from "../redux/actions/creators/orderCreator";
+import { payload, orders_detail, loading } from "../redux/actions/creators/orderCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function orderCreate(data) {
@@ -40,6 +40,7 @@ export async function orderShow() {
             switch (response.data.success) {
                 case true:
                     payload(response.data.data);
+                    orders_detail(response.data.data2);
                     loading(false);
                     break;
 

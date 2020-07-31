@@ -43,6 +43,7 @@ export async function employeeLogin(data) {
 
 /*::::::::::::::::::::LOGIN PIN::::::::::::::::::::*/
 export async function employeeLoginPin(data) {
+    loading(true);
     try {
         const response = await loginPinFetch(data);
         if (response.status === 200) {
@@ -50,6 +51,7 @@ export async function employeeLoginPin(data) {
                 case true:
                     localStorage.setItem('user', response.data.data.user);
                     localStorage.setItem('token', response.data.token);
+                    loading(false);
                     break;
 
                 case false:
@@ -60,6 +62,7 @@ export async function employeeLoginPin(data) {
                         let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
                         alert(messageError);
                     }
+                    loading(false);
                     break;
 
                 default:
@@ -69,6 +72,7 @@ export async function employeeLoginPin(data) {
         return response.data;
 
     } catch (error) {
+        loading(false);
         return error.message;
     };
 };

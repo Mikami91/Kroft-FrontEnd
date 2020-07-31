@@ -147,7 +147,7 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
   return (
     <Fragment>
 
-      <CustomLoading open={loading} />
+      <CustomLoading open={loading} text={"Cargando..."} />
 
       <AppBarTabs
         color="inherit"

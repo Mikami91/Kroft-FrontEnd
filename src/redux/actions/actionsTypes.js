@@ -69,5 +69,7 @@ export const PRODUCT_LOADING = 'PRODUCT_LOADING';
 /*::::::::::::::::::::ORDER::::::::::::::::::::*/
 // List
 export const ORDER_LIST = 'ORDER_LIST';
+// Orders detail List
+export const ORDERS_DETAIL_LIST = 'ORDERS_DETAIL_LIST';
 // Loading
 export const ORDER_LOADING = 'ORDER_LOADING';

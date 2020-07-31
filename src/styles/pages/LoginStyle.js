@@ -123,6 +123,7 @@ const LoginStyle = {
     marginTop: theme.spacing(-5),
     marginBottom: theme.spacing(1.8),
     padding: "15px 0",
+    zIndex: 100,
   },
   logo: {
     width: "100px",

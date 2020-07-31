@@ -1,6 +1,8 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
 import SwipeableViews from "react-swipeable-views";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -24,6 +26,7 @@ import CardFooter from "../components/Card/CardFooter.js";
 import TabPanel from "../components/Panel/TabPanel.js";
 import Modal from "../components/Modal/Modal.js";
 import CustomModal from "../components/Modal/CustomModal.js";
+import CustomLoading from '../components/Loading/CustomLoading';
 // Assets
 import logo from "../assets/img/brands/kroft-vertical.svg";
 // Styles
@@ -31,7 +34,7 @@ import styles from "../styles/pages/LoginStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function LoginPage(props) {
+function LoginPage({ loading }) {
   // State for Panel Tabs
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -88,6 +91,9 @@ export default function LoginPage(props) {
           className={classes.container}
         >
           <Card className={classes[cardAnimaton]} variant="cardLogin">
+
+            <CustomLoading open={loading} text={"Iniciando..."} inside />
+
             <CardHeader color="primary" className={classes.cardHeaderLogin}>
               <img
                 alt="Logo"
@@ -96,6 +102,7 @@ export default function LoginPage(props) {
               />
             </CardHeader>
             <CardBody login>
+
               <SingleTabs
                 centered
                 value={value}
@@ -193,4 +200,14 @@ export default function LoginPage(props) {
       />
     </Fragment>
   );
-}
+};
+
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { employee } = state;
+  return {
+    loading: employee.loading,
+  }
+};
+
+export default connect(mapStateToProps, null)(LoginPage);
