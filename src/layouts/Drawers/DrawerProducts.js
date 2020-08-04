@@ -339,7 +339,7 @@ function DrawerProducts(props) {
               icon: PrintIcon,
               edge: "start",
               size: "large",
-              disabled: table.amount >= 0 ? true : false,
+              disabled: table.amount > 0 ? false : true,
               onClick: handleOpenPrints,
             },
             {
@@ -349,7 +349,7 @@ function DrawerProducts(props) {
               icon: ListAltIcon,
               edge: false,
               size: "large",
-              disabled: table.amount >= 0 ? true : false,
+              disabled: table.amount > 0 ? false : true,
               onClick: handleOpenTotal,
             },
             {
@@ -359,7 +359,7 @@ function DrawerProducts(props) {
               icon: SendIcon,
               edge: "end",
               size: "large",
-              disabled: table.amount >= 0 ? true : false,
+              disabled: table.amount > 0 ? false : true,
               onClick: () => {
                 alert("Enviar orden");
               },
@@ -714,7 +714,7 @@ function DrawerProducts(props) {
               alignItems: 'center',
             }}>
               <TextField
-                autoFocus={typeof state.observation === 'undefined' ? true : false}
+                autoFocus={ state.observation === "" ? true : false}
                 id="textarea"
                 label="Observación"
                 multiline

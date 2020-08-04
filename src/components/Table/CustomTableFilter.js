@@ -22,6 +22,27 @@ import CustomText from '../Typography/CustomText';
 function CustomTableList(props) {
     const { size, padding, sticky, header, columns, data, key_field, filter, renderRefresh } = props;
 
+    let data_filtered = [];
+    for (let x in data) {
+        if (data[x][key_field] === filter) {
+            if (check(data[x])) {
+                data_filtered.push(data[x]);
+            }
+        }
+    }
+    function check(index) {
+        let flag = 0;
+        for (let y in data_filtered) {
+            if (data_filtered[y].product_id === index.product_id) {
+                data_filtered[y].product_quantity += index.product_quantity;
+                flag = 1
+            }
+        }
+        if (flag === 0) return true
+        else return false
+
+    }
+
     // Using useMemo hook
     return useMemo(() => {
         return (
@@ -42,7 +63,7 @@ function CustomTableList(props) {
                     </TableHead>
 
                     <TableBody>
-                        {data.map((index, key) => (
+                        {data_filtered.map((index, key) => (
                             <TableRow key={key + "row"}>
                                 {columns.map((col) => {
 
@@ -118,20 +139,20 @@ CustomTableList.propTypes = {
     sticky: PropTypes.bool,
     header: PropTypes.arrayOf(
         PropTypes.shape({
-            text: PropTypes.string,
+            text: PropTypes.dataing,
             align: PropTypes.oneOf(["inherit", "right", "center", "left"]),
             colSpan: PropTypes.number,
         })
     ),
     columns: PropTypes.arrayOf(
         PropTypes.shape({
-            field: PropTypes.string,
+            field: PropTypes.dataing,
             type: PropTypes.oneOf(["text", "icon"]),
             size: PropTypes.oneOf(["medium", "small"]),
             fontSize: PropTypes.oneOf(["large", "medium", "small", "default"]),
             align: PropTypes.oneOf(["inherit", "right", "center", "left"]),
             colSpan: PropTypes.number,
-            icon: PropTypes.object,
+            icon: PropTypes.data_filteredect,
             iconSize: PropTypes.oneOf(["inherit", "small", "large", "default"]),
             iconColor: PropTypes.oneOf(["inherit", "primary", "secondary", "error"]),
             onClick: PropTypes.func,
@@ -139,18 +160,18 @@ CustomTableList.propTypes = {
     ),
     data: PropTypes.array,
     key_field: PropTypes.oneOfType([
-        PropTypes.string,
+        PropTypes.dataing,
         PropTypes.number,
-    ]), 
+    ]),
     filter: PropTypes.oneOfType([
-        PropTypes.string,
+        PropTypes.dataing,
         PropTypes.number,
     ]),
     renderRefresh: PropTypes.oneOfType([
-        PropTypes.string,
+        PropTypes.dataing,
         PropTypes.number,
         PropTypes.array,
-        PropTypes.object,
+        PropTypes.data_filteredect,
     ]),
 };
 
