@@ -139,14 +139,14 @@ CustomTableList.propTypes = {
     sticky: PropTypes.bool,
     header: PropTypes.arrayOf(
         PropTypes.shape({
-            text: PropTypes.dataing,
+            text: PropTypes.string,
             align: PropTypes.oneOf(["inherit", "right", "center", "left"]),
             colSpan: PropTypes.number,
         })
     ),
     columns: PropTypes.arrayOf(
         PropTypes.shape({
-            field: PropTypes.dataing,
+            field: PropTypes.string,
             type: PropTypes.oneOf(["text", "icon"]),
             size: PropTypes.oneOf(["medium", "small"]),
             fontSize: PropTypes.oneOf(["large", "medium", "small", "default"]),
@@ -160,18 +160,18 @@ CustomTableList.propTypes = {
     ),
     data: PropTypes.array,
     key_field: PropTypes.oneOfType([
-        PropTypes.dataing,
+        PropTypes.string,
         PropTypes.number,
     ]),
     filter: PropTypes.oneOfType([
-        PropTypes.dataing,
+        PropTypes.string,
         PropTypes.number,
     ]),
     renderRefresh: PropTypes.oneOfType([
-        PropTypes.dataing,
+        PropTypes.string,
         PropTypes.number,
         PropTypes.array,
-        PropTypes.data_filteredect,
+        PropTypes.object,
     ]),
 };
 

@@ -23,6 +23,7 @@ import GridProducts from "../../components/Grid/GridProducts";
 import CustomModal from "../../components/Modal/CustomModal.js";
 import CustomTableList from "../../components/Table/CustomTableList.js";
 import CustomTableFilter from "../../components/Table/CustomTableFilter.js";
+import CustomTablePrints from "../../components/Table/CustomTablePrints";
 import ObservationPopover from '../../components/Popover/ObservationPopover';
 import CustomPopover from '../../components/Popover/CustomPopover';
 import CustomLoading from '../../components/Loading/CustomLoading';
@@ -542,34 +543,44 @@ function DrawerProducts(props) {
             size: "medium",
           }}
           content={
-            <CustomTableList
-              padding="none"
+            <CustomTablePrints
+              padding="default"
               header={[
                 {
-                  text: "ID",
+                  text: "Detalle",
                   align: "center",
                 },
                 {
-                  text: "Producto",
+                  text: "N°",
+                  align: "center",
+                },
+                {
+                  text: "Realizado",
                   align: "left",
                   colSpan: 2,
                 },
                 {
-                  text: "Acccion",
+                  text: "Imprimir",
                   align: "center",
                 },
               ]}
               columns={[
                 {
-                  field: "id",
+                  field: "detail",
+                  type: "expand",
+                  size: "medium",
+                  align: "center",
+                },
+                {
+                  field: "order_number",
                   type: "text",
                   align: "center",
                   color: "default",
-                  colSpan: 1,
                 },
                 {
-                  field: "name",
+                  field: "created_at",
                   type: "text",
+                  time: true,
                   align: "left",
                   color: "default",
                   colSpan: 2,
@@ -580,11 +591,13 @@ function DrawerProducts(props) {
                   size: "medium",
                   align: "center",
                   icon: PrintIcon,
-                  iconColor: "inherit",
-                  onClick: handleOnClick,
+                  onClick: () => alert("Print"),
                 },
               ]}
-              data={animes}
+              data={orders_detail_payload}
+              key_field="table_id"
+              filter={current.table_id}
+              renderRefresh={[openPrints]}
             />
           }
           variant="paper"
@@ -714,7 +727,7 @@ function DrawerProducts(props) {
               alignItems: 'center',
             }}>
               <TextField
-                autoFocus={ state.observation === "" ? true : false}
+                autoFocus={state.observation === "" ? true : false}
                 id="textarea"
                 label="Observación"
                 multiline
