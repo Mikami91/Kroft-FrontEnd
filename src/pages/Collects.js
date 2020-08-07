@@ -2,6 +2,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
+import NumberFormat from 'react-number-format';
 // Conecction to Store
 import { connect } from 'react-redux';
 // @material-ui/core components
@@ -31,12 +32,11 @@ import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomDrawer from "../components/Drawer/CustomDrawer.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
+import CustomMoneyInput from "../components/CustomInput/CustomMoneyInput.js";
 // Functions
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
-
-import IconInput from "../components/CustomInput/IconInput.js";
-
+import { orderShow } from "../functions/orderFunctions";
 // Variables
 import { environments } from "../variables/environments";
 import { tables } from "../variables/tables";
@@ -69,31 +69,72 @@ function CollectsPage({ environments, tables, loading }) {
     environment_name: "",
   });
 
-  // State for Modal Products
-  const [openProducts, setOpenProducts] = useState(false);
-  const handleOpenProducts = () => {
-    setOpenProducts(true);
+  // State for Modal Total Amount
+  const [openTotalAmount, setTotalAmount] = useState(false);
+
+  const handleOpenTotalAmount = (arg) => {
+    setTotalAmount(true);
+    setCurrentTable(arg);
   };
-  const handleCloseProducts = () => {
-    setOpenProducts(false);
+  const handleCloseTotalAmount = () => {
+    setTotalAmount(false);
   };
 
-  // State for Modal Profile
-  const [openProfile, setOpenProfile] = useState(false);
-  const handleOpenProfile = () => {
-    setOpenProfile(true);
-  };
-  const handleCloseProfile = () => {
-    setOpenProfile(false);
+  // Local State
+  const [dialogState, setDialogState] = useState({
+    sale_id: null,
+    user_id: null,
+    environment_id: null,
+    table_id: null,
+    payment_type: 1,
+    box: 1,
+    amount: 0,
+    currency: 0,
+    paid_BS: 0,
+    paid_US: 0,
+    change: 0,
+  });
+
+  // Changes State values
+  const handleChangeValues = (e) => {
+    setDialogState({
+      ...dialogState,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  // State for Modal Change Tables
-  const [openChangeTables, setOpenChangeTables] = useState(false);
-  const handleOpenChangeTables = () => {
-    setOpenChangeTables(true);
+  // Check if values is number
+  const isEmptyValue = (value) => {
+    if (value === '' || value === null || value === undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  // Changes amount to paid value
+  const handleChangeAmountBS = (e) => {
+    console.log(e.value)
+    if (isEmptyValue(e.value) === false) {
+      let result = (parseInt(e.value) + (dialogState.paid_US * 6.94)) - (currentTable.amount);
+      setDialogState({
+        ...dialogState,
+        paid_BS: parseInt(e.value),
+        change: Math.abs(result)
+      });
+    }
   };
-  const handleCloseChangeTables = () => {
-    setOpenChangeTables(false);
+
+  const handleChangeAmountUS = (e) => {
+    console.log(e.value)
+    if (isEmptyValue(e.value) === false) {
+      let result = (dialogState.paid_BS + (parseInt(e.value) * 6.94)) - (currentTable.amount);
+      setDialogState({
+        ...dialogState,
+        paid_US: parseInt(e.value),
+        change: Math.abs(result)
+      });
+    }
   };
 
   // State for Drawer
@@ -109,6 +150,7 @@ function CollectsPage({ environments, tables, loading }) {
   const handleRefresh = () => {
     environmentShow();
     tableShow();
+    orderShow();
   }
 
   // Payloads
@@ -158,7 +200,7 @@ function CollectsPage({ environments, tables, loading }) {
                     data={tables}
                     keyData={"environment_id"}
                     filter={index.id}
-                    onClick={handleOpenChangeTables}
+                    onClick={handleOpenTotalAmount}
                     color="primary"
                   />
                 </Grid>
@@ -225,20 +267,8 @@ function CollectsPage({ environments, tables, loading }) {
       />
 
       <CustomModal
-        open={openProfile}
-        close={handleCloseProfile}
-        title={{
-          text: "Perfil de Usuario",
-          size: "medium",
-        }}
-        content={<EmployeeAdd />}
-        maxWidth="sm"
-        fullWidth
-      />
-
-      <CustomModal
-        open={openChangeTables}
-        close={handleCloseChangeTables}
+        open={openTotalAmount}
+        close={handleCloseTotalAmount}
         title={{
           text: "Total:",
           margin: true,
@@ -246,7 +276,7 @@ function CollectsPage({ environments, tables, loading }) {
           bold: true,
         }}
         subtitle={{
-          text: "Bs. 258",
+          text: `Bs. ${currentTable.amount}`,
           color: "warning",
           margin: true,
           size: "medium",
@@ -260,36 +290,33 @@ function CollectsPage({ environments, tables, loading }) {
               justify="center"
               alignItems="center"
             >
-              <Grid item xs={12}>
-                <IconInput
-                  variant={"standard"}
-                  margin={"dense"}
-                  color="primary"
-                  // disabled={showProgress}
-                  type="number"
-                  label={"Bolivianos"}
-                  name="user"
-                  onChange={handleChange}
-                  // value={state.user}
-                  required
-                  icon={<CreditCardIcon />}
-                  iconPosition="end"
+              <Grid item xs={6} sm={6} md={6} lg={6}>
+                <NumberFormat
+                  value={dialogState.paid_BS === 0 ? '' : dialogState.paid_BS}
+                  onValueChange={handleChangeAmountBS}
+                  displayType={'input'}
+                  thousandSeparator={true}
+                  allowNegative={false}
+                  allowEmptyFormatting={false}
+                  allowLeadingZeros={true}
+                  decimalScale={2}
+                  isNumericString={true}
+                  customInput={CustomMoneyInput}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <IconInput
-                  variant={"standard"}
-                  margin={"dense"}
-                  color="primary"
-                  // disabled={showProgress}
-                  type="number"
-                  label={"Dolares"}
-                  name="user"
-                  onChange={handleChange}
-                  // value={state.user}
-                  required
-                  icon={<AttachMoneyIcon />}
-                  iconPosition="end"
+
+              <Grid item xs={6} sm={6} md={6} lg={6}>
+                <NumberFormat
+                  value={dialogState.paid_US === 0 ? '' : dialogState.paid_US}
+                  onValueChange={handleChangeAmountUS}
+                  displayType={'input'}
+                  thousandSeparator={true}
+                  allowNegative={false}
+                  allowEmptyFormatting={false}
+                  allowLeadingZeros={false}
+                  decimalScale={0}
+                  isNumericString={true}
+                  customInput={CustomMoneyInput}
                 />
               </Grid>
             </Grid>
@@ -298,7 +325,7 @@ function CollectsPage({ environments, tables, loading }) {
         leftButtons={[
           {
             type: "text",
-            text: "Cambio:",
+            text: (dialogState.paid_BS + (dialogState.paid_US * 6.94)) < currentTable.amount && dialogState.change > 0 ? 'Por pagar: ' : (dialogState.paid_BS + (dialogState.paid_US * 6.94)) === currentTable.amount ? 'Sin cambio: ' : 'Cambio: ',
             size: "default",
             align: "left",
             margin: true,
@@ -307,11 +334,11 @@ function CollectsPage({ environments, tables, loading }) {
           },
           {
             type: "text",
-            text: "Bs. 258",
+            text: `Bs. ${dialogState.change}`,
             size: "default",
             align: "right",
             margin: true,
-            color: "success",
+            color: (dialogState.paid_BS + (dialogState.paid_US * 6.94)) < currentTable.amount && dialogState.change > 0 ? 'danger' : (dialogState.paid_BS + (dialogState.paid_US * 6.94)) === currentTable.amount ? 'default' : 'success',
             display: "inline",
             bold: true,
           },
@@ -332,6 +359,7 @@ function CollectsPage({ environments, tables, loading }) {
             onClick: null,
           },
         ]}
+        renderRefresh={dialogState}
         scroll="paper"
         maxWidth="sm"
         fullWidth
@@ -343,7 +371,7 @@ function CollectsPage({ environments, tables, loading }) {
         close={handleCloseDrawer}
         categoryList={environments}
         itemList={tables}
-        itemOnClick={handleOpenProducts}
+        itemOnClick={handleCloseDrawer}
         filter="environment_id"
       />
 

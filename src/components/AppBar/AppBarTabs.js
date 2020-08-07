@@ -157,6 +157,8 @@ AppBarTabs.defaultProps = {
   orientation: "horizontal",
   scrollButtons: "off",
   centered: false,
+  // Orders array
+  orders: [],
 };
 AppBarTabs.propTypes = {
   // AppBar
@@ -192,6 +194,8 @@ AppBarTabs.propTypes = {
   orientation: PropTypes.oneOf(["horizontal", "vertical"]),
   scrollButtons: PropTypes.oneOf(["on", "off", "auto", "desktop"]),
   centered: PropTypes.bool,
+  // Orders array
+  orders: PropTypes.array,
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
