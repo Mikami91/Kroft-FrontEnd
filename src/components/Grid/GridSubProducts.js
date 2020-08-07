@@ -78,7 +78,8 @@ function GridSubProducts(props) {
                   color={color}
                   prefix="Bs."
                   price={index.price}
-                  photo={API + imagePath + index.photo}
+                  photo={'https://source.unsplash.com/300x300/?food,breakfast'}
+                  // photo={API + imagePath + index.photo}
                   name={index.name}
                   quantity={handleQuantity(index.id)}
                   onClick={() => onClick(index)}

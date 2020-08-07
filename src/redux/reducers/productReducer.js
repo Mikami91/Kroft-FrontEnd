@@ -21,6 +21,8 @@ const productState = {
     open: false,
     environment_id: null,
     table_id: null,
+    table_name: null,
+    table_number: null,
     env_index: null,
     table_index: null
   },
@@ -99,6 +101,8 @@ export function productReducer(state = productState, action) {
               open: true,
               environment_id: action.payload.environment_id,
               table_id: action.payload.id,
+              table_name: action.payload.name,
+              table_number: action.payload.number,
               env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
               table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
             }
@@ -130,6 +134,8 @@ export function productReducer(state = productState, action) {
                 open: true,
                 environment_id: action.payload.environment_id,
                 table_id: action.payload.id,
+                table_name: action.payload.name,
+                table_number: action.payload.number,
                 env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
                 table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
               }
@@ -144,6 +150,8 @@ export function productReducer(state = productState, action) {
               open: true,
               environment_id: action.payload.environment_id,
               table_id: action.payload.id,
+              table_name: action.payload.name,
+              table_number: action.payload.number,
               env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
               table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
             }
@@ -181,6 +189,8 @@ export function productReducer(state = productState, action) {
           open: true,
           environment_id: action.payload.environment_id,
           table_id: action.payload.id,
+          table_name: action.payload.name,
+          table_number: action.payload.number,
           env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
           table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
         },
@@ -194,6 +204,8 @@ export function productReducer(state = productState, action) {
           open: false,
           environment_id: null,
           table_id: null,
+          table_name: null,
+          table_number: null,
           env_index: null,
           table_index: null
         }
@@ -218,6 +230,7 @@ export function productReducer(state = productState, action) {
           product_quantity: 1,
           product_observation: "",
           print_category_id: action.payload.print_category_id,
+          print_category_name: action.payload.print_category_name,
           category_id: action.payload.category_id,
           sub_category_id: action.payload.sub_category_id,
           environment_id: state.current.environment_id,

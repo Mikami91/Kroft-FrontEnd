@@ -1,8 +1,10 @@
 // Dependencies
-import React, { useState, useMemo, Fragment } from "react";
+import React, { Fragment, Component, useState, useMemo, useRef } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 import NumberFormat from 'react-number-format';
+// Print
+import ReactToPrint from 'react-to-print';
 // Conecction to Store
 import { connect } from 'react-redux';
 // Actions Creators
@@ -23,7 +25,8 @@ import GridProducts from "../../components/Grid/GridProducts";
 import CustomModal from "../../components/Modal/CustomModal.js";
 import CustomTableList from "../../components/Table/CustomTableList.js";
 import CustomTableFilter from "../../components/Table/CustomTableFilter.js";
-import CustomTablePrints from "../../components/Table/CustomTablePrints";
+import CustomTableListPrints from "../../components/Table/CustomTableListPrints";
+import CustomTableToPrints from "../../components/Table/CustomTableToPrints";
 import ObservationPopover from '../../components/Popover/ObservationPopover';
 import CustomPopover from '../../components/Popover/CustomPopover';
 import CustomLoading from '../../components/Loading/CustomLoading';
@@ -45,18 +48,26 @@ import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import { orderCreate } from '../../functions/orderFunctions';
 
 // Assets
-import image from "../../assets/img/backgrounds/productbackground.jpg";
+// import image from "../../assets/img/backgrounds/productbackground.jpg";
 
 // Variables
 // import { tables } from "../../variables/tables";
 // import { categories } from "../../variables/categories";
-import { animes } from "../../variables/animes";
+// import { animes } from "../../variables/animes";
 // import { products } from "../../variables/products";
 
 // Styles
 import styles from "../../styles/components/drawerStyle.js";
 
 const useStyles = makeStyles(styles);
+
+class ComponentToPrint extends Component {
+  render() {
+    return (
+      <CustomTableToPrints data={this.props.data} renderRefresh={this.props.refresh} />
+    );
+  }
+}
 
 function DrawerProducts(props) {
   const {
@@ -180,7 +191,7 @@ function DrawerProducts(props) {
   };
 
   // Send Orders List
-  const handleSendOrder = () => {
+  async function handleSendOrder() {
     let data = {
       employee_id: localStorage.getItem('employee_id'),
       table_id: current.table_id,
@@ -195,6 +206,9 @@ function DrawerProducts(props) {
           delete_all();
           // Close Product Orders Table
           handleCloseOrders();
+          // Printing
+          let btn = document.getElementById("printHistory");
+          btn.click();
         }
       }
     });
@@ -204,6 +218,9 @@ function DrawerProducts(props) {
 
   // Styles
   const classes = useStyles();
+
+  // Component to Refer
+  let componentRef = useRef();
 
   // Using useMemo hook
   return useMemo(() => {
@@ -543,7 +560,7 @@ function DrawerProducts(props) {
             size: "medium",
           }}
           content={
-            <CustomTablePrints
+            <CustomTableListPrints
               padding="default"
               header={[
                 {
@@ -784,6 +801,18 @@ function DrawerProducts(props) {
             </Fragment>
           }
         />
+
+        <TabPanel value={1} index={0}>
+
+          <ReactToPrint
+            trigger={() => <button id="printHistory" style={{ display: 'none' }}>Print</button>}
+            content={() => componentRef}
+          // onPrintError={printError}
+          // onAfterPrint={printOk}
+          />
+          <ComponentToPrint ref={el => (componentRef = el)} data={product_orders_list} refresh={openTableOrders} />
+
+        </TabPanel>
 
       </Drawer>
     );

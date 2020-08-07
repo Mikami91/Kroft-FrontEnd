@@ -18,7 +18,7 @@ import CustomText from '../Typography/CustomText';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
 
-function CustomTablePrints(props) {
+function CustomTableListPrints(props) {
 
     const { size, padding, sticky, header, columns, data, key_field, filter, renderRefresh } = props;
 
@@ -193,7 +193,7 @@ function CustomTablePrints(props) {
     }, [renderRefresh, state.index]);
 };
 // PropTypes
-CustomTablePrints.defaultProps = {
+CustomTableListPrints.defaultProps = {
     size: "medium",
     padding: "default",
     sticky: false,
@@ -202,7 +202,7 @@ CustomTablePrints.defaultProps = {
     data: [],
     renderRefresh: null,
 };
-CustomTablePrints.propTypes = {
+CustomTableListPrints.propTypes = {
     size: PropTypes.oneOf(["small", "medium"]),
     padding: PropTypes.oneOf(["default", "checkbox", "none"]),
     sticky: PropTypes.bool,
@@ -237,5 +237,5 @@ CustomTablePrints.propTypes = {
     ]),
 };
 
-export default CustomTablePrints;
+export default CustomTableListPrints;
 

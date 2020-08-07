@@ -104,7 +104,8 @@ function GridProducts(props) {
                     color={color}
                     prefix={"Bs."}
                     price={index.price}
-                    photo={API + imagePath + index.photo}
+                    // photo={API + imagePath + index.photo}
+                    photo={'https://source.unsplash.com/300x300/?food,breakfast'}
                     name={index.name}
                     quantity={handleQuantity(index.id)}
                     onClick={() => onClick(index)}
@@ -114,7 +115,8 @@ function GridProducts(props) {
                       color={color}
                       prefix={""}
                       price={""}
-                      photo={API + imagePath2 + index.sub_category_photo}
+                      // photo={API + imagePath2 + index.sub_category_photo}
+                      photo={'https://source.unsplash.com/300x300/?food,breakfast'}
                       name={index.sub_category_name}
                       quantity={found_sub_category_id(index.sub_category_id)}
                       // quantity={index.id}
