@@ -62,3 +62,11 @@ export const order_show = "api/order_show";
 export const order_update = "api/order_update";
 export const order_state = "api/order_state";
 export const order_delete = "api/order_delete";
+
+/*::::::::::::::::::::COLLECT::::::::::::::::::::*/
+export const collect_create = "api/collect_create";
+export const collect_index = "api/collect_index";
+export const collect_show = "api/collect_show";
+export const collect_update = "api/collect_update";
+export const collect_state = "api/collect_state";
+export const collect_delete = "api/collect_delete";

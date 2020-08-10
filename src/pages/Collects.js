@@ -37,6 +37,7 @@ import CustomMoneyInput from "../components/CustomInput/CustomMoneyInput.js";
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
 import { orderShow } from "../functions/orderFunctions";
+import { collectCreate, collectShow } from "../functions/collectFunctions";
 // Variables
 import { environments } from "../variables/environments";
 import { tables } from "../variables/tables";
@@ -64,10 +65,14 @@ function CollectsPage({ environments, tables, loading }) {
     name: "",
     prefix: "",
     amount: 0,
+    is_busy: null,
+    order_id: null,
     state: null,
     environment_id: null,
     environment_name: "",
   });
+
+  console.log(currentTable);
 
   // State for Modal Total Amount
   const [openTotalAmount, setTotalAmount] = useState(false);
@@ -78,6 +83,17 @@ function CollectsPage({ environments, tables, loading }) {
   };
   const handleCloseTotalAmount = () => {
     setTotalAmount(false);
+    setCurrentTable({
+      id: null,
+      name: "",
+      prefix: "",
+      amount: 0,
+      is_busy: null,
+      order_id: null,
+      state: null,
+      environment_id: null,
+      environment_name: "",
+    });
   };
 
   // Local State
@@ -151,6 +167,7 @@ function CollectsPage({ environments, tables, loading }) {
     environmentShow();
     tableShow();
     orderShow();
+    collectShow();
   }
 
   // Payloads
@@ -163,6 +180,27 @@ function CollectsPage({ environments, tables, loading }) {
       set_is_payload(true);
     }
   }, [is_payload, environments, tables]);
+
+  // Send Order function
+  const handleMakeCollected = (e) => {
+    e.preventDefault();
+    collectCreate({
+      table_id: currentTable.id,
+      order_id: currentTable.order_id,
+      cashier_id: 1,
+      box_id: 1,
+      payment_id: 1,
+      total_amount: currentTable.amount,
+      currency: "bs"
+    }).then((response) => {
+      console.log(response);
+      if (typeof response !== 'undefined') {
+        if (response === true) {
+          console.log("Collected made");
+        }
+      }
+    });
+  };
 
   // Styles
   const classes = useStyles();
@@ -334,7 +372,21 @@ function CollectsPage({ environments, tables, loading }) {
           },
           {
             type: "text",
-            text: `Bs. ${dialogState.change}`,
+            text: <NumberFormat
+              value={dialogState.change}
+              displayType={'text'}
+              thousandSeparator={true}
+              allowNegative={false}
+              allowEmptyFormatting={false}
+              allowLeadingZeros={false}
+              decimalScale={2}
+              isNumericString={true}
+              renderText={value =>
+                <span>
+                  Bs. {value}
+                </span>
+              }
+            />,
             size: "default",
             align: "right",
             margin: true,
@@ -355,11 +407,11 @@ function CollectsPage({ environments, tables, loading }) {
             edge: "start",
             size: "large",
             variant: "contained",
-            disabled: false,
-            onClick: null,
+            disabled: dialogState.change >= currentTable.amount ? false : true,
+            onClick: handleMakeCollected,
           },
         ]}
-        renderRefresh={dialogState}
+        renderRefresh={dialogState.change}
         scroll="paper"
         maxWidth="sm"
         fullWidth

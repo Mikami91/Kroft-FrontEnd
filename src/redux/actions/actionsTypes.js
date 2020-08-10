@@ -73,3 +73,10 @@ export const ORDER_LIST = 'ORDER_LIST';
 export const ORDERS_DETAIL_LIST = 'ORDERS_DETAIL_LIST';
 // Loading
 export const ORDER_LOADING = 'ORDER_LOADING';
+
+
+/*::::::::::::::::::::COLLECT::::::::::::::::::::*/
+// List
+export const COLLECT_LIST = 'COLLECT_LIST';
+// Loading
+export const COLLECT_LOADING = 'COLLECT_LOADING';

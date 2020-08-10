@@ -8,6 +8,7 @@ import { categoryReducer } from './reducers/categoryReducer';
 import { subcategoryReducer } from './reducers/subcategoryReducer';
 import { productReducer } from './reducers/productReducer';
 import { orderReducer } from './reducers/orderReducer';
+import { collectReducer } from './reducers/collectReducer';
 
 // Combine Reducer
 export const mainReducer = combineReducers({
@@ -18,6 +19,7 @@ export const mainReducer = combineReducers({
     subcategory: subcategoryReducer,
     product: productReducer,
     orders: orderReducer,
+    collects: collectReducer,
   });
 
 /*export default function mainReducer(state = {}, action) {
