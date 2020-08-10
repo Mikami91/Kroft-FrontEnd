@@ -142,7 +142,7 @@ function CustomTableListPrints(props) {
                                                     size={col.size}
                                                     colSpan={col.colSpan}
                                                 >
-                                                    <IconButton aria-describedby={key + "icon"} onClick={null}>
+                                                    <IconButton aria-describedby={key + "icon"} onClick={(e) => col.onClick(e, index)}>
 
                                                         <col.icon
                                                             fontSize={col.iconSize}

@@ -88,9 +88,18 @@ function DrawerProducts(props) {
   const handleCloseOrders = () => setOpenTableOrders(false);
 
   // State for Modal Prints
-  const [openPrints, setOpenPrints] = useState(false);
-  const handleOpenPrints = () => setOpenPrints(true);
-  const handleClosePrints = () => setOpenPrints(false);
+  const [openPrints, setOpenPrints] = useState({
+    open: false,
+    list: []
+  });
+  const handleOpenPrints = () => setOpenPrints({
+    ...state,
+    open: true
+  });
+  const handleClosePrints = () => setOpenPrints({
+    open: false,
+    list: []
+  });
 
   // State for Modal Total Amount
   const [openTotal, setOpenTotal] = useState(false);
@@ -190,6 +199,19 @@ function DrawerProducts(props) {
     handleCloseOrders();
   };
 
+  let btn = document.getElementById("printOrder");
+  let btn2 = document.getElementById("printHistory");
+
+  // Print Order History
+  async function handlePrintHistory(e, arg) {
+    e.preventDefault();
+    await setOpenPrints({
+      ...state,
+      list: orders_detail_payload.filter(index => index.order_number === arg.order_number && index.order_id === arg.order_id)
+    });
+    btn2.click();
+  };
+
   // Send Orders List
   async function handleSendOrder() {
     let data = {
@@ -207,7 +229,6 @@ function DrawerProducts(props) {
           // Close Product Orders Table
           handleCloseOrders();
           // Printing
-          let btn = document.getElementById("printHistory");
           btn.click();
         }
       }
@@ -221,6 +242,7 @@ function DrawerProducts(props) {
 
   // Component to Refer
   let componentRef = useRef();
+  let componentRef2 = useRef();
 
   // Using useMemo hook
   return useMemo(() => {
@@ -553,7 +575,7 @@ function DrawerProducts(props) {
         />
 
         <CustomModal
-          open={openPrints}
+          open={openPrints.open}
           close={handleClosePrints}
           title={{
             text: "Historial de impresiones",
@@ -608,7 +630,7 @@ function DrawerProducts(props) {
                   size: "medium",
                   align: "center",
                   icon: PrintIcon,
-                  onClick: () => alert("Print"),
+                  onClick: handlePrintHistory,
                 },
               ]}
               data={orders_detail_payload}
@@ -805,18 +827,25 @@ function DrawerProducts(props) {
         <TabPanel value={1} index={0}>
 
           <ReactToPrint
-            trigger={() => <button id="printHistory" style={{ display: 'none' }}>Print</button>}
+            trigger={() => <button id="printOrder" style={{ display: 'none' }}>Print</button>}
             content={() => componentRef}
           // onPrintError={printError}
           // onAfterPrint={printOk}
           />
+
+          <ReactToPrint
+            trigger={() => <button id="printHistory" style={{ display: 'none' }}>Print</button>}
+            content={() => componentRef2}
+          />
+
           <ComponentToPrint ref={el => (componentRef = el)} data={product_orders_list} refresh={openTableOrders} />
+          <ComponentToPrint ref={el2 => (componentRef2 = el2)} data={openPrints.list} refresh={openPrints.open} />
 
         </TabPanel>
 
       </Drawer>
     );
-  }, [open, openTableOrders, openPrints, openTotal, value, current, global_quantity, state.open, state2.open, order_loading]);
+  }, [open, openTableOrders, openPrints.open, openTotal, value, current, global_quantity, state.open, state2.open, order_loading]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {
