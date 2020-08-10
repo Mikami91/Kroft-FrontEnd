@@ -41,11 +41,12 @@ import PrintIcon from "@material-ui/icons/Print";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SendIcon from "@material-ui/icons/Send";
+import RestoreIcon from '@material-ui/icons/Restore';
 import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 // Functions
-import { orderCreate } from '../../functions/orderFunctions';
+import { orderCreate, orderSend, orderCancel } from '../../functions/orderFunctions';
 
 // Assets
 // import image from "../../assets/img/backgrounds/productbackground.jpg";
@@ -212,16 +213,15 @@ function DrawerProducts(props) {
     btn2.click();
   };
 
-  // Send Orders List
-  async function handleSendOrder() {
-    let data = {
+  // Create Order function
+  async function handleCreateOrder() {
+    handleCloseOrders();
+    orderCreate({
       employee_id: localStorage.getItem('employee_id'),
       table_id: current.table_id,
       total_amount: global_amount,
       products: product_orders_list
-    }
-    handleCloseOrders();
-    orderCreate(data).then((response) => {
+    }).then((response) => {
       if (typeof response !== 'undefined') {
         if (response.success === true) {
           // Delete Orders List
@@ -230,6 +230,38 @@ function DrawerProducts(props) {
           handleCloseOrders();
           // Printing
           btn.click();
+        }
+      }
+    });
+  };
+
+  // Send Order function
+  const handleSendOrder = (e) => {
+    e.preventDefault();
+    orderSend({
+      order_id: table.order_id,
+      table_id: current.table_id,
+    }).then((response) => {
+      console.log(response);
+      if (typeof response !== 'undefined') {
+        if (response === true) {
+          console.log("Order sent");
+        }
+      }
+    });
+  };
+
+  // Cancel Order function
+  const handleCancelOrder = (e) => {
+    e.preventDefault();
+    orderCancel({
+      order_id: table.order_id,
+      table_id: current.table_id,
+    }).then((response) => {
+      console.log(response);
+      if (typeof response !== 'undefined') {
+        if (response === true) {
+          console.log("Order cancel");
         }
       }
     });
@@ -394,15 +426,13 @@ function DrawerProducts(props) {
             },
             {
               type: "fab",
-              text: "Enviar orden",
-              color: "primary",
-              icon: SendIcon,
+              text: table.is_busy === 1 ? "Enviar orden" : "Cancelar orden",
+              color: table.is_busy === 1 ? "primary" : "secondary",
+              icon: table.is_busy === 1 ? SendIcon : table.is_busy === 2 ? RestoreIcon : SendIcon,
               edge: "end",
               size: "large",
               disabled: table.amount > 0 ? false : true,
-              onClick: () => {
-                alert("Enviar orden");
-              },
+              onClick: table.is_busy === 1 ? handleSendOrder : table.is_busy === 2 ? handleCancelOrder : null
             },
           ]}
         />
@@ -565,7 +595,7 @@ function DrawerProducts(props) {
               color: "primary",
               variant: "contained",
               icon: PrintIcon,
-              onClick: handleSendOrder
+              onClick: handleCreateOrder
             },
           ]}
           renderRefresh={[openTableOrders, global_quantity]}

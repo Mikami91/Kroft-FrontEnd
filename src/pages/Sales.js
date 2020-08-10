@@ -69,6 +69,7 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
     prefix: "",
     amount: 0,
     is_busy: null,
+    order_id: null,
     environment_id: null,
     environment_name: "",
   });
