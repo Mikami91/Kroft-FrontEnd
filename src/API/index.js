@@ -1,6 +1,15 @@
 // API URL
 export const API = 'http://kroft-backend.test/';
 
+/*::::::::::::::::::::EMPLOYEE::::::::::::::::::::*/
+export const admin_create = "api/admin_create";
+export const admin_index = "api/admin_index";
+export const admin_show = "api/admin_show";
+export const admin_update = "api/admin_update";
+export const admin_state = "api/admin_state";
+export const admin_delete = "api/admin_delete";
+export const admin_login = "api/admin_login";
+export const admin_logout = "api/admin_logout";
 
 /*::::::::::::::::::::EMPLOYEE::::::::::::::::::::*/
 export const employee_create = "api/employee_create";

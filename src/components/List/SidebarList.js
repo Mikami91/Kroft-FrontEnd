@@ -16,15 +16,20 @@ import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
 
 const SidebarList = [
   {
-    name: "Inicio",
-    icon: DashboardRoundedIcon,
-    component: Started,
-  },
-  {
     name: "Personal",
     icon: GroupRoundedIcon,
     component: Employees,
   },
+  {
+    name: "Inicio",
+    icon: DashboardRoundedIcon,
+    component: Started,
+  },
+  // {
+  //   name: "Personal",
+  //   icon: GroupRoundedIcon,
+  //   component: Employees,
+  // },
   {
     name: "Ambientes",
     icon: DeckRoundedIcon,

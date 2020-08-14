@@ -6,6 +6,9 @@ import 'moment/locale/es';
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import IconButton from '@material-ui/core/IconButton';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
 // @material-ui/icons
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -22,6 +25,9 @@ import DateInput from '../../components/CustomInput/DateInput.js';
 import NumberInput from '../../components/CustomInput/NumberInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
+import CustomDivider from '../../components/Divider/CustomDivider.js';
+// Functions
+import { employeeCreate } from "../../functions/employeeFunctions";
 // Assets
 import image from '../../assets/img/defaults/user.png';
 // Varieables
@@ -35,25 +41,63 @@ moment.locale("en");
 moment().format('l');
 
 export default function EmployeeAdd(props) {
+
+    let arr = ['admin_id',
+        'rol_id',
+        'photo',
+        'first_name',
+        'last_name',
+        'birthdate',
+        'gender',
+        'phone',
+        'address',
+        'reference_phone',
+        'entry_date',
+        'user',
+        'password',
+        'pin',
+        'head_area',];
+
     // Local State
     const [state, setState] = useState({
-        file: null,
-        name: "",
-        born: null,
-        phone: "",
-        position: "",
-        salary: "",
+        // Others
+        admin_id: localStorage.getItem("admin_id"),
+        rol_id: "",
+        // Employee
+        photo: null,
+        first_name: "",
+        last_name: "",
+        birthdate: null,
+        gender: "",
+        phone: null,
+        address: "",
+        reference_phone: null,
+        entry_date: null,
         user: "",
         password: "",
         pin: "",
+        head_area: false,
+        // Salary
+        salary_month: null,
+        paid_amount: null,
+        // Photo
+        file: null,
         isUpload: false,
         error: false
     });
+
     // Change State for Inputs
     const handleChange = (e) => {
         setState({
             ...state,
             [e.target.name]: e.target.value
+        });
+    };
+
+    const handleChangeHeadArea = (e) => {
+        setState({
+            ...state,
+            head_area: !state.head_area
         });
     };
     // Empty State values
@@ -108,16 +152,21 @@ export default function EmployeeAdd(props) {
         });
         e.target.value = null;
     };
-    // Register function
-    const handleLogin = (e) => {
+
+    // Login function
+    const handleRegister = (e) => {
         e.preventDefault();
-        console.log(state);
-        // alert(state.salary);
-        // handleEmpty();
+        employeeCreate(state).then((response) => {
+            if (typeof response !== 'undefined') {
+                if (response.success === true) {
+                    console.log("registrado");
+                }
+            }
+        });
     };
     const classes = useStyles();
     return (
-        <form id="employee-add" onSubmit={handleLogin}>
+        <form id="employee-add" onSubmit={handleRegister}>
             {/* <p className={classes.divider}>Or Be Classical</p> */}
             <Card variant="cardForm">
 
@@ -146,8 +195,8 @@ export default function EmployeeAdd(props) {
                             </label>
                         </IconButton>
 
-                        <IconButton edge="end" disabled={state.isUpload ? true : false} 
-                            onClick={() => {document.getElementById("employee-file").click()}}
+                        <IconButton edge="end" disabled={state.isUpload ? true : false}
+                            onClick={() => { document.getElementById("employee-file").click() }}
                         >
                             <label>
                                 <AddAPhotoIcon />
@@ -174,48 +223,70 @@ export default function EmployeeAdd(props) {
                             elevation={6}
                             square="true"
                         >
+                            <CustomDivider text="Datos personales" color="warning" margin="dense" bold />
+
+                            <IconInput
+                                variant={'standard'} margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                type="text"
+                                label={'Nombre'}
+                                name="first_name"
+                                onChange={handleChange}
+                                value={state.first_name}
+                                required
+                                // icon={<AccountBoxIcon />}
+                                iconPosition="end"
+                            />
                             <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
                                 // disabled={showProgress}
                                 type="text"
-                                label={'Nombre completo'}
-                                name="name"
+                                label={'Apellidos'}
+                                name="last_name"
                                 onChange={handleChange}
-                                value={state.name}
+                                value={state.last_name}
                                 required
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
                             <DateInput
-                                 variant={'standard'}
-                                 margin={'dense'}
-                                 color="primary"
-                                 // disabled={showProgress}
-                                 type="text"
-                                 label={'Fecha de nacimiento'}
-                                 name="born"
-                                 onChange={handleChange}
-                                 value={state.born}
-                                 minDate={moment().subtract(70, 'years').calendar()}
-                                 maxDate={moment().subtract(18, 'years').calendar()}
-                                 required
-                            />
-                            {/* <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
                                 // disabled={showProgress}
                                 type="text"
                                 label={'Fecha de nacimiento'}
-                                name="born"
+                                name="birthdate"
                                 onChange={handleChange}
-                                value={state.born}
+                                value={state.birthdate}
+                                minDate={moment().subtract(70, 'years').calendar()}
+                                maxDate={moment().subtract(18, 'years').calendar()}
                                 required
-                                // icon={<CalendarTodayIcon />}
-                                iconPosition="end"
-                            /> */}
+                            />
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                // disabled={showProgress}
+                                id="position"
+                                label="Género"
+                                name="gender"
+                                onChange={handleChange}
+                                value={state.gender}
+                                itemList={{
+                                    data: [{ id: 0, gender: "Masculino" }, { id: 1, gender: "Femenino" }],
+                                    key: "id",
+                                    value: "gender"
+                                }}
+                                required
+                            />
+
+                            <CustomDivider text="Información" color="warning" margin="dense" bold />
+
                             <NumberInput
                                 variant={'standard'}
                                 margin={'dense'}
@@ -225,32 +296,36 @@ export default function EmployeeAdd(props) {
                                 name="phone"
                                 value={state.phone}
                                 onChange={handleChange}
-                                maxLength={8}
+                                maxLength={9}
                                 required
                                 phone
                             />
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
+                            <IconInput
+                                variant={'standard'}
+                                margin={'dense'}
                                 color="primary"
-                                hoverColor="primary"
                                 // disabled={showProgress}
-                                id="position"
-                                label="Cargo"
-                                name="position"
+                                type="text"
+                                label={'Dirección'}
+                                name="address"
                                 onChange={handleChange}
-                                value={state.position}
-                                // categoryList={{
-                                //     data: data,
-                                //     key: "id",
-                                //     value: "username"
-                                // }}
-                                itemList={{
-                                    data: data,
-                                    key: "id",
-                                    value: "website"
-                                }}
+                                value={state.address}
                                 required
+                                // icon={<AccountBoxIcon />}
+                                iconPosition="end"
+                            />
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                label={'Celular de referencia'}
+                                name="reference_phone"
+                                value={state.reference_phone}
+                                onChange={handleChange}
+                                maxLength={9}
+                                required
+                                phone
                             />
 
                         </Grid>
@@ -264,18 +339,82 @@ export default function EmployeeAdd(props) {
                             elevation={6}
                             square="true"
                         >
+                            <CustomDivider text="Cargo" color="warning" margin="dense" bold />
+
+                            <DateInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                type="text"
+                                label={'Fecha de ingreso'}
+                                name="entry_date"
+                                onChange={handleChange}
+                                value={state.entry_date}
+                                // views={["month", "date"]}
+                                openTo="month"
+                                minDate={moment().subtract(30, 'years').calendar()}
+                                maxDate={moment().add(1, 'years').calendar()}
+                                required
+                            />
+
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                // disabled={showProgress}
+                                id="position"
+                                label="Cargo"
+                                name="rol_id"
+                                onChange={handleChange}
+                                value={state.rol_id}
+                                itemList={{
+                                    data: data,
+                                    key: "id",
+                                    value: "website"
+                                }}
+                                required
+                            />
+
+                            <FormControlLabel
+                                control={<Checkbox checked={state.head_area} onChange={handleChangeHeadArea} name="head_area" />}
+                                label="Jefe de área"
+                                labelPlacement="end"
+                            />
+
+                            <CustomDivider text="Salario" color="warning" margin="dense" bold />
+
                             <NumberInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
                                 // disabled={showProgress}
                                 label={'Salario'}
-                                name="salary"
-                                value={state.salary}
+                                name="paid_amount"
+                                value={state.paid_amount}
                                 onChange={handleChange}
                                 prefix={"Bs"}
                                 required
                             />
+                            <DateInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                // disabled={showProgress}
+                                type="text"
+                                label={'Fecha de pago'}
+                                name="salary_month"
+                                onChange={handleChange}
+                                value={state.salary_month}
+                                views="date"
+                                openTo="date"
+                                autoOk
+                                required
+                            />
+
+                            <CustomDivider text="Perfil" color="warning" margin="dense" bold />
+
                             <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
@@ -325,7 +464,7 @@ export default function EmployeeAdd(props) {
 
                 <CardFooter form>
                     <CustomBotton form="employee-add" size="sm" type="submit" disabled={state.isUpload} >
-                        Registrar
+                        Registrarr
                     </CustomBotton>
                 </CardFooter>
             </Card>

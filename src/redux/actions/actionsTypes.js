@@ -1,3 +1,18 @@
+/*::::::::::::::::::::ADMIN::::::::::::::::::::*/
+// Login
+export const ADMIN_LOGIN = 'ADMIN_LOGIN';
+// Fetch
+export const ADMIN_FETCH = 'ADMIN_FETCH';
+// Verify Logged
+export const ADMIN_LOGGED = 'ADMIN_LOGGED';
+// Loading
+export const ADMIN_LOADING = 'ADMIN_LOADING';
+// Data
+export const ADMIN_DATA = 'ADMIN_DATA';
+// Dialog
+export const ADMIN_DIALOG = 'ADMIN_DIALOG';
+
+
 /*::::::::::::::::::::EMPLOYEE::::::::::::::::::::*/
 // Login
 export const EMPLOYEE_LOGIN = 'EMPLOYEE_LOGIN';

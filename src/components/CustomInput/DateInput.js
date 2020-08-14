@@ -6,7 +6,7 @@ import 'moment/locale/es';
 // Components Data Picker
 import "moment/locale/es";
 // import { es } from 'date-fns/locale';
-import { DatePicker  } from '@material-ui/pickers';
+import { DatePicker } from '@material-ui/pickers';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // Styles
@@ -16,7 +16,7 @@ const useStyles = makeStyles(styles);
 moment.locale("es");
 
 const DateInput = (props) => {
-    const { disabled, label, name, value, onChange, minDate, maxDate, placeholder, required, margin, color, variant } = props;
+    const { disabled, label, name, value, onChange, minDate, maxDate, views, openTo, disablePast, disableFuture, format, invalidDateMessage, autoOk, placeholder, required, margin, color, variant } = props;
     const classes = useStyles();
     const e = { target: {} };
     return (
@@ -24,8 +24,8 @@ const DateInput = (props) => {
             // Labels
             label={label}
             emptyLabel=""
-            invalidLabel="Texto invalidó"
-            invalidDateMessage="Formato de fecha invalidó"
+            invalidLabel="Texto inválido"
+            invalidDateMessage={invalidDateMessage}
             maxDateMessage="Rango de fecha no válido"
             minDateMessage="Rango de fecha no válido"
             okLabel="Aceptar"
@@ -39,7 +39,7 @@ const DateInput = (props) => {
             margin={margin}
             color={color}
             // Values
-            value={value}
+            value={value !== null ? moment(value).add(1, 'days').format('YYYY-MM-DD') : null}
             minDate={minDate}
             maxDate={maxDate}
             name={name}
@@ -50,17 +50,20 @@ const DateInput = (props) => {
             clearable
             onChange={
                 (date) => {
-                    console.log(date)
                     e.target["name"] = name;
-                    e.target["value"] = date === null ? null : moment(date).format("MM/DD/YY");
+                    e.target["value"] = date === null ? null : moment(date).format("YYYY-MM-DD");
                     return onChange(e);
                 }
             }
             // Options
-            views={["year", "month", "date"]}
-            disableFuture
-            openTo="year"
-            format="d MMM yyyy"
+            views={views}
+            openTo={openTo}
+            disablePast={disablePast}
+            disableFuture={disableFuture}
+            format={format}
+            autoOk={autoOk}
+        // format="d MMM yyyy"
+        // format="yyyy MMM d"
         />
     );
 };
@@ -70,6 +73,14 @@ DateInput.defaultProps = {
     value: null,
     minDate: null,
     maxDate: null,
+    views: ["year", "month", "date"],
+    openTo: "year",
+    disablePast: false,
+    disableFuture: false,
+    // format: "yyyy MMM d",
+    format: "d MMM yyyy",
+    invalidDateMessage: "Formato de fecha inválido",
+    autoOk: false,
     required: false,
     disabled: false,
     name: "",
@@ -87,6 +98,20 @@ DateInput.propTypes = {
     value: PropTypes.string,
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
+    views: PropTypes.oneOfType([
+        PropTypes.array,
+        PropTypes.string,
+    ]),
+    openTo: PropTypes.oneOf([
+        "year",
+        "month",
+        "date"
+    ]),
+    disablePast: PropTypes.bool,
+    disableFuture: PropTypes.bool,
+    format: PropTypes.string,
+    invalidDateMessage: PropTypes.string,
+    autoOk: PropTypes.bool,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     name: PropTypes.string,

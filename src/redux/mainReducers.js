@@ -1,6 +1,7 @@
 // Dependencies
 import { combineReducers } from 'redux';
 // Reducers
+import { adminReducer } from './reducers/adminReducer';
 import { employeeReducer } from './reducers/employeeReducer';
 import { environmentReducer } from './reducers/environmentReducer';
 import { tableReducer } from './reducers/tableReducer';
@@ -12,19 +13,20 @@ import { collectReducer } from './reducers/collectReducer';
 
 // Combine Reducer
 export const mainReducer = combineReducers({
-    employee: employeeReducer,
-    environment: environmentReducer,
-    table: tableReducer,
-    category: categoryReducer,
-    subcategory: subcategoryReducer,
-    product: productReducer,
-    orders: orderReducer,
-    collects: collectReducer,
-  });
+  admin: adminReducer,
+  employee: employeeReducer,
+  environment: environmentReducer,
+  table: tableReducer,
+  category: categoryReducer,
+  subcategory: subcategoryReducer,
+  product: productReducer,
+  orders: orderReducer,
+  collects: collectReducer,
+});
 
 /*export default function mainReducer(state = {}, action) {
   return {
     quotes: quoteReducer(state.quotes, action),
     theme: themeReducer(state.theme, action)
   };
-}*/ 
+}*/

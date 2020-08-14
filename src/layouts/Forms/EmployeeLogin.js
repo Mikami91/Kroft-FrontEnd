@@ -32,7 +32,7 @@ export default function EmployeeLogin(props) {
   };
   // Hooks
   let history = useHistory();
-  // Function
+  // Login function
   const handleLogin = (e) => {
     e.preventDefault();
     employeeLogin(state).then((response) => {

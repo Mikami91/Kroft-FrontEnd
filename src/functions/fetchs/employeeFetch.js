@@ -32,6 +32,15 @@ export const loginPinFetch = (data) => {
     });
 };
 
+/*::::::::::::::::::::CREATE::::::::::::::::::::*/
+export const createFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        url: employee_create,
+        data: data,
+    });
+};
+
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
 export const showFetch = (data) => {
     return customFetch({

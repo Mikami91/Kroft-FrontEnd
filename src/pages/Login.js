@@ -34,7 +34,7 @@ import styles from "../styles/pages/LoginStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ loading }) {
+function LoginPage({ admin_loading, employee_loading }) {
   // State for Panel Tabs
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -92,7 +92,7 @@ function LoginPage({ loading }) {
         >
           <Card className={classes[cardAnimaton]} variant="cardLogin">
 
-            <CustomLoading open={loading} text={"Iniciando..."} inside />
+            <CustomLoading open={admin_loading || employee_loading} text={"Iniciando..."} inside />
 
             <CardHeader color="primary" className={classes.cardHeaderLogin}>
               <img
@@ -204,9 +204,10 @@ function LoginPage({ loading }) {
 
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { employee } = state;
+  const { admin, employee } = state;
   return {
-    loading: employee.loading,
+    admin_loading: admin.loading,
+    employee_loading: employee.loading,
   }
 };
 

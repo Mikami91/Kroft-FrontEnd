@@ -61,15 +61,24 @@ function CollectsPage({ environments, tables, loading }) {
 
   // State Current Table
   const [currentTable, setCurrentTable] = useState({
+    // Table variables
     id: null,
     name: "",
-    prefix: "",
     amount: 0,
     is_busy: null,
     order_id: null,
     state: null,
+    // Environment variables
     environment_id: null,
     environment_name: "",
+    environment_prefix: "",
+    // Other variables
+    payment_type: 1,
+    box: 1,
+    currency: 0,
+    paid_BS: 0,
+    paid_US: 0,
+    change: 0,
   });
 
   console.log(currentTable);
@@ -79,44 +88,45 @@ function CollectsPage({ environments, tables, loading }) {
 
   const handleOpenTotalAmount = (arg) => {
     setTotalAmount(true);
-    setCurrentTable(arg);
+    setCurrentTable({
+      ...currentTable,
+      id: arg.id,
+      name: arg.name,
+      amount: arg.amount,
+      is_busy: arg.is_busy,
+      order_id: arg.order_id,
+      state: arg.state,
+      environment_id: arg.environment_id,
+      environment_name: arg.environment_name,
+      environment_prefix: arg.environment_prefix,
+    });
   };
   const handleCloseTotalAmount = () => {
     setTotalAmount(false);
     setCurrentTable({
+      // Table variables
       id: null,
       name: "",
-      prefix: "",
       amount: 0,
       is_busy: null,
       order_id: null,
       state: null,
       environment_id: null,
       environment_name: "",
+      environment_prefix: "",
+      // Other variables
+      payment_type: 1,
+      box: 1,
+      currency: 0,
+      paid_BS: 0,
+      paid_US: 0,
+      change: 0,
     });
   };
 
-  // Local State
-  const [dialogState, setDialogState] = useState({
-    sale_id: null,
-    user_id: null,
-    environment_id: null,
-    table_id: null,
-    payment_type: 1,
-    box: 1,
-    amount: 0,
-    currency: 0,
-    paid_BS: 0,
-    paid_US: 0,
-    change: 0,
-  });
 
   // Changes State values
   const handleChangeValues = (e) => {
-    setDialogState({
-      ...dialogState,
-      [e.target.name]: e.target.value,
-    });
   };
 
   // Check if values is number
@@ -132,9 +142,9 @@ function CollectsPage({ environments, tables, loading }) {
   const handleChangeAmountBS = (e) => {
     console.log(e.value)
     if (isEmptyValue(e.value) === false) {
-      let result = (parseInt(e.value) + (dialogState.paid_US * 6.94)) - (currentTable.amount);
-      setDialogState({
-        ...dialogState,
+      let result = (parseInt(e.value) + (currentTable.paid_US * 6.94)) - (currentTable.amount);
+      setCurrentTable({
+        ...currentTable,
         paid_BS: parseInt(e.value),
         change: Math.abs(result)
       });
@@ -144,9 +154,9 @@ function CollectsPage({ environments, tables, loading }) {
   const handleChangeAmountUS = (e) => {
     console.log(e.value)
     if (isEmptyValue(e.value) === false) {
-      let result = (dialogState.paid_BS + (parseInt(e.value) * 6.94)) - (currentTable.amount);
-      setDialogState({
-        ...dialogState,
+      let result = (currentTable.paid_BS + (parseInt(e.value) * 6.94)) - (currentTable.amount);
+      setCurrentTable({
+        ...currentTable,
         paid_US: parseInt(e.value),
         change: Math.abs(result)
       });
@@ -330,7 +340,7 @@ function CollectsPage({ environments, tables, loading }) {
             >
               <Grid item xs={6} sm={6} md={6} lg={6}>
                 <NumberFormat
-                  value={dialogState.paid_BS === 0 ? '' : dialogState.paid_BS}
+                  value={currentTable.paid_BS === 0 ? '' : currentTable.paid_BS}
                   onValueChange={handleChangeAmountBS}
                   displayType={'input'}
                   thousandSeparator={true}
@@ -345,7 +355,7 @@ function CollectsPage({ environments, tables, loading }) {
 
               <Grid item xs={6} sm={6} md={6} lg={6}>
                 <NumberFormat
-                  value={dialogState.paid_US === 0 ? '' : dialogState.paid_US}
+                  value={currentTable.paid_US === 0 ? '' : currentTable.paid_US}
                   onValueChange={handleChangeAmountUS}
                   displayType={'input'}
                   thousandSeparator={true}
@@ -363,7 +373,7 @@ function CollectsPage({ environments, tables, loading }) {
         leftButtons={[
           {
             type: "text",
-            text: (dialogState.paid_BS + (dialogState.paid_US * 6.94)) < currentTable.amount && dialogState.change > 0 ? 'Por pagar: ' : (dialogState.paid_BS + (dialogState.paid_US * 6.94)) === currentTable.amount ? 'Sin cambio: ' : 'Cambio: ',
+            text: (currentTable.paid_BS + (currentTable.paid_US * 6.94)) < currentTable.amount && currentTable.change > 0 ? 'Por pagar: ' : (currentTable.paid_BS + (currentTable.paid_US * 6.94)) === currentTable.amount ? 'Sin cambio: ' : 'Cambio: ',
             size: "default",
             align: "left",
             margin: true,
@@ -373,7 +383,7 @@ function CollectsPage({ environments, tables, loading }) {
           {
             type: "text",
             text: <NumberFormat
-              value={dialogState.change}
+              value={currentTable.change}
               displayType={'text'}
               thousandSeparator={true}
               allowNegative={false}
@@ -390,7 +400,7 @@ function CollectsPage({ environments, tables, loading }) {
             size: "default",
             align: "right",
             margin: true,
-            color: (dialogState.paid_BS + (dialogState.paid_US * 6.94)) < currentTable.amount && dialogState.change > 0 ? 'danger' : (dialogState.paid_BS + (dialogState.paid_US * 6.94)) === currentTable.amount ? 'default' : 'success',
+            color: (currentTable.paid_BS + (currentTable.paid_US * 6.94)) < currentTable.amount && currentTable.change > 0 ? 'danger' : (currentTable.paid_BS + (currentTable.paid_US * 6.94)) === currentTable.amount ? 'default' : 'success',
             display: "inline",
             bold: true,
           },
@@ -407,11 +417,11 @@ function CollectsPage({ environments, tables, loading }) {
             edge: "start",
             size: "large",
             variant: "contained",
-            disabled: dialogState.change >= currentTable.amount ? false : true,
+            disabled: currentTable.change >= currentTable.amount ? false : true,
             onClick: handleMakeCollected,
           },
         ]}
-        renderRefresh={dialogState.change}
+        renderRefresh={[currentTable.change, currentTable.id]}
         scroll="paper"
         maxWidth="sm"
         fullWidth
