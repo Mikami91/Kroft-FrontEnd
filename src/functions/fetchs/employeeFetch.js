@@ -37,6 +37,7 @@ export const createFetch = (data) => {
     return customFetch({
         method: 'POST',
         url: employee_create,
+        // type: 'multipart/form-data',
         data: data,
     });
 };
@@ -47,6 +48,33 @@ export const showFetch = (data) => {
         method: 'GET',
         token: true,
         url: employee_show,
+    });
+};
+
+/*::::::::::::::::::::UPDATE::::::::::::::::::::*/
+export const updateFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        url: employee_update,
+        data: data,
+    });
+};
+
+/*::::::::::::::::::::STATE::::::::::::::::::::*/
+export const stateFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        url: employee_state,
+        data: data,
+    });
+};
+
+/*::::::::::::::::::::DELETE::::::::::::::::::::*/
+export const deleteFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        url: employee_delete,
+        data: data,
     });
 };
 

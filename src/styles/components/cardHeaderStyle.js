@@ -8,6 +8,7 @@ import {
 } from "../../themes/theme.js";
 const cardHeaderStyle = {
   cardHeader: {
+    zIndex: 100,
     borderRadius: "3px",
     padding: "1rem 20px 1rem 20px",
     marginLeft: "20px",
@@ -17,21 +18,20 @@ const cardHeaderStyle = {
     marginBottom: "0"
   },
   cardHeaderPlain: {
+    zIndex: 100,
     marginLeft: "0px",
     marginRight: "0px"
   },
   cardHeaderDense: {
+    zIndex: 100,
     padding: "0.1rem 20px 0.1rem 20px",
     marginTop: "-25px",
-    zIndex: 10,
   },
   cardHeaderStats: {
+    zIndex: 100,
     padding: "15px",
     marginLeft: "0px",
     marginRight: "0px",
-    zIndex: 10,
-
-
     "& $cardHeaderIcon": {
       textAlign: "right"
     },
@@ -40,6 +40,7 @@ const cardHeaderStyle = {
     }
   },
   cardHeaderIcon: {
+    zIndex: 100,
     padding: "15px",
     marginLeft: "0px",
     marginRight: "0px",

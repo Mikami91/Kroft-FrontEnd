@@ -4,12 +4,12 @@ import axios from 'axios';
 import { API } from '../../API';
 
 export const customFetch = (props) => {
-    const { method, token, url, data, timeout } = props;
+    const { method, token, url, type, data, timeout } = props;
     return axios({
         method: typeof method !== 'undefined' ? method : 'POST',
         url: API + url,
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': typeof type !== 'undefined' ? type : 'application/json',
             'Authorization': token === true ? 'Bearer ' + localStorage.getItem('token') : null,
             'Token': token === true ? localStorage.getItem('token') : null,
         },

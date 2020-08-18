@@ -1,18 +1,33 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
 // Core Components
 import CustomTable from "../../components/Table/CustomTable.js";
+import AvatarTable from "../../components/Avatar/AvatarTable";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
+import CustomLoading from '../../components/Loading/CustomLoading.js';
+import CustomModal from '../../components/Modal/CustomModal';
+import EmployeeUpdate from '../../layouts/Forms/EmployeeUpdate';
 // Layouts
 import EmployeeAdd from '../../layouts/Forms/EmployeeAdd.js';
+// Functions
+import { employeeShow, employeeUpdate as employeeUpdateFunc, employeeDelete } from "../../functions/employeeFunctions";
+// API
+import { API } from '../../API/index';
 
-function Employees(props) {
-
+function Employees({ employees, fetching, loading }) {
+    const [state, setState] = useState({
+        data: {},
+        open: false
+    })
+    const handleOpen = (rowData) => [console.log(rowData), setState({ data: rowData, open: true })];
+    const handleClose = () => setState({ data: {}, open: false });
     return (
         <Fragment>
             <Grid
@@ -49,57 +64,65 @@ function Employees(props) {
                 // className={classes.container}
                 >
                     <Card variant="cardForm">
+
+                        <CustomLoading inside color="primary" open={loading} />
+
                         <CardHeader color="primary" dense>
                             <h3>Lista de Personal</h3>
                         </CardHeader>
                         <CardBody form>
                             <CustomTable
                                 column={[
+                                    { title: "ID", field: "id", type: "numeric", editable: "never" },
                                     {
-                                        title: "ID",
-                                        field: "id",
-                                        type: "numeric",
-                                        editable: "never"
+                                        title: "Foto", field: "photo", editable: "never", sorting: false,
+                                        render: rowData => (
+                                            <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/employees/`} />
+                                        )
                                     },
-                                    {
-                                        title: "Imagen",
-                                        field: "image",
-                                        editable: "never",
-                                        sorting: false,
-                                        // eslint-disable-next-line react/display-name
-                                        //   render: rowData => (
-                                        //     <AvatarTable rowData={rowData} path={path} />
-                                        //   )
-                                    },
-                                    { title: "Nombre", field: "name", type: "string" },
-                                    { title: "Apellidos", field: "lastname", type: "string" },
-                                    { title: "Usuario", field: "user", type: "string" },
-                                    { title: "PIN", field: "pin", type: "string" },
-                                    //{ title: 'Creación', field: 'created_at', editable: 'never', type: 'date' },
-                                    //{ title: 'Modificación', field: 'updated_at', editable: 'never', type: 'date' },
-                                    {
-                                        title: "Cargo",
-                                        field: "position_id",
-                                        type: "string",
-                                        //   lookup: selectList
-                                    },
-                                    {
-                                        title: "Contraseña",
-                                        field: "password_table",
-                                        editable: "onUpdate",
-                                        type: "string"
-                                    }
+                                    { title: "Nombre", field: "first_name", type: "string" },
+                                    { title: "Apellidos", field: "last_name", type: "string" },
+                                    { title: "Celular", field: "phone", type: "numeric" },
+
+                                    // { title: "Nacimiento", field: "birthdate", type: "string" },
+                                    // { title: "Genero", field: "gender", type: "string" },
+                                    // { title: "Dirección", field: "address", type: "string" },
+                                    // { title: "Celular de referencia", field: "reference_phone", type: "string" },
+                                    // { title: "Fecha de entrada", field: "entry_date", type: "string" },
+                                    // { title: "Usuario", field: "user", type: "string" },
+                                    // { title: "Jefe de área", field: "head_area", type: "string" },
                                 ]}
-                            //   data={EmployeesList}
-                            //   refresh={userListAction}
-                            //   updates={userUpdateAction}
-                            //   deletes={userDeleteAction}
-                            //   loading={Loading}
+                                data={employees}
+                                detailPanel={[
+                                    { title: "Nacimiento", field: "birthdate", type: "string" },
+                                    { title: "Genero", field: "gender", type: "bool", options: ["Masculino", "Femenino"] },
+                                    { title: "Dirección", field: "address", type: "string" },
+                                    { title: "Celular de referencia", field: "reference_phone", type: "string" },
+                                    { title: "Fecha de entrada", field: "entry_date", type: "string" },
+                                    { title: "Usuario", field: "user", type: "string" },
+                                    { title: "Jefe de área", field: "head_area", type: "bool", options: ["No", "Si"] },
+                                ]}
+                                refresh={employeeShow}
+                                // updates={handleOpen}
+                                customUpdate={handleOpen}
+                                deletes={employeeDelete}
+                            // loading={fetching || loading}
                             />
                         </CardBody>
                     </Card>
                 </Grid>
             </Grid>
+
+            <CustomModal
+                title={{
+                    text: "Editar personal",
+                    size: "medium",
+                }}
+                open={state.open}
+                close={handleClose}
+                content={<EmployeeUpdate data={state.data} />}
+                renderRefresh={[state.open, state.data]}
+            />
 
         </Fragment>
     );
@@ -110,5 +133,14 @@ Employees.propTypes = {
         typeof Element === "undefined" ? Object : Element
     ),
 };
+// Connect to Store State
+const mapStateToProps = (state) => {
+    const { employee } = state;
+    return {
+        employees: employee.payload,
+        fetching: employee.fetching,
+        loading: employee.loading,
+    }
+};
 
-export default Employees;
+export default connect(mapStateToProps, null)(Employees);

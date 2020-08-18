@@ -1,10 +1,13 @@
 /* eslint-disable react/display-name */
-import React, { forwardRef } from "react";
+import React, { Fragment, useMemo, forwardRef } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from "material-table";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
+import CustomLoading from '../Loading/CustomLoading';
+import CustomText from '../Typography/CustomText';
+// Styles
 import styles from "../../styles/components/tableStyle.js";
 // Icons
 import AddBox from "@material-ui/icons/AddBox";
@@ -56,7 +59,6 @@ const icons = {
 const useStyles = makeStyles(styles);
 
 export default function CustomTable(props) {
-  const classes = useStyles();
   const {
     toolbar,
     search,
@@ -65,99 +67,160 @@ export default function CustomTable(props) {
     header,
     column,
     data,
+    detailPanel,
     paging,
     padding,
     refresh,
     updates,
+    customUpdate,
     deletes,
-    loading
+    loading,
   } = props;
-  // console.log(Object.entries(tableData));
-  return (
-    <div className={classes.tableResponsive}>
-      <MaterialTable
-        columns={column}
-        data={data}
-        isLoading={loading}
-        icons={icons}
-        title=""
-        options={{
-          loadingType: "overlay",
-          header: header,
-          toolbarButtonAlignment: "left",
-          actionsColumnIndex: -1,
-          toolbar: toolbar,
-          search: search,
-          sorting: sorting,
-          filtering: filtering,
-          paging: paging,
-          padding: padding
-        }}
-        localization={{
-          pagination: {
-            labelDisplayedRows: "{from}-{to} de {count}",
-            labelRowsSelect: "Filas",
-            firstTooltip: "Primera página",
-            previousTooltip: "Anterior página",
-            nextTooltip: "Siguiente página",
-            lastTooltip: "Ultima página"
-          },
-          header: {
-            actions: "Acciones"
-          },
-          body: {
-            emptyDataSourceMessage: "No hay registros que mostrar.",
-            filterRow: {
-              filterTooltip: "Filtrar"
+  // Styles
+  const classes = useStyles();
+  // Using useMemo hook
+  return useMemo(() => {
+    return (
+      <div className={classes.tableResponsive}>
+        <MaterialTable
+          columns={column}
+          data={data}
+          isLoading={loading}
+          icons={icons}
+          title=""
+          options={{
+            loadingType: "overlay",
+            header: header,
+            toolbarButtonAlignment: "left",
+            actionsColumnIndex: -1,
+            toolbar: toolbar,
+            search: search,
+            sorting: sorting,
+            filtering: filtering,
+            paging: paging,
+            padding: padding,
+            selection: false,
+          }}
+          localization={{
+            pagination: {
+              labelDisplayedRows: "{from}-{to} de {count}",
+              labelRowsSelect: "Filas",
+              firstTooltip: "Primera página",
+              previousTooltip: "Anterior página",
+              nextTooltip: "Siguiente página",
+              lastTooltip: "Ultima página"
             },
-            editRow: {
-              saveTooltip: "Guardar",
-              cancelTooltip: "Cancelar",
-              deleteText: "¿Estás seguro de que deseas eliminar esta mesa?"
+            header: {
+              actions: "Acciones"
             },
-            addTooltip: "Agregar",
-            deleteTooltip: "Eliminar",
-            editTooltip: "Editar"
-          },
-          toolbar: {
-            searchTooltip: "Buscar",
-            searchPlaceholder: "Buscar"
-          }
-        }}
-        editable={{
-          onRowUpdate:
-            updates !== null
-              ? (newData, oldData) =>
+            body: {
+              emptyDataSourceMessage: "No hay registros que mostrar.",
+              filterRow: {
+                filterTooltip: "Filtrar"
+              },
+              editRow: {
+                saveTooltip: "Guardar",
+                cancelTooltip: "Cancelar",
+                deleteText: "¿Estás seguro de que deseas eliminar?"
+              },
+              addTooltip: "Agregar",
+              deleteTooltip: "Eliminar",
+              editTooltip: "Editar"
+            },
+            toolbar: {
+              searchTooltip: "Buscar",
+              searchPlaceholder: "Buscar"
+            }
+          }}
+          editable={{
+            onRowUpdate:
+              updates !== null
+                ? (newData, oldData) =>
                   new Promise(resolve => {
                     updates(newData);
+                    console.log(newData);
                     resolve();
                   })
-              : null,
+                : null,
 
-          onRowDelete:
-            deletes !== null
-              ? (newData, oldData) =>
+            onRowDelete:
+              deletes !== null
+                ? (newData, oldData) =>
                   new Promise(resolve => {
-                    deletes(newData.id);
+                    deletes({ id: newData.id });
                     resolve();
                   })
-              : null
-        }}
-        actions={
-          refresh !== null
-            ? [
+                : null,
+          }}
+          actions={
+            [
+              refresh !== null ?
                 {
                   icon: icons.Refresh,
                   tooltip: "Actualizar lista",
                   isFreeAction: true,
                   onClick: () => refresh()
                 }
-              ]
-            : null
-        }
-      />
-    </div>
-  );
+                : null,
+              customUpdate !== null ?
+                {
+                  icon: icons.Edit,
+                  tooltip: "Editar",
+                  isFreeAction: false,
+                  onClick: (event, rowData) => customUpdate(rowData)
+                }
+                : null
+            ]
+          }
+          // other props
+          components={{
+            OverlayLoading: props => (<CustomLoading open={loading} inside />)
+          }}
+          detailPanel={typeof detailPanel !== 'undefined' && detailPanel.length > 0 ? [
+            {
+              tooltip: 'Mas información',
+              render: rowData => {
+                return (
+                  <div
+                    style={{
+                      fontSize: '0.75re',
+                      textAlign: 'left',
+                      color: 'white',
+                      margin: '20px 50px',
+                      display: 'inline-grid',
+                      // backgroundColor: '#43A047',
+                    }}
+                  >
+                    {
+                      detailPanel.map((index, key) =>
+                        <div key={key}
+                          style={{
+                            display: 'flex',
+                          }}>
+                          <CustomText text={`${index.title}:`} color="warning" />
+                          <CustomText
+                            text={
+                              index.type === "bool" ?
+                                rowData[index.field] === 0 ?
+                                  index.options[0] :
+                                  index.options[1] :
+                                rowData[index.field]
+                            }
+                            margin={true}
+                            color="default"
+                          />
+                        </div>
+                      )
+                    }
+                  </div>
+                )
+              },
+            },
+          ] : null}
+        />
+      </div>
+    );
+  }, [data, loading]);
 }
 
 // PropTypes
@@ -169,10 +232,12 @@ CustomTable.defaultProps = {
   header: true,
   column: [],
   data: [],
+  detailPanel: [],
   paging: true,
   padding: "default",
   refresh: null,
   updates: null,
+  customUpdate: null,
   deletes: null,
   loading: false
 };
@@ -185,10 +250,12 @@ CustomTable.propTypes = {
   header: PropTypes.bool,
   column: PropTypes.arrayOf(PropTypes.object),
   data: PropTypes.arrayOf(PropTypes.object),
+  detailPanel: PropTypes.arrayOf(PropTypes.object),
   paging: PropTypes.bool,
   padding: PropTypes.oneOf(["default", "dense"]),
   refresh: PropTypes.func,
   updates: PropTypes.func,
+  customUpdate: PropTypes.func,
   deletes: PropTypes.func,
   loading: PropTypes.bool
 };

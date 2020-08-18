@@ -135,7 +135,7 @@ const DashboardStyle = (theme) => ({
     top: "0",
     bottom: "0",
     left: "0",
-    zIndex: 99999,
+    zIndex: 999,
     ...boxShadow,
     width: drawerDash,
     [theme.breakpoints.up("md")]: {

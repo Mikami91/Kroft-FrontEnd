@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import moment from 'moment';
 import 'moment/locale/es';
 // Conecction to Store
@@ -29,11 +29,11 @@ import CustomBotton from '../../components/CustomButtons/Button.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { employeeCreate } from "../../functions/employeeFunctions";
+import { employeeUpdate } from "../../functions/employeeFunctions";
 // Assets
 import image from '../../assets/img/defaults/user.png';
 // Varieables
-import { data } from '../../variables/JSON.js';
+import { data as dataVar } from '../../variables/JSON.js';
 // Styles
 import styles from "../../styles/pages/LoginStyle.js";
 // Make styles
@@ -42,8 +42,14 @@ const useStyles = makeStyles(styles);
 moment.locale("en");
 moment().format('l');
 
-function EmployeeAdd(props) {
-    const { fetching } = props;
+function EmployeeUpdate(props) {
+    const {
+        // Redux 
+        fetching,
+        // Props
+        data,
+    } = props;
+    console.log(props);
     // Local State
     const [state, setState] = useState({
         // Others
@@ -70,6 +76,37 @@ function EmployeeAdd(props) {
         isUpload: false,
         error: false
     });
+
+    useEffect(() => {
+        if (Object.keys(data).length > 0) {
+            setState({
+                ...data,
+                // Others
+                admin_id: localStorage.getItem("admin_id"),
+                rol_id: data.rol_id,
+                // Employee
+                first_name: data.first_name,
+                last_name: data.last_name,
+                birthdate: data.birthdate,
+                gender: data.gender,
+                phone: data.phone,
+                address: data.address,
+                reference_phone: data.reference_phone,
+                entry_date: data.entry_date,
+                user: data.user,
+                password: data.password,
+                pin: data.pin,
+                head_area: data.head_area === 0 ? false : true,
+                // Salary
+                salary_month: data.salary_month,
+                paid_amount: data.paid_amount,
+                // Photo
+                photo: data.photo,
+                isUpload: false,
+                error: false
+            });
+        }
+    }, [data])
 
     // Change State for Inputs
     const handleChange = (e) => {
@@ -148,10 +185,11 @@ function EmployeeAdd(props) {
         e.target.value = null;
     };
 
-    // Register function
-    const handleRegister = (e) => {
+    // Update function
+    const handleUpdate = (e) => {
         e.preventDefault();
-        employeeCreate(state).then((response) => {
+        setState({...state, photo: state.isUpload === true? state.photo : null});
+        employeeUpdate(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
                     handleEmpty();
@@ -160,9 +198,12 @@ function EmployeeAdd(props) {
             }
         });
     };
+    // Styles
     const classes = useStyles();
+    // Using useMemo hook
+    // return useMemo(() => {
     return (
-        <form id="employee-add" onSubmit={handleRegister} encType="multipart/form-data" >
+        <form id="employee-update" onSubmit={handleUpdate} encType="multipart/form-data" >
             <Card variant="cardForm">
 
                 <CustomLoading inside color="primary" open={state.isUpload || fetching} />
@@ -176,7 +217,7 @@ function EmployeeAdd(props) {
                     <input
                         // disabled={state.isUpload || showProgress ? true : false}
                         accept="image/png, image/jpeg, image/jpg"
-                        id="employee-file-create"
+                        id="employee-file-update"
                         type="file"
                         name="image"
                         onChange={handleImage}
@@ -191,7 +232,7 @@ function EmployeeAdd(props) {
                         </IconButton>
 
                         <IconButton edge="end" disabled={state.isUpload ? true : false}
-                            onClick={() => { document.getElementById("employee-file-create").click() }}
+                            onClick={() => { document.getElementById("employee-file-update").click() }}
                         >
                             <label>
                                 <AddAPhotoIcon />
@@ -365,7 +406,7 @@ function EmployeeAdd(props) {
                                 onChange={handleChange}
                                 value={state.rol_id}
                                 itemList={{
-                                    data: data,
+                                    data: dataVar,
                                     key: "id",
                                     value: "website"
                                 }}
@@ -458,13 +499,14 @@ function EmployeeAdd(props) {
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="employee-add" size="sm" type="submit" disabled={state.isUpload} >
-                        Registrar
+                    <CustomBotton form="employee-update" size="sm" type="submit" disabled={state.isUpload} >
+                        Guardar
                     </CustomBotton>
                 </CardFooter>
             </Card>
         </form>
     );
+    // }, [Object.keys(data).length > 0]);
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
@@ -474,4 +516,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, null)(EmployeeAdd);
+export default connect(mapStateToProps, null)(EmployeeUpdate);

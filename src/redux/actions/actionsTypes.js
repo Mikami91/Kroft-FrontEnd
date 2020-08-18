@@ -5,6 +5,8 @@ export const ADMIN_LOGIN = 'ADMIN_LOGIN';
 export const ADMIN_FETCH = 'ADMIN_FETCH';
 // Verify Logged
 export const ADMIN_LOGGED = 'ADMIN_LOGGED';
+// Fetching
+export const ADMIN_FETCHING = 'ADMIN_FETCHING';
 // Loading
 export const ADMIN_LOADING = 'ADMIN_LOADING';
 // Data
@@ -20,6 +22,8 @@ export const EMPLOYEE_LOGIN = 'EMPLOYEE_LOGIN';
 export const EMPLOYEE_FETCH = 'EMPLOYEE_FETCH';
 // Verify Logged
 export const EMPLOYEE_LOGGED = 'EMPLOYEE_LOGGED';
+// Fetching
+export const EMPLOYEE_FETCHING = 'EMPLOYEE_FETCHING';
 // Loading
 export const EMPLOYEE_LOADING = 'EMPLOYEE_LOADING';
 // Data
@@ -31,6 +35,8 @@ export const EMPLOYEE_DIALOG = 'EMPLOYEE_DIALOG';
 /*::::::::::::::::::::ENVIRONMENT::::::::::::::::::::*/
 // List
 export const ENVIRONMENT_LIST = 'ENVIRONMENT_LIST';
+// Fetching
+export const ENVIRONMENT_FETCHING = 'ENVIRONMENT_FETCHING';
 // Loading
 export const ENVIRONMENT_LOADING = 'ENVIRONMENT_LOADING';
 
@@ -38,6 +44,8 @@ export const ENVIRONMENT_LOADING = 'ENVIRONMENT_LOADING';
 /*::::::::::::::::::::TABLE::::::::::::::::::::*/
 // List
 export const TABLE_LIST = 'TABLE_LIST';
+// Fetching
+export const TABLE_FETCHING = 'TABLE_FETCHING';
 // Loading
 export const TABLE_LOADING = 'TABLE_LOADING';
 
@@ -45,6 +53,8 @@ export const TABLE_LOADING = 'TABLE_LOADING';
 /*::::::::::::::::::::CATEGORY::::::::::::::::::::*/
 // List
 export const CATEGORY_LIST = 'CATEGORY_LIST';
+// Fetching
+export const CATEGORY_FETCHING = 'CATEGORY_FETCHING';
 // Loading
 export const CATEGORY_LOADING = 'CATEGORY_LOADING';
 
@@ -52,6 +62,8 @@ export const CATEGORY_LOADING = 'CATEGORY_LOADING';
 /*::::::::::::::::::::SUB CATEGORY::::::::::::::::::::*/
 // List
 export const SUB_CATEGORY_LIST = 'SUB_CATEGORY_LIST';
+// Fetching
+export const SUB_CATEGORY_FETCHING = 'SUB_CATEGORY_FETCHING';
 // Loading
 export const SUB_CATEGORY_LOADING = 'SUB_CATEGORY_LOADING';
 
@@ -77,6 +89,8 @@ export const ADD_OBSERVATION = 'ADD_OBSERVATION';
 export const DELETE_OBSERVATION = 'DELETE_OBSERVATION';
 // Delete Products Orders
 export const DELETE_ORDERS = 'DELETE_ORDERS';
+// Fetching
+export const PRODUCT_FETCHING = 'PRODUCT_FETCHING';
 // Loading
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';
 

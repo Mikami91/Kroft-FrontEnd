@@ -1,5 +1,8 @@
 // Dependencies
-import React, { Fragment, useState, useMemo } from "react";
+import React, { Fragment, useState, useMemo, useEffect } from "react";
+import { withRouter } from "react-router-dom";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -19,6 +22,14 @@ import Sidebar from "../layouts/Sidebars/Sidebar.js";
 import CustomAppBar from "../components/AppBar/CustomAppBar";
 import TabPanel from "../components/Panel/TabPanel";
 import SidebarList from "../components/List/SidebarList";
+// Functions
+import { employeeShow } from "../functions/employeeFunctions";
+import { environmentShow } from "../functions/environmentFunctions";
+import { tableShow } from "../functions/tableFunctions";
+import { categoryShow } from "../functions/categoryFunctions";
+import { subcategoryShow } from "../functions/subcategoryFunctions";
+import { productShow } from "../functions/productFunctions";
+import { orderShow } from "../functions/orderFunctions";
 // Assets
 import logo from "../assets/img/brands/kroft-horizontal.svg";
 // Styles
@@ -26,27 +37,45 @@ import styles from "../styles/pages/DashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function DashboardPage(props) {
-  const classes = useStyles();
+function DashboardPage({ employees, loading }) {
+
+  // Loading payloads state
+  const [is_payload, set_is_payload] = useState(false);
   // TabPanel Swipeables Views
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  // const handleChangeIndex = (index) => {
-  // 	setValue(index);
-  // };
-
   // Change Desktop and Mobile display
   const [mobileOpen, setMobileOpen] = useState(false);
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  // // State for Card animation
-  // const [ cardAnimaton, setCardAnimation ] = useState('cardHidden');
-  // setTimeout(function () {
-  // 	setCardAnimation('');
-  // }, 700);
+
+  // Refresh fetches
+  const handleRefresh = () => {
+    employeeShow();
+    // environmentShow();
+    // tableShow();
+    // categoryShow();
+    // subcategoryShow();
+    // productShow();
+    // orderShow();
+  }
+
+  // Payloads
+  useEffect(() => {
+    if (is_payload === false) {
+
+      handleRefresh();
+
+      // Change is_payload state
+      set_is_payload(true);
+    }
+  }, [is_payload, employees]);
+
+  const classes = useStyles();
+
   return (
     <Fragment>
       <div className={classes.root}>
@@ -228,7 +257,7 @@ export default function DashboardPage(props) {
                       xl={12}
                       elevation={6}
                       square="true"
-                      // className={classes.container}
+                    // className={classes.container}
                     >
                       <list.component />
                     </Grid>
@@ -241,4 +270,26 @@ export default function DashboardPage(props) {
       </div>
     </Fragment>
   );
-}
+};
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { employee, environment, table, product } = state;
+  return {
+    employees: employee.payload,
+    loading: employee.loading,
+    environments: environment,
+    // loading: environment.loading,
+    tables: table.payload,
+    orders_list: product.orders,
+    current: product.current,
+  }
+};
+// // Functions to dispatching
+// const open_products = (payload) => (open(payload));
+// const close_products = (value) => (close(value));
+// // Binding an object full of action creators
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ open_products, close_products }, dispatch);
+// };
+
+export default withRouter(connect(mapStateToProps, null)(DashboardPage));

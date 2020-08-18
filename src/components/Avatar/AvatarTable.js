@@ -12,18 +12,18 @@ const useStyles = makeStyles(styles);
 
 export default function AvatarTable(props) {
   const classes = useStyles();
-  const { rowData, path } = props;
+  const { rowData, image, alt, path } = props;
   return (
-    // <Tooltip placement="bottom" title="Imagen">
+    // <Tooltip placement="bottom" alt="Imagen">
     <IconButton
       color="inherit"
       className={classes.avatar}
-      onClick={() => alert(rowData.name)}
+      onClick={() => alert(rowData[alt])}
     >
       <img
         className={classes.img}
-        src={path + rowData.image}
-        alt={rowData.image}
+        src={path + rowData[image]}
+        alt={rowData[alt]}
       />
     </IconButton>
     // </Tooltip>
@@ -33,10 +33,14 @@ export default function AvatarTable(props) {
 // PropTypes
 AvatarTable.defaultProps = {
   rowData: {},
+  image: "",
+  alt: "",
   path: ""
 };
 
 AvatarTable.propTypes = {
   rowData: PropTypes.object,
+  image: PropTypes.string,
+  alt: PropTypes.string,
   path: PropTypes.string
 };
