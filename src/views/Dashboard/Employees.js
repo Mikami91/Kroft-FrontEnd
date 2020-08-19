@@ -16,10 +16,8 @@ import CustomModal from '../../components/Modal/CustomModal';
 import EmployeeUpdate from '../../layouts/Forms/EmployeeUpdate';
 // Layouts
 import EmployeeAdd from '../../layouts/Forms/EmployeeAdd.js';
-// Icons
-import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 // Functions
-import { employeeShow, employeeUpdate as employeeUpdateFunc, employeeDelete } from "../../functions/employeeFunctions";
+import { employeeShow, employeeDelete } from "../../functions/employeeFunctions";
 // API
 import { API } from '../../API/index';
 
@@ -28,13 +26,12 @@ function Employees({ employees, fetching, loading }) {
         data: {},
         open: false
     })
-    const handleOpen = (rowData) => [console.log(rowData), setState({ data: rowData, open: true })];
+    const handleOpen = (rowData) => setState({ data: rowData, open: true });
     const handleClose = () => setState({ data: {}, open: false });
     return (
         <Fragment>
             <Grid
                 container
-                //   className={classes.content}
                 justify="center"
                 alignItems="flex-start"
                 spacing={3}
@@ -83,14 +80,6 @@ function Employees({ employees, fetching, loading }) {
                                     { title: "Nombre", field: "first_name", type: "string" },
                                     { title: "Apellidos", field: "last_name", type: "string" },
                                     { title: "Celular", field: "phone", type: "numeric" },
-
-                                    // { title: "Nacimiento", field: "birthdate", type: "string" },
-                                    // { title: "Genero", field: "gender", type: "string" },
-                                    // { title: "Dirección", field: "address", type: "string" },
-                                    // { title: "Celular de referencia", field: "reference_phone", type: "string" },
-                                    // { title: "Fecha de entrada", field: "entry_date", type: "string" },
-                                    // { title: "Usuario", field: "user", type: "string" },
-                                    // { title: "Jefe de área", field: "head_area", type: "string" },
                                 ]}
                                 data={employees}
                                 detailPanel={[
@@ -118,9 +107,10 @@ function Employees({ employees, fetching, loading }) {
                     text: "Editar personal",
                     size: "medium",
                 }}
+                loading={fetching}
                 open={state.open}
                 close={handleClose}
-                content={<EmployeeUpdate data={state.data} />}
+                content={<EmployeeUpdate data={state.data} close={handleClose} />}
                 rightButtons={[
                     {
                         type: "submit",
@@ -132,7 +122,6 @@ function Employees({ employees, fetching, loading }) {
                         // icon: CheckCircleRoundedIcon,
                         // iconColor: "secondary",
                         html: "employee-update",
-                        onClick: console.log("mmm"),
                     },
                 ]}
                 renderRefresh={[state.open, state.data]}

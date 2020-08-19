@@ -11,6 +11,7 @@ const modalStyle = {
     borderBottom: "none",
     padding: theme.spacing(2),
     minHeight: "16.43px",
+    zIndex: 999,
   },
   contentTitle: {
     display: "inline-flex",

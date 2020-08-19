@@ -136,7 +136,6 @@ function EmployeeAdd(props) {
             // Empty input file value
             e.target.value = null;
         }
-        console.log(state.photo);
     };
 
     // Empty State of Image
@@ -223,7 +222,7 @@ function EmployeeAdd(props) {
                             <IconInput
                                 variant={'standard'} margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Nombre'}
                                 name="first_name"
@@ -237,7 +236,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Apellidos'}
                                 name="last_name"
@@ -251,7 +250,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Fecha de nacimiento'}
                                 name="birthdate"
@@ -266,7 +265,7 @@ function EmployeeAdd(props) {
                                 margin="dense"
                                 color="primary"
                                 hoverColor="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 id="position"
                                 label="Género"
                                 name="gender"
@@ -286,7 +285,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 label={'Celular'}
                                 name="phone"
                                 value={state.phone}
@@ -299,7 +298,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Dirección'}
                                 name="address"
@@ -313,7 +312,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 label={'Celular de referencia'}
                                 name="reference_phone"
                                 value={state.reference_phone}
@@ -340,7 +339,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Fecha de ingreso'}
                                 name="entry_date"
@@ -358,7 +357,7 @@ function EmployeeAdd(props) {
                                 margin="dense"
                                 color="primary"
                                 hoverColor="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 id="position"
                                 label="Cargo"
                                 name="rol_id"
@@ -384,7 +383,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 label={'Salario'}
                                 name="paid_amount"
                                 value={state.paid_amount}
@@ -396,7 +395,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Fecha de pago'}
                                 name="salary_month"
@@ -414,7 +413,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Usuario'}
                                 name="user"
@@ -428,7 +427,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Contraseña'}
                                 name="password"
@@ -442,7 +441,7 @@ function EmployeeAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Pin'}
                                 name="pin"

@@ -1,17 +1,33 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
 // Core Components
 import CustomTable from "../../components/Table/CustomTable.js";
+import AvatarTable from "../../components/Avatar/AvatarTable";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
+import CustomLoading from '../../components/Loading/CustomLoading.js';
+import CustomModal from '../../components/Modal/CustomModal';
+import EnvironmentUpdate from '../../layouts/Forms/EnvironmentUpdate';
 // Layouts
 import EnvironmentAdd from "../Forms/EnvironmentAdd.js";
+// Functions
+import { environmentShow, environmentDelete } from "../../functions/environmentFunctions";
+// API
+import { API } from '../../API/index';
 
-function Environments(props) {
+function Environments({ environments, fetching, loading }) {
+  const [state, setState] = useState({
+    data: {},
+    open: false
+  })
+  const handleOpen = (rowData) => setState({ data: rowData, open: true });
+  const handleClose = () => setState({ data: {}, open: false });
   return (
     <Fragment>
       <Grid
@@ -30,7 +46,7 @@ function Environments(props) {
           xl={4}
           elevation={6}
           square="true"
-          // className={classes.container}
+        // className={classes.container}
         >
           <EnvironmentAdd />
         </Grid>
@@ -44,9 +60,12 @@ function Environments(props) {
           xl={8}
           elevation={6}
           square="true"
-          // className={classes.container}
+        // className={classes.container}
         >
           <Card variant="cardForm">
+
+            <CustomLoading inside color="primary" open={loading} />
+
             <CardHeader color="primary" dense>
               <h3>Lista de Ambientes</h3>
             </CardHeader>
@@ -60,13 +79,13 @@ function Environments(props) {
                     editable: "never",
                   },
                   {
-                    title: "Imagen",
-                    field: "image",
+                    title: "Foto",
+                    field: "Photo",
                     editable: "never",
                     sorting: false,
-                    // render: rowData => (
-                    //     <AvatarTable rowData={rowData} path={path} />
-                    // )
+                    render: rowData => (
+                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/environments/`} />
+                    )
                   },
                   { title: "Ambiente", field: "name", type: "string" },
                   { title: "Prefijo", field: "prefix", type: "string" },
@@ -83,16 +102,40 @@ function Environments(props) {
                     type: "date",
                   },
                 ]}
-                //   data={EmployeesList}
-                //   refresh={userListAction}
-                //   updates={userUpdateAction}
-                //   deletes={userDeleteAction}
-                //   loading={Loading}
+                data={environments}
+                refresh={environmentShow}
+                customUpdate={handleOpen}
+                deletes={environmentDelete}
               />
             </CardBody>
           </Card>
         </Grid>
       </Grid>
+
+      <CustomModal
+        title={{
+          text: "Editar ambiente",
+          size: "medium",
+        }}
+        loading={fetching}
+        open={state.open}
+        close={handleClose}
+        content={<EnvironmentUpdate data={state.data} close={handleClose} />}
+        rightButtons={[
+          {
+            type: "submit",
+            size: "medium",
+            align: "center",
+            text: "Guardar",
+            color: "primary",
+            variant: "contained",
+            html: "environment-update",
+          },
+        ]}
+        renderRefresh={[state.open, state.data]}
+        scroll="paper"
+      />
+
     </Fragment>
   );
 }
@@ -102,5 +145,14 @@ Environments.propTypes = {
     typeof Element === "undefined" ? Object : Element
   ),
 };
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { environment } = state;
+  return {
+    environments: environment.payload,
+    fetching: environment.fetching,
+    loading: environment.loading,
+  }
+};
 
-export default Environments;
+export default connect(mapStateToProps, null)(Environments);

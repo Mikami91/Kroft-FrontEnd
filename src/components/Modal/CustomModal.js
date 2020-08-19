@@ -16,6 +16,7 @@ import DialogIcon from "../CustomButtons/DialogIcon";
 import DialogFab from "../CustomButtons/DialogFab";
 import DialogText from "../Typography/DialogText";
 import CustomText from "../Typography/CustomText";
+import CustomLoading from '../Loading/CustomLoading.js';
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
 // Styles
@@ -40,6 +41,7 @@ export default function CustomModal(props) {
     fullWidth,
     maxWidth,
     title,
+    loading,
     subtitle,
     content,
     centerButtons,
@@ -89,6 +91,9 @@ export default function CustomModal(props) {
             </div>
           </div>
         </DialogTitle>
+
+        <CustomLoading open={loading} inside />
+
         <DialogContent style={{ backgroundImage: `url(${background})` }}>{content}</DialogContent>
         <DialogActions className={classes.modalFooter}>
           <div className={classes.contentLeft}>
@@ -179,6 +184,7 @@ CustomModal.defaultProps = {
   fullWidth: false,
   maxWidth: "md",
   title: {},
+  loading: false,
   content: null,
   footer: null,
   background: "",
@@ -197,6 +203,7 @@ CustomModal.propTypes = {
   fullWidth: PropTypes.bool,
   maxWidth: PropTypes.oneOf(["lg", "md", "sm", "xl", "xs", false]),
   title: PropTypes.object,
+  loading: PropTypes.bool,
   content: PropTypes.object,
   rightButtons: PropTypes.arrayOf(
     PropTypes.shape({

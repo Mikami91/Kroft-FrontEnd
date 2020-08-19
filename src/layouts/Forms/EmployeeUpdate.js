@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import moment from 'moment';
 import 'moment/locale/es';
 // Conecction to Store
@@ -263,7 +263,7 @@ function EmployeeUpdate(props) {
                         <IconInput
                             variant={'standard'} margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Nombre'}
                             name="first_name"
@@ -277,7 +277,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Apellidos'}
                             name="last_name"
@@ -291,7 +291,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Fecha de nacimiento'}
                             name="birthdate"
@@ -306,7 +306,7 @@ function EmployeeUpdate(props) {
                             margin="dense"
                             color="primary"
                             hoverColor="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             id="position"
                             label="Género"
                             name="gender"
@@ -323,7 +323,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             label={'Celular'}
                             name="phone"
                             value={state.phone}
@@ -350,7 +350,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Dirección'}
                             name="address"
@@ -364,7 +364,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             label={'Celular de referencia'}
                             name="reference_phone"
                             value={state.reference_phone}
@@ -380,7 +380,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Fecha de ingreso'}
                             name="entry_date"
@@ -398,7 +398,7 @@ function EmployeeUpdate(props) {
                             margin="dense"
                             color="primary"
                             hoverColor="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             id="position"
                             label="Cargo"
                             name="rol_id"
@@ -436,7 +436,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             label={'Salario'}
                             name="paid_amount"
                             value={state.paid_amount}
@@ -448,7 +448,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Fecha de pago'}
                             name="salary_month"
@@ -466,7 +466,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Usuario'}
                             name="user"
@@ -480,7 +480,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Contraseña'}
                             name="password"
@@ -494,7 +494,7 @@ function EmployeeUpdate(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            // disabled={showProgress}
+                            disabled={fetching}
                             type="text"
                             label={'Pin'}
                             name="pin"
