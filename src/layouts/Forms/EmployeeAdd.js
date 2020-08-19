@@ -229,7 +229,7 @@ function EmployeeAdd(props) {
                                 name="first_name"
                                 onChange={handleChange}
                                 value={state.first_name}
-                                norequired
+                                required
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
@@ -243,7 +243,7 @@ function EmployeeAdd(props) {
                                 name="last_name"
                                 onChange={handleChange}
                                 value={state.last_name}
-                                norequired
+                                required
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
@@ -259,7 +259,7 @@ function EmployeeAdd(props) {
                                 value={state.birthdate}
                                 minDate={moment().subtract(70, 'years').calendar()}
                                 maxDate={moment().subtract(18, 'years').calendar()}
-                                norequired
+                                required
                             />
                             <SelectInput
                                 variant="standard"
@@ -277,7 +277,7 @@ function EmployeeAdd(props) {
                                     key: "id",
                                     value: "gender"
                                 }}
-                                norequired
+                                required
                             />
 
                             <CustomDivider text="Información" color="warning" margin="dense" bold />
@@ -292,7 +292,7 @@ function EmployeeAdd(props) {
                                 value={state.phone}
                                 onChange={handleChange}
                                 maxLength={9}
-                                norequired
+                                required
                                 phone
                             />
                             <IconInput
@@ -305,7 +305,7 @@ function EmployeeAdd(props) {
                                 name="address"
                                 onChange={handleChange}
                                 value={state.address}
-                                norequired
+                                required
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
@@ -319,7 +319,7 @@ function EmployeeAdd(props) {
                                 value={state.reference_phone}
                                 onChange={handleChange}
                                 maxLength={9}
-                                norequired
+                                required
                                 phone
                             />
 
@@ -350,7 +350,7 @@ function EmployeeAdd(props) {
                                 openTo="month"
                                 minDate={moment().subtract(30, 'years').calendar()}
                                 maxDate={moment().add(1, 'years').calendar()}
-                                norequired
+                                required
                             />
 
                             <SelectInput
@@ -369,7 +369,7 @@ function EmployeeAdd(props) {
                                     key: "id",
                                     value: "website"
                                 }}
-                                norequired
+                                required
                             />
 
                             <FormControlLabel
@@ -390,7 +390,7 @@ function EmployeeAdd(props) {
                                 value={state.paid_amount}
                                 onChange={handleChange}
                                 prefix={"Bs"}
-                                norequired
+                                required
                             />
                             <DateInput
                                 variant={'standard'}
@@ -405,7 +405,7 @@ function EmployeeAdd(props) {
                                 views="date"
                                 openTo="date"
                                 autoOk
-                                norequired
+                                required
                             />
 
                             <CustomDivider text="Perfil" color="warning" margin="dense" bold />
@@ -420,7 +420,7 @@ function EmployeeAdd(props) {
                                 name="user"
                                 onChange={handleChange}
                                 value={state.user}
-                                norequired
+                                required
                                 // icon={<PersonIcon />}
                                 iconPosition="end"
                             />
@@ -434,7 +434,7 @@ function EmployeeAdd(props) {
                                 name="password"
                                 onChange={handleChange}
                                 value={state.password}
-                                norequired
+                                required
                                 // icon={<LockIcon />}
                                 iconPosition="end"
                             />
@@ -448,7 +448,7 @@ function EmployeeAdd(props) {
                                 name="pin"
                                 onChange={handleChange}
                                 value={state.pin}
-                                norequired
+                                required
                                 // icon={<VpnKeyIcon />}
                                 iconPosition="end"
                             />

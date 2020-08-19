@@ -39,7 +39,6 @@ function DialogButton(props) {
 
     <Hidden smDown key={key+ "large"}>
       <Button
-        type="submit"
         disabled={disabled}
         variant={variant}
         className={btnClasses}

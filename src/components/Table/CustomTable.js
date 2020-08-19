@@ -100,6 +100,11 @@ export default function CustomTable(props) {
             paging: paging,
             padding: padding,
             selection: false,
+            headerStyle: {
+              color: '#ff9800',
+              fontSize: 'small',
+              fontWeight: 'bold',
+            }
           }}
           localization={{
             pagination: {

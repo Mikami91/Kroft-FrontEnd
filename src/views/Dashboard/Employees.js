@@ -16,6 +16,8 @@ import CustomModal from '../../components/Modal/CustomModal';
 import EmployeeUpdate from '../../layouts/Forms/EmployeeUpdate';
 // Layouts
 import EmployeeAdd from '../../layouts/Forms/EmployeeAdd.js';
+// Icons
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 // Functions
 import { employeeShow, employeeUpdate as employeeUpdateFunc, employeeDelete } from "../../functions/employeeFunctions";
 // API
@@ -46,7 +48,6 @@ function Employees({ employees, fetching, loading }) {
                     xl={5}
                     elevation={6}
                     square="true"
-                // className={classes.container}
                 >
                     <EmployeeAdd />
 
@@ -61,7 +62,6 @@ function Employees({ employees, fetching, loading }) {
                     xl={7}
                     elevation={6}
                     square="true"
-                // className={classes.container}
                 >
                     <Card variant="cardForm">
 
@@ -121,7 +121,22 @@ function Employees({ employees, fetching, loading }) {
                 open={state.open}
                 close={handleClose}
                 content={<EmployeeUpdate data={state.data} />}
+                rightButtons={[
+                    {
+                        type: "submit",
+                        size: "medium",
+                        align: "center",
+                        text: "Guardar",
+                        color: "primary",
+                        variant: "contained",
+                        // icon: CheckCircleRoundedIcon,
+                        // iconColor: "secondary",
+                        html: "employee-update",
+                        onClick: console.log("mmm"),
+                    },
+                ]}
                 renderRefresh={[state.open, state.data]}
+                scroll="paper"
             />
 
         </Fragment>

@@ -19,6 +19,7 @@ const makeComponentStyles = makeStyles(() => ({
 const RegularButton = React.forwardRef((props, ref) => { 
   const {
     html,
+    type,
     color,
     variant,
     round,
@@ -50,7 +51,7 @@ const RegularButton = React.forwardRef((props, ref) => {
     [className]: className
   });
   return (
-    <Button {...rest} ref={ref} className={btnClasses}>
+    <Button type="submit" {...rest} ref={ref} className={btnClasses}>
       {children}
     </Button>
   );

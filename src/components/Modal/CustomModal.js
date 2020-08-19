@@ -11,6 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 // Core Components
 import DialogButton from "../CustomButtons/DialogButton";
+import DialogSubmit from "../CustomButtons/DialogSubmit";
 import DialogIcon from "../CustomButtons/DialogIcon";
 import DialogFab from "../CustomButtons/DialogFab";
 import DialogText from "../Typography/DialogText";
@@ -47,7 +48,7 @@ export default function CustomModal(props) {
     background,
     renderRefresh,
   } = props;
-  
+
   // Using useMemo hook
   return useMemo(() => {
     // Render
@@ -96,6 +97,10 @@ export default function CustomModal(props) {
               if (index.type === "button") {
                 return <DialogButton key={key} index={index} />;
               }
+              // Submit type
+              if (index.type === "submit") {
+                return <DialogSubmit key={key} index={index} />;
+              }
               // Icon type
               if (index.type === "icon" && typeof index.icon == "undefined") {
                 return <DialogIcon key={key} index={index} />;
@@ -117,6 +122,10 @@ export default function CustomModal(props) {
               if (index.type === "button") {
                 return <DialogButton key={key} index={index} />;
               }
+              // Submit type
+              if (index.type === "submit") {
+                return <DialogSubmit key={key} index={index} />;
+              }
               // Icon type
               if (index.type === "icon" && typeof index.icon !== "undefined") {
                 return <DialogIcon key={key} index={index} />;
@@ -137,6 +146,10 @@ export default function CustomModal(props) {
               // Button type
               if (index.type === "button") {
                 return <DialogButton key={key} index={index} />;
+              }
+              // Submit type
+              if (index.type === "submit") {
+                return <DialogSubmit key={key} index={index} />;
               }
               // Icon type
               if (index.type === "icon" && typeof index.icon !== "undefined") {
@@ -187,19 +200,19 @@ CustomModal.propTypes = {
   content: PropTypes.object,
   rightButtons: PropTypes.arrayOf(
     PropTypes.shape({
-      type: PropTypes.oneOf(["button", "icon", "fab", "text"]),
+      type: PropTypes.oneOf(["button", "submit", "icon", "fab", "text"]),
       icon: PropTypes.object,
     })
   ),
   centerButtons: PropTypes.arrayOf(
     PropTypes.shape({
-      type: PropTypes.oneOf(["button", "icon", "fab", "text"]),
+      type: PropTypes.oneOf(["button", "submit", "icon", "fab", "text"]),
       icon: PropTypes.object,
     })
   ),
   leftButtons: PropTypes.arrayOf(
     PropTypes.shape({
-      type: PropTypes.oneOf(["button", "icon", "fab", "text"]),
+      type: PropTypes.oneOf(["button", "submit", "icon", "fab", "text"]),
       icon: PropTypes.object,
     })
   ),

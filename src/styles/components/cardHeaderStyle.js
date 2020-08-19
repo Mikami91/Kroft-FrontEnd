@@ -92,6 +92,9 @@ const cardHeaderStyle = {
       margin: "5px 4px 0px"
     }
   },
+  cardHeaderModal: {
+    marginTop: "10px",
+  },
   warningCardHeader,
   successCardHeader,
   dangerCardHeader,
