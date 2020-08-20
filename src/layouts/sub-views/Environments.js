@@ -13,9 +13,9 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomModal from '../../components/Modal/CustomModal';
-import EnvironmentUpdate from '../../layouts/Forms/EnvironmentUpdate';
 // Layouts
-import EnvironmentAdd from "../Forms/EnvironmentAdd.js";
+import EnvironmentAdd from "../Forms/EnvironmentAdd";
+import EnvironmentUpdate from '../Forms/EnvironmentUpdate';
 // Functions
 import { environmentShow, environmentDelete } from "../../functions/environmentFunctions";
 // API
@@ -72,12 +72,7 @@ function Environments({ environments, fetching, loading }) {
             <CardBody form>
               <CustomTable
                 column={[
-                  {
-                    title: "ID",
-                    field: "id",
-                    type: "numeric",
-                    editable: "never",
-                  },
+                  { title: "ID", field: "id", type: "numeric", editable: "never", },
                   {
                     title: "Foto",
                     field: "Photo",
@@ -89,18 +84,8 @@ function Environments({ environments, fetching, loading }) {
                   },
                   { title: "Ambiente", field: "name", type: "string" },
                   { title: "Prefijo", field: "prefix", type: "string" },
-                  {
-                    title: "Creación",
-                    field: "created_at",
-                    editable: "never",
-                    type: "date",
-                  },
-                  {
-                    title: "Modificación",
-                    field: "updated_at",
-                    editable: "never",
-                    type: "date",
-                  },
+                  // { title: "Creación", field: "created_at", editable: "never", type: "date", },
+                  // { title: "Modificación", field: "updated_at", editable: "never", type: "date", },
                 ]}
                 data={environments}
                 refresh={environmentShow}

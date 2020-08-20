@@ -54,7 +54,7 @@ function DashboardPage({ employees, loading }) {
 
   // Refresh fetches
   const handleRefresh = () => {
-    employeeShow();
+    // employeeShow();
     // environmentShow();
     // tableShow();
     // categoryShow();

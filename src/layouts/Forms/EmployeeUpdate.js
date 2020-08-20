@@ -49,7 +49,7 @@ function EmployeeUpdate(props) {
         // Props
         data,
     } = props;
-    const image = typeof data.photo === "undefined" ? null : `${API}images/employees/${data.photo}`;
+    const current_image = typeof data.photo === "undefined" ? null : `${API}images/employees/${data.photo}`;
     // Local State
     const [state, setState] = useState({
         // Others
@@ -102,7 +102,7 @@ function EmployeeUpdate(props) {
                 salary_month: data.salary_month,
                 paid_amount: data.paid_amount,
                 // Photo
-                photo: data.photo,
+                photo: null,
                 isUpload: false,
                 photoChange: false,
                 error: false
@@ -187,7 +187,6 @@ function EmployeeUpdate(props) {
     // Update function
     const handleUpdate = (e) => {
         e.preventDefault();
-        setState({ ...state, photo: state.isUpload === true ? state.photo : null });
         employeeUpdate(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
@@ -209,7 +208,7 @@ function EmployeeUpdate(props) {
 
             <CardHeader color="success" avatar modal>
                 <AvatarForm
-                    image={state.photoChange === true ? state.photo : image}
+                    image={state.photoChange === true ? state.photo : current_image}
                     alt="Imagen"
                     title="Imagen"
                 />

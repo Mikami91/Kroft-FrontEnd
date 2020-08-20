@@ -13,27 +13,30 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
+import SelectInput from '../../components/CustomInput/SelectInput.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { environmentUpdate } from "../../functions/environmentFunctions";
+import { tableUpdate } from "../../functions/tableFunctions";
 // Apis
 import { API } from '../../API/index';
 
-function EnvironmentUpdate(props) {
+function TableUpdate(props) {
     const {
         // Redux 
         fetching,
+        environments,
         // Props
         data,
         close,
     } = props;
-    const current_image = typeof data.photo === "undefined" ? null : `${API}images/environments/${data.photo}`;
+    const current_image = typeof data.photo === "undefined" ? null : `${API}images/tables/${data.photo}`;
     // Local State
     const [state, setState] = useState({
         photo: null,
+        environment_id: "",
         name: "",
-        prefix: "",
+        number: null,
         isUpload: false,
         photoChange: false,
         error: false
@@ -43,9 +46,10 @@ function EnvironmentUpdate(props) {
         if (Object.keys(data).length > 0) {
             setState({
                 ...data,
+                environment_id: data.environment_id,
                 photo: null,
                 name: data.name,
-                prefix: data.prefix,
+                number: data.number,
                 isUpload: false,
                 photoChange: false,
                 error: false,
@@ -64,6 +68,7 @@ function EnvironmentUpdate(props) {
     // Empty State values
     const handleEmpty = (e) => {
         setState({
+            environment_id: "",
             photo: null,
             name: "",
             prefix: "",
@@ -110,7 +115,7 @@ function EnvironmentUpdate(props) {
     // Update function
     const handleUpdate = (e) => {
         e.preventDefault();
-        environmentUpdate(state).then((response) => {
+        tableUpdate(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
                     close();
@@ -121,7 +126,7 @@ function EnvironmentUpdate(props) {
         });
     };
     return (
-        <form id="environment-update" onSubmit={handleUpdate} encType="multipart/form-data" >
+        <form id="table-update" onSubmit={handleUpdate} encType="multipart/form-data" >
 
             <CustomLoading inside color="primary" open={state.isUpload || fetching} />
 
@@ -134,7 +139,7 @@ function EnvironmentUpdate(props) {
                 <input
                     // disabled={state.isUpload || showProgress ? true : false}
                     accept="image/png, image/jpeg, image/jpg"
-                    id="environment-file-update"
+                    id="table-file-update"
                     type="file"
                     name="image"
                     onChange={handleImage}
@@ -149,7 +154,7 @@ function EnvironmentUpdate(props) {
                     </IconButton>
 
                     <IconButton edge="end" disabled={state.isUpload ? true : false}
-                        onClick={() => { document.getElementById("environment-file-update").click() }}
+                        onClick={() => { document.getElementById("table-file-update").click() }}
                     >
                         <label>
                             <AddAPhotoIcon />
@@ -175,6 +180,24 @@ function EnvironmentUpdate(props) {
                         elevation={6}
                         square="true"
                     >
+                        <SelectInput
+                            variant="standard"
+                            margin="dense"
+                            color="primary"
+                            hoverColor="primary"
+                            disabled={fetching}
+                            id="environment"
+                            label="Ambiente"
+                            name="environment_id"
+                            onChange={handleChange}
+                            value={state.environment_id}
+                            itemList={{
+                                data: environments,
+                                key: "id",
+                                value: "name"
+                            }}
+                            required
+                        />
                         <IconInput
                             variant={'standard'}
                             margin={'dense'}
@@ -188,19 +211,6 @@ function EnvironmentUpdate(props) {
                             required
                             iconPosition="end"
                         />
-                        <IconInput
-                            variant={'standard'}
-                            margin={'dense'}
-                            color="primary"
-                            disabled={fetching}
-                            type="text"
-                            label={'Prefijo'}
-                            name="prefix"
-                            onChange={handleChange}
-                            value={state.prefix}
-                            required
-                            iconPosition="end"
-                        />
                     </Grid>
                 </Grid>
             </CardBody>
@@ -209,10 +219,11 @@ function EnvironmentUpdate(props) {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-    const { environment } = state;
+    const { table, environment } = state;
     return {
-        fetching: environment.fetching,
+        fetching: table.fetching,
+        environments: environment.payload
     }
 };
 
-export default connect(mapStateToProps, null)(EnvironmentUpdate);
+export default connect(mapStateToProps, null)(TableUpdate);

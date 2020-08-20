@@ -13,9 +13,9 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomModal from '../../components/Modal/CustomModal';
-import EmployeeUpdate from '../../layouts/Forms/EmployeeUpdate';
 // Layouts
 import EmployeeAdd from '../../layouts/Forms/EmployeeAdd.js';
+import EmployeeUpdate from '../../layouts/Forms/EmployeeUpdate';
 // Functions
 import { employeeShow, employeeDelete } from "../../functions/employeeFunctions";
 // API

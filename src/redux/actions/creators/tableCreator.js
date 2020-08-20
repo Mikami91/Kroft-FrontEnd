@@ -1,7 +1,7 @@
 // Store
 import store from '../../store';
 // Action types
-import { TABLE_LIST, TABLE_LOADING } from '../actionsTypes';
+import { TABLE_LIST, TABLE_FETCHING, TABLE_LOADING } from '../actionsTypes';
 
 
 export const table_list = (payload) => {
@@ -11,6 +11,14 @@ export const table_list = (payload) => {
   };
 }
 export const payload = (payload) => store.dispatch(table_list(payload));
+
+export const environment_fetching = (value) => {
+  return {
+    type: TABLE_FETCHING,
+    value: value
+  };
+};
+export const fetching = (value) => store.dispatch(environment_fetching(value));
 
 export const table_loading = (value) => {
   return {

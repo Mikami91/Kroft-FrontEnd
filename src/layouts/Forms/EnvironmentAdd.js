@@ -84,14 +84,13 @@ function EnvironmentAdd(props) {
         e.target.value = null;
     };
 
-    // Register function
+    // Create function
     const handleCreate = (e) => {
         e.preventDefault();
         environmentCreate(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
                     handleEmpty();
-                    console.log("registrado");
                 }
             }
         });
