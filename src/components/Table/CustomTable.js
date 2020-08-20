@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import React, { Fragment, useMemo, forwardRef } from "react";
+import React, { useMemo, forwardRef } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from "material-table";
 // @material-ui/core components

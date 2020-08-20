@@ -1,16 +1,16 @@
 // Store
 import store from '../../store';
 // Action types
-import { EMPLOYEE_DATA, EMPLOYEE_FETCHING, EMPLOYEE_LOADING } from '../actionsTypes';
+import { EMPLOYEE_LIST, EMPLOYEE_FETCHING, EMPLOYEE_LOADING } from '../actionsTypes';
 
 
-export const employee_data = (payload) => {
+export const employee_list = (payload) => {
   return {
-    type: EMPLOYEE_DATA,
+    type: EMPLOYEE_LIST,
     payload: payload
   };
 };
-export const payload = (payload) => store.dispatch(employee_data(payload));
+export const payload = (payload) => store.dispatch(employee_list(payload));
 
 export const employee_fetching = (value) => {
   return {

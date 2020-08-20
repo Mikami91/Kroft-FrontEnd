@@ -1,29 +1,29 @@
 // Action types
-import { EMPLOYEE_LIST, EMPLOYEE_FETCHING, EMPLOYEE_LOADING } from '../actions/actionsTypes';
+import { CUSTOMER_LIST, CUSTOMER_FETCHING, CUSTOMER_LOADING } from '../actions/actionsTypes';
 
 // Default State
-const employeeState = {
+const customerState = {
   payload: [],
   fetching: false,
   loading: false,
 };
 
-export function employeeReducer(state = employeeState, action) {
+export function customerReducer(state = customerState, action) {
 
   switch (action.type) {
-    case EMPLOYEE_LIST:
+    case CUSTOMER_LIST:
       return {
         ...state,
         payload: action.payload
       };
 
-    case EMPLOYEE_FETCHING:
+    case CUSTOMER_FETCHING:
       return {
         ...state,
         fetching: action.value
       };
 
-    case EMPLOYEE_LOADING:
+    case CUSTOMER_LOADING:
       return {
         ...state,
         loading: action.value

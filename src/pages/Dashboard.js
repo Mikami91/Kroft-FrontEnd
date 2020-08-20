@@ -29,6 +29,7 @@ import { tableShow } from "../functions/tableFunctions";
 import { categoryShow } from "../functions/categoryFunctions";
 import { subcategoryShow } from "../functions/subcategoryFunctions";
 import { productShow } from "../functions/productFunctions";
+import { customerShow } from "../functions/customerFunctions";
 import { orderShow } from "../functions/orderFunctions";
 // Assets
 import logo from "../assets/img/brands/kroft-horizontal.svg";
@@ -60,6 +61,7 @@ function DashboardPage({ employees, loading }) {
     // categoryShow();
     // subcategoryShow();
     // productShow();
+    customerShow();
     // orderShow();
   }
 

@@ -5,7 +5,6 @@ import 'moment/locale/es';
 // Conecction to Store
 import { connect } from 'react-redux';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import IconButton from '@material-ui/core/IconButton';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -15,17 +14,14 @@ import Checkbox from '@material-ui/core/Checkbox';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import DeleteIcon from '@material-ui/icons/Delete';
 // core components
-import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import CardFooter from "../../components/Card/CardFooter.js";
 import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
 import DateInput from '../../components/CustomInput/DateInput.js';
 import NumberInput from '../../components/CustomInput/NumberInput.js';
-import CustomBotton from '../../components/CustomButtons/Button.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
@@ -34,10 +30,6 @@ import { employeeUpdate } from "../../functions/employeeFunctions";
 import { API } from '../../API/index';
 // Varieables
 import { data as dataVar } from '../../variables/JSON.js';
-// Styles
-import styles from "../../styles/pages/LoginStyle.js";
-// Make styles
-const useStyles = makeStyles(styles);
 // Configs
 moment.locale("en");
 moment().format('l');
@@ -48,12 +40,13 @@ function EmployeeUpdate(props) {
         fetching,
         // Props
         data,
+        close,
     } = props;
     const current_image = typeof data.photo === "undefined" ? null : `${API}images/employees/${data.photo}`;
     // Local State
     const [state, setState] = useState({
         // Others
-        admin_id: localStorage.getItem("admin_id"),
+        admin_id: "",
         rol_id: "",
         // Employee
         first_name: "",
@@ -83,7 +76,7 @@ function EmployeeUpdate(props) {
             setState({
                 ...data,
                 // Others
-                admin_id: localStorage.getItem("admin_id"),
+                admin_id: data.admin_id,
                 rol_id: data.rol_id,
                 // Employee
                 first_name: data.first_name,
@@ -190,14 +183,12 @@ function EmployeeUpdate(props) {
         employeeUpdate(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
+                    close();
                     handleEmpty();
-                    console.log("registrado");
                 }
             }
         });
     };
-    // Styles
-    const classes = useStyles();
     // Using useMemo hook
     // return useMemo(() => {
     return (

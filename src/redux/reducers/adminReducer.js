@@ -1,5 +1,5 @@
 // Action types
-import { ADMIN_DATA, ADMIN_LOADING } from '../actions/actionsTypes';
+import { ADMIN_LIST, ADMIN_LOADING } from '../actions/actionsTypes';
 
 // Default State
 const adminState = {
@@ -10,7 +10,7 @@ const adminState = {
 export function adminReducer(state = adminState, action) {
 
   switch (action.type) {
-    case ADMIN_DATA:
+    case ADMIN_LIST:
       return {
         ...state,
         payload: action.payload

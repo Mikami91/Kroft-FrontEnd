@@ -6,13 +6,13 @@ import SwipeableViews from "react-swipeable-views";
 import TabPanel from "../../components/Panel/TabPanel";
 import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
-import SubProviders from "../../layouts/sub-views/Providers";
-import Suppliers from "../../layouts/sub-views/Suppliers";
+import SubCustomers from "../../layouts/sub-views/Customers";
+import Suppliers from "../../layouts/sub-views/Customers";
 // Icons
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
 import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
 
-function Providers(props) {
+function Customers(props) {
   // TabPanel Swipeables Views
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -25,7 +25,7 @@ function Providers(props) {
 
         <SwipeableViews index={value} onChangeIndex={handleChange}>
           <TabPanel sub value={value} index={0}>
-            <SubProviders />
+            <SubCustomers />
           </TabPanel>
           <TabPanel sub value={value} index={1}>
             <Suppliers />
@@ -56,10 +56,10 @@ function Providers(props) {
   }, [value]);
 }
 // PropTypes
-Providers.propTypes = {
+Customers.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
 };
 
-export default Providers;
+export default Customers;

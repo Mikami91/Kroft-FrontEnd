@@ -1,16 +1,16 @@
 // Store
 import store from '../../store';
 // Action types
-import { ADMIN_DATA, ADMIN_LOADING } from '../actionsTypes';
+import { ADMIN_LIST, ADMIN_LOADING } from '../actionsTypes';
 
 
-export const admin_data = (payload) => {
+export const admin_list = (payload) => {
   return {
-    type: ADMIN_DATA,
+    type: ADMIN_LIST,
     payload: payload
   };
 };
-export const payload = (payload) => store.dispatch(admin_data(payload));
+export const payload = (payload) => store.dispatch(admin_list(payload));
 
 export const admin_loading = (value) => {
   return {

@@ -1,7 +1,7 @@
 // Views
 import Started from '../../views/Dashboard/Started';
 import Employees from '../../views/Dashboard/Employees';
-import Providers from '../../views/Dashboard/Providers';
+import Customers from '../../views/Dashboard/Customers';
 import Environments from '../../views/Dashboard/Environments';
 // import Tables from '../../views/Dashboard/Tables';
 // import Categories from '../../views/Dashboard/Categories';
@@ -16,9 +16,9 @@ import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
 
 const SidebarList = [
   {
-    name: "Productos",
-    icon: FastfoodRoundedIcon,
-    component: Products,
+    name: "Proveedores",
+    icon: PeopleRoundedIcon,
+    component: Customers,
   },
   // {
   //   name: "Inicio",
@@ -43,7 +43,7 @@ const SidebarList = [
   // {
   //   name: "Proveedores",
   //   icon: PeopleRoundedIcon,
-  //   component: Providers,
+  //   component: Customers,
   // },
   // {
   //   name: "Reportes",

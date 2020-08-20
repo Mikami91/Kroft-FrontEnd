@@ -62,6 +62,22 @@ export const product_update = "api/product_update";
 export const product_state = "api/product_state";
 export const product_delete = "api/product_delete";
 
+/*::::::::::::::::::::CUSTOMER::::::::::::::::::::*/
+export const customer_create = "api/customer_create";
+export const customer_index = "api/customer_index";
+export const customer_show = "api/customer_show";
+export const customer_update = "api/customer_update";
+export const customer_state = "api/customer_state";
+export const customer_delete = "api/customer_delete";
+
+/*::::::::::::::::::::SUPPLY::::::::::::::::::::*/
+export const supply_create = "api/supply_create";
+export const supply_index = "api/supply_index";
+export const supply_show = "api/supply_show";
+export const supply_update = "api/supply_update";
+export const supply_state = "api/supply_state";
+export const supply_delete = "api/supply_delete";
+
 /*::::::::::::::::::::ORDER::::::::::::::::::::*/
 export const order_create = "api/order_create";
 export const order_send = "api/order_send";

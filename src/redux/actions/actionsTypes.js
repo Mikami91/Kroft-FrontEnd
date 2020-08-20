@@ -9,8 +9,8 @@ export const ADMIN_LOGGED = 'ADMIN_LOGGED';
 export const ADMIN_FETCHING = 'ADMIN_FETCHING';
 // Loading
 export const ADMIN_LOADING = 'ADMIN_LOADING';
-// Data
-export const ADMIN_DATA = 'ADMIN_DATA';
+// List
+export const ADMIN_LIST = 'ADMIN_LIST';
 // Dialog
 export const ADMIN_DIALOG = 'ADMIN_DIALOG';
 
@@ -26,8 +26,8 @@ export const EMPLOYEE_LOGGED = 'EMPLOYEE_LOGGED';
 export const EMPLOYEE_FETCHING = 'EMPLOYEE_FETCHING';
 // Loading
 export const EMPLOYEE_LOADING = 'EMPLOYEE_LOADING';
-// Data
-export const EMPLOYEE_DATA = 'EMPLOYEE_DATA';
+// List
+export const EMPLOYEE_LIST = 'EMPLOYEE_LIST';
 // Dialog
 export const EMPLOYEE_DIALOG = 'EMPLOYEE_DIALOG';
 
@@ -93,6 +93,15 @@ export const DELETE_ORDERS = 'DELETE_ORDERS';
 export const PRODUCT_FETCHING = 'PRODUCT_FETCHING';
 // Loading
 export const PRODUCT_LOADING = 'PRODUCT_LOADING';
+
+
+/*::::::::::::::::::::CUSTOMER::::::::::::::::::::*/
+// List
+export const CUSTOMER_LIST = 'CUSTOMER_LIST';
+// Fetching
+export const CUSTOMER_FETCHING = 'CUSTOMER_FETCHING';
+// Loading
+export const CUSTOMER_LOADING = 'CUSTOMER_LOADING';
 
 
 /*::::::::::::::::::::ORDER::::::::::::::::::::*/

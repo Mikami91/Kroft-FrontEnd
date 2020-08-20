@@ -51,7 +51,7 @@ export default function AdminLogin(props) {
         margin={"dense"}
         color="primary"
         // disabled={showProgress}
-        type="user"
+        type="text"
         label={"Usuario"}
         name="user"
         onChange={handleChange}
