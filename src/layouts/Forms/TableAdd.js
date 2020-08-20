@@ -24,8 +24,6 @@ import CustomLoading from '../../components/Loading/CustomLoading.js';
 import { tableCreate } from "../../functions/tableFunctions";
 // Assets
 import image from '../../assets/img/defaults/table.png';
-// Varieables
-import { data } from '../../variables/JSON.js';
 
 function TableAdd(props) {
     const { fetching, environments } = props;

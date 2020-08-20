@@ -97,7 +97,7 @@ function Tables({ tables, fetching, loading }) {
 
       <CustomModal
         title={{
-          text: "Editar mesas",
+          text: "Editar mesa",
           size: "medium",
         }}
         loading={fetching}

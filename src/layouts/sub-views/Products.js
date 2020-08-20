@@ -64,7 +64,7 @@ function Product({ products, fetching, loading }) {
             <CustomLoading inside color="primary" open={loading} />
 
             <CardHeader color="primary" dense>
-              <h3>Lista de Mesas</h3>
+              <h3>Lista de Productos</h3>
             </CardHeader>
             <CardBody form>
               <CustomTable

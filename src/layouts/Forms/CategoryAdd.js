@@ -1,9 +1,8 @@
 // Dependencies
 import React, { useState } from "react";
-import moment from 'moment';
-import 'moment/locale/es';
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons
@@ -17,27 +16,19 @@ import CardFooter from "../../components/Card/CardFooter.js";
 import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
-import SelectInput from '../../components/CustomInput/SelectInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
+// Functions
+import { categoryCreate } from "../../functions/categoryFunctions";
 // Assets
 import image from '../../assets/img/defaults/category.png';
-// Varieables
-import { data } from '../../variables/JSON.js';
-// Styles
-import styles from "../../styles/pages/LoginStyle.js";
-// Make styles
-const useStyles = makeStyles(styles);
-// Configs
-moment.locale("en");
-moment().format('l');
 
-export default function CategoryAdd(props) {
+function CategoryAdd(props) {
+    const { fetching } = props;
     // Local State
     const [state, setState] = useState({
-        file: null,
+        photo: null,
         name: "",
-        print_id: "",
         isUpload: false,
         error: false
     });
@@ -51,9 +42,8 @@ export default function CategoryAdd(props) {
     // Empty State values
     const handleEmpty = (e) => {
         setState({
-            file: null,
+            photo: null,
             name: "",
-            print_id: "",
             isUpload: false,
             error: false
         });
@@ -72,11 +62,7 @@ export default function CategoryAdd(props) {
             reader.onloadend = () => {
                 setState({
                     ...state,
-                    file: {
-                        image: reader.result,
-                        type: file.type,
-                        size: file.size,
-                    },
+                    photo: reader.result,
                     isUpload: false
                 });
             }
@@ -90,37 +76,39 @@ export default function CategoryAdd(props) {
     const handleEmptyImage = (e) => {
         setState({
             ...state,
-            file: null
+            photo: null
         });
         e.target.value = null;
     };
-    // Register function
-    const handleLogin = (e) => {
+
+    // Create function
+    const handleCreate = (e) => {
         e.preventDefault();
-        alert("El nombre es: " + state.name + " el prefijo es: " + state.prefix)
-        console.log(state);
-        // alert(state.salary);
-        // handleEmpty();
+        categoryCreate(state).then((response) => {
+            if (typeof response !== 'undefined') {
+                if (response.success === true) {
+                    handleEmpty();
+                }
+            }
+        });
     };
-    const classes = useStyles();
+
     return (
-        <form id="category-add" onSubmit={handleLogin}>
-            {/* <p className={classes.divider}>Or Be Classical</p> */}
+        <form id="category-add" onSubmit={handleCreate}>
             <Card variant="cardForm">
 
-                <CustomLoading inside color="secondary" open={state.isUpload} />
+                <CustomLoading inside color="primary" open={state.isUpload || fetching} />
 
                 <CardHeader color="success" avatar>
                     <AvatarForm
-                        image={state.file === null ? image : state.file.image}
+                        image={state.photo === null ? image : state.photo}
                         alt="Imagen"
                         title="Imagen"
                         square
                     />
                     <input
-                        // disabled={state.isUpload || showProgress ? true : false}
                         accept="image/png, image/jpeg, image/jpg"
-                        id="category-file"
+                        id="category-file-create"
                         type="file"
                         name="image"
                         onChange={handleImage}
@@ -128,14 +116,14 @@ export default function CategoryAdd(props) {
                     />
 
                     <CardIconActions>
-                        <IconButton edge="start" onClick={handleEmptyImage} disabled={state.file === null || state.isUpload ? true : false}>
+                        <IconButton edge="start" onClick={handleEmptyImage} disabled={state.photo === null || state.isUpload ? true : false}>
                             <label>
                                 <DeleteIcon />
                             </label>
                         </IconButton>
 
-                        <IconButton edge="end" disabled={state.isUpload ? true : false} 
-                            onClick={() => {document.getElementById("category-file").click()}}
+                        <IconButton edge="end" disabled={state.isUpload ? true : false}
+                            onClick={() => { document.getElementById("category-file-create").click() }}
                         >
                             <label>
                                 <AddAPhotoIcon />
@@ -147,7 +135,6 @@ export default function CategoryAdd(props) {
                 <CardBody form>
                     <Grid
                         container
-                        //   className={classes.content}
                         justify="center"
                         alignItems="flex-start"
                         spacing={2}
@@ -166,7 +153,7 @@ export default function CategoryAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Categoría'}
                                 name="name"
@@ -176,35 +163,12 @@ export default function CategoryAdd(props) {
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                // disabled={showProgress}
-                                id="print_id"
-                                label="Imprimir en"
-                                name="print_id"
-                                onChange={handleChange}
-                                value={state.print_id}
-                                // categoryList={{
-                                //     data: data,
-                                //     key: "id",
-                                //     value: "username"
-                                // }}
-                                itemList={{
-                                    data: data,
-                                    key: "id",
-                                    value: "website"
-                                }}
-                                required
-                            />
                         </Grid>
                     </Grid>
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="table-add" size="sm" type="submit" disabled={state.isUpload} >
+                    <CustomBotton form="category-add" size="sm" type="submit" disabled={state.isUpload} >
                         Agregar
                     </CustomBotton>
                 </CardFooter>
@@ -212,3 +176,12 @@ export default function CategoryAdd(props) {
         </form>
     );
 };
+const mapStateToProps = (state) => {
+    const { category, environment } = state;
+    return {
+        fetching: category.fetching,
+        environments: environment.payload
+    }
+};
+
+export default connect(mapStateToProps, null)(CategoryAdd);
