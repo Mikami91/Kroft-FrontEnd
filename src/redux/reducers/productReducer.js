@@ -10,6 +10,7 @@ import {
   ADD_OBSERVATION,
   DELETE_OBSERVATION,
   DELETE_ORDERS,
+  PRODUCT_FETCHING,
   PRODUCT_LOADING
 } from '../actions/actionsTypes';
 
@@ -26,6 +27,7 @@ const productState = {
     env_index: null,
     table_index: null
   },
+  fetching: false,
   loading: false,
 };
 
@@ -324,6 +326,12 @@ export function productReducer(state = productState, action) {
 
       // Return update state
       return new_state;
+
+    case PRODUCT_FETCHING:
+      return {
+        ...state,
+        fetching: action.value
+      };
 
     case PRODUCT_LOADING:
       return {

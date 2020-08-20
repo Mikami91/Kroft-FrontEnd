@@ -1,9 +1,8 @@
 // Dependencies
 import React, { useState } from "react";
-import moment from 'moment';
-import 'moment/locale/es';
+// Conecction to Store
+import { connect } from 'react-redux';
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import IconButton from '@material-ui/core/IconButton';
 // @material-ui/icons
@@ -18,36 +17,27 @@ import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
-import DateInput from '../../components/CustomInput/DateInput.js';
 import NumberInput from '../../components/CustomInput/NumberInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
+import CustomDivider from '../../components/Divider/CustomDivider.js';
+// Functions
+import { productCreate } from "../../functions/productFunctions";
 // Assets
 import image from '../../assets/img/defaults/product.png';
 // Varieables
 import { data } from '../../variables/JSON.js';
-// Styles
-import styles from "../../styles/pages/LoginStyle.js";
-// Make styles
-const useStyles = makeStyles(styles);
-// Configs
-moment.locale("en");
-moment().format('l');
 
-export default function ProductAdd(props) {
+function ProductAdd(props) {
+    const { fetching, environments } = props;
     // Local State
     const [state, setState] = useState({
-        file: null,
-        supplier: "",
-        category: "",
-        subcategory: "",
+        print_category_id: "",
+        category_id: "",
+        sub_category_id: "",
+        photo: null,
         name: "",
-        buying_date: null,
-        expire_date: null,
-        buying_price: "",
-        selling_price: "",
-        quantity: "",
-        code: "",
+        price: null,
         isUpload: false,
         error: false
     });
@@ -61,17 +51,12 @@ export default function ProductAdd(props) {
     // Empty State values
     const handleEmpty = (e) => {
         setState({
-            image: null,
-            supplier: "",
-            category: "",
-            subcategory: "",
+            print_category_id: "",
+            category_id: "",
+            sub_category_id: "",
+            photo: null,
             name: "",
-            buying_date: null,
-            expire_date: null,
-            buying_price: "",
-            selling_price: "",
-            quantity: "",
-            code: "",
+            price: null,
             isUpload: false,
             error: false
         });
@@ -90,11 +75,7 @@ export default function ProductAdd(props) {
             reader.onloadend = () => {
                 setState({
                     ...state,
-                    file: {
-                        image: reader.result,
-                        type: file.type,
-                        size: file.size,
-                    },
+                    photo: reader.result,
                     isUpload: false
                 });
             }
@@ -108,36 +89,39 @@ export default function ProductAdd(props) {
     const handleEmptyImage = (e) => {
         setState({
             ...state,
-            file: null
+            photo: null
         });
         e.target.value = null;
     };
-    // Register function
-    const handleLogin = (e) => {
+
+    // Create function
+    const handleCreate = (e) => {
         e.preventDefault();
-        console.log(state);
-        // alert(state.salary);
-        // handleEmpty();
+        productCreate(state).then((response) => {
+            if (typeof response !== 'undefined') {
+                if (response.success === true) {
+                    handleEmpty();
+                }
+            }
+        });
     };
-    const classes = useStyles();
+
     return (
-        <form id="employee-add" onSubmit={handleLogin}>
-            {/* <p className={classes.divider}>Or Be Classical</p> */}
+        <form id="product-add" onSubmit={handleCreate}>
             <Card variant="cardForm">
 
-                <CustomLoading inside color="secondary" open={state.isUpload} />
+                <CustomLoading inside color="primary" open={state.isUpload || fetching} />
 
                 <CardHeader color="success" avatar>
                     <AvatarForm
-                        image={state.file === null ? image : state.file.image}
+                        image={state.photo === null ? image : state.photo}
                         alt="Imagen"
                         title="Imagen"
                         square
                     />
                     <input
-                        // disabled={state.isUpload || showProgress ? true : false}
                         accept="image/png, image/jpeg, image/jpg"
-                        id="product-file"
+                        id="product-file-create"
                         type="file"
                         name="image"
                         onChange={handleImage}
@@ -145,14 +129,14 @@ export default function ProductAdd(props) {
                     />
 
                     <CardIconActions>
-                        <IconButton edge="start" onClick={handleEmptyImage} disabled={state.file === null || state.isUpload ? true : false}>
+                        <IconButton edge="start" onClick={handleEmptyImage} disabled={state.photo === null || state.isUpload ? true : false}>
                             <label>
                                 <DeleteIcon />
                             </label>
                         </IconButton>
 
-                        <IconButton edge="end" disabled={state.isUpload ? true : false} 
-                            onClick={() => {document.getElementById("product-file").click()}}
+                        <IconButton edge="end" disabled={state.isUpload ? true : false}
+                            onClick={() => { document.getElementById("product-file-create").click() }}
                         >
                             <label>
                                 <AddAPhotoIcon />
@@ -164,7 +148,6 @@ export default function ProductAdd(props) {
                 <CardBody form>
                     <Grid
                         container
-                        //   className={classes.content}
                         justify="center"
                         alignItems="flex-start"
                         spacing={2}
@@ -179,47 +162,13 @@ export default function ProductAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                // disabled={showProgress}
-                                id="category"
-                                label="Categoría"
-                                name="category"
-                                onChange={handleChange}
-                                value={state.category}
-                                itemList={{
-                                    data: data,
-                                    key: "id",
-                                    value: "website"
-                                }}
-                                required
-                            />
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                // disabled={showProgress}
-                                id="subcategory"
-                                label="Subcategoría"
-                                name="subcategory"
-                                onChange={handleChange}
-                                value={state.subcategory}
-                                itemList={{
-                                    data: data,
-                                    key: "id",
-                                    value: "website"
-                                }}
-                                required
-                            />
+
+                            <CustomDivider text="Producto" color="warning" margin="dense" bold />
+
                             <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
+                                variant={'standard'} margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
+                                disabled={fetching}
                                 type="text"
                                 label={'Nombre'}
                                 name="name"
@@ -233,27 +182,64 @@ export default function ProductAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                // disabled={showProgress}
-                                label={'Precio de venta'}
-                                prefix="Bs"
-                                name="selling_price"
-                                value={state.selling_price}
+                                disabled={fetching}
+                                label={'Precio'}
+                                name="price"
+                                value={state.price}
                                 onChange={handleChange}
-                                decimal={2}
-                                // maxLength={8}
+                                prefix={"Bs"}
                                 required
                             />
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
+
+                        </Grid>
+
+                        <Grid
+                            item
+                            xs={12}
+                            sm={12}
+                            md={6}
+                            lg={6}
+                            xl={6}
+                            elevation={6}
+                            square="true"
+                        >
+
+                            <CustomDivider text="Categorías" color="warning" margin="dense" bold />
+
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
                                 color="primary"
-                                // disabled={showProgress}
-                                label={'Cantidad'}
-                                name="quantity"
-                                value={state.quantity}
+                                hoverColor="primary"
+                                disabled={fetching}
+                                id="category_id"
+                                label="Categoría"
+                                name="category_id"
                                 onChange={handleChange}
-                                maxLength={9}
-                                decimal={0}
+                                value={state.category_id}
+                                itemList={{
+                                    data: data,
+                                    key: "id",
+                                    value: "name"
+                                }}
+                                required
+                            />
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                disabled={fetching}
+                                id="sub_category_id"
+                                label="Subcategoría"
+                                name="sub_category_id"
+                                onChange={handleChange}
+                                value={state.sub_category_id}
+                                itemList={{
+                                    data: data,
+                                    key: "id",
+                                    value: "name"
+                                }}
                                 required
                             />
 
@@ -268,88 +254,33 @@ export default function ProductAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            {/* <SelectInput
+
+                            <CustomDivider text="Impresión" color="warning" margin="dense" bold />
+
+                            <SelectInput
                                 variant="standard"
                                 margin="dense"
                                 color="primary"
                                 hoverColor="primary"
-                                // disabled={showProgress}
-                                id="supplier"
-                                label="Proveedor"
-                                name="supplier"
+                                disabled={fetching}
+                                id="print_category_id"
+                                label="Impresión"
+                                name="print_category_id"
                                 onChange={handleChange}
-                                value={state.supplier}
+                                value={state.print_category_id}
                                 itemList={{
                                     data: data,
                                     key: "id",
-                                    value: "website"
+                                    value: "name"
                                 }}
                                 required
-                            /> */}
-                            <DateInput
-                                 variant={'standard'}
-                                 margin={'dense'}
-                                 color="primary"
-                                 // disabled={showProgress}
-                                 type="text"
-                                 label={'Fecha de compra'}
-                                 name="buying_date"
-                                 onChange={handleChange}
-                                 value={state.buying_date}
-                                 minDate={moment().subtract(5, 'years').calendar()}
-                                 maxDate={moment().subtract(1, 'years').calendar()}
-                                 required
                             />
-                            <DateInput
-                                 variant={'standard'}
-                                 margin={'dense'}
-                                 color="primary"
-                                 // disabled={showProgress}
-                                 type="text"
-                                 label={'Fecha de expiracion'}
-                                 name="expire_date"
-                                 onChange={handleChange}
-                                 value={state.expire_date}
-                                 minDate={moment().subtract(0, 'years').calendar()}
-                                 //maxDate={moment().subtract(1, 'years').calendar()}
-                                 required
-                            />
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                label={'Precio de compra'}
-                                prefix="Bs"
-                                name="buying_price"
-                                value={state.buying_price}
-                                onChange={handleChange}
-                                decimal={2}
-                                // maxLength={8}
-                                required
-                            />
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                // disabled={showProgress}
-                                type="text"
-                                label={'Codigo'}
-                                name="code"
-                                onChange={handleChange}
-                                value={state.code}
-                                required
-                                // icon={<VpnKeyIcon />}
-                                iconPosition="end"
-                            />
-                            
                         </Grid>
-
                     </Grid>
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="employee-add" size="sm" type="submit" disabled={state.isUpload} >
+                    <CustomBotton form="product-add" size="sm" type="submit" disabled={state.isUpload} >
                         Agregar
                     </CustomBotton>
                 </CardFooter>
@@ -357,3 +288,13 @@ export default function ProductAdd(props) {
         </form>
     );
 };
+const mapStateToProps = (state) => {
+    const { product, category, subcategory } = state;
+    return {
+        fetching: product.fetching,
+        categories: category.payload,
+        subcategories: subcategory.payload,
+    }
+};
+
+export default connect(mapStateToProps, null)(ProductAdd);

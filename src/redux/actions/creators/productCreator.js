@@ -12,6 +12,7 @@ import {
   ADD_OBSERVATION,
   DELETE_OBSERVATION,
   DELETE_ORDERS,
+  PRODUCT_FETCHING,
   PRODUCT_LOADING
 } from '../actionsTypes';
 
@@ -93,6 +94,14 @@ export const delete_orders = () => {
   };
 }
 export const delete_all = () => store.dispatch(delete_orders());
+
+export const product_fetching = (value) => {
+  return {
+    type: PRODUCT_FETCHING,
+    value: value
+  };
+};
+export const fetching = (value) => store.dispatch(product_fetching(value));
 
 export const product_loading = (value) => {
   return {

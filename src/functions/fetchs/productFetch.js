@@ -11,12 +11,52 @@ import {
 } from '../../API';
 
 
+/*::::::::::::::::::::CREATE::::::::::::::::::::*/
+export const createFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: product_create,
+        data: data,
+    });
+};
+
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export const showFetch = () => {
+export const showFetch = (data) => {
     return customFetch({
         method: 'GET',
         token: true,
         url: product_show,
+    });
+};
+
+/*::::::::::::::::::::UPDATE::::::::::::::::::::*/
+export const updateFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: product_update,
+        data: data,
+    });
+};
+
+/*::::::::::::::::::::STATE::::::::::::::::::::*/
+export const stateFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: product_state,
+        data: data,
+    });
+};
+
+/*::::::::::::::::::::DELETE::::::::::::::::::::*/
+export const deleteFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: product_delete,
+        data: data,
     });
 };
 

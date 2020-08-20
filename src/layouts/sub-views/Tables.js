@@ -81,7 +81,7 @@ function Tables({ tables, fetching, loading }) {
                   },
                   { title: "Mesa", field: "name", type: "string" },
                   { title: "Número", field: "number", type: "numeric" },
-                  { title: "Ambiente", field: "environment_name", type: "numeric" },
+                  { title: "Ambiente", field: "environment_name", type: "string" },
                   // { title: "Creación", field: "created_at", editable: "never", type: "date", },
                   // { title: "Modificación", field: "updated_at", editable: "never", type: "date", },
                 ]}
