@@ -58,8 +58,8 @@ function DashboardPage({ employees, loading }) {
     // employeeShow();
     // environmentShow();
     // tableShow();
-    // categoryShow();
-    // subcategoryShow();
+    categoryShow();
+    subcategoryShow();
     // productShow();
     customerShow();
     // orderShow();

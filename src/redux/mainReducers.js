@@ -8,6 +8,7 @@ import { tableReducer } from './reducers/tableReducer';
 import { categoryReducer } from './reducers/categoryReducer';
 import { subcategoryReducer } from './reducers/subcategoryReducer';
 import { productReducer } from './reducers/productReducer';
+import { supplierReducer } from './reducers/supplierReducer';
 import { customerReducer } from './reducers/customerReducer';
 import { orderReducer } from './reducers/orderReducer';
 import { collectReducer } from './reducers/collectReducer';
@@ -22,6 +23,7 @@ export const mainReducer = combineReducers({
   subcategory: subcategoryReducer,
   product: productReducer,
   customer: customerReducer,
+  supplier: supplierReducer,
   orders: orderReducer,
   collects: collectReducer,
 });

@@ -1,5 +1,7 @@
 // Dependencies
 import React, { useState, useEffect } from "react";
+import moment from 'moment';
+import 'moment/locale/es';
 // Conecction to Store
 import { connect } from 'react-redux';
 // @material-ui/core components
@@ -13,35 +15,53 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
+import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
 import NumberInput from '../../components/CustomInput/NumberInput.js';
-import IconInput from '../../components/CustomInput/IconInput.js';
+import DateInput from '../../components/CustomInput/DateInput.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { productUpdate } from "../../functions/productFunctions";
+import { supplierUpdate } from "../../functions/supplierFunctions";
 // Apis
 import { API } from '../../API/index';
 // Varieables
 import { data as data2 } from '../../variables/JSON.js';
+// Configs
+moment.locale("en");
+moment().format('l');
 
-function ProductUpdate(props) {
+function SupplierUpdate(props) {
     const {
         // Redux 
-        fetching,
-        categories,
-        subcategories,
+        fetching, customers, categories, subcategories,
         // Props
-        data,
-        close,
+        data, close
     } = props;
     const current_image = typeof data.photo === "undefined" ? null : `${API}images/products/${data.photo}`;
     // Local State
     const [state, setState] = useState({
-        environment_id: "",
-        photo: null,
+        // Product
+        product_id: "",
+        // Customer
+        customer_id: "",
+        // Supplier
         name: "",
-        number: null,
+        quantity: null,
+        // Prices
+        buying_price: null,
+        price: null,
+        // Categories
+        category_id: "",
+        sub_category_id: "",
+        // Information
+        observation: "",
+        buying_date: null,
+        expire_date: null,
+        // Print
+        print_category_id: "",
+        // Photo
+        photo: null,
         isUpload: false,
         photoChange: false,
         error: false
@@ -51,13 +71,30 @@ function ProductUpdate(props) {
         if (Object.keys(data).length > 0) {
             setState({
                 ...data,
-                environment_id: data.environment_id,
-                photo: null,
+                // Customer
+                customer_id: data.customer_id,
+                // Product
+                product_id: data.id,
+                // Supplier
                 name: data.name,
-                number: data.number,
+                quantity: data.quantity,
+                // Prices
+                buying_price: data.buying_price,
+                price: data.price,
+                // Categories
+                category_id: data.category_id,
+                sub_category_id: data.sub_category_id,
+                // Information
+                observation: data.observation,
+                buying_date: data.buying_date,
+                expire_date: data.expire_date,
+                // Print
+                print_category_id: data.print_category_id,
+                // Photo
+                photo: null,
                 isUpload: false,
                 photoChange: false,
-                error: false,
+                error: false
             });
         }
     }, [data])
@@ -69,14 +106,30 @@ function ProductUpdate(props) {
             [e.target.name]: e.target.value
         });
     };
-
     // Empty State values
     const handleEmpty = (e) => {
         setState({
-            environment_id: "",
-            photo: null,
+            // Product
+            product_id: "",
+            // Customer
+            customer_id: "",
+            // Supplier
             name: "",
-            prefix: "",
+            quantity: null,
+            // Prices
+            buying_price: null,
+            price: null,
+            // Categories
+            category_id: "",
+            sub_category_id: "",
+            // Information
+            observation: "",
+            buying_date: null,
+            expire_date: null,
+            // Print
+            print_category_id: "",
+            // Photo
+            photo: null,
             isUpload: false,
             photoChange: false,
             error: false
@@ -120,7 +173,7 @@ function ProductUpdate(props) {
     // Update function
     const handleUpdate = (e) => {
         e.preventDefault();
-        productUpdate(state).then((response) => {
+        supplierUpdate(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
                     close();
@@ -129,8 +182,9 @@ function ProductUpdate(props) {
             }
         });
     };
+
     return (
-        <form id="product-update" onSubmit={handleUpdate} encType="multipart/form-data" >
+        <form id="supplier-update" onSubmit={handleUpdate}>
 
             <CustomLoading inside color="primary" open={state.isUpload || fetching} />
 
@@ -139,17 +193,16 @@ function ProductUpdate(props) {
                     image={state.photoChange === true ? state.photo : current_image}
                     alt="Imagen"
                     title="Imagen"
+                    square
                 />
                 <input
-                    // disabled={state.isUpload || showProgress ? true : false}
                     accept="image/png, image/jpeg, image/jpg"
-                    id="product-file-update"
+                    id="supplier-file-update"
                     type="file"
                     name="image"
                     onChange={handleImage}
                     style={{ display: 'none' }}
                 />
-
                 <CardIconActions>
                     <IconButton edge="start" onClick={handleEmptyImage} disabled={state.photoChange === true || state.isUpload === true ? false : true}>
                         <label>
@@ -158,7 +211,7 @@ function ProductUpdate(props) {
                     </IconButton>
 
                     <IconButton edge="end" disabled={state.isUpload ? true : false}
-                        onClick={() => { document.getElementById("product-file-update").click() }}
+                        onClick={() => { document.getElementById("supplier-file-update").click() }}
                     >
                         <label>
                             <AddAPhotoIcon />
@@ -184,8 +237,28 @@ function ProductUpdate(props) {
                         elevation={6}
                         square="true"
                     >
+                        <CustomDivider text="Proveedor" color="warning" margin="dense" bold />
 
-                        <CustomDivider text="Producto" color="warning" margin="dense" bold />
+                        <SelectInput
+                            variant="standard"
+                            margin="dense"
+                            color="primary"
+                            hoverColor="primary"
+                            disabled={fetching}
+                            id="customer_id"
+                            label="Proveedor"
+                            name="customer_id"
+                            onChange={handleChange}
+                            value={state.customer_id}
+                            itemList={{
+                                data: customers,
+                                key: "id",
+                                value: "shop_name"
+                            }}
+                            required
+                        />
+
+                        <CustomDivider text="Insumo" color="warning" margin="dense" bold />
 
                         <IconInput
                             variant={'standard'} margin={'dense'}
@@ -205,7 +278,34 @@ function ProductUpdate(props) {
                             margin={'dense'}
                             color="primary"
                             disabled={fetching}
-                            label={'Precio'}
+                            label={'Cantidad'}
+                            name="quantity"
+                            value={state.quantity}
+                            onChange={handleChange}
+                            maxLength={5}
+                            required
+                        />
+
+                        <CustomDivider text="Precios" color="warning" margin="dense" bold />
+
+                        <NumberInput
+                            variant={'standard'}
+                            margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            label={'Precio de compra'}
+                            name="buying_price"
+                            value={state.buying_price}
+                            onChange={handleChange}
+                            prefix={"Bs"}
+                            required
+                        />
+                        <NumberInput
+                            variant={'standard'}
+                            margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            label={'Precio de venta'}
                             name="price"
                             value={state.price}
                             onChange={handleChange}
@@ -240,7 +340,7 @@ function ProductUpdate(props) {
                             onChange={handleChange}
                             value={state.category_id}
                             itemList={{
-                                data: data2,
+                                data: categories,
                                 key: "id",
                                 value: "name"
                             }}
@@ -258,24 +358,57 @@ function ProductUpdate(props) {
                             onChange={handleChange}
                             value={state.sub_category_id}
                             itemList={{
-                                data: data2,
+                                data: subcategories,
                                 key: "id",
                                 value: "name"
                             }}
                             required
                         />
 
-                    </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        sm={12}
-                        md={6}
-                        lg={6}
-                        xl={6}
-                        elevation={6}
-                        square="true"
-                    >
+                        <CustomDivider text="Información" color="warning" margin="dense" bold />
+
+                        <IconInput
+                            variant={'standard'}
+                            margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            type="text"
+                            label={'Observación'}
+                            name="observation"
+                            onChange={handleChange}
+                            value={state.observation}
+                            // required
+                            // icon={<AccountBoxIcon />}
+                            iconPosition="end"
+                        />
+                        <DateInput
+                            variant={'standard'}
+                            margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            type="text"
+                            label={'Fecha de compra'}
+                            name="buying_date"
+                            onChange={handleChange}
+                            value={state.buying_date}
+                            minDate={moment().subtract(10, 'years').calendar()}
+                            maxDate={moment().add(10, 'years').calendar()}
+                            required
+                        />
+                        <DateInput
+                            variant={'standard'}
+                            margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            type="text"
+                            label={'Fecha de vencimiento'}
+                            name="expire_date"
+                            onChange={handleChange}
+                            value={state.expire_date}
+                            minDate={moment().subtract(10, 'years').calendar()}
+                            maxDate={moment().add(10, 'years').calendar()}
+                            required
+                        />
 
                         <CustomDivider text="Impresión" color="warning" margin="dense" bold />
 
@@ -298,19 +431,20 @@ function ProductUpdate(props) {
                             required
                         />
                     </Grid>
+
                 </Grid>
             </CardBody>
-        </form>
+        </form >
     );
 };
-// Connect to Store State
 const mapStateToProps = (state) => {
-    const { product, category, subcategory } = state;
+    const { supplier, customer, category, subcategory } = state;
     return {
-        fetching: product.fetching,
+        fetching: supplier.fetching,
+        customers: customer.payload,
         categories: category.payload,
         subcategories: subcategory.payload,
     }
 };
 
-export default connect(mapStateToProps, null)(ProductUpdate);
+export default connect(mapStateToProps, null)(SupplierUpdate);

@@ -7,7 +7,7 @@ import TabPanel from "../../components/Panel/TabPanel";
 import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
 import SubCustomers from "../../layouts/sub-views/Customers";
-import Suppliers from "../../layouts/sub-views/Customers";
+import Suppliers from "../../layouts/sub-views/Suppliers";
 // Icons
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
 import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';

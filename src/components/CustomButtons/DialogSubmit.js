@@ -11,8 +11,6 @@ import styles from "../../styles/components/buttonStyle.js";
 const useStyles = makeStyles(styles);
 
 function DialogSubmit(props) {
-    console.log(props);
-    console.log(props.index);
     const { disabled, variant, margin, color, html, text, icon, key } = props.index;
     const classes = useStyles();
     const btnClasses = classNames({

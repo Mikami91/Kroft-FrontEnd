@@ -104,6 +104,15 @@ export const CUSTOMER_FETCHING = 'CUSTOMER_FETCHING';
 export const CUSTOMER_LOADING = 'CUSTOMER_LOADING';
 
 
+/*::::::::::::::::::::SUPPLIER::::::::::::::::::::*/
+// List
+export const SUPPLIER_LIST = 'SUPPLIER_LIST';
+// Fetching
+export const SUPPLIER_FETCHING = 'SUPPLIER_FETCHING';
+// Loading
+export const SUPPLIER_LOADING = 'SUPPLIER_LOADING';
+
+
 /*::::::::::::::::::::ORDER::::::::::::::::::::*/
 // List
 export const ORDER_LIST = 'ORDER_LIST';
