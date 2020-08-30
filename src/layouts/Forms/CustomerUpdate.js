@@ -34,7 +34,7 @@ function CustomerUpdate(props) {
         data,
         close,
     } = props;
-    const current_image = typeof data.photo === "undefined" ? null : `${API}images/customers/${data.photo}`;
+    const current_photo = typeof data.photo === "undefined" ? null : `${API}images/customers/${data.photo}`;
     // Local State
     const [state, setState] = useState({
         // Others
@@ -72,7 +72,7 @@ function CustomerUpdate(props) {
                 phone: data.phone,
                 email: data.email,
                 // Photo
-                photo: data.photo,
+                photo: null,
                 isUpload: false,
                 error: false
             });
@@ -164,7 +164,7 @@ function CustomerUpdate(props) {
 
             <CardHeader color="success" avatar modal>
                 <AvatarForm
-                    image={state.photoChange === true ? state.photo : current_image}
+                    image={state.photoChange === true ? state.photo : current_photo}
                     alt="Imagen"
                     title="Imagen"
                 />

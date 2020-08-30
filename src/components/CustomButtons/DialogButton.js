@@ -13,7 +13,7 @@ import styles from "../../styles/components/buttonStyle.js";
 const useStyles = makeStyles(styles);
 
 function DialogButton(props) {
-  const { disabled, variant, margin, color, onClick, html, text, icon, key } = props.index;
+  const { disabled, variant, margin, color, onClick, html, text, icon, autoAdjust, key } = props.index;
   const classes = useStyles();
   const btnClasses = classNames({
     [classes.dialogButton]: true,
@@ -23,21 +23,37 @@ function DialogButton(props) {
 
     [classes.disabled]: disabled,
   });
-  return [
-    <Hidden mdUp key={key + "small"}>
-      <IconButton
-        aria-label={text}
-        disabled={disabled}
-        variant={variant}
-        className={btnClasses}
-        onClick={onClick}
-        html={html}
-      >
-        {typeof icon !== "undefined" ? createElement(icon) : null}
-      </IconButton>
-    </Hidden>,
 
-    <Hidden smDown key={key+ "large"}>
+  if (autoAdjust === true) {
+    return [
+      <Hidden mdUp key={key + "small"}>
+        <IconButton
+          aria-label={text}
+          disabled={disabled}
+          variant={variant}
+          className={btnClasses}
+          onClick={onClick}
+          html={html}
+        >
+          {typeof icon !== "undefined" ? createElement(icon) : null}
+        </IconButton>
+      </Hidden>,
+
+      <Hidden smDown key={key + "large"}>
+        <Button
+          disabled={disabled}
+          variant={variant}
+          className={btnClasses}
+          endIcon={typeof icon !== "undefined" ? createElement(icon) : null}
+          onClick={onClick}
+          html={html}
+        >
+          {text}
+        </Button>
+      </Hidden>,
+    ];
+  } else {
+    return (
       <Button
         disabled={disabled}
         variant={variant}
@@ -48,8 +64,8 @@ function DialogButton(props) {
       >
         {text}
       </Button>
-    </Hidden>,
-  ];
+    );
+  }
 }
 // PropTypes
 DialogButton.defaultProps = {
@@ -60,6 +76,7 @@ DialogButton.defaultProps = {
   icon: null,
   onClick: null,
   html: "",
+  autoAdjust: true,
   text: "Button",
 };
 DialogButton.propTypes = {
@@ -80,6 +97,7 @@ DialogButton.propTypes = {
   icon: PropTypes.object,
   onClick: PropTypes.func,
   html: PropTypes.string,
+  autoAdjust: PropTypes.bool,
   text: PropTypes.string,
 };
 

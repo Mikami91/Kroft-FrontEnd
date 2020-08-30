@@ -108,6 +108,17 @@ function Environments({ environments, fetching, loading }) {
         content={<EnvironmentUpdate data={state.data} close={handleClose} />}
         rightButtons={[
           {
+            type: "button",
+            size: "medium",
+            align: "center",
+            text: "Cancelar",
+            color: "default",
+            variant: "text",
+            autoAdjust: false,
+            margin: true,
+            onClick: handleClose
+          },
+          {
             type: "submit",
             size: "medium",
             align: "center",

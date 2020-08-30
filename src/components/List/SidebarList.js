@@ -13,43 +13,39 @@ import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
 import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
+import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 
 const SidebarList = [
+  {
+    name: "Inicio",
+    icon: DashboardRoundedIcon,
+    component: Started,
+  },
+  {
+    name: "Personal",
+    icon: GroupRoundedIcon,
+    component: Employees,
+  },
+  {
+    name: "Ambientes",
+    icon: DeckRoundedIcon,
+    component: Environments,
+  },
+  {
+    name: "Productos",
+    icon: FastfoodRoundedIcon,
+    component: Products,
+  },
   {
     name: "Proveedores",
     icon: PeopleRoundedIcon,
     component: Customers,
   },
-  // {
-  //   name: "Inicio",
-  //   icon: DashboardRoundedIcon,
-  //   component: Started,
-  // },
-  // {
-  //   name: "Personal",
-  //   icon: GroupRoundedIcon,
-  //   component: Employees,
-  // },
-  // {
-  //   name: "Ambientes",
-  //   icon: DeckRoundedIcon,
-  //   component: Environments,
-  // },
-  // {
-  //   name: "Productos",
-  //   icon: FastfoodRoundedIcon,
-  //   component: Products,
-  // },
-  // {
-  //   name: "Proveedores",
-  //   icon: PeopleRoundedIcon,
-  //   component: Customers,
-  // },
-  // {
-  //   name: "Reportes",
-  //   icon: DescriptionRoundedIcon,
-  //   component: "Reportes",
-  // },
+  {
+    name: "Reportes",
+    icon: DescriptionRoundedIcon,
+    component: "Reportes",
+  },
   // {
   //   name: "Almacenes",
   //   icon: AssessmentRoundedIcon,
