@@ -1,7 +1,15 @@
 // Fetchs
-import { createFetch, showFetch } from './fetchs/collectFetch';
+import {
+    createFetch,
+    showFetch,
+    globalReportFetch,
+    cashierReportFetch,
+    waiterReportFetch,
+    envReportFetch,
+    tableReportFetch,
+} from './fetchs/collectFetch';
 // Actions Creators
-import { payload, loading } from "../redux/actions/creators/collectCreator";
+import { payload, global, fetching, loading } from "../redux/actions/creators/collectCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function collectCreate(data) {
@@ -55,6 +63,34 @@ export async function collectShow() {
 
     } catch (error) {
         loading(false);
+        return error.message;
+    };
+};
+
+/*::::::::::::::::::::GLOBAL REPORT::::::::::::::::::::*/
+export async function collectGlobalReport(data) {
+    fetching(true);
+    try {
+        const response = await globalReportFetch(data);
+        if (response.status === 200) {
+            switch (response.data.success) {
+                case true:
+                    global(response.data.data);
+                    fetching(false);
+                    break;
+
+                case false:
+                    fetching(false);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        return response.data;
+
+    } catch (error) {
+        fetching(false);
         return error.message;
     };
 };

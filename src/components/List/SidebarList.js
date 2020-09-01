@@ -3,6 +3,7 @@ import Started from '../../views/Dashboard/Started';
 import Employees from '../../views/Dashboard/Employees';
 import Customers from '../../views/Dashboard/Customers';
 import Environments from '../../views/Dashboard/Environments';
+import Reports from '../../views/Dashboard/Reports';
 // import Tables from '../../views/Dashboard/Tables';
 // import Categories from '../../views/Dashboard/Categories';
 // import Subcategories from '../../views/Dashboard/Subcategories';
@@ -16,6 +17,11 @@ import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 
 const SidebarList = [
+  {
+    name: "Reportes",
+    icon: DescriptionRoundedIcon,
+    component: Reports,
+  },
   {
     name: "Inicio",
     icon: DashboardRoundedIcon,
@@ -41,11 +47,11 @@ const SidebarList = [
     icon: PeopleRoundedIcon,
     component: Customers,
   },
-  {
-    name: "Reportes",
-    icon: DescriptionRoundedIcon,
-    component: "Reportes",
-  },
+  // {
+  //   name: "Reportes",
+  //   icon: DescriptionRoundedIcon,
+  //   component: Reportes,
+  // },
   // {
   //   name: "Almacenes",
   //   icon: AssessmentRoundedIcon,

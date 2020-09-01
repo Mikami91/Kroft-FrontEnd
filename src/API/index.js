@@ -92,6 +92,13 @@ export const order_delete = "api/order_delete";
 export const collect_create = "api/collect_create";
 export const collect_index = "api/collect_index";
 export const collect_show = "api/collect_show";
+
+export const collect_global_report = "api/collect_global_report";
+export const collect_cashier_report = "api/collect_cashier_report";
+export const collect_waiter_report = "api/collect_waiter_report";
+export const collect_env_report = "api/collect_env_report";
+export const collect_table_report = "api/collect_table_report";
+
 export const collect_update = "api/collect_update";
 export const collect_state = "api/collect_state";
 export const collect_delete = "api/collect_delete";

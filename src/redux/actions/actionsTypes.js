@@ -125,5 +125,17 @@ export const ORDER_LOADING = 'ORDER_LOADING';
 /*::::::::::::::::::::COLLECT::::::::::::::::::::*/
 // List
 export const COLLECT_LIST = 'COLLECT_LIST';
+// List
+export const COLLECT_GLOBAL = 'COLLECT_GLOBAL';
+// List
+export const COLLECT_CASHIER = 'COLLECT_CASHIER';
+// List
+export const COLLECT_WAITER = 'COLLECT_WAITER';
+// List
+export const COLLECT_ENV = 'COLLECT_ENV';
+// List
+export const COLLECT_TABLE = 'COLLECT_TABLE';
+// Fetchin
+export const COLLECT_FETCHING = 'COLLECT_FETCHING';
 // Loading
 export const COLLECT_LOADING = 'COLLECT_LOADING';
