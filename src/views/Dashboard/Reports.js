@@ -7,9 +7,13 @@ import TabPanel from "../../components/Panel/TabPanel";
 import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
 import GlobalReports from "../../layouts/sub-views/GlobalReports";
+import CashierReports from "../../layouts/sub-views/CashierReports";
+import WaiterReports from "../../layouts/sub-views/WaiterReports";
 import EnvironmentReports from "../../layouts/sub-views/EnvironmentReports";
+import TableReports from "../../layouts/sub-views/TableReports";
 // Icons
 import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';
+import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 import TableChartRounded from '@material-ui/icons/TableChartRounded';
 
@@ -29,8 +33,18 @@ function Reports(props) {
             <GlobalReports />
           </TabPanel>
           <TabPanel sub value={value} index={1}>
+            <CashierReports />
+          </TabPanel>
+          <TabPanel sub value={value} index={2}>
+            <WaiterReports />
+          </TabPanel>
+          <TabPanel sub value={value} index={3}>
             <EnvironmentReports />
           </TabPanel>
+          <TabPanel sub value={value} index={4}>
+            <TableReports />
+          </TabPanel>
+
         </SwipeableViews>
 
         <FooterTabBar
@@ -43,6 +57,14 @@ function Reports(props) {
             {
               text: "Generales",
               icon: ListAltRoundedIcon,
+            },
+            {
+              text: "Cajeros",
+              icon: GroupRoundedIcon,
+            },
+            {
+              text: "Meseros",
+              icon: GroupRoundedIcon,
             },
             {
               text: "Ambientes",

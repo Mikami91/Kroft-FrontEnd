@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 // Conecction to Store
 import { connect } from 'react-redux';
@@ -11,25 +11,14 @@ import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
-import CustomModal from '../../components/Modal/CustomModal';
 // Layouts
-import GlobalReport from "../Forms/GlobalReport";
-import EnvironmentUpdate from '../Forms/EnvironmentUpdate';
-// Functions
-import { environmentShow, environmentDelete } from "../../functions/environmentFunctions";
+import WaiterReport from "../Forms/WaiterReport";
 
-function GlobalReports({ data, fetching, loading }) {
-  const [state, setState] = useState({
-    data: {},
-    open: false
-  })
-  const handleOpen = (rowData) => setState({ data: rowData, open: true });
-  const handleClose = () => setState({ data: {}, open: false });
+function WaiterReports({ data, fetching, loading }) {
   return (
     <Fragment>
       <Grid
         container
-        //   className={classes.content}
         justify="center"
         alignItems="flex-start"
         spacing={3}
@@ -43,9 +32,8 @@ function GlobalReports({ data, fetching, loading }) {
           xl={3}
           elevation={6}
           square="true"
-        // className={classes.container}
         >
-          <GlobalReport />
+          <WaiterReport />
         </Grid>
 
         <Grid
@@ -57,7 +45,6 @@ function GlobalReports({ data, fetching, loading }) {
           xl={9}
           elevation={6}
           square="true"
-        // className={classes.container}
         >
           <Card variant="cardForm">
 
@@ -70,6 +57,7 @@ function GlobalReports({ data, fetching, loading }) {
               <CustomTable
                 column={[
                   { title: "ID", field: "id", type: "numeric", editable: "never", },
+                  { title: "Mesero", field: "waiter_first_name", type: "string" },
                   { title: "Pago", field: "payment_name", type: "string" },
                   { title: "Monto", field: "total_amount", type: "numeric" },
                   { title: "Creación", field: "created_at", editable: "never", type: "date", },
@@ -83,58 +71,20 @@ function GlobalReports({ data, fetching, loading }) {
                   { title: "Caja", field: "box_name", type: "string" },
                   { title: "Monto", field: "total_amount", type: "string" },
                   { title: "Pago", field: "payment_name", type: "string" },
-                  { title: "Fecha", field: "created_at", type: "date"},
+                  { title: "Fecha", field: "created_at", type: "date" },
                 ]}
                 data={data}
-                // refresh={environmentShow}
-                // customUpdate={handleOpen}
-                // deletes={environmentDelete}
               />
             </CardBody>
           </Card>
         </Grid>
       </Grid>
 
-      <CustomModal
-        title={{
-          text: "Editar ambiente",
-          size: "medium",
-        }}
-        loading={fetching}
-        open={state.open}
-        close={handleClose}
-        content={<EnvironmentUpdate data={state.data} close={handleClose} />}
-        rightButtons={[
-          {
-            type: "button",
-            size: "medium",
-            align: "center",
-            text: "Cancelar",
-            color: "default",
-            variant: "text",
-            autoAdjust: false,
-            margin: true,
-            onClick: handleClose
-          },
-          {
-            type: "submit",
-            size: "medium",
-            align: "center",
-            text: "Guardar",
-            color: "primary",
-            variant: "contained",
-            html: "environment-update",
-          },
-        ]}
-        renderRefresh={[state.open, state.data]}
-        scroll="paper"
-      />
-
     </Fragment>
   );
 }
 // PropTypes
-GlobalReports.propTypes = {
+WaiterReports.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
@@ -143,10 +93,10 @@ GlobalReports.propTypes = {
 const mapStateToProps = (state) => {
   const { collects } = state;
   return {
-    data: collects.global,
+    data: collects.waiter,
     fetching: collects.fetching,
     loading: collects.loading,
   }
 };
 
-export default connect(mapStateToProps, null)(GlobalReports);
+export default connect(mapStateToProps, null)(WaiterReports);
