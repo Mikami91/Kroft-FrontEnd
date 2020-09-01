@@ -12,6 +12,7 @@ import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
+import SelectInput from '../../components/CustomInput/SelectInput.js';
 import DateInput from '../../components/CustomInput/DateInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
@@ -19,20 +20,20 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import SingleTabs from '../../components/CustomTabs/SingleTabs';
 import TabPanel from "../../components/Panel/TabPanel.js";
 // Functions
-import { collectGlobalReport } from "../../functions/collectFunctions";
+import { collectEnvReport } from "../../functions/collectFunctions";
 // Configs
 moment.locale("es");
 moment().format('l');
 
-function GlobalReport(props) {
-    const { fetching } = props;
+function EnvironmentReport(props) {
+    const { environments, fetching } = props;
     // State for Panel Tabs
     const [value, setValue] = useState(0);
     const handleChangeValue = (event, newValue) => {
         setValue(newValue);
         setState({
             ...state,
-            type: newValue === 0 ?  "month" : "range",
+            type: newValue === 0 ? "month" : "range",
         });
     };
     const handleChangeIndex = (index) => {
@@ -40,6 +41,7 @@ function GlobalReport(props) {
     };
     const [state, setState] = useState({
         type: "month",
+        environment_id: "",
         month: null,
         from_month: null,
         to_month: null,
@@ -56,6 +58,7 @@ function GlobalReport(props) {
     const handleEmpty = (e) => {
         setState({
             ...state,
+            environment_id: "",
             month: null,
             from_month: null,
             to_month: null,
@@ -66,7 +69,7 @@ function GlobalReport(props) {
     // Report function
     const handleReport = (e) => {
         e.preventDefault();
-        collectGlobalReport(state).then((response) => {
+        collectEnvReport(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
                     handleEmpty();
@@ -76,7 +79,7 @@ function GlobalReport(props) {
     };
 
     return (
-        <form id="global-report" onSubmit={handleReport}>
+        <form id="env-report" onSubmit={handleReport}>
 
             <Card variant="cardForm">
 
@@ -93,6 +96,35 @@ function GlobalReport(props) {
                         alignItems="flex-start"
                         spacing={2}
                     >
+                        <Grid
+                            item
+                            xs={10}
+                            elevation={6}
+                            square="true"
+                        >
+                            <CustomDivider text="Ambiente" color="warning" margin="normal" bold />
+
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                disabled={fetching}
+                                id="environment_id"
+                                label="Seleccionar ambiente"
+                                name="environment_id"
+                                onChange={handleChange}
+                                value={state.environment_id}
+                                itemList={{
+                                    data: environments,
+                                    key: "id",
+                                    value: "name"
+                                }}
+                                required
+                            />
+
+                        </Grid>
+
                         <Grid
                             item
                             xs={12}
@@ -187,7 +219,7 @@ function GlobalReport(props) {
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="global-report" size="sm" type="submit" disabled={state.isUpload} >
+                    <CustomBotton form="env-report" size="sm" type="submit" disabled={state.isUpload} >
                         Generar
                     </CustomBotton>
                 </CardFooter>
@@ -196,10 +228,11 @@ function GlobalReport(props) {
     );
 };
 const mapStateToProps = (state) => {
-    const { collects } = state;
+    const { collects, environment } = state;
     return {
+        environments: environment.payload,
         fetching: collects.fetching,
     }
 };
 
-export default connect(mapStateToProps, null)(GlobalReport);
+export default connect(mapStateToProps, null)(EnvironmentReport);

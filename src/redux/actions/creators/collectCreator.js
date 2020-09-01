@@ -35,7 +35,7 @@ export const collect_cashier = (payload) => {
     payload: payload
   };
 }
-export const cachier = (payload) => store.dispatch(collect_cashier(payload));
+export const cashier = (payload) => store.dispatch(collect_cashier(payload));
 
 export const collect_waiter = (payload) => {
   return {

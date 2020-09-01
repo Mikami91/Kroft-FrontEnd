@@ -7,8 +7,9 @@ import TabPanel from "../../components/Panel/TabPanel";
 import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
 import GlobalReports from "../../layouts/sub-views/GlobalReports";
-import SubTables from "../../layouts/sub-views/Tables";
+import EnvironmentReports from "../../layouts/sub-views/EnvironmentReports";
 // Icons
+import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';
 import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 import TableChartRounded from '@material-ui/icons/TableChartRounded';
 
@@ -28,7 +29,7 @@ function Reports(props) {
             <GlobalReports />
           </TabPanel>
           <TabPanel sub value={value} index={1}>
-            <SubTables />
+            <EnvironmentReports />
           </TabPanel>
         </SwipeableViews>
 
@@ -39,6 +40,10 @@ function Reports(props) {
           value={value}
           change={handleChange}
           tabs={[
+            {
+              text: "Generales",
+              icon: ListAltRoundedIcon,
+            },
             {
               text: "Ambientes",
               icon: DeckRoundedIcon,

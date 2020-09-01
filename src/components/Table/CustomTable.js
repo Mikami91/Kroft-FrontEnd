@@ -2,6 +2,8 @@
 import React, { useMemo, forwardRef } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from "material-table";
+import moment from 'moment';
+import 'moment/locale/es';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -76,6 +78,9 @@ export default function CustomTable(props) {
     deletes,
     loading,
   } = props;
+  // Configs
+  moment.locale("es");
+  moment().format('l');
   // Styles
   const classes = useStyles();
   // Using useMemo hook
@@ -209,7 +214,9 @@ export default function CustomTable(props) {
                                 rowData[index.field] === 0 ?
                                   index.options[0] :
                                   index.options[1] :
-                                rowData[index.field]
+                                index.type === "date" ?
+                                  moment(rowData[index.field]).format('D MMMM YYYY, h:mm a') :
+                                  rowData[index.field]
                             }
                             margin={true}
                             color="default"
@@ -225,7 +232,7 @@ export default function CustomTable(props) {
         />
       </div>
     );
-  }, [data, loading]);
+  }, [data, detailPanel, loading]);
 }
 
 // PropTypes
