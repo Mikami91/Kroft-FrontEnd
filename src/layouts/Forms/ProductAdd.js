@@ -25,11 +25,9 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import { productCreate } from "../../functions/productFunctions";
 // Assets
 import image from '../../assets/img/defaults/product.png';
-// Varieables
-import { data } from '../../variables/JSON.js';
 
 function ProductAdd(props) {
-    const { fetching, categories, subcategories } = props;
+    const { fetching, categories, subcategories, printscategories } = props;
     // Local State
     const [state, setState] = useState({
         print_category_id: "",
@@ -269,7 +267,7 @@ function ProductAdd(props) {
                                 onChange={handleChange}
                                 value={state.print_category_id}
                                 itemList={{
-                                    data: data,
+                                    data: printscategories,
                                     key: "id",
                                     value: "name"
                                 }}
@@ -289,11 +287,12 @@ function ProductAdd(props) {
     );
 };
 const mapStateToProps = (state) => {
-    const { product, category, subcategory } = state;
+    const { product, category, subcategory, printcategory } = state;
     return {
         fetching: product.fetching,
         categories: category.payload,
         subcategories: subcategory.payload,
+        printscategories: printcategory.payload,
     }
 };
 

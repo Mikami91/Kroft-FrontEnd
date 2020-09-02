@@ -22,8 +22,6 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import { productUpdate } from "../../functions/productFunctions";
 // Apis
 import { API } from '../../API/index';
-// Varieables
-import { data as data2 } from '../../variables/JSON.js';
 
 function ProductUpdate(props) {
     const {
@@ -31,6 +29,7 @@ function ProductUpdate(props) {
         fetching,
         categories,
         subcategories,
+        printscategories,
         // Props
         data,
         close,
@@ -240,7 +239,7 @@ function ProductUpdate(props) {
                             onChange={handleChange}
                             value={state.category_id}
                             itemList={{
-                                data: data2,
+                                data: categories,
                                 key: "id",
                                 value: "name"
                             }}
@@ -258,7 +257,7 @@ function ProductUpdate(props) {
                             onChange={handleChange}
                             value={state.sub_category_id}
                             itemList={{
-                                data: data2,
+                                data: subcategories,
                                 key: "id",
                                 value: "name"
                             }}
@@ -291,7 +290,7 @@ function ProductUpdate(props) {
                             onChange={handleChange}
                             value={state.print_category_id}
                             itemList={{
-                                data: data2,
+                                data: printscategories,
                                 key: "id",
                                 value: "name"
                             }}
@@ -305,11 +304,12 @@ function ProductUpdate(props) {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-    const { product, category, subcategory } = state;
+    const { product, category, subcategory, printcategory } = state;
     return {
         fetching: product.fetching,
         categories: category.payload,
         subcategories: subcategory.payload,
+        printscategories: printcategory.payload,
     }
 };
 

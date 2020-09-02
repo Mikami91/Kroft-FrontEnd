@@ -73,6 +73,7 @@ export default function CustomTable(props) {
     paging,
     padding,
     refresh,
+    add,
     updates,
     customUpdate,
     deletes,
@@ -143,12 +144,20 @@ export default function CustomTable(props) {
             }
           }}
           editable={{
+            onRowAdd:
+              add !== null
+                ? (newData, oldData) =>
+                  new Promise(resolve => {
+                    add(newData);
+                    resolve();
+                  })
+                : null,
+
             onRowUpdate:
               updates !== null
                 ? (newData, oldData) =>
                   new Promise(resolve => {
                     updates(newData);
-                    console.log(newData);
                     resolve();
                   })
                 : null,
@@ -248,6 +257,7 @@ CustomTable.defaultProps = {
   paging: true,
   padding: "default",
   refresh: null,
+  add: null,
   updates: null,
   customUpdate: null,
   deletes: null,
@@ -266,6 +276,7 @@ CustomTable.propTypes = {
   paging: PropTypes.bool,
   padding: PropTypes.oneOf(["default", "dense"]),
   refresh: PropTypes.func,
+  add: PropTypes.func,
   updates: PropTypes.func,
   customUpdate: PropTypes.func,
   deletes: PropTypes.func,

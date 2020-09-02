@@ -4,6 +4,7 @@ import Employees from '../../views/Dashboard/Employees';
 import Customers from '../../views/Dashboard/Customers';
 import Environments from '../../views/Dashboard/Environments';
 import Reports from '../../views/Dashboard/Reports';
+import Settings from '../../views/Dashboard/Settings';
 // import Tables from '../../views/Dashboard/Tables';
 // import Categories from '../../views/Dashboard/Categories';
 // import Subcategories from '../../views/Dashboard/Subcategories';
@@ -15,12 +16,13 @@ import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
 import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
 import PeopleRoundedIcon from '@material-ui/icons/PeopleRounded';
 import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
+import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 
 const SidebarList = [
   {
-    name: "Reportes",
-    icon: DescriptionRoundedIcon,
-    component: Reports,
+    name: "Ajustes",
+    icon: SettingsRoundedIcon,
+    component: Settings,
   },
   {
     name: "Inicio",
@@ -47,11 +49,11 @@ const SidebarList = [
     icon: PeopleRoundedIcon,
     component: Customers,
   },
-  // {
-  //   name: "Reportes",
-  //   icon: DescriptionRoundedIcon,
-  //   component: Reportes,
-  // },
+  {
+    name: "Reportes",
+    icon: DescriptionRoundedIcon,
+    component: Reports,
+  },
   // {
   //   name: "Almacenes",
   //   icon: AssessmentRoundedIcon,

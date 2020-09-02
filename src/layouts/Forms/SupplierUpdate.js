@@ -25,8 +25,6 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import { supplierUpdate } from "../../functions/supplierFunctions";
 // Apis
 import { API } from '../../API/index';
-// Varieables
-import { data as data2 } from '../../variables/JSON.js';
 // Configs
 moment.locale("en");
 moment().format('l');
@@ -34,7 +32,7 @@ moment().format('l');
 function SupplierUpdate(props) {
     const {
         // Redux 
-        fetching, customers, categories, subcategories,
+        fetching, customers, categories, subcategories, printscategories,
         // Props
         data, close
     } = props;
@@ -424,7 +422,7 @@ function SupplierUpdate(props) {
                             onChange={handleChange}
                             value={state.print_category_id}
                             itemList={{
-                                data: data2,
+                                data: printscategories,
                                 key: "id",
                                 value: "name"
                             }}
@@ -438,12 +436,13 @@ function SupplierUpdate(props) {
     );
 };
 const mapStateToProps = (state) => {
-    const { supplier, customer, category, subcategory } = state;
+    const { supplier, customer, category, subcategory, printcategory } = state;
     return {
         fetching: supplier.fetching,
         customers: customer.payload,
         categories: category.payload,
         subcategories: subcategory.payload,
+        printscategories: printcategory.payload,
     }
 };
 

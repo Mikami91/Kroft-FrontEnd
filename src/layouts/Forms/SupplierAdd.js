@@ -28,14 +28,12 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import { supplierCreate } from "../../functions/supplierFunctions";
 // Assets
 import image from '../../assets/img/defaults/product.png';
-// Varieables
-import { data } from '../../variables/JSON.js';
 // Configs
 moment.locale("en");
 moment().format('l');
 
 function SupplierAdd(props) {
-    const { fetching, customers, categories, subcategories } = props;
+    const { fetching, customers, categories, subcategories, printscategories } = props;
     // Local State
     const [state, setState] = useState({
         // Customer
@@ -381,7 +379,7 @@ function SupplierAdd(props) {
                                 onChange={handleChange}
                                 value={state.print_category_id}
                                 itemList={{
-                                    data: data,
+                                    data: printscategories,
                                     key: "id",
                                     value: "name"
                                 }}
@@ -402,12 +400,13 @@ function SupplierAdd(props) {
     );
 };
 const mapStateToProps = (state) => {
-    const { supplier, customer, category, subcategory } = state;
+    const { supplier, customer, category, subcategory, printcategory } = state;
     return {
         fetching: supplier.fetching,
         customers: customer.payload,
         categories: category.payload,
         subcategories: subcategory.payload,
+        printscategories: printcategory.payload,
     }
 };
 

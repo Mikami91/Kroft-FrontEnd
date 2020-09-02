@@ -26,6 +26,8 @@ import SidebarList from "../components/List/SidebarList";
 import { employeeShow } from "../functions/employeeFunctions";
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
+
+import { printCategoryShow } from "../functions/printCategoryFunctions";
 import { categoryShow } from "../functions/categoryFunctions";
 import { subcategoryShow } from "../functions/subcategoryFunctions";
 import { productShow } from "../functions/productFunctions";
@@ -55,9 +57,10 @@ function DashboardPage({ employees, loading }) {
 
   // Refresh fetches
   const handleRefresh = () => {
-    employeeShow();
+    // employeeShow();
     // environmentShow();
-    // tableShow();
+    tableShow();
+    printCategoryShow();
     // categoryShow();
     // subcategoryShow();
     // productShow();

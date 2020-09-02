@@ -50,6 +50,15 @@ export const TABLE_FETCHING = 'TABLE_FETCHING';
 export const TABLE_LOADING = 'TABLE_LOADING';
 
 
+/*::::::::::::::::::::PRINT CATEGORY::::::::::::::::::::*/
+// List
+export const PRINT_CATEGORY_LIST = 'PRINT_CATEGORY_LIST';
+// Fetching
+export const PRINT_CATEGORY_FETCHING = 'PRINT_CATEGORY_FETCHING';
+// Loading
+export const PRINT_CATEGORY_LOADING = 'PRINT_CATEGORY_LOADING';
+
+
 /*::::::::::::::::::::CATEGORY::::::::::::::::::::*/
 // List
 export const CATEGORY_LIST = 'CATEGORY_LIST';

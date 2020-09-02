@@ -38,6 +38,14 @@ export const table_update = "api/table_update";
 export const table_state = "api/table_state";
 export const table_delete = "api/table_delete";
 
+/*::::::::::::::::::::CATEGORY PRINT::::::::::::::::::::*/
+export const print_category_create = "api/print_category_create";
+export const print_category_index = "api/print_category_index";
+export const print_category_show = "api/print_category_show";
+export const print_category_update = "api/print_category_update";
+export const print_category_state = "api/print_category_state";
+export const print_category_delete = "api/print_category_delete";
+
 /*::::::::::::::::::::CATEGORY::::::::::::::::::::*/
 export const category_create = "api/category_create";
 export const category_index = "api/category_index";

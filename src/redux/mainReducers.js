@@ -5,6 +5,7 @@ import { adminReducer } from './reducers/adminReducer';
 import { employeeReducer } from './reducers/employeeReducer';
 import { environmentReducer } from './reducers/environmentReducer';
 import { tableReducer } from './reducers/tableReducer';
+import { printCategoryReducer } from './reducers/printCategoryReducer';
 import { categoryReducer } from './reducers/categoryReducer';
 import { subcategoryReducer } from './reducers/subcategoryReducer';
 import { productReducer } from './reducers/productReducer';
@@ -19,6 +20,7 @@ export const mainReducer = combineReducers({
   employee: employeeReducer,
   environment: environmentReducer,
   table: tableReducer,
+  printcategory: printCategoryReducer,
   category: categoryReducer,
   subcategory: subcategoryReducer,
   product: productReducer,
