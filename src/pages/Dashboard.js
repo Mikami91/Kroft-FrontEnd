@@ -26,13 +26,14 @@ import SidebarList from "../components/List/SidebarList";
 import { employeeShow } from "../functions/employeeFunctions";
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
-
 import { printCategoryShow } from "../functions/printCategoryFunctions";
 import { categoryShow } from "../functions/categoryFunctions";
 import { subcategoryShow } from "../functions/subcategoryFunctions";
 import { productShow } from "../functions/productFunctions";
 import { customerShow } from "../functions/customerFunctions";
 import { orderShow } from "../functions/orderFunctions";
+// Events
+import { handleEvents } from '../events';
 // Assets
 import logo from "../assets/img/brands/kroft-horizontal.svg";
 // Styles
@@ -55,11 +56,14 @@ function DashboardPage({ employees, loading }) {
     setMobileOpen(!mobileOpen);
   };
 
+  // Events start
+  handleEvents();
+
   // Refresh fetches
   const handleRefresh = () => {
     // employeeShow();
     // environmentShow();
-    tableShow();
+    // tableShow();
     printCategoryShow();
     // categoryShow();
     // subcategoryShow();
