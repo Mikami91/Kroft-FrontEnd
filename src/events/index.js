@@ -2,14 +2,19 @@
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 // Actions Creators
-import { payload as printCategoryPayload } from '../redux/actions/creators/printCategoryCreator';
 
-// import { environmentList } from '../redux/actions/creators/environments';
-// import { tableList } from '../redux/actions/creators/tables';
-// import { categoryList } from '../redux/actions/creators/categories';
-// import { subcategoryList } from '../redux/actions/creators/subcategories';
-// import { productList, productMergeList } from '../redux/actions/creators/products';
-// import { totalOrderList, orderList } from '../redux/actions/creators/orders';
+import { payload as adminPayload } from '../redux/actions/creators/adminCreator';
+import { payload as employeePayload } from '../redux/actions/creators/employeeCreator';
+import { payload as customerPayload } from '../redux/actions/creators/customerCreator';
+import { payload as environmentPayload } from '../redux/actions/creators/environmentCreator';
+import { payload as tablePayload } from '../redux/actions/creators/tableCreator';
+import { payload as printCategoryPayload } from '../redux/actions/creators/printCategoryCreator';
+import { payload as categoryPayload } from '../redux/actions/creators/categoryCreator';
+import { payload as subcategoryPayload } from '../redux/actions/creators/subcategoryCreator';
+import { payload as productPayload } from '../redux/actions/creators/productCreator';
+import { payload as supplierPayload } from '../redux/actions/creators/supplierCreator';
+import { payload as orderPayload } from '../redux/actions/creators/orderCreator';
+import { payload as collectPayload } from '../redux/actions/creators/collectCreator';
 
 
 export const handleEvents = () => {
@@ -36,41 +41,63 @@ export const handleEvents = () => {
 
     // Events
 
-    // Prints Categories
-    window.Echo.channel('print_category').listen('PrintCategoryEvent', (e) => {
+    // Admins
+    window.Echo.channel('admins').listen('AdminEvent', (e) => {
+        adminPayload(e.message);
+    })
+
+    // Employees
+    window.Echo.channel('employees').listen('EmployeeEvent', (e) => {
+        employeePayload(e.message);
+    })
+
+    // Customers
+    window.Echo.channel('customers').listen('CustomerEvent', (e) => {
+        customerPayload(e.message);
+    })
+
+    // Environments
+    window.Echo.channel('environments').listen('EnvironmentEvent', (e) => {
+        environmentPayload(e.message);
+    })
+
+    // Tables
+    window.Echo.channel('tables').listen('TableEvent', (e) => {
+        tablePayload(e.message);
+    })
+
+    // PrintsCategories
+    window.Echo.channel('print_categories').listen('PrintCategoryEvent', (e) => {
         printCategoryPayload(e.message);
     })
 
-    // // Environments
-    // window.Echo.channel('environments_chanel').listen('EnvironmentsEvent', (e) => {
-    //     store.dispatch(environmentList(e.message));
-    // })
-    // // Tables
-    // window.Echo.channel('tables_chanel').listen('TablesEvent', (e) => {
-    //     store.dispatch(tableList(e.message));
-    // })
-    // // Categories
-    // window.Echo.channel('categories_chanel').listen('CategoriesEvent', (e) => {
-    //     store.dispatch(categoryList(e.message));
-    // })
-    // // SubCategories
-    // window.Echo.channel('subcategories_chanel').listen('SubCategoriesEvent', (e) => {
-    //     store.dispatch(subcategoryList(e.message));
-    // })
-    // // Products
-    // window.Echo.channel('products_chanel').listen('ProductsEvent', (e) => {
-    //     store.dispatch(productList(e.message));
-    // })
-    // // Products Merge
-    // window.Echo.channel('products_merge_chanel').listen('ProductsMergeEvent', (e) => {
-    //     store.dispatch(productMergeList(e.message));
-    // })
-    // // Total Orders
-    // window.Echo.channel('total_orders_chanel').listen('TotalOrdersEvent', (e) => {
-    //     store.dispatch(totalOrderList(e.message));
-    // })
-    // // Orders
-    // window.Echo.channel('orders_chanel').listen('OrdersEvent', (e) => {
-    //     store.dispatch(orderList(e.message));
-    // })
+    // Categories
+    window.Echo.channel('categories').listen('CategoryEvent', (e) => {
+        categoryPayload(e.message);
+    })
+
+    // Subcategories
+    window.Echo.channel('sub_categories').listen('SubCategoryEvent', (e) => {
+        subcategoryPayload(e.message);
+    })
+
+    // Products
+    window.Echo.channel('products').listen('ProductEvent', (e) => {
+        productPayload(e.message);
+    })
+
+    // Suppliers
+    window.Echo.channel('suppliers').listen('SupplierEvent', (e) => {
+        supplierPayload(e.message);
+    })
+
+    // Orders
+    window.Echo.channel('orders').listen('OrderEvent', (e) => {
+        orderPayload(e.message);
+    })
+
+    // Collects
+    window.Echo.channel('collects').listen('CollectEvent', (e) => {
+        collectPayload(e.message);
+    })
 }
