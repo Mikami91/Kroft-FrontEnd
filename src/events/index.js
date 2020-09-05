@@ -3,6 +3,7 @@ import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 // Actions Creators
 
+// import { payload as superAdminPayload } from '../redux/actions/creators/superAdminCreator';
 import { payload as adminPayload } from '../redux/actions/creators/adminCreator';
 import { payload as employeePayload } from '../redux/actions/creators/employeeCreator';
 import { payload as customerPayload } from '../redux/actions/creators/customerCreator';
@@ -13,9 +14,10 @@ import { payload as categoryPayload } from '../redux/actions/creators/categoryCr
 import { payload as subcategoryPayload } from '../redux/actions/creators/subcategoryCreator';
 import { payload as productPayload } from '../redux/actions/creators/productCreator';
 import { payload as supplierPayload } from '../redux/actions/creators/supplierCreator';
-import { payload as orderPayload } from '../redux/actions/creators/orderCreator';
+// import { payload as ingredientPayload } from '../redux/actions/creators/ingredientCreator';
+import { payload as orderPayload, orders_detail as ordersDetailPayload } from '../redux/actions/creators/orderCreator';
 import { payload as collectPayload } from '../redux/actions/creators/collectCreator';
-
+// import { payload as paymentPayload } from '../redux/actions/creators/paymentCreator';
 
 export const handleEvents = () => {
 
@@ -41,15 +43,30 @@ export const handleEvents = () => {
 
     // Events
 
+    // // Super Admins
+    // window.Echo.channel('super_admins').listen('SuperAdminEvent', (e) => {
+    //     adminPayload(e.message);
+    // })
+
     // Admins
     window.Echo.channel('admins').listen('AdminEvent', (e) => {
         adminPayload(e.message);
     })
 
+    // Roles
+    // window.Echo.channel('roles').listen('RolEvent', (e) => {
+    //     rolPayload(e.message);
+    // })
+
     // Employees
     window.Echo.channel('employees').listen('EmployeeEvent', (e) => {
         employeePayload(e.message);
     })
+
+    // Salaries
+    // window.Echo.channel('salaries').listen('SalaryEvent', (e) => {
+    //     rolPayload(e.message);
+    // })
 
     // Customers
     window.Echo.channel('customers').listen('CustomerEvent', (e) => {
@@ -87,7 +104,7 @@ export const handleEvents = () => {
     })
 
     // Suppliers
-    window.Echo.channel('suppliers').listen('SupplierEvent', (e) => {
+    window.Echo.channel('supplies').listen('SupplyEvent', (e) => {
         supplierPayload(e.message);
     })
 
@@ -96,8 +113,18 @@ export const handleEvents = () => {
         orderPayload(e.message);
     })
 
+    // Order Details
+    window.Echo.channel('order_details').listen('OrderDetailEvent', (e) => {
+        ordersDetailPayload(e.message);
+    })
+
     // Collects
     window.Echo.channel('collects').listen('CollectEvent', (e) => {
         collectPayload(e.message);
     })
+
+    // Payments
+    // window.Echo.channel('payments').listen('PaymentEvent', (e) => {
+    //     paymentPayload(e.message);
+    // })
 }
