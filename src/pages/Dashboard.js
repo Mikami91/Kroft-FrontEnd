@@ -41,7 +41,7 @@ import styles from "../styles/pages/DashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function DashboardPage({ employees, loading }) {
+function DashboardPage({ redux_state, employees, loading }) {
 
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
@@ -57,14 +57,16 @@ function DashboardPage({ employees, loading }) {
   };
 
   // Events start
-  handleEvents();
+  useMemo(() => {
+    handleEvents();
+  }, [is_payload]);
 
   // Refresh fetches
   const handleRefresh = () => {
     // employeeShow();
     // environmentShow();
     // tableShow();
-    printCategoryShow();
+    // printCategoryShow();
     // categoryShow();
     // subcategoryShow();
     // productShow();
@@ -284,6 +286,7 @@ function DashboardPage({ employees, loading }) {
 const mapStateToProps = (state) => {
   const { employee, environment, table, product } = state;
   return {
+    redux_state: state,
     employees: employee.payload,
     loading: employee.loading,
     environments: environment,

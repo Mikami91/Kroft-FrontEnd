@@ -21,6 +21,8 @@ import { payload as collectPayload } from '../redux/actions/creators/collectCrea
 
 export const handleEvents = () => {
 
+    console.log("Ruuuun");
+
     //window.Pusher = require('pusher-js');
 
     // Configurations
