@@ -12,9 +12,9 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { printCategoryCreate, printCategoryShow, printCategoryUpdate, printCategoryDelete } from "../../functions/printCategoryFunctions";
+import { rolCreate, rolShow, rolUpdate, rolDelete } from "../../functions/rolFunctions";
 
-function PrintsCategories({ data, fetching, loading }) {
+function Roles({ data, fetching, loading }) {
   return (
     <Fragment>
       <Grid
@@ -23,6 +23,7 @@ function PrintsCategories({ data, fetching, loading }) {
         alignItems="flex-start"
         spacing={3}
       >
+
         <Grid
           item
           xs={12}
@@ -38,7 +39,7 @@ function PrintsCategories({ data, fetching, loading }) {
             <CustomLoading inside color="primary" open={loading || fetching} />
 
             <CardHeader color="primary" dense>
-              <h3>Categorias de impresión</h3>
+              <h3>Roles</h3>
             </CardHeader>
             <CardBody form>
               <CustomTable
@@ -47,10 +48,10 @@ function PrintsCategories({ data, fetching, loading }) {
                   { title: "Impresion", field: "name", type: "string" }
                 ]}
                 data={data}
-                add={printCategoryCreate}
-                refresh={printCategoryShow}
-                updates={printCategoryUpdate}
-                deletes={printCategoryDelete}
+                add={rolCreate}
+                refresh={rolShow}
+                updates={rolUpdate}
+                deletes={rolDelete}
               />
             </CardBody>
           </Card>
@@ -61,19 +62,19 @@ function PrintsCategories({ data, fetching, loading }) {
   );
 }
 // PropTypes
-PrintsCategories.propTypes = {
+Roles.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { printcategory } = state;
+  const { rol } = state;
   return {
-    data: printcategory.payload,
-    fetching: printcategory.fetching,
-    loading: printcategory.loading,
+    data: rol.payload,
+    fetching: rol.fetching,
+    loading: rol.loading,
   }
 };
 
-export default connect(mapStateToProps, null)(PrintsCategories);
+export default connect(mapStateToProps, null)(Roles);

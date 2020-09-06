@@ -7,16 +7,10 @@ import TabPanel from "../../components/Panel/TabPanel";
 import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
 import PrintsCategories from "../../layouts/sub-views/PrintsCategories";
-import CashierReports from "../../layouts/sub-views/CashierReports";
-import WaiterReports from "../../layouts/sub-views/WaiterReports";
-import EnvironmentReports from "../../layouts/sub-views/EnvironmentReports";
-import TableReports from "../../layouts/sub-views/TableReports";
+import Roles from "../../layouts/sub-views/Roles";
 // Icons
-import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';
 import PrintRoundedIcon from '@material-ui/icons/PrintRounded';
-import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
-import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
-import TableChartRounded from '@material-ui/icons/TableChartRounded';
+import AssignmentIndRoundedIcon from '@material-ui/icons/AssignmentIndRounded';
 
 function Settings(props) {
   // TabPanel Swipeables Views
@@ -34,7 +28,7 @@ function Settings(props) {
             <PrintsCategories />
           </TabPanel>
           <TabPanel sub value={value} index={1}>
-            <CashierReports />
+            <Roles />
           </TabPanel>
           {/* <TabPanel sub value={value} index={2}>
             <WaiterReports />
@@ -60,8 +54,8 @@ function Settings(props) {
               icon: PrintRoundedIcon,
             },
             {
-              text: "Cajeros",
-              icon: GroupRoundedIcon,
+              text: "Roles",
+              icon: AssignmentIndRoundedIcon,
             },
             // {
             //   text: "Meseros",

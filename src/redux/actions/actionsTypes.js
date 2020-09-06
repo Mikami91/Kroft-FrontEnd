@@ -15,6 +15,15 @@ export const ADMIN_LIST = 'ADMIN_LIST';
 export const ADMIN_DIALOG = 'ADMIN_DIALOG';
 
 
+/*::::::::::::::::::::ROL::::::::::::::::::::*/
+// List
+export const ROL_LIST = 'ROL_LIST';
+// Fetching
+export const ROL_FETCHING = 'ROL_FETCHING';
+// Loading
+export const ROL_LOADING = 'ROL_LOADING';
+
+
 /*::::::::::::::::::::EMPLOYEE::::::::::::::::::::*/
 // Login
 export const EMPLOYEE_LOGIN = 'EMPLOYEE_LOGIN';

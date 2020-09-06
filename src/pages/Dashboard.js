@@ -24,6 +24,7 @@ import TabPanel from "../components/Panel/TabPanel";
 import SidebarList from "../components/List/SidebarList";
 // Functions
 import { employeeShow } from "../functions/employeeFunctions";
+import { rolShow } from "../functions/rolFunctions";
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
 import { printCategoryShow } from "../functions/printCategoryFunctions";
@@ -63,6 +64,7 @@ function DashboardPage({ redux_state, employees, loading }) {
 
   // Refresh fetches
   const handleRefresh = () => {
+    rolShow();
     // employeeShow();
     // environmentShow();
     // tableShow();

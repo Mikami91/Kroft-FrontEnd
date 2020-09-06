@@ -6,6 +6,7 @@ import Pusher from 'pusher-js';
 // import { payload as superAdminPayload } from '../redux/actions/creators/superAdminCreator';
 import { payload as adminPayload } from '../redux/actions/creators/adminCreator';
 import { payload as employeePayload } from '../redux/actions/creators/employeeCreator';
+import { payload as rolPayload } from '../redux/actions/creators/rolCreator';
 import { payload as customerPayload } from '../redux/actions/creators/customerCreator';
 import { payload as environmentPayload } from '../redux/actions/creators/environmentCreator';
 import { payload as tablePayload } from '../redux/actions/creators/tableCreator';
@@ -55,10 +56,10 @@ export const handleEvents = () => {
         adminPayload(e.message);
     })
 
-    // Roles
-    // window.Echo.channel('roles').listen('RolEvent', (e) => {
-    //     rolPayload(e.message);
-    // })
+    //  Roles
+    window.Echo.channel('roles').listen('RolEvent', (e) => {
+        rolPayload(e.message);
+    })
 
     // Employees
     window.Echo.channel('employees').listen('EmployeeEvent', (e) => {

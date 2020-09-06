@@ -1,10 +1,10 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/printCategoryFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/rolFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/printCategoryCreator";
+import { payload, loading, fetching } from "../redux/actions/creators/rolCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function printCategoryCreate(data) {
+export async function rolCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -32,7 +32,7 @@ export async function printCategoryCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function printCategoryShow(data) {
+export async function rolShow(data) {
     loading(true);
     try {
         const response = await showFetch(data);
@@ -60,7 +60,7 @@ export async function printCategoryShow(data) {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function printCategoryUpdate(data) {
+export async function rolUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -88,7 +88,7 @@ export async function printCategoryUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function printCategoryState(data) {
+export async function rolState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -115,7 +115,7 @@ export async function printCategoryState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function printCategoryDelete(data) {
+export async function rolDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

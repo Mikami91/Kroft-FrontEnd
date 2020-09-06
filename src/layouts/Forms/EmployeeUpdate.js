@@ -28,8 +28,6 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import { employeeUpdate } from "../../functions/employeeFunctions";
 // Apis
 import { API } from '../../API/index';
-// Varieables
-import { data as dataVar } from '../../variables/JSON.js';
 // Configs
 moment.locale("en");
 moment().format('l');
@@ -38,6 +36,7 @@ function EmployeeUpdate(props) {
     const {
         // Redux 
         fetching,
+        roles,
         // Props
         data,
         close,
@@ -395,9 +394,9 @@ function EmployeeUpdate(props) {
                             onChange={handleChange}
                             value={state.rol_id}
                             itemList={{
-                                data: dataVar,
+                                data: roles,
                                 key: "id",
-                                value: "website"
+                                value: "name"
                             }}
                             required
                         />
@@ -511,9 +510,10 @@ function EmployeeUpdate(props) {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-    const { employee } = state;
+    const { employee, rol } = state;
     return {
         fetching: employee.fetching,
+        roles: rol.payload,
     }
 };
 

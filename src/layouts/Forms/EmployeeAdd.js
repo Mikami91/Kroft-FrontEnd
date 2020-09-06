@@ -31,14 +31,12 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import { employeeCreate } from "../../functions/employeeFunctions";
 // Assets
 import image from '../../assets/img/defaults/user.png';
-// Varieables
-import { data } from '../../variables/JSON.js';
 // Configs
 moment.locale("en");
 moment().format('l');
 
 function EmployeeAdd(props) {
-    const { fetching } = props;
+    const { fetching, roles } = props;
     // Local State
     const [state, setState] = useState({
         // Others
@@ -358,9 +356,9 @@ function EmployeeAdd(props) {
                                 onChange={handleChange}
                                 value={state.rol_id}
                                 itemList={{
-                                    data: data,
+                                    data: roles,
                                     key: "id",
-                                    value: "website"
+                                    value: "name"
                                 }}
                                 required
                             />
@@ -461,9 +459,10 @@ function EmployeeAdd(props) {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-    const { employee } = state;
+    const { employee, rol } = state;
     return {
         fetching: employee.fetching,
+        roles: rol.payload,
     }
 };
 
