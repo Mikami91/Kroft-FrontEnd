@@ -22,6 +22,7 @@ import Sidebar from "../layouts/Sidebars/Sidebar.js";
 import CustomAppBar from "../components/AppBar/CustomAppBar";
 import TabPanel from "../components/Panel/TabPanel";
 import SidebarList from "../components/List/SidebarList";
+import CustomLoading from '../components/Loading/CustomLoading';
 // Functions
 import { employeeShow } from "../functions/employeeFunctions";
 import { rolShow } from "../functions/rolFunctions";
@@ -34,7 +35,22 @@ import { productShow } from "../functions/productFunctions";
 import { customerShow } from "../functions/customerFunctions";
 import { orderShow } from "../functions/orderFunctions";
 // Events
-import { handleEvents } from '../events';
+import {
+  admins_WS,
+  roles_WS,
+  employees_WS,
+  customers_WS,
+  environments_WS,
+  tables_WS,
+  print_categories_WS,
+  categories_WS,
+  sub_categories_WS,
+  products_WS,
+  supplies_WS,
+  orders_WS,
+  order_details_WS,
+  collects_WS
+} from '../events';
 // Assets
 import logo from "../assets/img/brands/kroft-horizontal.svg";
 // Styles
@@ -42,7 +58,20 @@ import styles from "../styles/pages/DashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function DashboardPage({ redux_state, employees, loading }) {
+function DashboardPage({
+  admins,
+  roles,
+  employees,
+  environments,
+  tables,
+  printcategories,
+  categories,
+  subcategories,
+  products,
+  customers,
+  suppliers,
+  orders,
+  collects }) {
 
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
@@ -58,22 +87,33 @@ function DashboardPage({ redux_state, employees, loading }) {
   };
 
   // Events start
-  useMemo(() => {
-    handleEvents();
-  }, [is_payload]);
+  admins_WS();
+  roles_WS();
+  employees_WS();
+  customers_WS();
+  environments_WS();
+  tables_WS();
+  print_categories_WS();
+  categories_WS();
+  sub_categories_WS();
+  products_WS();
+  supplies_WS();
+  orders_WS();
+  order_details_WS();
+  collects_WS();
 
   // Refresh fetches
   const handleRefresh = () => {
     rolShow();
-    // employeeShow();
-    // environmentShow();
-    // tableShow();
-    // printCategoryShow();
-    // categoryShow();
-    // subcategoryShow();
-    // productShow();
-    // customerShow();
-    // orderShow();
+    employeeShow();
+    environmentShow();
+    tableShow();
+    printCategoryShow();
+    categoryShow();
+    subcategoryShow();
+    productShow();
+    customerShow();
+    orderShow();
   }
 
   // Payloads
@@ -91,6 +131,23 @@ function DashboardPage({ redux_state, employees, loading }) {
 
   return (
     <Fragment>
+
+      <CustomLoading open={
+        admins ||
+        roles ||
+        employees ||
+        environments ||
+        tables ||
+        printcategories ||
+        categories ||
+        subcategories ||
+        products ||
+        customers ||
+        suppliers ||
+        orders ||
+        collects} text={""} />
+
+
       <div className={classes.root}>
         <CssBaseline />
 
@@ -286,16 +343,35 @@ function DashboardPage({ redux_state, employees, loading }) {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { employee, environment, table, product } = state;
+  const {
+    admin,
+    rol,
+    employee,
+    environment,
+    table,
+    printcategory,
+    category,
+    subcategory,
+    product,
+    customer,
+    supplier,
+    orders,
+    collects,
+  } = state;
   return {
-    redux_state: state,
-    employees: employee.payload,
-    loading: employee.loading,
-    environments: environment,
-    // loading: environment.loading,
-    tables: table.payload,
-    orders_list: product.orders,
-    current: product.current,
+    admins: admin.loading,
+    roles: rol.loading,
+    employees: employee.loading,
+    environments: environment.loading,
+    tables: table.loading,
+    printcategories: printcategory.loading,
+    categories: category.loading,
+    subcategories: subcategory.loading,
+    products: product.loading,
+    customers: customer.loading,
+    suppliers: supplier.loading,
+    orders: orders.loading,
+    collects: collects.loading,
   }
 };
 // // Functions to dispatching

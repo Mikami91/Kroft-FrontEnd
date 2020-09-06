@@ -1,4 +1,5 @@
 // Dependencies
+import { useMemo } from "react";
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 // Actions Creators
@@ -7,6 +8,7 @@ import Pusher from 'pusher-js';
 import { payload as adminPayload } from '../redux/actions/creators/adminCreator';
 import { payload as employeePayload } from '../redux/actions/creators/employeeCreator';
 import { payload as rolPayload } from '../redux/actions/creators/rolCreator';
+// import { payload as salaryPayload } from '../redux/actions/creators/salaryCreator';
 import { payload as customerPayload } from '../redux/actions/creators/customerCreator';
 import { payload as environmentPayload } from '../redux/actions/creators/environmentCreator';
 import { payload as tablePayload } from '../redux/actions/creators/tableCreator';
@@ -20,114 +22,146 @@ import { payload as orderPayload, orders_detail as ordersDetailPayload } from '.
 import { payload as collectPayload } from '../redux/actions/creators/collectCreator';
 // import { payload as paymentPayload } from '../redux/actions/creators/paymentCreator';
 
-export const handleEvents = () => {
 
-    console.log("Ruuuun");
+//window.Pusher = require('pusher-js');
 
-    //window.Pusher = require('pusher-js');
+// CONFIGURATIONS
 
-    // Configurations
-    window.Echo = new Echo({
-        broadcaster: 'pusher',
-        key: '3351a028ec8f3033b9c3',
-        // wsHost: 'http://kroftserver.test',
-        wsHost: window.location.hostname,
-        wsPort: 6001,
-        cluster: 'mt1',
-        auth: {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-                Accept: 'application/json',
-            },
+export const websocketConnection = new Echo({
+    broadcaster: 'pusher',
+    key: '3351a028ec8f3033b9c3',
+    // wsHost: 'http://kroftserver.test',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    cluster: 'mt1',
+    auth: {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Accept: 'application/json',
         },
-        disableStats: true,
-        encrypted: false
-    });
+    },
+    disableStats: true,
+    encrypted: false
+});
 
-    // Events
 
-    // // Super Admins
-    // window.Echo.channel('super_admins').listen('SuperAdminEvent', (e) => {
-    //     adminPayload(e.message);
-    // })
+// EVENTS
 
-    // Admins
-    window.Echo.channel('admins').listen('AdminEvent', (e) => {
+// // Super Admins
+// export const super_admis_WS = () => useMemo(() => {
+//     websocketConnection.channel('super_admis').listen('SuperAdminEvent', (e) => {
+//         superAdminPayload(e.message);
+//     })
+// }, []);
+
+// Admins
+export const admins_WS = () => useMemo(() => {
+    websocketConnection.channel('admins').listen('AdminEvent', (e) => {
         adminPayload(e.message);
     })
+}, []);
 
-    //  Roles
-    window.Echo.channel('roles').listen('RolEvent', (e) => {
+//  Roles
+export const roles_WS = () => useMemo(() => {
+    websocketConnection.channel('roles').listen('RolEvent', (e) => {
         rolPayload(e.message);
     })
+}, []);
 
-    // Employees
-    window.Echo.channel('employees').listen('EmployeeEvent', (e) => {
+// Employees
+export const employees_WS = () => useMemo(() => {
+    websocketConnection.channel('employees').listen('EmployeeEvent', (e) => {
         employeePayload(e.message);
     })
+}, []);
 
-    // Salaries
-    // window.Echo.channel('salaries').listen('SalaryEvent', (e) => {
-    //     rolPayload(e.message);
-    // })
+// // Salaries
+// export const salaries_WS = () => useMemo(() => {
+//     websocketConnection.channel('salaries').listen('SalaryEvent', (e) => {
+//         salaryPayload(e.message);
+//     })
+// }, []);
 
-    // Customers
-    window.Echo.channel('customers').listen('CustomerEvent', (e) => {
+// Customers
+export const customers_WS = () => useMemo(() => {
+    websocketConnection.channel('customers').listen('CustomerEvent', (e) => {
         customerPayload(e.message);
     })
+}, []);
 
-    // Environments
-    window.Echo.channel('environments').listen('EnvironmentEvent', (e) => {
+// Environments
+export const environments_WS = () => useMemo(() => {
+    websocketConnection.channel('environments').listen('EnvironmentEvent', (e) => {
         environmentPayload(e.message);
     })
+}, []);
 
-    // Tables
-    window.Echo.channel('tables').listen('TableEvent', (e) => {
+// Tables
+export const tables_WS = () => useMemo(() => {
+    websocketConnection.channel('tables').listen('TableEvent', (e) => {
         tablePayload(e.message);
     })
+}, []);
 
-    // PrintsCategories
-    window.Echo.channel('print_categories').listen('PrintCategoryEvent', (e) => {
+// PrintsCategories
+export const print_categories_WS = () => useMemo(() => {
+    websocketConnection.channel('print_categories').listen('PrintCategoryEvent', (e) => {
         printCategoryPayload(e.message);
     })
+}, []);
 
-    // Categories
-    window.Echo.channel('categories').listen('CategoryEvent', (e) => {
+// Categories
+export const categories_WS = () => useMemo(() => {
+    websocketConnection.channel('categories').listen('CategoryEvent', (e) => {
         categoryPayload(e.message);
     })
+}, []);
 
-    // Subcategories
-    window.Echo.channel('sub_categories').listen('SubCategoryEvent', (e) => {
+// Subcategories
+export const sub_categories_WS = () => useMemo(() => {
+    websocketConnection.channel('sub_categories').listen('SubCategoryEvent', (e) => {
         subcategoryPayload(e.message);
     })
+}, []);
 
-    // Products
-    window.Echo.channel('products').listen('ProductEvent', (e) => {
+// Products
+export const products_WS = () => useMemo(() => {
+    websocketConnection.channel('products').listen('ProductEvent', (e) => {
         productPayload(e.message);
     })
+}, []);
 
-    // Suppliers
-    window.Echo.channel('supplies').listen('SupplyEvent', (e) => {
+// Suppliers
+export const supplies_WS = () => useMemo(() => {
+    websocketConnection.channel('supplies').listen('SupplyEvent', (e) => {
         supplierPayload(e.message);
     })
+}, []);
 
-    // Orders
-    window.Echo.channel('orders').listen('OrderEvent', (e) => {
+// Orders
+export const orders_WS = () => useMemo(() => {
+    websocketConnection.channel('orders').listen('OrderEvent', (e) => {
         orderPayload(e.message);
     })
+}, []);
 
-    // Order Details
-    window.Echo.channel('order_details').listen('OrderDetailEvent', (e) => {
+// Order Details
+export const order_details_WS = () => useMemo(() => {
+    websocketConnection.channel('order_details').listen('OrderDetailEvent', (e) => {
         ordersDetailPayload(e.message);
     })
+}, []);
 
-    // Collects
-    window.Echo.channel('collects').listen('CollectEvent', (e) => {
+// Collects
+export const collects_WS = () => useMemo(() => {
+    websocketConnection.channel('collects').listen('CollectEvent', (e) => {
         collectPayload(e.message);
     })
+}, []);
 
-    // Payments
-    // window.Echo.channel('payments').listen('PaymentEvent', (e) => {
-    //     paymentPayload(e.message);
-    // })
-}
+// // Payments
+// export const payments_WS = () => useMemo(() => {
+//     websocketConnection.channel('payments').listen('PaymentEvent', (e) => {
+//         paymentPayload(e.message);
+//     })
+// }, []);

@@ -202,17 +202,17 @@ export async function employeeState(data) {
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
 export async function employeeDelete(data) {
-    loading(true);
+    fetching(true);
     try {
         const response = await deleteFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    loading(false);
+                    fetching(false);
                     break;
 
                 case false:
-                    loading(false);
+                    fetching(false);
                     break;
 
                 default:
@@ -222,7 +222,7 @@ export async function employeeDelete(data) {
         return response.data.data;
 
     } catch (error) {
-        loading(false);
+        fetching(false);
         return error.message;
     };
 };
