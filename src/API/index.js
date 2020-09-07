@@ -104,6 +104,14 @@ export const order_update = "api/order_update";
 export const order_state = "api/order_state";
 export const order_delete = "api/order_delete";
 
+/*::::::::::::::::::::PAYMENT::::::::::::::::::::*/
+export const payment_create = "api/payment_create";
+export const payment_index = "api/payment_index";
+export const payment_show = "api/payment_show";
+export const payment_update = "api/payment_update";
+export const payment_state = "api/payment_state";
+export const payment_delete = "api/payment_delete";
+
 /*::::::::::::::::::::COLLECT::::::::::::::::::::*/
 export const collect_create = "api/collect_create";
 export const collect_index = "api/collect_index";

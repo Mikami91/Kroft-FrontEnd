@@ -8,9 +8,13 @@ import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
 import PrintsCategories from "../../layouts/sub-views/PrintsCategories";
 import Roles from "../../layouts/sub-views/Roles";
+import Payments from "../../layouts/sub-views/Payments";
+import Restaurant from "../../layouts/sub-views/Restaurant";
 // Icons
 import PrintRoundedIcon from '@material-ui/icons/PrintRounded';
 import AssignmentIndRoundedIcon from '@material-ui/icons/AssignmentIndRounded';
+import PaymentRoundedIcon from '@material-ui/icons/PaymentRounded';
+import RestaurantRoundedIcon from '@material-ui/icons/RestaurantRounded';
 
 function Settings(props) {
   // TabPanel Swipeables Views
@@ -29,6 +33,12 @@ function Settings(props) {
           </TabPanel>
           <TabPanel sub value={value} index={1}>
             <Roles />
+          </TabPanel>
+          <TabPanel sub value={value} index={2}>
+            <Payments />
+          </TabPanel>
+          <TabPanel sub value={value} index={3}>
+            <Restaurant />
           </TabPanel>
           {/* <TabPanel sub value={value} index={2}>
             <WaiterReports />
@@ -57,10 +67,14 @@ function Settings(props) {
               text: "Roles",
               icon: AssignmentIndRoundedIcon,
             },
-            // {
-            //   text: "Meseros",
-            //   icon: GroupRoundedIcon,
-            // },
+            {
+              text: "Pagos",
+              icon: PaymentRoundedIcon,
+            },
+            {
+              text: "Restaurante",
+              icon: RestaurantRoundedIcon,
+            },
             // {
             //   text: "Ambientes",
             //   icon: DeckRoundedIcon,

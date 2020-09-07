@@ -49,6 +49,7 @@ import {
   supplies_WS,
   orders_WS,
   order_details_WS,
+  payments_WS,
   collects_WS
 } from '../events';
 // Assets
@@ -100,20 +101,21 @@ function DashboardPage({
   supplies_WS();
   orders_WS();
   order_details_WS();
+  payments_WS();
   collects_WS();
 
   // Refresh fetches
   const handleRefresh = () => {
-    rolShow();
-    employeeShow();
-    environmentShow();
-    tableShow();
-    printCategoryShow();
-    categoryShow();
-    subcategoryShow();
-    productShow();
-    customerShow();
-    orderShow();
+    // rolShow();
+    // employeeShow();
+    // environmentShow();
+    // tableShow();
+    // printCategoryShow();
+    // categoryShow();
+    // subcategoryShow();
+    // productShow();
+    // customerShow();
+    // orderShow();
   }
 
   // Payloads
@@ -133,19 +135,21 @@ function DashboardPage({
     <Fragment>
 
       <CustomLoading open={
-        admins ||
-        roles ||
-        employees ||
-        environments ||
-        tables ||
-        printcategories ||
-        categories ||
-        subcategories ||
-        products ||
-        customers ||
-        suppliers ||
-        orders ||
-        collects} text={""} />
+        !is_payload
+        // admins ||
+        // roles ||
+        // employees ||
+        // environments ||
+        // tables ||
+        // printcategories ||
+        // categories ||
+        // subcategories ||
+        // products ||
+        // customers ||
+        // suppliers ||
+        // orders ||
+        // collects
+        } text={""} />
 
 
       <div className={classes.root}>

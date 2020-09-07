@@ -1,10 +1,10 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/printCategoryFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/paymentFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/printCategoryCreator";
+import { payload, loading, fetching } from "../redux/actions/creators/paymentCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function printCategoryCreate(data) {
+export async function paymentCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -32,7 +32,7 @@ export async function printCategoryCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function printCategoryShow(data) {
+export async function paymentShow(data) {
     loading(true);
     try {
         const response = await showFetch(data);
@@ -60,7 +60,7 @@ export async function printCategoryShow(data) {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function printCategoryUpdate(data) {
+export async function paymentUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -88,7 +88,7 @@ export async function printCategoryUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function printCategoryState(data) {
+export async function paymentState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -115,7 +115,7 @@ export async function printCategoryState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function printCategoryDelete(data) {
+export async function paymentDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

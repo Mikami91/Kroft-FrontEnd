@@ -191,18 +191,18 @@ export async function collectEnvReport(data) {
 
 /*::::::::::::::::::::TABLE REPORT::::::::::::::::::::*/
 export async function collectTableReport(data) {
-    fetching(true);
+    loading(true);
     try {
         const response = await tableReportFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
                     table(response.data.data);
-                    fetching(false);
+                    loading(false);
                     break;
 
                 case false:
-                    fetching(false);
+                    loading(false);
                     break;
 
                 default:
@@ -212,7 +212,7 @@ export async function collectTableReport(data) {
         return response.data;
 
     } catch (error) {
-        fetching(false);
+        loading(false);
         return error.message;
     };
 };

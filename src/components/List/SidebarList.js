@@ -24,11 +24,11 @@ const SidebarList = [
     icon: SettingsRoundedIcon,
     component: Settings,
   },
-  {
-    name: "Inicio",
-    icon: DashboardRoundedIcon,
-    component: Started,
-  },
+  // {
+  //   name: "Inicio",
+  //   icon: DashboardRoundedIcon,
+  //   component: Started,
+  // },
   {
     name: "Personal",
     icon: GroupRoundedIcon,
@@ -53,6 +53,11 @@ const SidebarList = [
     name: "Reportes",
     icon: DescriptionRoundedIcon,
     component: Reports,
+  },
+  {
+    name: "Ajustes",
+    icon: SettingsRoundedIcon,
+    component: Settings,
   },
   // {
   //   name: "Almacenes",

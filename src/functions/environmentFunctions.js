@@ -128,17 +128,17 @@ export async function environmentState(data) {
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
 export async function environmentDelete(data) {
-    fetching(true);
+    loading(true);
     try {
         const response = await deleteFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    fetching(false);
+                    loading(false);
                     break;
 
                 case false:
-                    fetching(false);
+                    loading(false);
                     break;
 
                 default:
@@ -148,7 +148,7 @@ export async function environmentDelete(data) {
         return response.data.data;
 
     } catch (error) {
-        fetching(false);
+        loading(false);
         return error.message;
     };
 };

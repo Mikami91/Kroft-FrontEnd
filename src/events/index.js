@@ -19,9 +19,8 @@ import { payload as productPayload } from '../redux/actions/creators/productCrea
 import { payload as supplierPayload } from '../redux/actions/creators/supplierCreator';
 // import { payload as ingredientPayload } from '../redux/actions/creators/ingredientCreator';
 import { payload as orderPayload, orders_detail as ordersDetailPayload } from '../redux/actions/creators/orderCreator';
+import { payload as paymentPayload } from '../redux/actions/creators/paymentCreator';
 import { payload as collectPayload } from '../redux/actions/creators/collectCreator';
-// import { payload as paymentPayload } from '../redux/actions/creators/paymentCreator';
-
 
 //window.Pusher = require('pusher-js');
 
@@ -152,16 +151,16 @@ export const order_details_WS = () => useMemo(() => {
     })
 }, []);
 
+// Payments
+export const payments_WS = () => useMemo(() => {
+    websocketConnection.channel('payments').listen('PaymentEvent', (e) => {
+        paymentPayload(e.message);
+    })
+}, []);
+
 // Collects
 export const collects_WS = () => useMemo(() => {
     websocketConnection.channel('collects').listen('CollectEvent', (e) => {
         collectPayload(e.message);
     })
 }, []);
-
-// // Payments
-// export const payments_WS = () => useMemo(() => {
-//     websocketConnection.channel('payments').listen('PaymentEvent', (e) => {
-//         paymentPayload(e.message);
-//     })
-// }, []);

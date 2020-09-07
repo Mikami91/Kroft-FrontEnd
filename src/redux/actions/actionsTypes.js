@@ -139,6 +139,13 @@ export const ORDERS_DETAIL_LIST = 'ORDERS_DETAIL_LIST';
 // Loading
 export const ORDER_LOADING = 'ORDER_LOADING';
 
+/*::::::::::::::::::::PAYMENT::::::::::::::::::::*/
+// List
+export const PAYMENT_LIST = 'PAYMENT_LIST';
+// Fetching
+export const PAYMENT_FETCHING = 'PAYMENT_FETCHING';
+// Loading
+export const PAYMENT_LOADING = 'PAYMENT_LOADING';
 
 /*::::::::::::::::::::COLLECT::::::::::::::::::::*/
 // List

@@ -13,6 +13,7 @@ import { productReducer } from './reducers/productReducer';
 import { supplierReducer } from './reducers/supplierReducer';
 import { customerReducer } from './reducers/customerReducer';
 import { orderReducer } from './reducers/orderReducer';
+import { paymentReducer } from './reducers/paymentReducer';
 import { collectReducer } from './reducers/collectReducer';
 
 // Combine Reducer
@@ -29,6 +30,7 @@ export const mainReducer = combineReducers({
   customer: customerReducer,
   supplier: supplierReducer,
   orders: orderReducer,
+  payments: paymentReducer,
   collects: collectReducer,
 });
 
