@@ -41,9 +41,24 @@ import { categoryShow } from "../functions/categoryFunctions";
 import { subcategoryShow } from "../functions/subcategoryFunctions";
 import { productShow } from "../functions/productFunctions";
 import { orderShow } from "../functions/orderFunctions";
-// Variables
-// import { environments } from "../variables/environments";
-// import { tables } from "../variables/tables";
+// Events
+import {
+  admins_WS,
+  roles_WS,
+  employees_WS,
+  customers_WS,
+  environments_WS,
+  tables_WS,
+  print_categories_WS,
+  categories_WS,
+  sub_categories_WS,
+  products_WS,
+  supplies_WS,
+  orders_WS,
+  order_details_WS,
+  payments_WS,
+  collects_WS
+} from '../events';
 // Styles
 import styles from "../styles/pages/SalesStyle.js";
 
@@ -111,6 +126,18 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
   const handleCloseDrawer = () => {
     setOpenDrawer(false);
   };
+
+  // Events
+  environments_WS();
+  tables_WS();
+  print_categories_WS();
+  categories_WS();
+  sub_categories_WS();
+  products_WS();
+  supplies_WS();
+  orders_WS()
+  order_details_WS();
+  collects_WS();
 
   // Refresh fetches
   const handleRefresh = () => {

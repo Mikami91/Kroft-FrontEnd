@@ -39,7 +39,7 @@ function FloatChip(props) {
             </ListItem>
         </div>
     );
-  }, [primary, secondary]);
+  }, [primary, secondary, color]);
 
 };
 // PropTypes

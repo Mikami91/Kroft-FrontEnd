@@ -73,7 +73,7 @@ class ComponentToPrint extends Component {
 function DrawerProducts(props) {
   const {
     /* Redux */
-    categories, subcategories, products, orders_list, current, loading, orders_payload, orders_detail_payload, order_loading,
+    categories, subcategories, products, tables, orders_list, current, loading, orders_payload, orders_detail_payload, order_loading,
     /* Props */
     direction, variant, open, close, background, table } = props;
 
@@ -118,6 +118,12 @@ function DrawerProducts(props) {
   // calculate Global quantity and global amount from current Table
   let global_quantity = 0;
   let global_amount = 0;
+
+  let table_state = 0;
+  let table_amount = 0;
+
+  tables.find(index => index.id === current.table_id ? table_state = index.is_busy : table_state = 0);
+  tables.find(index => index.id === current.table_id ? table_amount = index.amount : table_amount = 0);
 
   if (open === true) {
     if (current.env_index !== null && current.table_index !== null) {
@@ -345,12 +351,12 @@ function DrawerProducts(props) {
           floatChip={{
             primary: `${table.name} ${table.number}`,
             secondary: table.environment_name,
-            color: table.is_busy === 0 ? "success" : table.is_busy === 1 ? "danger" : table.is_busy === 2 ? "warning" : "gray",
+            color: table_state === 0 ? "success" : table_state === 1 ? "danger" : table_state === 2 ? "warning" : "gray",
             type: "icon",
             icon: TableChartRoundedIcon
           }}
           fabButton={{
-            disabled: global_quantity <= 0 ? true : false,
+            disabled: global_quantity <= 0 ? true : table_state === 2 ? true : false,
             color: "secondary",
             label: "Lista de ordenes",
             quantity: global_quantity,
@@ -383,7 +389,7 @@ function DrawerProducts(props) {
               text:
                 [<NumberFormat
                   key={999}
-                  value={table.amount}
+                  value={table_amount}
                   displayType={'text'}
                   thousandSeparator={true}
                   allowNegative={false}
@@ -411,7 +417,7 @@ function DrawerProducts(props) {
               icon: PrintIcon,
               edge: "start",
               size: "large",
-              disabled: table.amount > 0 ? false : true,
+              disabled: table_amount > 0 ? false : true,
               onClick: handleOpenPrints,
             },
             {
@@ -421,18 +427,18 @@ function DrawerProducts(props) {
               icon: ListAltIcon,
               edge: false,
               size: "large",
-              disabled: table.amount > 0 ? false : true,
+              disabled: table_amount > 0 ? false : true,
               onClick: handleOpenTotal,
             },
             {
               type: "fab",
-              text: table.is_busy === 1 ? "Enviar orden" : "Cancelar orden",
-              color: table.is_busy === 1 ? "primary" : "secondary",
-              icon: table.is_busy === 1 ? SendIcon : table.is_busy === 2 ? RestoreIcon : SendIcon,
+              text: table_state === 1 ? "Enviar orden" : "Cancelar orden",
+              color: table_state === 1 ? "primary" : "secondary",
+              icon: table_state === 1 ? SendIcon : table_state === 2 ? RestoreIcon : SendIcon,
               edge: "end",
               size: "large",
-              disabled: table.amount > 0 ? false : true,
-              onClick: table.is_busy === 1 ? handleSendOrder : table.is_busy === 2 ? handleCancelOrder : null
+              disabled: table_amount > 0 ? false : true,
+              onClick: table_state === 1 ? handleSendOrder : table_state === 2 ? handleCancelOrder : null
             },
           ]}
         />
@@ -762,7 +768,7 @@ function DrawerProducts(props) {
               text:
                 [<NumberFormat
                   key={999}
-                  value={table.amount}
+                  value={table_amount}
                   displayType={'text'}
                   thousandSeparator={true}
                   allowNegative={false}
@@ -875,7 +881,7 @@ function DrawerProducts(props) {
 
       </Drawer>
     );
-  }, [open, openTableOrders, openPrints.open, openTotal, value, current, global_quantity, state.open, state2.open, order_loading]);
+  }, [open, openTableOrders, openPrints.open, openTotal, value, current, global_quantity, tables, table_state, state.open, state2.open, order_loading]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {
@@ -894,12 +900,13 @@ DrawerProducts.propTypes = {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { category, subcategory, product, orders } = state;
+  const { category, subcategory, product, orders, table } = state;
   return {
     categories: category.payload.filter(dataList => dataList.state === 1),
     loading: category.loading,
     subcategories: subcategory.payload.filter(dataList => dataList.state === 1),
     products: product.payload.filter(dataList => dataList.state === 1),
+    tables: table.payload.filter(dataList => dataList.state === 1),
     orders_list: product.orders,
     current: product.current,
     orders_payload: orders.payload,
