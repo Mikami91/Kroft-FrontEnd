@@ -32,12 +32,22 @@ export const loginPinFetch = (data) => {
     });
 };
 
+/*::::::::::::::::::::LOGOUT::::::::::::::::::::*/
+export const logoutFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: employee_logout,
+        data: data,
+    });
+};
+
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export const createFetch = (data) => {
     return customFetch({
         method: 'POST',
+        token: true,
         url: employee_create,
-        // type: 'multipart/form-data',
         data: data,
     });
 };
@@ -55,6 +65,7 @@ export const showFetch = (data) => {
 export const updateFetch = (data) => {
     return customFetch({
         method: 'POST',
+        token: true,
         url: employee_update,
         data: data,
     });
@@ -64,6 +75,7 @@ export const updateFetch = (data) => {
 export const stateFetch = (data) => {
     return customFetch({
         method: 'POST',
+        token: true,
         url: employee_state,
         data: data,
     });
@@ -73,6 +85,7 @@ export const stateFetch = (data) => {
 export const deleteFetch = (data) => {
     return customFetch({
         method: 'POST',
+        token: true,
         url: employee_delete,
         data: data,
     });

@@ -1,3 +1,20 @@
+/*::::::::::::::::::::SUPER ADMIN::::::::::::::::::::*/
+// Login
+export const SUPER_ADMIN_LOGIN = 'SUPER_ADMIN_LOGIN';
+// Fetch
+export const SUPER_ADMIN_FETCH = 'SUPER_ADMIN_FETCH';
+// Verify Logged
+export const SUPER_ADMIN_LOGGED = 'SUPER_ADMIN_LOGGED';
+// Fetching
+export const SUPER_ADMIN_FETCHING = 'SUPER_ADMIN_FETCHING';
+// Loading
+export const SUPER_ADMIN_LOADING = 'SUPER_ADMIN_LOADING';
+// List
+export const SUPER_ADMIN_LIST = 'SUPER_ADMIN_LIST';
+// Dialog
+export const SUPER_ADMIN_DIALOG = 'SUPER_ADMIN_DIALOG';
+
+
 /*::::::::::::::::::::ADMIN::::::::::::::::::::*/
 // Login
 export const ADMIN_LOGIN = 'ADMIN_LOGIN';

@@ -1,5 +1,5 @@
 // Fetchs
-import { loginFetch, loginPinFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/employeeFetch';
+import { loginFetch, loginPinFetch, logoutFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/employeeFetch';
 // Actions Creators
 import { payload, fetching, loading } from "../redux/actions/creators/employeeCreator";
 
@@ -62,6 +62,33 @@ export async function employeeLoginPin(data) {
                         let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
                         alert(messageError);
                     }
+                    loading(false);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        return response.data;
+
+    } catch (error) {
+        loading(false);
+        return error.message;
+    };
+};
+
+/*::::::::::::::::::::LOGOUT::::::::::::::::::::*/
+export async function employeeLogout(data) {
+    loading(true);
+    try {
+        const response = await logoutFetch(data);
+        if (response.status === 200) {
+            switch (response.data.success) {
+                case true:
+                    loading(false);
+                    break;
+
+                case false:
                     loading(false);
                     break;
 

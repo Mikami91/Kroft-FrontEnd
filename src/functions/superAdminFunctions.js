@@ -1,10 +1,10 @@
 // Fetchs
-import { loginFetch, logoutFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/adminFetch';
+import { loginFetch, logoutFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/superAdminFetch';
 // Actions Creators
-import { payload, fetching, loading } from "../redux/actions/creators/adminCreator";
+import { payload, fetching, loading } from "../redux/actions/creators/superAdminCreator";
 
 /*::::::::::::::::::::LOGIN::::::::::::::::::::*/
-export async function adminLogin(data) {
+export async function superAdminLogin(data) {
     loading(true);
     try {
         const response = await loginFetch(data);
@@ -13,9 +13,9 @@ export async function adminLogin(data) {
                 case true:
                     payload(response.data.data);
                     localStorage.setItem('user', response.data.data.user);
-                    localStorage.setItem('admin_id', response.data.data.id);
+                    localStorage.setItem('super_admin_id', response.data.data.id);
                     localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('rol', 'admin');
+                    localStorage.setItem('rol', 'super_admin');
                     loading(false);
                     break;
 
@@ -51,7 +51,7 @@ export async function superAdminLogout(data) {
             switch (response.data.success) {
                 case true:
                     localStorage.setItem('user', '');
-                    localStorage.setItem('admin_id', '');
+                    localStorage.setItem('super_admin_id', '');
                     localStorage.setItem('token', '');
                     localStorage.setItem('rol', '');
                     loading(false);

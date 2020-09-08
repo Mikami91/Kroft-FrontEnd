@@ -15,6 +15,7 @@ import SendRoundedIcon from '@material-ui/icons/SendRounded';
 import EmployeeLogin from "../layouts/Forms/EmployeeLogin.js";
 import PinLogin from "../layouts/Forms/PinLogin.js";
 import AdminLogin from "../layouts/Forms/AdminLogin.js";
+import SuperAdminLogin from "../layouts/Forms/SuperAdminLogin.js";
 import EmailForm from "../layouts/Forms/EmailForm.js";
 // core components
 import FooterLogin from "../components/Footer/FooterLogin.js";
@@ -112,11 +113,15 @@ function LoginPage({ admin_loading, employee_loading }) {
                 tabs={[
                   {
                     tabName: "Personal",
-                    tabIcon: AccountBoxIcon,
+                    // tabIcon: AccountBoxIcon,
                   },
                   {
-                    tabName: "Gerencia",
-                    tabIcon: AssignmentIndIcon,
+                    tabName: "Admin",
+                    // tabIcon: AssignmentIndIcon,
+                  },
+                  {
+                    tabName: "Super",
+                    // tabIcon: AccountBoxIcon,
                   },
                 ]}
               />
@@ -129,15 +134,19 @@ function LoginPage({ admin_loading, employee_loading }) {
                   <EmployeeLogin />
                   <PinLogin />
                 </TabPanel>
+
                 <TabPanel value={value} index={1}>
                   <AdminLogin />
                 </TabPanel>
+
+                <TabPanel value={value} index={2}>
+                  <SuperAdminLogin />
+                </TabPanel>
+
               </SwipeableViews>
             </CardBody>
             <CardFooter className="cardFooterLogin">
-              {value === 0 ? null : (
-                <h4 onClick={handleOpen}>¿Olvidaste tu contraseña?</h4>
-              )}
+              {value === 2 ? (<h4 onClick={handleOpen}>¿Olvidaste tu contraseña?</h4>) : null}
             </CardFooter>
           </Card>
           {/* <Link to="/Kroft-FrontEnd/sales">

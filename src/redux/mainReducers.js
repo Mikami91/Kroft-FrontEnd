@@ -1,6 +1,7 @@
 // Dependencies
 import { combineReducers } from 'redux';
 // Reducers
+import { superAdminReducer } from './reducers/superAdminReducer';
 import { adminReducer } from './reducers/adminReducer';
 import { rolReducer } from './reducers/rolReducer';
 import { employeeReducer } from './reducers/employeeReducer';
@@ -18,6 +19,7 @@ import { collectReducer } from './reducers/collectReducer';
 
 // Combine Reducer
 export const mainReducer = combineReducers({
+  superadmin: superAdminReducer,
   admin: adminReducer,
   rol: rolReducer, 
   employee: employeeReducer,

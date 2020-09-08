@@ -2,14 +2,14 @@
 import { customFetch } from "./CustomFetch";
 // APIs
 import {
-    admin_create,
-    admin_index,
-    admin_show,
-    admin_update,
-    admin_state,
-    admin_delete,
-    admin_login,
-    admin_logout,
+    super_admin_create,
+    super_admin_index,
+    super_admin_show,
+    super_admin_update,
+    super_admin_state,
+    super_admin_delete,
+    super_admin_login,
+    super_admin_logout,
 } from '../../API';
 
 
@@ -17,7 +17,7 @@ import {
 export const loginFetch = (data) => {
     return customFetch({
         method: 'POST',
-        url: admin_login,
+        url: super_admin_login,
         data: data,
     });
 };
@@ -26,7 +26,7 @@ export const loginFetch = (data) => {
 export const logoutFetch = (data) => {
     return customFetch({
         method: 'POST',
-        url: admin_logout,
+        url: super_admin_logout,
         data: data,
     });
 };
@@ -35,7 +35,7 @@ export const logoutFetch = (data) => {
 export const createFetch = (data) => {
     return customFetch({
         method: 'POST',
-        url: admin_create,
+        url: super_admin_create,
         data: data,
     });
 };
@@ -45,7 +45,7 @@ export const showFetch = () => {
     return customFetch({
         method: 'GET',
         token: true,
-        url: admin_show,
+        url: super_admin_show,
     });
 };
 
@@ -54,7 +54,7 @@ export const updateFetch = (data) => {
     return customFetch({
         method: 'POST',
         token: true,
-        url: admin_update,
+        url: super_admin_update,
         data: data,
     });
 };
@@ -64,7 +64,7 @@ export const stateFetch = (data) => {
     return customFetch({
         method: 'POST',
         token: true,
-        url: admin_state,
+        url: super_admin_state,
         data: data,
     });
 };
@@ -74,9 +74,10 @@ export const deleteFetch = (data) => {
     return customFetch({
         method: 'POST',
         token: true,
-        url: admin_delete,
+        url: super_admin_delete,
         data: data,
     });
 };
+
 
 

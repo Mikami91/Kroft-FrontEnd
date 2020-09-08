@@ -112,18 +112,20 @@ function DrawerProducts(props) {
     set_orders(arg);
   };
 
+  // State and amount of Current Table
+  let table_state = 0;
+  let table_amount = 0;
+
+  tables.find(index => index.id === current.table_id ? table_state = index.is_busy : table_state = 0);
+  tables.find(index => index.id === current.table_id ? table_amount = index.amount : table_amount = 0);
+
+
   // Products Orders List
   let product_orders_list = [];
 
   // calculate Global quantity and global amount from current Table
   let global_quantity = 0;
   let global_amount = 0;
-
-  let table_state = 0;
-  let table_amount = 0;
-
-  tables.find(index => index.id === current.table_id ? table_state = index.is_busy : table_state = 0);
-  tables.find(index => index.id === current.table_id ? table_amount = index.amount : table_amount = 0);
 
   if (open === true) {
     if (current.env_index !== null && current.table_index !== null) {
