@@ -73,7 +73,7 @@ class ComponentToPrint extends Component {
 function DrawerProducts(props) {
   const {
     /* Redux */
-    categories, subcategories, products, tables, orders_list, current, loading, orders_payload, orders_detail_payload, order_loading,
+    categories, products, tables, orders_list, current, orders_detail_payload, order_loading,
     /* Props */
     direction, variant, open, close, background, table } = props;
 
@@ -902,16 +902,13 @@ DrawerProducts.propTypes = {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { category, subcategory, product, orders, table } = state;
+  const { category, product, orders, table } = state;
   return {
     categories: category.payload.filter(dataList => dataList.state === 1),
-    loading: category.loading,
-    subcategories: subcategory.payload.filter(dataList => dataList.state === 1),
     products: product.payload.filter(dataList => dataList.state === 1),
     tables: table.payload.filter(dataList => dataList.state === 1),
     orders_list: product.orders,
     current: product.current,
-    orders_payload: orders.payload,
     orders_detail_payload: orders.orders_detail,
     order_loading: orders.loading,
   }

@@ -12,7 +12,7 @@ import styles from "../../styles/components/customInputStyle.js";
 const useStyles = makeStyles(styles);
 
 const IconInput = (props) => {
-    const { disabled, required, type, value, name, onChange, placeholder, icon, iconPosition, label, margin, color, variant } = props;
+    const { disabled, required, type, value, name, onChange, placeholder, icon, iconPosition, label, margin, color, variant, multiline, rows, rowsMax } = props;
     // Styles
     const classes = useStyles();
     return (
@@ -22,6 +22,9 @@ const IconInput = (props) => {
             margin={margin}
             className={classes.labelRoot + classes.underlinePrimary}
             fullWidth
+            multiline={multiline}
+            rows={rows}
+            rowsMax={rowsMax}
             required={required}
             label={label}
             placeholder={placeholder}
@@ -54,6 +57,9 @@ IconInput.defaultProps = {
     iconPosition: "end",
     variant: "normal",
     margin: "normal",
+    multiline: false,
+    rows: 2,
+    rowsMax: 2,
     color: "primary",
     error: false,
     success: false,
@@ -87,6 +93,9 @@ IconInput.propTypes = {
         "outlined",
         "standard"
     ]),
+    multiline: PropTypes.bool,
+    rows: PropTypes.number,
+    rowsMax: PropTypes.number,
     margin: PropTypes.oneOf([
         "dense",
         "none",

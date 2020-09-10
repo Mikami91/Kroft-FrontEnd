@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 // Conecction to Store
@@ -15,8 +15,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import CustomText from "../../components/Typography/CustomText";
 // API
 import { API } from '../../API/index';
-// Icons
-import WhatshotIcon from "@material-ui/icons/Whatshot";
 // Styles
 import styles from "../../styles/components/appBarIconStyle";
 
@@ -83,8 +81,6 @@ const AppBarIcons = (props) => {
         }}
       >
         {data.map((index, key) => {
-          // Using useMemo hook
-          // return useMemo(() => {
           const imageFabClasses = classNames({
             [classes.fabButton]: true,
             [classes[selectColor + "SelectFabButton"]]: key === value,
@@ -122,8 +118,8 @@ const AppBarIcons = (props) => {
                   className={imageFabClasses}
                 >
                   <img
-                    src={'https://source.unsplash.com/300x300/?food,breakfast'}
-                    // src={API + imagePath + index.photo}
+                    // src={'https://source.unsplash.com/300x300/?food,breakfast'}
+                    src={API + imagePath + index.photo}
                     alt={index.name}
                     color={index.selectColor}
                     className={classes.imageIcon}
@@ -134,7 +130,6 @@ const AppBarIcons = (props) => {
               <CustomText text={index.name} adjust />
             </Grid>
           );
-          // }, [data, value]);
         })}
       </Tabs>
     </AppBar>
@@ -200,11 +195,11 @@ AppBarIcons.propTypes = {
     "info",
   ]),
 };
-// Connect to Store State
-const mapStateToProps = (state) => {
-  const { product } = state;
-  return {
-    orders_list: product.orders,
-  }
-};
-export default connect(mapStateToProps, null)(AppBarIcons);
+// // Connect to Store State
+// const mapStateToProps = (state) => {
+//   const { product } = state;
+//   return {
+//     orders_list: product.orders,
+//   }
+// };
+export default connect(null, null)(AppBarIcons);

@@ -16,7 +16,6 @@ export default function CustomText(props) {
     variant,
     color,
     align,
-    autoSize,
     size,
     adjust,
     margin,
@@ -25,7 +24,6 @@ export default function CustomText(props) {
     display,
   } = props;
   const TextClasses = classNames({
-    // [classes.text]: autoSize,
     [classes.adjustText]: adjust,
     [classes[size + "SizeText"]]: true,
     [classes.margin]: margin,
@@ -48,7 +46,6 @@ export default function CustomText(props) {
 CustomText.defaultProps = {
   text: "",
   align: "inherit",
-  autoSize: false,
   size: "default",
   adjust: false,
   margin: false,
@@ -61,7 +58,6 @@ CustomText.defaultProps = {
 CustomText.propTypes = {
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   align: PropTypes.oneOf(["inherit", "left", "center", "right", "justify"]),
-  autoSize: PropTypes.bool,
   size: PropTypes.oneOf(["default", "medium", "large"]),
   adjust: PropTypes.bool,
   margin: PropTypes.bool,

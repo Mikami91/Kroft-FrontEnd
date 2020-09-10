@@ -1,9 +1,7 @@
 import {
-  drawerWidth,
   drawerDash,
   transition,
   boxShadow,
-  container,
   theme,
 } from "../../themes/theme.js";
 

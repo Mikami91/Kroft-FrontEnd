@@ -14,22 +14,16 @@ import PersonIcon from "@material-ui/icons/Person";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
-import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import CreditCardIcon from '@material-ui/icons/CreditCard';
-// Views
-import Products from "../views/Sales/Products.js";
+// import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+// import CreditCardIcon from '@material-ui/icons/CreditCard';
 // Layouts
-import EmployeeAdd from "../layouts/Forms/EmployeeAdd.js";
-import ChangeTable from "../layouts/Forms/ChangeTable.js";
 import DrawerList from "../layouts/Drawers/DrawerTablesList.js";
 // core components
 import AppBarTabs from "../components/AppBar/AppBarTabs.js";
 import TabPanel from "../components/Panel/TabPanel";
 import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
-import CustomDrawer from "../components/Drawer/CustomDrawer.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
 import CustomMoneyInput from "../components/CustomInput/CustomMoneyInput.js";
@@ -38,9 +32,6 @@ import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
 import { orderShow } from "../functions/orderFunctions";
 import { collectCreate, collectShow } from "../functions/collectFunctions";
-// Variables
-import { environments } from "../variables/environments";
-import { tables } from "../variables/tables";
 // Styles
 import styles from "../styles/pages/SalesStyle.js";
 
@@ -122,11 +113,6 @@ function CollectsPage({ environments, tables, loading }) {
       paid_US: 0,
       change: 0,
     });
-  };
-
-
-  // Changes State values
-  const handleChangeValues = (e) => {
   };
 
   // Check if values is number

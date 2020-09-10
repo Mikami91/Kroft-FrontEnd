@@ -1,10 +1,9 @@
 // Dependencies
-import React, { Fragment, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import 'moment/locale/es';
 // UI Material Components
-import { makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -20,7 +19,7 @@ import ExpandLessRoundedIcon from '@material-ui/icons/ExpandLessRounded';
 
 function CustomTableListPrints(props) {
 
-    const { size, padding, sticky, header, columns, data, key_field, filter, renderRefresh } = props;
+    const { header, columns, data, key_field, filter, renderRefresh } = props;
 
     // Local State
     const [state, setState] = useState({
@@ -178,6 +177,7 @@ function CustomTableListPrints(props) {
                                             );
                                         }
                                     }
+                                    return null;
                                 })}
                             </TableRow>,
 

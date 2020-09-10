@@ -24,18 +24,22 @@ import TabPanel from "../components/Panel/TabPanel";
 import SidebarList from "../components/List/SidebarList";
 import CustomLoading from '../components/Loading/CustomLoading';
 // Functions
-import { employeeShow } from "../functions/employeeFunctions";
-import { rolShow } from "../functions/rolFunctions";
-import { environmentShow } from "../functions/environmentFunctions";
-import { tableShow } from "../functions/tableFunctions";
-import { printCategoryShow } from "../functions/printCategoryFunctions";
-import { categoryShow } from "../functions/categoryFunctions";
-import { subcategoryShow } from "../functions/subcategoryFunctions";
-import { productShow } from "../functions/productFunctions";
-import { customerShow } from "../functions/customerFunctions";
-import { orderShow } from "../functions/orderFunctions";
+// import { superAdminShow } from "../functions/superAdminFunctions";
+import { companyShow } from "../functions/companyFunctions";
+// import { adminShow } from "../functions/adminFunctions";
+// import { employeeShow } from "../functions/employeeFunctions";
+// import { rolShow } from "../functions/rolFunctions";
+// import { environmentShow } from "../functions/environmentFunctions";
+// import { tableShow } from "../functions/tableFunctions";
+// import { printCategoryShow } from "../functions/printCategoryFunctions";
+// import { categoryShow } from "../functions/categoryFunctions";
+// import { subcategoryShow } from "../functions/subcategoryFunctions";
+// import { productShow } from "../functions/productFunctions";
+// import { customerShow } from "../functions/customerFunctions";
+// import { orderShow } from "../functions/orderFunctions";
 // Events
 import {
+  companies_WS,
   admins_WS,
   roles_WS,
   employees_WS,
@@ -60,6 +64,7 @@ import styles from "../styles/pages/DashboardStyle.js";
 const useStyles = makeStyles(styles);
 
 function DashboardPage({
+  companies,
   admins,
   roles,
   employees,
@@ -88,6 +93,7 @@ function DashboardPage({
   };
 
   // Events start
+  companies_WS();
   admins_WS();
   roles_WS();
   employees_WS();
@@ -106,6 +112,8 @@ function DashboardPage({
 
   // Refresh fetches
   const handleRefresh = () => {
+    companyShow();
+    // adminShow();
     // rolShow();
     // employeeShow();
     // environmentShow();
@@ -348,6 +356,7 @@ function DashboardPage({
 // Connect to Store State
 const mapStateToProps = (state) => {
   const {
+    company,
     admin,
     rol,
     employee,
@@ -363,6 +372,7 @@ const mapStateToProps = (state) => {
     collects,
   } = state;
   return {
+    companies: company.payload,
     admins: admin.loading,
     roles: rol.loading,
     employees: employee.loading,

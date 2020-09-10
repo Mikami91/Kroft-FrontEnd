@@ -118,6 +118,7 @@ export default function CustomModal(props) {
               if (index.type === "text") {
                 return <DialogText key={key} index={index} />;
               }
+              return null;
             })}
           </div>
 
@@ -143,6 +144,7 @@ export default function CustomModal(props) {
               if (index.type === "text") {
                 return <DialogText key={key} index={index} />;
               }
+              return null;
             })}
           </div>
 
@@ -168,6 +170,7 @@ export default function CustomModal(props) {
               if (index.type === "text") {
                 return <DialogText key={key} index={index} />;
               }
+              return null;
             })}
           </div>
         </DialogActions>

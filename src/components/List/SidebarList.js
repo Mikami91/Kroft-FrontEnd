@@ -54,21 +54,17 @@ const SidebarList = [
     icon: DescriptionRoundedIcon,
     component: Reports,
   },
-  {
-    name: "Ajustes",
-    icon: SettingsRoundedIcon,
-    component: Settings,
-  },
+  // {
+  //   name: "Ajustes",
+  //   icon: SettingsRoundedIcon,
+  //   component: Settings,
+  // },
   // {
   //   name: "Almacenes",
   //   icon: AssessmentRoundedIcon,
   //   component: "Almacenes",
   // },
-  // {
-  //   name: "Ajustes",
-  //   icon: SettingsRounded,
-  //   component: "Ajustes",
-  // },
+
 
 
   // {

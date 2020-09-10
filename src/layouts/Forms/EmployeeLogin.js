@@ -56,7 +56,7 @@ export default function EmployeeLogin(props) {
   };
   const classes = useStyles();
   return (
-    <form className={classes.form} id="employee-login" onSubmit={handleLogin}>
+    <form className={classes.form} id="employee-login" onSubmit={handleLogin} autoComplete="off">
       {/* <p className={classes.divider}>Or Be Classical</p> */}
       <IconInput
         variant={"standard"}

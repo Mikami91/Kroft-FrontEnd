@@ -5,6 +5,7 @@ import Pusher from 'pusher-js';
 // Actions Creators
 
 // import { payload as superAdminPayload } from '../redux/actions/creators/superAdminCreator';
+import { payload as companyPayload } from '../redux/actions/creators/companyCreator';
 import { payload as adminPayload } from '../redux/actions/creators/adminCreator';
 import { payload as employeePayload } from '../redux/actions/creators/employeeCreator';
 import { payload as rolPayload } from '../redux/actions/creators/rolCreator';
@@ -52,6 +53,13 @@ export const websocketConnection = new Echo({
 //         superAdminPayload(e.message);
 //     })
 // }, []);
+
+// Companies
+export const companies_WS = () => useMemo(() => {
+    websocketConnection.channel('companies').listen('CompanyEvent', (e) => {
+        companyPayload(e.message);
+    })
+}, []);
 
 // Admins
 export const admins_WS = () => useMemo(() => {

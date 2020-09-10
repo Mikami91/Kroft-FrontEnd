@@ -1,10 +1,9 @@
 // Dependencies
-import React, { Fragment, useState, useMemo } from "react";
+import React, { Fragment, useMemo } from "react";
 import PropTypes from "prop-types";
 // UI Material Components
 import {
   Badge,
-  Grid,
   IconButton,
   Table,
   TableBody,

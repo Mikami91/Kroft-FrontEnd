@@ -1,5 +1,3 @@
-// Theme
-import { theme } from "../../themes/theme";
 
 const panelStyle = {
   content: {

@@ -1,7 +1,6 @@
 // Dependencies
 import React, { createElement } from "react";
 import PropTypes from "prop-types";
-import { Link, withRouter } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -31,19 +30,17 @@ function DialogFab(props) {
   } else {
     return (
       <Tooltip placement="bottom" title={text}>
-        <Link to={text}>
-          <Fab
-            color={color}
-            // size="small"
-            aria-label={text}
-            onClick={onClick}
-            className={classes.fabButton + " " + classes[props.align + "Fab"]}
-          >
-            {typeof icon !== "undefined"
-              ? createElement(icon, { className: classes.dialogIcon })
-              : null}
-          </Fab>
-        </Link>
+        <Fab
+          color={color}
+          // size="small"
+          aria-label={text}
+          onClick={onClick}
+          className={classes.fabButton + " " + classes[props.align + "Fab"]}
+        >
+          {typeof icon !== "undefined"
+            ? createElement(icon, { className: classes.dialogIcon })
+            : null}
+        </Fab>
       </Tooltip>
     );
   }

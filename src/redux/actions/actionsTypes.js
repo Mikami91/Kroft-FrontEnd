@@ -15,6 +15,15 @@ export const SUPER_ADMIN_LIST = 'SUPER_ADMIN_LIST';
 export const SUPER_ADMIN_DIALOG = 'SUPER_ADMIN_DIALOG';
 
 
+/*::::::::::::::::::::COMPANY::::::::::::::::::::*/
+// List
+export const COMPANY_LIST = 'COMPANY_LIST';
+// Fetching
+export const COMPANY_FETCHING = 'COMPANY_FETCHING';
+// Loading
+export const COMPANY_LOADING = 'COMPANY_LOADING';
+
+
 /*::::::::::::::::::::ADMIN::::::::::::::::::::*/
 // Login
 export const ADMIN_LOGIN = 'ADMIN_LOGIN';

@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import Grid from "@material-ui/core/Grid";
 import IconButton from '@material-ui/core/IconButton';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 // @material-ui/icons
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';

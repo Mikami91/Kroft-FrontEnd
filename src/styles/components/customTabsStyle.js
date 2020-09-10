@@ -1,5 +1,3 @@
-// Themes
-import { primaryColor, secondaryColor } from '../../themes/theme.js';
 
 const customTabsStyle = {
   cardTitle: {

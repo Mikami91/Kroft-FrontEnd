@@ -11,6 +11,14 @@ export const super_admin_delete = "api/super_admin_delete";
 export const super_admin_login = "api/super_admin_login";
 export const super_admin_logout = "api/super_admin_logout";
 
+/*::::::::::::::::::::COMPANY::::::::::::::::::::*/
+export const company_create = "api/company_create";
+export const company_index = "api/company_index";
+export const company_show = "api/company_show";
+export const company_update = "api/company_update";
+export const company_state = "api/company_state";
+export const company_delete = "api/company_delete";
+
 /*::::::::::::::::::::ADMIN::::::::::::::::::::*/
 export const admin_create = "api/admin_create";
 export const admin_index = "api/admin_index";

@@ -17,8 +17,6 @@ import RefreshIcon from "@material-ui/icons/Refresh";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 import TableChartIcon from '@material-ui/icons/TableChart';
-// Views
-import Products from "../views/Sales/Products.js";
 // Layouts
 import EmployeeAdd from "../layouts/Forms/EmployeeAdd.js";
 import ChangeTable from "../layouts/Forms/ChangeTable.js";
@@ -29,7 +27,6 @@ import AppBarTabs from "../components/AppBar/AppBarTabs.js";
 import TabPanel from "../components/Panel/TabPanel";
 import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
-import CustomDrawer from "../components/Drawer/CustomDrawer.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
 // Assets
@@ -43,10 +40,6 @@ import { productShow } from "../functions/productFunctions";
 import { orderShow } from "../functions/orderFunctions";
 // Events
 import {
-  admins_WS,
-  roles_WS,
-  employees_WS,
-  customers_WS,
   environments_WS,
   tables_WS,
   print_categories_WS,
@@ -56,7 +49,6 @@ import {
   supplies_WS,
   orders_WS,
   order_details_WS,
-  payments_WS,
   collects_WS
 } from '../events';
 // Styles
@@ -203,7 +195,7 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
                   alignItems="flex-start"
                 >
                   <GridTables
-                    value={value}
+                    // value={value}
                     keyData={"environment_id"}
                     filter={index.id}
                     data={tables}

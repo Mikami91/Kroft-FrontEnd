@@ -21,7 +21,6 @@ import FooterAppBar from "../../components/Footer/FooterAppBar.js";
 
 import AppBarIcons from "../../components/AppBar/AppBarIcons.js";
 import GridProducts from "../../components/Grid/GridProducts";
-import CustomModal from "../../components/Modal/CustomModal.js";
 // Variables
 import { tables } from "../../variables/tables";
 import { categories } from "../../variables/categories";

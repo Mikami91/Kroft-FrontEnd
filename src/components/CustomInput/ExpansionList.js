@@ -1,6 +1,5 @@
 // Dependencies
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,21 +21,10 @@ const useStyles = makeStyles(styles);
 
 function ExpansionList(props) {
   const {
-    disabled,
-    id,
-    label,
-    margin,
-    color,
     hoverColor,
-    name,
     categoryList,
     itemList,
     filter,
-    onChange,
-    placeholder,
-    required,
-    value,
-    variant,
   } = props;
   const classes = useStyles();
   const listItem = classNames({

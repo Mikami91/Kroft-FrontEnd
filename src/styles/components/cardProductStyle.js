@@ -8,8 +8,6 @@ import {
     secondaryCardHeader,
     roseCardHeader,
     grayColor,
-    lightColor,
-    darkColor
   } from "../../themes/theme.js";
   
   const cardProductStyle = {

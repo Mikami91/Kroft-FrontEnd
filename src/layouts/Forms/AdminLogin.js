@@ -45,7 +45,7 @@ export default function AdminLogin(props) {
 
   const classes = useStyles();
   return (
-    <form className={classes.form} id="admin-login" onSubmit={handleLogin}>
+    <form className={classes.form} id="admin-login" onSubmit={handleLogin} autoComplete="off">
       <IconInput
         variant={"standard"}
         margin={"dense"}

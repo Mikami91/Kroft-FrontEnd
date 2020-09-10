@@ -54,7 +54,7 @@ export default function PinLogin(props) {
     };
     const classes = useStyles();
     return (
-        <form className={classes.pinForm} id="pin-login" onSubmit={handleLogin}>
+        <form className={classes.pinForm} id="pin-login" onSubmit={handleLogin} autoComplete="off">
             {/* <p className={classes.divider}>Or Be Classical</p> */}
             <PINInput
                 variant={'outlined'}

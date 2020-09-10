@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Conecction to Store
 import { connect } from 'react-redux';
 // @material-ui/core components
@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import DeleteIcon from '@material-ui/icons/Delete';
 // core components
-import Card from "../../components/Card/Card.js";
+import CardImage from "../../components/Card/CardImage";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
@@ -20,20 +20,41 @@ import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { environmentCreate } from "../../functions/environmentFunctions";
+import { companyUpdate } from "../../functions/companyFunctions";
+// Apis
+import { API } from '../../API/index';
 // Assets
 import image from '../../assets/img/defaults/environment.png';
 
-function EnvironmentAdd(props) {
-    const { fetching } = props;
+function RestaurantForm(props) {
+    const { company, fetching } = props;
     // Local State
     const [state, setState] = useState({
+        super_admin_id: localStorage.getItem("super_admin_id"),
         photo: null,
+        photoChange: false,
         name: "",
         description: "",
         isUpload: false,
-        error: false
+        error: false,
+        is_payload: false
     });
+
+    const current_image = Object.keys(company).length !== 0 ? `${API}images/companies/${company.photo}` : image;
+
+    // Use Effect
+    useEffect(() => {
+        if (Object.keys(company).length !== 0 && state.is_payload === false) {
+            setState({
+                ...state,
+                name: company.name,
+                description: company.description,
+                is_payload: true
+            });
+        }
+    }, [state.is_payload, company]);
+
+
     // Change State for Inputs
     const handleChange = (e) => {
         setState({
@@ -44,11 +65,8 @@ function EnvironmentAdd(props) {
     // Empty State values
     const handleEmpty = (e) => {
         setState({
-            photo: null,
-            name: "",
-            description: "",
-            isUpload: false,
-            error: false
+            ...state,
+            photoChange: false,
         });
     };
 
@@ -66,6 +84,7 @@ function EnvironmentAdd(props) {
                 setState({
                     ...state,
                     photo: reader.result,
+                    photoChange: true,
                     isUpload: false
                 });
             }
@@ -79,7 +98,8 @@ function EnvironmentAdd(props) {
     const handleEmptyImage = (e) => {
         setState({
             ...state,
-            photo: null
+            photo: null,
+            photoChange: false,
         });
         e.target.value = null;
     };
@@ -87,7 +107,7 @@ function EnvironmentAdd(props) {
     // Create function
     const handleCreate = (e) => {
         e.preventDefault();
-        environmentCreate(state).then((response) => {
+        companyUpdate(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
                     handleEmpty();
@@ -97,115 +117,133 @@ function EnvironmentAdd(props) {
     };
 
     return (
-        <form id="restaurant-form" onSubmit={handleCreate}>
+        <form id="restaurant-form" onSubmit={handleCreate} autoComplete="off">
 
-            <Card variant="cardForm">
+            {/* <Card variant="cardForm"> */}
 
-                <CustomLoading inside color="primary" open={state.isUpload || fetching} />
+            <CustomLoading inside color="primary" open={state.isUpload || fetching} />
 
-                <CardHeader color="success" avatar>
-                    <AvatarForm
-                        image={state.photo === null ? image : state.photo}
-                        alt="Imagen"
-                        title="Imagen"
-                        square
-                    />
-                    <input
-                        // disabled={state.isUpload || showProgress ? true : false}
-                        accept="image/png, image/jpeg, image/jpg"
-                        id="restaurant-logo-file"
-                        type="file"
-                        name="image"
-                        onChange={handleImage}
-                        style={{ display: 'none' }}
-                    />
-
-                    <CardIconActions>
-                        <IconButton edge="start" onClick={handleEmptyImage} disabled={state.photo === null || state.isUpload ? true : false}>
-                            <label>
-                                <DeleteIcon />
-                            </label>
-                        </IconButton>
-
-                        <IconButton edge="end" disabled={state.isUpload ? true : false}
-                            onClick={() => { document.getElementById("restaurant-logo-file").click() }}
-                        >
-                            <label>
-                                <AddAPhotoIcon />
-                            </label>
-                        </IconButton>
-                    </CardIconActions>
-                </CardHeader>
-
-                <CardBody form>
+            <CardBody form>
+                <Grid
+                    container
+                    justify="center"
+                    alignItems="flex-start"
+                    spacing={2}
+                >
                     <Grid
-                        container
-                        justify="center"
-                        alignItems="flex-start"
-                        spacing={2}
+                        item
+                        xs={12}
+                        sm={12}
+                        md={4}
+                        lg={4}
+                        xl={4}
+                        elevation={6}
+                        square="true"
                     >
-                        <Grid
-                            item
-                            xs={12}
-                            sm={12}
-                            md={6}
-                            lg={6}
-                            xl={6}
-                            elevation={6}
-                            square="true"
-                        >
 
-                            <CustomDivider text="Nombre" color="warning" margin="dense" bold />
+                        <CustomDivider text="Nombre" color="warning" margin="normal" bold />
 
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                disabled={fetching}
-                                type="text"
-                                label={'Retaurante'}
-                                name="name"
-                                onChange={handleChange}
-                                value={state.name}
-                                required
-                                // icon={<AccountBoxIcon />}
-                                iconPosition="end"
-                            />
+                        <IconInput
+                            variant={'standard'}
+                            margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            type="text"
+                            label={'Retaurante'}
+                            name="name"
+                            onChange={handleChange}
+                            value={state.name}
+                            required
+                            // icon={<AccountBoxIcon />}
+                            iconPosition="end"
+                        />
 
-                            <CustomDivider text="Descripción" color="warning" margin="dense" bold />
+                        <CustomDivider text="Descripción" color="warning" margin="normal" bold />
 
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                disabled={fetching}
-                                type="text"
-                                label={'Descripción'}
-                                name="description"
-                                onChange={handleChange}
-                                value={state.description}
-                                required
-                                // icon={<AccountBoxIcon />}
-                                iconPosition="end"
-                            />
-                        </Grid>
+                        <IconInput
+                            variant={'standard'}
+                            margin={'normal'}
+                            color="primary"
+                            disabled={fetching}
+                            type="text"
+                            label={'Descripción'}
+                            name="description"
+                            onChange={handleChange}
+                            value={state.description}
+                            required
+                            multiline={true}
+                            rows={4}
+                            rowsMax={6}
+                            // icon={<AccountBoxIcon />}
+                            iconPosition="end"
+                        />
+
                     </Grid>
-                </CardBody>
 
-                <CardFooter form>
-                    <CustomBotton form="restaurant-form" size="sm" type="submit" disabled={state.isUpload} >
-                        Agregar
-                    </CustomBotton>
-                </CardFooter>
-            </Card>
+                    <Grid
+                        item
+                        xs={12}
+                        sm={12}
+                        md={8}
+                        lg={8}
+                        xl={8}
+                        elevation={6}
+                        square="true"
+                    >
+                        <CustomDivider text="Banner" color="warning" margin="" bold />
+
+                        <CardImage
+                            variant="cardSide"
+                            image={state.photoChange === true ? state.photo : current_image}
+                            imageAlt="Banner"
+                        />
+                        <input
+                            // disabled={state.isUpload || showProgress ? true : false}
+                            accept="image/png, image/jpeg, image/jpg"
+                            id="restaurant-logo-file"
+                            type="file"
+                            name="image"
+                            onChange={handleImage}
+                            style={{ display: 'none' }}
+                        />
+
+                        <CardIconActions>
+                            <IconButton edge="start" onClick={handleEmptyImage} disabled={state.photoChange === true || state.isUpload === true ? false : true}>
+                                <label>
+                                    <DeleteIcon />
+                                </label>
+                            </IconButton>
+
+                            <IconButton edge="end" disabled={state.isUpload ? true : false}
+                                onClick={() => { document.getElementById("restaurant-logo-file").click() }}
+                            >
+                                <label>
+                                    <AddAPhotoIcon />
+                                </label>
+                            </IconButton>
+                        </CardIconActions>
+
+                    </Grid>
+
+                </Grid>
+            </CardBody>
+
+            <CardFooter form>
+                <CustomBotton form="restaurant-form" size="sm" type="submit" disabled={state.isUpload} >
+                    Guardar
+                </CustomBotton>
+            </CardFooter>
+
+            {/* </Card> */}
         </form>
     );
 };
 const mapStateToProps = (state) => {
-    const { environment } = state;
+    const { company } = state;
     return {
-        fetching: environment.fetching,
+        company: company.payload,
+        fetching: company.fetching,
     }
 };
 
-export default connect(mapStateToProps, null)(EnvironmentAdd);
+export default connect(mapStateToProps, null)(RestaurantForm);

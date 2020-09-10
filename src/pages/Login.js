@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
 import { connect } from 'react-redux';
@@ -8,8 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
-import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
 import SendRoundedIcon from '@material-ui/icons/SendRounded';
 // Layouts
 import EmployeeLogin from "../layouts/Forms/EmployeeLogin.js";
@@ -21,13 +19,19 @@ import EmailForm from "../layouts/Forms/EmailForm.js";
 import FooterLogin from "../components/Footer/FooterLogin.js";
 import SingleTabs from "../components/CustomTabs/SingleTabs.js";
 import Card from "../components/Card/Card.js";
+import CardImage from "../components/Card/CardImage.js";
 import CardHeader from "../components/Card/CardHeader.js";
 import CardBody from "../components/Card/CardBody.js";
 import CardFooter from "../components/Card/CardFooter.js";
 import TabPanel from "../components/Panel/TabPanel.js";
-import Modal from "../components/Modal/Modal.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
+// Functions
+import { companyShow } from "../functions/companyFunctions";
+// Events
+import { companies_WS } from '../events';
+// Apis
+import { API } from '../API/index';
 // Assets
 import logo from "../assets/img/brands/kroft-vertical.svg";
 // Styles
@@ -35,7 +39,25 @@ import styles from "../styles/pages/LoginStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ admin_loading, employee_loading }) {
+function LoginPage({ company, admin_loading, employee_loading }) {
+
+  // Loading payloads state
+  const [is_payload, set_is_payload] = useState(false);
+
+  // Payloads
+  useEffect(() => {
+    if (is_payload === false) {
+
+      companyShow();
+
+      // Change is_payload state
+      set_is_payload(true);
+    }
+  }, [is_payload, company]);
+
+  // Events start
+  companies_WS();
+
   // State for Panel Tabs
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -76,7 +98,14 @@ function LoginPage({ admin_loading, employee_loading }) {
             xl={9}
             className={classes.containerSide}
           >
-            <Card className={classes[cardAnimaton]} variant="cardSide"></Card>
+            <CardImage
+              className={classes[cardAnimaton]}
+              variant="cardSide"
+              image={API + "images/companies/" + company.photo}
+              imageAlt="Banner"
+              text={company.name}
+              textColor="warning"
+            />
           </Grid>
         </Hidden>
 
@@ -213,8 +242,9 @@ function LoginPage({ admin_loading, employee_loading }) {
 
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { admin, employee } = state;
+  const { company, admin, employee } = state;
   return {
+    company: company.payload,
     admin_loading: admin.loading,
     employee_loading: employee.loading,
   }

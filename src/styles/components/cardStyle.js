@@ -1,18 +1,16 @@
 // Theme
-import { container, theme } from "../../themes/theme.js";
-
-// let width;
-
-// (function () {
-//     width = window.innerWidth;
-
-//     window.addEventListener('resize', function () {
-//        if (window.innerWidth !== width) {
-//           width = window.innerWidth;
-//           //  window.location.reload(true);
-//        }
-//     });
-// })();
+import {
+  primaryColor,
+  secondaryColor,
+  warningColor,
+  dangerColor,
+  successColor,
+  infoColor,
+  roseColor,
+  whiteColor,
+  blackColor,
+  theme
+} from "../../themes/theme.js";
 
 const cardStyle = {
   card: {
@@ -94,10 +92,10 @@ const cardStyle = {
     transition: "all 300ms linear",
     height: "100%",
 
-    backgroundImage: "url(https://source.unsplash.com/random)",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
+    // backgroundImage: "url(https://source.unsplash.com/random)",
+    // backgroundRepeat: "no-repeat",
+    // backgroundSize: "cover",
+    // backgroundPosition: "center",
   },
   cardDash: {
     border: "0",
@@ -138,6 +136,53 @@ const cardStyle = {
   },
   cardCarousel: {
     overflow: "hidden",
+  },
+  cardImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    borderRadius: "6px",
+  },
+  cardText: {
+    position: "absolute",
+    color: "black",
+    marginLeft: "1rem",
+    fontSize: "xxx-large",
+    marginTop: "1rem",
+    fontFamily: "cursive",
+    textShadow: "1px 4px 5px rgba(50 50 50)",
+    fontWeight: "bold",
+  },
+  primaryText: {
+    color: primaryColor,
+  },
+  secondaryText: {
+    color: secondaryColor,
+  },
+  warningText: {
+    color: warningColor,
+  },
+  dangerText: {
+    color: dangerColor,
+  },
+  successText: {
+    color: successColor,
+  },
+  infoText: {
+    color: infoColor,
+  },
+  roseText: {
+    color: roseColor,
+  },
+  whiteText: {
+    color: whiteColor,
+  },
+  blackText: {
+    color: blackColor,
   },
 };
 

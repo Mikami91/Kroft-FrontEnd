@@ -3,8 +3,6 @@ import React, { useMemo } from "react";
 // import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-// Conecction to Store
-import { connect } from 'react-redux';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -24,14 +22,12 @@ const useStyles = makeStyles(styles);
 function GridTables(props) {
   const classes = useStyles();
   const {
-    // Redux
-    tables,
     // Props
-    value, filter, data, keyData, onClick, color } = props;
+    filter, data, keyData, onClick, color } = props;
   // Using useMemo hook
   return useMemo(() => {
     // Render
-    return tables.map((index, key) => {
+    return data.map((index, key) => {
       if (index[keyData] === filter) {
         const gridClasses = classNames({
           [classes.tables]: true,
@@ -81,7 +77,7 @@ function GridTables(props) {
       }
       return null;
     });
-  }, [tables]);
+  }, [data]);
 }
 // Proptypes
 GridTables.defaultProps = {
@@ -109,12 +105,5 @@ GridTables.propTypes = {
     "rose",
   ]),
 };
-// Connect to Store State
-const mapStateToProps = (state) => {
-  const { table } = state;
-  return {
-    tables: table.payload.filter(dataList => dataList.state === 1),
-  }
-};
 
-export default connect(mapStateToProps, null)(GridTables);
+export default GridTables;

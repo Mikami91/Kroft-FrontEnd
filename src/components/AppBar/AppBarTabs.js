@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useMemo } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 // Conecction to Store
@@ -42,8 +42,6 @@ function AppBarTabs(props) {
     centered,
     // Orders array
     orders,
-    // Redux
-    orders_list
   } = props;
 
   // Find if Product Orders has SubCategory ID
@@ -89,7 +87,6 @@ function AppBarTabs(props) {
         centered={centered}
       >
         {data.map((index, key) => {
-          // return useMemo(() => {
           return (
             <Tab
               key={key}
@@ -131,7 +128,6 @@ function AppBarTabs(props) {
               }
             />
           );
-          // }, [data]);
         })}
       </Tabs>
     </AppBar>
@@ -198,13 +194,11 @@ AppBarTabs.propTypes = {
   orders: PropTypes.array,
 };
 // Connect to Store State
-const mapStateToProps = (state) => {
-  const { table, environment, product } = state;
-  return {
-    environments: environment.payload.filter(dataList => dataList.state === 1),
-    loading: environment.loading,
-    orders_list: product.orders,
-  }
-};
+// const mapStateToProps = (state) => {
+//   const {  } = state;
+//   return {
 
-export default connect(mapStateToProps, null)(AppBarTabs);
+//   }
+// };
+
+export default connect(null, null)(AppBarTabs);
