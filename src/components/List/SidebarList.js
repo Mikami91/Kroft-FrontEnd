@@ -19,11 +19,11 @@ import DescriptionRoundedIcon from '@material-ui/icons/DescriptionRounded';
 import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 
 const SidebarList = [
-  {
-    name: "Ajustes",
-    icon: SettingsRoundedIcon,
-    component: Settings,
-  },
+  // {
+  //   name: "Ajustes",
+  //   icon: SettingsRoundedIcon,
+  //   component: Settings,
+  // },
   // {
   //   name: "Inicio",
   //   icon: DashboardRoundedIcon,
@@ -54,11 +54,11 @@ const SidebarList = [
     icon: DescriptionRoundedIcon,
     component: Reports,
   },
-  // {
-  //   name: "Ajustes",
-  //   icon: SettingsRoundedIcon,
-  //   component: Settings,
-  // },
+  {
+    name: "Ajustes",
+    icon: SettingsRoundedIcon,
+    component: Settings,
+  },
   // {
   //   name: "Almacenes",
   //   icon: AssessmentRoundedIcon,

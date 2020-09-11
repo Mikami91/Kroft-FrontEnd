@@ -17,6 +17,7 @@ import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 
 // import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 // import CreditCardIcon from '@material-ui/icons/CreditCard';
+
 // Layouts
 import DrawerList from "../layouts/Drawers/DrawerTablesList.js";
 // core components
@@ -32,6 +33,19 @@ import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
 import { orderShow } from "../functions/orderFunctions";
 import { collectCreate, collectShow } from "../functions/collectFunctions";
+// Events
+import {
+  environments_WS,
+  tables_WS,
+  print_categories_WS,
+  categories_WS,
+  sub_categories_WS,
+  products_WS,
+  supplies_WS,
+  orders_WS,
+  order_details_WS,
+  collects_WS
+} from '../events';
 // Styles
 import styles from "../styles/pages/SalesStyle.js";
 
@@ -72,25 +86,28 @@ function CollectsPage({ environments, tables, loading }) {
     change: 0,
   });
 
-  console.log(currentTable);
-
   // State for Modal Total Amount
   const [openTotalAmount, setTotalAmount] = useState(false);
 
-  const handleOpenTotalAmount = (arg) => {
-    setTotalAmount(true);
-    setCurrentTable({
-      ...currentTable,
-      id: arg.id,
-      name: arg.name,
-      amount: arg.amount,
-      is_busy: arg.is_busy,
-      order_id: arg.order_id,
-      state: arg.state,
-      environment_id: arg.environment_id,
-      environment_name: arg.environment_name,
-      environment_prefix: arg.environment_prefix,
-    });
+  const handleOpenTotalAmount = (args) => {
+
+    if (args.is_busy === 2) {
+      setTotalAmount(true);
+      setCurrentTable({
+        ...currentTable,
+        id: args.id,
+        name: args.name,
+        amount: args.amount,
+        is_busy: args.is_busy,
+        order_id: args.order_id,
+        state: args.state,
+        environment_id: args.environment_id,
+        environment_name: args.environment_name,
+        environment_prefix: args.environment_prefix,
+      });
+    }
+
+    return null;
   };
   const handleCloseTotalAmount = () => {
     setTotalAmount(false);
@@ -158,6 +175,18 @@ function CollectsPage({ environments, tables, loading }) {
     setOpenDrawer(false);
   };
 
+  // Events
+  environments_WS();
+  tables_WS();
+  print_categories_WS();
+  categories_WS();
+  sub_categories_WS();
+  products_WS();
+  supplies_WS();
+  orders_WS()
+  order_details_WS();
+  collects_WS();
+
   // Refresh fetches
   const handleRefresh = () => {
     environmentShow();
@@ -208,7 +237,7 @@ function CollectsPage({ environments, tables, loading }) {
       <AppBarTabs
         color="inherit"
         data={environments}
-        iconType="img"
+        iconType="icon"
         imagePath="images/environments/"
         value={value}
         onChange={handleChange}
@@ -403,7 +432,7 @@ function CollectsPage({ environments, tables, loading }) {
             edge: "start",
             size: "large",
             variant: "contained",
-            disabled: currentTable.change >= currentTable.amount ? false : true,
+            disabled: currentTable.paid_BS + (currentTable.paid_US * 6.68) >= currentTable.amount ? false : true,
             onClick: handleMakeCollected,
           },
         ]}
