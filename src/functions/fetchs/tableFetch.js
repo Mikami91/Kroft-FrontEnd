@@ -5,6 +5,7 @@ import {
     table_create,
     table_index,
     table_show,
+    table_change,
     table_update,
     table_state,
     table_delete,
@@ -27,6 +28,16 @@ export const showFetch = (data) => {
         method: 'GET',
         token: true,
         url: table_show,
+    });
+};
+
+/*::::::::::::::::::::CHANGE::::::::::::::::::::*/
+export const changeFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: table_change,
+        data: data,
     });
 };
 

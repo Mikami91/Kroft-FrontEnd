@@ -60,6 +60,7 @@ export const environment_delete = "api/environment_delete";
 export const table_create = "api/table_create";
 export const table_index = "api/table_index";
 export const table_show = "api/table_show";
+export const table_change = "api/table_change";
 export const table_update = "api/table_update";
 export const table_state = "api/table_state";
 export const table_delete = "api/table_delete";

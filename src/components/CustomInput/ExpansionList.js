@@ -25,6 +25,7 @@ function ExpansionList(props) {
     categoryList,
     itemList,
     filter,
+    onClick
   } = props;
   const classes = useStyles();
   const listItem = classNames({
@@ -77,13 +78,13 @@ function ExpansionList(props) {
                     <ListItem
                       button
                       className={collapseItem}
-                      onClick={() => alert(index2[itemList.value])}
+                      onClick={() => onClick(index2)}
                     >
                       <ListItemIcon>
                         <TableChartRoundedIcon />
                       </ListItemIcon>
                       <ListItemText
-                        primary={index2[itemList.value]}
+                        primary={typeof index2[itemList.secondValue] !== "undefined" ? `${index2[itemList.value]} ${index2[itemList.secondValue]}` : index2[itemList.value]}
                         secondary={index.name}
                       />
                     </ListItem>

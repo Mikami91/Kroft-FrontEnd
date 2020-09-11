@@ -1,5 +1,5 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/tableFetch';
+import { createFetch, showFetch, changeFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/tableFetch';
 // Actions Creators
 import { payload, loading, fetching } from "../redux/actions/creators/tableCreator";
 
@@ -61,6 +61,34 @@ export async function tableShow(data) {
 
     } catch (error) {
         loading(false);
+        return error.message;
+    };
+};
+
+/*::::::::::::::::::::CHANGE::::::::::::::::::::*/
+export async function tableChange(data) {
+    fetching(true);
+    try {
+        const response = await changeFetch(data);
+        if (response.status === 200) {
+            switch (response.data.success) {
+                case true:
+                    fetching(false);
+                    break;
+
+                case false:
+                    alert(response.data.message);
+                    fetching(false);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        return response.data;
+
+    } catch (error) {
+        fetching(false);
         return error.message;
     };
 };

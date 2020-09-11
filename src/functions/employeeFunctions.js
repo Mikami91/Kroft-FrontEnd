@@ -15,6 +15,7 @@ export async function employeeLogin(data) {
                     localStorage.setItem('user', response.data.data.user);
                     localStorage.setItem('employee_id', response.data.data.id);
                     localStorage.setItem('token', response.data.token);
+                    localStorage.setItem("head_area", response.data.data.head_area);
                     loading(false);
                     break;
 
@@ -50,7 +51,9 @@ export async function employeeLoginPin(data) {
             switch (response.data.success) {
                 case true:
                     localStorage.setItem('user', response.data.data.user);
+                    localStorage.setItem('employee_id', response.data.data.id);
                     localStorage.setItem('token', response.data.token);
+                    localStorage.setItem("head_area", response.data.data.head_area);
                     loading(false);
                     break;
 

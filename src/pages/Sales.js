@@ -33,7 +33,7 @@ import CustomLoading from '../components/Loading/CustomLoading';
 import image from '../assets/img/backgrounds/productbackground.jpg';
 // Functions
 import { environmentShow } from "../functions/environmentFunctions";
-import { tableShow } from "../functions/tableFunctions";
+import { tableShow, tableChange } from "../functions/tableFunctions";
 import { categoryShow } from "../functions/categoryFunctions";
 import { subcategoryShow } from "../functions/subcategoryFunctions";
 import { productShow } from "../functions/productFunctions";
@@ -56,7 +56,7 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SalesPage({ environments, tables, orders_list, current, close_products, loading }) {
+function SalesPage({ environments, tables, orders_list, current, close_products, loading, tables_fetching }) {
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
 
@@ -108,6 +108,63 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
   };
   const handleCloseChangeTables = () => {
     setOpenChangeTables(false);
+  };
+
+  const [state, setState] = useState({
+    from_table: "",
+    from_table_name: "",
+    from_table_number: null,
+
+    to_table: "",
+    to_table_name: "",
+    to_table_number: null,
+    isFetch: false
+  });
+
+  // Empty State values
+  const handleEmpty = () => {
+    setState({
+      from_table: "",
+      from_table_name: "",
+      from_table_number: null,
+
+      to_table: "",
+      to_table_name: "",
+      to_table_number: null,
+      isFetch: false
+    });
+  };
+
+  // Changes State values
+  const handleChangeFrom = (arg) => {
+    setState({
+      ...state,
+      from_table: arg.id,
+      from_table_name: arg.name,
+      from_table_number: arg.number,
+    });
+  };
+
+  const handleChangeTo = (arg) => {
+    setState({
+      ...state,
+      to_table: arg.id,
+      to_table_name: arg.name,
+      to_table_number: arg.number,
+    });
+  };
+
+  const handleChangeTable = (e) => {
+    e.preventDefault();
+    tableChange(state).then((response) => {
+      console.log(response);
+      if (typeof response !== 'undefined') {
+        if (response.success === true) {
+          handleCloseChangeTables();
+          handleEmpty();
+        }
+      }
+    })
   };
 
   // State for Drawer
@@ -259,7 +316,7 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
             icon: SwapHorizIcon,
             edge: "start",
             size: "large",
-            disabled: false,
+            disabled: localStorage.getItem("head_area") === "1" ? false : true,
             onClick: handleOpenChangeTables,
           },
           {
@@ -290,57 +347,49 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
       <CustomModal
         open={openChangeTables}
         close={handleCloseChangeTables}
+        closeIcon={tables_fetching === true ? false : true}
         title={{
           text: "Cambio de mesas",
           size: "medium",
         }}
-        content={<ChangeTable environments={environments} tables={tables} />}
+        content={<ChangeTable environments={environments} tables={tables} state={state} onChangeFrom={handleChangeFrom} onChangeTo={handleChangeTo} />}
         centerButtons={[
           {
             type: "fab",
-            text: "/Kroft-FrontEnd/",
+            text: "Realizar cambio",
             color: "primary",
             icon: SwapHorizIcon,
             size: "large",
-            disabled: false,
+            disabled: state.from_table && state.to_table !== "" ? false : true,
+            onClick: handleChangeTable
           },
         ]}
         leftButtons={[
           {
             type: "button",
-            text: "Mesa N° 1",
+            text: state.from_table_name + " " + state.from_table_number,
             color: "danger",
-            icon: TableChartIcon,
+            // icon: TableChartIcon,
             edge: "end",
             size: "small",
             variant: "contained",
             disabled: false,
-            onClick: handleOpenProfile,
           },
-          // {
-          //   type: "text",
-          //   text: "Typography",
-          //   color: "default",
-          // },
         ]}
         rightButtons={[
-          // {
-          //   type: "text",
-          //   text: "Typography",
-          //   color: "default",
-          // },
           {
             type: "button",
-            text: "Mesa N° 2",
+            text: state.to_table_name + " " + state.to_table_number,
             color: "success",
-            icon: TableChartIcon,
+            // icon: TableChartIcon,
             edge: "start",
             size: "large",
             variant: "contained",
             disabled: false,
-            onClick: handleOpenProfile,
           },
         ]}
+        renderRefresh={[state, tables_fetching]}
+        loading={tables_fetching}
         scroll="paper"
         maxWidth="sm"
         fullWidth
@@ -375,6 +424,7 @@ const mapStateToProps = (state) => {
     environments: environment.payload.filter(dataList => dataList.state === 1),
     loading: environment.loading,
     tables: table.payload.filter(dataList => dataList.state === 1),
+    tables_fetching: table.fetching,
     orders_list: product.orders,
     current: product.current,
   }
