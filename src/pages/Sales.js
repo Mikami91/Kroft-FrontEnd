@@ -79,14 +79,28 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
     order_id: null,
     environment_id: null,
     environment_name: "",
+    waiter_id: null
   });
 
   // State for Modal Products
   // const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = (args) => {
-    // setOpenProducts(true);
-    setCurrentTable(args);
-    open_products(args);
+
+    if (args.waiter_id === null) {
+
+      setCurrentTable(args);
+      open_products(args);
+
+    } else {
+      if (args.waiter_id === parseInt(localStorage.getItem("employee_id"))) {
+
+        setCurrentTable(args);
+        open_products(args);
+
+      } else {
+        alert("Mesa ya antedida por otro mesero.");
+      }
+    }
   };
   const handleCloseProducts = () => {
     close_products();
