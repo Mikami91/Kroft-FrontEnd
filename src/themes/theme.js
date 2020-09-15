@@ -69,8 +69,8 @@ export const theme = createMuiTheme({
 		// 			height: '3rem'
 		// 		}
 		// 	}
-    // },
-    // MuiFab: {
+		// },
+		// MuiFab: {
 		// 	root: {
 		// 		width: '2rem',
 		// 		height: '2rem',
@@ -103,7 +103,8 @@ export const errorColor = theme.palette.error[500];
 export const warningColor = '#ff9800';
 export const dangerColor = '#f44336';
 export const successColor = '#4caf50';
-export const infoColor = '#00acc1';
+export const infoColor = '#2196f3';
+// export const infoColor = '#00acc1';
 export const roseColor = '#e91e63';
 
 export const grayColor = [
@@ -122,6 +123,7 @@ export const grayColor = [
 ];
 export const blackColor = '#000';
 export const whiteColor = '#FFF';
+export const defaultColor = '#FAFAFA';
 
 // Global Styles
 export const drawerDash = 120;

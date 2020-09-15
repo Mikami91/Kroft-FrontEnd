@@ -6,12 +6,14 @@ import {
   warningColor,
   successColor,
   infoColor,
+  defaultColor,
   primaryBoxShadow,
   secondaryBoxShadow,
   infoBoxShadow,
   successBoxShadow,
   warningBoxShadow,
   dangerBoxShadow,
+  boxShadow,
   container
 } from "../../themes/theme.js";
 
@@ -61,10 +63,16 @@ const snackbarContentStyle = {
     color: "#ffffff",
     ...secondaryBoxShadow
   },
+  default: {
+    backgroundColor: defaultColor,
+    color: "#2c2c2c",
+    ...boxShadow
+  },
   message: {
     padding: "0",
+    fontWeight: "bold",
     display: "block",
-    maxWidth: "89%",
+    maxWidth: "90%",
     "&,& *": {
       letterSpacing: "normal"
     }

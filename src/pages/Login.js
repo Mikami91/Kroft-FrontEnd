@@ -26,6 +26,7 @@ import CardFooter from "../components/Card/CardFooter.js";
 import TabPanel from "../components/Panel/TabPanel.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
+import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
 // Functions
 import { companyShow } from "../functions/companyFunctions";
 // Events
@@ -39,7 +40,7 @@ import styles from "../styles/pages/LoginStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ company, admin_loading, employee_loading }) {
+function LoginPage({ company, admin_loading, employee_loading, snackbar_show, snackbar_message, snackbar_severity }) {
 
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
@@ -88,6 +89,7 @@ function LoginPage({ company, admin_loading, employee_loading }) {
         justify="center"
         alignItems="center"
       >
+        <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} />
         <Hidden only={["xs", "sm"]}>
           <Grid
             item
@@ -242,11 +244,14 @@ function LoginPage({ company, admin_loading, employee_loading }) {
 
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { company, admin, employee } = state;
+  const { company, admin, employee, snackbar } = state;
   return {
     company: company.payload,
     admin_loading: admin.loading,
     employee_loading: employee.loading,
+    snackbar_show: snackbar.show,
+    snackbar_message: snackbar.message,
+    snackbar_severity: snackbar.severity,
   }
 };
 

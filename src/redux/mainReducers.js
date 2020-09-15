@@ -17,6 +17,7 @@ import { customerReducer } from './reducers/customerReducer';
 import { orderReducer } from './reducers/orderReducer';
 import { paymentReducer } from './reducers/paymentReducer';
 import { collectReducer } from './reducers/collectReducer';
+import { snackbarReducer } from './reducers/snackbarReducer';
 
 // Combine Reducer
 export const mainReducer = combineReducers({
@@ -36,6 +37,7 @@ export const mainReducer = combineReducers({
   orders: orderReducer,
   payments: paymentReducer,
   collects: collectReducer,
+  snackbar: snackbarReducer,
 });
 
 /*export default function mainReducer(state = {}, action) {

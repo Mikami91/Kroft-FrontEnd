@@ -190,3 +190,7 @@ export const COLLECT_TABLE = 'COLLECT_TABLE';
 export const COLLECT_FETCHING = 'COLLECT_FETCHING';
 // Loading
 export const COLLECT_LOADING = 'COLLECT_LOADING';
+
+/*::::::::::::::::::::SNACKBAR::::::::::::::::::::*/
+// Show
+export const SNACKBAR_SHOW = 'SNACKBAR_SHOW';

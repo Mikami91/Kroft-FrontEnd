@@ -2,6 +2,8 @@
 import { loginFetch, loginPinFetch, logoutFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/employeeFetch';
 // Actions Creators
 import { payload, fetching, loading } from "../redux/actions/creators/employeeCreator";
+import { snackbar } from "../redux/actions/creators/snackbarCreator";
+
 
 /*::::::::::::::::::::LOGIN::::::::::::::::::::*/
 export async function employeeLogin(data) {
@@ -60,6 +62,7 @@ export async function employeeLoginPin(data) {
                 case false:
                     if (typeof response.data.message === 'string') {
                         let messageError = response.data.message;
+                        snackbar({ show: true, message: response.data.message, severity: "danger" });
                         alert(messageError);
                     } else {
                         let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
