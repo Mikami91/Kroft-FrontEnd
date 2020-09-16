@@ -29,17 +29,17 @@ import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
 // Functions
 // import { superAdminShow } from "../functions/superAdminFunctions";
 import { companyShow } from "../functions/companyFunctions";
-// import { adminShow } from "../functions/adminFunctions";
-// import { employeeShow } from "../functions/employeeFunctions";
-// import { rolShow } from "../functions/rolFunctions";
-// import { environmentShow } from "../functions/environmentFunctions";
-// import { tableShow } from "../functions/tableFunctions";
-// import { printCategoryShow } from "../functions/printCategoryFunctions";
-// import { categoryShow } from "../functions/categoryFunctions";
-// import { subcategoryShow } from "../functions/subcategoryFunctions";
-// import { productShow } from "../functions/productFunctions";
-// import { customerShow } from "../functions/customerFunctions";
-// import { orderShow } from "../functions/orderFunctions";
+import { adminShow } from "../functions/adminFunctions";
+import { employeeShow } from "../functions/employeeFunctions";
+import { rolShow } from "../functions/rolFunctions";
+import { environmentShow } from "../functions/environmentFunctions";
+import { tableShow } from "../functions/tableFunctions";
+import { printCategoryShow } from "../functions/printCategoryFunctions";
+import { categoryShow } from "../functions/categoryFunctions";
+import { subcategoryShow } from "../functions/subcategoryFunctions";
+import { productShow } from "../functions/productFunctions";
+import { customerShow } from "../functions/customerFunctions";
+import { orderShow } from "../functions/orderFunctions";
 // Events
 import {
   companies_WS,
@@ -123,17 +123,17 @@ function DashboardPage({
   // Refresh fetches
   const handleRefresh = () => {
     companyShow();
-    // adminShow();
-    // rolShow();
-    // employeeShow();
-    // environmentShow();
-    // tableShow();
-    // printCategoryShow();
-    // categoryShow();
-    // subcategoryShow();
-    // productShow();
-    // customerShow();
-    // orderShow();
+    adminShow();
+    rolShow();
+    employeeShow();
+    environmentShow();
+    tableShow();
+    printCategoryShow();
+    categoryShow();
+    subcategoryShow();
+    productShow();
+    customerShow();
+    orderShow();
   }
 
   // Payloads

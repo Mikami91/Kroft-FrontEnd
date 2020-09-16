@@ -39,7 +39,7 @@ export async function adminLogin(data) {
 };
 
 /*::::::::::::::::::::LOGOUT::::::::::::::::::::*/
-export async function superAdminLogout(data) {
+export async function adminLogout(data) {
     loading(true);
     try {
         const response = await logoutFetch(data);
@@ -72,7 +72,7 @@ export async function superAdminLogout(data) {
 };
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function superAdminCreate(data) {
+export async function adminCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -102,7 +102,7 @@ export async function superAdminCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function superAdminShow(data) {
+export async function adminShow(data) {
     loading(true);
     try {
         const response = await showFetch(data);
@@ -131,7 +131,7 @@ export async function superAdminShow(data) {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function superAdminUpdate(data) {
+export async function adminUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -161,7 +161,7 @@ export async function superAdminUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function superAdminState(data) {
+export async function adminState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -191,7 +191,7 @@ export async function superAdminState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function superAdminDelete(data) {
+export async function adminDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

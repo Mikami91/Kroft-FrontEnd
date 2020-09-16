@@ -115,9 +115,16 @@ function DrawerProducts(props) {
   // State and amount of Current Table
   let table_state = 0;
   let table_amount = 0;
+  let current_order_id = null;
 
-  tables.find(index => index.id === current.table_id ? table_state = index.is_busy : table_state = 0);
-  tables.find(index => index.id === current.table_id ? table_amount = index.amount : table_amount = 0);
+
+  tables.find(index => index.id === current.table_id ?
+    [table_state = index.is_busy, current_order_id = index.order_id, table_amount = index.amount] : null
+  );
+
+  // tables.find(index => index.id === current.table_id ? table_state = index.is_busy : table_state = 0);
+  // tables.find(index => index.id === current.table_id ? table_amount = index.amount : table_amount = 0);
+  // tables.find(index => index.id === current.table_id ? current_order_id = index.order_id : current_order_id = null);
 
 
   // Products Orders List
@@ -247,7 +254,7 @@ function DrawerProducts(props) {
   const handleSendOrder = (e) => {
     e.preventDefault();
     orderSend({
-      order_id: table.order_id,
+      order_id: current_order_id,
       table_id: current.table_id,
     }).then((response) => {
       console.log(response);
@@ -263,7 +270,7 @@ function DrawerProducts(props) {
   const handleCancelOrder = (e) => {
     e.preventDefault();
     orderCancel({
-      order_id: table.order_id,
+      order_id: current_order_id,
       table_id: current.table_id,
     }).then((response) => {
       console.log(response);
