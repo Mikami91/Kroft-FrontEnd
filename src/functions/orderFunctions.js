@@ -2,6 +2,7 @@
 import { createFetch, sendFetch, cancelFetch, showFetch } from './fetchs/orderFetch';
 // Actions Creators
 import { payload, orders_detail, loading } from "../redux/actions/creators/orderCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function orderCreate(data) {
@@ -11,12 +12,13 @@ export async function orderCreate(data) {
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    // payload(response.data.data);
                     loading(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -27,6 +29,7 @@ export async function orderCreate(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -39,12 +42,13 @@ export async function orderSend(data) {
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    // payload(response.data.data);
                     loading(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -55,6 +59,7 @@ export async function orderSend(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -68,12 +73,13 @@ export async function orderCancel(data) {
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    // payload(response.data.data);
                     loading(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -84,6 +90,7 @@ export async function orderCancel(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -113,6 +120,7 @@ export async function orderShow() {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };

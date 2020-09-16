@@ -5,6 +5,8 @@ import SwipeableViews from "react-swipeable-views";
 import NumberFormat from 'react-number-format';
 // Conecction to Store
 import { connect } from 'react-redux';
+// Actions Creators
+import { hideSnackbar } from '../redux/actions/creators/snackbarCreator';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -27,6 +29,7 @@ import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
+import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
 import CustomMoneyInput from "../components/CustomInput/CustomMoneyInput.js";
 // Functions
 import { environmentShow } from "../functions/environmentFunctions";
@@ -51,7 +54,7 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function CollectsPage({ environments, tables, loading }) {
+function CollectsPage({ environments, tables, loading, snackbar_show, snackbar_message, snackbar_severity }) {
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
   const [value, setValue] = useState(0);
@@ -187,6 +190,9 @@ function CollectsPage({ environments, tables, loading }) {
   order_details_WS();
   collects_WS();
 
+  // Dispatches
+  const handleCloseSnackbar = () => hideSnackbar();
+
   // Refresh fetches
   const handleRefresh = () => {
     environmentShow();
@@ -233,6 +239,7 @@ function CollectsPage({ environments, tables, loading }) {
     <Fragment>
 
       <CustomLoading open={loading} />
+      <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} onClose={handleCloseSnackbar} />
 
       <AppBarTabs
         color="inherit"
@@ -457,11 +464,14 @@ function CollectsPage({ environments, tables, loading }) {
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { table, environment } = state;
+  const { table, environment, snackbar } = state;
   return {
     environments: environment.payload.filter(dataList => dataList.state === 1),
     loading: environment.loading,
     tables: table.payload.filter(dataList => dataList.state === 1),
+    snackbar_show: snackbar.show,
+    snackbar_message: snackbar.message,
+    snackbar_severity: snackbar.severity,
   }
 };
 

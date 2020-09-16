@@ -2,6 +2,7 @@
 import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/subcategoryFetch';
 // Actions Creators
 import { payload, loading, fetching } from "../redux/actions/creators/subcategoryCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function subcategoryCreate(data) {
@@ -12,17 +13,12 @@ export async function subcategoryCreate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -33,6 +29,7 @@ export async function subcategoryCreate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -61,6 +58,7 @@ export async function subcategoryShow(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -74,17 +72,12 @@ export async function subcategoryUpdate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -95,6 +88,7 @@ export async function subcategoryUpdate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -108,10 +102,12 @@ export async function subcategoryState(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -122,6 +118,7 @@ export async function subcategoryState(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -135,10 +132,12 @@ export async function subcategoryDelete(data) {
             switch (response.data.success) {
                 case true:
                     loading(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -149,6 +148,7 @@ export async function subcategoryDelete(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };

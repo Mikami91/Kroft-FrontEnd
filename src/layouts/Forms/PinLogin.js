@@ -37,17 +37,17 @@ export default function PinLogin(props) {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
 
-                    switch (response.data.rol_id) {
-                        case 1:
-                            history.push('/Kroft-FrontEnd/sales');
-                            break;
-                        case 2:
-                            history.push('/Kroft-FrontEnd/collects');
-                            break;
+                    // switch (response.data.rol_id) {
+                    //     case 1:
+                    //         history.push('/Kroft-FrontEnd/sales');
+                    //         break;
+                    //     case 2:
+                    //         history.push('/Kroft-FrontEnd/collects');
+                    //         break;
 
-                        default:
-                            break;
-                    }
+                    //     default:
+                    //         break;
+                    // }
                 }
             }
         });

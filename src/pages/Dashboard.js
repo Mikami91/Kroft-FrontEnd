@@ -3,6 +3,8 @@ import React, { Fragment, useState, useMemo, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 // Conecction to Store
 import { connect } from 'react-redux';
+// Actions Creators
+import { hideSnackbar } from '../redux/actions/creators/snackbarCreator';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -23,6 +25,7 @@ import CustomAppBar from "../components/AppBar/CustomAppBar";
 import TabPanel from "../components/Panel/TabPanel";
 import SidebarList from "../components/List/SidebarList";
 import CustomLoading from '../components/Loading/CustomLoading';
+import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
 // Functions
 // import { superAdminShow } from "../functions/superAdminFunctions";
 import { companyShow } from "../functions/companyFunctions";
@@ -77,7 +80,11 @@ function DashboardPage({
   customers,
   suppliers,
   orders,
-  collects }) {
+  collects,
+  snackbar_show,
+  snackbar_message,
+  snackbar_severity
+}) {
 
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
@@ -109,6 +116,9 @@ function DashboardPage({
   order_details_WS();
   payments_WS();
   collects_WS();
+
+  // Dispatches
+  const handleCloseSnackbar = () => hideSnackbar();
 
   // Refresh fetches
   const handleRefresh = () => {
@@ -157,7 +167,9 @@ function DashboardPage({
         // suppliers ||
         // orders ||
         // collects
-        } text={""} />
+      } />
+      <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} onClose={handleCloseSnackbar} />
+
 
 
       <div className={classes.root}>
@@ -370,6 +382,7 @@ const mapStateToProps = (state) => {
     supplier,
     orders,
     collects,
+    snackbar,
   } = state;
   return {
     companies: company.payload,
@@ -386,6 +399,9 @@ const mapStateToProps = (state) => {
     suppliers: supplier.loading,
     orders: orders.loading,
     collects: collects.loading,
+    snackbar_show: snackbar.show,
+    snackbar_message: snackbar.message,
+    snackbar_severity: snackbar.severity,
   }
 };
 // // Functions to dispatching

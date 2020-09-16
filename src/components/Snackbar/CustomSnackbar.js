@@ -28,6 +28,18 @@ function CustomSnackbar(props) {
         [classes[severity]]: true,
     });
 
+    // console.log(message);
+    // if (typeof message === 'object') {
+
+    //     // for (let [key, value] of Object.entries(message)) {
+    //     //     console.log(`key=${key} value=${value}`);
+    //     //     console.log(value);
+    //     // }
+
+    //     Object.entries(message).map((key, value) =>
+    //         console.log(key[1])
+    //     )
+    // }
     return (
         <Snackbar
             anchorOrigin={{
@@ -45,8 +57,19 @@ function CustomSnackbar(props) {
                 message={
                     <Fragment>
                         <span id="custom-snackbar" className={classes.message}>
-                            {message}
+                            {
+                                typeof message === 'object' ?
+                                    <ul>
+                                        {Object.entries(message).map((key, value) =>
+                                            <li key={key}>
+                                                {key[1]}
+                                            </li>
+                                        )}
+
+                                    </ul> : message
+                            }
                         </span>
+
                     </Fragment>
                 }
                 action={
@@ -70,7 +93,7 @@ CustomSnackbar.defaultProps = {
     vertical: "top",
     horizontal: "right",
     message: "...",
-    duration: 3000,
+    duration: 3500,
     severity: "default"
 };
 CustomSnackbar.propTypes = {
@@ -78,7 +101,10 @@ CustomSnackbar.propTypes = {
     onClose: PropTypes.func,
     horizontal: PropTypes.oneOf(["center", "left", "right"]),
     vertical: PropTypes.oneOf(["bottom", "top"]),
-    message: PropTypes.string,
+    message: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.array,
+    ]),
     duration: PropTypes.number,
     severity: PropTypes.oneOf(["default", "success", "info", "warning", "danger", "primary", "secondary"]),
 

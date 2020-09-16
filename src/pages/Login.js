@@ -3,6 +3,8 @@ import React, { Fragment, useState, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
 import { connect } from 'react-redux';
+// Actions Creators
+import { hideSnackbar } from '../redux/actions/creators/snackbarCreator';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -59,6 +61,9 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
   // Events start
   companies_WS();
 
+  // Dispatches
+  const handleCloseSnackbar = () => hideSnackbar();
+
   // State for Panel Tabs
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -89,7 +94,8 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
         justify="center"
         alignItems="center"
       >
-        <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} />
+        <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} onClose={handleCloseSnackbar} />
+
         <Hidden only={["xs", "sm"]}>
           <Grid
             item

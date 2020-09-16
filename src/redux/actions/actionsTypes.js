@@ -194,3 +194,5 @@ export const COLLECT_LOADING = 'COLLECT_LOADING';
 /*::::::::::::::::::::SNACKBAR::::::::::::::::::::*/
 // Show
 export const SNACKBAR_SHOW = 'SNACKBAR_SHOW';
+// Hide
+export const SNACKBAR_HIDE = 'SNACKBAR_HIDE';

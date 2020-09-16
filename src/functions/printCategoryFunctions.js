@@ -2,6 +2,7 @@
 import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/printCategoryFetch';
 // Actions Creators
 import { payload, loading, fetching } from "../redux/actions/creators/printCategoryCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function printCategoryCreate(data) {
@@ -12,11 +13,12 @@ export async function printCategoryCreate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
-                    alert(response.data.message);
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -27,6 +29,7 @@ export async function printCategoryCreate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -55,6 +58,7 @@ export async function printCategoryShow(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -68,11 +72,12 @@ export async function printCategoryUpdate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
-                    alert(response.data.message);
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -83,6 +88,7 @@ export async function printCategoryUpdate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -96,10 +102,12 @@ export async function printCategoryState(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -110,6 +118,7 @@ export async function printCategoryState(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -123,10 +132,12 @@ export async function printCategoryDelete(data) {
             switch (response.data.success) {
                 case true:
                     loading(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -137,6 +148,7 @@ export async function printCategoryDelete(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };

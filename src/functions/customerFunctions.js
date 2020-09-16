@@ -2,6 +2,7 @@
 import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/customerFetch';
 // Actions Creators
 import { payload, fetching, loading } from "../redux/actions/creators/customerCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function customerCreate(data) {
@@ -12,17 +13,12 @@ export async function customerCreate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -33,6 +29,7 @@ export async function customerCreate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -61,6 +58,7 @@ export async function customerShow(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -74,17 +72,12 @@ export async function customerUpdate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -95,6 +88,7 @@ export async function customerUpdate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -108,10 +102,12 @@ export async function customerState(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -122,6 +118,7 @@ export async function customerState(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -135,10 +132,12 @@ export async function customerDelete(data) {
             switch (response.data.success) {
                 case true:
                     loading(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -149,6 +148,7 @@ export async function customerDelete(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };

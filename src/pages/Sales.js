@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 // Actions Creators
 import { bindActionCreators } from 'redux';
 import { open, close } from '../redux/actions/creators/productCreator';
+import { infoSnackbar, hideSnackbar } from '../redux/actions/creators/snackbarCreator';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -29,6 +30,7 @@ import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
+import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
 // Assets
 import image from '../assets/img/backgrounds/productbackground.jpg';
 // Functions
@@ -56,7 +58,7 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SalesPage({ environments, tables, orders_list, current, close_products, loading, tables_fetching }) {
+function SalesPage({ environments, tables, orders_list, current, close_products, loading, tables_fetching, snackbar_show, snackbar_message, snackbar_severity }) {
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
 
@@ -98,7 +100,7 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
         open_products(args);
 
       } else {
-        alert("Mesa ya antedida por otro mesero.");
+        infoSnackbar("Mesa ya antedida por otro mesero.");
       }
     }
   };
@@ -202,6 +204,9 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
   order_details_WS();
   collects_WS();
 
+  // Dispatches
+  const handleCloseSnackbar = () => hideSnackbar();
+
   // Refresh fetches
   const handleRefresh = () => {
     environmentShow();
@@ -238,7 +243,8 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
   return (
     <Fragment>
 
-      <CustomLoading open={loading} text={"Cargando..."} />
+      <CustomLoading open={loading} />
+      <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} onClose={handleCloseSnackbar} />
 
       <AppBarTabs
         color="inherit"
@@ -433,7 +439,7 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { table, environment, product } = state;
+  const { table, environment, product, snackbar } = state;
   return {
     environments: environment.payload.filter(dataList => dataList.state === 1),
     loading: environment.loading,
@@ -441,6 +447,9 @@ const mapStateToProps = (state) => {
     tables_fetching: table.fetching,
     orders_list: product.orders,
     current: product.current,
+    snackbar_show: snackbar.show,
+    snackbar_message: snackbar.message,
+    snackbar_severity: snackbar.severity,
   }
 };
 // Functions to dispatching

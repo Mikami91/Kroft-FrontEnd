@@ -2,6 +2,7 @@
 import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/productFetch';
 // Actions Creators
 import { payload, loading, fetching } from "../redux/actions/creators/productCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function productCreate(data) {
@@ -12,17 +13,12 @@ export async function productCreate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -61,6 +57,7 @@ export async function productShow(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -74,17 +71,12 @@ export async function productUpdate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -95,6 +87,7 @@ export async function productUpdate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -108,10 +101,12 @@ export async function productState(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -122,6 +117,7 @@ export async function productState(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -135,10 +131,12 @@ export async function productDelete(data) {
             switch (response.data.success) {
                 case true:
                     loading(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -149,6 +147,7 @@ export async function productDelete(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };

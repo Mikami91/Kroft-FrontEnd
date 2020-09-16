@@ -2,7 +2,7 @@
 import { loginFetch, loginPinFetch, logoutFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/employeeFetch';
 // Actions Creators
 import { payload, fetching, loading } from "../redux/actions/creators/employeeCreator";
-import { snackbar } from "../redux/actions/creators/snackbarCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
 
 
 /*::::::::::::::::::::LOGIN::::::::::::::::::::*/
@@ -22,14 +22,8 @@ export async function employeeLogin(data) {
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -40,6 +34,7 @@ export async function employeeLogin(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -60,15 +55,8 @@ export async function employeeLoginPin(data) {
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        snackbar({ show: true, message: response.data.message, severity: "danger" });
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -79,6 +67,7 @@ export async function employeeLoginPin(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -96,6 +85,7 @@ export async function employeeLogout(data) {
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -106,6 +96,7 @@ export async function employeeLogout(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -119,17 +110,12 @@ export async function employeeCreate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -140,6 +126,7 @@ export async function employeeCreate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -168,6 +155,7 @@ export async function employeeShow(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -181,17 +169,12 @@ export async function employeeUpdate(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
-                    if (typeof response.data.message === 'string') {
-                        let messageError = response.data.message;
-                        alert(messageError);
-                    } else {
-                        let messageError = response.data.message.user ? response.data.message.user : response.data.message.password;
-                        alert(messageError);
-                    }
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -202,6 +185,7 @@ export async function employeeUpdate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -215,10 +199,12 @@ export async function employeeState(data) {
             switch (response.data.success) {
                 case true:
                     fetching(false);
+                    infoSnackbar(response.data.message);
                     break;
 
                 case false:
                     fetching(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -229,6 +215,7 @@ export async function employeeState(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -242,10 +229,12 @@ export async function employeeDelete(data) {
             switch (response.data.success) {
                 case true:
                     loading(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -256,6 +245,7 @@ export async function employeeDelete(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };

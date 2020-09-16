@@ -1,5 +1,5 @@
 // Action types
-import { SNACKBAR_SHOW } from '../actions/actionsTypes';
+import { SNACKBAR_SHOW, SNACKBAR_HIDE } from '../actions/actionsTypes';
 
 // Default State
 const snackbarState = {
@@ -10,8 +10,6 @@ const snackbarState = {
 
 export function snackbarReducer(state = snackbarState, action) {
 
-  console.log(action);
-
   switch (action.type) {
     case SNACKBAR_SHOW:
       return {
@@ -19,6 +17,14 @@ export function snackbarReducer(state = snackbarState, action) {
         show: action.payload.show,
         message: action.payload.message,
         severity: action.payload.severity,
+      };
+
+    case SNACKBAR_HIDE:
+      return {
+        ...state,
+        show: false,
+        message: "",
+        // severity: "default",
       };
 
     default:

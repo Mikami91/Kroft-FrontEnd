@@ -19,6 +19,7 @@ import {
     fetching,
     loading
 } from "../redux/actions/creators/collectCreator";
+import { successSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function collectCreate(data) {
@@ -28,12 +29,13 @@ export async function collectCreate(data) {
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    // payload(response.data.data);
                     loading(false);
+                    successSnackbar(response.data.message);
                     break;
 
                 case false:
                     loading(false);
+                    dangerSnackbar(response.data.message);
                     break;
 
                 default:
@@ -44,6 +46,7 @@ export async function collectCreate(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -72,6 +75,7 @@ export async function collectShow() {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -100,6 +104,7 @@ export async function collectGlobalReport(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -129,6 +134,7 @@ export async function collectCashierReport(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -157,6 +163,7 @@ export async function collectWaiterReport(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -185,6 +192,7 @@ export async function collectEnvReport(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
@@ -213,6 +221,7 @@ export async function collectTableReport(data) {
 
     } catch (error) {
         loading(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
