@@ -35,10 +35,10 @@ export async function printCategoryCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function printCategoryShow(data) {
+export async function printCategoryShow() {
     loading(true);
     try {
-        const response = await showFetch(data);
+        const response = await showFetch();
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:

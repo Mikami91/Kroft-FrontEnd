@@ -35,10 +35,10 @@ export async function tableCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function tableShow(data) {
+export async function tableShow() {
     loading(true);
     try {
-        const response = await showFetch(data);
+        const response = await showFetch();
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:

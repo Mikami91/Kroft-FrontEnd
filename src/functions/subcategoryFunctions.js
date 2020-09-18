@@ -35,10 +35,10 @@ export async function subcategoryCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function subcategoryShow(data) {
+export async function subcategoryShow() {
     loading(true);
     try {
-        const response = await showFetch(data);
+        const response = await showFetch();
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:

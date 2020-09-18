@@ -35,10 +35,10 @@ export async function customerCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function customerShow(data) {
+export async function customerShow() {
     loading(true);
     try {
-        const response = await showFetch(data);
+        const response = await showFetch();
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:

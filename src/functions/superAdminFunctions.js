@@ -102,10 +102,10 @@ export async function superAdminCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function superAdminShow(data) {
+export async function superAdminShow() {
     loading(true);
     try {
-        const response = await showFetch(data);
+        const response = await showFetch();
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:

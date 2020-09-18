@@ -227,7 +227,7 @@ function CollectsPage({ environments, tables, loading, snackbar_show, snackbar_m
       console.log(response);
       if (typeof response !== 'undefined') {
         if (response === true) {
-          console.log("Collected made");
+          setTotalAmount(false);
         }
       }
     });

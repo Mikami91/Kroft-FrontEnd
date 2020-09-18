@@ -53,7 +53,7 @@ export const createFetch = (data) => {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export const showFetch = (data) => {
+export const showFetch = () => {
     return customFetch({
         method: 'GET',
         token: true,

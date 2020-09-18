@@ -124,10 +124,10 @@ export async function paymentState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function paymentDelete(data) {
+export async function paymentDelete() {
     loading(true);
     try {
-        const response = await deleteFetch(data);
+        const response = await deleteFetch();
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
