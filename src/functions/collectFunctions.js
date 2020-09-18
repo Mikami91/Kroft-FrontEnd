@@ -23,18 +23,18 @@ import { successSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actio
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function collectCreate(data) {
-    loading(true);
+    fetching(true);
     try {
         const response = await createFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    loading(false);
+                    fetching(false);
                     successSnackbar(response.data.message);
                     break;
 
                 case false:
-                    loading(false);
+                    fetching(false);
                     dangerSnackbar(response.data.message);
                     break;
 
@@ -45,7 +45,7 @@ export async function collectCreate(data) {
         return response.data;
 
     } catch (error) {
-        loading(false);
+        fetching(false);
         warningSnackbar("Error de servidor.");
         return error.message;
     };

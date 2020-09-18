@@ -54,7 +54,7 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function CollectsPage({ environments, tables, loading, snackbar_show, snackbar_message, snackbar_severity }) {
+function CollectsPage({ environments, tables, collect_fetching, loading, snackbar_show, snackbar_message, snackbar_severity }) {
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
   const [value, setValue] = useState(0);
@@ -226,8 +226,8 @@ function CollectsPage({ environments, tables, loading, snackbar_show, snackbar_m
     }).then((response) => {
       console.log(response);
       if (typeof response !== 'undefined') {
-        if (response === true) {
-          setTotalAmount(false);
+        if (response.success === true) {
+          handleCloseTotalAmount();
         }
       }
     });
@@ -244,7 +244,7 @@ function CollectsPage({ environments, tables, loading, snackbar_show, snackbar_m
       <AppBarTabs
         color="inherit"
         data={environments}
-        iconType="icon"
+        iconType="img"
         imagePath="images/environments/"
         value={value}
         onChange={handleChange}
@@ -339,6 +339,7 @@ function CollectsPage({ environments, tables, loading, snackbar_show, snackbar_m
       <CustomModal
         open={openTotalAmount}
         close={handleCloseTotalAmount}
+        closeIcon={collect_fetching === true ? false : true}
         title={{
           text: "Total:",
           margin: true,
@@ -443,7 +444,8 @@ function CollectsPage({ environments, tables, loading, snackbar_show, snackbar_m
             onClick: handleMakeCollected,
           },
         ]}
-        renderRefresh={[currentTable.change, currentTable.id]}
+        renderRefresh={[openTotalAmount, currentTable.change, currentTable.id, collect_fetching]}
+        loading={collect_fetching}
         scroll="paper"
         maxWidth="sm"
         fullWidth
@@ -464,7 +466,7 @@ function CollectsPage({ environments, tables, loading, snackbar_show, snackbar_m
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { table, environment, snackbar } = state;
+  const { table, environment, collects, snackbar } = state;
   return {
     environments: environment.payload.filter(dataList => dataList.state === 1),
     loading: environment.loading,
@@ -472,6 +474,7 @@ const mapStateToProps = (state) => {
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,
+    collect_fetching: collects.fetching,
   }
 };
 
