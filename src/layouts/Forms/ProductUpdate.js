@@ -138,6 +138,7 @@ function ProductUpdate(props) {
                     image={state.photoChange === true ? state.photo : current_image}
                     alt="Imagen"
                     title="Imagen"
+                    square
                 />
                 <input
                     // disabled={state.isUpload || showProgress ? true : false}

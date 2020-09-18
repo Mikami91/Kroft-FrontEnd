@@ -76,7 +76,7 @@ function Tables({ tables, fetching, loading }) {
                     editable: "never",
                     sorting: false,
                     render: rowData => (
-                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/tables/`} />
+                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/tables/`} square />
                     )
                   },
                   { title: "Mesa", field: "name", type: "string" },

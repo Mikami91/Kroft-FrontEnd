@@ -130,7 +130,7 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
         >
           <Card className={classes[cardAnimaton]} variant="cardLogin">
 
-            <CustomLoading open={admin_loading || employee_loading} text={"Iniciando..."} inside />
+            <CustomLoading open={admin_loading || employee_loading} text={""} inside />
 
             <CardHeader color="primary" className={classes.cardHeaderLogin}>
               <img

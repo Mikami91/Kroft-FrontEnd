@@ -76,7 +76,7 @@ function Subcategories({ subcategories, fetching, loading }) {
                     editable: "never",
                     sorting: false,
                     render: rowData => (
-                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/sub_categories/`} />
+                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/sub_categories/`} square />
                     )
                   },
                   { title: "Subategoría", field: "name", type: "string" },

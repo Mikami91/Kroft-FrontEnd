@@ -122,7 +122,7 @@ function AppBarTabs(props) {
                     src={API + imagePath + index.photo}
                     alt={index.name}
                     color={index.selectColor}
-                    className={classes.images}
+                    className={classes.icons}
                   />
                 </Badge>
               }

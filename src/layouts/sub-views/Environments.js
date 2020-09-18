@@ -79,7 +79,7 @@ function Environments({ environments, fetching, loading }) {
                     editable: "never",
                     sorting: false,
                     render: rowData => (
-                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/environments/`} />
+                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/environments/`} square />
                     )
                   },
                   { title: "Ambiente", field: "name", type: "string" },

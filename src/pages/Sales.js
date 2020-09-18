@@ -249,7 +249,7 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
       <AppBarTabs
         color="inherit"
         data={environments}
-        iconType="icon"
+        iconType="img"
         imagePath="images/environments/"
         value={value}
         onChange={handleChange}

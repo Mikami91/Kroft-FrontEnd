@@ -76,7 +76,7 @@ function Product({ products, fetching, loading }) {
                     editable: "never",
                     sorting: false,
                     render: rowData => (
-                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/products/`} />
+                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/products/`} square />
                     )
                   },
                   { title: "Producto", field: "name", type: "string" },
