@@ -34,16 +34,15 @@ function CustomerAdd(props) {
     const [state, setState] = useState({
         // Others
         admin_id: localStorage.getItem("admin_id"),
-        // Customer
-        first_name: "",
-        last_name: "",
         // Shop
         shop_name: "",
-        address: "",
-        // Information
-        city: "",
-        phone: null,
-        email: "",
+        shop_nit: "",
+        shop_phone: "",
+        shop_city: "",
+        shop_address: "",
+        // Customer
+        contact_name: "",
+        contact_phone: "",
         // Photo
         photo: null,
         isUpload: false,
@@ -62,16 +61,15 @@ function CustomerAdd(props) {
     const handleEmpty = (e) => {
         setState({
             admin_id: localStorage.getItem("admin_id"),
-            // Customer
-            first_name: "",
-            last_name: "",
             // Shop
             shop_name: "",
-            address: "",
-            // Information
-            city: "",
-            phone: null,
-            email: "",
+            shop_nit: "",
+            shop_phone: "",
+            shop_city: "",
+            shop_address: "",
+            // Customer
+            contact_name: "",
+            contact_phone: "",
             // Photo
             photo: null,
             isUpload: false,
@@ -128,7 +126,7 @@ function CustomerAdd(props) {
 
                 <CustomLoading inside color="primary" open={state.isUpload || fetching} />
 
-                <CardHeader color="success" avatar>
+                {/* <CardHeader color="success" avatar>
                     <AvatarForm
                         image={state.photo === null ? image : state.photo}
                         alt="Imagen"
@@ -159,6 +157,10 @@ function CustomerAdd(props) {
                             </label>
                         </IconButton>
                     </CardIconActions>
+                </CardHeader> */}
+
+                <CardHeader color="primary" dense centered>
+                    <h3>Proveedor</h3>
                 </CardHeader>
 
                 <CardBody form>
@@ -178,7 +180,7 @@ function CustomerAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            <CustomDivider text="Datos personales" color="warning" margin="dense" bold />
+                            <CustomDivider text="Empresa" color="warning" margin="dense" bold />
 
                             <IconInput
                                 variant={'standard'} margin={'dense'}
@@ -186,36 +188,6 @@ function CustomerAdd(props) {
                                 disabled={fetching}
                                 type="text"
                                 label={'Nombre'}
-                                name="first_name"
-                                onChange={handleChange}
-                                value={state.first_name}
-                                required
-                                // icon={<AccountBoxIcon />}
-                                iconPosition="end"
-                            />
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                disabled={fetching}
-                                type="text"
-                                label={'Apellidos'}
-                                name="last_name"
-                                onChange={handleChange}
-                                value={state.last_name}
-                                required
-                                // icon={<AccountBoxIcon />}
-                                iconPosition="end"
-                            />
-
-                            <CustomDivider text="Tienda" color="warning" margin="dense" bold />
-
-                            <IconInput
-                                variant={'standard'} margin={'dense'}
-                                color="primary"
-                                disabled={fetching}
-                                type="text"
-                                label={'Tienda'}
                                 name="shop_name"
                                 onChange={handleChange}
                                 value={state.shop_name}
@@ -223,6 +195,54 @@ function CustomerAdd(props) {
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
+
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                disabled={fetching}
+                                label={'NIT'}
+                                name="shop_nit"
+                                value={state.shop_nit}
+                                onChange={handleChange}
+                                maxLength={15}
+                                phone
+                                required
+                            />
+
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                disabled={fetching}
+                                label={'Teléfono'}
+                                name="shop_phone"
+                                value={state.shop_phone}
+                                onChange={handleChange}
+                                maxLength={9}
+                                phone
+                                required
+                            />
+
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                disabled={fetching}
+                                id="city"
+                                label="Ciudad"
+                                name="shop_city"
+                                onChange={handleChange}
+                                value={state.shop_city}
+                                itemList={{
+                                    data: cities,
+                                    key: "name",
+                                    value: "name"
+                                }}
+                                required
+                            />
+
                             <IconInput
                                 variant={'standard'}
                                 margin={'dense'}
@@ -230,9 +250,9 @@ function CustomerAdd(props) {
                                 disabled={fetching}
                                 type="text"
                                 label={'Dirección'}
-                                name="address"
+                                name="shop_address"
                                 onChange={handleChange}
-                                value={state.address}
+                                value={state.shop_address}
                                 required
                                 // icon={<AccountBoxIcon />}
                                 iconPosition="end"
@@ -249,7 +269,21 @@ function CustomerAdd(props) {
                             elevation={6}
                             square="true"
                         >
-                            <CustomDivider text="Información" color="warning" margin="dense" bold />
+                            <CustomDivider text="Contacto" color="warning" margin="dense" bold />
+
+                            <IconInput
+                                variant={'standard'} margin={'dense'}
+                                color="primary"
+                                disabled={fetching}
+                                type="text"
+                                label={'Nombre'}
+                                name="contact_name"
+                                onChange={handleChange}
+                                value={state.contact_name}
+                                required
+                                // icon={<AccountBoxIcon />}
+                                iconPosition="end"
+                            />
 
                             <NumberInput
                                 variant={'standard'}
@@ -257,44 +291,12 @@ function CustomerAdd(props) {
                                 color="primary"
                                 disabled={fetching}
                                 label={'Celular'}
-                                name="phone"
-                                value={state.phone}
+                                name="contact_phone"
+                                value={state.contact_phone}
                                 onChange={handleChange}
                                 maxLength={9}
                                 required
                                 phone
-                            />
-                            <IconInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                disabled={fetching}
-                                type="email"
-                                label={'Correo electrónico'}
-                                name="email"
-                                onChange={handleChange}
-                                value={state.email}
-                                required
-                                // icon={<AccountBoxIcon />}
-                                iconPosition="end"
-                            />
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                disabled={fetching}
-                                id="city"
-                                label="Ciudad"
-                                name="city"
-                                onChange={handleChange}
-                                value={state.city}
-                                itemList={{
-                                    data: cities,
-                                    key: "name",
-                                    value: "name"
-                                }}
-                                required
                             />
 
                         </Grid>

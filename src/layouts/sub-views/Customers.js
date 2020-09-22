@@ -69,24 +69,25 @@ function Customers({ customers, fetching, loading }) {
                         </CardHeader>
                         <CardBody form>
                             <CustomTable
+
                                 column={[
                                     { title: "ID", field: "id", type: "numeric", editable: "never" },
-                                    {
-                                        title: "Foto", field: "photo", editable: "never", sorting: false,
-                                        render: rowData => (
-                                            <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/customers/`} />
-                                        )
-                                    },
-                                    { title: "Nombre", field: "first_name", type: "string" },
-                                    { title: "Apellidos", field: "last_name", type: "string" },
-                                    { title: "Tienda", field: "shop_name", type: "string" },
+                                    // {
+                                    //     title: "Foto", field: "photo", editable: "never", sorting: false,
+                                    //     render: rowData => (
+                                    //         <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/customers/`} />
+                                    //     )
+                                    // },
+                                    { title: "Proveedor", field: "shop_name", type: "string" },
+                                    { title: "NIT", field: "shop_nit", type: "mumeric" },
+                                    { title: "Telefono", field: "shop_phone", type: "string" },
                                 ]}
                                 data={customers}
                                 detailPanel={[
-                                    { title: "Celular", field: "phone", type: "numeric" },
-                                    { title: "Correo electrónico", field: "email", type: "string" },
-                                    { title: "Dirección", field: "address", type: "string" },
-                                    { title: "Ciudad", field: "city", type: "string" },
+                                    { title: "Ciudad", field: "shop_city", type: "numeric" },
+                                    { title: "Dirección", field: "shop_address", type: "string" },
+                                    { title: "Nombre de contacto", field: "contact_name", type: "string" },
+                                    { title: "Celular de contacto", field: "contact_phone", type: "string" },
                                 ]}
                                 refresh={customerShow}
                                 // updates={handleOpen}
