@@ -338,7 +338,7 @@ function EmployeeAdd(props) {
                                 value={state.entry_date}
                                 // views={["month", "date"]}
                                 openTo="month"
-                                minDate={moment().subtract(30, 'years').calendar()}
+                                minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
                                 maxDate={moment().add(1, 'years').calendar()}
                                 required
                             />

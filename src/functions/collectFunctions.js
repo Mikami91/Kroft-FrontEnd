@@ -199,18 +199,18 @@ export async function collectEnvReport(data) {
 
 /*::::::::::::::::::::TABLE REPORT::::::::::::::::::::*/
 export async function collectTableReport(data) {
-    loading(true);
+    fetching(true);
     try {
         const response = await tableReportFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
                     table(response.data.data);
-                    loading(false);
+                    fetching(false);
                     break;
 
                 case false:
-                    loading(false);
+                    fetching(false);
                     break;
 
                 default:
@@ -220,7 +220,7 @@ export async function collectTableReport(data) {
         return response.data;
 
     } catch (error) {
-        loading(false);
+        fetching(false);
         warningSnackbar("Error de servidor.");
         return error.message;
     };

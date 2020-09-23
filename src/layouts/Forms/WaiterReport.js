@@ -14,6 +14,7 @@ import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import SelectInput from '../../components/CustomInput/SelectInput.js';
 import DateInput from '../../components/CustomInput/DateInput.js';
+import TimeInput from '../../components/CustomInput/TimeInput.js';
 import CustomBotton from '../../components/CustomButtons/Button.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
@@ -33,7 +34,7 @@ function WaiterReport(props) {
         setValue(newValue);
         setState({
             ...state,
-            type: newValue === 0 ? "month" : "range",
+            type: newValue === 0 ? "month" : newValue === 1 ? "range" : "hours",
         });
     };
     const handleChangeIndex = (index) => {
@@ -45,6 +46,9 @@ function WaiterReport(props) {
         month: null,
         from_month: null,
         to_month: null,
+        date: null,
+        from_hour: null,
+        to_hour: null,
         error: false
     });
     // Change State for Inputs
@@ -62,6 +66,9 @@ function WaiterReport(props) {
             month: null,
             from_month: null,
             to_month: null,
+            date: null,
+            from_hour: null,
+            to_hour: null,
             error: false
         });
     };
@@ -146,6 +153,9 @@ function WaiterReport(props) {
                                     {
                                         tabName: "Rango",
                                     },
+                                    {
+                                        tabName: "Horas",
+                                    },
                                 ]}
                             />
 
@@ -165,8 +175,8 @@ function WaiterReport(props) {
                                         name="month"
                                         onChange={handleChange}
                                         value={state.month}
-                                        minDate={moment().subtract(30, 'years').calendar()}
-                                        maxDate={moment().format("MM/DD/YYYY")}
+                                        minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
+                                        maxDate={moment().format("YYYY/MM/DD")}
                                         format="MMM yyyy"
                                         openTo="year"
                                         views={["year", "month"]}
@@ -187,8 +197,8 @@ function WaiterReport(props) {
                                         name="from_month"
                                         onChange={handleChange}
                                         value={state.from_month}
-                                        minDate={moment().subtract(30, 'years').calendar()}
-                                        maxDate={moment().format("MM/DD/YYYY")}
+                                        minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
+                                        maxDate={moment().format("YYYY/MM/DD")}
                                         openTo="year"
                                         disableFuture
                                         autoOk
@@ -204,14 +214,61 @@ function WaiterReport(props) {
                                         name="to_month"
                                         onChange={handleChange}
                                         value={state.to_month}
-                                        minDate={moment().subtract(30, 'years').calendar()}
-                                        maxDate={moment().format("MM/DD/YYYY")}
+                                        minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
+                                        maxDate={moment().format("YYYY/MM/DD")}
                                         openTo="year"
                                         disableFuture
                                         autoOk
                                         required
                                     />
                                 </TabPanel>
+
+                                <TabPanel value={value} index={2}>
+                                    <DateInput
+                                        variant={'standard'}
+                                        margin={'dense'}
+                                        color="primary"
+                                        disabled={fetching}
+                                        type="text"
+                                        label={'Fecha'}
+                                        name="date"
+                                        onChange={handleChange}
+                                        value={state.date}
+                                        minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
+                                        maxDate={moment().format("YYYY/MM/DD")}
+                                        openTo="year"
+                                        disableFuture
+                                        autoOk
+                                        required
+                                    />
+                                    <TimeInput
+                                        variant={'standard'}
+                                        margin={'dense'}
+                                        color="primary"
+                                        disabled={fetching}
+                                        type="text"
+                                        label={'Iniciar'}
+                                        name="from_hour"
+                                        value={state.from_hour}
+                                        onChange={handleChange}
+                                        views={["hours", "minutes"]}
+                                        required
+                                    />
+                                    <TimeInput
+                                        variant={'standard'}
+                                        margin={'dense'}
+                                        color="primary"
+                                        disabled={fetching}
+                                        type="text"
+                                        label={'Finalizar'}
+                                        name="to_hour"
+                                        value={state.to_hour}
+                                        onChange={handleChange}
+                                        views={["hours", "minutes"]}
+                                        required
+                                    />
+                                </TabPanel>
+
                             </SwipeableViews>
 
                         </Grid>

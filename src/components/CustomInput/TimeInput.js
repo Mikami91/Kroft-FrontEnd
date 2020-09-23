@@ -6,7 +6,7 @@ import 'moment/locale/es';
 // Components Data Picker
 import "moment/locale/es";
 // import { es } from 'date-fns/locale';
-import { DatePicker } from '@material-ui/pickers';
+import { TimePicker } from '@material-ui/pickers';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // Styles
@@ -15,20 +15,19 @@ const useStyles = makeStyles(styles);
 // Config Locale
 moment.locale("es");
 
-const DateInput = (props) => {
-    const { disabled, label, name, value, onChange, minDate, maxDate, views, openTo, disablePast, disableFuture, format, invalidDateMessage, autoOk, readOnly, placeholder, required, margin, color, variant } = props;
+const TimeInput = (props) => {
+    const { disabled, label, name, value, onChange, minDate, maxDate, views, openTo, format, ampm, invalidDateMessage, autoOk, readOnly, placeholder, required, margin, color, variant } = props;
     const classes = useStyles();
-    console.log(minDate, maxDate);
     const e = { target: {} };
     return (
-        <DatePicker
+        <TimePicker
             // Labels
             label={label}
             emptyLabel=""
             invalidLabel="Valor inválido"
             invalidDateMessage={invalidDateMessage}
-            maxDateMessage="Rango de fecha no válido"
-            minDateMessage="Rango de fecha no válido"
+            maxDateMessage="Hora no válido"
+            minDateMessage="Hora no válido"
             okLabel="Aceptar"
             cancelLabel="Cancelar"
             clearLabel="Eliminar"
@@ -40,46 +39,42 @@ const DateInput = (props) => {
             margin={margin}
             color={color}
             // Values
-            value={value !== null ? moment(value).add(1, 'days').format('YYYY-MM-DD') : null}
+            value={value}
             minDate={minDate}
             maxDate={maxDate}
-            name={name}
             placeholder={placeholder}
-            disabled={disabled}
-            required={required}
             // Functions
             clearable
             onChange={
                 (date) => {
                     e.target["name"] = name;
-                    e.target["value"] = date === null ? null : moment(date).format("YYYY-MM-DD");
+                    e.target["value"] = date === null ? null : moment(date).format();
                     return onChange(e);
                 }
             }
             // Options
             views={views}
             openTo={openTo}
-            disablePast={disablePast}
-            disableFuture={disableFuture}
+            ampm={ampm}
             format={format}
+            disabled={disabled}
             autoOk={autoOk}
             readOnly={readOnly}
+            required={required}
         />
     );
 };
 // PropTypes
-DateInput.defaultProps = {
+TimeInput.defaultProps = {
     onChange: null,
     value: null,
     minDate: null,
     maxDate: null,
-    views: ["year", "month", "date"],
-    openTo: "year",
-    disablePast: false,
-    disableFuture: false,
-    // format: "yyyy MMM d",
-    format: "d MMM yyyy",
-    invalidDateMessage: "Formato de fecha inválido",
+    views: ["hours", "minutes", "seconds"],
+    openTo: "hours",
+    ampm: true,
+    format: "h:mm a",
+    invalidDateMessage: "Formato de hora inválido",
     autoOk: false,
     readOnly: false,
     required: false,
@@ -94,9 +89,12 @@ DateInput.defaultProps = {
     success: false,
     white: true
 };
-DateInput.propTypes = {
+TimeInput.propTypes = {
     onChange: PropTypes.func,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Date),
+    ]),
     minDate: PropTypes.string,
     maxDate: PropTypes.string,
     views: PropTypes.oneOfType([
@@ -104,12 +102,11 @@ DateInput.propTypes = {
         PropTypes.string,
     ]),
     openTo: PropTypes.oneOf([
-        "year",
-        "month",
-        "date"
+        "hours",
+        "minutes",
+        "seconds"
     ]),
-    disablePast: PropTypes.bool,
-    disableFuture: PropTypes.bool,
+    ampm: PropTypes.bool,
     format: PropTypes.string,
     invalidDateMessage: PropTypes.string,
     autoOk: PropTypes.bool,
@@ -138,4 +135,4 @@ DateInput.propTypes = {
     white: PropTypes.bool
 };
 
-export default DateInput;
+export default TimeInput;
