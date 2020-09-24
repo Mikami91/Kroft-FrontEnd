@@ -18,7 +18,6 @@ moment.locale("es");
 const DateInput = (props) => {
     const { disabled, label, name, value, onChange, minDate, maxDate, views, openTo, disablePast, disableFuture, format, invalidDateMessage, autoOk, readOnly, placeholder, required, margin, color, variant } = props;
     const classes = useStyles();
-    console.log(minDate, maxDate);
     const e = { target: {} };
     return (
         <DatePicker

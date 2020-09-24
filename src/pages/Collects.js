@@ -113,7 +113,6 @@ function CollectsPage({ environments, tables, collect_fetching, loading, snackba
     return null;
   };
   const handleCloseTotalAmount = () => {
-    setTotalAmount(false);
     setCurrentTable({
       // Table variables
       id: null,
@@ -133,6 +132,7 @@ function CollectsPage({ environments, tables, collect_fetching, loading, snackba
       paid_US: 0,
       change: 0,
     });
+    setTotalAmount(false);
   };
 
   // Check if values is number
@@ -221,7 +221,7 @@ function CollectsPage({ environments, tables, collect_fetching, loading, snackba
       cashier_id: 1,
       box_id: 1,
       payment_id: 1,
-      total_amount: currentTable.amount,
+      amount: currentTable.amount,
       currency: "bs"
     }).then((response) => {
       console.log(response);

@@ -454,7 +454,7 @@ function DrawerProducts(props) {
 
         <CustomModal
           // background={"https://source.unsplash.com/random"}
-          open={openTableOrders}
+          open={product_orders_list.length > 0 ? openTableOrders : false}
           close={handleCloseOrders}
           title={{
             text: "Lista de ordenes",

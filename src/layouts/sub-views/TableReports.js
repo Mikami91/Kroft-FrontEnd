@@ -60,7 +60,7 @@ function TableReports({ data, fetching, loading }) {
                   { title: "Ambiente", field: "environment_name", type: "string" },
                   { title: "Mesa", field: "table_number", type: "string" },
                   { title: "Pago", field: "payment_name", type: "string" },
-                  { title: "Monto", field: "total_amount", type: "numeric" },
+                  { title: "Monto", field: "amount", type: "numeric" },
                   { title: "Creación", field: "created_at", editable: "never", type: "date", },
                   { title: "Modificación", field: "updated_at", editable: "never", type: "date", },
                 ]}
@@ -70,7 +70,7 @@ function TableReports({ data, fetching, loading }) {
                   { title: "Mesero", field: "waiter_first_name", type: "string" },
                   { title: "Cajero", field: "cashier_first_name", type: "string" },
                   { title: "Caja", field: "box_name", type: "string" },
-                  { title: "Monto", field: "total_amount", type: "string" },
+                  { title: "Monto", field: "amount", type: "string" },
                   { title: "Pago", field: "payment_name", type: "string" },
                   { title: "Fecha", field: "created_at", type: "date" },
                 ]}

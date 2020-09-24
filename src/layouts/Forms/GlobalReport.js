@@ -77,7 +77,7 @@ function GlobalReport(props) {
         collectGlobalReport(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
-                    handleEmpty();
+                    // handleEmpty();
                 }
             }
         });
