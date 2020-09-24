@@ -9,6 +9,7 @@ import {
     collect_show,
 
     collect_global_report,
+    collect_employee_report,
     collect_cashier_report,
     collect_waiter_report,
     collect_env_report,
@@ -44,6 +45,16 @@ export const globalReportFetch = (data) => {
         method: 'POST',
         token: true,
         url: collect_global_report,
+        data: data
+    });
+};
+
+/*::::::::::::::::::::EMPLOYEE REPORT::::::::::::::::::::*/
+export const employeeReportFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: collect_employee_report,
         data: data
     });
 };

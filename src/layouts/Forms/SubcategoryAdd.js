@@ -17,7 +17,7 @@ import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
-import CustomBotton from '../../components/CustomButtons/Button.js'
+import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
 import { subcategoryCreate } from "../../functions/subcategoryFunctions";

@@ -12,7 +12,7 @@ import AvatarTable from "../../components/Avatar/AvatarTable.js";
 import GridItem from "../../components/Grid/GridItem.js";
 import GridContainer from "../../components/Grid/GridContainer.js";
 import CustomTable from "../../components/Table/CustomTable.js";
-import CustomBotton from '../../components/CustomButtons/Button.js'
+import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";

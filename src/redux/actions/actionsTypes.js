@@ -179,6 +179,8 @@ export const COLLECT_LIST = 'COLLECT_LIST';
 // List
 export const COLLECT_GLOBAL = 'COLLECT_GLOBAL';
 // List
+export const COLLECT_EMPLOYEE = 'COLLECT_GLOBAL';
+// List
 export const COLLECT_CASHIER = 'COLLECT_CASHIER';
 // List
 export const COLLECT_WAITER = 'COLLECT_WAITER';

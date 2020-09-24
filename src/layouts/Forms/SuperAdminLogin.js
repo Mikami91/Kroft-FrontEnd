@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
 // core components
-import Button from "../../components/CustomButtons/Button.js";
+import CustomButton from "../../components/CustomButtons/CustomButton.js";
 import PasswordInput from "../../components/CustomInput/PasswordInput.js";
 import IconInput from "../../components/CustomInput/IconInput.js";
 // Style
@@ -71,9 +71,9 @@ export default function SuperAdminLogin(props) {
         onChange={handleChange}
         value={state.password}
       />
-      <Button color="primary" size="sm" type="submit">
+      <CustomButton color="primary" size="sm" type="submit">
         Iniciar
-        </Button>
+        </CustomButton>
     </form>
   );
 }

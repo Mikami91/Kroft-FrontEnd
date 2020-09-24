@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import PersonIcon from "@material-ui/icons/Person";
 // core components
-import Button from "../../components/CustomButtons/Button.js";
+import CustomButton from "../../components/CustomButtons/CustomButton.js";
 import PasswordInput from "../../components/CustomInput/PasswordInput.js";
 import IconInput from "../../components/CustomInput/IconInput.js";
 // Style
@@ -70,9 +70,9 @@ export default function AdminLogin(props) {
         onChange={handleChange}
         value={state.password}
       />
-      <Button color="primary" size="sm" type="submit">
+      <CustomButton color="primary" size="sm" type="submit">
         Iniciar
-        </Button>
+        </CustomButton>
     </form>
   );
 }

@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import PersonIcon from "@material-ui/icons/Person";
 // core components
-import Button from "../../components/CustomButtons/Button.js";
+import CustomButton from "../../components/CustomButtons/CustomButton.js";
 import PasswordInput from "../../components/CustomInput/PasswordInput.js";
 import IconInput from "../../components/CustomInput/IconInput.js";
 // Styles
@@ -46,7 +46,7 @@ export default function EmployeeLogin(props) {
             case 2:
               history.push('/Kroft-FrontEnd/collects');
               break;
-          
+
             default:
               break;
           }
@@ -82,9 +82,9 @@ export default function EmployeeLogin(props) {
         onChange={handleChange}
         value={state.password}
       />
-        <Button /*simple*/ color="primary" size="sm" type="submit">
-          Iniciar
-        </Button>
+      <CustomButton /*simple*/ color="primary" size="sm" type="submit">
+        Iniciar
+        </CustomButton>
     </form>
   );
 }

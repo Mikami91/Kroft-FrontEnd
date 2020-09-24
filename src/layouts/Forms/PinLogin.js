@@ -3,10 +3,7 @@ import React, { useState } from "react";
 import { useHistory } from 'react-router-dom';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-// @material-ui/icons
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 // core components
-import Button from "../../components/CustomButtons/Button.js";
 import PINInput from '../../components/CustomInput/PINInput.js';
 // Styles
 import styles from "../../styles/pages/LoginStyle.js";

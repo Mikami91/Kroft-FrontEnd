@@ -137,6 +137,7 @@ export const collect_index = "api/collect_index";
 export const collect_show = "api/collect_show";
 
 export const collect_global_report = "api/collect_global_report";
+export const collect_employee_report = "api/collect_employee_report";
 export const collect_cashier_report = "api/collect_cashier_report";
 export const collect_waiter_report = "api/collect_waiter_report";
 export const collect_env_report = "api/collect_env_report";

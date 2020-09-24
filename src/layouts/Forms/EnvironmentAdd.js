@@ -16,7 +16,7 @@ import CardFooter from "../../components/Card/CardFooter.js";
 import CardIconActions from '../../components/Card/CardIconActions.js';
 import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
-import CustomBotton from '../../components/CustomButtons/Button.js'
+import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
 import { environmentCreate } from "../../functions/environmentFunctions";

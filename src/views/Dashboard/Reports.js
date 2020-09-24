@@ -7,7 +7,7 @@ import TabPanel from "../../components/Panel/TabPanel";
 import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
 import GlobalReports from "../../layouts/sub-views/GlobalReports";
-import CashierReports from "../../layouts/sub-views/CashierReports";
+import EmployeeReports from "../../layouts/sub-views/EmployeeReports";
 import WaiterReports from "../../layouts/sub-views/WaiterReports";
 import EnvironmentReports from "../../layouts/sub-views/EnvironmentReports";
 import TableReports from "../../layouts/sub-views/TableReports";
@@ -33,15 +33,15 @@ function Reports(props) {
             <GlobalReports />
           </TabPanel>
           <TabPanel sub value={value} index={1}>
-            <CashierReports />
+            <EmployeeReports />
           </TabPanel>
-          <TabPanel sub value={value} index={2}>
+          {/* <TabPanel sub value={value} index={2}>
             <WaiterReports />
-          </TabPanel>
-          <TabPanel sub value={value} index={3}>
+          </TabPanel> */}
+          <TabPanel sub value={value} index={2}>
             <EnvironmentReports />
           </TabPanel>
-          <TabPanel sub value={value} index={4}>
+          <TabPanel sub value={value} index={3}>
             <TableReports />
           </TabPanel>
 
@@ -59,13 +59,13 @@ function Reports(props) {
               icon: ListAltRoundedIcon,
             },
             {
-              text: "Cajeros",
+              text: "Personal",
               icon: GroupRoundedIcon,
             },
-            {
-              text: "Meseros",
-              icon: GroupRoundedIcon,
-            },
+            // {
+            //   text: "Meseros",
+            //   icon: GroupRoundedIcon,
+            // },
             {
               text: "Ambientes",
               icon: DeckRoundedIcon,

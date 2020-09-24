@@ -4,6 +4,7 @@ import store from '../../store';
 import {
   COLLECT_LIST,
   COLLECT_GLOBAL,
+  COLLECT_EMPLOYEE,
   COLLECT_CASHIER,
   COLLECT_WAITER,
   COLLECT_ENV,
@@ -28,6 +29,14 @@ export const collect_global = (payload) => {
   };
 }
 export const global = (payload) => store.dispatch(collect_global(payload));
+
+export const collect_employee = (payload) => {
+  return {
+    type: COLLECT_EMPLOYEE,
+    payload: payload
+  };
+}
+export const employee = (payload) => store.dispatch(collect_employee(payload));
 
 export const collect_cashier = (payload) => {
   return {

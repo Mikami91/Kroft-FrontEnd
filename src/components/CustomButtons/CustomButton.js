@@ -16,7 +16,7 @@ const makeComponentStyles = makeStyles(() => ({
   ...buttonStyle
 }));
 
-const RegularButton = React.forwardRef((props, ref) => { 
+const CustomButton = React.forwardRef((props, ref) => {
   const {
     html,
     color,
@@ -57,12 +57,23 @@ const RegularButton = React.forwardRef((props, ref) => {
 });
 
 // PropTypes
-RegularButton.defaultProps = {
+CustomButton.defaultProps = {
   color: "primary",
-  variant: "contained"
+  variant: "contained",
+  html: "",
+  size: "sm",
+  simple: false,
+  round: false,
+  fullWidth: false,
+  disabled: false,
+  block: false,
+  link: false,
+  justIcon: false,
+  children: "",
+  className: ""
 }
 
-RegularButton.propTypes = {
+CustomButton.propTypes = {
   html: PropTypes.string,
   color: PropTypes.oneOf([
     "primary",
@@ -96,4 +107,4 @@ RegularButton.propTypes = {
   className: PropTypes.string
 };
 
-export default RegularButton;
+export default CustomButton;

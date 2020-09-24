@@ -5,8 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import EmailIcon from '@material-ui/icons/Email';
 // core components
-import Button from "../../components/CustomButtons/Button.js";
-import PasswordInput from '../../components/CustomInput/PasswordInput.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 // Style
 import styles from "../../styles/pages/LoginStyle.js";

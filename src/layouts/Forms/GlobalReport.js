@@ -14,7 +14,7 @@ import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
 import DateInput from '../../components/CustomInput/DateInput.js';
 import TimeInput from '../../components/CustomInput/TimeInput.js';
-import CustomBotton from '../../components/CustomButtons/Button.js'
+import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 import SingleTabs from '../../components/CustomTabs/SingleTabs';
@@ -107,7 +107,7 @@ function GlobalReport(props) {
                             elevation={6}
                             square="true"
                         >
-                            <CustomDivider text="Buscar por:" color="warning" margin="normal" bold />
+                            <CustomDivider text="Buscar por:" color="warning" margin="middle" bold />
 
                             <SingleTabs
                                 centered

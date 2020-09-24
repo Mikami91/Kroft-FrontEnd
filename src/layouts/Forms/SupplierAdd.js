@@ -21,7 +21,7 @@ import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
 import NumberInput from '../../components/CustomInput/NumberInput.js';
 import DateInput from '../../components/CustomInput/DateInput.js';
-import CustomBotton from '../../components/CustomButtons/Button.js'
+import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions

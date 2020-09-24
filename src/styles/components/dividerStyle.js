@@ -34,6 +34,10 @@ const dividerStyle = {
     marginTop: "2rem",
     marginBottom: "0.5rem",
   },
+  middle: {
+    marginTop: "0.5rem",
+    marginBottom: "0.5rem",
+  },
   // Weight
   bold: {
     fontWeight: "bold",

@@ -39,7 +39,8 @@ CustomDivider.propTypes = {
     margin: PropTypes.oneOf([
         "none",
         "dense",
-        "normal"
+        "normal",
+        "middle",
     ]),
     size: PropTypes.oneOf([
         "small",

@@ -2,18 +2,20 @@
 import {
   COLLECT_LIST,
   COLLECT_GLOBAL,
+  COLLECT_EMPLOYEE,
   COLLECT_CASHIER,
   COLLECT_WAITER,
   COLLECT_ENV,
   COLLECT_TABLE,
   COLLECT_FETCHING,
-  COLLECT_LOADING
+  COLLECT_LOADING,
 } from '../actions/actionsTypes';
 
 // Default State
 const collectState = {
   payload: [],
   global: [],
+  employee: [],
   cashier: [],
   waiter: [],
   env: [],
@@ -36,6 +38,12 @@ export function collectReducer(state = collectState, action) {
       return {
         ...state,
         global: action.payload
+      };
+
+    case COLLECT_EMPLOYEE:
+      return {
+        ...state,
+        employee: action.payload
       };
 
     case COLLECT_CASHIER:
@@ -63,7 +71,7 @@ export function collectReducer(state = collectState, action) {
       };
 
     case COLLECT_FETCHING:
-      return{
+      return {
         ...state,
         fetching: action.value
       };

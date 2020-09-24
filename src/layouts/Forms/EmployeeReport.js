@@ -21,13 +21,13 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import SingleTabs from '../../components/CustomTabs/SingleTabs';
 import TabPanel from "../../components/Panel/TabPanel.js";
 // Functions
-import { collectWaiterReport } from "../../functions/collectFunctions";
+import { collectEmployeeReport } from "../../functions/collectFunctions";
 // Configs
 moment.locale("es");
 moment().format('l');
 
-function WaiterReport(props) {
-    const { waiters, fetching } = props;
+function EmployeeReport(props) {
+    const { roles, cashiers, fetching } = props;
     // State for Panel Tabs
     const [value, setValue] = useState(0);
     const handleChangeValue = (event, newValue) => {
@@ -41,11 +41,18 @@ function WaiterReport(props) {
         setValue(index);
     };
     const [state, setState] = useState({
+        // Rol
+        rol_id: "",
+        // Type
         type: "month",
-        waiter_id: "",
+        // Employee
+        employee_id: "",
+        // Month
         month: null,
+        // Range
         from_month: null,
         to_month: null,
+        // Hours
         date: null,
         from_hour: null,
         to_hour: null,
@@ -62,7 +69,8 @@ function WaiterReport(props) {
     const handleEmpty = (e) => {
         setState({
             ...state,
-            waiter_id: "",
+            rol_id: "",
+            employee_id: "",
             month: null,
             from_month: null,
             to_month: null,
@@ -76,17 +84,17 @@ function WaiterReport(props) {
     // Report function
     const handleReport = (e) => {
         e.preventDefault();
-        collectWaiterReport(state).then((response) => {
+        collectEmployeeReport(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
-                    handleEmpty();
+                    // handleEmpty();
                 }
             }
         });
     };
 
     return (
-        <form id="waiter-report" onSubmit={handleReport}>
+        <form id="cashier-report" onSubmit={handleReport}>
 
             <Card variant="cardForm">
 
@@ -109,7 +117,7 @@ function WaiterReport(props) {
                             elevation={6}
                             square="true"
                         >
-                            <CustomDivider text="Mesero" color="warning" margin="normal" bold />
+                            <CustomDivider text="Rol" color="warning" margin="dense" bold />
 
                             <SelectInput
                                 variant="standard"
@@ -117,13 +125,34 @@ function WaiterReport(props) {
                                 color="primary"
                                 hoverColor="primary"
                                 disabled={fetching}
-                                id="waiter_id"
-                                label="Seleccionar mesero"
-                                name="waiter_id"
+                                id="rol_id"
+                                label="Seleccionar Rol"
+                                name="rol_id"
                                 onChange={handleChange}
-                                value={state.waiter_id}
+                                value={state.rol_id}
                                 itemList={{
-                                    data: waiters.filter((i) => i.rol_id === 1),
+                                    data: roles,
+                                    key: "id",
+                                    value: "name"
+                                }}
+                                required
+                            />
+
+                            <CustomDivider text="Personal" color="warning" margin="dense" bold />
+
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                disabled={fetching}
+                                id="employee_id"
+                                label="Seleccionar cajero"
+                                name="employee_id"
+                                onChange={handleChange}
+                                value={state.employee_id}
+                                itemList={{
+                                    data: cashiers.filter((i) => i.rol_id === state.rol_id),
                                     key: "id",
                                     value: "first_name"
                                 }}
@@ -138,7 +167,7 @@ function WaiterReport(props) {
                             elevation={6}
                             square="true"
                         >
-                            <CustomDivider text="Buscar por:" color="warning" margin="normal" bold />
+                            <CustomDivider text="Buscar por:" color="warning" margin="middle" bold />
 
                             <SingleTabs
                                 centered
@@ -276,7 +305,10 @@ function WaiterReport(props) {
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="waiter-report" size="sm" type="submit" disabled={state.isUpload} >
+                    <CustomBotton color="transparent" size="sm" type="button" disabled={state.isUpload} onClick={handleEmpty} >
+                        Limpiar
+                    </CustomBotton>
+                    <CustomBotton form="cashier-report" size="sm" type="submit" disabled={state.isUpload} >
                         Generar
                     </CustomBotton>
                 </CardFooter>
@@ -285,11 +317,12 @@ function WaiterReport(props) {
     );
 };
 const mapStateToProps = (state) => {
-    const { collects, employee } = state;
+    const { collects, employee, rol } = state;
     return {
-        waiters: employee.payload,
+        roles: rol.payload,
+        cashiers: employee.payload,
         fetching: collects.fetching,
     }
 };
 
-export default connect(mapStateToProps, null)(WaiterReport);
+export default connect(mapStateToProps, null)(EmployeeReport);

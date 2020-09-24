@@ -3,6 +3,7 @@ import {
     createFetch,
     showFetch,
     globalReportFetch,
+    employeeReportFetch,
     cashierReportFetch,
     waiterReportFetch,
     envReportFetch,
@@ -12,6 +13,7 @@ import {
 import {
     payload,
     global,
+    employee,
     cashier,
     waiter,
     env,
@@ -109,6 +111,34 @@ export async function collectGlobalReport(data) {
     };
 };
 
+/*::::::::::::::::::::EMPLOYEE REPORT::::::::::::::::::::*/
+export async function collectEmployeeReport(data) {
+    fetching(true);
+    try {
+        const response = await employeeReportFetch(data);
+        if (response.status === 200) {
+            switch (response.data.success) {
+                case true:
+                    employee(response.data.data);
+                    fetching(false);
+                    break;
+
+                case false:
+                    fetching(false);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        return response.data;
+
+    } catch (error) {
+        fetching(false);
+        warningSnackbar("Error de servidor.");
+        return error.message;
+    };
+};
 
 /*::::::::::::::::::::CASHIER REPORT::::::::::::::::::::*/
 export async function collectCashierReport(data) {
