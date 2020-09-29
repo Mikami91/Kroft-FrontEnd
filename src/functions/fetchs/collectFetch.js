@@ -3,21 +3,22 @@ import { customFetch } from "./CustomFetch";
 // APIs
 import {
     collect_create,
-    collect_send,
-    collect_cancel,
-    collect_index,
+    // collect_send,
+    // collect_cancel,
+    // collect_index,
     collect_show,
 
     collect_global_report,
     collect_employee_report,
-    collect_cashier_report,
-    collect_waiter_report,
+    // collect_cashier_report,
+    // collect_waiter_report,
     collect_env_report,
+    collect_product_report,
     collect_table_report,
 
-    collect_update,
-    collect_state,
-    collect_delete,
+    // collect_update,
+    // collect_state,
+    // collect_delete,
 } from '../../API';
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
@@ -59,25 +60,25 @@ export const employeeReportFetch = (data) => {
     });
 };
 
-/*::::::::::::::::::::CASHIER REPORT::::::::::::::::::::*/
-export const cashierReportFetch = (data) => {
-    return customFetch({
-        method: 'POST',
-        token: true,
-        url: collect_cashier_report,
-        data: data
-    });
-};
+// /*::::::::::::::::::::CASHIER REPORT::::::::::::::::::::*/
+// export const cashierReportFetch = (data) => {
+//     return customFetch({
+//         method: 'POST',
+//         token: true,
+//         url: collect_cashier_report,
+//         data: data
+//     });
+// };
 
-/*::::::::::::::::::::WAITER REPORT::::::::::::::::::::*/
-export const waiterReportFetch = (data) => {
-    return customFetch({
-        method: 'POST',
-        token: true,
-        url: collect_waiter_report,
-        data: data
-    });
-};
+// /*::::::::::::::::::::WAITER REPORT::::::::::::::::::::*/
+// export const waiterReportFetch = (data) => {
+//     return customFetch({
+//         method: 'POST',
+//         token: true,
+//         url: collect_waiter_report,
+//         data: data
+//     });
+// };
 
 /*::::::::::::::::::::ENV REPORT::::::::::::::::::::*/
 export const envReportFetch = (data) => {
@@ -88,6 +89,17 @@ export const envReportFetch = (data) => {
         data: data
     });
 };
+
+/*::::::::::::::::::::PRODUCT REPORT::::::::::::::::::::*/
+export const productReportFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: collect_product_report,
+        data: data
+    });
+};
+
 
 /*::::::::::::::::::::TABLE REPORT::::::::::::::::::::*/
 export const tableReportFetch = (data) => {

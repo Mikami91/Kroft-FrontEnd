@@ -4,20 +4,22 @@ import {
     showFetch,
     globalReportFetch,
     employeeReportFetch,
-    cashierReportFetch,
-    waiterReportFetch,
+    // cashierReportFetch,
+    // waiterReportFetch,
     envReportFetch,
-    tableReportFetch,
+    productReportFetch,
+    // tableReportFetch,
 } from './fetchs/collectFetch';
 // Actions Creators
 import {
     payload,
     global,
     employee,
-    cashier,
-    waiter,
+    // cashier,
+    // waiter,
     env,
-    table,
+    product,
+    // table,
     fetching,
     loading
 } from "../redux/actions/creators/collectCreator";
@@ -140,63 +142,63 @@ export async function collectEmployeeReport(data) {
     };
 };
 
-/*::::::::::::::::::::CASHIER REPORT::::::::::::::::::::*/
-export async function collectCashierReport(data) {
-    fetching(true);
-    try {
-        const response = await cashierReportFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    cashier(response.data.data);
-                    fetching(false);
-                    break;
+// /*::::::::::::::::::::CASHIER REPORT::::::::::::::::::::*/
+// export async function collectCashierReport(data) {
+//     fetching(true);
+//     try {
+//         const response = await cashierReportFetch(data);
+//         if (response.status === 200) {
+//             switch (response.data.success) {
+//                 case true:
+//                     cashier(response.data.data);
+//                     fetching(false);
+//                     break;
 
-                case false:
-                    fetching(false);
-                    break;
+//                 case false:
+//                     fetching(false);
+//                     break;
 
-                default:
-                    break;
-            }
-        };
-        return response.data;
+//                 default:
+//                     break;
+//             }
+//         };
+//         return response.data;
 
-    } catch (error) {
-        fetching(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
+//     } catch (error) {
+//         fetching(false);
+//         warningSnackbar("Error de servidor.");
+//         return error.message;
+//     };
+// };
 
-/*::::::::::::::::::::WAITER REPORT::::::::::::::::::::*/
-export async function collectWaiterReport(data) {
-    fetching(true);
-    try {
-        const response = await waiterReportFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    waiter(response.data.data);
-                    fetching(false);
-                    break;
+// /*::::::::::::::::::::WAITER REPORT::::::::::::::::::::*/
+// export async function collectWaiterReport(data) {
+//     fetching(true);
+//     try {
+//         const response = await waiterReportFetch(data);
+//         if (response.status === 200) {
+//             switch (response.data.success) {
+//                 case true:
+//                     waiter(response.data.data);
+//                     fetching(false);
+//                     break;
 
-                case false:
-                    fetching(false);
-                    break;
+//                 case false:
+//                     fetching(false);
+//                     break;
 
-                default:
-                    break;
-            }
-        };
-        return response.data;
+//                 default:
+//                     break;
+//             }
+//         };
+//         return response.data;
 
-    } catch (error) {
-        fetching(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
+//     } catch (error) {
+//         fetching(false);
+//         warningSnackbar("Error de servidor.");
+//         return error.message;
+//     };
+// };
 
 /*::::::::::::::::::::ENV REPORT::::::::::::::::::::*/
 export async function collectEnvReport(data) {
@@ -227,15 +229,15 @@ export async function collectEnvReport(data) {
     };
 };
 
-/*::::::::::::::::::::TABLE REPORT::::::::::::::::::::*/
-export async function collectTableReport(data) {
+/*::::::::::::::::::::PRODUCT REPORT::::::::::::::::::::*/
+export async function collectProductReport(data) {
     fetching(true);
     try {
-        const response = await tableReportFetch(data);
+        const response = await productReportFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    table(response.data.data);
+                    product(response.data.data);
                     fetching(false);
                     break;
 
@@ -255,3 +257,32 @@ export async function collectTableReport(data) {
         return error.message;
     };
 };
+
+// /*::::::::::::::::::::TABLE REPORT::::::::::::::::::::*/
+// export async function collectTableReport(data) {
+//     fetching(true);
+//     try {
+//         const response = await tableReportFetch(data);
+//         if (response.status === 200) {
+//             switch (response.data.success) {
+//                 case true:
+//                     table(response.data.data);
+//                     fetching(false);
+//                     break;
+
+//                 case false:
+//                     fetching(false);
+//                     break;
+
+//                 default:
+//                     break;
+//             }
+//         };
+//         return response.data;
+
+//     } catch (error) {
+//         fetching(false);
+//         warningSnackbar("Error de servidor.");
+//         return error.message;
+//     };
+// };

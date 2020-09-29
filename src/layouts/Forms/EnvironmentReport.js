@@ -27,7 +27,7 @@ moment.locale("es");
 moment().format('l');
 
 function EnvironmentReport(props) {
-    const { environments, fetching } = props;
+    const { environments, tables, fetching } = props;
     // State for Panel Tabs
     const [value, setValue] = useState(0);
     const handleChangeValue = (event, newValue) => {
@@ -43,6 +43,7 @@ function EnvironmentReport(props) {
     const [state, setState] = useState({
         type: "month",
         environment_id: "",
+        table_id: "",
         month: null,
         from_month: null,
         to_month: null,
@@ -63,6 +64,7 @@ function EnvironmentReport(props) {
         setState({
             ...state,
             environment_id: "",
+            table_id: "",
             month: null,
             from_month: null,
             to_month: null,
@@ -79,7 +81,7 @@ function EnvironmentReport(props) {
         collectEnvReport(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
-                    handleEmpty();
+                    // handleEmpty();
                 }
             }
         });
@@ -109,7 +111,7 @@ function EnvironmentReport(props) {
                             elevation={6}
                             square="true"
                         >
-                            <CustomDivider text="Ambiente" color="warning" margin="normal" bold />
+                            <CustomDivider text="Ambiente" color="warning" margin="dense" bold />
 
                             <SelectInput
                                 variant="standard"
@@ -130,6 +132,26 @@ function EnvironmentReport(props) {
                                 required
                             />
 
+                            <CustomDivider text="Mesa" color="warning" margin="dense" bold />
+
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                disabled={fetching}
+                                id="table_id"
+                                label="Seleccionar Mesa"
+                                name="table_id"
+                                onChange={handleChange}
+                                value={state.table_id}
+                                itemList={{
+                                    data: tables.filter((i) => i.environment_id === state.environment_id),
+                                    key: "id",
+                                    value: "number"
+                                }}
+                            />
+
                         </Grid>
 
                         <Grid
@@ -138,7 +160,7 @@ function EnvironmentReport(props) {
                             elevation={6}
                             square="true"
                         >
-                            <CustomDivider text="Buscar por:" color="warning" margin="normal" bold />
+                            <CustomDivider text="Buscar por:" color="warning" margin="middle" bold />
 
                             <SingleTabs
                                 centered
@@ -275,7 +297,10 @@ function EnvironmentReport(props) {
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton form="env-report" size="sm" type="submit" disabled={state.isUpload} >
+                    <CustomBotton color="transparent" size="sm" type="button" disabled={fetching} onClick={handleEmpty} >
+                        Limpiar
+                    </CustomBotton>
+                    <CustomBotton form="env-report" size="sm" type="submit" disabled={fetching} >
                         Generar
                     </CustomBotton>
                 </CardFooter>
@@ -284,9 +309,10 @@ function EnvironmentReport(props) {
     );
 };
 const mapStateToProps = (state) => {
-    const { collects, environment } = state;
+    const { collects, environment, table } = state;
     return {
         environments: environment.payload,
+        tables: table.payload,
         fetching: collects.fetching,
     }
 };

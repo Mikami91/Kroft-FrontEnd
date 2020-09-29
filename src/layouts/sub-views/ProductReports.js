@@ -12,9 +12,9 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Layouts
-import EnvironmentReport from "../Forms/EnvironmentReport";
+import ProductReport from "../Forms/ProductReport";
 
-function EnvironmentReports({ data, fetching, loading }) {
+function ProductReports({ data, fetching, loading }) {
   return (
     <Fragment>
       <Grid
@@ -33,7 +33,7 @@ function EnvironmentReports({ data, fetching, loading }) {
           elevation={6}
           square="true"
         >
-          <EnvironmentReport />
+          <ProductReport />
         </Grid>
 
         <Grid
@@ -57,18 +57,17 @@ function EnvironmentReports({ data, fetching, loading }) {
               <CustomTable
                 column={[
                   { title: "ID", field: "id", type: "numeric", editable: "never", },
-                  { title: "Ambiente", field: "environment_name", type: "string" },
-                  { title: "Mesa", field: "table_number", type: "string" },
-                  { title: "Pago", field: "payment_name", type: "string" },
-                  { title: "Monto", field: "amount", type: "numeric" },
+                  { title: "Producto", field: "product_name", type: "string" },
+                  { title: "Precio", field: "product_price", type: "numeric" },
+                  { title: "Cantidad", field: "product_quantity", type: "numeric" },
                   { title: "Creación", field: "created_at", editable: "never", type: "date", },
                   { title: "Modificación", field: "updated_at", editable: "never", type: "date", },
                 ]}
                 detailPanel={[
-                  { title: "Ambiente", field: "environment_name", type: "string" },
-                  { title: "Mesa", field: "table_number", type: "string" },
-                  { title: "Mesero", field: "waiter_first_name", type: "string" },
-                  { title: "Cajero", field: "cashier_first_name", type: "string" },
+                  // { title: "Ambiente", field: "environment_name", type: "string" },
+                  // { title: "Mesa", field: "table_number", type: "string" },
+                  // { title: "Mesero", field: "waiter_first_name", type: "string" },
+                  // { title: "Cajero", field: "cashier_first_name", type: "string" },
                   { title: "Caja", field: "box_name", type: "string" },
                   { title: "Monto", field: "amount", type: "string" },
                   { title: "Pago", field: "payment_name", type: "string" },
@@ -85,7 +84,7 @@ function EnvironmentReports({ data, fetching, loading }) {
   );
 }
 // PropTypes
-EnvironmentReports.propTypes = {
+ProductReports.propTypes = {
   container: PropTypes.instanceOf(
     typeof Element === "undefined" ? Object : Element
   ),
@@ -94,10 +93,10 @@ EnvironmentReports.propTypes = {
 const mapStateToProps = (state) => {
   const { collects } = state;
   return {
-    data: collects.env,
+    data: collects.product,
     fetching: collects.fetching,
     loading: collects.loading,
   }
 };
 
-export default connect(mapStateToProps, null)(EnvironmentReports);
+export default connect(mapStateToProps, null)(ProductReports);

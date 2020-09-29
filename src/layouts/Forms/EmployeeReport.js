@@ -305,10 +305,10 @@ function EmployeeReport(props) {
                 </CardBody>
 
                 <CardFooter form>
-                    <CustomBotton color="transparent" size="sm" type="button" disabled={state.isUpload} onClick={handleEmpty} >
+                    <CustomBotton color="transparent" size="sm" type="button" disabled={fetching} onClick={handleEmpty} >
                         Limpiar
                     </CustomBotton>
-                    <CustomBotton form="cashier-report" size="sm" type="submit" disabled={state.isUpload} >
+                    <CustomBotton form="cashier-report" size="sm" type="submit" disabled={fetching} >
                         Generar
                     </CustomBotton>
                 </CardFooter>

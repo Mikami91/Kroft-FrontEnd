@@ -6,6 +6,7 @@ import {
   COLLECT_CASHIER,
   COLLECT_WAITER,
   COLLECT_ENV,
+  COLLECT_PRODUCT,
   COLLECT_TABLE,
   COLLECT_FETCHING,
   COLLECT_LOADING,
@@ -19,6 +20,7 @@ const collectState = {
   cashier: [],
   waiter: [],
   env: [],
+  product: [],
   table: [],
   fetching: false,
   loading: false,
@@ -62,6 +64,12 @@ export function collectReducer(state = collectState, action) {
       return {
         ...state,
         env: action.payload
+      };
+
+    case COLLECT_PRODUCT:
+      return {
+        ...state,
+        product: action.payload
       };
 
     case COLLECT_TABLE:

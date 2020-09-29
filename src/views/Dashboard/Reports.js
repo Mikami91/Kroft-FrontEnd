@@ -8,14 +8,14 @@ import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 // Sub-Views
 import GlobalReports from "../../layouts/sub-views/GlobalReports";
 import EmployeeReports from "../../layouts/sub-views/EmployeeReports";
-import WaiterReports from "../../layouts/sub-views/WaiterReports";
+// import WaiterReports from "../../layouts/sub-views/WaiterReports";
 import EnvironmentReports from "../../layouts/sub-views/EnvironmentReports";
-import TableReports from "../../layouts/sub-views/TableReports";
+import ProductReports from "../../layouts/sub-views/ProductReports";
 // Icons
 import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';
 import GroupRoundedIcon from '@material-ui/icons/GroupRounded';
 import DeckRoundedIcon from '@material-ui/icons/DeckRounded';
-import TableChartRounded from '@material-ui/icons/TableChartRounded';
+import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
 
 function Reports(props) {
   // TabPanel Swipeables Views
@@ -35,14 +35,11 @@ function Reports(props) {
           <TabPanel sub value={value} index={1}>
             <EmployeeReports />
           </TabPanel>
-          {/* <TabPanel sub value={value} index={2}>
-            <WaiterReports />
-          </TabPanel> */}
           <TabPanel sub value={value} index={2}>
             <EnvironmentReports />
           </TabPanel>
           <TabPanel sub value={value} index={3}>
-            <TableReports />
+            <ProductReports />
           </TabPanel>
 
         </SwipeableViews>
@@ -71,8 +68,8 @@ function Reports(props) {
               icon: DeckRoundedIcon,
             },
             {
-              text: "Mesas",
-              icon: TableChartRounded,
+              text: "Productos",
+              icon: FastfoodRoundedIcon,
             },
           ]}
           tabsColor="secondary"

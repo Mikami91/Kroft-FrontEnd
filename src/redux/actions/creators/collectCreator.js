@@ -5,10 +5,11 @@ import {
   COLLECT_LIST,
   COLLECT_GLOBAL,
   COLLECT_EMPLOYEE,
-  COLLECT_CASHIER,
-  COLLECT_WAITER,
+  // COLLECT_CASHIER,
+  // COLLECT_WAITER,
   COLLECT_ENV,
-  COLLECT_TABLE,
+  COLLECT_PRODUCT,
+  // COLLECT_TABLE,
   COLLECT_FETCHING,
   COLLECT_LOADING,
 } from '../actionsTypes';
@@ -38,21 +39,21 @@ export const collect_employee = (payload) => {
 }
 export const employee = (payload) => store.dispatch(collect_employee(payload));
 
-export const collect_cashier = (payload) => {
-  return {
-    type: COLLECT_CASHIER,
-    payload: payload
-  };
-}
-export const cashier = (payload) => store.dispatch(collect_cashier(payload));
+// export const collect_cashier = (payload) => {
+//   return {
+//     type: COLLECT_CASHIER,
+//     payload: payload
+//   };
+// }
+// export const cashier = (payload) => store.dispatch(collect_cashier(payload));
 
-export const collect_waiter = (payload) => {
-  return {
-    type: COLLECT_WAITER,
-    payload: payload
-  };
-}
-export const waiter = (payload) => store.dispatch(collect_waiter(payload));
+// export const collect_waiter = (payload) => {
+//   return {
+//     type: COLLECT_WAITER,
+//     payload: payload
+//   };
+// }
+// export const waiter = (payload) => store.dispatch(collect_waiter(payload));
 
 export const collect_env = (payload) => {
   return {
@@ -62,13 +63,21 @@ export const collect_env = (payload) => {
 }
 export const env = (payload) => store.dispatch(collect_env(payload));
 
-export const collect_table = (payload) => {
+export const collect_product = (payload) => {
   return {
-    type: COLLECT_TABLE,
+    type: COLLECT_PRODUCT,
     payload: payload
   };
 }
-export const table = (payload) => store.dispatch(collect_table(payload));
+export const product = (payload) => store.dispatch(collect_product(payload));
+
+// export const collect_table = (payload) => {
+//   return {
+//     type: COLLECT_TABLE,
+//     payload: payload
+//   };
+// }
+// export const table = (payload) => store.dispatch(collect_table(payload));
 
 export const collect_fetching = (value) => {
   return {

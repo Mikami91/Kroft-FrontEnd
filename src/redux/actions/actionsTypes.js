@@ -187,6 +187,8 @@ export const COLLECT_WAITER = 'COLLECT_WAITER';
 // List
 export const COLLECT_ENV = 'COLLECT_ENV';
 // List
+export const COLLECT_PRODUCT = 'COLLECT_PRODUCT';
+// List
 export const COLLECT_TABLE = 'COLLECT_TABLE';
 // Fetchin
 export const COLLECT_FETCHING = 'COLLECT_FETCHING';
