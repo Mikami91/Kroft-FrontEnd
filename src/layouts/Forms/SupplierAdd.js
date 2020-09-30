@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
 import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
 // @material-ui/icons
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -26,6 +27,8 @@ import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
 import { supplierCreate } from "../../functions/supplierFunctions";
+// Variables
+import { units } from '../../variables/units.js';
 // Assets
 import image from '../../assets/img/defaults/product.png';
 // Configs
@@ -40,19 +43,14 @@ function SupplierAdd(props) {
         customer_id: "",
         // Supplier
         name: "",
+        presentation: "",
         quantity: null,
         // Prices
         buying_price: null,
-        price: null,
-        // Categories
-        category_id: "",
-        sub_category_id: "",
         // Information
         observation: "",
         buying_date: null,
         expire_date: null,
-        // Print
-        print_category_id: "",
         // Photo
         photo: null,
         isUpload: false,
@@ -72,19 +70,14 @@ function SupplierAdd(props) {
             customer_id: "",
             // Supplier
             name: "",
+            presentation: "",
             quantity: null,
             // Prices
             buying_price: null,
-            price: null,
-            // Categories
-            category_id: "",
-            sub_category_id: "",
             // Information
             observation: "",
             buying_date: null,
             expire_date: null,
-            // Print
-            print_category_id: "",
             // Photo
             photo: null,
             isUpload: false,
@@ -225,46 +218,45 @@ function SupplierAdd(props) {
                                 onChange={handleChange}
                                 value={state.name}
                                 required
-                                // icon={<AccountBoxIcon />}
                                 iconPosition="end"
                             />
+
+                            <CustomDivider text="Presentación" color="warning" margin="dense" bold />
+
+                            <SelectInput
+                                variant="standard"
+                                margin="dense"
+                                color="primary"
+                                hoverColor="primary"
+                                disabled={fetching}
+                                id="presentation"
+                                label="Presentación"
+                                name="presentation"
+                                onChange={handleChange}
+                                value={state.presentation}
+                                itemList={{
+                                    data: units,
+                                    key: "name",
+                                    value: "name"
+                                }}
+                                required
+                            />
+
                             <NumberInput
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                disabled={fetching}
+                                disabled={fetching || state.presentation === ""}
                                 label={'Cantidad'}
                                 name="quantity"
+                                prefix={
+                                    state.presentation === "Kilos" ? "Kg" :
+                                        state.presentation === "Litros" ? "L" :
+                                            state.presentation === "Unidades" ? "U" : ""
+                                }
                                 value={state.quantity}
                                 onChange={handleChange}
                                 maxLength={5}
-                                required
-                            />
-
-                            <CustomDivider text="Precios" color="warning" margin="dense" bold />
-
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                disabled={fetching}
-                                label={'Precio de compra'}
-                                name="buying_price"
-                                value={state.buying_price}
-                                onChange={handleChange}
-                                prefix={"Bs"}
-                                required
-                            />
-                            <NumberInput
-                                variant={'standard'}
-                                margin={'dense'}
-                                color="primary"
-                                disabled={fetching}
-                                label={'Precio de venta'}
-                                name="price"
-                                value={state.price}
-                                onChange={handleChange}
-                                prefix={"Bs"}
                                 required
                             />
 
@@ -280,51 +272,43 @@ function SupplierAdd(props) {
                             elevation={6}
                             square="true"
                         >
+                            <CustomDivider text="Precio" color="warning" margin="dense" bold />
 
-                            <CustomDivider text="Categorías" color="warning" margin="dense" bold />
-
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
                                 color="primary"
-                                hoverColor="primary"
                                 disabled={fetching}
-                                id="category_id"
-                                label="Categoría"
-                                name="category_id"
+                                label={'Precio de compra'}
+                                name="buying_price"
+                                value={state.buying_price}
                                 onChange={handleChange}
-                                value={state.category_id}
-                                itemList={{
-                                    data: categories,
-                                    key: "id",
-                                    value: "name"
-                                }}
-                                required
-                            />
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                disabled={fetching}
-                                id="sub_category_id"
-                                label="Subcategoría"
-                                name="sub_category_id"
-                                onChange={handleChange}
-                                value={state.sub_category_id}
-                                itemList={{
-                                    data: subcategories,
-                                    key: "id",
-                                    value: "name"
-                                }}
+                                prefix={"Bs"}
                                 required
                             />
 
                             <CustomDivider text="Información" color="warning" margin="dense" bold />
 
-                            <IconInput
+                            <TextField
+                                variant="standard"
+                                color="primary"
+                                margin="dense"
+                                disabled={fetching}
+                                id="observation"
+                                label="Observación"
+                                name="observation"
+                                onChange={handleChange}
+                                value={state.observation}
+                                fullWidth
+                                multiline
+                                rows={3}
+                            // rowsMax={4}
+                            />
+
+                            {/* <IconInput
+                                id="standard-multiline-static"
                                 variant={'standard'}
-                                margin={'dense'}
+                                margin={'normal'}
                                 color="primary"
                                 disabled={fetching}
                                 type="text"
@@ -332,10 +316,9 @@ function SupplierAdd(props) {
                                 name="observation"
                                 onChange={handleChange}
                                 value={state.observation}
-                                // required
-                                // icon={<AccountBoxIcon />}
-                                iconPosition="end"
-                            />
+                                multiline
+                                rows={8}
+                            /> */}
                             <DateInput
                                 variant={'standard'}
                                 margin={'dense'}
@@ -346,8 +329,11 @@ function SupplierAdd(props) {
                                 name="buying_date"
                                 onChange={handleChange}
                                 value={state.buying_date}
-                                minDate={moment().subtract(10, 'years').calendar()}
-                                maxDate={moment().add(10, 'years').calendar()}
+                                minDate={moment().subtract(10, 'years').format("YYYY/MM/DD")}
+                                maxDate={moment().format("YYYY/MM/DD")}
+                                openTo="date"
+                                disableFuture
+                                autoOk
                                 required
                             />
                             <DateInput
@@ -360,31 +346,14 @@ function SupplierAdd(props) {
                                 name="expire_date"
                                 onChange={handleChange}
                                 value={state.expire_date}
-                                minDate={moment().subtract(10, 'years').calendar()}
-                                maxDate={moment().add(10, 'years').calendar()}
+                                minDate={moment().format("YYYY/MM/DD")}
+                                maxDate={moment().add(10, 'years').format("YYYY/MM/DD")}
+                                openTo="date"
+                                disablePast
+                                autoOk
                                 required
                             />
 
-                            <CustomDivider text="Impresión" color="warning" margin="dense" bold />
-
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                disabled={fetching}
-                                id="print_category_id"
-                                label="Impresión"
-                                name="print_category_id"
-                                onChange={handleChange}
-                                value={state.print_category_id}
-                                itemList={{
-                                    data: printscategories,
-                                    key: "id",
-                                    value: "name"
-                                }}
-                                required
-                            />
                         </Grid>
 
                     </Grid>

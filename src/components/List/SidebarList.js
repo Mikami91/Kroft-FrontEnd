@@ -21,9 +21,9 @@ import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
 const SidebarList = [
 
   {
-    name: "Reportes",
-    icon: DescriptionRoundedIcon,
-    component: Reports,
+    name: "Proveedores",
+    icon: PeopleRoundedIcon,
+    component: Customers,
   },
 
   // {

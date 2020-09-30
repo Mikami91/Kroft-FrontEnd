@@ -140,7 +140,7 @@ function DashboardPage({
   useEffect(() => {
     if (is_payload === false) {
 
-      handleRefresh();
+      // handleRefresh();
 
       // Change is_payload state
       set_is_payload(true);

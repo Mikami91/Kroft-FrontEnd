@@ -79,7 +79,7 @@ function Customers({ customers, fetching, loading }) {
                                     //     )
                                     // },
                                     { title: "Proveedor", field: "shop_name", type: "string" },
-                                    { title: "NIT", field: "shop_nit", type: "mumeric" },
+                                    { title: "NIT", field: "shop_nit", type: "numeric" },
                                     { title: "Telefono", field: "shop_phone", type: "string" },
                                 ]}
                                 data={customers}
