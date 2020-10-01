@@ -71,27 +71,23 @@ function Suppliers({ suppliers, fetching, loading }) {
               <CustomTable
                 column={[
                   { title: "ID", field: "id", type: "numeric", editable: "never" },
-                  {
-                    title: "Foto", field: "photo", editable: "never", sorting: false,
-                    render: rowData => (
-                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/products/`} square />
-                    )
-                  },
+                  // {
+                  //   title: "Foto", field: "photo", editable: "never", sorting: false,
+                  //   render: rowData => (
+                  //     <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/products/`} square />
+                  //   )
+                  // },
                   { title: "Insumo", field: "name", type: "string" },
-                  { title: "Precio", field: "price", type: "numeric" },
-                  { title: "Categoría", field: "category_name", type: "string" },
-                  { title: "Subcategoría", field: "sub_category_name", type: "string" },
-                  { title: "Impresión", field: "print_category_name", type: "string" },
-                  // { title: "Creación", field: "created_at", editable: "never", type: "date", },
-                  // { title: "Modificación", field: "updated_at", editable: "never", type: "date", },
+                  { title: "Ud.", field: "unit_type", type: "string", editable: "never" },
+                  { title: "Presentación", field: "presentation", type: "numeric" },
+                  { title: "Cantidad", field: "quantity", type: "numeric" },
+                  { title: "P./U.", field: "buying_price", type: "numeric" },
                 ]}
                 data={suppliers}
                 detailPanel={[
-                  { title: "Cantidad", field: "quantity", type: "numeric" },
-                  { title: "Observación", field: "observation", type: "string" },
-                  { title: "Precio de compra", field: "buying_price", type: "string" },
-                  { title: "Fecha de compra", field: "buying_date", type: "string" },
-                  { title: "Fecha de expiración", field: "expire_date", type: "string" },
+                  { title: "Observación", field: "observation", type: "string", },
+                  { title: "Fecha de compra", field: "buying_date", type: "date", },
+                  { title: "Fecha de expiración", field: "expire_date", type: "date", },
                   { title: "Código", field: "code", type: "string" },
                 ]}
                 refresh={supplierShow}

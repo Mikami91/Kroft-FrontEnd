@@ -141,6 +141,8 @@ function DashboardPage({
     if (is_payload === false) {
 
       // handleRefresh();
+      customerShow();
+
 
       // Change is_payload state
       set_is_payload(true);

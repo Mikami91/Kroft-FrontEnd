@@ -28,7 +28,7 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
 import { supplierCreate } from "../../functions/supplierFunctions";
 // Variables
-import { units } from '../../variables/units.js';
+import { presentationTypes } from '../../variables/presentationTypes.js';
 // Assets
 import image from '../../assets/img/defaults/product.png';
 // Configs
@@ -36,14 +36,15 @@ moment.locale("en");
 moment().format('l');
 
 function SupplierAdd(props) {
-    const { fetching, customers, categories, subcategories, printscategories } = props;
+    const { fetching, customers } = props;
     // Local State
     const [state, setState] = useState({
         // Customer
         customer_id: "",
         // Supplier
         name: "",
-        presentation: "",
+        unit_type: "",
+        presentation: null,
         quantity: null,
         // Prices
         buying_price: null,
@@ -70,7 +71,8 @@ function SupplierAdd(props) {
             customer_id: "",
             // Supplier
             name: "",
-            presentation: "",
+            unit_type: "",
+            presentation: null,
             quantity: null,
             // Prices
             buying_price: null,
@@ -229,14 +231,14 @@ function SupplierAdd(props) {
                                 color="primary"
                                 hoverColor="primary"
                                 disabled={fetching}
-                                id="presentation"
-                                label="Presentación"
-                                name="presentation"
+                                id="unit_type"
+                                label="Tipo de unidad"
+                                name="unit_type"
                                 onChange={handleChange}
-                                value={state.presentation}
+                                value={state.unit_type}
                                 itemList={{
-                                    data: units,
-                                    key: "name",
+                                    data: presentationTypes,
+                                    key: "symbol",
                                     value: "name"
                                 }}
                                 required
@@ -246,14 +248,24 @@ function SupplierAdd(props) {
                                 variant={'standard'}
                                 margin={'dense'}
                                 color="primary"
-                                disabled={fetching || state.presentation === ""}
-                                label={'Cantidad'}
-                                name="quantity"
-                                prefix={
-                                    state.presentation === "Kilos" ? "Kg" :
-                                        state.presentation === "Litros" ? "L" :
-                                            state.presentation === "Unidades" ? "U" : ""
+                                disabled={fetching || state.unit_type === "" || state.unit_type === "Unidades"}
+                                label={'Presentación'}
+                                name="presentation"
+                                prefix={state.unit_type === "Kilos" ? "Kg" : state.unit_type === "Litros" ? "L" : ""
                                 }
+                                value={state.presentation}
+                                onChange={handleChange}
+                                maxLength={5}
+                                required
+                            />
+
+                            <NumberInput
+                                variant={'standard'}
+                                margin={'dense'}
+                                color="primary"
+                                disabled={fetching || state.unit_type === ""}
+                                label={'Cantidad de unidades'}
+                                name="quantity"
                                 value={state.quantity}
                                 onChange={handleChange}
                                 maxLength={5}
@@ -279,7 +291,7 @@ function SupplierAdd(props) {
                                 margin={'dense'}
                                 color="primary"
                                 disabled={fetching}
-                                label={'Precio de compra'}
+                                label={'Precio por unidad'}
                                 name="buying_price"
                                 value={state.buying_price}
                                 onChange={handleChange}
@@ -304,21 +316,6 @@ function SupplierAdd(props) {
                                 rows={3}
                             // rowsMax={4}
                             />
-
-                            {/* <IconInput
-                                id="standard-multiline-static"
-                                variant={'standard'}
-                                margin={'normal'}
-                                color="primary"
-                                disabled={fetching}
-                                type="text"
-                                label={'Observación'}
-                                name="observation"
-                                onChange={handleChange}
-                                value={state.observation}
-                                multiline
-                                rows={8}
-                            /> */}
                             <DateInput
                                 variant={'standard'}
                                 margin={'dense'}
@@ -369,13 +366,10 @@ function SupplierAdd(props) {
     );
 };
 const mapStateToProps = (state) => {
-    const { supplier, customer, category, subcategory, printcategory } = state;
+    const { supplier, customer } = state;
     return {
         fetching: supplier.fetching,
         customers: customer.payload,
-        categories: category.payload,
-        subcategories: subcategory.payload,
-        printscategories: printcategory.payload,
     }
 };
 
