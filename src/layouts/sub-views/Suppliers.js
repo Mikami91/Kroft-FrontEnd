@@ -1,6 +1,7 @@
 // Dependencies
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
+import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
 import { connect } from 'react-redux';
 // @material-ui/Componentes
@@ -13,8 +14,11 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomModal from '../../components/Modal/CustomModal';
+import SingleTabs from '../../components/CustomTabs/SingleTabs';
+import TabPanel from "../../components/Panel/TabPanel.js";
 // Layouts
-import SupplierAdd from '../Forms/SupplierAdd.js';
+import NewSupplierAdd from '../Forms/NewSupplierAdd';
+import ExistSupplierAdd from '../Forms/ExistSupplierAdd';
 import SupplierUpdate from '../Forms/SupplierUpdate';
 // Functions
 import { supplierShow, supplierDelete } from "../../functions/supplierFunctions";
@@ -22,6 +26,14 @@ import { supplierShow, supplierDelete } from "../../functions/supplierFunctions"
 import { API } from '../../API/index';
 
 function Suppliers({ suppliers, fetching, loading }) {
+  // State for Panel Tabs
+  const [value, setValue] = useState(0);
+  const handleChangeValue = (event, newValue) => {
+    setValue(newValue);
+  };
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
   const [state, setState] = useState({
     data: {},
     open: false
@@ -46,7 +58,45 @@ function Suppliers({ suppliers, fetching, loading }) {
           elevation={6}
           square="true"
         >
-          <SupplierAdd />
+          <Card variant="cardForm">
+            <CustomLoading inside color="primary" open={fetching} />
+
+            <CardHeader color="primary" dense centered>
+              <h3>Insumo</h3>
+            </CardHeader>
+
+            <SingleTabs
+              centered
+              value={value}
+              onChange={handleChangeValue}
+              plainTabs
+              headerColor="primary"
+              tabs={[
+                {
+                  tabName: "Nuevo",
+                },
+                {
+                  tabName: "Existente",
+                }
+              ]}
+            />
+
+            <SwipeableViews
+              axis="x"
+              index={value}
+              onChangeIndex={handleChangeIndex}
+            >
+              <TabPanel value={value} index={0} centered>
+                <NewSupplierAdd />
+              </TabPanel>
+
+              <TabPanel value={value} index={1} centered>
+                <ExistSupplierAdd />
+              </TabPanel>
+
+            </SwipeableViews>
+
+          </Card>
 
         </Grid>
 

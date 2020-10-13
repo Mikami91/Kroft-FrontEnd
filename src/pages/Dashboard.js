@@ -39,6 +39,7 @@ import { categoryShow } from "../functions/categoryFunctions";
 import { subcategoryShow } from "../functions/subcategoryFunctions";
 import { productShow } from "../functions/productFunctions";
 import { customerShow } from "../functions/customerFunctions";
+import { supplierShow } from "../functions/supplierFunctions";
 import { orderShow } from "../functions/orderFunctions";
 // Events
 import {
@@ -133,6 +134,7 @@ function DashboardPage({
     subcategoryShow();
     productShow();
     customerShow();
+    supplierShow();
     orderShow();
   }
 
@@ -142,7 +144,7 @@ function DashboardPage({
 
       // handleRefresh();
       customerShow();
-
+      supplierShow();
 
       // Change is_payload state
       set_is_payload(true);
