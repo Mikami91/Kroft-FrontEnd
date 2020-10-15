@@ -1,5 +1,5 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/supplierFetch';
+import { createFetch, existFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/supplierFetch';
 // Actions Creators
 import { payload, loading, fetching } from "../redux/actions/creators/supplierCreator";
 import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
@@ -9,6 +9,36 @@ export async function supplierCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
+        if (response.status === 200) {
+            switch (response.data.success) {
+                case true:
+                    fetching(false);
+                    successSnackbar(response.data.message);
+                    break;
+
+                case false:
+                    fetching(false);
+                    dangerSnackbar(response.data.message);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        return response.data;
+
+    } catch (error) {
+        fetching(false);
+        warningSnackbar("Error de servidor.");
+        return error.message;
+    };
+};
+
+/*::::::::::::::::::::EXIST::::::::::::::::::::*/
+export async function supplierExist(data) {
+    fetching(true);
+    try {
+        const response = await existFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:

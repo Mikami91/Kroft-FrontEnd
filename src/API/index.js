@@ -107,6 +107,7 @@ export const customer_delete = "api/customer_delete";
 
 /*::::::::::::::::::::SUPPLY::::::::::::::::::::*/
 export const supply_create = "api/supply_create";
+export const supply_exist = "api/supply_exist";
 export const supply_index = "api/supply_index";
 export const supply_show = "api/supply_show";
 export const supply_update = "api/supply_update";

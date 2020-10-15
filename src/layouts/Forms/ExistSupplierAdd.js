@@ -18,7 +18,7 @@ import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { supplierCreate } from "../../functions/supplierFunctions";
+import { supplierExist } from "../../functions/supplierFunctions";
 // Variables
 import { presentationTypes } from '../../variables/presentationTypes.js';
 // Configs
@@ -33,9 +33,6 @@ function ExistSupplierAdd(props) {
         customer_id: "",
         // Supplier
         supply_id: "",
-        name: "",
-        unit_type: "",
-        presentation: null,
         quantity: null,
         // Prices
         buying_price: null,
@@ -43,16 +40,15 @@ function ExistSupplierAdd(props) {
         observation: "",
         buying_date: null,
         expire_date: null,
-        // Photo
-        photo: null,
-        isUpload: false,
         error: false
     });
     // Change State for Inputs
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
+
         setState({
             ...state,
-            [e.target.name]: e.target.value
+            supply_id: e.target.name === "customer_id" ? "" : state.supply_id,
+            [e.target.name]: e.target.value,
         });
     };
     // Empty State values
@@ -62,9 +58,6 @@ function ExistSupplierAdd(props) {
             customer_id: "",
             // Supplier
             supply_id: "",
-            name: "",
-            unit_type: "",
-            presentation: null,
             quantity: null,
             // Prices
             buying_price: null,
@@ -79,7 +72,7 @@ function ExistSupplierAdd(props) {
     // Create function
     const handleCreate = (e) => {
         e.preventDefault();
-        supplierCreate(state).then((response) => {
+        supplierExist(state).then((response) => {
             if (typeof response !== 'undefined') {
                 if (response.success === true) {
                     handleEmpty();
@@ -156,7 +149,7 @@ function ExistSupplierAdd(props) {
                             variant={'standard'}
                             margin={'dense'}
                             color="primary"
-                            disabled={fetching || state.unit_type === ""}
+                            disabled={fetching || state.customer_id === "" || state.supply_id === ""}
                             label={'Cantidad de unidades'}
                             name="quantity"
                             value={state.quantity}

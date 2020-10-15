@@ -3,6 +3,7 @@ import { customFetch } from "./CustomFetch";
 // APIs
 import {
     supply_create,
+    supply_exist,
     supply_index,
     supply_show,
     supply_update,
@@ -17,6 +18,16 @@ export const createFetch = (data) => {
         method: 'POST',
         token: true,
         url: supply_create,
+        data: data,
+    });
+};
+
+/*::::::::::::::::::::EXIST::::::::::::::::::::*/
+export const existFetch = (data) => {
+    return customFetch({
+        method: 'POST',
+        token: true,
+        url: supply_exist,
         data: data,
     });
 };
