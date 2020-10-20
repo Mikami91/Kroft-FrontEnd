@@ -6,33 +6,22 @@ import 'moment/locale/es';
 import { connect } from 'react-redux';
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
-import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
-// @material-ui/icons
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import DeleteIcon from '@material-ui/icons/Delete';
 // core components
-import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
-import CardIconActions from '../../components/Card/CardIconActions.js';
-import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
 import NumberInput from '../../components/CustomInput/NumberInput.js';
 import DateInput from '../../components/CustomInput/DateInput.js';
 import CustomBotton from '../../components/CustomButtons/CustomButton.js'
-import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
 import { supplierCreate } from "../../functions/supplierFunctions";
 // Variables
 import { presentationTypes } from '../../variables/presentationTypes.js';
-// Assets
-import image from '../../assets/img/defaults/product.png';
 // Configs
-moment.locale("en");
+moment.locale("es");
 moment().format('l');
 
 function NewSupplierAdd(props) {
@@ -65,7 +54,7 @@ function NewSupplierAdd(props) {
         });
     };
     // Empty State values
-    const handleEmpty = (e) => {
+    const handleEmpty = () => {
         setState({
             // Customer
             customer_id: "",
@@ -87,38 +76,6 @@ function NewSupplierAdd(props) {
         });
     };
 
-    // Changes State for Image
-    const handleImage = (e) => {
-        setState({
-            ...state,
-            isUpload: true
-        });
-        //e.preventDefault();
-        let file = e.target.files[0];
-        if (file) {
-            let reader = new FileReader();
-            reader.onloadend = () => {
-                setState({
-                    ...state,
-                    photo: reader.result,
-                    isUpload: false
-                });
-            }
-            reader.readAsDataURL(file)
-            // Empty input file value
-            e.target.value = null;
-        }
-    };
-
-    // Empty State of Image
-    const handleEmptyImage = (e) => {
-        setState({
-            ...state,
-            photo: null
-        });
-        e.target.value = null;
-    };
-
     // Create function
     const handleCreate = (e) => {
         e.preventDefault();
@@ -133,39 +90,6 @@ function NewSupplierAdd(props) {
 
     return (
         <form id="new-supplier-add" onSubmit={handleCreate}>
-
-            {/* <CardHeader color="success" avatar>
-                    <AvatarForm
-                        image={state.photo === null ? image : state.photo}
-                        alt="Imagen"
-                        title="Imagen"
-                        square
-                    />
-                    <input
-                        accept="image/png, image/jpeg, image/jpg"
-                        id="supplier-file-create"
-                        type="file"
-                        name="image"
-                        onChange={handleImage}
-                        style={{ display: 'none' }}
-                    />
-
-                    <CardIconActions>
-                        <IconButton edge="start" onClick={handleEmptyImage} disabled={state.photo === null || state.isUpload ? true : false}>
-                            <label>
-                                <DeleteIcon />
-                            </label>
-                        </IconButton>
-
-                        <IconButton edge="end" disabled={state.isUpload ? true : false}
-                            onClick={() => { document.getElementById("supplier-file-create").click() }}
-                        >
-                            <label>
-                                <AddAPhotoIcon />
-                            </label>
-                        </IconButton>
-                    </CardIconActions>
-                </CardHeader> */}
 
             <CardBody form>
                 <Grid

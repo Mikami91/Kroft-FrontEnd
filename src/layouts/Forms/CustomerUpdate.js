@@ -5,15 +5,8 @@ import 'moment/locale/es';
 import { connect } from 'react-redux';
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
-import IconButton from '@material-ui/core/IconButton';
-// @material-ui/icons
-import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
-import DeleteIcon from '@material-ui/icons/Delete';
 // core components
-import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import CardIconActions from '../../components/Card/CardIconActions.js';
-import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import SelectInput from '../../components/CustomInput/SelectInput.js';
 import NumberInput from '../../components/CustomInput/NumberInput.js';
@@ -21,8 +14,6 @@ import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
 import { customerUpdate } from "../../functions/customerFunctions";
-// Apis
-import { API } from '../../API/index';
 // Varieables
 import { cities } from '../../variables/cities';
 
@@ -34,21 +25,19 @@ function CustomerUpdate(props) {
         data,
         close,
     } = props;
-    const current_photo = typeof data.photo === "undefined" ? null : `${API}images/customers/${data.photo}`;
     // Local State
     const [state, setState] = useState({
         // Others
-        admin_id: "",
-        // Customer
-        first_name: "",
-        last_name: "",
+        admin_id: localStorage.getItem("admin_id"),
         // Shop
         shop_name: "",
-        address: "",
-        // Information
-        city: "",
-        phone: null,
-        email: "",
+        shop_nit: "",
+        shop_phone: "",
+        shop_city: "",
+        shop_address: "",
+        // Customer
+        contact_name: "",
+        contact_phone: "",
         // Photo
         photo: null,
         isUpload: false,
@@ -61,20 +50,19 @@ function CustomerUpdate(props) {
                 ...data,
                 // Others
                 admin_id: data.admin_id,
-                // Customer
-                first_name: data.first_name,
-                last_name: data.last_name,
                 // Shop
                 shop_name: data.shop_name,
-                address: data.address,
-                // Information
-                city: data.city,
-                phone: data.phone,
-                email: data.email,
+                shop_nit: data.shop_nit,
+                shop_phone: data.shop_phone,
+                shop_city: data.shop_city,
+                shop_address: data.shop_address,
+                // Customer
+                contact_name: data.contact_name,
+                contact_phone: data.contact_phone,
                 // Photo
                 photo: null,
                 isUpload: false,
-                error: false
+                error: false,
             });
         }
     }, [data])
@@ -90,57 +78,21 @@ function CustomerUpdate(props) {
     // Empty State values
     const handleEmpty = (e) => {
         setState({
-            // Others
-            admin_id: "",
-            // Customer
-            first_name: "",
-            last_name: "",
+            admin_id: localStorage.getItem("admin_id"),
             // Shop
             shop_name: "",
-            address: "",
-            // Information
-            city: "",
-            phone: null,
-            email: "",
+            shop_nit: "",
+            shop_phone: "",
+            shop_city: "",
+            shop_address: "",
+            // Customer
+            contact_name: "",
+            contact_phone: "",
             // Photo
             photo: null,
             isUpload: false,
             error: false
         });
-    };
-
-    // Changes State for Image
-    const handleImage = (e) => {
-        setState({
-            ...state,
-            isUpload: true,
-        });
-        //e.preventDefault();
-        let file = e.target.files[0];
-        if (file) {
-            let reader = new FileReader();
-            reader.onloadend = () => {
-                setState({
-                    ...state,
-                    photo: reader.result,
-                    isUpload: false,
-                    photoChange: true,
-                });
-            }
-            reader.readAsDataURL(file)
-            // Empty input file value
-            e.target.value = null;
-        }
-    };
-
-    // Empty State of Image
-    const handleEmptyImage = (e) => {
-        setState({
-            ...state,
-            photo: null,
-            photoChange: false,
-        });
-        e.target.value = null;
     };
 
     // Update function
@@ -155,45 +107,11 @@ function CustomerUpdate(props) {
             }
         });
     };
-    // Using useMemo hook
-    // return useMemo(() => {
+
     return (
         <form id="customer-update" onSubmit={handleUpdate} encType="multipart/form-data" >
 
             <CustomLoading inside color="primary" open={state.isUpload || fetching} />
-
-            <CardHeader color="success" avatar modal>
-                <AvatarForm
-                    image={state.photoChange === true ? state.photo : current_photo}
-                    alt="Imagen"
-                    title="Imagen"
-                />
-                <input
-                    // disabled={state.isUpload || showProgress ? true : false}
-                    accept="image/png, image/jpeg, image/jpg"
-                    id="customer-file-update"
-                    type="file"
-                    name="image"
-                    onChange={handleImage}
-                    style={{ display: 'none' }}
-                />
-
-                <CardIconActions>
-                    <IconButton edge="start" onClick={handleEmptyImage} disabled={state.photoChange === true || state.isUpload === true ? false : true}>
-                        <label>
-                            <DeleteIcon />
-                        </label>
-                    </IconButton>
-
-                    <IconButton edge="end" disabled={state.isUpload ? true : false}
-                        onClick={() => { document.getElementById("customer-file-update").click() }}
-                    >
-                        <label>
-                            <AddAPhotoIcon />
-                        </label>
-                    </IconButton>
-                </CardIconActions>
-            </CardHeader>
 
             <CardBody form>
                 <Grid
@@ -212,7 +130,7 @@ function CustomerUpdate(props) {
                         elevation={6}
                         square="true"
                     >
-                        <CustomDivider text="Datos personales" color="warning" margin="dense" bold />
+                        <CustomDivider text="Empresa" color="warning" margin="dense" bold />
 
                         <IconInput
                             variant={'standard'} margin={'dense'}
@@ -220,36 +138,6 @@ function CustomerUpdate(props) {
                             disabled={fetching}
                             type="text"
                             label={'Nombre'}
-                            name="first_name"
-                            onChange={handleChange}
-                            value={state.first_name}
-                            required
-                            // icon={<AccountBoxIcon />}
-                            iconPosition="end"
-                        />
-                        <IconInput
-                            variant={'standard'}
-                            margin={'dense'}
-                            color="primary"
-                            disabled={fetching}
-                            type="text"
-                            label={'Apellidos'}
-                            name="last_name"
-                            onChange={handleChange}
-                            value={state.last_name}
-                            required
-                            // icon={<AccountBoxIcon />}
-                            iconPosition="end"
-                        />
-
-                        <CustomDivider text="Tienda" color="warning" margin="dense" bold />
-
-                        <IconInput
-                            variant={'standard'} margin={'dense'}
-                            color="primary"
-                            disabled={fetching}
-                            type="text"
-                            label={'Tienda'}
                             name="shop_name"
                             onChange={handleChange}
                             value={state.shop_name}
@@ -257,6 +145,54 @@ function CustomerUpdate(props) {
                             // icon={<AccountBoxIcon />}
                             iconPosition="end"
                         />
+
+                        <NumberInput
+                            variant={'standard'}
+                            margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            label={'NIT'}
+                            name="shop_nit"
+                            value={state.shop_nit}
+                            onChange={handleChange}
+                            maxLength={15}
+                            phone
+                            required
+                        />
+
+                        <NumberInput
+                            variant={'standard'}
+                            margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            label={'Teléfono'}
+                            name="shop_phone"
+                            value={state.shop_phone}
+                            onChange={handleChange}
+                            maxLength={9}
+                            phone
+                            required
+                        />
+
+                        <SelectInput
+                            variant="standard"
+                            margin="dense"
+                            color="primary"
+                            hoverColor="primary"
+                            disabled={fetching}
+                            id="city"
+                            label="Ciudad"
+                            name="shop_city"
+                            onChange={handleChange}
+                            value={state.shop_city}
+                            itemList={{
+                                data: cities,
+                                key: "name",
+                                value: "name"
+                            }}
+                            required
+                        />
+
                         <IconInput
                             variant={'standard'}
                             margin={'dense'}
@@ -264,9 +200,9 @@ function CustomerUpdate(props) {
                             disabled={fetching}
                             type="text"
                             label={'Dirección'}
-                            name="address"
+                            name="shop_address"
                             onChange={handleChange}
-                            value={state.address}
+                            value={state.shop_address}
                             required
                             // icon={<AccountBoxIcon />}
                             iconPosition="end"
@@ -283,7 +219,21 @@ function CustomerUpdate(props) {
                         elevation={6}
                         square="true"
                     >
-                        <CustomDivider text="Información" color="warning" margin="dense" bold />
+                        <CustomDivider text="Contacto" color="warning" margin="dense" bold />
+
+                        <IconInput
+                            variant={'standard'} margin={'dense'}
+                            color="primary"
+                            disabled={fetching}
+                            type="text"
+                            label={'Nombre'}
+                            name="contact_name"
+                            onChange={handleChange}
+                            value={state.contact_name}
+                            required
+                            // icon={<AccountBoxIcon />}
+                            iconPosition="end"
+                        />
 
                         <NumberInput
                             variant={'standard'}
@@ -291,53 +241,18 @@ function CustomerUpdate(props) {
                             color="primary"
                             disabled={fetching}
                             label={'Celular'}
-                            name="phone"
-                            value={state.phone}
+                            name="contact_phone"
+                            value={state.contact_phone}
                             onChange={handleChange}
                             maxLength={9}
                             required
                             phone
                         />
-                        <IconInput
-                            variant={'standard'}
-                            margin={'dense'}
-                            color="primary"
-                            disabled={fetching}
-                            type="email"
-                            label={'Correo electrónico'}
-                            name="email"
-                            onChange={handleChange}
-                            value={state.email}
-                            required
-                            // icon={<AccountBoxIcon />}
-                            iconPosition="end"
-                        />
-                        <SelectInput
-                            variant="standard"
-                            margin="dense"
-                            color="primary"
-                            hoverColor="primary"
-                            disabled={fetching}
-                            id="city"
-                            label="Ciudad"
-                            name="city"
-                            onChange={handleChange}
-                            value={state.city}
-                            itemList={{
-                                data: cities,
-                                key: "name",
-                                value: "name"
-                            }}
-                            required
-                        />
-
                     </Grid>
-
                 </Grid>
             </CardBody>
         </form>
     );
-    // }, []);
 };
 // Connect to Store State
 const mapStateToProps = (state) => {

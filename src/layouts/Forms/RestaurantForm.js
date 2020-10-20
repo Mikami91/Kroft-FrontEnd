@@ -121,7 +121,7 @@ function RestaurantForm(props) {
 
             {/* <Card variant="cardForm"> */}
 
-            <CustomLoading inside color="primary" open={state.isUpload || fetching} />
+            <CustomLoading inside color="primary" margin="normal" open={state.isUpload || fetching} />
 
             <CardBody form>
                 <Grid
@@ -190,7 +190,7 @@ function RestaurantForm(props) {
                         elevation={6}
                         square="true"
                     >
-                        <CustomDivider text="Banner" color="warning" margin="" bold />
+                        <CustomDivider text="Banner" color="warning" margin="normal" bold />
 
                         <CardImage
                             variant="cardSide"

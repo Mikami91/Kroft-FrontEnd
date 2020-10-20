@@ -34,8 +34,6 @@ function ExistSupplierAdd(props) {
         // Supplier
         supply_id: "",
         quantity: null,
-        // Prices
-        buying_price: null,
         // Information
         observation: "",
         buying_date: null,
@@ -59,8 +57,6 @@ function ExistSupplierAdd(props) {
             // Supplier
             supply_id: "",
             quantity: null,
-            // Prices
-            buying_price: null,
             // Information
             observation: "",
             buying_date: null,
@@ -171,7 +167,7 @@ function ExistSupplierAdd(props) {
                         elevation={6}
                         square="true"
                     >
-                        <CustomDivider text="Precio" color="warning" margin="dense" bold />
+                        {/* <CustomDivider text="Precio" color="warning" margin="dense" bold />
 
                         <NumberInput
                             variant={'standard'}
@@ -184,7 +180,7 @@ function ExistSupplierAdd(props) {
                             onChange={handleChange}
                             prefix={"Bs"}
                             required
-                        />
+                        /> */}
 
                         <CustomDivider text="Información" color="warning" margin="dense" bold />
 

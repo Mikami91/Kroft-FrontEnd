@@ -23,8 +23,6 @@ import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
 import { customerCreate } from "../../functions/customerFunctions";
-// Assets
-import image from '../../assets/img/defaults/user.png';
 // Varieables
 import { cities } from '../../variables/cities';
 

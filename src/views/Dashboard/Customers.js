@@ -25,11 +25,10 @@ function Customers(props) {
 
         <SwipeableViews index={value} onChangeIndex={handleChange}>
           <TabPanel sub value={value} index={0}>
-            {/* <SubCustomers /> */}
-            <Suppliers />
+            <SubCustomers />
           </TabPanel>
           <TabPanel sub value={value} index={1}>
-            {/* <Suppliers /> */}
+            <Suppliers />
           </TabPanel>
         </SwipeableViews>
 
