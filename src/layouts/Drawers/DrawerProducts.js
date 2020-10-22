@@ -48,15 +48,6 @@ import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 // Functions
 import { orderCreate, orderSend, orderCancel } from '../../functions/orderFunctions';
 
-// Assets
-// import image from "../../assets/img/backgrounds/productbackground.jpg";
-
-// Variables
-// import { tables } from "../../variables/tables";
-// import { categories } from "../../variables/categories";
-// import { animes } from "../../variables/animes";
-// import { products } from "../../variables/products";
-
 // Styles
 import styles from "../../styles/components/drawerStyle.js";
 
@@ -112,20 +103,13 @@ function DrawerProducts(props) {
     set_orders(arg);
   };
 
-  // State and amount of Current Table
+  // Set state, amount and order_id of current Table
   let table_state = 0;
   let table_amount = 0;
   let current_order_id = null;
 
-
-  tables.find(index => index.id === current.table_id ?
-    [table_state = index.is_busy, current_order_id = index.order_id, table_amount = index.amount] : null
-  );
-
-  // tables.find(index => index.id === current.table_id ? table_state = index.is_busy : table_state = 0);
-  // tables.find(index => index.id === current.table_id ? table_amount = index.amount : table_amount = 0);
-  // tables.find(index => index.id === current.table_id ? current_order_id = index.order_id : current_order_id = null);
-
+  tables.reduce((index, cur) => cur.id === current.table_id ?
+    [table_state = cur.is_busy, current_order_id = cur.order_id, table_amount = cur.amount] : null, []);
 
   // Products Orders List
   let product_orders_list = [];

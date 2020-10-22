@@ -30,7 +30,6 @@ function CustomTableListPrints(props) {
 
     // Expanded functions
     const handleOpenExpanded = (index) => {
-        console.log(index);
         setState({
             ...state,
             rowContent: data.filter(i => i.order_number === index.order_number && i.table_id === filter),

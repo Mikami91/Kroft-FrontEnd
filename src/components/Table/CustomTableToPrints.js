@@ -19,8 +19,6 @@ const CustomTableToPrints = (props) => {
         /* Props */
         data, renderRefresh } = props;
 
-    console.log(data, current)
-
     // Styles
     const classes = useStyles();
 
@@ -40,7 +38,6 @@ const CustomTableToPrints = (props) => {
         r[a.print_category_name].push(a);
         return r;
     }, Object.create(null));
-    console.log(result)
 
     //EPSON TM-T88V Receipt
 

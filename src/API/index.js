@@ -1,5 +1,6 @@
 // API URL
 export const API = 'http://kroft-backend.test/';
+// export const API = 'http://c1870854.ferozo.com/kroft/';
 
 /*::::::::::::::::::::SUPER ADMIN::::::::::::::::::::*/
 export const super_admin_create = "api/super_admin_create";
