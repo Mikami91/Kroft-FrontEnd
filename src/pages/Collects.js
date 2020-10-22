@@ -1,6 +1,6 @@
 // Dependencies
 import React, { Fragment, useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 import NumberFormat from 'react-number-format';
 // Conecction to Store
@@ -54,7 +54,12 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function CollectsPage({ environments, tables, collect_fetching, loading, snackbar_show, snackbar_message, snackbar_severity }) {
+function CollectsPage(props) {
+  // Props
+  const { environments, tables, collect_fetching, loading, snackbar_show, snackbar_message, snackbar_severity } = props;
+
+  let history = useHistory();
+
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
   const [value, setValue] = useState(0);
@@ -233,6 +238,17 @@ function CollectsPage({ environments, tables, collect_fetching, loading, snackba
     });
   };
 
+  // Logout function
+  const handleLogout = () => {
+    // Empty local storage
+    localStorage.setItem('user', '');
+    localStorage.setItem('employee_id', '');
+    localStorage.setItem('token', '');
+    localStorage.setItem("head_area", '');
+    // Redirect to login page
+    history.push("/Kroft-FrontEnd");
+  }
+
   // Styles
   const classes = useStyles();
   return (
@@ -295,14 +311,12 @@ function CollectsPage({ environments, tables, collect_fetching, loading, snackba
         leftButtons={[
           {
             type: "fab",
-            text: "/Kroft-FrontEnd/",
+            text: "Salir",
             color: "secondary",
             icon: KeyboardBackspaceIcon,
             size: "large",
             disabled: false,
-            // onClick: () => {
-            // 	alert('Salir');
-            // }
+            onClick: handleLogout
           },
           {
             type: "icon",

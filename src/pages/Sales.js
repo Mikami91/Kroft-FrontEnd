@@ -1,6 +1,6 @@
 // Dependencies
 import React, { Fragment, useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
 import { connect } from 'react-redux';
@@ -58,9 +58,23 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function SalesPage({ environments, tables, orders_list, current, close_products, loading, tables_fetching, snackbar_show, snackbar_message, snackbar_severity }) {
+function SalesPage(props) {
+  // Props
+  const {
+    environments,
+    tables,
+    orders_list,
+    current,
+    close_products,
+    loading,
+    tables_fetching,
+    snackbar_show,
+    snackbar_message,
+    snackbar_severity } = props;
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
+
+  let history = useHistory();
 
   // Change environments state
   const [value, setValue] = useState(0);
@@ -237,6 +251,17 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
     product_orders_list = current_location.products;
   };
 
+  // Logout function
+  const handleLogout = () => {
+    // Empty local storage
+    localStorage.setItem('user', '');
+    localStorage.setItem('employee_id', '');
+    localStorage.setItem('token', '');
+    localStorage.setItem("head_area", '');
+    // Redirect to login page
+    history.push("/Kroft-FrontEnd");
+  }
+
   // Styles
   const classes = useStyles();
 
@@ -301,14 +326,12 @@ function SalesPage({ environments, tables, orders_list, current, close_products,
         leftButtons={[
           {
             type: "fab",
-            text: "/Kroft-FrontEnd/",
+            text: "Salir",
             color: "secondary",
             icon: KeyboardBackspaceIcon,
             size: "large",
             disabled: false,
-            // onClick: () => {
-            // 	alert('Salir');
-            // }
+            onClick: handleLogout
           },
           {
             type: "icon",
