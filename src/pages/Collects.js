@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef, Component } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 import NumberFormat from 'react-number-format';
@@ -7,6 +7,8 @@ import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux';
 // Actions Creators
 import { hideSnackbar } from '../redux/actions/creators/snackbarCreator';
+// Print
+import ReactToPrint from 'react-to-print';
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -16,6 +18,8 @@ import PersonIcon from "@material-ui/icons/Person";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
+import PrintIcon from "@material-ui/icons/Print";
+import SendIcon from "@material-ui/icons/Send";
 
 // import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 // import CreditCardIcon from '@material-ui/icons/CreditCard';
@@ -31,11 +35,14 @@ import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
 import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
 import CustomMoneyInput from "../components/CustomInput/CustomMoneyInput.js";
+import CustomTableFilter from "../components/Table/CustomTableFilter.js";
+import CustomTableToPrints from "../components/Table/CustomTableToPrints";
 // Functions
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
 import { orderShow } from "../functions/orderFunctions";
 import { collectCreate, collectShow } from "../functions/collectFunctions";
+import { orderCreate, orderSend, orderCancel } from '../functions/orderFunctions';
 // Events
 import {
   environments_WS,
@@ -54,9 +61,17 @@ import styles from "../styles/pages/SalesStyle.js";
 
 const useStyles = makeStyles(styles);
 
+class ComponentToPrint extends Component {
+  render() {
+    return (
+      <CustomTableToPrints data={this.props.data} renderRefresh={this.props.refresh} />
+    );
+  }
+}
+
 function CollectsPage(props) {
   // Props
-  const { environments, tables, collect_fetching, loading, snackbar_show, snackbar_message, snackbar_severity } = props;
+  const { environments, tables, orders_detail_payload, order_loading, collect_fetching, loading, snackbar_show, snackbar_message, snackbar_severity } = props;
 
   let history = useHistory();
 
@@ -77,6 +92,7 @@ function CollectsPage(props) {
     // Table variables
     id: null,
     name: "",
+    number: null,
     amount: 0,
     is_busy: null,
     order_id: null,
@@ -97,7 +113,27 @@ function CollectsPage(props) {
   // State for Modal Total Amount
   const [openTotalAmount, setTotalAmount] = useState(false);
 
+  // State for Modal Pass to collect
+  const [openPassCollect, setPassCollect] = useState(false);
+
   const handleOpenTotalAmount = (args) => {
+
+    if (args.is_busy === 1) {
+      setPassCollect(true);
+      setCurrentTable({
+        ...currentTable,
+        id: args.id,
+        name: args.name,
+        number: args.number,
+        amount: args.amount,
+        is_busy: args.is_busy,
+        order_id: args.order_id,
+        state: args.state,
+        environment_id: args.environment_id,
+        environment_name: args.environment_name,
+        environment_prefix: args.environment_prefix,
+      });
+    }
 
     if (args.is_busy === 2) {
       setTotalAmount(true);
@@ -105,6 +141,7 @@ function CollectsPage(props) {
         ...currentTable,
         id: args.id,
         name: args.name,
+        number: args.number,
         amount: args.amount,
         is_busy: args.is_busy,
         order_id: args.order_id,
@@ -122,6 +159,7 @@ function CollectsPage(props) {
       // Table variables
       id: null,
       name: "",
+      number: null,
       amount: 0,
       is_busy: null,
       order_id: null,
@@ -138,6 +176,10 @@ function CollectsPage(props) {
       change: 0,
     });
     setTotalAmount(false);
+  };
+
+  const handleClosePassCollect = () => {
+    setPassCollect(false);
   };
 
   // Check if values is number
@@ -248,6 +290,50 @@ function CollectsPage(props) {
     // Redirect to login page
     history.push("/Kroft-FrontEnd");
   }
+
+  // State for Modal Prints
+  const [printList, setPrintList] = useState([]);
+
+  // Component to Refer
+  let componentRef = useRef();
+  let btn = document.getElementById("printTotal");
+
+  // Total Print 
+  const handleTotalPrint = async (e) => {
+    e.preventDefault();
+    await setPrintList(orders_detail_payload.filter(index => index.order_id === currentTable.order_id));
+    btn.click();
+  };
+
+  // Send Order function
+  const handleSendOrder = (e) => {
+    e.preventDefault();
+    orderSend({
+      order_id: currentTable.order_id,
+      table_id: currentTable.id,
+    }).then((response) => {
+      if (typeof response !== 'undefined') {
+        if (response.success === true) {
+          handleClosePassCollect();
+        }
+      }
+    });
+  };
+
+  // Cancel Order function
+  const handleCancelOrder = (e) => {
+    e.preventDefault();
+    orderCancel({
+      order_id: currentTable.order_id,
+      table_id: currentTable.id,
+    }).then((response) => {
+      if (typeof response !== 'undefined') {
+        if (response.success === true) {
+          handleClosePassCollect();
+        }
+      }
+    });
+  };
 
   // Styles
   const classes = useStyles();
@@ -442,9 +528,6 @@ function CollectsPage(props) {
             bold: true,
           },
         ]}
-        centerButtons={[
-
-        ]}
         rightButtons={[
           {
             type: "button",
@@ -465,6 +548,112 @@ function CollectsPage(props) {
         fullWidth
       />
 
+      <CustomModal
+        open={openPassCollect}
+        close={handleClosePassCollect}
+        closeIcon={collect_fetching || order_loading === true ? false : true}
+        title={{
+          text: `${currentTable.name} ${currentTable.number}: `,
+          margin: true,
+          size: "medium",
+          bold: true,
+        }}
+        subtitle={{
+          text: `Bs. ${currentTable.amount}`,
+          color: "warning",
+          margin: true,
+          size: "medium",
+          bold: true,
+        }}
+        content={
+          <CustomTableFilter
+            padding="default"
+            header={[
+              {
+                text: "ID",
+                align: "center",
+              },
+              {
+                text: "Producto",
+                align: "left",
+                colSpan: 2,
+              },
+              {
+                text: "P./U.",
+                align: "right",
+              },
+              {
+                text: "Cantidad",
+                align: "right",
+              },
+            ]}
+            columns={[
+              {
+                field: "id",
+                type: "text",
+                align: "center",
+                color: "default",
+              },
+              {
+                field: "product_name",
+                type: "text",
+                align: "left",
+                color: "default",
+                colSpan: 2,
+              },
+              {
+                field: "product_price",
+                type: "text",
+                align: "right",
+                variant: "h6",
+                color: "warning",
+              },
+              {
+                field: "product_quantity",
+                type: "text",
+                align: "right",
+                variant: "h6",
+                color: "warning",
+              },
+            ]}
+            data={orders_detail_payload}
+            key_field="table_id"
+            filter={currentTable.id}
+            renderRefresh={[currentTable, openPassCollect]}
+          />
+        }
+        centerButtons={[
+          {
+            type: "icon",
+            text: "Imprimir",
+            color: "default",
+            icon: PrintIcon,
+            edge: "start",
+            size: "large",
+            disabled: currentTable.amount > 0 ? false : true,
+            onClick: handleTotalPrint,
+          },
+        ]}
+        rightButtons={[
+          {
+            type: "button",
+            text: "Enviar a cobrar",
+            color: "primary",
+            icon: SendIcon,
+            edge: "start",
+            size: "large",
+            variant: "contained",
+            disabled: currentTable.amount > 0 ? false : true,
+            onClick: currentTable.is_busy === 1 ? handleSendOrder : null,
+          },
+        ]}
+        renderRefresh={[openTotalAmount, currentTable.change, currentTable.id, collect_fetching]}
+        loading={collect_fetching || order_loading}
+        scroll="paper"
+        maxWidth="sm"
+        fullWidth
+      />
+
       <DrawerList
         direction="right"
         open={openDrawer}
@@ -475,12 +664,20 @@ function CollectsPage(props) {
         filter="environment_id"
       />
 
+      <TabPanel value={1} index={0}>
+        <ReactToPrint
+          trigger={() => <button id="printTotal" style={{ display: 'none' }}>Print</button>}
+          content={() => componentRef}
+        />
+        <ComponentToPrint ref={el => (componentRef = el)} data={printList} refresh={[openPassCollect, currentTable.id]} />
+      </TabPanel>
+
     </Fragment>
   );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { table, environment, collects, snackbar } = state;
+  const { table, environment, collects, orders, snackbar } = state;
   return {
     environments: environment.payload.filter(dataList => dataList.state === 1),
     loading: environment.loading,
@@ -489,6 +686,8 @@ const mapStateToProps = (state) => {
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,
     collect_fetching: collects.fetching,
+    orders_detail_payload: orders.orders_detail,
+    order_loading: orders.loading,
   }
 };
 

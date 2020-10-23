@@ -241,10 +241,9 @@ function DrawerProducts(props) {
       order_id: current_order_id,
       table_id: current.table_id,
     }).then((response) => {
-      console.log(response);
       if (typeof response !== 'undefined') {
         if (response === true) {
-          console.log("Order sent");
+          close();
         }
       }
     });
@@ -257,7 +256,6 @@ function DrawerProducts(props) {
       order_id: current_order_id,
       table_id: current.table_id,
     }).then((response) => {
-      console.log(response);
       if (typeof response !== 'undefined') {
         if (response === true) {
           console.log("Order cancel");
@@ -361,7 +359,7 @@ function DrawerProducts(props) {
           leftButtons={[
             {
               type: "fab",
-              text: "/Kroft-FrontEnd/sales",
+              text: "Atras",
               value: "",
               color: "primary",
               icon: UndoIcon,
