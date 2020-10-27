@@ -69,26 +69,28 @@ import styles from "../styles/pages/DashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function DashboardPage({
-  companies,
-  admins,
-  boxes,
-  roles,
-  employees,
-  environments,
-  tables,
-  printcategories,
-  categories,
-  subcategories,
-  products,
-  customers,
-  suppliers,
-  orders,
-  collects,
-  snackbar_show,
-  snackbar_message,
-  snackbar_severity,
-}) {
+function DashboardPage(props) {
+  // Props
+  const {
+    companies,
+    admins,
+    boxes,
+    roles,
+    employees,
+    environments,
+    tables,
+    printcategories,
+    categories,
+    subcategories,
+    products,
+    customers,
+    suppliers,
+    orders,
+    collects,
+    snackbar_show,
+    snackbar_message,
+    snackbar_severity,
+  } = props;
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
   // TabPanel Swipeables Views
