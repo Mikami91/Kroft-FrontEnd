@@ -9,7 +9,8 @@ export const customFetch = (props) => {
         method: typeof method !== 'undefined' ? method : 'POST',
         url: API + url,
         headers: {
-            'Access-Control-Allow-Origin': 'http://c1870854.ferozo.com/kroft/',
+            // 'Access-Control-Allow-Origin': 'http://kroft-backend.test/',
+            // 'Access-Control-Allow-Origin': 'http://c1870854.ferozo.com/kroft/',
             'Content-Type': typeof type !== 'undefined' ? type : 'application/json',
             'Authorization': token === true ? 'Bearer ' + localStorage.getItem('token') : null,
             'Token': token === true ? localStorage.getItem('token') : null,

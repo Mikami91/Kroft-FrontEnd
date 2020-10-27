@@ -2,9 +2,9 @@
 import React, { Fragment, useState, useMemo, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Actions Creators
-import { hideSnackbar } from '../redux/actions/creators/snackbarCreator';
+import { hideSnackbar } from "../redux/actions/creators/snackbarCreator";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -24,13 +24,14 @@ import Sidebar from "../layouts/Sidebars/Sidebar.js";
 import CustomAppBar from "../components/AppBar/CustomAppBar";
 import TabPanel from "../components/Panel/TabPanel";
 import SidebarList from "../components/List/SidebarList";
-import CustomLoading from '../components/Loading/CustomLoading';
-import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
+import CustomLoading from "../components/Loading/CustomLoading";
+import CustomSnackbar from "../components/Snackbar/CustomSnackbar";
 // Functions
 // import { superAdminShow } from "../functions/superAdminFunctions";
 import { companyShow } from "../functions/companyFunctions";
 import { adminShow } from "../functions/adminFunctions";
 import { employeeShow } from "../functions/employeeFunctions";
+import { boxShow } from "../functions/boxFunctions";
 import { rolShow } from "../functions/rolFunctions";
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
@@ -45,6 +46,7 @@ import { orderShow } from "../functions/orderFunctions";
 import {
   companies_WS,
   admins_WS,
+  boxes_WS,
   roles_WS,
   employees_WS,
   customers_WS,
@@ -58,8 +60,8 @@ import {
   orders_WS,
   order_details_WS,
   payments_WS,
-  collects_WS
-} from '../events';
+  collects_WS,
+} from "../events";
 // Assets
 import logo from "../assets/img/brands/kroft-horizontal.svg";
 // Styles
@@ -70,6 +72,7 @@ const useStyles = makeStyles(styles);
 function DashboardPage({
   companies,
   admins,
+  boxes,
   roles,
   employees,
   environments,
@@ -84,9 +87,8 @@ function DashboardPage({
   collects,
   snackbar_show,
   snackbar_message,
-  snackbar_severity
+  snackbar_severity,
 }) {
-
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
   // TabPanel Swipeables Views
@@ -103,6 +105,7 @@ function DashboardPage({
   // Events start
   companies_WS();
   admins_WS();
+  boxes_WS();
   roles_WS();
   employees_WS();
   customers_WS();
@@ -125,6 +128,7 @@ function DashboardPage({
   const handleRefresh = () => {
     companyShow();
     adminShow();
+    boxShow();
     rolShow();
     employeeShow();
     environmentShow();
@@ -136,15 +140,12 @@ function DashboardPage({
     customerShow();
     supplierShow();
     orderShow();
-  }
+  };
 
   // Payloads
   useEffect(() => {
     if (is_payload === false) {
-
       // handleRefresh();
-      customerShow();
-      supplierShow();
 
       // Change is_payload state
       set_is_payload(true);
@@ -155,26 +156,30 @@ function DashboardPage({
 
   return (
     <Fragment>
-
-      <CustomLoading open={
-        !is_payload
-        // admins ||
-        // roles ||
-        // employees ||
-        // environments ||
-        // tables ||
-        // printcategories ||
-        // categories ||
-        // subcategories ||
-        // products ||
-        // customers ||
-        // suppliers ||
-        // orders ||
-        // collects
-      } />
-      <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} onClose={handleCloseSnackbar} />
-
-
+      <CustomLoading
+        open={
+          !is_payload
+          // admins ||
+          // roles ||
+          // employees ||
+          // environments ||
+          // tables ||
+          // printcategories ||
+          // categories ||
+          // subcategories ||
+          // products ||
+          // customers ||
+          // suppliers ||
+          // orders ||
+          // collects
+        }
+      />
+      <CustomSnackbar
+        open={snackbar_show}
+        message={snackbar_message}
+        severity={snackbar_severity}
+        onClose={handleCloseSnackbar}
+      />
 
       <div className={classes.root}>
         <CssBaseline />
@@ -355,7 +360,7 @@ function DashboardPage({
                       xl={12}
                       elevation={6}
                       square="true"
-                    // className={classes.container}
+                      // className={classes.container}
                     >
                       <list.component />
                     </Grid>
@@ -368,7 +373,7 @@ function DashboardPage({
       </div>
     </Fragment>
   );
-};
+}
 // Connect to Store State
 const mapStateToProps = (state) => {
   const {
@@ -406,7 +411,7 @@ const mapStateToProps = (state) => {
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,
-  }
+  };
 };
 // // Functions to dispatching
 // const open_products = (payload) => (open(payload));

@@ -45,7 +45,7 @@ function Roles({ data, fetching, loading }) {
               <CustomTable
                 column={[
                   { title: "ID", field: "id", type: "numeric", editable: "never", },
-                  { title: "Impresion", field: "name", type: "string" }
+                  { title: "Rol", field: "name", type: "string" }
                 ]}
                 data={data}
                 add={rolCreate}

@@ -9,9 +9,11 @@ import FooterTabBar from "../../components/Footer/FooterTabBar.js";
 import SubProducts from "../../layouts/sub-views/Products";
 import Categories from "../../layouts/sub-views/Categories";
 import Subcategories from "../../layouts/sub-views/Subcategories";
+import PrintsCategories from "../../layouts/sub-views/PrintsCategories";
 // Icons
-import FastfoodRoundedIcon from '@material-ui/icons/FastfoodRounded';
-import CategoryRoundedIcon from '@material-ui/icons/CategoryRounded';
+import FastfoodRoundedIcon from "@material-ui/icons/FastfoodRounded";
+import CategoryRoundedIcon from "@material-ui/icons/CategoryRounded";
+import PrintRoundedIcon from "@material-ui/icons/PrintRounded";
 
 function Products(props) {
   // TabPanel Swipeables Views
@@ -23,7 +25,6 @@ function Products(props) {
   return useMemo(() => {
     return (
       <Fragment>
-
         <SwipeableViews index={value} onChangeIndex={handleChange}>
           <TabPanel sub value={value} index={0}>
             <SubProducts />
@@ -33,6 +34,9 @@ function Products(props) {
           </TabPanel>
           <TabPanel sub value={value} index={2}>
             <Subcategories />
+          </TabPanel>
+          <TabPanel sub value={value} index={3}>
+            <PrintsCategories />
           </TabPanel>
         </SwipeableViews>
 
@@ -55,10 +59,13 @@ function Products(props) {
               text: "Subcategorías",
               icon: CategoryRoundedIcon,
             },
+            {
+              text: "Impresiones",
+              icon: PrintRoundedIcon,
+            },
           ]}
           tabsColor="secondary"
         />
-
       </Fragment>
     );
   }, [value]);

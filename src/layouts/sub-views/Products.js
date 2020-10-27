@@ -2,7 +2,7 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
 // Core Components
@@ -11,31 +11,26 @@ import AvatarTable from "../../components/Avatar/AvatarTable";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import CustomLoading from '../../components/Loading/CustomLoading.js';
-import CustomModal from '../../components/Modal/CustomModal';
+import CustomLoading from "../../components/Loading/CustomLoading.js";
+import CustomModal from "../../components/Modal/CustomModal";
 // Layouts
 import ProductAdd from "../Forms/ProductAdd.js";
-import ProductUpdate from '../Forms/ProductUpdate';
+import ProductUpdate from "../Forms/ProductUpdate";
 // Functions
 import { productShow, productDelete } from "../../functions/productFunctions";
 // API
-import { API } from '../../API/index';
+import { API } from "../../API/index";
 
 function Product({ products, fetching, loading }) {
   const [state, setState] = useState({
     data: {},
-    open: false
-  })
+    open: false,
+  });
   const handleOpen = (rowData) => setState({ data: rowData, open: true });
   const handleClose = () => setState({ data: {}, open: false });
   return (
     <Fragment>
-      <Grid
-        container
-        justify="center"
-        alignItems="flex-start"
-        spacing={3}
-      >
+      <Grid container justify="center" alignItems="flex-start" spacing={3}>
         <Grid
           item
           xs={12}
@@ -60,7 +55,6 @@ function Product({ products, fetching, loading }) {
           square="true"
         >
           <Card variant="cardForm">
-
             <CustomLoading inside color="primary" open={loading} />
 
             <CardHeader color="primary" dense>
@@ -69,21 +63,54 @@ function Product({ products, fetching, loading }) {
             <CardBody form>
               <CustomTable
                 column={[
-                  { title: "ID", field: "id", type: "numeric", editable: "never", },
+                  {
+                    title: "ID",
+                    field: "id",
+                    type: "numeric",
+                    editable: "never",
+                  },
                   {
                     title: "Foto",
                     field: "Photo",
                     editable: "never",
                     sorting: false,
-                    render: rowData => (
-                      <AvatarTable rowData={rowData} image="photo" alt="id" path={`${API}images/products/`} square />
-                    )
+                    render: (rowData) => (
+                      <AvatarTable
+                        rowData={rowData}
+                        image="photo"
+                        alt="id"
+                        path={`${API}images/products/`}
+                        square
+                      />
+                    ),
                   },
                   { title: "Producto", field: "name", type: "string" },
-                  { title: "Precio", field: "price", type: "numeric" },
-                  { title: "Categoría", field: "category_name", type: "string" },
-                  { title: "Subcategoría", field: "sub_category_name", type: "string" },
-                  { title: "Impresión", field: "print_category_name", type: "string" },
+                  {
+                    title: "Precio",
+                    field: "price",
+                    type: "currency",
+                    currencySetting: {
+                      locale: "es-BO",
+                      currencyCode: "BOB",
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    },
+                  },
+                  {
+                    title: "Categoría",
+                    field: "category_name",
+                    type: "string",
+                  },
+                  {
+                    title: "Subcategoría",
+                    field: "sub_category_name",
+                    type: "string",
+                  },
+                  {
+                    title: "Impresión",
+                    field: "print_category_name",
+                    type: "string",
+                  },
                   // { title: "Creación", field: "created_at", editable: "never", type: "date", },
                   // { title: "Modificación", field: "updated_at", editable: "never", type: "date", },
                 ]}
@@ -116,7 +143,7 @@ function Product({ products, fetching, loading }) {
             variant: "text",
             autoAdjust: false,
             margin: true,
-            onClick: handleClose
+            onClick: handleClose,
           },
           {
             type: "submit",
@@ -131,7 +158,6 @@ function Product({ products, fetching, loading }) {
         renderRefresh={[state.open, state.data]}
         scroll="paper"
       />
-
     </Fragment>
   );
 }
@@ -148,7 +174,7 @@ const mapStateToProps = (state) => {
     products: product.payload,
     fetching: product.fetching,
     loading: product.loading,
-  }
+  };
 };
 
 export default connect(mapStateToProps, null)(Product);

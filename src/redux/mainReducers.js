@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import { superAdminReducer } from './reducers/superAdminReducer';
 import { companyReducer } from './reducers/companyReducer';
 import { adminReducer } from './reducers/adminReducer';
+import { boxReducer } from './reducers/boxReducer';
 import { rolReducer } from './reducers/rolReducer';
 import { employeeReducer } from './reducers/employeeReducer';
 import { environmentReducer } from './reducers/environmentReducer';
@@ -24,6 +25,7 @@ export const mainReducer = combineReducers({
   superadmin: superAdminReducer,
   company: companyReducer,
   admin: adminReducer,
+  boxes: boxReducer,
   rol: rolReducer, 
   employee: employeeReducer,
   environment: environmentReducer,

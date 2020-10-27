@@ -1,5 +1,5 @@
 // API URL
-export const API = 'http://kroft-backend.test/';
+export const API = "http://kroft-backend.test/";
 // export const API = 'http://c1870854.ferozo.com/kroft/';
 
 /*::::::::::::::::::::SUPER ADMIN::::::::::::::::::::*/
@@ -29,6 +29,14 @@ export const admin_state = "api/admin_state";
 export const admin_delete = "api/admin_delete";
 export const admin_login = "api/admin_login";
 export const admin_logout = "api/admin_logout";
+
+/*::::::::::::::::::::BOX::::::::::::::::::::*/
+export const box_create = "api/box_create";
+export const box_index = "api/box_index";
+export const box_show = "api/box_show";
+export const box_update = "api/box_update";
+export const box_state = "api/box_state";
+export const box_delete = "api/box_delete";
 
 /*::::::::::::::::::::ROL::::::::::::::::::::*/
 export const rol_create = "api/rol_create";

@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
 // Core Components
@@ -12,18 +12,21 @@ import AvatarTable from "../../components/Avatar/AvatarTable";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
-import CustomLoading from '../../components/Loading/CustomLoading.js';
-import CustomModal from '../../components/Modal/CustomModal';
-import SingleTabs from '../../components/CustomTabs/SingleTabs';
+import CustomLoading from "../../components/Loading/CustomLoading.js";
+import CustomModal from "../../components/Modal/CustomModal";
+import SingleTabs from "../../components/CustomTabs/SingleTabs";
 import TabPanel from "../../components/Panel/TabPanel.js";
 // Layouts
-import NewSupplierAdd from '../Forms/NewSupplierAdd';
-import ExistSupplierAdd from '../Forms/ExistSupplierAdd';
-import SupplierUpdate from '../Forms/SupplierUpdate';
+import NewSupplierAdd from "../Forms/NewSupplierAdd";
+import ExistSupplierAdd from "../Forms/ExistSupplierAdd";
+import SupplierUpdate from "../Forms/SupplierUpdate";
 // Functions
-import { supplierShow, supplierDelete } from "../../functions/supplierFunctions";
+import {
+  supplierShow,
+  supplierDelete,
+} from "../../functions/supplierFunctions";
 // API
-import { API } from '../../API/index';
+import { API } from "../../API/index";
 
 function Suppliers({ suppliers, fetching, loading }) {
   // State for Panel Tabs
@@ -36,18 +39,13 @@ function Suppliers({ suppliers, fetching, loading }) {
   };
   const [state, setState] = useState({
     data: {},
-    open: false
-  })
+    open: false,
+  });
   const handleOpen = (rowData) => setState({ data: rowData, open: true });
   const handleClose = () => setState({ data: {}, open: false });
   return (
     <Fragment>
-      <Grid
-        container
-        justify="center"
-        alignItems="flex-start"
-        spacing={3}
-      >
+      <Grid container justify="center" alignItems="flex-start" spacing={3}>
         <Grid
           item
           xs={12}
@@ -77,7 +75,7 @@ function Suppliers({ suppliers, fetching, loading }) {
                 },
                 {
                   tabName: "Existente",
-                }
+                },
               ]}
             />
 
@@ -93,11 +91,8 @@ function Suppliers({ suppliers, fetching, loading }) {
               <TabPanel value={value} index={1} centered>
                 <ExistSupplierAdd />
               </TabPanel>
-
             </SwipeableViews>
-
           </Card>
-
         </Grid>
 
         <Grid
@@ -111,7 +106,6 @@ function Suppliers({ suppliers, fetching, loading }) {
           square="true"
         >
           <Card variant="cardForm">
-
             <CustomLoading inside color="primary" open={loading} />
 
             <CardHeader color="primary" dense>
@@ -120,7 +114,12 @@ function Suppliers({ suppliers, fetching, loading }) {
             <CardBody form>
               <CustomTable
                 column={[
-                  { title: "ID", field: "id", type: "numeric", editable: "never" },
+                  {
+                    title: "ID",
+                    field: "id",
+                    type: "numeric",
+                    editable: "never",
+                  },
                   // {
                   //   title: "Foto", field: "photo", editable: "never", sorting: false,
                   //   render: rowData => (
@@ -128,23 +127,54 @@ function Suppliers({ suppliers, fetching, loading }) {
                   //   )
                   // },
                   { title: "Insumo", field: "name", type: "string" },
-                  { title: "Ud.", field: "unit_type", type: "string", editable: "never" },
-                  { title: "Presentación", field: "presentation", type: "numeric" },
+                  {
+                    title: "Ud.",
+                    field: "unit_type",
+                    type: "string",
+                    editable: "never",
+                  },
+                  {
+                    title: "Presentación",
+                    field: "presentation",
+                    type: "numeric",
+                  },
                   { title: "Cantidad", field: "quantity", type: "numeric" },
-                  { title: "P./U.", field: "buying_price", type: "numeric" },
+                  {
+                    title: "P./U.",
+                    field: "buying_price",
+                    type: "currency",
+                    currencySetting: {
+                      locale: "es-BO",
+                      currencyCode: "BOB",
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    },
+                  },
                 ]}
                 data={suppliers}
                 detailPanel={[
-                  { title: "Observación", field: "observation", type: "string", },
-                  { title: "Fecha de compra", field: "buying_date", type: "date", },
-                  { title: "Fecha de expiración", field: "expire_date", type: "date", },
+                  {
+                    title: "Observación",
+                    field: "observation",
+                    type: "string",
+                  },
+                  {
+                    title: "Fecha de compra",
+                    field: "buying_date",
+                    type: "date",
+                  },
+                  {
+                    title: "Fecha de expiración",
+                    field: "expire_date",
+                    type: "date",
+                  },
                   { title: "Código", field: "code", type: "string" },
                 ]}
                 refresh={supplierShow}
                 // updates={handleOpen}
                 customUpdate={handleOpen}
                 deletes={supplierDelete}
-              // loading={fetching || loading}
+                // loading={fetching || loading}
               />
             </CardBody>
           </Card>
@@ -170,7 +200,7 @@ function Suppliers({ suppliers, fetching, loading }) {
             variant: "text",
             autoAdjust: false,
             margin: true,
-            onClick: handleClose
+            onClick: handleClose,
           },
           {
             type: "submit",
@@ -185,10 +215,9 @@ function Suppliers({ suppliers, fetching, loading }) {
         renderRefresh={[state.open, state.data]}
         scroll="paper"
       />
-
     </Fragment>
   );
-};
+}
 // PropTypes
 Suppliers.propTypes = {
   container: PropTypes.instanceOf(
@@ -202,7 +231,7 @@ const mapStateToProps = (state) => {
     suppliers: supplier.payload,
     fetching: supplier.fetching,
     loading: supplier.loading,
-  }
+  };
 };
 
 export default connect(mapStateToProps, null)(Suppliers);
