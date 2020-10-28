@@ -181,7 +181,7 @@ export async function adminState(data) {
                     break;
             }
         };
-        return response.data.data;
+        return response.data;
 
     } catch (error) {
         fetching(false);

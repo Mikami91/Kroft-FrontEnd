@@ -2,16 +2,18 @@
 import React, { Fragment, useState, useEffect, useRef, Component } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Actions Creators
-import { hideSnackbar } from '../redux/actions/creators/snackbarCreator';
+import { hideSnackbar } from "../redux/actions/creators/snackbarCreator";
 // Print
-import ReactToPrint from 'react-to-print';
+import ReactToPrint from "react-to-print";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+// core components
+import CustomCheckList from "../components/List/CustomCheckList";
 // @material-ui/icons
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import PersonIcon from "@material-ui/icons/Person";
@@ -20,10 +22,8 @@ import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl"
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import PrintIcon from "@material-ui/icons/Print";
 import SendIcon from "@material-ui/icons/Send";
-
 // import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 // import CreditCardIcon from '@material-ui/icons/CreditCard';
-
 // Layouts
 import DrawerList from "../layouts/Drawers/DrawerTablesList.js";
 // core components
@@ -32,19 +32,25 @@ import TabPanel from "../components/Panel/TabPanel";
 import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomModal from "../components/Modal/CustomModal.js";
-import CustomLoading from '../components/Loading/CustomLoading';
-import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
+import CustomLoading from "../components/Loading/CustomLoading";
+import CustomSnackbar from "../components/Snackbar/CustomSnackbar";
 import CustomMoneyInput from "../components/CustomInput/CustomMoneyInput.js";
 import CustomTableFilter from "../components/Table/CustomTableFilter.js";
 import CustomTableToPrints from "../components/Table/CustomTableToPrints";
 // Functions
+import { boxShow, boxState as boxStateFunc } from "../functions/boxFunctions";
 import { environmentShow } from "../functions/environmentFunctions";
 import { tableShow } from "../functions/tableFunctions";
 import { orderShow } from "../functions/orderFunctions";
 import { collectCreate, collectShow } from "../functions/collectFunctions";
-import { orderCreate, orderSend, orderCancel } from '../functions/orderFunctions';
+import {
+  orderCreate,
+  orderSend,
+  orderCancel,
+} from "../functions/orderFunctions";
 // Events
 import {
+  boxes_WS,
   environments_WS,
   tables_WS,
   print_categories_WS,
@@ -54,8 +60,8 @@ import {
   supplies_WS,
   orders_WS,
   order_details_WS,
-  collects_WS
-} from '../events';
+  collects_WS,
+} from "../events";
 // Styles
 import styles from "../styles/pages/SalesStyle.js";
 
@@ -64,16 +70,52 @@ const useStyles = makeStyles(styles);
 class ComponentToPrint extends Component {
   render() {
     return (
-      <CustomTableToPrints data={this.props.data} renderRefresh={this.props.refresh} />
+      <CustomTableToPrints
+        data={this.props.data}
+        renderRefresh={this.props.refresh}
+      />
     );
   }
 }
 
 function CollectsPage(props) {
   // Props
-  const { environments, tables, orders_detail_payload, order_loading, collect_fetching, loading, snackbar_show, snackbar_message, snackbar_severity } = props;
+  const {
+    boxes,
+    box_fetching,
+    box_loading,
+    environments,
+    tables,
+    orders_detail_payload,
+    order_loading,
+    collect_fetching,
+    loading,
+    snackbar_show,
+    snackbar_message,
+    snackbar_severity,
+  } = props;
 
   let history = useHistory();
+
+  // Box state
+  const [boxState, setBoxState] = useState({
+    open: true,
+    id: null,
+  });
+  const handleChangeBox = (value) => setBoxState({ ...boxState, id: value });
+
+  // Send Order function
+  const handleSelectBox = (e) => {
+    e.preventDefault();
+    boxStateFunc(boxState).then((response) => {
+      if (typeof response !== "undefined") {
+        if (response.success === true) {
+          setBoxState({ ...boxState, open: false });
+          localStorage.setItem("box_id", boxState.id);
+        }
+      }
+    });
+  };
 
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
@@ -117,7 +159,6 @@ function CollectsPage(props) {
   const [openPassCollect, setPassCollect] = useState(false);
 
   const handleOpenTotalAmount = (args) => {
-
     if (args.is_busy === 1) {
       setPassCollect(true);
       setCurrentTable({
@@ -184,34 +225,36 @@ function CollectsPage(props) {
 
   // Check if values is number
   const isEmptyValue = (value) => {
-    if (value === '' || value === null || value === undefined) {
-      return true
+    if (value === "" || value === null || value === undefined) {
+      return true;
     } else {
-      return false
+      return false;
     }
-  }
+  };
 
   // Changes amount to paid value
   const handleChangeAmountBS = (e) => {
-    console.log(e.value)
+    console.log(e.value);
     if (isEmptyValue(e.value) === false) {
-      let result = (parseInt(e.value) + (currentTable.paid_US * 6.94)) - (currentTable.amount);
+      let result =
+        parseInt(e.value) + currentTable.paid_US * 6.94 - currentTable.amount;
       setCurrentTable({
         ...currentTable,
         paid_BS: parseInt(e.value),
-        change: Math.abs(result)
+        change: Math.abs(result),
       });
     }
   };
 
   const handleChangeAmountUS = (e) => {
-    console.log(e.value)
+    console.log(e.value);
     if (isEmptyValue(e.value) === false) {
-      let result = (currentTable.paid_BS + (parseInt(e.value) * 6.94)) - (currentTable.amount);
+      let result =
+        currentTable.paid_BS + parseInt(e.value) * 6.94 - currentTable.amount;
       setCurrentTable({
         ...currentTable,
         paid_US: parseInt(e.value),
-        change: Math.abs(result)
+        change: Math.abs(result),
       });
     }
   };
@@ -226,6 +269,7 @@ function CollectsPage(props) {
   };
 
   // Events
+  boxes_WS();
   environments_WS();
   tables_WS();
   print_categories_WS();
@@ -233,7 +277,7 @@ function CollectsPage(props) {
   sub_categories_WS();
   products_WS();
   supplies_WS();
-  orders_WS()
+  orders_WS();
   order_details_WS();
   collects_WS();
 
@@ -242,16 +286,16 @@ function CollectsPage(props) {
 
   // Refresh fetches
   const handleRefresh = () => {
+    boxShow();
     environmentShow();
     tableShow();
     orderShow();
     collectShow();
-  }
+  };
 
   // Payloads
   useEffect(() => {
     if (is_payload === false) {
-
       handleRefresh();
 
       // Change is_payload state
@@ -266,13 +310,13 @@ function CollectsPage(props) {
       table_id: currentTable.id,
       order_id: currentTable.order_id,
       cashier_id: 1,
-      box_id: 1,
+      box_id: localStorage.getItem("box_id"),
       payment_id: 1,
       amount: currentTable.amount,
-      currency: "bs"
+      currency: "bs",
     }).then((response) => {
       console.log(response);
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         if (response.success === true) {
           handleCloseTotalAmount();
         }
@@ -283,13 +327,13 @@ function CollectsPage(props) {
   // Logout function
   const handleLogout = () => {
     // Empty local storage
-    localStorage.setItem('user', '');
-    localStorage.setItem('employee_id', '');
-    localStorage.setItem('token', '');
-    localStorage.setItem("head_area", '');
+    localStorage.setItem("user", "");
+    localStorage.setItem("employee_id", "");
+    localStorage.setItem("token", "");
+    localStorage.setItem("head_area", "");
     // Redirect to login page
     history.push("/Kroft-FrontEnd");
-  }
+  };
 
   // State for Modal Prints
   const [printList, setPrintList] = useState([]);
@@ -298,10 +342,14 @@ function CollectsPage(props) {
   let componentRef = useRef();
   let btn = document.getElementById("printTotal");
 
-  // Total Print 
+  // Total Print
   const handleTotalPrint = async (e) => {
     e.preventDefault();
-    await setPrintList(orders_detail_payload.filter(index => index.order_id === currentTable.order_id));
+    await setPrintList(
+      orders_detail_payload.filter(
+        (index) => index.order_id === currentTable.order_id
+      )
+    );
     btn.click();
   };
 
@@ -312,7 +360,7 @@ function CollectsPage(props) {
       order_id: currentTable.order_id,
       table_id: currentTable.id,
     }).then((response) => {
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         if (response.success === true) {
           handleClosePassCollect();
         }
@@ -327,7 +375,7 @@ function CollectsPage(props) {
       order_id: currentTable.order_id,
       table_id: currentTable.id,
     }).then((response) => {
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         if (response.success === true) {
           handleClosePassCollect();
         }
@@ -339,9 +387,13 @@ function CollectsPage(props) {
   const classes = useStyles();
   return (
     <Fragment>
-
       <CustomLoading open={loading} />
-      <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} onClose={handleCloseSnackbar} />
+      <CustomSnackbar
+        open={snackbar_show}
+        message={snackbar_message}
+        severity={snackbar_severity}
+        onClose={handleCloseSnackbar}
+      />
 
       <AppBarTabs
         color="inherit"
@@ -402,7 +454,7 @@ function CollectsPage(props) {
             icon: KeyboardBackspaceIcon,
             size: "large",
             disabled: false,
-            onClick: handleLogout
+            onClick: handleLogout,
           },
           {
             type: "icon",
@@ -416,7 +468,7 @@ function CollectsPage(props) {
           },
           {
             type: "text",
-            text: localStorage.getItem('user'),
+            text: localStorage.getItem("user"),
             color: "default",
             margin: true,
             autoSize: true,
@@ -463,9 +515,9 @@ function CollectsPage(props) {
             >
               <Grid item xs={6} sm={6} md={6} lg={6}>
                 <NumberFormat
-                  value={currentTable.paid_BS === 0 ? '' : currentTable.paid_BS}
+                  value={currentTable.paid_BS === 0 ? "" : currentTable.paid_BS}
                   onValueChange={handleChangeAmountBS}
-                  displayType={'input'}
+                  displayType={"input"}
                   thousandSeparator={true}
                   allowNegative={false}
                   allowEmptyFormatting={false}
@@ -478,9 +530,9 @@ function CollectsPage(props) {
 
               <Grid item xs={6} sm={6} md={6} lg={6}>
                 <NumberFormat
-                  value={currentTable.paid_US === 0 ? '' : currentTable.paid_US}
+                  value={currentTable.paid_US === 0 ? "" : currentTable.paid_US}
                   onValueChange={handleChangeAmountUS}
-                  displayType={'input'}
+                  displayType={"input"}
                   thousandSeparator={true}
                   allowNegative={false}
                   allowEmptyFormatting={false}
@@ -496,7 +548,14 @@ function CollectsPage(props) {
         leftButtons={[
           {
             type: "text",
-            text: (currentTable.paid_BS + (currentTable.paid_US * 6.94)) < currentTable.amount && currentTable.change > 0 ? 'Por pagar: ' : (currentTable.paid_BS + (currentTable.paid_US * 6.94)) === currentTable.amount ? 'Sin cambio: ' : 'Cambio: ',
+            text:
+              currentTable.paid_BS + currentTable.paid_US * 6.94 <
+                currentTable.amount && currentTable.change > 0
+                ? "Por pagar: "
+                : currentTable.paid_BS + currentTable.paid_US * 6.94 ===
+                  currentTable.amount
+                ? "Sin cambio: "
+                : "Cambio: ",
             size: "default",
             align: "left",
             margin: true,
@@ -505,25 +564,30 @@ function CollectsPage(props) {
           },
           {
             type: "text",
-            text: <NumberFormat
-              value={currentTable.change}
-              displayType={'text'}
-              thousandSeparator={true}
-              allowNegative={false}
-              allowEmptyFormatting={false}
-              allowLeadingZeros={false}
-              decimalScale={2}
-              isNumericString={true}
-              renderText={value =>
-                <span>
-                  Bs. {value}
-                </span>
-              }
-            />,
+            text: (
+              <NumberFormat
+                value={currentTable.change}
+                displayType={"text"}
+                thousandSeparator={true}
+                allowNegative={false}
+                allowEmptyFormatting={false}
+                allowLeadingZeros={false}
+                decimalScale={2}
+                isNumericString={true}
+                renderText={(value) => <span>Bs. {value}</span>}
+              />
+            ),
             size: "default",
             align: "right",
             margin: true,
-            color: (currentTable.paid_BS + (currentTable.paid_US * 6.94)) < currentTable.amount && currentTable.change > 0 ? 'danger' : (currentTable.paid_BS + (currentTable.paid_US * 6.94)) === currentTable.amount ? 'default' : 'success',
+            color:
+              currentTable.paid_BS + currentTable.paid_US * 6.94 <
+                currentTable.amount && currentTable.change > 0
+                ? "danger"
+                : currentTable.paid_BS + currentTable.paid_US * 6.94 ===
+                  currentTable.amount
+                ? "default"
+                : "success",
             display: "inline",
             bold: true,
           },
@@ -537,11 +601,20 @@ function CollectsPage(props) {
             edge: "start",
             size: "large",
             variant: "contained",
-            disabled: currentTable.paid_BS + (currentTable.paid_US * 6.68) >= currentTable.amount ? false : true,
+            disabled:
+              currentTable.paid_BS + currentTable.paid_US * 6.68 >=
+              currentTable.amount
+                ? false
+                : true,
             onClick: handleMakeCollected,
           },
         ]}
-        renderRefresh={[openTotalAmount, currentTable.change, currentTable.id, collect_fetching]}
+        renderRefresh={[
+          openTotalAmount,
+          currentTable.change,
+          currentTable.id,
+          collect_fetching,
+        ]}
         loading={collect_fetching}
         scroll="paper"
         maxWidth="sm"
@@ -647,10 +720,66 @@ function CollectsPage(props) {
             onClick: currentTable.is_busy === 1 ? handleSendOrder : null,
           },
         ]}
-        renderRefresh={[openTotalAmount, currentTable.change, currentTable.id, collect_fetching]}
+        renderRefresh={[
+          openTotalAmount,
+          currentTable.change,
+          currentTable.id,
+          collect_fetching,
+        ]}
         loading={collect_fetching || order_loading}
         scroll="paper"
         maxWidth="sm"
+        fullWidth
+      />
+
+      <CustomModal
+        open={boxState.open}
+        close={handleChangeBox}
+        closeIcon={false}
+        title={{
+          text: "Seleccionar Caja",
+          margin: true,
+          size: "medium",
+          bold: true,
+        }}
+        content={
+          <CustomCheckList
+            list={boxes}
+            key="id"
+            value="name"
+            checked={boxState.id}
+            onChange={handleChangeBox}
+          />
+        }
+        leftButtons={[
+          {
+            type: "fab",
+            text: "Salir",
+            color: "secondary",
+            icon: KeyboardBackspaceIcon,
+            size: "large",
+            variant: "contained",
+            disabled: false,
+            onClick: handleLogout,
+          },
+        ]}
+        rightButtons={[
+          {
+            type: "button",
+            text: "Continuar",
+            color: "primary",
+            icon: DoneRoundedIcon,
+            edge: "start",
+            size: "large",
+            variant: "contained",
+            disabled: boxState.id !== null ? false : true,
+            onClick: handleSelectBox,
+          },
+        ]}
+        renderRefresh={[boxState.open]}
+        loading={box_fetching || box_loading}
+        scroll="body"
+        maxWidth="xs"
         fullWidth
       />
 
@@ -666,29 +795,41 @@ function CollectsPage(props) {
 
       <TabPanel value={1} index={0}>
         <ReactToPrint
-          trigger={() => <button id="printTotal" style={{ display: 'none' }}>Print</button>}
+          trigger={() => (
+            <button id="printTotal" style={{ display: "none" }}>
+              Print
+            </button>
+          )}
           content={() => componentRef}
         />
-        <ComponentToPrint ref={el => (componentRef = el)} data={printList} refresh={[openPassCollect, currentTable.id]} />
+        <ComponentToPrint
+          ref={(el) => (componentRef = el)}
+          data={printList}
+          refresh={[openPassCollect, currentTable.id]}
+        />
       </TabPanel>
-
     </Fragment>
   );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { table, environment, collects, orders, snackbar } = state;
+  const { boxes, table, environment, collects, orders, snackbar } = state;
   return {
-    environments: environment.payload.filter(dataList => dataList.state === 1),
+    boxes: boxes.payload,
+    box_fetching: boxes.fetching,
+    box_loading: boxes.loading,
+    environments: environment.payload.filter(
+      (dataList) => dataList.state === 1
+    ),
     loading: environment.loading,
-    tables: table.payload.filter(dataList => dataList.state === 1),
+    tables: table.payload.filter((dataList) => dataList.state === 1),
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,
     collect_fetching: collects.fetching,
     orders_detail_payload: orders.orders_detail,
     order_loading: orders.loading,
-  }
+  };
 };
 
 export default withRouter(connect(mapStateToProps, null)(CollectsPage));

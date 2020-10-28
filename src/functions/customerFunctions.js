@@ -114,7 +114,7 @@ export async function customerState(data) {
                     break;
             }
         };
-        return response.data.data;
+        return response.data;
 
     } catch (error) {
         fetching(false);

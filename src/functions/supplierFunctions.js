@@ -144,7 +144,7 @@ export async function supplierState(data) {
                     break;
             }
         };
-        return response.data.data;
+        return response.data;
 
     } catch (error) {
         fetching(false);
