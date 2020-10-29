@@ -19,14 +19,15 @@ const useStyles = makeStyles(styles);
 function CustomCheckList(props) {
   const {
     list,
-    key,
+    keyValue,
     value,
     onChange,
     checked,
-    disabled,
     margin,
-    color,
-    variant,
+
+    fontSize,
+    fontColor,
+    fontBold,
   } = props;
 
   // Styles
@@ -39,18 +40,18 @@ function CustomCheckList(props) {
     <List dense className={checkListClasses}>
       {list.map((index) => {
         return (
-          <ListItem key={`listItem-${index.id}`} button>
+          <ListItem key={`listItem-${index[keyValue]}`} button>
             <ListItemText
-              id={`listItemText-${index.id}`}
+              id={`listItemText-${index[keyValue]}`}
               primary={index[value]}
             />
             <ListItemSecondaryAction>
               <Checkbox
                 edge="end"
                 onChange={() => onChange(index.id)}
-                checked={index.id === checked}
+                checked={index[keyValue] === checked}
                 disabled={index.state === 1 ? false : true}
-                inputProps={{ "aria-labelledby": index.id }}
+                inputProps={{ "aria-labelledby": index[keyValue] }}
               />
             </ListItemSecondaryAction>
           </ListItem>
@@ -64,37 +65,25 @@ function CustomCheckList(props) {
 CustomCheckList.defaultProps = {
   onChange: null,
   list: [],
-  key: "id",
+  keyValue: "id",
   value: "",
-  required: false,
-  disabled: false,
-  name: "",
-  label: "",
-  placeholder: "",
-  variant: "normal",
   margin: "normal",
-  color: "primary",
-  hoverColor: "primary",
-  error: false,
-  success: false,
-  white: true,
+  // Text
+  fontSize: "medium",
+  fontColor: "default",
+  fontBold: false,
 };
 
 CustomCheckList.propTypes = {
   onChange: PropTypes.func,
   list: PropTypes.array,
-  key: PropTypes.string,
+  keyValue: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  required: PropTypes.bool,
-  disabled: PropTypes.bool,
-  name: PropTypes.string,
-  placeholder: PropTypes.string,
-  label: PropTypes.string,
-  variant: PropTypes.oneOf(["filled", "outlined", "standard"]),
   margin: PropTypes.oneOf(["dense", "none", "normal"]),
-  color: PropTypes.oneOf(["primary", "secondary"]),
-  hoverColor: PropTypes.oneOf([
-    "black",
+  // Text
+  fontSize: PropTypes.oneOf(["medium", "small", "large"]),
+  fontColor: PropTypes.oneOf([
+    "default",
     "primary",
     "secondary",
     "info",
@@ -103,9 +92,7 @@ CustomCheckList.propTypes = {
     "danger",
     "rose",
   ]),
-  error: PropTypes.bool,
-  success: PropTypes.bool,
-  white: PropTypes.bool,
+  fontBold: PropTypes.bool,
 };
 
 export default CustomCheckList;

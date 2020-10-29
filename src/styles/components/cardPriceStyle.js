@@ -21,7 +21,10 @@ const cardPriceStyle = {
   cardPrice: {
     color: theme.palette.type === "light" ? "#424242" : "#ff9800",
     background: theme.palette.type === "light" ? "#fff" : "#424242",
-    boxShadow: theme.palette.type === "light" ? defaultBoxShadow.boxShadow : warningBoxShadow.boxShadow,
+    boxShadow:
+      theme.palette.type === "light"
+        ? defaultBoxShadow.boxShadow
+        : warningBoxShadow.boxShadow,
     // "&$primaryColor,&$secondaryColor,&$warningColor,&$dangerColor,&$successColor,&$infoColor,&$roseColor": {
     overflow: "hidden",
     position: "absolute",
@@ -33,30 +36,30 @@ const cardPriceStyle = {
     height: 19,
     marginTop: -74,
     marginLeft: -5,
-    [theme.breakpoints.only('sm')]: {
+    [theme.breakpoints.only("sm")]: {
       width: 55,
       height: 25,
       marginTop: -100,
       marginLeft: -8,
     },
-    [theme.breakpoints.only('md')]: {
+    [theme.breakpoints.only("md")]: {
       width: 65,
       height: 30,
       marginTop: -110,
       marginLeft: -10,
     },
-    [theme.breakpoints.only('lg')]: {
+    [theme.breakpoints.only("lg")]: {
       width: 75,
       height: 35,
       marginTop: -125,
       marginLeft: -13,
     },
-    [theme.breakpoints.only('xl')]: {
+    [theme.breakpoints.only("xl")]: {
       width: 80,
       height: 38,
       marginTop: -130,
       marginLeft: -15,
-    }
+    },
     // }
   },
   cardPrefix: {
@@ -67,22 +70,22 @@ const cardPriceStyle = {
     fontSize: "0.5rem",
     fontWeight: "bold",
     lineHeight: "1.4rem",
-    [theme.breakpoints.only('sm')]: {
+    [theme.breakpoints.only("sm")]: {
       fontSize: "smaller",
       lineHeight: "1.5rem",
     },
-    [theme.breakpoints.only('md')]: {
+    [theme.breakpoints.only("md")]: {
       fontSize: "small",
       lineHeight: "1.6rem",
     },
-    [theme.breakpoints.only('lg')]: {
+    [theme.breakpoints.only("lg")]: {
       fontSize: "medium",
       lineHeight: "1.9rem",
     },
-    [theme.breakpoints.only('xl')]: {
+    [theme.breakpoints.only("xl")]: {
       fontSize: "larger",
       lineHeight: "2rem",
-    }
+    },
   },
   cardText: {
     // paddingRight: theme.spacing(0.7),
@@ -92,48 +95,48 @@ const cardPriceStyle = {
     fontSize: "smaller",
     fontWeight: "bold",
     lineHeight: "1.4rem",
-    [theme.breakpoints.only('sm')]: {
+    [theme.breakpoints.only("sm")]: {
       fontSize: "small",
       lineHeight: "1.5rem",
     },
-    [theme.breakpoints.only('md')]: {
+    [theme.breakpoints.only("md")]: {
       fontSize: "medium",
       lineHeight: "1.6rem",
     },
-    [theme.breakpoints.only('lg')]: {
+    [theme.breakpoints.only("lg")]: {
       fontSize: "larger",
       lineHeight: "1.9rem",
     },
-    [theme.breakpoints.only('xl')]: {
+    [theme.breakpoints.only("xl")]: {
       fontSize: "large",
       lineHeight: "2rem",
-    }
+    },
   },
   cardName: {
     // paddingRight: theme.spacing(0.7),
     overflow: "hiden",
-    wordBreak : "break-word",
+    wordBreak: "break-word",
     whiteSpace: "break-spaces",
     textOverflow: "ellipsis",
     fontSize: "smaller",
     fontWeight: "bold",
     lineHeight: "1rem",
-    [theme.breakpoints.only('sm')]: {
+    [theme.breakpoints.only("sm")]: {
       fontSize: "small",
       lineHeight: "1.5rem",
     },
-    [theme.breakpoints.only('md')]: {
+    [theme.breakpoints.only("md")]: {
       fontSize: "medium",
       lineHeight: "1.6rem",
     },
-    [theme.breakpoints.only('lg')]: {
+    [theme.breakpoints.only("lg")]: {
       fontSize: "larger",
       lineHeight: "1.9rem",
     },
-    [theme.breakpoints.only('xl')]: {
+    [theme.breakpoints.only("xl")]: {
       fontSize: "large",
       lineHeight: "2rem",
-    }
+    },
   },
   cardPrice2: {
     "&$primaryColor,&$secondaryColor,&$warningColor,&$dangerColor,&$successColor,&$infoColor,&$roseColor": {
@@ -145,27 +148,27 @@ const cardPriceStyle = {
       width: "1.4rem",
       height: "0.5rem",
       marginRight: "-0.3rem",
-      [theme.breakpoints.only('sm')]: {
+      [theme.breakpoints.only("sm")]: {
         width: "1.8rem",
         height: "0.9rem",
         marginRight: "-0.4rem",
       },
-      [theme.breakpoints.only('md')]: {
+      [theme.breakpoints.only("md")]: {
         width: "2.2rem",
         height: "1.4rem",
         marginRight: "-0.5rem",
       },
-      [theme.breakpoints.only('lg')]: {
+      [theme.breakpoints.only("lg")]: {
         width: "2.5rem",
         height: "1.8rem",
         marginRight: "-0.6rem",
       },
-      [theme.breakpoints.only('xl')]: {
+      [theme.breakpoints.only("xl")]: {
         width: "3rem",
         height: "2.2rem",
         marginRight: "-0.7rem",
       },
-    }
+    },
   },
   primaryColor: {
     color: "#fff",
@@ -201,6 +204,28 @@ const cardPriceStyle = {
     color: "#fff",
     background: roseColor,
     ...roseBoxShadow,
+  },
+
+  primary: {
+    color: primaryColor,
+  },
+  secondary: {
+    color: secondaryColor,
+  },
+  warning: {
+    color: warningColor,
+  },
+  danger: {
+    color: dangerColor,
+  },
+  success: {
+    color: successColor,
+  },
+  info: {
+    color: infoColor,
+  },
+  rose: {
+    color: roseColor,
   },
 };
 

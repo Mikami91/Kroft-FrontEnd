@@ -22,6 +22,7 @@ import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl"
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import PrintIcon from "@material-ui/icons/Print";
 import SendIcon from "@material-ui/icons/Send";
+import PaymentRoundedIcon from "@material-ui/icons/PaymentRounded";
 // import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 // import CreditCardIcon from '@material-ui/icons/CreditCard';
 // Layouts
@@ -37,6 +38,7 @@ import CustomSnackbar from "../components/Snackbar/CustomSnackbar";
 import CustomMoneyInput from "../components/CustomInput/CustomMoneyInput.js";
 import CustomTableFilter from "../components/Table/CustomTableFilter.js";
 import CustomTableToPrints from "../components/Table/CustomTableToPrints";
+import CardBox from "../components/Card/CardBox";
 // Functions
 import { boxShow, boxState as boxStateFunc } from "../functions/boxFunctions";
 import { environmentShow } from "../functions/environmentFunctions";
@@ -97,25 +99,35 @@ function CollectsPage(props) {
 
   let history = useHistory();
 
-  // Box state
-  const [boxState, setBoxState] = useState({
-    open: true,
+  // Box Select state
+  const [boxSelectState, setBoxSelectState] = useState({
+    open: localStorage.getItem("box_id") !== "" ? false : true,
     id: null,
   });
-  const handleChangeBox = (value) => setBoxState({ ...boxState, id: value });
+  const handleChangeBox = (value) =>
+    setBoxSelectState({ ...boxSelectState, id: value });
 
   // Send Order function
   const handleSelectBox = (e) => {
     e.preventDefault();
-    boxStateFunc(boxState).then((response) => {
+    boxStateFunc(boxSelectState).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
-          setBoxState({ ...boxState, open: false });
-          localStorage.setItem("box_id", boxState.id);
+          setBoxSelectState({ ...boxSelectState, open: false });
+          localStorage.setItem("box_id", boxSelectState.id);
         }
       }
     });
   };
+
+  // Box state
+  const [boxState, setBoxState] = useState({
+    open: false,
+    id: null,
+  });
+  const handleOpenBox = (value) => setBoxState({ ...boxState, open: true });
+
+  const handleCloseBox = (value) => setBoxState({ ...boxState, open: false });
 
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
@@ -458,6 +470,16 @@ function CollectsPage(props) {
           },
           {
             type: "icon",
+            text: "Caja",
+            color: "default",
+            icon: PaymentRoundedIcon,
+            size: "large",
+            margin: true,
+            disabled: false,
+            onClick: handleOpenBox,
+          },
+          {
+            type: "icon",
             text: "Perfil",
             color: "default",
             icon: PersonIcon,
@@ -733,7 +755,7 @@ function CollectsPage(props) {
       />
 
       <CustomModal
-        open={boxState.open}
+        open={boxSelectState.open}
         close={handleChangeBox}
         closeIcon={false}
         title={{
@@ -745,10 +767,13 @@ function CollectsPage(props) {
         content={
           <CustomCheckList
             list={boxes}
-            key="id"
+            keyValue="id"
             value="name"
-            checked={boxState.id}
+            checked={boxSelectState.id}
             onChange={handleChangeBox}
+            fontSize="medium"
+            fontColor="warning"
+            fontBold={true}
           />
         }
         leftButtons={[
@@ -772,8 +797,75 @@ function CollectsPage(props) {
             edge: "start",
             size: "large",
             variant: "contained",
-            disabled: boxState.id !== null ? false : true,
+            disabled: boxSelectState.id !== null ? false : true,
             onClick: handleSelectBox,
+          },
+        ]}
+        renderRefresh={[boxSelectState.open]}
+        loading={box_fetching || box_loading}
+        scroll="body"
+        maxWidth="xs"
+        fullWidth
+      />
+
+      <CustomModal
+        open={boxState.open}
+        close={handleCloseBox}
+        closeIcon={true}
+        title={{
+          text: "Caja",
+          margin: true,
+          size: "medium",
+          bold: true,
+        }}
+        content={
+          <CardBox
+            data={boxes}
+            keyValue="id"
+            filter={parseInt(localStorage.getItem("box_id"))}
+            amount={{
+              text: "Monto",
+              prefix: "Bs",
+              field: "box_amount",
+              color: "warning",
+            }}
+            change={{
+              text: "Cambio",
+              prefix: "Bs",
+              field: "change_amount",
+              color: "warning",
+            }}
+            income={{
+              text: "Ingresos",
+              prefix: "Bs",
+              field: "income_amount",
+              color: "danger",
+            }}
+          />
+        }
+        leftButtons={[
+          {
+            type: "fab",
+            text: "Salir",
+            color: "secondary",
+            icon: KeyboardBackspaceIcon,
+            size: "large",
+            variant: "contained",
+            disabled: false,
+            onClick: handleLogout,
+          },
+        ]}
+        rightButtons={[
+          {
+            type: "button",
+            text: "Cierre de caja",
+            color: "primary",
+            icon: DoneRoundedIcon,
+            edge: "start",
+            size: "large",
+            variant: "contained",
+            // disabled: boxState.id !== null ? false : true,
+            // onClick: handleSelectBox,
           },
         ]}
         renderRefresh={[boxState.open]}
