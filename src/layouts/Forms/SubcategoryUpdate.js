@@ -17,7 +17,7 @@ import SelectInput from '../../components/CustomInput/SelectInput.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { subcategoryUpdate } from "../../functions/subcategoryFunctions";
+import { subcategoryUpdate } from "../../functions/cruds/subcategoryFunctions";
 // Apis
 import { API } from '../../API/index';
 

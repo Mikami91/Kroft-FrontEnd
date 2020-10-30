@@ -17,7 +17,7 @@ import CustomModal from '../../components/Modal/CustomModal';
 import CategoryAdd from "../Forms/CategoryAdd.js";
 import CategoryUpdate from '../Forms/CategoryUpdate';
 // Functions
-import { categoryShow, categoryDelete } from "../../functions/categoryFunctions";
+import { categoryShow, categoryDelete } from "../../functions/cruds/categoryFunctions";
 // API
 import { API } from '../../API/index';
 

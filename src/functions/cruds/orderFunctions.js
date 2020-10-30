@@ -1,23 +1,23 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/environmentFetch';
+import { createFetch, sendFetch, cancelFetch, showFetch } from '../fetchs/orderFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/environmentCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, orders_detail, loading } from "../../redux/actions/creators/orderCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function environmentCreate(data) {
-    fetching(true);
+export async function orderCreate(data) {
+    loading(true);
     try {
         const response = await createFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
-                    fetching(false);
+                    loading(false);
                     successSnackbar(response.data.message);
                     break;
 
                 case false:
-                    fetching(false);
+                    loading(false);
                     dangerSnackbar(response.data.message);
                     break;
 
@@ -26,35 +26,6 @@ export async function environmentCreate(data) {
             }
         };
         return response.data;
-
-    } catch (error) {
-        fetching(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
-
-/*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function environmentShow() {
-    loading(true);
-    try {
-        const response = await showFetch();
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    payload(response.data.data);
-                    loading(false);
-                    break;
-
-                case false:
-                    loading(false);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data.data;
 
     } catch (error) {
         loading(false);
@@ -63,71 +34,11 @@ export async function environmentShow() {
     };
 };
 
-/*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function environmentUpdate(data) {
-    fetching(true);
-    try {
-        const response = await updateFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    fetching(false);
-                    infoSnackbar(response.data.message);
-                    break;
-
-                case false:
-                    fetching(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        fetching(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
-
-/*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function environmentState(data) {
-    fetching(true);
-    try {
-        const response = await stateFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    fetching(false);
-                    infoSnackbar(response.data.message);
-                    break;
-
-                case false:
-                    fetching(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        fetching(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
-
-/*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function environmentDelete(data) {
+/*::::::::::::::::::::SEND::::::::::::::::::::*/
+export async function orderSend(data) {
     loading(true);
     try {
-        const response = await deleteFetch(data);
+        const response = await sendFetch(data);
         if (response.status === 200) {
             switch (response.data.success) {
                 case true:
@@ -144,7 +55,68 @@ export async function environmentDelete(data) {
                     break;
             }
         };
-        return response.data.data;
+        return response.data;
+
+    } catch (error) {
+        loading(false);
+        warningSnackbar("Error de servidor.");
+        return error.message;
+    };
+};
+
+
+/*::::::::::::::::::::CANCEL::::::::::::::::::::*/
+export async function orderCancel(data) {
+    loading(true);
+    try {
+        const response = await cancelFetch(data);
+        if (response.status === 200) {
+            switch (response.data.success) {
+                case true:
+                    loading(false);
+                    infoSnackbar(response.data.message);
+                    break;
+
+                case false:
+                    loading(false);
+                    dangerSnackbar(response.data.message);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        return response.data;
+
+    } catch (error) {
+        loading(false);
+        warningSnackbar("Error de servidor.");
+        return error.message;
+    };
+};
+
+/*::::::::::::::::::::SHOW::::::::::::::::::::*/
+export async function orderShow() {
+    loading(true);
+    try {
+        const response = await showFetch();
+        if (response.status === 200) {
+            switch (response.data.success) {
+                case true:
+                    payload(response.data.data);
+                    orders_detail(response.data.data2);
+                    loading(false);
+                    break;
+
+                case false:
+                    loading(false);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        return response.data;
 
     } catch (error) {
         loading(false);

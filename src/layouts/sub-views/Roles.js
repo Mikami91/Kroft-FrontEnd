@@ -17,7 +17,7 @@ import {
   rolShow,
   rolUpdate,
   rolDelete,
-} from "../../functions/rolFunctions";
+} from "../../functions/cruds/rolFunctions";
 
 function Roles({ data, fetching, loading }) {
   return (

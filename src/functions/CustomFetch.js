@@ -1,7 +1,7 @@
 // Dependencies
 import axios from 'axios';
 // API
-import { API } from '../../API';
+import { API } from '../API';
 
 export const customFetch = (props) => {
     const { method, token, url, type, data, timeout } = props;

@@ -1,5 +1,5 @@
 // Custom fetch
-import { customFetch } from "./CustomFetch";
+import { customFetch } from "../CustomFetch";
 // APIs
 import {
     payment_create,

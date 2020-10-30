@@ -46,7 +46,7 @@ import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 // Functions
-import { orderCreate, orderSend, orderCancel } from '../../functions/orderFunctions';
+import { orderCreate, orderSend, orderCancel } from '../../functions/cruds/orderFunctions';
 
 // Styles
 import styles from "../../styles/components/drawerStyle.js";

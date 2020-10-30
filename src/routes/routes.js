@@ -2,7 +2,7 @@
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import Sales from "../pages/Sales";
-import Collects from "../pages/Collects";
+import Collects from "../pages/collects/Collects";
 import Products from "../pages/Products";
 //Kroft-FrontEnd
 const routes = [

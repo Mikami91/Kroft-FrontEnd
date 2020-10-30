@@ -12,7 +12,7 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { printCategoryCreate, printCategoryShow, printCategoryUpdate, printCategoryDelete } from "../../functions/printCategoryFunctions";
+import { printCategoryCreate, printCategoryShow, printCategoryUpdate, printCategoryDelete } from "../../functions/cruds/printCategoryFunctions";
 
 function PrintsCategories({ data, fetching, loading }) {
   return (

@@ -1,11 +1,11 @@
 // Fetchs
-import { createFetch, existFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/supplierFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/companyFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/supplierCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, loading, fetching } from "../../redux/actions/creators/companyCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function supplierCreate(data) {
+export async function companyCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -34,38 +34,8 @@ export async function supplierCreate(data) {
     };
 };
 
-/*::::::::::::::::::::EXIST::::::::::::::::::::*/
-export async function supplierExist(data) {
-    fetching(true);
-    try {
-        const response = await existFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    fetching(false);
-                    successSnackbar(response.data.message);
-                    break;
-
-                case false:
-                    fetching(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        fetching(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
-
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function supplierShow() {
+export async function companyShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -94,7 +64,7 @@ export async function supplierShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function supplierUpdate(data) {
+export async function companyUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -124,7 +94,7 @@ export async function supplierUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function supplierState(data) {
+export async function companyState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -154,7 +124,7 @@ export async function supplierState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function supplierDelete(data) {
+export async function companyDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

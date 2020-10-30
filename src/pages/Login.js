@@ -30,7 +30,7 @@ import CustomModal from "../components/Modal/CustomModal.js";
 import CustomLoading from '../components/Loading/CustomLoading';
 import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
 // Functions
-import { companyShow } from "../functions/companyFunctions";
+import { companyShow } from "../functions/cruds/companyFunctions";
 // Events
 import { companies_WS } from '../events';
 // Apis

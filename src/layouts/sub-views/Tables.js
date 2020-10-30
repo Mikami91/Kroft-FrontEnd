@@ -17,7 +17,7 @@ import CustomModal from '../../components/Modal/CustomModal';
 import TableAdd from "../Forms/TableAdd.js";
 import TableUpdate from '../Forms/TableUpdate';
 // Functions
-import { tableShow, tableDelete } from "../../functions/tableFunctions";
+import { tableShow, tableDelete } from "../../functions/cruds/tableFunctions";
 // API
 import { API } from '../../API/index';
 

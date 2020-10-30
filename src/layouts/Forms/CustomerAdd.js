@@ -22,7 +22,7 @@ import CustomBotton from '../../components/CustomButtons/CustomButton.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { customerCreate } from "../../functions/customerFunctions";
+import { customerCreate } from "../../functions/cruds/customerFunctions";
 // Varieables
 import { cities } from '../../variables/cities';
 

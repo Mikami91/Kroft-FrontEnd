@@ -18,7 +18,7 @@ import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { supplierExist } from "../../functions/supplierFunctions";
+import { supplierExist } from "../../functions/cruds/supplierFunctions";
 // Variables
 import { presentationTypes } from '../../variables/presentationTypes.js';
 // Configs

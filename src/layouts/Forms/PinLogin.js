@@ -8,7 +8,7 @@ import PINInput from '../../components/CustomInput/PINInput.js';
 // Styles
 import styles from "../../styles/pages/LoginStyle.js";
 // Functions
-import { employeeLoginPin } from "../../functions/employeeFunctions";
+import { employeeLoginPin } from "../../functions/cruds/employeeFunctions";
 
 const useStyles = makeStyles(styles);
 

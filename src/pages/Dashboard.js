@@ -27,21 +27,21 @@ import SidebarList from "../components/List/SidebarList";
 import CustomLoading from "../components/Loading/CustomLoading";
 import CustomSnackbar from "../components/Snackbar/CustomSnackbar";
 // Functions
-// import { superAdminShow } from "../functions/superAdminFunctions";
-import { companyShow } from "../functions/companyFunctions";
-import { adminShow } from "../functions/adminFunctions";
-import { employeeShow } from "../functions/employeeFunctions";
-import { boxShow } from "../functions/boxFunctions";
-import { rolShow } from "../functions/rolFunctions";
-import { environmentShow } from "../functions/environmentFunctions";
-import { tableShow } from "../functions/tableFunctions";
-import { printCategoryShow } from "../functions/printCategoryFunctions";
-import { categoryShow } from "../functions/categoryFunctions";
-import { subcategoryShow } from "../functions/subcategoryFunctions";
-import { productShow } from "../functions/productFunctions";
-import { customerShow } from "../functions/customerFunctions";
-import { supplierShow } from "../functions/supplierFunctions";
-import { orderShow } from "../functions/orderFunctions";
+// import { superAdminShow } from "../functions/cruds/superAdminFunctions";
+import { companyShow } from "../functions/cruds/companyFunctions";
+import { adminShow } from "../functions/cruds/adminFunctions";
+import { employeeShow } from "../functions/cruds/employeeFunctions";
+import { boxShow } from "../functions/cruds/boxFunctions";
+import { rolShow } from "../functions/cruds/rolFunctions";
+import { environmentShow } from "../functions/cruds/environmentFunctions";
+import { tableShow } from "../functions/cruds/tableFunctions";
+import { printCategoryShow } from "../functions/cruds/printCategoryFunctions";
+import { categoryShow } from "../functions/cruds/categoryFunctions";
+import { subcategoryShow } from "../functions/cruds/subcategoryFunctions";
+import { productShow } from "../functions/cruds/productFunctions";
+import { customerShow } from "../functions/cruds/customerFunctions";
+import { supplierShow } from "../functions/cruds/supplierFunctions";
+import { orderShow } from "../functions/cruds/orderFunctions";
 // Events
 import {
   companies_WS,

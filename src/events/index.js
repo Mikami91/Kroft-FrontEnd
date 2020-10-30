@@ -207,3 +207,39 @@ export const collects_WS = () =>
       collectPayload(e.message);
     });
   }, []);
+
+export const allWebsocket = () => {
+  // super_admis_WS();
+  companies_WS();
+  admins_WS();
+  boxes_WS();
+  roles_WS();
+  employees_WS();
+  // salaries_WS();
+  customers_WS();
+  environments_WS();
+  tables_WS();
+  print_categories_WS();
+  categories_WS();
+  sub_categories_WS();
+  products_WS();
+  supplies_WS();
+  orders_WS();
+  order_details_WS();
+  payments_WS();
+  collects_WS();
+};
+
+export const collectWebsocket = () => {
+  boxes_WS();
+  environments_WS();
+  tables_WS();
+  print_categories_WS();
+  categories_WS();
+  sub_categories_WS();
+  products_WS();
+  supplies_WS();
+  orders_WS();
+  order_details_WS();
+  collects_WS();
+};

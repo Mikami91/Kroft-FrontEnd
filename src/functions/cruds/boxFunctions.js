@@ -1,108 +1,11 @@
 // Fetchs
-import { loginFetch, loginPinFetch, logoutFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/employeeFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/boxFetch';
 // Actions Creators
-import { payload, fetching, loading } from "../redux/actions/creators/employeeCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
-
-
-/*::::::::::::::::::::LOGIN::::::::::::::::::::*/
-export async function employeeLogin(data) {
-    loading(true);
-    try {
-        const response = await loginFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    payload(response.data.data);
-                    localStorage.setItem('user', response.data.data.user);
-                    localStorage.setItem('employee_id', response.data.data.id);
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem("head_area", response.data.data.head_area);
-                    loading(false);
-                    break;
-
-                case false:
-                    loading(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        loading(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
-
-/*::::::::::::::::::::LOGIN PIN::::::::::::::::::::*/
-export async function employeeLoginPin(data) {
-    loading(true);
-    try {
-        const response = await loginPinFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    localStorage.setItem('user', response.data.data.user);
-                    localStorage.setItem('employee_id', response.data.data.id);
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem("head_area", response.data.data.head_area);
-                    loading(false);
-                    break;
-
-                case false:
-                    loading(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        loading(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
-
-/*::::::::::::::::::::LOGOUT::::::::::::::::::::*/
-export async function employeeLogout(data) {
-    loading(true);
-    try {
-        const response = await logoutFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    loading(false);
-                    break;
-
-                case false:
-                    loading(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        loading(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
+import { payload, loading, fetching } from "../../redux/actions/creators/boxCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function employeeCreate(data) {
+export async function boxCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -132,7 +35,7 @@ export async function employeeCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function employeeShow() {
+export async function boxShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -161,7 +64,7 @@ export async function employeeShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function employeeUpdate(data) {
+export async function boxUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -191,7 +94,7 @@ export async function employeeUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function employeeState(data) {
+export async function boxState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -221,7 +124,7 @@ export async function employeeState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function employeeDelete(data) {
+export async function boxDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

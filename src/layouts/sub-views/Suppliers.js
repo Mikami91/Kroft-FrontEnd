@@ -24,7 +24,7 @@ import SupplierUpdate from "../Forms/SupplierUpdate";
 import {
   supplierShow,
   supplierDelete,
-} from "../../functions/supplierFunctions";
+} from "../../functions/cruds/supplierFunctions";
 // API
 import { API } from "../../API/index";
 

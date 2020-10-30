@@ -1,78 +1,11 @@
 // Fetchs
-import { loginFetch, logoutFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/superAdminFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/printCategoryFetch';
 // Actions Creators
-import { payload, fetching, loading } from "../redux/actions/creators/superAdminCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
-
-/*::::::::::::::::::::LOGIN::::::::::::::::::::*/
-export async function superAdminLogin(data) {
-    loading(true);
-    try {
-        const response = await loginFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    payload(response.data.data);
-                    localStorage.setItem('user', response.data.data.user);
-                    localStorage.setItem('super_admin_id', response.data.data.id);
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('rol', 'super_admin');
-                    loading(false);
-                    break;
-
-                case false:
-                    loading(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        loading(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
-
-/*::::::::::::::::::::LOGOUT::::::::::::::::::::*/
-export async function superAdminLogout(data) {
-    loading(true);
-    try {
-        const response = await logoutFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    localStorage.setItem('user', '');
-                    localStorage.setItem('super_admin_id', '');
-                    localStorage.setItem('token', '');
-                    localStorage.setItem('rol', '');
-                    loading(false);
-                    break;
-
-                case false:
-                    loading(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        loading(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
+import { payload, loading, fetching } from "../../redux/actions/creators/printCategoryCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function superAdminCreate(data) {
+export async function printCategoryCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -102,7 +35,7 @@ export async function superAdminCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function superAdminShow() {
+export async function printCategoryShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -131,7 +64,7 @@ export async function superAdminShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function superAdminUpdate(data) {
+export async function printCategoryUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -161,7 +94,7 @@ export async function superAdminUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function superAdminState(data) {
+export async function printCategoryState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -191,7 +124,7 @@ export async function superAdminState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function superAdminDelete(data) {
+export async function printCategoryDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

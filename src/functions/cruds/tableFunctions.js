@@ -1,8 +1,8 @@
 // Fetchs
-import { createFetch, showFetch, changeFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/tableFetch';
+import { createFetch, showFetch, changeFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/tableFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/tableCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, loading, fetching } from "../../redux/actions/creators/tableCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function tableCreate(data) {

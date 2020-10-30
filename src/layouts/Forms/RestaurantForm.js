@@ -20,7 +20,7 @@ import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { companyUpdate } from "../../functions/companyFunctions";
+import { companyUpdate } from "../../functions/cruds/companyFunctions";
 // Apis
 import { API } from '../../API/index';
 // Assets

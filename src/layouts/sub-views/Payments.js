@@ -12,7 +12,7 @@ import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { paymentCreate, paymentShow, paymentUpdate, paymentDelete } from "../../functions/paymentFunctions";
+import { paymentCreate, paymentShow, paymentUpdate, paymentDelete } from "../../functions/cruds/paymentFunctions";
 
 function Payments({ data, fetching, loading }) {
   return (

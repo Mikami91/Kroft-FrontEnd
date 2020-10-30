@@ -1,11 +1,11 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/rolFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/subcategoryFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/rolCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, loading, fetching } from "../../redux/actions/creators/subcategoryCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function rolCreate(data) {
+export async function subcategoryCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -35,7 +35,7 @@ export async function rolCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function rolShow() {
+export async function subcategoryShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -64,7 +64,7 @@ export async function rolShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function rolUpdate(data) {
+export async function subcategoryUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -94,7 +94,7 @@ export async function rolUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function rolState(data) {
+export async function subcategoryState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -124,7 +124,7 @@ export async function rolState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function rolDelete(data) {
+export async function subcategoryDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

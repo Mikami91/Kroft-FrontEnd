@@ -17,7 +17,7 @@ import CustomModal from "../../components/Modal/CustomModal";
 import ProductAdd from "../Forms/ProductAdd.js";
 import ProductUpdate from "../Forms/ProductUpdate";
 // Functions
-import { productShow, productDelete } from "../../functions/productFunctions";
+import { productShow, productDelete } from "../../functions/cruds/productFunctions";
 // API
 import { API } from "../../API/index";
 

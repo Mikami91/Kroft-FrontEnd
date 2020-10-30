@@ -19,7 +19,7 @@ import IconInput from '../../components/CustomInput/IconInput.js';
 import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { environmentCreate } from "../../functions/environmentFunctions";
+import { environmentCreate } from "../../functions/cruds/environmentFunctions";
 // Assets
 import image from '../../assets/img/defaults/environment.png';
 

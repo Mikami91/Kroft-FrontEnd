@@ -1,11 +1,11 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/boxFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/categoryFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/boxCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, loading, fetching } from "../../redux/actions/creators/categoryCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function boxCreate(data) {
+export async function categoryCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -35,7 +35,7 @@ export async function boxCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function boxShow() {
+export async function categoryShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -64,7 +64,7 @@ export async function boxShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function boxUpdate(data) {
+export async function categoryUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -94,7 +94,7 @@ export async function boxUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function boxState(data) {
+export async function categoryState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -124,7 +124,7 @@ export async function boxState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function boxDelete(data) {
+export async function categoryDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

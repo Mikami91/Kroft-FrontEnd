@@ -22,7 +22,7 @@ import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { productCreate } from "../../functions/productFunctions";
+import { productCreate } from "../../functions/cruds/productFunctions";
 // Assets
 import image from '../../assets/img/defaults/product.png';
 

@@ -24,7 +24,7 @@ import NumberInput from "../../components/CustomInput/NumberInput.js";
 import CustomLoading from "../../components/Loading/CustomLoading.js";
 import CustomDivider from "../../components/Divider/CustomDivider.js";
 // Functions
-import { employeeUpdate } from "../../functions/employeeFunctions";
+import { employeeUpdate } from "../../functions/cruds/employeeFunctions";
 // Apis
 import { API } from "../../API/index";
 // Configs

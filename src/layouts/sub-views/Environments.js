@@ -17,7 +17,7 @@ import CustomModal from '../../components/Modal/CustomModal';
 import EnvironmentAdd from "../Forms/EnvironmentAdd";
 import EnvironmentUpdate from '../Forms/EnvironmentUpdate';
 // Functions
-import { environmentShow, environmentDelete } from "../../functions/environmentFunctions";
+import { environmentShow, environmentDelete } from "../../functions/cruds/environmentFunctions";
 // API
 import { API } from '../../API/index';
 

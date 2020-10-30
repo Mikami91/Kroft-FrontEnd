@@ -16,7 +16,7 @@ import AvatarForm from '../../components/Avatar/Avatarform.js';
 import IconInput from '../../components/CustomInput/IconInput.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { environmentUpdate } from "../../functions/environmentFunctions";
+import { environmentUpdate } from "../../functions/cruds/environmentFunctions";
 // Apis
 import { API } from '../../API/index';
 

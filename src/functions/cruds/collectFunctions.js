@@ -9,7 +9,7 @@ import {
     envReportFetch,
     productReportFetch,
     // tableReportFetch,
-} from './fetchs/collectFetch';
+} from '../fetchs/collectFetch';
 // Actions Creators
 import {
     payload,
@@ -22,8 +22,8 @@ import {
     // table,
     fetching,
     loading
-} from "../redux/actions/creators/collectCreator";
-import { successSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+} from "../../redux/actions/creators/collectCreator";
+import { successSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
 export async function collectCreate(data) {

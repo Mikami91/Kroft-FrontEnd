@@ -16,7 +16,7 @@ import DateInput from '../../components/CustomInput/DateInput.js';
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
-import { supplierUpdate } from "../../functions/supplierFunctions";
+import { supplierUpdate } from "../../functions/cruds/supplierFunctions";
 // Variables
 import { presentationTypes } from '../../variables/presentationTypes.js';
 // Configs

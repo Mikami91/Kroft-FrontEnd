@@ -19,7 +19,7 @@ import IconInput from '../../components/CustomInput/IconInput.js';
 import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { categoryCreate } from "../../functions/categoryFunctions";
+import { categoryCreate } from "../../functions/cruds/categoryFunctions";
 // Assets
 import image from '../../assets/img/defaults/category.png';
 

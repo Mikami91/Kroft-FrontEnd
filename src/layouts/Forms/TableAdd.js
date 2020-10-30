@@ -21,7 +21,7 @@ import NumberInput from '../../components/CustomInput/NumberInput.js';
 import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { tableCreate } from "../../functions/tableFunctions";
+import { tableCreate } from "../../functions/cruds/tableFunctions";
 // Assets
 import image from '../../assets/img/defaults/table.png';
 

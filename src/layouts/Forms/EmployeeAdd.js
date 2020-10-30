@@ -27,7 +27,7 @@ import CustomBotton from "../../components/CustomButtons/CustomButton.js";
 import CustomLoading from "../../components/Loading/CustomLoading.js";
 import CustomDivider from "../../components/Divider/CustomDivider.js";
 // Functions
-import { employeeCreate } from "../../functions/employeeFunctions";
+import { employeeCreate } from "../../functions/cruds/employeeFunctions";
 // Assets
 import image from "../../assets/img/defaults/user.png";
 // Configs

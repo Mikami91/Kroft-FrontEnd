@@ -20,7 +20,7 @@ import SelectInput from '../../components/CustomInput/SelectInput.js';
 import CustomBotton from '../../components/CustomButtons/CustomButton.js'
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 // Functions
-import { subcategoryCreate } from "../../functions/subcategoryFunctions";
+import { subcategoryCreate } from "../../functions/cruds/subcategoryFunctions";
 // Assets
 import image from '../../assets/img/defaults/category.png';
 

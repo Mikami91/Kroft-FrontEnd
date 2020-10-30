@@ -17,7 +17,7 @@ import CustomModal from '../../components/Modal/CustomModal';
 import SubcategoryAdd from "../Forms/SubcategoryAdd.js";
 import SubcategoryUpdate from '../Forms/SubcategoryUpdate';
 // Functions
-import { subcategoryShow, subcategoryDelete } from "../../functions/subcategoryFunctions";
+import { subcategoryShow, subcategoryDelete } from "../../functions/cruds/subcategoryFunctions";
 // API
 import { API } from '../../API/index';
 

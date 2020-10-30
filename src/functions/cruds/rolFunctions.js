@@ -1,11 +1,11 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/productFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/rolFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/productCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, loading, fetching } from "../../redux/actions/creators/rolCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function productCreate(data) {
+export async function rolCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -29,12 +29,13 @@ export async function productCreate(data) {
 
     } catch (error) {
         fetching(false);
+        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function productShow() {
+export async function rolShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -63,7 +64,7 @@ export async function productShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function productUpdate(data) {
+export async function rolUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -93,7 +94,7 @@ export async function productUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function productState(data) {
+export async function rolState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -123,7 +124,7 @@ export async function productState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function productDelete(data) {
+export async function rolDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

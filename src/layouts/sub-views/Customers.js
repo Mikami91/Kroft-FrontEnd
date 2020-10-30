@@ -17,7 +17,7 @@ import CustomModal from '../../components/Modal/CustomModal';
 import CustomerAdd from '../Forms/CustomerAdd.js';
 import CustomerUpdate from '../../layouts/Forms/CustomerUpdate';
 // Functions
-import { customerShow, customerDelete } from "../../functions/customerFunctions";
+import { customerShow, customerDelete } from "../../functions/cruds/customerFunctions";
 // API
 import { API } from '../../API/index';
 

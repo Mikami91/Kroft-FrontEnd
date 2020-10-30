@@ -12,7 +12,7 @@ import IconInput from "../../components/CustomInput/IconInput.js";
 // Style
 import styles from "../../styles/pages/LoginStyle.js";
 // Functions
-import { adminLogin } from "../../functions/adminFunctions";
+import { adminLogin } from "../../functions/cruds/adminFunctions";
 
 const useStyles = makeStyles(styles);
 

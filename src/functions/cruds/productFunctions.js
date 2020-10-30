@@ -1,11 +1,11 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/printCategoryFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/productFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/printCategoryCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, loading, fetching } from "../../redux/actions/creators/productCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function printCategoryCreate(data) {
+export async function productCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -29,13 +29,12 @@ export async function printCategoryCreate(data) {
 
     } catch (error) {
         fetching(false);
-        warningSnackbar("Error de servidor.");
         return error.message;
     };
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function printCategoryShow() {
+export async function productShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -64,7 +63,7 @@ export async function printCategoryShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function printCategoryUpdate(data) {
+export async function productUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -94,7 +93,7 @@ export async function printCategoryUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function printCategoryState(data) {
+export async function productState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -124,7 +123,7 @@ export async function printCategoryState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function printCategoryDelete(data) {
+export async function productDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

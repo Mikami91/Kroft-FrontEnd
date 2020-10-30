@@ -21,7 +21,7 @@ import CustomDivider from '../../components/Divider/CustomDivider.js';
 import SingleTabs from '../../components/CustomTabs/SingleTabs';
 import TabPanel from "../../components/Panel/TabPanel.js";
 // Functions
-import { collectEmployeeReport } from "../../functions/collectFunctions";
+import { collectEmployeeReport } from "../../functions/cruds/collectFunctions";
 // Configs
 moment.locale("es");
 moment().format('l');

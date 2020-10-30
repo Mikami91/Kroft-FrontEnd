@@ -34,12 +34,12 @@ import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
 // Assets
 import image from '../assets/img/backgrounds/productbackground.jpg';
 // Functions
-import { environmentShow } from "../functions/environmentFunctions";
-import { tableShow, tableChange } from "../functions/tableFunctions";
-import { categoryShow } from "../functions/categoryFunctions";
-import { subcategoryShow } from "../functions/subcategoryFunctions";
-import { productShow } from "../functions/productFunctions";
-import { orderShow } from "../functions/orderFunctions";
+import { environmentShow } from "../functions/cruds/environmentFunctions";
+import { tableShow, tableChange } from "../functions/cruds/tableFunctions";
+import { categoryShow } from "../functions/cruds/categoryFunctions";
+import { subcategoryShow } from "../functions/cruds/subcategoryFunctions";
+import { productShow } from "../functions/cruds/productFunctions";
+import { orderShow } from "../functions/cruds/orderFunctions";
 // Events
 import {
   environments_WS,

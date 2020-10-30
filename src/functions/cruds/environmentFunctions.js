@@ -1,78 +1,11 @@
 // Fetchs
-import { loginFetch, logoutFetch, createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/adminFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/environmentFetch';
 // Actions Creators
-import { payload, fetching, loading } from "../redux/actions/creators/adminCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
-
-/*::::::::::::::::::::LOGIN::::::::::::::::::::*/
-export async function adminLogin(data) {
-    loading(true);
-    try {
-        const response = await loginFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    payload(response.data.data);
-                    localStorage.setItem('user', response.data.data.user);
-                    localStorage.setItem('admin_id', response.data.data.id);
-                    localStorage.setItem('token', response.data.token);
-                    localStorage.setItem('rol', 'admin');
-                    loading(false);
-                    break;
-
-                case false:
-                    loading(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        loading(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
-
-/*::::::::::::::::::::LOGOUT::::::::::::::::::::*/
-export async function adminLogout(data) {
-    loading(true);
-    try {
-        const response = await logoutFetch(data);
-        if (response.status === 200) {
-            switch (response.data.success) {
-                case true:
-                    localStorage.setItem('user', '');
-                    localStorage.setItem('admin_id', '');
-                    localStorage.setItem('token', '');
-                    localStorage.setItem('rol', '');
-                    loading(false);
-                    break;
-
-                case false:
-                    loading(false);
-                    dangerSnackbar(response.data.message);
-                    break;
-
-                default:
-                    break;
-            }
-        };
-        return response.data;
-
-    } catch (error) {
-        loading(false);
-        warningSnackbar("Error de servidor.");
-        return error.message;
-    };
-};
+import { payload, loading, fetching } from "../../redux/actions/creators/environmentCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function adminCreate(data) {
+export async function environmentCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -102,7 +35,7 @@ export async function adminCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function adminShow() {
+export async function environmentShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -131,7 +64,7 @@ export async function adminShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function adminUpdate(data) {
+export async function environmentUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -161,7 +94,7 @@ export async function adminUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function adminState(data) {
+export async function environmentState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -191,7 +124,7 @@ export async function adminState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function adminDelete(data) {
+export async function environmentDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

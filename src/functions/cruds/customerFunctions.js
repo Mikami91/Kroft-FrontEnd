@@ -1,11 +1,11 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/categoryFetch';
+import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/customerFetch';
 // Actions Creators
-import { payload, loading, fetching } from "../redux/actions/creators/categoryCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, fetching, loading } from "../../redux/actions/creators/customerCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function categoryCreate(data) {
+export async function customerCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -35,7 +35,7 @@ export async function categoryCreate(data) {
 };
 
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function categoryShow() {
+export async function customerShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -64,7 +64,7 @@ export async function categoryShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function categoryUpdate(data) {
+export async function customerUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -94,7 +94,7 @@ export async function categoryUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function categoryState(data) {
+export async function customerState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -124,7 +124,7 @@ export async function categoryState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function categoryDelete(data) {
+export async function customerDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);

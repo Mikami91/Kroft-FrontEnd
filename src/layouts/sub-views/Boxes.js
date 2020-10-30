@@ -19,7 +19,7 @@ import {
   boxShow,
   boxUpdate,
   boxDelete,
-} from "../../functions/boxFunctions";
+} from "../../functions/cruds/boxFunctions";
 
 function Boxes({ data, fetching, loading }) {
   return (

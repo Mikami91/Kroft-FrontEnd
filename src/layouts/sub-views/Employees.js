@@ -17,7 +17,7 @@ import CustomModal from '../../components/Modal/CustomModal';
 import EmployeeAdd from '../Forms/EmployeeAdd.js';
 import EmployeeUpdate from '../Forms/EmployeeUpdate';
 // Functions
-import { employeeShow, employeeDelete } from "../../functions/employeeFunctions";
+import { employeeShow, employeeDelete } from "../../functions/cruds/employeeFunctions";
 // API
 import { API } from '../../API/index';
 

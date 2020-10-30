@@ -1,11 +1,11 @@
 // Fetchs
-import { createFetch, showFetch, updateFetch, stateFetch, deleteFetch } from './fetchs/customerFetch';
+import { createFetch, existFetch, showFetch, updateFetch, stateFetch, deleteFetch } from '../fetchs/supplierFetch';
 // Actions Creators
-import { payload, fetching, loading } from "../redux/actions/creators/customerCreator";
-import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../redux/actions/creators/snackbarCreator";
+import { payload, loading, fetching } from "../../redux/actions/creators/supplierCreator";
+import { successSnackbar, infoSnackbar, warningSnackbar, dangerSnackbar } from "../../redux/actions/creators/snackbarCreator";
 
 /*::::::::::::::::::::CREATE::::::::::::::::::::*/
-export async function customerCreate(data) {
+export async function supplierCreate(data) {
     fetching(true);
     try {
         const response = await createFetch(data);
@@ -34,8 +34,38 @@ export async function customerCreate(data) {
     };
 };
 
+/*::::::::::::::::::::EXIST::::::::::::::::::::*/
+export async function supplierExist(data) {
+    fetching(true);
+    try {
+        const response = await existFetch(data);
+        if (response.status === 200) {
+            switch (response.data.success) {
+                case true:
+                    fetching(false);
+                    successSnackbar(response.data.message);
+                    break;
+
+                case false:
+                    fetching(false);
+                    dangerSnackbar(response.data.message);
+                    break;
+
+                default:
+                    break;
+            }
+        };
+        return response.data;
+
+    } catch (error) {
+        fetching(false);
+        warningSnackbar("Error de servidor.");
+        return error.message;
+    };
+};
+
 /*::::::::::::::::::::SHOW::::::::::::::::::::*/
-export async function customerShow() {
+export async function supplierShow() {
     loading(true);
     try {
         const response = await showFetch();
@@ -64,7 +94,7 @@ export async function customerShow() {
 };
 
 /*::::::::::::::::::::UPDATE::::::::::::::::::::*/
-export async function customerUpdate(data) {
+export async function supplierUpdate(data) {
     fetching(true);
     try {
         const response = await updateFetch(data);
@@ -94,7 +124,7 @@ export async function customerUpdate(data) {
 };
 
 /*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function customerState(data) {
+export async function supplierState(data) {
     fetching(true);
     try {
         const response = await stateFetch(data);
@@ -124,7 +154,7 @@ export async function customerState(data) {
 };
 
 /*::::::::::::::::::::DELETE::::::::::::::::::::*/
-export async function customerDelete(data) {
+export async function supplierDelete(data) {
     loading(true);
     try {
         const response = await deleteFetch(data);
