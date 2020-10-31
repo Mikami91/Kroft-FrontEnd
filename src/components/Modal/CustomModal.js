@@ -107,7 +107,7 @@ export default function CustomModal(props) {
                 return <DialogSubmit key={key} index={index} />;
               }
               // Icon type
-              if (index.type === "icon" && typeof index.icon == "undefined") {
+              if (index.type === "icon" && typeof index.icon !== "undefined") {
                 return <DialogIcon key={key} index={index} />;
               }
               // Fab type

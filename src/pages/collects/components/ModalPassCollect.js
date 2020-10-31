@@ -132,13 +132,13 @@ function ModalPassCollect(props) {
           renderRefresh={[state, open]}
         />
       }
-      centerButtons={[
+      leftButtons={[
         {
           type: "icon",
           text: "Imprimir",
           color: "default",
           icon: PrintIcon,
-          edge: "start",
+          edge: false,
           size: "large",
           disabled: state.amount > 0 ? false : true,
           onClick: handleTotalPrint,
@@ -157,13 +157,7 @@ function ModalPassCollect(props) {
           onClick: state.is_busy === 1 ? handleSendOrder : null,
         },
       ]}
-      renderRefresh={[
-        // openTotalAmount,
-        open,
-        state.change,
-        state.id,
-        collect_fetching,
-      ]}
+      renderRefresh={[open, state.change, state.id, collect_fetching]}
       loading={collect_fetching || order_loading}
       scroll="paper"
       maxWidth="sm"

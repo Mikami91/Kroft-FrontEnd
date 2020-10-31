@@ -21,6 +21,7 @@ export const useCurrentTable = () => {
     payment_type: 1,
     box: 1,
     currency: 0,
+    card_number: null,
     paid_BS: 0,
     paid_US: 0,
     change: 0,
@@ -59,6 +60,7 @@ export const useCurrentTable = () => {
       payment_type: 1,
       box: 1,
       currency: 0,
+      card_number: null,
       paid_BS: 0,
       paid_US: 0,
       change: 0,
@@ -94,11 +96,19 @@ export const useCurrentTable = () => {
     }
   };
 
+  const handleChangeCreditCard = (e) => {
+    setCurrentTableState({
+      ...currentTableState,
+      card_number: e.value,
+    });
+  };
+
   return [
     currentTableState,
     setCurrentTable,
     emptyCurrentTable,
     handleChangeAmountBS,
     handleChangeAmountUS,
+    handleChangeCreditCard,
   ];
 };

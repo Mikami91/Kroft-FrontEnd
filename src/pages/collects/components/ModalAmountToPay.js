@@ -1,18 +1,16 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
+import React from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
-// @material-ui/core components
-import Grid from "@material-ui/core/Grid";
 // @material-ui/icons
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 // core components
 import CustomModal from "../../../components/Modal/CustomModal.js";
-import CustomMoneyInput from "../../../components/CustomInput/CustomMoneyInput.js";
+// Local components
+import PaymentsCard from "./PaymentsCard";
 // Functions
 import { collectCreate } from "../../../functions/cruds/collectFunctions";
-import { isEmptyValue } from "../../../functions/isEmptyValue";
 
 function ModalAmountToPay(props) {
   // Props
@@ -21,16 +19,13 @@ function ModalAmountToPay(props) {
     open,
     close,
     state,
-    set,
-    empty,
-    changeBs,
-    changeUs,
+    emptyState,
     // Redux
     collect_fetching,
   } = props;
 
   const handleCloseTotalAmount = () => {
-    empty();
+    emptyState();
     close();
   };
 
@@ -73,46 +68,7 @@ function ModalAmountToPay(props) {
         size: "medium",
         bold: true,
       }}
-      content={
-        <Fragment>
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-          >
-            <Grid item xs={6} sm={6} md={6} lg={6}>
-              <NumberFormat
-                value={state.paid_BS === 0 ? "" : state.paid_BS}
-                onValueChange={changeBs}
-                displayType={"input"}
-                thousandSeparator={true}
-                allowNegative={false}
-                allowEmptyFormatting={false}
-                allowLeadingZeros={true}
-                decimalScale={2}
-                isNumericString={true}
-                customInput={CustomMoneyInput}
-              />
-            </Grid>
-
-            <Grid item xs={6} sm={6} md={6} lg={6}>
-              <NumberFormat
-                value={state.paid_US === 0 ? "" : state.paid_US}
-                onValueChange={changeUs}
-                displayType={"input"}
-                thousandSeparator={true}
-                allowNegative={false}
-                allowEmptyFormatting={false}
-                allowLeadingZeros={false}
-                decimalScale={0}
-                isNumericString={true}
-                customInput={CustomMoneyInput}
-              />
-            </Grid>
-          </Grid>
-        </Fragment>
-      }
+      content={<PaymentsCard />}
       leftButtons={[
         {
           type: "text",
@@ -172,7 +128,13 @@ function ModalAmountToPay(props) {
           onClick: handleMakeCollected,
         },
       ]}
-      renderRefresh={[open, state.change, state.id, collect_fetching]}
+      renderRefresh={[
+        open,
+        state.change,
+        state.id,
+        state.card_number,
+        collect_fetching,
+      ]}
       loading={collect_fetching}
       scroll="paper"
       maxWidth="sm"

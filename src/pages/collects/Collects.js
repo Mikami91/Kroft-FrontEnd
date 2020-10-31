@@ -14,6 +14,8 @@ import {
 } from "../../hooks/useModal";
 import { useDrawer } from "../../hooks/useDrawer";
 import { useCurrentTable } from "../../hooks/useTable";
+// Contexts
+import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Print
 import ReactToPrint from "react-to-print";
 // Local components
@@ -85,6 +87,7 @@ function CollectsPage(props) {
     emptyCurrentTable,
     handleChangeAmountBS,
     handleChangeAmountUS,
+    handleChangeCreditCard,
   ] = useCurrentTable();
   // Hooks for Drawers
   const [openDrawer, toggleDrawer] = useDrawer();
@@ -99,12 +102,10 @@ function CollectsPage(props) {
       togglePassCollect();
       setCurrentTable(args);
     }
-
     if (args.is_busy === 2) {
       toggleAmountPay();
       setCurrentTable(args);
     }
-
     return null;
   };
 
@@ -178,7 +179,16 @@ function CollectsPage(props) {
   };
 
   return (
-    <Fragment>
+    <CurrentTableContext.Provider
+      value={{
+        state: currentTableState,
+        setState: setCurrentTable,
+        emptyState: emptyCurrentTable,
+        changeBs: handleChangeAmountBS,
+        changeUs: handleChangeAmountUS,
+        changeCard: handleChangeCreditCard,
+      }}
+    >
       <CustomLoading open={loading} />
       <CustomSnackbar
         open={snackbar_show}
@@ -216,10 +226,7 @@ function CollectsPage(props) {
         open={openAmountPay}
         close={toggleAmountPay}
         state={currentTableState}
-        set={setCurrentTable}
-        empty={emptyCurrentTable}
-        changeBs={handleChangeAmountBS}
-        changeUs={handleChangeAmountUS}
+        emptyState={emptyCurrentTable}
       />
 
       <DrawerTablesList open={openDrawer} close={toggleDrawer} />
@@ -239,7 +246,7 @@ function CollectsPage(props) {
           refresh={[openPassCollect, currentTableState.id]}
         />
       </TabPanel>
-    </Fragment>
+    </CurrentTableContext.Provider>
   );
 }
 // Connect to Store State
