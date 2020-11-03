@@ -1,5 +1,5 @@
 // Dependencies
-import React, { Fragment, useState, useEffect, useRef, Component } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -16,8 +16,8 @@ import { useDrawer } from "../../hooks/useDrawer";
 import { useCurrentTable } from "../../hooks/useTable";
 // Contexts
 import CurrentTableContext from "../../hooks/contexts/TableContext";
-// Print
-import ReactToPrint from "react-to-print";
+// Layouts
+import ComponentToPrint from "../../layouts/Prints/ComponentToPrint";
 // Local components
 import AppBar from "./components/AppBar";
 import TablesGrid from "./components/TablesGrid";
@@ -28,10 +28,8 @@ import ModalSelectBox from "./components/ModalSelectBox";
 import ModalBox from "./components/ModalBox";
 import ModalAmountToPay from "./components/ModalAmountToPay";
 // core components
-import TabPanel from "../../components/Panel/TabPanel";
 import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
-import CustomTableToPrints from "../../components/Table/CustomTableToPrints";
 // Functions
 import {
   boxShow,
@@ -51,17 +49,6 @@ import {
 } from "../../functions/cruds/orderFunctions";
 // Events
 import { collectWebsocket } from "../../events";
-
-class ComponentToPrint extends Component {
-  render() {
-    return (
-      <CustomTableToPrints
-        data={this.props.data}
-        renderRefresh={this.props.refresh}
-      />
-    );
-  }
-}
 
 function CollectsPage(props) {
   // Props
@@ -148,8 +135,7 @@ function CollectsPage(props) {
   // State for Modal Prints
   const [printList, setPrintList] = useState([]);
 
-  // Component to Refer
-  let componentRef = useRef();
+  // Button for print
   let btn = document.getElementById("printTotal");
 
   // Total Print
@@ -231,42 +217,25 @@ function CollectsPage(props) {
 
       <DrawerTablesList open={openDrawer} close={toggleDrawer} />
 
-      <TabPanel value={1} index={0}>
-        <ReactToPrint
-          trigger={() => (
-            <button id="printTotal" style={{ display: "none" }}>
-              Print
-            </button>
-          )}
-          content={() => componentRef}
-        />
-        <ComponentToPrint
-          ref={(el) => (componentRef = el)}
-          data={printList}
-          refresh={[openPassCollect, currentTableState.id]}
-        />
-      </TabPanel>
+      <ComponentToPrint
+        btnID="printTotal"
+        printList={printList}
+        refresh={[openPassCollect, currentTableState.id]}
+      />
     </CurrentTableContext.Provider>
   );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { boxes, tables, environments, collects, orders, snackbar } = state;
+  const { tables, environments, orders, snackbar } = state;
   return {
-    boxes: boxes.payload,
-    box_fetching: boxes.fetching,
-    box_loading: boxes.loading,
-    environments: environments.payload.filter(
-      (dataList) => dataList.state === 1
-    ),
+    environments: environments.payload,
     loading: environments.loading,
-    tables: tables.payload.filter((dataList) => dataList.state === 1),
+    tables: tables.payload,
+    orders_detail_payload: orders.orders_detail,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,
-    collect_fetching: collects.fetching,
-    orders_detail_payload: orders.orders_detail,
-    order_loading: orders.loading,
   };
 };
 
