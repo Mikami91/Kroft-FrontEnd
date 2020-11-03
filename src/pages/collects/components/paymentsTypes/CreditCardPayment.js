@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -18,7 +18,7 @@ function CreditCardPayment(props) {
   } = props;
 
   // Use Contexts
-  const { state, changeCard } = React.useContext(CurrentTableContext);
+  const { state, changeCard } = useContext(CurrentTableContext);
 
   return (
     <Grid container direction="column" justify="center" alignItems="center">

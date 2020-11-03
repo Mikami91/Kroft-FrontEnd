@@ -35,6 +35,7 @@ import {
   boxShow,
   boxState as boxStateFunc,
 } from "../../functions/cruds/boxFunctions";
+import { paymentShow } from "../../functions/cruds/paymentFunctions";
 import { environmentShow } from "../../functions/cruds/environmentFunctions";
 import { tableShow } from "../../functions/cruds/tableFunctions";
 import { orderShow } from "../../functions/cruds/orderFunctions";
@@ -74,6 +75,7 @@ function CollectsPage(props) {
     emptyCurrentTable,
     handleChangeAmountBS,
     handleChangeAmountUS,
+    handleChangePaymentType,
     handleChangeCreditCard,
   ] = useCurrentTable();
   // Hooks for Drawers
@@ -107,6 +109,7 @@ function CollectsPage(props) {
     boxShow();
     environmentShow();
     tableShow();
+    paymentShow();
     orderShow();
     collectShow();
   };
@@ -172,6 +175,7 @@ function CollectsPage(props) {
         emptyState: emptyCurrentTable,
         changeBs: handleChangeAmountBS,
         changeUs: handleChangeAmountUS,
+        changePaymentType: handleChangePaymentType,
         changeCard: handleChangeCreditCard,
       }}
     >

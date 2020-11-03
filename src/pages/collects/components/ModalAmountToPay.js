@@ -8,7 +8,7 @@ import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 // core components
 import CustomModal from "../../../components/Modal/CustomModal.js";
 // Local components
-import PaymentsCard from "./PaymentsCard";
+import Payments from "./Payments";
 // Functions
 import { collectCreate } from "../../../functions/cruds/collectFunctions";
 
@@ -35,10 +35,12 @@ function ModalAmountToPay(props) {
     collectCreate({
       table_id: state.id,
       order_id: state.order_id,
-      cashier_id: 1,
+      cashier_id: localStorage.getItem("employee_id"),
       box_id: localStorage.getItem("box_id"),
-      payment_id: 1,
+      payment_type: state.payment_type,
+      payment_id: state.payment_id,
       amount: state.amount,
+      card_number: state.card_number,
       currency: "bs",
     }).then((response) => {
       console.log(response);
@@ -68,7 +70,7 @@ function ModalAmountToPay(props) {
         size: "medium",
         bold: true,
       }}
-      content={<PaymentsCard />}
+      content={<Payments />}
       leftButtons={[
         {
           type: "text",

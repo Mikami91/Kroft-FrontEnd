@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import SwipeableViews from "react-swipeable-views";
 import moment from "moment";
 import "moment/locale/es";
@@ -9,8 +9,10 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 // core components
 import CardBody from "../../../components/Card/CardBody.js";
-import SingleTabs from "../../../components/CustomTabs/SingleTabs";
+import PaymentsTabs from "../../../components/CustomTabs/PaymentsTabs";
 import TabPanel from "../../../components/Panel/TabPanel.js";
+// Contexts
+import CurrentTableContext from "../../../hooks/contexts/TableContext";
 // Local components
 import CashPayment from "./paymentsTypes/CashPayment";
 import CreditCardPayment from "./paymentsTypes/CreditCardPayment";
@@ -21,16 +23,24 @@ import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
 moment.locale("es");
 moment().format("l");
 
-function PaymentsCard(props) {
-  const { fetching } = props;
+function Payments(props) {
+  // Props
+  const { paymentsTypes } = props;
+  // Use Contexts
+  const { changePaymentType } = useContext(CurrentTableContext);
   // State for Panel Tabs
   const [value, setValue] = useState(0);
   const handleChangeValue = (event, newValue) => {
     setValue(newValue);
-    // setState({
-    //   ...state,
-    //   type: newValue === 0 ? "cash" : newValue === 1 ? "card" : "cash_card",
-    // });
+    changePaymentType(
+      newValue === 0
+        ? ["cash", 1]
+        : newValue === 1
+        ? ["card", 2]
+        : newValue === 2
+        ? ["cash_card", 3]
+        : ["", null]
+    );
   };
   const handleChangeIndex = (index) => {
     setValue(index);
@@ -40,25 +50,13 @@ function PaymentsCard(props) {
     <CardBody form>
       <Grid container justify="center" alignItems="flex-start" spacing={2}>
         <Grid item xs={12} elevation={6} square="true">
-          <SingleTabs
+          <PaymentsTabs
             centered
             value={value}
             onChange={handleChangeValue}
-            // plainTabs
             headerColor="primary"
-            tabs={[
-              {
-                tabName: "Efectivo",
-                tabIcon: AttachMoneyRoundedIcon,
-              },
-              {
-                tabName: "Tarjeta",
-                tabIcon: CreditCardRoundedIcon,
-              },
-              {
-                tabName: "Efectivo y Tarjeta",
-              },
-            ]}
+            tabs={paymentsTypes}
+            tabText="name"
           />
 
           <SwipeableViews
@@ -84,10 +82,10 @@ function PaymentsCard(props) {
   );
 }
 const mapStateToProps = (state) => {
-  const { collects } = state;
+  const { payments } = state;
   return {
-    fetching: collects.fetching,
+    paymentsTypes: payments.payload,
   };
 };
 
-export default connect(mapStateToProps, null)(PaymentsCard);
+export default connect(mapStateToProps, null)(Payments);
