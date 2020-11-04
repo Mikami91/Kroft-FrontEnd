@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -10,11 +10,13 @@ import CustomMoneyInput from "../../../../components/CustomInput/CustomMoneyInpu
 // Contexts
 import CurrentTableContext from "../../../../hooks/contexts/TableContext";
 
-function CashPayment(props) {
+function CreditCardPayment(props) {
   const { fetching } = props;
 
   // Use Contexts
-  const { state, changeBs, changeUs } = React.useContext(CurrentTableContext);
+  const { state, changeBs, changeUs, changeCard } = useContext(
+    CurrentTableContext
+  );
 
   return (
     <Grid container direction="column" justify="center" alignItems="center">
@@ -46,6 +48,22 @@ function CashPayment(props) {
           customInput={CustomMoneyInput}
         />
       </Grid>
+      <Grid item xs={6} sm={6} md={6} lg={6}>
+        <NumberFormat
+          value={state.card_number}
+          onValueChange={changeCard}
+          displayType={"input"}
+          thousandSeparator={false}
+          allowNegative={false}
+          allowEmptyFormatting={false}
+          allowLeadingZeros={false}
+          decimalScale={0}
+          isNumericString={true}
+          format="#### #### #### ####"
+          mask="_"
+          customInput={CustomMoneyInput}
+        />
+      </Grid>
     </Grid>
   );
 }
@@ -57,4 +75,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(CashPayment);
+export default connect(mapStateToProps, null)(CreditCardPayment);

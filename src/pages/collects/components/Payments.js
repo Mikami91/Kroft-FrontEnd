@@ -16,6 +16,7 @@ import CurrentTableContext from "../../../hooks/contexts/TableContext";
 // Local components
 import CashPayment from "./paymentsTypes/CashPayment";
 import CreditCardPayment from "./paymentsTypes/CreditCardPayment";
+import CashCreditCardPayment from "./paymentsTypes/CashCreditCardPayment";
 // Icons
 import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
@@ -73,7 +74,7 @@ function Payments(props) {
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-              {"Cash & Card"}
+              <CashCreditCardPayment />
             </TabPanel>
           </SwipeableViews>
         </Grid>

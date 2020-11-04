@@ -20,7 +20,6 @@ export const useCurrentTable = () => {
     // Other variables
     payment_type: "cash",
     payment_id: 1,
-    box: 1,
     currency: 0,
     card_number: null,
     paid_BS: 0,
@@ -58,7 +57,6 @@ export const useCurrentTable = () => {
       environment_name: "",
       environment_prefix: "",
       // Other variables
-      box_id: localStorage.getItem("box_id"),
       currency: 0,
       card_number: null,
       paid_BS: 0,
@@ -103,8 +101,6 @@ export const useCurrentTable = () => {
       payment_id: array[1],
     });
   };
-
-  console.log(currentTableState.payment_id);
 
   const handleChangeCreditCard = (e) => {
     setCurrentTableState({

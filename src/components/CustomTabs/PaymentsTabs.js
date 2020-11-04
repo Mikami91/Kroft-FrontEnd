@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Icon from "@material-ui/core/Icon";
 // Styles
 import styles from "../../styles/components/customTabsStyle.js";
 
