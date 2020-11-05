@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useContext, useState } from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -14,7 +14,7 @@ function CashPayment(props) {
   const { fetching } = props;
 
   // Use Contexts
-  const { state, changeBs, changeUs } = React.useContext(CurrentTableContext);
+  const { state, changeBs, changeUs } = useContext(CurrentTableContext);
 
   return (
     <Grid container direction="column" justify="center" alignItems="center">

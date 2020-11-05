@@ -21,7 +21,7 @@ export const useCurrentTable = () => {
     payment_type: "cash",
     payment_id: 1,
     currency: 0,
-    card_number: null,
+    card_number: "",
     paid_BS: 0,
     paid_US: 0,
     change: 0,
@@ -58,7 +58,7 @@ export const useCurrentTable = () => {
       environment_prefix: "",
       // Other variables
       currency: 0,
-      card_number: null,
+      card_number: "",
       paid_BS: 0,
       paid_US: 0,
       change: 0,
@@ -67,29 +67,25 @@ export const useCurrentTable = () => {
 
   // Changes amount to paid value
   const handleChangeAmountBS = (e) => {
-    if (isEmptyValue(e.value) === false) {
-      let result =
-        parseInt(e.value) +
-        currentTableState.paid_US * 6.94 -
-        currentTableState.amount;
+    const { floatValue } = e;
+    if (isEmptyValue(floatValue) === false) {
+      const { paid_US, amount } = currentTableState;
       setCurrentTableState({
         ...currentTableState,
-        paid_BS: parseInt(e.value),
-        change: Math.abs(result),
+        paid_BS: floatValue,
+        change: Math.abs(floatValue + paid_US * 6.94 - amount),
       });
     }
   };
 
   const handleChangeAmountUS = (e) => {
-    if (isEmptyValue(e.value) === false) {
-      let result =
-        currentTableState.paid_BS +
-        parseInt(e.value) * 6.94 -
-        currentTableState.amount;
+    const { floatValue } = e;
+    if (isEmptyValue(floatValue) === false) {
+      const { paid_BS, amount } = currentTableState;
       setCurrentTableState({
         ...currentTableState,
-        paid_US: parseInt(e.value),
-        change: Math.abs(result),
+        paid_US: floatValue,
+        change: Math.abs(paid_BS + floatValue * 6.94 - amount),
       });
     }
   };

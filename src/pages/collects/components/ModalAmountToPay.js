@@ -1,5 +1,5 @@
 // Dependencies
-import React from "react";
+import React, { useMemo } from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -51,6 +51,58 @@ function ModalAmountToPay(props) {
       }
     });
   };
+
+  let btnDisabled = true;
+  const { payment_type, paid_BS, paid_US, card_number, amount } = state;
+  let cashValid =
+    payment_type === "cash" && paid_BS + paid_US * 6.68 >= amount
+      ? true
+      : false;
+
+  let creditCardValid =
+    payment_type === "card" && card_number !== "" && card_number.length === 16
+      ? true
+      : false;
+
+  let cashCreditCardValid =
+    payment_type === "cash_card" &&
+    paid_BS + paid_US * 6.68 >= amount &&
+    card_number !== "" &&
+    card_number.length === 16
+      ? true
+      : false;
+
+  useMemo(() => {
+    console.log("Func run");
+    if (payment_type === "cash") {
+      if (paid_BS + paid_US * 6.68 >= amount) {
+        return (btnDisabled = false);
+      }
+    }
+
+    if (payment_type === "card") {
+      if (card_number !== "" && card_number.length === 16) {
+        return (btnDisabled = false);
+      }
+    }
+
+    if (payment_type === "cash_card") {
+      if (
+        paid_BS + paid_US * 6.68 >= amount &&
+        card_number !== "" &&
+        card_number.length === 16
+      ) {
+        return (btnDisabled = false);
+      }
+    }
+  }, [
+    open,
+    cashValid === true ? state : null,
+    creditCardValid === true ? state : null,
+    cashCreditCardValid === true ? state : null,
+  ]);
+
+  // isValid;
 
   return (
     <CustomModal
@@ -125,16 +177,15 @@ function ModalAmountToPay(props) {
           edge: "start",
           size: "large",
           variant: "contained",
-          disabled:
-            state.paid_BS + state.paid_US * 6.68 >= state.amount ? false : true,
+          disabled: btnDisabled,
           onClick: handleMakeCollected,
         },
       ]}
       renderRefresh={[
         open,
-        state.change,
-        state.id,
-        state.card_number,
+        // state.change,
+        // state.id,
+        // state.card_number,
         collect_fetching,
       ]}
       loading={collect_fetching}
