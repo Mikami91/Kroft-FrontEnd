@@ -25,7 +25,7 @@ function CashPayment(props) {
           displayType={"input"}
           thousandSeparator={true}
           allowNegative={false}
-          allowEmptyFormatting={false}
+          allowEmptyFormatting={true}
           allowLeadingZeros={true}
           decimalScale={2}
           isNumericString={true}
@@ -39,7 +39,7 @@ function CashPayment(props) {
           displayType={"input"}
           thousandSeparator={true}
           allowNegative={false}
-          allowEmptyFormatting={false}
+          allowEmptyFormatting={true}
           allowLeadingZeros={false}
           decimalScale={0}
           isNumericString={true}

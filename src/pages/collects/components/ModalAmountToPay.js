@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -9,6 +9,8 @@ import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import CustomModal from "../../../components/Modal/CustomModal.js";
 // Local components
 import Payments from "./Payments";
+// Contexts
+import CurrentTableContext from "../../../hooks/contexts/TableContext";
 // Functions
 import { collectCreate } from "../../../functions/cruds/collectFunctions";
 
@@ -18,11 +20,23 @@ function ModalAmountToPay(props) {
     // Local
     open,
     close,
-    state,
-    emptyState,
     // Redux
     collect_fetching,
   } = props;
+
+  // Use Contexts
+  const {
+    state,
+    emptyState,
+    TO_PAY,
+    WITHOUT_CHANGE,
+    WITH_CHANGE,
+    PAID_OKAY,
+    CARD_OKAY,
+    cashValid,
+    cardValid,
+    cashCardValid,
+  } = useContext(CurrentTableContext);
 
   const handleCloseTotalAmount = () => {
     emptyState();
@@ -43,7 +57,6 @@ function ModalAmountToPay(props) {
       card_number: state.card_number,
       currency: "bs",
     }).then((response) => {
-      console.log(response);
       if (typeof response !== "undefined") {
         if (response.success === true) {
           handleCloseTotalAmount();
@@ -53,56 +66,21 @@ function ModalAmountToPay(props) {
   };
 
   let btnDisabled = true;
-  const { payment_type, paid_BS, paid_US, card_number, amount } = state;
-  let cashValid =
-    payment_type === "cash" && paid_BS + paid_US * 6.68 >= amount
-      ? true
-      : false;
 
-  let creditCardValid =
-    payment_type === "card" && card_number !== "" && card_number.length === 16
-      ? true
-      : false;
-
-  let cashCreditCardValid =
-    payment_type === "cash_card" &&
-    paid_BS + paid_US * 6.68 >= amount &&
-    card_number !== "" &&
-    card_number.length === 16
-      ? true
-      : false;
-
+  // Validated function
   useMemo(() => {
-    console.log("Func run");
-    if (payment_type === "cash") {
-      if (paid_BS + paid_US * 6.68 >= amount) {
-        return (btnDisabled = false);
-      }
+    if (cashValid) {
+      return (btnDisabled = false);
     }
 
-    if (payment_type === "card") {
-      if (card_number !== "" && card_number.length === 16) {
-        return (btnDisabled = false);
-      }
+    if (cardValid) {
+      return (btnDisabled = false);
     }
 
-    if (payment_type === "cash_card") {
-      if (
-        paid_BS + paid_US * 6.68 >= amount &&
-        card_number !== "" &&
-        card_number.length === 16
-      ) {
-        return (btnDisabled = false);
-      }
+    if (cashCardValid) {
+      return (btnDisabled = false);
     }
-  }, [
-    open,
-    cashValid === true ? state : null,
-    creditCardValid === true ? state : null,
-    cashCreditCardValid === true ? state : null,
-  ]);
-
-  // isValid;
+  }, [open, cashValid || cardValid || cashCardValid === true ? state : null]);
 
   return (
     <CustomModal
@@ -126,13 +104,18 @@ function ModalAmountToPay(props) {
       leftButtons={[
         {
           type: "text",
-          text:
-            state.paid_BS + state.paid_US * 6.94 < state.amount &&
-            state.change > 0
-              ? "Por pagar: "
-              : state.paid_BS + state.paid_US * 6.94 === state.amount
-              ? "Sin cambio: "
-              : "Cambio: ",
+          text: TO_PAY
+            ? "Por pagar: "
+            : WITHOUT_CHANGE
+            ? "Sin cambio: "
+            : "Cambio: ",
+          color: TO_PAY
+            ? "danger"
+            : WITHOUT_CHANGE
+            ? "default"
+            : WITH_CHANGE
+            ? "success"
+            : "",
           size: "default",
           align: "left",
           margin: true,
@@ -150,6 +133,7 @@ function ModalAmountToPay(props) {
               allowEmptyFormatting={false}
               allowLeadingZeros={false}
               decimalScale={2}
+              fixedDecimalScale={true}
               isNumericString={true}
               renderText={(value) => <span>Bs. {value}</span>}
             />
@@ -157,13 +141,7 @@ function ModalAmountToPay(props) {
           size: "default",
           align: "right",
           margin: true,
-          color:
-            state.paid_BS + state.paid_US * 6.94 < state.amount &&
-            state.change > 0
-              ? "danger"
-              : state.paid_BS + state.paid_US * 6.94 === state.amount
-              ? "default"
-              : "success",
+          color: "warning",
           display: "inline",
           bold: true,
         },

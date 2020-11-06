@@ -77,6 +77,14 @@ function CollectsPage(props) {
     handleChangeAmountUS,
     handleChangePaymentType,
     handleChangeCreditCard,
+    TO_PAY,
+    WITHOUT_CHANGE,
+    WITH_CHANGE,
+    PAID_OKAY,
+    CARD_OKAY,
+    cashValid,
+    cardValid,
+    cashCardValid,
   ] = useCurrentTable();
   // Hooks for Drawers
   const [openDrawer, toggleDrawer] = useDrawer();
@@ -177,6 +185,14 @@ function CollectsPage(props) {
         changeUs: handleChangeAmountUS,
         changePaymentType: handleChangePaymentType,
         changeCard: handleChangeCreditCard,
+        TO_PAY: TO_PAY,
+        WITHOUT_CHANGE: WITHOUT_CHANGE,
+        WITH_CHANGE: WITH_CHANGE,
+        PAID_OKAY: PAID_OKAY,
+        CARD_OKAY: CARD_OKAY,
+        cashValid: cashValid,
+        cardValid: cardValid,
+        cashCardValid: cashCardValid,
       }}
     >
       <CustomLoading open={loading} />
@@ -212,12 +228,7 @@ function CollectsPage(props) {
 
       <ModalBox open={openBox} close={toggleBox} />
 
-      <ModalAmountToPay
-        open={openAmountPay}
-        close={toggleAmountPay}
-        state={currentTableState}
-        emptyState={emptyCurrentTable}
-      />
+      <ModalAmountToPay open={openAmountPay} close={toggleAmountPay} />
 
       <DrawerTablesList open={openDrawer} close={toggleDrawer} />
 
