@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState } from "react";
+import React from "react";
 // Conecction to Store
 import { connect } from "react-redux";
 // core components
@@ -7,15 +7,7 @@ import AppBarTabs from "../../../components/AppBar/AppBarTabs.js";
 
 function AppBar(props) {
   // Props
-  const { environments } = props;
-
-  // Local State
-  const [value, setValue] = useState(0);
-
-  // Change environments
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const { environments, tabIndex, changeTabIndex } = props;
 
   return (
     <AppBarTabs
@@ -23,8 +15,8 @@ function AppBar(props) {
       data={environments}
       iconType="img"
       imagePath="images/environments/"
-      value={value}
-      onChange={handleChange}
+      value={tabIndex}
+      onChange={changeTabIndex}
       variant="fullWidth"
       scrollButtons="auto"
     />

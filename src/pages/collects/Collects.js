@@ -6,14 +6,14 @@ import { connect } from "react-redux";
 // Actions Creators
 import { hideSnackbar } from "../../redux/actions/creators/snackbarCreator";
 // Hooks
+import { useDrawer } from "../../hooks/useDrawer";
+import { useCurrentTable } from "../../hooks/useTable";
 import {
   useBoxSelectModal,
   useBoxModal,
   usePassCollectModal,
   useAmountPay,
 } from "../../hooks/useModal";
-import { useDrawer } from "../../hooks/useDrawer";
-import { useCurrentTable } from "../../hooks/useTable";
 // Contexts
 import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Layouts
@@ -62,6 +62,14 @@ function CollectsPage(props) {
     snackbar_message,
     snackbar_severity,
   } = props;
+
+  // Tabs index state
+  const [tabIndex, setTabIndex] = useState(0);
+
+  // Change environments
+  const changeTabIndex = (event, newValue) => {
+    setTabIndex(newValue);
+  };
 
   // Hooks for Modals
   const [selectBoxState, setSelectBox, toggleSelectBox] = useBoxSelectModal();
@@ -203,8 +211,12 @@ function CollectsPage(props) {
         onClose={handleCloseSnackbar}
       />
 
-      <AppBar />
-      <TablesGrid onClick={handleOpenTotalAmount} />
+      <AppBar tabIndex={tabIndex} changeTabIndex={changeTabIndex} />
+      <TablesGrid
+        tabIndex={tabIndex}
+        changeTabIndex={changeTabIndex}
+        onClick={handleOpenTotalAmount}
+      />
       <FooterBar
         refresh={handleRefresh}
         logout={handleLogout}

@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState } from "react";
+import React from "react";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -16,24 +16,17 @@ const useStyles = makeStyles(styles);
 
 function TablesGrid(props) {
   // Props
-  const { environments, tables, onClick } = props;
-
-  // Local State
-  const [value, setValue] = useState(0);
-
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+  const { environments, tables, tabIndex, changeTabIndex, onClick } = props;
 
   // Styles
   const classes = useStyles();
 
   return (
     <div className={classes.rootMenu}>
-      <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+      <SwipeableViews index={tabIndex} onChangeIndex={changeTabIndex}>
         {environments.map((index, key) => {
           return (
-            <TabPanel key={key} value={value} index={key}>
+            <TabPanel key={key} value={tabIndex} index={key}>
               <Grid
                 container
                 spacing={0}
@@ -43,7 +36,7 @@ function TablesGrid(props) {
                 alignItems="flex-start"
               >
                 <GridTables
-                  value={value}
+                  value={tabIndex}
                   data={tables}
                   keyData={"environment_id"}
                   filter={index.id}

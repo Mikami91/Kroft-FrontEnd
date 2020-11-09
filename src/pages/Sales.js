@@ -3,11 +3,14 @@ import React, { Fragment, useState, useEffect } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Actions Creators
-import { bindActionCreators } from 'redux';
-import { open, close } from '../redux/actions/creators/productCreator';
-import { infoSnackbar, hideSnackbar } from '../redux/actions/creators/snackbarCreator';
+import { bindActionCreators } from "redux";
+import { open, close } from "../redux/actions/creators/productCreator";
+import {
+  infoSnackbar,
+  hideSnackbar,
+} from "../redux/actions/creators/snackbarCreator";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -17,7 +20,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
 import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
-import TableChartIcon from '@material-ui/icons/TableChart';
+import TableChartIcon from "@material-ui/icons/TableChart";
 // Layouts
 import EmployeeAdd from "../layouts/Forms/EmployeeAdd.js";
 import ChangeTable from "../layouts/Forms/ChangeTable.js";
@@ -29,10 +32,10 @@ import TabPanel from "../components/Panel/TabPanel";
 import GridTables from "../components/Grid/GridTables";
 import FooterAppBar from "../components/Footer/FooterAppBar.js";
 import CustomModal from "../components/Modal/CustomModal.js";
-import CustomLoading from '../components/Loading/CustomLoading';
-import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
+import CustomLoading from "../components/Loading/CustomLoading";
+import CustomSnackbar from "../components/Snackbar/CustomSnackbar";
 // Assets
-import image from '../assets/img/backgrounds/productbackground.jpg';
+import image from "../assets/img/backgrounds/productbackground.jpg";
 // Functions
 import { environmentShow } from "../functions/cruds/environmentFunctions";
 import { tableShow, tableChange } from "../functions/cruds/tableFunctions";
@@ -51,8 +54,8 @@ import {
   supplies_WS,
   orders_WS,
   order_details_WS,
-  collects_WS
-} from '../events';
+  collects_WS,
+} from "../events";
 // Styles
 import styles from "../styles/pages/SalesStyle.js";
 
@@ -70,7 +73,8 @@ function SalesPage(props) {
     tables_fetching,
     snackbar_show,
     snackbar_message,
-    snackbar_severity } = props;
+    snackbar_severity,
+  } = props;
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
 
@@ -95,24 +99,19 @@ function SalesPage(props) {
     order_id: null,
     environment_id: null,
     environment_name: "",
-    waiter_id: null
+    waiter_id: null,
   });
 
   // State for Modal Products
   // const [openProducts, setOpenProducts] = useState(false);
   const handleOpenProducts = (args) => {
-
     if (args.waiter_id === null) {
-
       setCurrentTable(args);
       open_products(args);
-
     } else {
       if (args.waiter_id === parseInt(localStorage.getItem("employee_id"))) {
-
         setCurrentTable(args);
         open_products(args);
-
       } else {
         infoSnackbar("Mesa ya antedida por otro mesero.");
       }
@@ -148,7 +147,7 @@ function SalesPage(props) {
     to_table: "",
     to_table_name: "",
     to_table_number: null,
-    isFetch: false
+    isFetch: false,
   });
 
   // Empty State values
@@ -161,7 +160,7 @@ function SalesPage(props) {
       to_table: "",
       to_table_name: "",
       to_table_number: null,
-      isFetch: false
+      isFetch: false,
     });
   };
 
@@ -188,13 +187,13 @@ function SalesPage(props) {
     e.preventDefault();
     tableChange(state).then((response) => {
       console.log(response);
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         if (response.success === true) {
           handleCloseChangeTables();
           handleEmpty();
         }
       }
-    })
+    });
   };
 
   // State for Drawer
@@ -214,7 +213,7 @@ function SalesPage(props) {
   sub_categories_WS();
   products_WS();
   supplies_WS();
-  orders_WS()
+  orders_WS();
   order_details_WS();
   collects_WS();
 
@@ -229,12 +228,11 @@ function SalesPage(props) {
     subcategoryShow();
     productShow();
     orderShow();
-  }
+  };
 
   // Payloads
   useEffect(() => {
     if (is_payload === false) {
-
       handleRefresh();
 
       // Change is_payload state
@@ -247,29 +245,34 @@ function SalesPage(props) {
 
   // if (open === true) {
   if (current.env_index !== null && current.table_index !== null) {
-    let current_location = orders_list[current.env_index].tables[current.table_index];
+    let current_location =
+      orders_list[current.env_index].tables[current.table_index];
     product_orders_list = current_location.products;
-  };
+  }
 
   // Logout function
   const handleLogout = () => {
     // Empty local storage
-    localStorage.setItem('user', '');
-    localStorage.setItem('employee_id', '');
-    localStorage.setItem('token', '');
-    localStorage.setItem("head_area", '');
+    localStorage.setItem("user", "");
+    localStorage.setItem("employee_id", "");
+    localStorage.setItem("token", "");
+    localStorage.setItem("head_area", "");
     // Redirect to login page
     history.push("/Kroft-FrontEnd");
-  }
+  };
 
   // Styles
   const classes = useStyles();
 
   return (
     <Fragment>
-
       <CustomLoading open={loading} />
-      <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} onClose={handleCloseSnackbar} />
+      <CustomSnackbar
+        open={snackbar_show}
+        message={snackbar_message}
+        severity={snackbar_severity}
+        onClose={handleCloseSnackbar}
+      />
 
       <AppBarTabs
         color="inherit"
@@ -331,7 +334,7 @@ function SalesPage(props) {
             icon: KeyboardBackspaceIcon,
             size: "large",
             disabled: false,
-            onClick: handleLogout
+            onClick: handleLogout,
           },
           {
             type: "icon",
@@ -345,7 +348,7 @@ function SalesPage(props) {
           },
           {
             type: "text",
-            text: localStorage.getItem('user'),
+            text: localStorage.getItem("user"),
             color: "default",
             margin: true,
             autoSize: true,
@@ -395,7 +398,15 @@ function SalesPage(props) {
           text: "Cambio de mesas",
           size: "medium",
         }}
-        content={<ChangeTable environments={environments} tables={tables} state={state} onChangeFrom={handleChangeFrom} onChangeTo={handleChangeTo} />}
+        content={
+          <ChangeTable
+            environments={environments}
+            tables={tables}
+            state={state}
+            onChangeFrom={handleChangeFrom}
+            onChangeTo={handleChangeTo}
+          />
+        }
         centerButtons={[
           {
             type: "fab",
@@ -404,7 +415,7 @@ function SalesPage(props) {
             icon: SwapHorizIcon,
             size: "large",
             disabled: state.from_table && state.to_table !== "" ? false : true,
-            onClick: handleChangeTable
+            onClick: handleChangeTable,
           },
         ]}
         leftButtons={[
@@ -456,31 +467,32 @@ function SalesPage(props) {
         close={handleCloseProducts}
         table={currentTable}
       />
-
     </Fragment>
   );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { table, environment, product, snackbar } = state;
+  const { tables, environments, product, snackbar } = state;
   return {
-    environments: environment.payload.filter(dataList => dataList.state === 1),
-    loading: environment.loading,
-    tables: table.payload.filter(dataList => dataList.state === 1),
-    tables_fetching: table.fetching,
+    environments: environments.payload,
+    loading: environments.loading,
+    tables: tables.payload,
+    tables_fetching: tables.fetching,
     orders_list: product.orders,
     current: product.current,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,
-  }
+  };
 };
 // Functions to dispatching
-const open_products = (payload) => (open(payload));
-const close_products = (value) => (close(value));
+const open_products = (payload) => open(payload);
+const close_products = (value) => close(value);
 // Binding an object full of action creators
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ open_products, close_products }, dispatch);
-};
+}
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SalesPage));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SalesPage)
+);

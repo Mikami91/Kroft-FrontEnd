@@ -2,14 +2,22 @@
 import React, { Fragment, Component, useState, useMemo, useRef } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
-import NumberFormat from 'react-number-format';
+import NumberFormat from "react-number-format";
 // Print
-import ReactToPrint from 'react-to-print';
+import ReactToPrint from "react-to-print";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Actions Creators
-import { bindActionCreators } from 'redux';
-import { orders, more, less, remove, add_obs, delete_obs, delete_all } from '../../redux/actions/creators/productCreator';
+import { bindActionCreators } from "redux";
+import {
+  orders,
+  more,
+  less,
+  remove,
+  add_obs,
+  delete_obs,
+  delete_all,
+} from "../../redux/actions/creators/productCreator";
 // UI Material Components
 import Drawer from "@material-ui/core/Drawer";
 import Grid from "@material-ui/core/Grid";
@@ -27,9 +35,9 @@ import CustomTableList from "../../components/Table/CustomTableList.js";
 import CustomTableFilter from "../../components/Table/CustomTableFilter.js";
 import CustomTableListPrints from "../../components/Table/CustomTableListPrints";
 import CustomTableToPrints from "../../components/Table/CustomTableToPrints";
-import ObservationPopover from '../../components/Popover/ObservationPopover';
-import CustomPopover from '../../components/Popover/CustomPopover';
-import CustomLoading from '../../components/Loading/CustomLoading';
+import ObservationPopover from "../../components/Popover/ObservationPopover";
+import CustomPopover from "../../components/Popover/CustomPopover";
+import CustomLoading from "../../components/Loading/CustomLoading";
 // Icons
 import UndoIcon from "@material-ui/icons/Undo";
 import FormatListBulletedIcon from "@material-ui/icons/FormatListBulleted";
@@ -41,12 +49,16 @@ import PrintIcon from "@material-ui/icons/Print";
 import DeleteSweepIcon from "@material-ui/icons/DeleteSweep";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import SendIcon from "@material-ui/icons/Send";
-import RestoreIcon from '@material-ui/icons/Restore';
+import RestoreIcon from "@material-ui/icons/Restore";
 import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
-import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
-import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
+import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
+import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 // Functions
-import { orderCreate, orderSend, orderCancel } from '../../functions/cruds/orderFunctions';
+import {
+  orderCreate,
+  orderSend,
+  orderCancel,
+} from "../../functions/cruds/orderFunctions";
 
 // Styles
 import styles from "../../styles/components/drawerStyle.js";
@@ -56,7 +68,10 @@ const useStyles = makeStyles(styles);
 class ComponentToPrint extends Component {
   render() {
     return (
-      <CustomTableToPrints data={this.props.data} renderRefresh={this.props.refresh} />
+      <CustomTableToPrints
+        data={this.props.data}
+        renderRefresh={this.props.refresh}
+      />
     );
   }
 }
@@ -64,9 +79,21 @@ class ComponentToPrint extends Component {
 function DrawerProducts(props) {
   const {
     /* Redux */
-    categories, products, tables, orders_list, current, orders_detail_payload, order_loading,
+    categories,
+    products,
+    tables,
+    orders_list,
+    current,
+    orders_detail_payload,
+    order_loading,
     /* Props */
-    direction, variant, open, close, background, table } = props;
+    direction,
+    variant,
+    open,
+    close,
+    background,
+    table,
+  } = props;
 
   // Categories index State
   const [value, setValue] = useState(0);
@@ -82,16 +109,18 @@ function DrawerProducts(props) {
   // State for Modal Prints
   const [openPrints, setOpenPrints] = useState({
     open: false,
-    list: []
+    list: [],
   });
-  const handleOpenPrints = () => setOpenPrints({
-    ...state,
-    open: true
-  });
-  const handleClosePrints = () => setOpenPrints({
-    open: false,
-    list: []
-  });
+  const handleOpenPrints = () =>
+    setOpenPrints({
+      ...state,
+      open: true,
+    });
+  const handleClosePrints = () =>
+    setOpenPrints({
+      open: false,
+      list: [],
+    });
 
   // State for Modal Total Amount
   const [openTotal, setOpenTotal] = useState(false);
@@ -108,8 +137,17 @@ function DrawerProducts(props) {
   let table_amount = 0;
   let current_order_id = null;
 
-  tables.reduce((index, cur) => cur.id === current.table_id ?
-    [table_state = cur.is_busy, current_order_id = cur.order_id, table_amount = cur.amount] : null, []);
+  tables.reduce(
+    (index, cur) =>
+      cur.id === current.table_id
+        ? [
+            (table_state = cur.is_busy),
+            (current_order_id = cur.order_id),
+            (table_amount = cur.amount),
+          ]
+        : null,
+    []
+  );
 
   // Products Orders List
   let product_orders_list = [];
@@ -120,28 +158,32 @@ function DrawerProducts(props) {
 
   if (open === true) {
     if (current.env_index !== null && current.table_index !== null) {
-      let current_location = orders_list[current.env_index].tables[current.table_index];
+      let current_location =
+        orders_list[current.env_index].tables[current.table_index];
       product_orders_list = current_location.products;
       global_quantity = current_location.global_quantity;
       global_amount = current_location.global_amount;
-    };
-  };
+    }
+  }
 
   // Add Product quantity
-  const handleMoreQuantity = (product_id) => more_quantity({ product_id: product_id });
+  const handleMoreQuantity = (product_id) =>
+    more_quantity({ product_id: product_id });
 
   // Add Product quantity
-  const handleLessQuantity = (product_id) => less_quantity({ product_id: product_id });
+  const handleLessQuantity = (product_id) =>
+    less_quantity({ product_id: product_id });
 
   // Add Product quantity
-  const handleRemoveProduct = (product_id) => remove_product({ product_id: product_id });
+  const handleRemoveProduct = (product_id) =>
+    remove_product({ product_id: product_id });
 
   // Open and Close Observation Popopver
   const [state, setState] = useState({
     open: false,
     anchorEl: null,
     product_id: null,
-    observation: ''
+    observation: "",
   });
 
   const handleOpenObservation = (e, id, observation) => {
@@ -149,7 +191,7 @@ function DrawerProducts(props) {
       open: true,
       anchorEl: e.currentTarget,
       product_id: id,
-      observation: observation
+      observation: observation,
     });
   };
   const handleCloseObservation = () => {
@@ -157,20 +199,23 @@ function DrawerProducts(props) {
       open: false,
       anchorEl: null,
       product_id: null,
-      observation: ''
+      observation: "",
     });
   };
   // Delete observation
   const handleDelete = () => {
     delete_obs({ product_id: state.product_id });
     handleCloseObservation();
-  }
+  };
 
   // Save observation
   const handleSave = () => {
-    add_obs({ product_id: state.product_id, observation: document.getElementById('textarea').value });
+    add_obs({
+      product_id: state.product_id,
+      observation: document.getElementById("textarea").value,
+    });
     handleCloseObservation();
-  }
+  };
 
   // Open and Close Confirmation Popopver
   const [state2, setState2] = useState({
@@ -207,21 +252,25 @@ function DrawerProducts(props) {
     e.preventDefault();
     await setOpenPrints({
       ...state,
-      list: orders_detail_payload.filter(index => index.order_number === arg.order_number && index.order_id === arg.order_id)
+      list: orders_detail_payload.filter(
+        (index) =>
+          index.order_number === arg.order_number &&
+          index.order_id === arg.order_id
+      ),
     });
     btn2.click();
-  };
+  }
 
   // Create Order function
   async function handleCreateOrder() {
     handleCloseOrders();
     orderCreate({
-      employee_id: localStorage.getItem('employee_id'),
+      employee_id: localStorage.getItem("employee_id"),
       table_id: current.table_id,
       total_amount: global_amount,
-      products: product_orders_list
+      products: product_orders_list,
     }).then((response) => {
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         if (response.success === true) {
           // Delete Orders List
           delete_all();
@@ -232,7 +281,7 @@ function DrawerProducts(props) {
         }
       }
     });
-  };
+  }
 
   // Send Order function
   const handleSendOrder = (e) => {
@@ -241,7 +290,7 @@ function DrawerProducts(props) {
       order_id: current_order_id,
       table_id: current.table_id,
     }).then((response) => {
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         if (response === true) {
           close();
         }
@@ -256,7 +305,7 @@ function DrawerProducts(props) {
       order_id: current_order_id,
       table_id: current.table_id,
     }).then((response) => {
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         if (response === true) {
           console.log("Order cancel");
         }
@@ -287,7 +336,6 @@ function DrawerProducts(props) {
           keepMounted: true,
         }}
       >
-
         <CustomLoading open={order_loading} text="Enviando orden..." />
 
         <AppBarIcons
@@ -342,12 +390,20 @@ function DrawerProducts(props) {
           floatChip={{
             primary: `${table.name} ${table.number}`,
             secondary: table.environment_name,
-            color: table_state === 0 ? "success" : table_state === 1 ? "danger" : table_state === 2 ? "warning" : "gray",
+            color:
+              table_state === 0
+                ? "success"
+                : table_state === 1
+                ? "danger"
+                : table_state === 2
+                ? "warning"
+                : "gray",
             type: "icon",
-            icon: TableChartRoundedIcon
+            icon: TableChartRoundedIcon,
           }}
           fabButton={{
-            disabled: global_quantity <= 0 ? true : table_state === 2 ? true : false,
+            disabled:
+              global_quantity <= 0 ? true : table_state === 2 ? true : false,
             color: "secondary",
             label: "Lista de ordenes",
             quantity: global_quantity,
@@ -377,23 +433,20 @@ function DrawerProducts(props) {
             },
             {
               type: "text",
-              text:
-                [<NumberFormat
+              text: [
+                <NumberFormat
                   key={999}
                   value={table_amount}
-                  displayType={'text'}
+                  displayType={"text"}
                   thousandSeparator={true}
                   allowNegative={false}
                   allowEmptyFormatting={false}
                   allowLeadingZeros={false}
                   decimalScale={2}
                   isNumericString={true}
-                  renderText={value =>
-                    <span>
-                      Bs. {value}
-                    </span>
-                  }
-                />],
+                  renderText={(value) => <span>Bs. {value}</span>}
+                />,
+              ],
               color: "warning",
               margin: true,
               size: "medium",
@@ -425,11 +478,21 @@ function DrawerProducts(props) {
               type: "fab",
               text: table_state === 1 ? "Enviar orden" : "Cancelar orden",
               color: table_state === 1 ? "primary" : "secondary",
-              icon: table_state === 1 ? SendIcon : table_state === 2 ? RestoreIcon : SendIcon,
+              icon:
+                table_state === 1
+                  ? SendIcon
+                  : table_state === 2
+                  ? RestoreIcon
+                  : SendIcon,
               edge: "end",
               size: "large",
               disabled: table_amount > 0 ? false : true,
-              onClick: table_state === 1 ? handleSendOrder : table_state === 2 ? handleCancelOrder : null
+              onClick:
+                table_state === 1
+                  ? handleSendOrder
+                  : table_state === 2
+                  ? handleCancelOrder
+                  : null,
             },
           ]}
         />
@@ -562,22 +625,20 @@ function DrawerProducts(props) {
             },
             {
               type: "text",
-              text: [<NumberFormat
-                key={9999}
-                value={global_amount}
-                displayType={'text'}
-                thousandSeparator={true}
-                allowNegative={false}
-                allowEmptyFormatting={false}
-                allowLeadingZeros={false}
-                decimalScale={2}
-                isNumericString={true}
-                renderText={value =>
-                  <span>
-                    Bs. {value}
-                  </span>
-                }
-              />],
+              text: [
+                <NumberFormat
+                  key={9999}
+                  value={global_amount}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  allowNegative={false}
+                  allowEmptyFormatting={false}
+                  allowLeadingZeros={false}
+                  decimalScale={2}
+                  isNumericString={true}
+                  renderText={(value) => <span>Bs. {value}</span>}
+                />,
+              ],
               align: "right",
               margin: true,
               size: "medium",
@@ -592,7 +653,7 @@ function DrawerProducts(props) {
               color: "primary",
               variant: "contained",
               icon: PrintIcon,
-              onClick: handleCreateOrder
+              onClick: handleCreateOrder,
             },
           ]}
           renderRefresh={[openTableOrders, global_quantity]}
@@ -737,8 +798,8 @@ function DrawerProducts(props) {
           }
           leftButtons={[
             {
-              field: "delete",
               type: "icon",
+              text: "Imprimir",
               size: "medium",
               align: "center",
               icon: DeleteIcon,
@@ -756,23 +817,20 @@ function DrawerProducts(props) {
             },
             {
               type: "text",
-              text:
-                [<NumberFormat
+              text: [
+                <NumberFormat
                   key={999}
                   value={table_amount}
-                  displayType={'text'}
+                  displayType={"text"}
                   thousandSeparator={true}
                   allowNegative={false}
                   allowEmptyFormatting={false}
                   allowLeadingZeros={false}
                   decimalScale={2}
                   isNumericString={true}
-                  renderText={value =>
-                    <span>
-                      Bs. {value}
-                    </span>
-                  }
-                />],
+                  renderText={(value) => <span>Bs. {value}</span>}
+                />,
+              ],
               color: "warning",
               margin: true,
               size: "medium",
@@ -788,10 +846,12 @@ function DrawerProducts(props) {
           state={state}
           handleClose={handleCloseObservation}
           content={
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-            }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
               <TextField
                 autoFocus={state.observation === "" ? true : false}
                 id="textarea"
@@ -805,19 +865,32 @@ function DrawerProducts(props) {
                 variant="outlined"
               />
               <Tooltip placement="bottom" title="Cancelar" arrow>
-                <IconButton aria-label="Cancelar" color="inherit" onClick={handleCloseObservation}>
+                <IconButton
+                  aria-label="Cancelar"
+                  color="inherit"
+                  onClick={handleCloseObservation}
+                >
                   <CancelRoundedIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
               <Tooltip placement="bottom" title="Eliminar" arrow>
                 <span>
-                  <IconButton aria-label="Eliminar" color="secondary" disabled={state.observation === "" ? true : false} onClick={handleDelete}>
+                  <IconButton
+                    aria-label="Eliminar"
+                    color="secondary"
+                    disabled={state.observation === "" ? true : false}
+                    onClick={handleDelete}
+                  >
                     <DeleteIcon fontSize="large" />
                   </IconButton>
                 </span>
               </Tooltip>
               <Tooltip placement="bottom" title="Guardar" arrow>
-                <IconButton aria-label="Guardar" color="primary" onClick={handleSave}>
+                <IconButton
+                  aria-label="Guardar"
+                  color="primary"
+                  onClick={handleSave}
+                >
                   <CheckCircleRoundedIcon fontSize="large" />
                 </IconButton>
               </Tooltip>
@@ -831,48 +904,83 @@ function DrawerProducts(props) {
           content={
             <Fragment>
               <p>¿Eliminar toda la lista?</p>
-              <div style={{
-                display: 'flex',
-                alignItems: 'center',
-              }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
                 <Tooltip placement="bottom" title="Cancelar" arrow>
-                  <IconButton aria-label="Cancelar" color="inherit" onClick={handleCloseConfirmation}>
+                  <IconButton
+                    aria-label="Cancelar"
+                    color="inherit"
+                    onClick={handleCloseConfirmation}
+                  >
                     <CancelRoundedIcon fontSize="large" />
                   </IconButton>
                 </Tooltip>
                 <Tooltip placement="bottom" title="Eliminar" arrow>
-                  <IconButton aria-label="Eliminar" color="secondary" onClick={handleDeleteOrders}>
+                  <IconButton
+                    aria-label="Eliminar"
+                    color="secondary"
+                    onClick={handleDeleteOrders}
+                  >
                     <DeleteIcon fontSize="large" />
                   </IconButton>
                 </Tooltip>
               </div>
-
             </Fragment>
           }
         />
 
         <TabPanel value={1} index={0}>
-
           <ReactToPrint
-            trigger={() => <button id="printOrder" style={{ display: 'none' }}>Print</button>}
+            trigger={() => (
+              <button id="printOrder" style={{ display: "none" }}>
+                Print
+              </button>
+            )}
             content={() => componentRef}
-          // onPrintError={printError}
-          // onAfterPrint={printOk}
+            // onPrintError={printError}
+            // onAfterPrint={printOk}
           />
 
           <ReactToPrint
-            trigger={() => <button id="printHistory" style={{ display: 'none' }}>Print</button>}
+            trigger={() => (
+              <button id="printHistory" style={{ display: "none" }}>
+                Print
+              </button>
+            )}
             content={() => componentRef2}
           />
 
-          <ComponentToPrint ref={el => (componentRef = el)} data={product_orders_list} refresh={openTableOrders} />
-          <ComponentToPrint ref={el2 => (componentRef2 = el2)} data={openPrints.list} refresh={openPrints.open} />
-
+          <ComponentToPrint
+            ref={(el) => (componentRef = el)}
+            data={product_orders_list}
+            refresh={openTableOrders}
+          />
+          <ComponentToPrint
+            ref={(el2) => (componentRef2 = el2)}
+            data={openPrints.list}
+            refresh={openPrints.open}
+          />
         </TabPanel>
-
       </Drawer>
     );
-  }, [open, openTableOrders, openPrints.open, openTotal, value, current, global_quantity, tables, table_state, state.open, state2.open, order_loading]);
+  }, [
+    open,
+    openTableOrders,
+    openPrints.open,
+    openTotal,
+    value,
+    current,
+    global_quantity,
+    tables,
+    table_state,
+    state.open,
+    state2.open,
+    order_loading,
+  ]);
 }
 // PropTypes
 DrawerProducts.defaultProps = {
@@ -891,24 +999,24 @@ DrawerProducts.propTypes = {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { category, product, orders, table } = state;
+  const { category, product, orders, tables } = state;
   return {
-    categories: category.payload.filter(dataList => dataList.state === 1),
-    products: product.payload.filter(dataList => dataList.state === 1),
-    tables: table.payload.filter(dataList => dataList.state === 1),
+    categories: category.payload,
+    products: product.payload,
+    tables: tables.payload,
     orders_list: product.orders,
     current: product.current,
     orders_detail_payload: orders.orders_detail,
     order_loading: orders.loading,
-  }
+  };
 };
 // Functions to dispatching
-const set_orders = (payload) => (orders(payload));
-const more_quantity = (id) => (more(id));
-const less_quantity = (id) => (less(id));
-const remove_product = (id) => (remove(id));
+const set_orders = (payload) => orders(payload);
+const more_quantity = (id) => more(id);
+const less_quantity = (id) => less(id);
+const remove_product = (id) => remove(id);
 // Binding an object full of action creators
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ set_orders }, dispatch);
-};
+}
 export default connect(mapStateToProps, mapDispatchToProps)(DrawerProducts);
