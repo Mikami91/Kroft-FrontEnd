@@ -46,16 +46,37 @@ function ModalAmountToPay(props) {
   // Send Order function
   const handleMakeCollected = (e) => {
     e.preventDefault();
+    const {
+      id,
+      order_id,
+      payment_type,
+      payment_id,
+      card_number,
+      total_amount,
+      bs_amount,
+      us_amount,
+      change_amount
+    } = state;
     collectCreate({
-      table_id: state.id,
-      order_id: state.order_id,
+      table_id: id,
+      order_id: order_id,
       cashier_id: localStorage.getItem("employee_id"),
       box_id: localStorage.getItem("box_id"),
-      payment_type: state.payment_type,
-      payment_id: state.payment_id,
-      amount: state.amount,
-      card_number: state.card_number,
-      currency: "bs",
+      payment_type: payment_type,
+      payment_id: payment_id,
+      card_number: card_number,
+      currency:
+        bs_amount && us_amount !== 0
+          ? "Bs/Us"
+          : bs_amount !== 0
+            ? "Bs"
+            : us_amount !== 0
+              ? "Us"
+              : "",
+      total_amount: total_amount,
+      bs_amount: bs_amount,
+      us_amount: us_amount,
+      change_amount: change_amount,
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
@@ -94,7 +115,7 @@ function ModalAmountToPay(props) {
         bold: true,
       }}
       subtitle={{
-        text: `Bs. ${state.amount}`,
+        text: `Bs. ${state.total_amount}`,
         color: "warning",
         margin: true,
         size: "medium",
@@ -107,15 +128,17 @@ function ModalAmountToPay(props) {
           text: TO_PAY
             ? "Por pagar: "
             : WITHOUT_CHANGE
-            ? "Sin cambio: "
-            : "Cambio: ",
+              ? "Sin cambio: "
+              : WITH_CHANGE
+                ? "Cambio: "
+                : "",
           color: TO_PAY
             ? "danger"
             : WITHOUT_CHANGE
-            ? "default"
-            : WITH_CHANGE
-            ? "success"
-            : "",
+              ? "default"
+              : WITH_CHANGE
+                ? "success"
+                : "",
           size: "default",
           align: "left",
           margin: true,
@@ -124,20 +147,23 @@ function ModalAmountToPay(props) {
         },
         {
           type: "text",
-          text: (
-            <NumberFormat
-              value={state.change}
-              displayType={"text"}
-              thousandSeparator={true}
-              allowNegative={false}
-              allowEmptyFormatting={false}
-              allowLeadingZeros={false}
-              decimalScale={2}
-              fixedDecimalScale={true}
-              isNumericString={true}
-              renderText={(value) => <span>Bs. {value}</span>}
-            />
-          ),
+          text:
+            TO_PAY || WITHOUT_CHANGE || WITH_CHANGE ? (
+              <NumberFormat
+                value={state.change_amount}
+                displayType={"text"}
+                thousandSeparator={true}
+                allowNegative={false}
+                allowEmptyFormatting={false}
+                allowLeadingZeros={false}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                isNumericString={true}
+                renderText={(value) => <span>Bs. {value}</span>}
+              />
+            ) : (
+                ""
+              ),
           size: "default",
           align: "right",
           margin: true,
@@ -161,7 +187,7 @@ function ModalAmountToPay(props) {
       ]}
       renderRefresh={[
         open,
-        // state.change,
+        // state.change_amount,
         // state.id,
         // state.card_number,
         collect_fetching,

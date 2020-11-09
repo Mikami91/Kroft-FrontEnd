@@ -20,7 +20,7 @@ function CashPayment(props) {
     <Grid container direction="column" justify="center" alignItems="center">
       <Grid item xs={6} sm={6} md={6} lg={6}>
         <NumberFormat
-          value={state.paid_BS === 0 ? "" : state.paid_BS}
+          value={state.bs_amount === 0 ? "" : state.bs_amount}
           onValueChange={changeBs}
           displayType={"input"}
           thousandSeparator={true}
@@ -34,7 +34,7 @@ function CashPayment(props) {
       </Grid>
       <Grid item xs={6} sm={6} md={6} lg={6}>
         <NumberFormat
-          value={state.paid_US === 0 ? "" : state.paid_US}
+          value={state.us_amount === 0 ? "" : state.us_amount}
           onValueChange={changeUs}
           displayType={"input"}
           thousandSeparator={true}

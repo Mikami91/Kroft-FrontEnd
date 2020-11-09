@@ -141,10 +141,10 @@ function DrawerProducts(props) {
     (index, cur) =>
       cur.id === current.table_id
         ? [
-            (table_state = cur.is_busy),
-            (current_order_id = cur.order_id),
-            (table_amount = cur.amount),
-          ]
+          (table_state = cur.is_busy),
+          (current_order_id = cur.order_id),
+          (table_amount = cur.total_amount),
+        ]
         : null,
     []
   );
@@ -394,10 +394,10 @@ function DrawerProducts(props) {
               table_state === 0
                 ? "success"
                 : table_state === 1
-                ? "danger"
-                : table_state === 2
-                ? "warning"
-                : "gray",
+                  ? "danger"
+                  : table_state === 2
+                    ? "warning"
+                    : "gray",
             type: "icon",
             icon: TableChartRoundedIcon,
           }}
@@ -443,8 +443,9 @@ function DrawerProducts(props) {
                   allowEmptyFormatting={false}
                   allowLeadingZeros={false}
                   decimalScale={2}
+                  fixedDecimalScale={true}
                   isNumericString={true}
-                  renderText={(value) => <span>Bs. {value}</span>}
+                  renderText={(value) => <span>Bs. {table_amount > 0 ? value : '0.00'}</span>}
                 />,
               ],
               color: "warning",
@@ -482,8 +483,8 @@ function DrawerProducts(props) {
                 table_state === 1
                   ? SendIcon
                   : table_state === 2
-                  ? RestoreIcon
-                  : SendIcon,
+                    ? RestoreIcon
+                    : SendIcon,
               edge: "end",
               size: "large",
               disabled: table_amount > 0 ? false : true,
@@ -491,8 +492,8 @@ function DrawerProducts(props) {
                 table_state === 1
                   ? handleSendOrder
                   : table_state === 2
-                  ? handleCancelOrder
-                  : null,
+                    ? handleCancelOrder
+                    : null,
             },
           ]}
         />
@@ -941,8 +942,8 @@ function DrawerProducts(props) {
               </button>
             )}
             content={() => componentRef}
-            // onPrintError={printError}
-            // onAfterPrint={printOk}
+          // onPrintError={printError}
+          // onAfterPrint={printOk}
           />
 
           <ReactToPrint

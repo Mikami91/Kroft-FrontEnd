@@ -115,7 +115,7 @@ function ModalPassCollect(props) {
         bold: true,
       }}
       subtitle={{
-        text: `Bs. ${state.amount}`,
+        text: `Bs. ${state.total_amount}`,
         color: "warning",
         margin: true,
         size: "medium",
@@ -140,7 +140,7 @@ function ModalPassCollect(props) {
           icon: PrintIcon,
           edge: false,
           size: "large",
-          disabled: state.amount > 0 ? false : true,
+          disabled: state.total_amount > 0 ? false : true,
           onClick: handleTotalPrint,
         },
       ]}
@@ -153,7 +153,7 @@ function ModalPassCollect(props) {
           edge: "start",
           size: "large",
           variant: "contained",
-          disabled: state.amount > 0 ? false : true,
+          disabled: state.total_amount > 0 ? false : true,
           onClick: state.is_busy === 1 ? handleSendOrder : null,
         },
       ]}
