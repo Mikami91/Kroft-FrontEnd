@@ -8,7 +8,7 @@ import CustomModal from "../../../components/Modal/CustomModal.js";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 // Functions
-import { boxState as boxStateFunc } from "../../../functions/cruds/boxFunctions";
+import { boxOpen } from "../../../functions/cruds/boxFunctions";
 
 function ModalSelectBox(props) {
   // Props
@@ -29,7 +29,7 @@ function ModalSelectBox(props) {
   // Select Box function
   const handleSelectBox = (e) => {
     e.preventDefault();
-    boxStateFunc(state).then((response) => {
+    boxOpen(state).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
           close();

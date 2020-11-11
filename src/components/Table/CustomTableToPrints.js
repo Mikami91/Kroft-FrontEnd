@@ -19,6 +19,8 @@ const CustomTableToPrints = (props) => {
         /* Props */
         data, renderRefresh } = props;
 
+        console.log(data)
+
     // Styles
     const classes = useStyles();
 

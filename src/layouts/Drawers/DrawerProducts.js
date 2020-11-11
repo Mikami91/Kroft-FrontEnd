@@ -35,6 +35,7 @@ import CustomTableList from "../../components/Table/CustomTableList.js";
 import CustomTableFilter from "../../components/Table/CustomTableFilter.js";
 import CustomTableListPrints from "../../components/Table/CustomTableListPrints";
 import CustomTableToPrints from "../../components/Table/CustomTableToPrints";
+import ComponentToPrint from "../../layouts/Prints/ComponentToPrint";
 import ObservationPopover from "../../components/Popover/ObservationPopover";
 import CustomPopover from "../../components/Popover/CustomPopover";
 import CustomLoading from "../../components/Loading/CustomLoading";
@@ -53,6 +54,7 @@ import RestoreIcon from "@material-ui/icons/Restore";
 import TableChartRoundedIcon from "@material-ui/icons/TableChartRounded";
 import CheckCircleRoundedIcon from "@material-ui/icons/CheckCircleRounded";
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
+import PrintRounded from "@material-ui/icons/PrintRounded";
 // Functions
 import {
   orderCreate,
@@ -65,7 +67,7 @@ import styles from "../../styles/components/drawerStyle.js";
 
 const useStyles = makeStyles(styles);
 
-class ComponentToPrint extends Component {
+class ComponentToPrint2 extends Component {
   render() {
     return (
       <CustomTableToPrints
@@ -141,10 +143,10 @@ function DrawerProducts(props) {
     (index, cur) =>
       cur.id === current.table_id
         ? [
-          (table_state = cur.is_busy),
-          (current_order_id = cur.order_id),
-          (table_amount = cur.total_amount),
-        ]
+            (table_state = cur.is_busy),
+            (current_order_id = cur.order_id),
+            (table_amount = cur.total_amount),
+          ]
         : null,
     []
   );
@@ -246,6 +248,7 @@ function DrawerProducts(props) {
 
   let btn = document.getElementById("printOrder");
   let btn2 = document.getElementById("printHistory");
+  let btn3 = document.getElementById("printTotal");
 
   // Print Order History
   async function handlePrintHistory(e, arg) {
@@ -313,7 +316,17 @@ function DrawerProducts(props) {
     });
   };
 
-  const handleOnClick = (e) => console.log(e.currentTarget);
+  // State for Modal Prints
+  const [printList, setPrintList] = useState([]);
+
+  // Total Print
+  const handleTotalPrint = async (e) => {
+    e.preventDefault();
+    await setPrintList(
+      orders_detail_payload.filter((index) => index.order_id === table.order_id)
+    );
+    btn3.click();
+  };
 
   // Styles
   const classes = useStyles();
@@ -321,6 +334,7 @@ function DrawerProducts(props) {
   // Component to Refer
   let componentRef = useRef();
   let componentRef2 = useRef();
+  let componentRef3 = useRef();
 
   // Using useMemo hook
   return useMemo(() => {
@@ -394,10 +408,10 @@ function DrawerProducts(props) {
               table_state === 0
                 ? "success"
                 : table_state === 1
-                  ? "danger"
-                  : table_state === 2
-                    ? "warning"
-                    : "gray",
+                ? "danger"
+                : table_state === 2
+                ? "warning"
+                : "gray",
             type: "icon",
             icon: TableChartRoundedIcon,
           }}
@@ -445,7 +459,9 @@ function DrawerProducts(props) {
                   decimalScale={2}
                   fixedDecimalScale={true}
                   isNumericString={true}
-                  renderText={(value) => <span>Bs. {table_amount > 0 ? value : '0.00'}</span>}
+                  renderText={(value) => (
+                    <span>Bs. {table_amount > 0 ? value : "0.00"}</span>
+                  )}
                 />,
               ],
               color: "warning",
@@ -483,8 +499,8 @@ function DrawerProducts(props) {
                 table_state === 1
                   ? SendIcon
                   : table_state === 2
-                    ? RestoreIcon
-                    : SendIcon,
+                  ? RestoreIcon
+                  : SendIcon,
               edge: "end",
               size: "large",
               disabled: table_amount > 0 ? false : true,
@@ -492,8 +508,8 @@ function DrawerProducts(props) {
                 table_state === 1
                   ? handleSendOrder
                   : table_state === 2
-                    ? handleCancelOrder
-                    : null,
+                  ? handleCancelOrder
+                  : null,
             },
           ]}
         />
@@ -803,9 +819,9 @@ function DrawerProducts(props) {
               text: "Imprimir",
               size: "medium",
               align: "center",
-              icon: DeleteIcon,
+              icon: PrintRounded,
               iconColor: "secondary",
-              onClick: handleOnClick,
+              onClick: handleTotalPrint,
             },
           ]}
           rightButtons={[
@@ -942,8 +958,6 @@ function DrawerProducts(props) {
               </button>
             )}
             content={() => componentRef}
-          // onPrintError={printError}
-          // onAfterPrint={printOk}
           />
 
           <ReactToPrint
@@ -955,17 +969,23 @@ function DrawerProducts(props) {
             content={() => componentRef2}
           />
 
-          <ComponentToPrint
+          <ComponentToPrint2
             ref={(el) => (componentRef = el)}
             data={product_orders_list}
             refresh={openTableOrders}
           />
-          <ComponentToPrint
+          <ComponentToPrint2
             ref={(el2) => (componentRef2 = el2)}
             data={openPrints.list}
             refresh={openPrints.open}
           />
         </TabPanel>
+
+        <ComponentToPrint
+          btnID="printTotal"
+          printList={printList}
+          refresh={[openTotal, printList]}
+        />
       </Drawer>
     );
   }, [
