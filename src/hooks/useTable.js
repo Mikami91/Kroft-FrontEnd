@@ -17,13 +17,19 @@ export const useCurrentTable = () => {
     environment_id: null,
     environment_name: "",
     environment_prefix: "",
-    // Other variables
+    // Payments
     payment_type: "cash",
     payment_id: 1,
+    credit_card1_number: "",
+    credit_card2_number: "",
+    credit_card3_number: "",
     currency: 0,
-    card_number: "",
     bs_amount: 0,
     us_amount: 0,
+    company_name: "",
+    responsable: "",
+    ci: "",
+    phone: "",
     change_amount: 0,
   });
 
@@ -31,7 +37,13 @@ export const useCurrentTable = () => {
     payment_type,
     bs_amount,
     us_amount,
-    card_number,
+    credit_card1_number,
+    credit_card2_number,
+    credit_card3_number,
+    company_name,
+    responsable,
+    ci,
+    phone,
     total_amount,
     change_amount,
   } = currentTableState;
@@ -62,20 +74,28 @@ export const useCurrentTable = () => {
       is_busy: null,
       order_id: null,
       state: null,
+      // Environment variables
       environment_id: null,
       environment_name: "",
       environment_prefix: "",
-      // Other variables
+      // Payments
+      credit_card1_number: "",
+      credit_card2_number: "",
+      credit_card3_number: "",
       currency: 0,
-      card_number: "",
       bs_amount: 0,
       us_amount: 0,
+      company_name: "",
+      responsable: "",
+      ci: "",
+      phone: "",
       change_amount: 0,
     });
   };
 
   // Changes total_amount to paid value
-  const handleChangeAmountBS = (e) => {
+  const changeAmountBS = (e) => {
+    console.log(e);
     let value = isEmptyValue(e.floatValue) ? 0 : e.floatValue;
     setCurrentTableState({
       ...currentTableState,
@@ -84,7 +104,7 @@ export const useCurrentTable = () => {
     });
   };
 
-  const handleChangeAmountUS = (e) => {
+  const changeAmountUS = (e) => {
     let value = isEmptyValue(e.floatValue) ? 0 : e.floatValue;
     setCurrentTableState({
       ...currentTableState,
@@ -93,7 +113,7 @@ export const useCurrentTable = () => {
     });
   };
 
-  const handleChangePaymentType = (array) => {
+  const changePaymentType = (array) => {
     setCurrentTableState({
       ...currentTableState,
       payment_type: array[0],
@@ -101,20 +121,51 @@ export const useCurrentTable = () => {
     });
   };
 
-  const handleChangeCreditCard = (e) => {
+  const changeCreditCard1 = (e) => {
     setCurrentTableState({
       ...currentTableState,
-      card_number: e.value,
+      credit_card1_number: e.value,
+    });
+  };
+
+  const changeCreditCard2 = (e) => {
+    setCurrentTableState({
+      ...currentTableState,
+      credit_card2_number: e.value,
+    });
+  };
+
+  const changeCreditCard3 = (e) => {
+    setCurrentTableState({
+      ...currentTableState,
+      credit_card3_number: e.value,
+    });
+  };
+
+  const changeWillPay = (e) => {
+    const { name, value } = e.target;
+    setCurrentTableState({
+      ...currentTableState,
+      [name]: value,
     });
   };
 
   // Validated parameters
-  const TO_PAY = us_amount * 6.94 + bs_amount < total_amount && change_amount > 0.00;
+  const TO_PAY =
+    us_amount * 6.94 + bs_amount < total_amount && change_amount > 0.0;
   const WITHOUT_CHANGE = us_amount * 6.94 + bs_amount === total_amount;
-  const WITH_CHANGE = us_amount * 6.94 + bs_amount > total_amount && change_amount > 0.00;
+  const WITH_CHANGE =
+    us_amount * 6.94 + bs_amount > total_amount && change_amount > 0.0;
 
   const PAID_OKAY = us_amount * 6.94 + bs_amount >= total_amount;
-  const CARD_OKAY = card_number !== "" && card_number.length === 16;
+  const CARD_OKAY = credit_card1_number.length === 16;
+  const CARDS_OKAY =
+    credit_card1_number.length === 16 && credit_card2_number.length === 16;
+  const WILL_PAY_OKAY =
+    company_name.length >= 2 &&
+    responsable.length >= 5 &&
+    ci.length === 7 &&
+    phone.length === 8;
 
   let cashValid = payment_type === "cash" && PAID_OKAY ? true : false;
 
@@ -123,14 +174,25 @@ export const useCurrentTable = () => {
   let cashCardValid =
     payment_type === "cash_card" && PAID_OKAY && CARD_OKAY ? true : false;
 
+  let variousCardsValid =
+    payment_type === "various_cards" && CARDS_OKAY ? true : false;
+
+  let willPayValid =
+    payment_type === "will_pay" && WILL_PAY_OKAY ? true : false;
+
+  console.log(willPayValid);
+
   return [
     currentTableState,
     setCurrentTable,
     emptyCurrentTable,
-    handleChangeAmountBS,
-    handleChangeAmountUS,
-    handleChangePaymentType,
-    handleChangeCreditCard,
+    changeAmountBS,
+    changeAmountUS,
+    changePaymentType,
+    changeCreditCard1,
+    changeCreditCard2,
+    changeCreditCard3,
+    changeWillPay,
     TO_PAY,
     WITHOUT_CHANGE,
     WITH_CHANGE,
@@ -139,5 +201,7 @@ export const useCurrentTable = () => {
     cashValid,
     cardValid,
     cashCardValid,
+    variousCardsValid,
+    willPayValid,
   ];
 };

@@ -10,7 +10,7 @@ import CustomMoneyInput from "../../../../components/CustomInput/CustomMoneyInpu
 // Contexts
 import CurrentTableContext from "../../../../hooks/contexts/TableContext";
 
-function CashPayment(props) {
+function Cash(props) {
   const { fetching } = props;
 
   // Use Contexts
@@ -18,7 +18,7 @@ function CashPayment(props) {
 
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Grid item xs={6} sm={6} md={6} lg={6}>
+      <Grid item xs={12}>
         <NumberFormat
           value={state.bs_amount === 0 ? "" : state.bs_amount}
           onValueChange={changeBs}
@@ -29,10 +29,14 @@ function CashPayment(props) {
           allowLeadingZeros={true}
           decimalScale={2}
           isNumericString={true}
+          disabled={fetching}
+          // Input props
+          adornment="Bs"
+          size="medium"
           customInput={CustomMoneyInput}
         />
       </Grid>
-      <Grid item xs={6} sm={6} md={6} lg={6}>
+      <Grid item xs={12}>
         <NumberFormat
           value={state.us_amount === 0 ? "" : state.us_amount}
           onValueChange={changeUs}
@@ -43,6 +47,11 @@ function CashPayment(props) {
           allowLeadingZeros={false}
           decimalScale={0}
           isNumericString={true}
+          disabled={fetching}
+          // Input props
+          adornment="$"
+          helperText="Cambio Bs 6.94"
+          size="medium"
           customInput={CustomMoneyInput}
         />
       </Grid>
@@ -57,4 +66,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(CashPayment);
+export default connect(mapStateToProps, null)(Cash);

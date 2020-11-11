@@ -14,9 +14,11 @@ import TabPanel from "../../../components/Panel/TabPanel.js";
 // Contexts
 import CurrentTableContext from "../../../hooks/contexts/TableContext";
 // Local components
-import CashPayment from "./paymentsTypes/CashPayment";
-import CreditCardPayment from "./paymentsTypes/CreditCardPayment";
-import CashCreditCardPayment from "./paymentsTypes/CashCreditCardPayment";
+import Cash from "./paymentsTypes/Cash";
+import CreditCard from "./paymentsTypes/CreditCard";
+import CashCreditCard from "./paymentsTypes/CashCreditCard";
+import VariousCreditCard from "./paymentsTypes/VariousCreditCard";
+import WillPay from "./paymentsTypes/WillPay";
 // Icons
 import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
@@ -40,7 +42,11 @@ function Payments(props) {
         ? ["card", 2]
         : newValue === 2
         ? ["cash_card", 3]
-        : ["", null]
+        : newValue === 3
+        ? ["various_cards", 4]
+        : newValue === 4
+        ? ["will_pay", 5]
+        : null
     );
   };
   const handleChangeIndex = (index) => {
@@ -66,15 +72,21 @@ function Payments(props) {
             onChangeIndex={handleChangeIndex}
           >
             <TabPanel value={value} index={0} centered>
-              <CashPayment />
+              <Cash />
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-              <CreditCardPayment />
+              <CreditCard />
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-              <CashCreditCardPayment />
+              <CashCreditCard />
+            </TabPanel>
+            <TabPanel value={value} index={3}>
+              <VariousCreditCard />
+            </TabPanel>
+            <TabPanel value={value} index={4}>
+              <WillPay />
             </TabPanel>
           </SwipeableViews>
         </Grid>

@@ -25,6 +25,8 @@ function CustomMoneyInput(props) {
     readOnly,
     helperText,
     color,
+    fullWidth,
+    size,
     // Redux
     showProgress,
   } = props;
@@ -34,6 +36,9 @@ function CustomMoneyInput(props) {
       variant={variant}
       margin={margin}
       color={color}
+      medium="medium"
+      fullWidth={fullWidth}
+      size={size}
       required={required}
       disabled={showProgress}
       style={{ width: "-webkit-fill-available" }}
@@ -69,6 +74,8 @@ CustomMoneyInput.defaultProps = {
   readOnly: false,
   helperText: "",
   color: "primary",
+  fullWidth: true,
+  size: "small",
 };
 
 CustomMoneyInput.propTypes = {
@@ -83,6 +90,8 @@ CustomMoneyInput.propTypes = {
   readOnly: PropTypes.bool,
   helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   color: PropTypes.oneOf(["primary", "secondary"]),
+  fullWidth: PropTypes.bool,
+  size: PropTypes.oneOf(["small", "medium"]),
 };
 
 // Connect to Store State

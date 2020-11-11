@@ -10,7 +10,7 @@ import CustomMoneyInput from "../../../../components/CustomInput/CustomMoneyInpu
 // Contexts
 import CurrentTableContext from "../../../../hooks/contexts/TableContext";
 
-function CreditCardPayment(props) {
+function CreditCard(props) {
   // Props
   const {
     // Redux
@@ -18,14 +18,15 @@ function CreditCardPayment(props) {
   } = props;
 
   // Use Contexts
-  const { state, changeCard } = useContext(CurrentTableContext);
+  const { state, changeCard1 } = useContext(CurrentTableContext);
 
   return (
     <Grid container direction="column" justify="center" alignItems="center">
-      <Grid item xs={6} sm={6} md={6} lg={6}>
+      <Grid item xs={12}>
         <NumberFormat
-          value={state.card_number}
-          onValueChange={changeCard}
+          name="credit_card1_number"
+          value={state.credit_card1_number}
+          onValueChange={changeCard1}
           displayType={"input"}
           thousandSeparator={false}
           allowNegative={false}
@@ -35,6 +36,9 @@ function CreditCardPayment(props) {
           isNumericString={true}
           format="#### #### #### ####"
           mask="_"
+          disabled={fetching}
+          // Input props
+          helperText="Numero de tarjeta"
           customInput={CustomMoneyInput}
         />
       </Grid>
@@ -49,4 +53,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(CreditCardPayment);
+export default connect(mapStateToProps, null)(CreditCard);

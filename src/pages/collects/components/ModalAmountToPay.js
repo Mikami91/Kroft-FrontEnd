@@ -36,6 +36,8 @@ function ModalAmountToPay(props) {
     cashValid,
     cardValid,
     cashCardValid,
+    variousCardsValid,
+    willPayValid,
   } = useContext(CurrentTableContext);
 
   const handleCloseTotalAmount = () => {
@@ -51,11 +53,17 @@ function ModalAmountToPay(props) {
       order_id,
       payment_type,
       payment_id,
-      card_number,
+      credit_card1_number,
+      credit_card2_number,
+      credit_card3_number,
+      company_name,
+      responsable,
+      ci,
+      phone,
       total_amount,
       bs_amount,
       us_amount,
-      change_amount
+      change_amount,
     } = state;
     collectCreate({
       table_id: id,
@@ -64,18 +72,24 @@ function ModalAmountToPay(props) {
       box_id: localStorage.getItem("box_id"),
       payment_type: payment_type,
       payment_id: payment_id,
-      card_number: card_number,
+      credit_card1_number: credit_card1_number,
+      credit_card2_number: credit_card2_number,
+      credit_card3_number: credit_card3_number,
       currency:
         bs_amount && us_amount !== 0
           ? "Bs/Us"
           : bs_amount !== 0
-            ? "Bs"
-            : us_amount !== 0
-              ? "Us"
-              : "",
+          ? "Bs"
+          : us_amount !== 0
+          ? "Us"
+          : "",
       total_amount: total_amount,
       bs_amount: bs_amount,
       us_amount: us_amount,
+      company_name: company_name,
+      responsable: responsable,
+      ci: ci,
+      phone: phone,
       change_amount: change_amount,
     }).then((response) => {
       if (typeof response !== "undefined") {
@@ -101,7 +115,24 @@ function ModalAmountToPay(props) {
     if (cashCardValid) {
       return (btnDisabled = false);
     }
-  }, [open, cashValid || cardValid || cashCardValid === true ? state : null]);
+
+    if (variousCardsValid) {
+      return (btnDisabled = false);
+    }
+
+    if (willPayValid) {
+      return (btnDisabled = false);
+    }
+  }, [
+    open,
+    cashValid ||
+    cardValid ||
+    cashCardValid ||
+    variousCardsValid ||
+    willPayValid === true
+      ? state
+      : null,
+  ]);
 
   return (
     <CustomModal
@@ -128,17 +159,17 @@ function ModalAmountToPay(props) {
           text: TO_PAY
             ? "Por pagar: "
             : WITHOUT_CHANGE
-              ? "Sin cambio: "
-              : WITH_CHANGE
-                ? "Cambio: "
-                : "",
+            ? "Sin cambio: "
+            : WITH_CHANGE
+            ? "Cambio: "
+            : "",
           color: TO_PAY
             ? "danger"
             : WITHOUT_CHANGE
-              ? "default"
-              : WITH_CHANGE
-                ? "success"
-                : "",
+            ? "default"
+            : WITH_CHANGE
+            ? "success"
+            : "",
           size: "default",
           align: "left",
           margin: true,
@@ -162,8 +193,8 @@ function ModalAmountToPay(props) {
                 renderText={(value) => <span>Bs. {value}</span>}
               />
             ) : (
-                ""
-              ),
+              ""
+            ),
           size: "default",
           align: "right",
           margin: true,
@@ -189,7 +220,7 @@ function ModalAmountToPay(props) {
         open,
         // state.change_amount,
         // state.id,
-        // state.card_number,
+        // state.credit_card1_number,
         collect_fetching,
       ]}
       loading={collect_fetching}

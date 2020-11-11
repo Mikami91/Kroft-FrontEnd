@@ -81,10 +81,13 @@ function CollectsPage(props) {
     currentTableState,
     setCurrentTable,
     emptyCurrentTable,
-    handleChangeAmountBS,
-    handleChangeAmountUS,
-    handleChangePaymentType,
-    handleChangeCreditCard,
+    changeAmountBS,
+    changeAmountUS,
+    changePaymentType,
+    changeCreditCard1,
+    changeCreditCard2,
+    changeCreditCard3,
+    changeWillPay,
     TO_PAY,
     WITHOUT_CHANGE,
     WITH_CHANGE,
@@ -93,6 +96,8 @@ function CollectsPage(props) {
     cashValid,
     cardValid,
     cashCardValid,
+    variousCardsValid,
+    willPayValid,
   ] = useCurrentTable();
   // Hooks for Drawers
   const [openDrawer, toggleDrawer] = useDrawer();
@@ -189,10 +194,13 @@ function CollectsPage(props) {
         state: currentTableState,
         setState: setCurrentTable,
         emptyState: emptyCurrentTable,
-        changeBs: handleChangeAmountBS,
-        changeUs: handleChangeAmountUS,
-        changePaymentType: handleChangePaymentType,
-        changeCard: handleChangeCreditCard,
+        changeBs: changeAmountBS,
+        changeUs: changeAmountUS,
+        changePaymentType: changePaymentType,
+        changeCard1: changeCreditCard1,
+        changeCard2: changeCreditCard2,
+        changeCard3: changeCreditCard3,
+        changeWillPay: changeWillPay,
         TO_PAY: TO_PAY,
         WITHOUT_CHANGE: WITHOUT_CHANGE,
         WITH_CHANGE: WITH_CHANGE,
@@ -201,6 +209,8 @@ function CollectsPage(props) {
         cashValid: cashValid,
         cardValid: cardValid,
         cashCardValid: cashCardValid,
+        variousCardsValid: variousCardsValid,
+        willPayValid: willPayValid,
       }}
     >
       <CustomLoading open={loading} />
