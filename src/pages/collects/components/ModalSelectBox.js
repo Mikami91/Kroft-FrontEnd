@@ -102,7 +102,7 @@ function ModalSelectBox(props) {
 const mapStateToProps = (state) => {
   const { boxes } = state;
   return {
-    boxes: boxes.payload,
+    boxes: boxes.payload.filter((index) => index.is_open === 0),
     box_fetching: boxes.fetching,
     box_loading: boxes.loading,
   };

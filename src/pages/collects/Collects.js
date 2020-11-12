@@ -98,6 +98,7 @@ function CollectsPage(props) {
     cashCardValid,
     variousCardsValid,
     willPayValid,
+    makeDynamicState,
   ] = useCurrentTable();
   // Hooks for Drawers
   const [openDrawer, toggleDrawer] = useDrawer();
@@ -211,6 +212,7 @@ function CollectsPage(props) {
         cashCardValid: cashCardValid,
         variousCardsValid: variousCardsValid,
         willPayValid: willPayValid,
+        makeDynamicState: makeDynamicState,
       }}
     >
       <CustomLoading open={loading} />

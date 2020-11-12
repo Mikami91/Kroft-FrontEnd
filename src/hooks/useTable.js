@@ -35,17 +35,21 @@ export const useCurrentTable = () => {
     change_amount: 0,
   });
 
-  const {
+  let {
+    id,
+    order_id,
     payment_type,
-    bs_amount,
-    us_amount,
+    payment_id,
     credit_card1_number,
     credit_card2_number,
+    credit_card3_number,
     company_name,
     responsable,
     ci,
     phone,
     total_amount,
+    bs_amount,
+    us_amount,
     change_amount,
   } = currentTableState;
 
@@ -182,6 +186,53 @@ export const useCurrentTable = () => {
   let willPayValid =
     payment_type === "will_pay" && WILL_PAY_OKAY ? true : false;
 
+  // Conditionals
+  const isOne = payment_type === "cash" || payment_type === "cash_card";
+  const isTwo = payment_type === "card" || payment_type === "various_cards";
+  const isThree = payment_type === "will_pay";
+
+  const dynamic_currency = isOne
+    ? bs_amount && us_amount !== 0
+      ? "Bs/Us"
+      : bs_amount !== 0
+      ? "Bs"
+      : us_amount !== 0
+      ? "Us"
+      : ""
+    : "";
+
+  const makeDynamicState = () => {
+    const dynamicState = {
+      // Other parameters
+      table_id: id,
+      order_id: order_id,
+      cashier_id: localStorage.getItem("employee_id"),
+      box_id: localStorage.getItem("box_id"),
+      payment_id: payment_id,
+      // Payment type
+      payment_type: payment_type,
+      // Card or Various Cards type
+      credit_card1_number: credit_card1_number,
+      credit_card2_number: credit_card2_number,
+      credit_card3_number: credit_card3_number,
+      cards_amount: isTwo ? total_amount : 0,
+      // Cash or Cash-Card type
+      currency: dynamic_currency,
+      bs_amount: isOne ? bs_amount : 0,
+      us_amount: isOne ? us_amount : 0,
+      // Will pay type
+      company_name: company_name,
+      responsable: responsable,
+      ci: ci,
+      phone: phone,
+      will_pay_amount: isThree ? total_amount : 0,
+      // Totals Amounts
+      total_amount: total_amount,
+      change_amount: isOne ? change_amount : 0,
+    };
+    return dynamicState;
+  };
+
   return [
     currentTableState,
     setCurrentTable,
@@ -203,5 +254,6 @@ export const useCurrentTable = () => {
     cashCardValid,
     variousCardsValid,
     willPayValid,
+    makeDynamicState,
   ];
 };

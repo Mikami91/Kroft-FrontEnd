@@ -38,6 +38,7 @@ function ModalAmountToPay(props) {
     cashCardValid,
     variousCardsValid,
     willPayValid,
+    makeDynamicState,
   } = useContext(CurrentTableContext);
 
   const handleCloseTotalAmount = () => {
@@ -46,55 +47,10 @@ function ModalAmountToPay(props) {
   };
 
   // Send Order function
-  const handleMakeCollected = (e) => {
+  const handleMakeCollected = async (e) => {
     e.preventDefault();
-    const {
-      id,
-      order_id,
-      payment_type,
-      payment_id,
-      credit_card1_number,
-      credit_card2_number,
-      credit_card3_number,
-      company_name,
-      responsable,
-      ci,
-      phone,
-      total_amount,
-      bs_amount,
-      us_amount,
-      change_amount,
-    } = state;
-    collectCreate({
-      table_id: id,
-      order_id: order_id,
-      cashier_id: localStorage.getItem("employee_id"),
-      box_id: localStorage.getItem("box_id"),
-      payment_type: payment_type,
-      payment_id: payment_id,
-      credit_card1_number: credit_card1_number,
-      credit_card2_number: credit_card2_number,
-      credit_card3_number: credit_card3_number,
-      currency:
-        bs_amount && us_amount !== 0
-          ? "Bs/Us"
-          : bs_amount !== 0
-          ? "Bs"
-          : us_amount !== 0
-          ? "Us"
-          : "",
-      total_amount: total_amount,
-      bs_amount: payment_type === "cash" || "cash_card" ? bs_amount : 0,
-      us_amount: payment_type === "cash" || "cash_card" ? us_amount : 0,
-      cards_amount:
-        payment_type === "card" || "various_cards" ? total_amount : 0,
-      will_pay_amount: payment_type === "will_pay" ? total_amount : 0,
-      company_name: company_name,
-      responsable: responsable,
-      ci: ci,
-      phone: phone,
-      change_amount: change_amount,
-    }).then((response) => {
+    const dynamicState = await makeDynamicState();
+    collectCreate(dynamicState).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
           handleCloseTotalAmount();
