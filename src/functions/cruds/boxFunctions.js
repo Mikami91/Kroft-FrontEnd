@@ -3,7 +3,8 @@ import {
   createFetch,
   showFetch,
   updateFetch,
-  openFetch,
+  openingFetch,
+  closingFetch,
   stateFetch,
   deleteFetch,
 } from "../fetchs/boxFetch";
@@ -106,11 +107,40 @@ export async function boxUpdate(data) {
   }
 }
 
-/*::::::::::::::::::::STATE::::::::::::::::::::*/
-export async function boxOpen(data) {
+/*::::::::::::::::::::OPENING::::::::::::::::::::*/
+export async function boxOpening(data) {
   fetching(true);
   try {
-    const response = await openFetch(data);
+    const response = await openingFetch(data);
+    if (response.status === 200) {
+      switch (response.data.success) {
+        case true:
+          fetching(false);
+          infoSnackbar(response.data.message);
+          break;
+
+        case false:
+          fetching(false);
+          dangerSnackbar(response.data.message);
+          break;
+
+        default:
+          break;
+      }
+    }
+    return response.data;
+  } catch (error) {
+    fetching(false);
+    warningSnackbar("Error de servidor.");
+    return error.message;
+  }
+}
+
+/*::::::::::::::::::::CLOSING::::::::::::::::::::*/
+export async function boxClosing(data) {
+  fetching(true);
+  try {
+    const response = await closingFetch(data);
     if (response.status === 200) {
       switch (response.data.success) {
         case true:

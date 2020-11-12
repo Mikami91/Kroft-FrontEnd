@@ -220,9 +220,9 @@ function SubcategoryUpdate(props) {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-    const { table, category } = state;
+    const { subcategory, category } = state;
     return {
-        fetching: table.fetching,
+        fetching: subcategory.fetching,
         categories: category.payload
     }
 };

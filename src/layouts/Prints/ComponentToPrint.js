@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useRef, Component } from "react";
+import React, { useRef, useMemo, Component } from "react";
 import PropTypes from "prop-types";
 // Print
 import ReactToPrint from "react-to-print";
@@ -25,23 +25,26 @@ function ComponentToPrint(props) {
   // Component to Refer
   let componentRef = useRef();
 
-  return (
-    <TabPanel value={1} index={0}>
-      <ReactToPrint
-        trigger={() => (
-          <button id={btnID} style={{ display: "none" }}>
-            Print
-          </button>
-        )}
-        content={() => componentRef}
-      />
-      <ComponentPrint
-        ref={(el) => (componentRef = el)}
-        data={printList}
-        refresh={refresh}
-      />
-    </TabPanel>
-  );
+  // Using useMemo hook
+  return useMemo(() => {
+    return (
+      <TabPanel value={1} index={0}>
+        <ReactToPrint
+          trigger={() => (
+            <button id={btnID} style={{ display: "none" }}>
+              Print
+            </button>
+          )}
+          content={() => componentRef}
+        />
+        <ComponentPrint
+          ref={(el) => (componentRef = el)}
+          data={printList}
+          refresh={refresh}
+        />
+      </TabPanel>
+    );
+  }, [refresh]);
 }
 // PropTypes
 ComponentToPrint.defaultProps = {

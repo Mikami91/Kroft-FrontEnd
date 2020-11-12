@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
@@ -36,15 +36,15 @@ export default function EmployeeLogin(props) {
   const handleLogin = (e) => {
     e.preventDefault();
     employeeLogin(state).then((response) => {
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         if (response.success === true) {
-
           switch (response.data.rol_id) {
             case 1:
-              history.push('/Kroft-FrontEnd/sales');
+              history.push("/Kroft-FrontEnd/sales");
               break;
             case 2:
-              history.push('/Kroft-FrontEnd/collects');
+              localStorage.setItem("box_id", 0);
+              history.push("/Kroft-FrontEnd/collects");
               break;
 
             default:
@@ -56,7 +56,12 @@ export default function EmployeeLogin(props) {
   };
   const classes = useStyles();
   return (
-    <form className={classes.form} id="employee-login" onSubmit={handleLogin} autoComplete="off">
+    <form
+      className={classes.form}
+      id="employee-login"
+      onSubmit={handleLogin}
+      autoComplete="off"
+    >
       {/* <p className={classes.divider}>Or Be Classical</p> */}
       <IconInput
         variant={"standard"}
@@ -84,7 +89,7 @@ export default function EmployeeLogin(props) {
       />
       <CustomButton /*simple*/ color="primary" size="sm" type="submit">
         Iniciar
-        </CustomButton>
+      </CustomButton>
     </form>
   );
 }

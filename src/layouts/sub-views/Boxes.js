@@ -53,7 +53,7 @@ function Boxes({ data, fetching, loading }) {
                   { title: "Caja", field: "name", type: "string" },
                   {
                     title: "Monto",
-                    field: "box_amount",
+                    field: "total_amount",
                     type: "currency",
                     currencySetting: {
                       locale: "es-BO",

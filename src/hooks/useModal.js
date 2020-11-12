@@ -15,7 +15,7 @@ export const useAmountPay = (initialState = false) => {
 
 export const useBoxSelectModal = (newValue = null) => {
   const [selectBoxState, setSelectBoxState] = useState({
-    open: localStorage.getItem("box_id") !== "" ? false : true,
+    open: parseInt(localStorage.getItem("box_id")) === 0 || null ? true : false,
     id: newValue,
   });
   const setSelectBox = (newValue) =>

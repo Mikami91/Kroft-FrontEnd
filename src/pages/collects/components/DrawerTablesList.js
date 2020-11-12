@@ -25,6 +25,7 @@ function DrawerTablesList(props) {
       itemList={tables}
       itemOnClick={close}
       filter="environment_id"
+      refresh={[open, environments, tables]}
     />
   );
 }

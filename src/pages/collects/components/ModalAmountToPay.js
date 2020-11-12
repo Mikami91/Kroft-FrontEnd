@@ -84,8 +84,11 @@ function ModalAmountToPay(props) {
           ? "Us"
           : "",
       total_amount: total_amount,
-      bs_amount: bs_amount,
-      us_amount: us_amount,
+      bs_amount: payment_type === "cash" || "cash_card" ? bs_amount : 0,
+      us_amount: payment_type === "cash" || "cash_card" ? us_amount : 0,
+      cards_amount:
+        payment_type === "card" || "various_cards" ? total_amount : 0,
+      will_pay_amount: payment_type === "will_pay" ? total_amount : 0,
       company_name: company_name,
       responsable: responsable,
       ci: ci,

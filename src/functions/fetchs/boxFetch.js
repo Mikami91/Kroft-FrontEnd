@@ -6,7 +6,8 @@ import {
   box_index,
   box_show,
   box_update,
-  box_open,
+  box_opening,
+  box_closing,
   box_state,
   box_delete,
 } from "../../API";
@@ -40,12 +41,22 @@ export const updateFetch = (data) => {
   });
 };
 
-/*::::::::::::::::::::OPEN::::::::::::::::::::*/
-export const openFetch = (data) => {
+/*::::::::::::::::::::OPENING::::::::::::::::::::*/
+export const openingFetch = (data) => {
   return customFetch({
     method: "POST",
     token: true,
-    url: box_open,
+    url: box_opening,
+    data: data,
+  });
+};
+
+/*::::::::::::::::::::CLOSING::::::::::::::::::::*/
+export const closingFetch = (data) => {
+  return customFetch({
+    method: "POST",
+    token: true,
+    url: box_closing,
     data: data,
   });
 };

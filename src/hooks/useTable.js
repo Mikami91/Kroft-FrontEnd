@@ -26,6 +26,8 @@ export const useCurrentTable = () => {
     currency: 0,
     bs_amount: 0,
     us_amount: 0,
+    cards_amount: 0,
+    will_pay_amount: 0,
     company_name: "",
     responsable: "",
     ci: "",
@@ -39,7 +41,6 @@ export const useCurrentTable = () => {
     us_amount,
     credit_card1_number,
     credit_card2_number,
-    credit_card3_number,
     company_name,
     responsable,
     ci,
@@ -85,6 +86,8 @@ export const useCurrentTable = () => {
       currency: 0,
       bs_amount: 0,
       us_amount: 0,
+      cards_amount: 0,
+      will_pay_amount: 0,
       company_name: "",
       responsable: "",
       ci: "",
@@ -95,7 +98,6 @@ export const useCurrentTable = () => {
 
   // Changes total_amount to paid value
   const changeAmountBS = (e) => {
-    console.log(e);
     let value = isEmptyValue(e.floatValue) ? 0 : e.floatValue;
     setCurrentTableState({
       ...currentTableState,
@@ -179,8 +181,6 @@ export const useCurrentTable = () => {
 
   let willPayValid =
     payment_type === "will_pay" && WILL_PAY_OKAY ? true : false;
-
-  console.log(willPayValid);
 
   return [
     currentTableState,

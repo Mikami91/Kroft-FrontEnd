@@ -1,10 +1,10 @@
 // Dependencies
 import React, { useState } from "react";
 import SwipeableViews from "react-swipeable-views";
-import moment from 'moment';
-import 'moment/locale/es';
+import moment from "moment";
+import "moment/locale/es";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
 // core components
@@ -12,309 +12,320 @@ import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
-import SelectInput from '../../components/CustomInput/SelectInput.js';
-import DateInput from '../../components/CustomInput/DateInput.js';
-import TimeInput from '../../components/CustomInput/TimeInput.js';
-import CustomBotton from '../../components/CustomButtons/CustomButton.js'
-import CustomLoading from '../../components/Loading/CustomLoading.js';
-import CustomDivider from '../../components/Divider/CustomDivider.js';
-import SingleTabs from '../../components/CustomTabs/SingleTabs';
+import SelectInput from "../../components/CustomInput/SelectInput.js";
+import DateInput from "../../components/CustomInput/DateInput.js";
+import TimeInput from "../../components/CustomInput/TimeInput.js";
+import CustomBotton from "../../components/CustomButtons/CustomButton.js";
+import CustomLoading from "../../components/Loading/CustomLoading.js";
+import CustomDivider from "../../components/Divider/CustomDivider.js";
+import SingleTabs from "../../components/CustomTabs/SingleTabs";
 import TabPanel from "../../components/Panel/TabPanel.js";
 // Functions
 import { collectEnvReport } from "../../functions/cruds/collectFunctions";
 // Configs
 moment.locale("es");
-moment().format('l');
+moment().format("l");
 
 function EnvironmentReport(props) {
-    const { environments, tables, fetching } = props;
-    // State for Panel Tabs
-    const [value, setValue] = useState(0);
-    const handleChangeValue = (event, newValue) => {
-        setValue(newValue);
-        setState({
-            ...state,
-            type: newValue === 0 ? "month" : newValue === 1 ? "range" : "hours",
-        });
-    };
-    const handleChangeIndex = (index) => {
-        setValue(index);
-    };
-    const [state, setState] = useState({
-        type: "month",
-        environment_id: "",
-        table_id: "",
-        month: null,
-        from_month: null,
-        to_month: null,
-        date: null,
-        from_hour: null,
-        to_hour: null,
-        error: false
+  const { environments, tables, fetching } = props;
+  // State for Panel Tabs
+  const [value, setValue] = useState(0);
+  const handleChangeValue = (event, newValue) => {
+    setValue(newValue);
+    setState({
+      ...state,
+      type: newValue === 0 ? "month" : newValue === 1 ? "range" : "hours",
     });
-    // Change State for Inputs
-    const handleChange = (e) => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        });
-    };
-    // Empty State values
-    const handleEmpty = (e) => {
-        setState({
-            ...state,
-            environment_id: "",
-            table_id: "",
-            month: null,
-            from_month: null,
-            to_month: null,
-            date: null,
-            from_hour: null,
-            to_hour: null,
-            error: false
-        });
-    };
+  };
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
+  const [state, setState] = useState({
+    type: "month",
+    environment_id: "",
+    table_id: "",
+    month: null,
+    from_month: null,
+    to_month: null,
+    date: null,
+    from_hour: null,
+    to_hour: null,
+    error: false,
+  });
+  // Change State for Inputs
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+  // Empty State values
+  const handleEmpty = (e) => {
+    setState({
+      ...state,
+      environment_id: "",
+      table_id: "",
+      month: null,
+      from_month: null,
+      to_month: null,
+      date: null,
+      from_hour: null,
+      to_hour: null,
+      error: false,
+    });
+  };
 
-    // Report function
-    const handleReport = (e) => {
-        e.preventDefault();
-        collectEnvReport(state).then((response) => {
-            if (typeof response !== 'undefined') {
-                if (response.success === true) {
-                    // handleEmpty();
-                }
-            }
-        });
-    };
+  // Report function
+  const handleReport = (e) => {
+    e.preventDefault();
+    collectEnvReport(state).then((response) => {
+      if (typeof response !== "undefined") {
+        if (response.success === true) {
+          // handleEmpty();
+        }
+      }
+    });
+  };
 
-    return (
-        <form id="env-report" onSubmit={handleReport}>
+  return (
+    <form id="env-report" onSubmit={handleReport}>
+      <Card variant="cardForm">
+        <CustomLoading inside color="primary" open={fetching} />
 
-            <Card variant="cardForm">
+        <CardHeader color="primary" dense centered>
+          <h3>Parametros</h3>
+        </CardHeader>
 
-                <CustomLoading inside color="primary" open={fetching} />
+        <CardBody form>
+          <Grid container justify="center" alignItems="flex-start" spacing={2}>
+            <Grid item xs={10} elevation={6} square="true">
+              <CustomDivider
+                text="Ambiente"
+                color="warning"
+                margin="dense"
+                bold
+              />
 
-                <CardHeader color="primary" dense centered>
-                    <h3>Parametros</h3>
-                </CardHeader>
+              <SelectInput
+                variant="standard"
+                margin="dense"
+                color="primary"
+                hoverColor="primary"
+                disabled={fetching}
+                id="environment_id"
+                label="Seleccionar ambiente"
+                name="environment_id"
+                onChange={handleChange}
+                value={state.environment_id}
+                itemList={{
+                  data: environments,
+                  key: "id",
+                  value: "name",
+                }}
+                required
+              />
 
-                <CardBody form>
-                    <Grid
-                        container
-                        justify="center"
-                        alignItems="flex-start"
-                        spacing={2}
-                    >
-                        <Grid
-                            item
-                            xs={10}
-                            elevation={6}
-                            square="true"
-                        >
-                            <CustomDivider text="Ambiente" color="warning" margin="dense" bold />
+              <CustomDivider text="Mesa" color="warning" margin="dense" bold />
 
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                disabled={fetching}
-                                id="environment_id"
-                                label="Seleccionar ambiente"
-                                name="environment_id"
-                                onChange={handleChange}
-                                value={state.environment_id}
-                                itemList={{
-                                    data: environments,
-                                    key: "id",
-                                    value: "name"
-                                }}
-                                required
-                            />
+              <SelectInput
+                variant="standard"
+                margin="dense"
+                color="primary"
+                hoverColor="primary"
+                disabled={fetching}
+                id="table_id"
+                label="Seleccionar Mesa"
+                name="table_id"
+                onChange={handleChange}
+                value={state.table_id}
+                itemList={{
+                  data: tables.filter(
+                    (i) => i.environment_id === state.environment_id
+                  ),
+                  key: "id",
+                  value: "number",
+                }}
+              />
+            </Grid>
 
-                            <CustomDivider text="Mesa" color="warning" margin="dense" bold />
+            <Grid item xs={12} elevation={6} square="true">
+              <CustomDivider
+                text="Buscar por:"
+                color="warning"
+                margin="middle"
+                bold
+              />
 
-                            <SelectInput
-                                variant="standard"
-                                margin="dense"
-                                color="primary"
-                                hoverColor="primary"
-                                disabled={fetching}
-                                id="table_id"
-                                label="Seleccionar Mesa"
-                                name="table_id"
-                                onChange={handleChange}
-                                value={state.table_id}
-                                itemList={{
-                                    data: tables.filter((i) => i.environment_id === state.environment_id),
-                                    key: "id",
-                                    value: "number"
-                                }}
-                            />
+              <SingleTabs
+                centered
+                value={value}
+                onChange={handleChangeValue}
+                plainTabs
+                headerColor="primary"
+                tabs={[
+                  {
+                    tabName: "Mes",
+                  },
+                  {
+                    tabName: "Rango",
+                  },
+                  {
+                    tabName: "Horas",
+                  },
+                ]}
+              />
 
-                        </Grid>
+              <SwipeableViews
+                axis="x"
+                index={value}
+                onChangeIndex={handleChangeIndex}
+              >
+                <TabPanel value={value} index={0} centered>
+                  <DateInput
+                    variant={"standard"}
+                    margin={"dense"}
+                    color="primary"
+                    disabled={fetching}
+                    type="text"
+                    label={"Seleccionar mes"}
+                    name="month"
+                    onChange={handleChange}
+                    value={state.month}
+                    minDate={moment()
+                      .subtract(30, "years")
+                      .format("YYYY/MM/DD")}
+                    maxDate={moment().format("YYYY/MM/DD")}
+                    format="MMM yyyy"
+                    openTo="year"
+                    views={["year", "month"]}
+                    disableFuture
+                    autoOk
+                    required
+                  />
+                </TabPanel>
 
-                        <Grid
-                            item
-                            xs={12}
-                            elevation={6}
-                            square="true"
-                        >
-                            <CustomDivider text="Buscar por:" color="warning" margin="middle" bold />
+                <TabPanel value={value} index={1}>
+                  <DateInput
+                    variant={"standard"}
+                    margin={"dense"}
+                    color="primary"
+                    disabled={fetching}
+                    type="text"
+                    label={"Desde"}
+                    name="from_month"
+                    onChange={handleChange}
+                    value={state.from_month}
+                    minDate={moment()
+                      .subtract(30, "years")
+                      .format("YYYY/MM/DD")}
+                    maxDate={moment().format("YYYY/MM/DD")}
+                    openTo="year"
+                    disableFuture
+                    autoOk
+                    required
+                  />
+                  <DateInput
+                    variant={"standard"}
+                    margin={"dense"}
+                    color="primary"
+                    disabled={fetching}
+                    type="text"
+                    label={"Hasta"}
+                    name="to_month"
+                    onChange={handleChange}
+                    value={state.to_month}
+                    minDate={moment()
+                      .subtract(30, "years")
+                      .format("YYYY/MM/DD")}
+                    maxDate={moment().format("YYYY/MM/DD")}
+                    openTo="year"
+                    disableFuture
+                    autoOk
+                    required
+                  />
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                  <DateInput
+                    variant={"standard"}
+                    margin={"dense"}
+                    color="primary"
+                    disabled={fetching}
+                    type="text"
+                    label={"Fecha"}
+                    name="date"
+                    onChange={handleChange}
+                    value={state.date}
+                    minDate={moment()
+                      .subtract(30, "years")
+                      .format("YYYY/MM/DD")}
+                    maxDate={moment().format("YYYY/MM/DD")}
+                    openTo="year"
+                    disableFuture
+                    autoOk
+                    required
+                  />
+                  <TimeInput
+                    variant={"standard"}
+                    margin={"dense"}
+                    color="primary"
+                    disabled={fetching}
+                    type="text"
+                    label={"Iniciar"}
+                    name="from_hour"
+                    value={state.from_hour}
+                    onChange={handleChange}
+                    views={["hours", "minutes"]}
+                    required
+                  />
+                  <TimeInput
+                    variant={"standard"}
+                    margin={"dense"}
+                    color="primary"
+                    disabled={fetching}
+                    type="text"
+                    label={"Finalizar"}
+                    name="to_hour"
+                    value={state.to_hour}
+                    onChange={handleChange}
+                    views={["hours", "minutes"]}
+                    required
+                  />
+                </TabPanel>
+              </SwipeableViews>
+            </Grid>
+          </Grid>
+        </CardBody>
 
-                            <SingleTabs
-                                centered
-                                value={value}
-                                onChange={handleChangeValue}
-                                plainTabs
-                                headerColor="primary"
-                                tabs={[
-                                    {
-                                        tabName: "Mes",
-                                    },
-                                    {
-                                        tabName: "Rango",
-                                    },
-                                    {
-                                        tabName: "Horas",
-                                    },
-                                ]}
-                            />
-
-                            <SwipeableViews
-                                axis="x"
-                                index={value}
-                                onChangeIndex={handleChangeIndex}
-                            >
-                                <TabPanel value={value} index={0} centered>
-                                    <DateInput
-                                        variant={'standard'}
-                                        margin={'dense'}
-                                        color="primary"
-                                        disabled={fetching}
-                                        type="text"
-                                        label={'Seleccionar mes'}
-                                        name="month"
-                                        onChange={handleChange}
-                                        value={state.month}
-                                        minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
-                                        maxDate={moment().format("YYYY/MM/DD")}
-                                        format="MMM yyyy"
-                                        openTo="year"
-                                        views={["year", "month"]}
-                                        disableFuture
-                                        autoOk
-                                        required
-                                    />
-                                </TabPanel>
-
-                                <TabPanel value={value} index={1}>
-                                    <DateInput
-                                        variant={'standard'}
-                                        margin={'dense'}
-                                        color="primary"
-                                        disabled={fetching}
-                                        type="text"
-                                        label={'Desde'}
-                                        name="from_month"
-                                        onChange={handleChange}
-                                        value={state.from_month}
-                                        minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
-                                        maxDate={moment().format("YYYY/MM/DD")}
-                                        openTo="year"
-                                        disableFuture
-                                        autoOk
-                                        required
-                                    />
-                                    <DateInput
-                                        variant={'standard'}
-                                        margin={'dense'}
-                                        color="primary"
-                                        disabled={fetching}
-                                        type="text"
-                                        label={'Hasta'}
-                                        name="to_month"
-                                        onChange={handleChange}
-                                        value={state.to_month}
-                                        minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
-                                        maxDate={moment().format("YYYY/MM/DD")}
-                                        openTo="year"
-                                        disableFuture
-                                        autoOk
-                                        required
-                                    />
-                                </TabPanel>
-                                <TabPanel value={value} index={2}>
-                                    <DateInput
-                                        variant={'standard'}
-                                        margin={'dense'}
-                                        color="primary"
-                                        disabled={fetching}
-                                        type="text"
-                                        label={'Fecha'}
-                                        name="date"
-                                        onChange={handleChange}
-                                        value={state.date}
-                                        minDate={moment().subtract(30, 'years').format("YYYY/MM/DD")}
-                                        maxDate={moment().format("YYYY/MM/DD")}
-                                        openTo="year"
-                                        disableFuture
-                                        autoOk
-                                        required
-                                    />
-                                    <TimeInput
-                                        variant={'standard'}
-                                        margin={'dense'}
-                                        color="primary"
-                                        disabled={fetching}
-                                        type="text"
-                                        label={'Iniciar'}
-                                        name="from_hour"
-                                        value={state.from_hour}
-                                        onChange={handleChange}
-                                        views={["hours", "minutes"]}
-                                        required
-                                    />
-                                    <TimeInput
-                                        variant={'standard'}
-                                        margin={'dense'}
-                                        color="primary"
-                                        disabled={fetching}
-                                        type="text"
-                                        label={'Finalizar'}
-                                        name="to_hour"
-                                        value={state.to_hour}
-                                        onChange={handleChange}
-                                        views={["hours", "minutes"]}
-                                        required
-                                    />
-                                </TabPanel>
-
-                            </SwipeableViews>
-
-                        </Grid>
-                    </Grid>
-                </CardBody>
-
-                <CardFooter form>
-                    <CustomBotton color="transparent" size="sm" type="button" disabled={fetching} onClick={handleEmpty} >
-                        Limpiar
-                    </CustomBotton>
-                    <CustomBotton form="env-report" size="sm" type="submit" disabled={fetching} >
-                        Generar
-                    </CustomBotton>
-                </CardFooter>
-            </Card>
-        </form>
-    );
-};
+        <CardFooter form>
+          <CustomBotton
+            color="transparent"
+            size="sm"
+            type="button"
+            disabled={fetching}
+            onClick={handleEmpty}
+          >
+            Limpiar
+          </CustomBotton>
+          <CustomBotton
+            form="env-report"
+            size="sm"
+            type="submit"
+            disabled={fetching}
+          >
+            Generar
+          </CustomBotton>
+        </CardFooter>
+      </Card>
+    </form>
+  );
+}
 const mapStateToProps = (state) => {
-    const { collects, environment, table } = state;
-    return {
-        environments: environment.payload,
-        tables: table.payload,
-        fetching: collects.fetching,
-    }
+  const { collects, environments, tables } = state;
+  return {
+    environments: environments.payload,
+    tables: tables.payload,
+    fetching: collects.fetching,
+  };
 };
 
 export default connect(mapStateToProps, null)(EnvironmentReport);

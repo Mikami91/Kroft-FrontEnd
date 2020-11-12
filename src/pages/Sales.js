@@ -457,6 +457,7 @@ function SalesPage(props) {
         itemList={tables}
         itemOnClick={handleOpenProducts}
         filter="environment_id"
+        refresh={[openDrawer, environments, tables]}
       />
 
       <DrawerProducts

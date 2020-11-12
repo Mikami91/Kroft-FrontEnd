@@ -36,6 +36,8 @@ export const box_index = "api/box_index";
 export const box_show = "api/box_show";
 export const box_update = "api/box_update";
 export const box_open = "api/box_open";
+export const box_opening = "api/box_opening";
+export const box_closing = "api/box_closing";
 export const box_state = "api/box_state";
 export const box_delete = "api/box_delete";
 

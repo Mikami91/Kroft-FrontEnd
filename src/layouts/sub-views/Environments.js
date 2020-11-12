@@ -143,11 +143,11 @@ Environments.propTypes = {
 };
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { environment } = state;
+  const { environments } = state;
   return {
-    environments: environment.payload,
-    fetching: environment.fetching,
-    loading: environment.loading,
+    environments: environments.payload,
+    fetching: environments.fetching,
+    loading: environments.loading,
   }
 };
 

@@ -33,6 +33,7 @@ function DrawerTablesList(props) {
     itemList,
     itemOnClick,
     filter,
+    refresh,
   } = props;
   const classes = useStyles();
 
@@ -69,8 +70,8 @@ function DrawerTablesList(props) {
                             index2.is_busy === 0
                               ? classes.success
                               : index2.is_busy === 1
-                                ? classes.danger
-                                : classes.warning
+                              ? classes.danger
+                              : classes.warning
                           }
                           style={{ color: "#fff" }}
                         >
@@ -84,8 +85,8 @@ function DrawerTablesList(props) {
                           index2.is_busy === 0
                             ? "Disponible"
                             : index2.is_busy === 1
-                              ? "Ocupado"
-                              : "Por cobrar"
+                            ? "Ocupado"
+                            : "Por cobrar"
                         }
                       />
 
@@ -110,7 +111,7 @@ function DrawerTablesList(props) {
         </List>
       </Drawer>
     );
-  }, [open]);
+  }, [refresh]);
 }
 // PropTypes
 DrawerTablesList.defaultProps = {
@@ -122,6 +123,7 @@ DrawerTablesList.defaultProps = {
   itemList: [],
   itemOnClick: null,
   filter: "id",
+  refresh: null,
 };
 DrawerTablesList.propTypes = {
   direction: PropTypes.oneOf(["left", "right", "top", "bottom"]),
@@ -132,6 +134,11 @@ DrawerTablesList.propTypes = {
   itemList: PropTypes.array,
   itemOnClick: PropTypes.func,
   filter: PropTypes.string,
+  refresh: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.array,
+  ]),
 };
 
 export default DrawerTablesList;
