@@ -8,7 +8,11 @@ import Pusher from "pusher-js";
 import { payload as companyPayload } from "../redux/actions/creators/companyCreator";
 import { payload as adminPayload } from "../redux/actions/creators/adminCreator";
 import { payload as employeePayload } from "../redux/actions/creators/employeeCreator";
-import { payload as boxPayload } from "../redux/actions/creators/boxCreator";
+import {
+  payload as boxPayload,
+  opening_box,
+  closed_boxes,
+} from "../redux/actions/creators/boxCreator";
 import { payload as rolPayload } from "../redux/actions/creators/rolCreator";
 // import { payload as salaryPayload } from '../redux/actions/creators/salaryCreator';
 import { payload as customerPayload } from "../redux/actions/creators/customerCreator";
@@ -79,6 +83,36 @@ export const boxes_WS = () =>
     websocketConnection.channel("boxes").listen("BoxEvent", (e) => {
       boxPayload(e.message);
     });
+    websocketConnection
+      .channel("boxes_open_close")
+      .listen("BoxOpenCloseEvent", (e) => {
+        opening_box(e.message.filter((index) => index.state === 1));
+      });
+    websocketConnection
+      .channel("boxes_open_close")
+      .listen("BoxOpenCloseEvent", (e) => {
+        closed_boxes(e.message.filter((index) => index.state === 0));
+      });
+  }, []);
+
+//  Opening Box
+export const opening_box_WS = () =>
+  useMemo(() => {
+    websocketConnection
+      .channel("boxes_open_close")
+      .listen("BoxOpenCloseEvent", (e) => {
+        opening_box(e.message);
+      });
+  }, []);
+
+//  Closed Boxes
+export const closed_boxes_WS = () =>
+  useMemo(() => {
+    websocketConnection
+      .channel("boxes_open_close")
+      .listen("BoxOpenCloseEvent", (e) => {
+        closed_boxes(e.message);
+      });
   }, []);
 
 //  Roles
@@ -232,6 +266,7 @@ export const allWebsocket = () => {
 
 export const collectWebsocket = () => {
   boxes_WS();
+  opening_box_WS();
   environments_WS();
   tables_WS();
   print_categories_WS();

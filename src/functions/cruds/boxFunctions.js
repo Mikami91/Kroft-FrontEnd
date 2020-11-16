@@ -11,6 +11,8 @@ import {
 // Actions Creators
 import {
   payload,
+  opening_box,
+  closed_boxes,
   loading,
   fetching,
 } from "../../redux/actions/creators/boxCreator";
@@ -59,6 +61,8 @@ export async function boxShow() {
       switch (response.data.success) {
         case true:
           payload(response.data.data);
+          opening_box(response.data.data2);
+          closed_boxes(response.data.data2);
           loading(false);
           break;
 

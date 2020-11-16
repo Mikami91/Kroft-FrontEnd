@@ -16,12 +16,12 @@ export const useAmountPay = (initialState = false) => {
 export const useBoxSelectModal = (newValue = null) => {
   const [selectBoxState, setSelectBoxState] = useState({
     open: parseInt(localStorage.getItem("box_id")) === 0 || null ? true : false,
-    id: newValue,
+    box_id: newValue,
   });
   const setSelectBox = (newValue) =>
     setSelectBoxState({
       ...selectBoxState,
-      id: newValue,
+      box_id: newValue,
     });
   const toggleSelectBox = () =>
     setSelectBoxState({

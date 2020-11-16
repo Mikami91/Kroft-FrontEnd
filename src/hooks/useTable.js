@@ -170,7 +170,7 @@ export const useCurrentTable = () => {
   const WILL_PAY_OKAY =
     company_name.length >= 2 &&
     responsable.length >= 5 &&
-    ci.length === 7 &&
+    ci.length >= 7 &&
     phone.length === 8;
 
   let cashValid = payment_type === "cash" && PAID_OKAY ? true : false;

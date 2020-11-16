@@ -58,7 +58,7 @@ function WillPay(props) {
           name="ci"
           value={state.ci}
           onChange={changeWillPay}
-          maxLength={8}
+          maxLength={9}
           required
           phone
         />

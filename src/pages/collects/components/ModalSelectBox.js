@@ -36,7 +36,7 @@ function ModalSelectBox(props) {
       if (typeof response !== "undefined") {
         if (response.success === true) {
           close();
-          localStorage.setItem("box_id", state.id);
+          localStorage.setItem("box_id", state.box_id);
         }
       }
     });

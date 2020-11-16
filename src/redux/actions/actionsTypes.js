@@ -41,6 +41,10 @@ export const ADMIN_DIALOG = "ADMIN_DIALOG";
 /*::::::::::::::::::::BOX::::::::::::::::::::*/
 // List
 export const BOX_LIST = "BOX_LIST";
+// Opens
+export const BOX_OPEN = "BOX_OPEN";
+// Closes
+export const BOX_CLOSED = "BOX_CLOSED";
 // Fetching
 export const BOX_FETCHING = "BOX_FETCHING";
 // Loading
