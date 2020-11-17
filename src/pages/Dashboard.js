@@ -43,25 +43,7 @@ import { customerShow } from "../functions/cruds/customerFunctions";
 import { supplierShow } from "../functions/cruds/supplierFunctions";
 import { orderShow } from "../functions/cruds/orderFunctions";
 // Events
-import {
-  companies_WS,
-  admins_WS,
-  boxes_WS,
-  roles_WS,
-  employees_WS,
-  customers_WS,
-  environments_WS,
-  tables_WS,
-  print_categories_WS,
-  categories_WS,
-  sub_categories_WS,
-  products_WS,
-  supplies_WS,
-  orders_WS,
-  order_details_WS,
-  payments_WS,
-  collects_WS,
-} from "../events";
+import { dashboardWebsocket } from "../events";
 // Assets
 import logo from "../assets/img/brands/kroft-horizontal.svg";
 // Styles
@@ -104,24 +86,8 @@ function DashboardPage(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  // Events start
-  companies_WS();
-  admins_WS();
-  boxes_WS();
-  roles_WS();
-  employees_WS();
-  customers_WS();
-  environments_WS();
-  tables_WS();
-  print_categories_WS();
-  categories_WS();
-  sub_categories_WS();
-  products_WS();
-  supplies_WS();
-  orders_WS();
-  order_details_WS();
-  payments_WS();
-  collects_WS();
+  // Events
+  dashboardWebsocket();
 
   // Dispatches
   const handleCloseSnackbar = () => hideSnackbar();

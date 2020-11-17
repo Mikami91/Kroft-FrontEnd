@@ -17,15 +17,12 @@ function ModalBox(props) {
     // Local
     open,
     close,
-    refresh,
     // Redux
     boxes,
     box_opening,
     box_fetching,
     box_loading,
   } = props;
-
-  console.log(box_opening);
 
   // Current Employee and Box
   const current_cashier_id = parseInt(localStorage.getItem("employee_id"));
@@ -66,19 +63,19 @@ function ModalBox(props) {
           bold: true,
         }}
         content={
-          console.log("modal render")
-          // box_opening !== undefined ? (
-          //   <Fragment>
-          //     <h2>Monto en Bs:</h2>
-          //     <p>{box_opening.bs_income_amount}</p>
-          //     <h2>Monto en $:</h2>
-          //     <p>{box_opening.us_income_amount}</p>
-          //     <h2>Monto en Tarjetas de Crédito:</h2>
-          //     <p>{box_opening.cards_income_amount}</p>
-          //     <h2>Monto en Pagaré:</h2>
-          //     <p>{box_opening.will_pay_income_amount}</p>
-          //   </Fragment>
-          // ) : null
+          box_opening !== undefined ? (
+            <Fragment>
+              <h2>Monto en Bs:</h2>
+              <p>{box_opening.bs_income_amount}</p>
+              <h2>Monto en $:</h2>
+              <p>{box_opening.us_income_amount}</p>
+              <h2>Monto en Tarjetas de Crédito:</h2>
+              <p>{box_opening.cards_income_amount}</p>
+              <h2>Monto en Pagaré:</h2>
+              <p>{box_opening.will_pay_income_amount}</p>
+            </Fragment>
+          ) : null
+
           // <CardBox
           //   data={boxes}
           //   keyValue="id"
@@ -123,7 +120,7 @@ function ModalBox(props) {
         fullWidth
       />
     );
-  }, [open, box_opening !== undefined ? box_opening : null]);
+  }, [open]);
 }
 // Connect to Store State
 const mapStateToProps = (state) => {

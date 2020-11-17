@@ -35,11 +35,11 @@ export default function PinLogin(props) {
         if (response.success === true) {
           switch (response.data.rol_id) {
             case 1:
-              history.push("/Kroft-FrontEnd/sales");
+              history.push("/sales");
               break;
             case 2:
               localStorage.setItem("box_id", 0);
-              history.push("/Kroft-FrontEnd/collects");
+              history.push("/collects");
               break;
 
             default:

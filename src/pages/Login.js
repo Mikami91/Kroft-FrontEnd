@@ -186,7 +186,7 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
               {value === 2 ? (<h4 onClick={handleOpen}>¿Olvidaste tu contraseña?</h4>) : null}
             </CardFooter>
           </Card>
-          {/* <Link to="/Kroft-FrontEnd/sales">
+          {/* <Link to="/sales">
             Home
           </Link> */}
           <FooterLogin whiteFont />

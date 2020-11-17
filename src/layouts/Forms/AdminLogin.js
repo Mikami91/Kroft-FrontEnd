@@ -37,7 +37,7 @@ export default function AdminLogin(props) {
     adminLogin(state).then((response) => {
       if (typeof response !== 'undefined') {
         if (response.success === true) {
-          history.push('/Kroft-FrontEnd/dashboard');
+          history.push('/dashboard');
         }
       }
     });

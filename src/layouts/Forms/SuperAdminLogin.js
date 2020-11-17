@@ -1,10 +1,10 @@
 // Dependencies
 import React, { useState } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
-import EmailRoundedIcon from '@material-ui/icons/EmailRounded';
+import EmailRoundedIcon from "@material-ui/icons/EmailRounded";
 // core components
 import CustomButton from "../../components/CustomButtons/CustomButton.js";
 import PasswordInput from "../../components/CustomInput/PasswordInput.js";
@@ -35,10 +35,10 @@ export default function SuperAdminLogin(props) {
   const handleLogin = (e) => {
     e.preventDefault();
     superAdminLogin(state).then((response) => {
-      if (typeof response !== 'undefined') {
+      if (typeof response !== "undefined") {
         console.log(response);
         if (response.success === true) {
-          history.push('/Kroft-FrontEnd/dashboard');
+          history.push("/dashboard");
         }
       }
     });
@@ -46,7 +46,12 @@ export default function SuperAdminLogin(props) {
 
   const classes = useStyles();
   return (
-    <form className={classes.form} id="super-admin-login" onSubmit={handleLogin} autoComplete="off">
+    <form
+      className={classes.form}
+      id="super-admin-login"
+      onSubmit={handleLogin}
+      autoComplete="off"
+    >
       <IconInput
         variant={"standard"}
         margin={"dense"}
@@ -73,7 +78,7 @@ export default function SuperAdminLogin(props) {
       />
       <CustomButton color="primary" size="sm" type="submit">
         Iniciar
-        </CustomButton>
+      </CustomButton>
     </form>
   );
 }

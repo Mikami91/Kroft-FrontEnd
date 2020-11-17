@@ -258,7 +258,7 @@ function SalesPage(props) {
     localStorage.setItem("token", "");
     localStorage.setItem("head_area", "");
     // Redirect to login page
-    history.push("/Kroft-FrontEnd");
+    history.push("/");
   };
 
   // Styles
