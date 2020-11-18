@@ -57,7 +57,9 @@ function CollectsPage(props) {
     environments,
     tables,
     orders_detail_payload,
-    loading,
+    environments_loading,
+    tables_loading,
+    boxes_loading,
     snackbar_show,
     snackbar_message,
     snackbar_severity,
@@ -129,11 +131,11 @@ function CollectsPage(props) {
   // Refresh fetches
   const handleRefresh = () => {
     boxShow();
-    environmentShow();
-    tableShow();
-    paymentShow();
-    orderShow();
-    collectShow();
+    // environmentShow();
+    // tableShow();
+    // paymentShow();
+    // orderShow();
+    // collectShow();
   };
 
   // Payloads
@@ -215,7 +217,9 @@ function CollectsPage(props) {
         makeDynamicState: makeDynamicState,
       }}
     >
-      <CustomLoading open={loading} />
+      <CustomLoading
+        open={environments_loading || tables_loading || boxes_loading}
+      />
       <CustomSnackbar
         open={snackbar_show}
         message={snackbar_message}
@@ -266,11 +270,13 @@ function CollectsPage(props) {
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { tables, environments, orders, snackbar } = state;
+  const { tables, environments, orders, boxes, snackbar } = state;
   return {
     environments: environments.payload,
-    loading: environments.loading,
+    environments_loading: environments.loading,
     tables: tables.payload,
+    tables_loading: tables.loading,
+    boxes_loading: boxes.loading,
     orders_detail_payload: orders.orders_detail,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,

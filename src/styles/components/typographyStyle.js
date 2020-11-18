@@ -7,6 +7,7 @@ import {
   warningColor,
   dangerColor,
   whiteColor,
+  grayColor,
   theme,
 } from "../../themes/theme.js";
 
@@ -72,7 +73,7 @@ const typographyStyle = {
     [theme.breakpoints.only("xl")]: {
       fontSize: "1.7rem",
     },
-  }, 
+  },
   largeSizeText: {
     color: theme.palette.type === "light" ? "#424242" : "#fff",
     fontWeight: "bold",
@@ -90,7 +91,7 @@ const typographyStyle = {
     [theme.breakpoints.only("xl")]: {
       fontSize: "1.9rem",
     },
-  }, 
+  },
   defaultHeaderMargins: {
     marginTop: "20px",
     marginBottom: "10px",
@@ -134,6 +135,9 @@ const typographyStyle = {
   },
   whiteText: {
     color: whiteColor,
+  },
+  grayText: {
+    color: grayColor[0],
   },
   defaultText: {
     color: theme.palette.type === "light" ? "#424242" : "#fff",
@@ -184,7 +188,7 @@ const typographyStyle = {
   },
   bold: {
     fontWeight: "bold",
-  } 
+  },
 };
 
 export default typographyStyle;

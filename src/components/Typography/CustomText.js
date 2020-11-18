@@ -66,6 +66,7 @@ CustomText.propTypes = {
     "default",
     "inherit",
     "white",
+    "gray",
     "warning",
     "success",
     "danger",
