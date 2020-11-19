@@ -1,40 +1,36 @@
 import React, { Fragment } from "react";
-import classNames from "classnames";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 // @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 // core components
 import CustomText from "../../components/Typography/CustomText";
 import CustomDivider from "../../components/Divider/CustomDivider.js";
-import styles from "../../styles/components/cardPriceStyle.js";
-
-const useStyles = makeStyles(styles);
 
 export default function CardOpenBox(props) {
   // Props
   const { data, keyValue, filter, amount, change, income } = props;
   const {
+    initial_amount,
     bs_income_amount,
     us_income_amount,
     cards_income_amount,
     will_pay_income_amount,
   } = data;
-  // Styles
-  const classes = useStyles();
-  const cardIconClasses = classNames({
-    // [classes.cardPrice]: true,
-    // [classes[color + "Color"]]: color,
-  });
+  // Variables
+  let total_incomes =
+    us_income_amount * 6.94 +
+    bs_income_amount +
+    cards_income_amount +
+    will_pay_income_amount;
+  let total_amount = initial_amount + total_incomes;
 
   return (
     <Grid container direction="column" justify="center" alignItems="flex-start">
       <CustomDivider text="MONTO INICIAL:" color="white" margin="middle" bold />
       <Grid item xs={12}>
         <NumberFormat
-          value={bs_income_amount}
+          value={initial_amount}
           displayType={"text"}
           thousandSeparator={true}
           allowNegative={false}
@@ -42,6 +38,7 @@ export default function CardOpenBox(props) {
           allowLeadingZeros={true}
           decimalScale={2}
           isNumericString={true}
+          fixedDecimalScale={initial_amount !== undefined ? true : false}
           renderText={(value) => (
             <CustomText text={`Bs ${value}`} color="warning" />
           )}
@@ -58,6 +55,7 @@ export default function CardOpenBox(props) {
           allowLeadingZeros={true}
           decimalScale={2}
           isNumericString={true}
+          fixedDecimalScale={bs_income_amount !== undefined ? true : false}
           renderText={(value) => (
             <Fragment>
               <CustomText text="Monto Bolivianos:" color="gray" />
@@ -76,6 +74,7 @@ export default function CardOpenBox(props) {
           allowLeadingZeros={true}
           decimalScale={2}
           isNumericString={true}
+          fixedDecimalScale={bs_income_amount !== undefined ? true : false}
           renderText={(value) => (
             <Fragment>
               <CustomText text="Monto Dolares:" color="gray" />
@@ -94,6 +93,7 @@ export default function CardOpenBox(props) {
           allowLeadingZeros={true}
           decimalScale={2}
           isNumericString={true}
+          fixedDecimalScale={bs_income_amount !== undefined ? true : false}
           renderText={(value) => (
             <Fragment>
               <CustomText text="Monto Tarjetas:" color="gray" />
@@ -112,6 +112,7 @@ export default function CardOpenBox(props) {
           allowLeadingZeros={true}
           decimalScale={2}
           isNumericString={true}
+          fixedDecimalScale={bs_income_amount !== undefined ? true : false}
           renderText={(value) => (
             <Fragment>
               <CustomText text="Monto Pagarés:" color="gray" />
@@ -120,15 +121,15 @@ export default function CardOpenBox(props) {
           )}
         />
       </Grid>
-      <CustomDivider text="MONTO TOTAL:" color="white" margin="middle" bold />
+      <CustomDivider
+        text="TOTAL INGRESOS:"
+        color="white"
+        margin="middle"
+        bold
+      />
       <Grid item xs={12}>
         <NumberFormat
-          value={
-            us_income_amount * 6.94 +
-            bs_income_amount +
-            cards_income_amount +
-            will_pay_income_amount
-          }
+          value={total_incomes}
           displayType={"text"}
           thousandSeparator={true}
           allowNegative={false}
@@ -136,6 +137,24 @@ export default function CardOpenBox(props) {
           allowLeadingZeros={true}
           decimalScale={2}
           isNumericString={true}
+          fixedDecimalScale={total_incomes !== undefined ? true : false}
+          renderText={(value) => (
+            <CustomText text={`Bs ${value}`} color="warning" />
+          )}
+        />
+      </Grid>
+      <CustomDivider text="MONTO TOTAL:" color="white" margin="middle" bold />
+      <Grid item xs={12}>
+        <NumberFormat
+          value={total_amount}
+          displayType={"text"}
+          thousandSeparator={true}
+          allowNegative={false}
+          allowEmptyFormatting={true}
+          allowLeadingZeros={true}
+          decimalScale={2}
+          isNumericString={true}
+          fixedDecimalScale={total_amount !== undefined ? true : false}
           renderText={(value) => (
             <CustomText text={`Bs ${value}`} color="warning" />
           )}

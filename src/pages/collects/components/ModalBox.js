@@ -48,7 +48,7 @@ function ModalBox(props) {
         localStorage.setItem("employee_id", null);
         localStorage.setItem("token", null);
         // Redirect to login page
-        history.push("/Kroft-FrontEnd");
+        history.push("/");
       }
     }
   };
@@ -78,19 +78,6 @@ function ModalBox(props) {
           bold: false,
         }}
         content={
-          // box_opening !== undefined ? (
-          //   <Fragment>
-          //     <h2>Monto en Bs:</h2>
-          //     <p>{box_opening.bs_income_amount}</p>
-          //     <h2>Monto en $:</h2>
-          //     <p>{box_opening.us_income_amount}</p>
-          //     <h2>Monto en Tarjetas de Crédito:</h2>
-          //     <p>{box_opening.cards_income_amount}</p>
-          //     <h2>Monto en Pagaré:</h2>
-          //     <p>{box_opening.will_pay_income_amount}</p>
-          //   </Fragment>
-          // ) : null
-
           <CardOpenBox
             data={box_opening}
             keyValue="id"
