@@ -1,7 +1,7 @@
 // Pages
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
-import Sales from "../pages/Sales";
+import Sales from "../pages/sales/Sales";
 import Collects from "../pages/collects/Collects";
 import Products from "../pages/Products";
 //Kroft-FrontEnd

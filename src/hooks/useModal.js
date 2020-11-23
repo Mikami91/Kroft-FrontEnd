@@ -42,3 +42,9 @@ export const useModal = (initialIsOpened = false) => {
   const toggle = () => setIsOpened(!isOpened);
   return [isOpened, setIsOpened, toggle];
 };
+
+export const useChangeTableModal = (initialIsOpened = false) => {
+  const [changeTableOpen, setChangeTableOpen] = useState(initialIsOpened);
+  const toggleChangeTable = () => setChangeTableOpen(!changeTableOpen);
+  return [changeTableOpen, setChangeTableOpen, toggleChangeTable];
+};

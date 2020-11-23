@@ -284,6 +284,19 @@ export const dashboardWebsocket = () => {
   collects_WS();
 };
 
+export const salesWebsocket = () => {
+  environments_WS();
+  tables_WS();
+  print_categories_WS();
+  categories_WS();
+  sub_categories_WS();
+  products_WS();
+  supplies_WS();
+  orders_WS();
+  order_details_WS();
+  collects_WS();
+};
+
 export const collectWebsocket = () => {
   boxes_WS();
   opening_box_WS();

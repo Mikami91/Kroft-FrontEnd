@@ -7,7 +7,7 @@ import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import PersonIcon from "@material-ui/icons/Person";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
-import PaymentRoundedIcon from "@material-ui/icons/PaymentRounded";
+import SwapHorizIcon from "@material-ui/icons/SwapHoriz";
 // core components
 import FooterAppBar from "../../../components/Footer/FooterAppBar.js";
 
@@ -17,7 +17,7 @@ function FooterBar(props) {
     // Local
     refresh,
     logout,
-    openBox,
+    toggleChangeTable,
     openDrawer,
   } = props;
 
@@ -46,16 +46,6 @@ function FooterBar(props) {
         },
         {
           type: "icon",
-          text: "Caja",
-          color: "default",
-          icon: PaymentRoundedIcon,
-          size: "large",
-          margin: true,
-          disabled: false,
-          onClick: openBox,
-        },
-        {
-          type: "icon",
           text: "Perfil",
           color: "default",
           icon: PersonIcon,
@@ -73,6 +63,16 @@ function FooterBar(props) {
         },
       ]}
       rightButtons={[
+        {
+          type: "icon",
+          text: "Cambiar de Mesa",
+          color: "default",
+          icon: SwapHorizIcon,
+          edge: "start",
+          size: "large",
+          disabled: localStorage.getItem("head_area") === "1" ? false : true,
+          onClick: toggleChangeTable,
+        },
         {
           type: "icon",
           text: "Lista de Mesas",

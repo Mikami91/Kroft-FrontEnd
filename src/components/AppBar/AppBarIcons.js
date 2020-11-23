@@ -3,18 +3,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // @material-ui/Componentes
 import AppBar from "@material-ui/core/AppBar";
 import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
-import Badge from '@material-ui/core/Badge';
+import Badge from "@material-ui/core/Badge";
 import Tabs from "@material-ui/core/Tabs";
 import { makeStyles } from "@material-ui/core/styles";
 // Core Components
 import CustomText from "../../components/Typography/CustomText";
 // API
-import { API } from '../../API/index';
+import { API } from "../../API/index";
 // Styles
 import styles from "../../styles/components/appBarIconStyle";
 
@@ -41,13 +41,13 @@ const AppBarIcons = (props) => {
 
   // Find if Product Orders has SubCategory ID
   const found_category_id = (category_id) => {
-    let found = orders.some(index => index.category_id === category_id);
+    let found = orders.some((index) => index.category_id === category_id);
     if (found === true) {
       return true;
     } else {
       return false;
     }
-  }
+  };
 
   // Styles
   const classes = useStyles();
@@ -102,8 +102,8 @@ const AppBarIcons = (props) => {
                 color="secondary"
                 variant="dot"
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right',
+                  vertical: "bottom",
+                  horizontal: "right",
                 }}
                 invisible={!found_category_id(index.id)}
               >
@@ -150,6 +150,7 @@ AppBarIcons.defaultProps = {
   onChange: null,
   selectColor: "primary",
   hoverColor: "primary",
+  orders: [],
 };
 AppBarIcons.propTypes = {
   // AppBar
@@ -194,6 +195,7 @@ AppBarIcons.propTypes = {
     "success",
     "info",
   ]),
+  orders: PropTypes.array,
 };
 // // Connect to Store State
 // const mapStateToProps = (state) => {

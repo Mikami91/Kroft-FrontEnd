@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { hideSnackbar } from "../../redux/actions/creators/snackbarCreator";
 // Hooks
 import { useDrawer } from "../../hooks/useDrawer";
-import { useCurrentTable } from "../../hooks/useTable";
+import { useCurrentTable } from "../../hooks/useCurrentTable";
 import {
   useBoxSelectModal,
   useBoxModal,
@@ -131,11 +131,11 @@ function CollectsPage(props) {
   // Refresh fetches
   const handleRefresh = () => {
     boxShow();
-    // environmentShow();
-    // tableShow();
-    // paymentShow();
-    // orderShow();
-    // collectShow();
+    environmentShow();
+    tableShow();
+    paymentShow();
+    orderShow();
+    collectShow();
   };
 
   // Payloads
