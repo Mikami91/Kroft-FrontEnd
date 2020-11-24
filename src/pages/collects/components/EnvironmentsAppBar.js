@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 // core components
 import AppBarTabs from "../../../components/AppBar/AppBarTabs.js";
 
-function AppBar(props) {
+function EnvironmentsAppBar(props) {
   // Props
   const { environments, tabIndex, changeTabIndex } = props;
 
@@ -30,4 +30,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(AppBar);
+export default connect(mapStateToProps, null)(EnvironmentsAppBar);

@@ -19,9 +19,9 @@ import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Local Layouts
 import Products from "./components/Products";
 // Local components
-import AppBar from "./components/AppBar";
+import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
 import TablesGrid from "./components/TablesGrid";
-import FooterBar from "./components/FooterBar";
+import SalesFooterBar from "./components/SalesFooterBar";
 import DrawerTablesList from "./components/DrawerTablesList";
 import ModalChangeTable from "./components/ModalChangeTable";
 // core components
@@ -145,35 +145,30 @@ function CollectsPage(props) {
         severity={snackbar_severity}
         onClose={handleCloseSnackbar}
       />
-
-      <AppBar tabIndex={tabIndex} changeTabIndex={changeTabIndex} />
+      <EnvironmentsAppBar tabIndex={tabIndex} changeTabIndex={changeTabIndex} />
       <TablesGrid
         tabIndex={tabIndex}
         changeTabIndex={changeTabIndex}
         onClick={handleOpenProducts}
       />
-      <FooterBar
+      <SalesFooterBar
         refresh={handleRefresh}
         logout={handleLogout}
         openDrawer={toggleDrawer}
         toggleChangeTable={toggleChangeTable}
       />
-
       <ModalChangeTable open={changeTableOpen} close={toggleChangeTable} />
-
       <DrawerTablesList
         open={openDrawer}
         close={toggleDrawer}
         openProducts={handleOpenProducts}
       />
-
       <Products
         direction="bottom"
         variant="temporary"
         background={image}
         open={currentOpenTable.open}
         close={handleCloseProducts}
-        table={currentTableState}
       />
     </CurrentTableContext.Provider>
   );

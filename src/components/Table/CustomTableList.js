@@ -12,7 +12,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 // Core Components
-import CustomText from '../Typography/CustomText';
+import CustomText from "../Typography/CustomText";
 // Styles
 // import "../../styles/index.css";
 // Containers
@@ -53,7 +53,11 @@ function CustomTableList(props) {
                         size={col.size}
                         colSpan={col.colSpan}
                       >
-                        <CustomText text={index[col.field]} size={col.fontSize} color={col.color} />
+                        <CustomText
+                          text={index[col.field]}
+                          size={col.fontSize}
+                          color={col.color}
+                        />
                       </TableCell>
                     );
                   } else {
@@ -65,20 +69,42 @@ function CustomTableList(props) {
                         size={col.size}
                         colSpan={col.colSpan}
                       >
-                        <IconButton aria-describedby={col.variant === "pop" ? "simple-popover" : key + "icon"} onClick={col.variant === "pop" ? (event) => col.onClick(event, index.product_id, index.product_observation) : (event) => col.onClick(index.product_id)}>
-
-                          {col.variant === "pop" ?
-                            <Badge color="secondary" variant="dot" invisible={index.product_observation === "" ? true : false}>
+                        <IconButton
+                          aria-describedby={
+                            col.variant === "pop"
+                              ? "simple-popover"
+                              : key + "icon"
+                          }
+                          onClick={
+                            col.variant === "pop"
+                              ? (event) =>
+                                  col.onClick(
+                                    event,
+                                    index.product_id,
+                                    index.product_observation
+                                  )
+                              : (event) => col.onClick(index.product_id)
+                          }
+                        >
+                          {col.variant === "pop" ? (
+                            <Badge
+                              color="secondary"
+                              variant="dot"
+                              invisible={
+                                index.product_observation === "" ? true : false
+                              }
+                            >
                               <col.icon
                                 fontSize={col.iconSize}
                                 color={col.iconColor}
                               />
-                            </Badge> :
+                            </Badge>
+                          ) : (
                             <col.icon
                               fontSize={col.iconSize}
                               color={col.iconColor}
-                            />}
-
+                            />
+                          )}
                         </IconButton>
                       </TableCell>
                     );
@@ -88,7 +114,6 @@ function CustomTableList(props) {
             ))}
           </TableBody>
         </Table>
-
       </Fragment>
     );
   }, [renderRefresh]);

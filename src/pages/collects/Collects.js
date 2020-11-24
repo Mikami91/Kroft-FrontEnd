@@ -19,9 +19,9 @@ import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Layouts
 import ComponentToPrint from "../../layouts/Prints/ComponentToPrint";
 // Local components
-import AppBar from "./components/AppBar";
+import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
 import TablesGrid from "./components/TablesGrid";
-import FooterBar from "./components/FooterBar";
+import CollectFooterBar from "./components/CollectFooterBar";
 import DrawerTablesList from "./components/DrawerTablesList";
 import ModalPassCollect from "./components/ModalPassCollect";
 import ModalSelectBox from "./components/ModalSelectBox";
@@ -227,13 +227,13 @@ function CollectsPage(props) {
         onClose={handleCloseSnackbar}
       />
 
-      <AppBar tabIndex={tabIndex} changeTabIndex={changeTabIndex} />
+      <EnvironmentsAppBar tabIndex={tabIndex} changeTabIndex={changeTabIndex} />
       <TablesGrid
         tabIndex={tabIndex}
         changeTabIndex={changeTabIndex}
         onClick={handleOpenTotalAmount}
       />
-      <FooterBar
+      <CollectFooterBar
         refresh={handleRefresh}
         logout={handleLogout}
         openDrawer={toggleDrawer}
