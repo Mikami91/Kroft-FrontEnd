@@ -40,11 +40,67 @@ export const usePassCollectModal = (initialState = false) => {
 export const useModal = (initialIsOpened = false) => {
   const [isOpened, setIsOpened] = useState(initialIsOpened);
   const toggle = () => setIsOpened(!isOpened);
-  return [isOpened, setIsOpened, toggle];
+  return [isOpened, toggle];
 };
 
 export const useChangeTableModal = (initialIsOpened = false) => {
   const [changeTableOpen, setChangeTableOpen] = useState(initialIsOpened);
   const toggleChangeTable = () => setChangeTableOpen(!changeTableOpen);
-  return [changeTableOpen, setChangeTableOpen, toggleChangeTable];
+  return [changeTableOpen, toggleChangeTable];
+};
+
+export const useProductsOrdersModal = () => {
+  const [openProductsOrders, setProductsOrders] = useState(false);
+  const toggleProductsOrders = () => setProductsOrders(!openProductsOrders);
+  return [openProductsOrders, toggleProductsOrders];
+};
+
+// export const useTotalAmountModal = () => {
+//   const [openTotalAmount, setTotalAmount] = useState(false);
+//   const toggleTotalAmount = () => setTotalAmount(!openTotalAmount);
+//   return [openTotalAmount, toggleTotalAmount];
+// };
+
+export const useTotalAmountModal = () => {
+  const [totalAmount, setTotalAmountState] = useState({
+    open: false,
+    list: [],
+  });
+  const setTotalAmount = (array, key) => {
+    setTotalAmountState({
+      ...totalAmount,
+      list: array.filter((index) => index.order_id === key),
+    });
+  };
+  const toggleTotalAmount = () =>
+    setTotalAmountState({
+      ...totalAmount,
+      open: !totalAmount.open,
+      list: totalAmount.open ? totalAmount.list : [],
+    });
+  return [totalAmount, setTotalAmount, toggleTotalAmount];
+};
+
+export const useHistoryPrintsModal = () => {
+  const [historyPrints, setHistoryPrintsState] = useState({
+    open: false,
+    list: [],
+  });
+  const setHistoryPrints = (array, keys) => {
+    setHistoryPrintsState({
+      ...historyPrints,
+      list: array.filter(
+        (index) =>
+          index.order_number === keys.order_number &&
+          index.order_id === keys.order_id
+      ),
+    });
+  };
+  const toggleHistoryPrints = () =>
+    setHistoryPrintsState({
+      ...historyPrints,
+      open: !historyPrints.open,
+      list: historyPrints.open ? historyPrints.list : [],
+    });
+  return [historyPrints, setHistoryPrints, toggleHistoryPrints];
 };

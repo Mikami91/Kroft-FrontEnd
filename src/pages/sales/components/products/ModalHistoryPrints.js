@@ -8,13 +8,12 @@ import PrintIcon from "@material-ui/icons/Print";
 import CustomModal from "../../../../components/Modal/CustomModal.js";
 import CustomTableListPrints from "../../../../components/Table/CustomTableListPrints";
 
-function ModalPrintsHistory(props) {
-  // Props
+function ModalHistoryPrints(props) {
   const {
     // Local
     open,
     toggle,
-    handlePrintHistory,
+    handleHistoryPrint,
     // Redux
     currentOpenTable,
     orders_detail_payload,
@@ -79,7 +78,7 @@ function ModalPrintsHistory(props) {
                 size: "medium",
                 align: "center",
                 icon: PrintIcon,
-                onClick: handlePrintHistory,
+                onClick: handleHistoryPrint,
               },
             ]}
             data={orders_detail_payload}
@@ -104,4 +103,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ModalPrintsHistory);
+export default connect(mapStateToProps, null)(ModalHistoryPrints);

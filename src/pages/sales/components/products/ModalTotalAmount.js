@@ -16,7 +16,7 @@ function ModalTotalAmount(props) {
     toggle,
     global_quantity,
     table_amount,
-    handleTotalPrint,
+    handleTotalAmountPrint,
     // Redux
     currentOpenTable,
     orders_detail_payload,
@@ -86,7 +86,7 @@ function ModalTotalAmount(props) {
             data={orders_detail_payload}
             key_field="table_id"
             filter={currentOpenTable.table_id}
-            renderRefresh={[global_quantity /*state.observation*/]}
+            renderRefresh={[orders_detail_payload, global_quantity]}
           />
         }
         leftButtons={[
@@ -97,7 +97,7 @@ function ModalTotalAmount(props) {
             align: "center",
             icon: PrintRounded,
             iconColor: "secondary",
-            onClick: handleTotalPrint,
+            onClick: handleTotalAmountPrint,
           },
         ]}
         rightButtons={[
@@ -135,7 +135,7 @@ function ModalTotalAmount(props) {
         fullWidth
       />
     );
-  }, [open]);
+  }, [open, orders_detail_payload]);
 }
 // Connect to Store State
 const mapStateToProps = (state) => {

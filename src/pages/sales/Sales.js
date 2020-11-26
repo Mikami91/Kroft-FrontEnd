@@ -52,6 +52,8 @@ function CollectsPage(props) {
     snackbar_severity,
   } = props;
 
+  console.log(`%c SALES RENDER`, "color: lightgreen; font-size: large");
+
   // Tabs index state
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -169,6 +171,7 @@ function CollectsPage(props) {
         background={image}
         open={currentOpenTable.open}
         close={handleCloseProducts}
+        currentTable={currentTableState}
       />
     </CurrentTableContext.Provider>
   );

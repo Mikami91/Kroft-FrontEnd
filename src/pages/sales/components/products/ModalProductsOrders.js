@@ -218,7 +218,7 @@ function ModalProductsOrders(props) {
         fullWidth
       />
     );
-  }, [open, observationState]);
+  }, [open, observationState, global_quantity]);
 }
 // Connect to Store State
 const mapStateToProps = (state) => {

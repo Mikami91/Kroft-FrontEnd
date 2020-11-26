@@ -3,9 +3,9 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Actions Creators
-import { orders } from '../../redux/actions/creators/productCreator';
+import { orders as makeOrder } from "../../redux/actions/creators/productCreator";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -22,12 +22,22 @@ import image from "../../assets/img/defaults/product.png";
 const useStyles = makeStyles(styles);
 
 function CardProduct(props) {
-  const classes = useStyles();
   const {
-    // Redux
-    orders_list,
     // Props
-    photo, name, prefix, price, quantity, onClick, color, variant } = props;
+    current_product,
+    photo,
+    name,
+    prefix,
+    price,
+    quantity,
+    color,
+    variant,
+  } = props;
+
+  console.log(`%c CARD RENDER`, "color: lightgreen; font-size: large");
+
+  // Styles
+  const classes = useStyles();
   const cardClasses = classNames({
     [classes.products]: true,
   });
@@ -36,20 +46,17 @@ function CardProduct(props) {
   return useMemo(() => {
     return (
       <Badge badgeContent={quantity} color={color} variant={variant} max={99}>
-        <CardActionArea onClick={onClick}>
+        <CardActionArea onClick={() => makeOrder(current_product)}>
           <Card className={cardClasses}>
-            {/* <div className={classes.cardHeader}> */}
-            {/* </div> */}
             <CardMedia
               component="img"
-              // height="140"
+              height="140"
               className={classes.image}
               image={photo}
               title={name}
               loading="lazy"
             />
             <div className={classes.cardFooter}>
-              {/* <h3 className={classes.name}>{name}</h3> */}
               <h3 className={classes.price}>{prefix + " " + price}</h3>
               <CustomText text={name} color="default" adjust={true} />
             </div>
@@ -61,6 +68,7 @@ function CardProduct(props) {
 }
 // Proptypes
 CardProduct.defaultProps = {
+  current_product: null,
   photo: image,
   name: "",
   filter: "",
@@ -70,6 +78,7 @@ CardProduct.defaultProps = {
   variant: "standard",
 };
 CardProduct.propTypes = {
+  current_product: PropTypes.object,
   photo: PropTypes.string,
   name: PropTypes.string,
   prefix: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -84,16 +93,7 @@ CardProduct.propTypes = {
     "info",
     "rose",
   ]),
-  variant: PropTypes.oneOf([
-    "standard",
-    "dot",
-  ]),
+  variant: PropTypes.oneOf(["standard", "dot"]),
 };
-// Connect to Store State
-const mapStateToProps = (state) => {
-  const { product } = state;
-  return {
-    orders_list: product.orders,
-  }
-};
-export default connect(mapStateToProps, null)(CardProduct);
+
+export default connect(null, null)(CardProduct);

@@ -6,8 +6,14 @@ import { connect } from "react-redux";
 import AppBarIcons from "../../../../components/AppBar/AppBarIcons.js";
 
 function CategoriesAppBar(props) {
-  // Props
-  const { categories, tabIndex, changeTabIndex, product_orders_list } = props;
+  const {
+    // Redux
+    categories,
+    // Props
+    tabIndex,
+    changeTabIndex,
+    product_orders_list,
+  } = props;
 
   return (
     <AppBarIcons

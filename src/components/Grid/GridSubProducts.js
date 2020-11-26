@@ -3,14 +3,14 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 // Core components
 import CardProduct from "../Card/CardProduct.js";
 // API
-import { API } from '../../API/index';
+import { API } from "../../API/index";
 // Styles
 import styles from "../../styles/components/gridStyle";
 
@@ -18,8 +18,17 @@ const useStyles = makeStyles(styles);
 
 function GridSubProducts(props) {
   const {
-    // props 
-    data, keyData, filter, imagePath, onClick, color, orders, renderRefresh } = props;
+    // props
+    data,
+    keyData,
+    filter,
+    imagePath,
+    onClick,
+    color,
+    orders,
+    current_product,
+    renderRefresh,
+  } = props;
 
   // Search Product ID in Orders list and return his quantity
   const handleQuantity = (product_id) => {
@@ -68,11 +77,12 @@ function GridSubProducts(props) {
                   color={color}
                   prefix="Bs."
                   price={index.price}
-                  photo={'https://source.unsplash.com/300x300/?food,breakfast'}
+                  photo={"https://source.unsplash.com/300x300/?food,breakfast"}
                   // photo={API + imagePath + index.photo}
                   name={index.name}
                   quantity={handleQuantity(index.id)}
-                  onClick={() => onClick(index)}
+                  current_product={current_product}
+                  // onClick={() => onClick(index)}
                   keyi={key}
                 />
               </Grid>

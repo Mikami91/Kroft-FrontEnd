@@ -22,10 +22,12 @@ function ProductsFooterBar(props) {
     table_state,
     table_amount,
     global_quantity,
+    handleSendOrder,
+    handleCancelOrder,
     handleCloseProducts,
-    toggleOpenOrders,
-    toggleOpenPrints,
-    toggleOpenTotal,
+    toggleProductsOrders,
+    toggleHistoryPrints,
+    toggleTotalAmount,
   } = props;
 
   // Use Contexts
@@ -58,7 +60,7 @@ function ProductsFooterBar(props) {
         float: false,
         align: "center",
         icon: FormatListBulletedIcon,
-        onClick: toggleOpenOrders,
+        onClick: toggleProductsOrders,
       }}
       leftButtons={[
         {
@@ -113,7 +115,7 @@ function ProductsFooterBar(props) {
           edge: "start",
           size: "large",
           disabled: table_amount > 0 ? false : true,
-          onClick: toggleOpenPrints,
+          onClick: toggleHistoryPrints,
         },
         {
           type: "icon",
@@ -123,7 +125,7 @@ function ProductsFooterBar(props) {
           edge: false,
           size: "large",
           disabled: table_amount > 0 ? false : true,
-          onClick: toggleOpenTotal,
+          onClick: toggleTotalAmount,
         },
         {
           type: "fab",
@@ -138,12 +140,12 @@ function ProductsFooterBar(props) {
           edge: "end",
           size: "large",
           disabled: table_amount > 0 ? false : true,
-          // onClick:
-          //   table_state === 1
-          //     ? handleSendOrder
-          //     : table_state === 2
-          //     ? handleCancelOrder
-          //     : null,
+          onClick:
+            table_state === 1
+              ? handleSendOrder
+              : table_state === 2
+              ? handleCancelOrder
+              : null,
         },
       ]}
     />
