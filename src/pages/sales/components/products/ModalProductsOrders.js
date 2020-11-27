@@ -28,8 +28,8 @@ function ModalProductsOrders(props) {
     open,
     toggle,
     product_orders_list,
-    handleOpenObservation,
-    handleOpenConfirmation,
+    openObservation,
+    openConfirmation,
     handleCreateOrder,
     global_quantity,
     global_amount,
@@ -104,7 +104,7 @@ function ModalProductsOrders(props) {
                 icon: InfoIcon,
                 iconColor: "primary",
                 variant: "pop",
-                onClick: handleOpenObservation,
+                onClick: openObservation,
               },
               {
                 field: "product_name",
@@ -167,7 +167,7 @@ function ModalProductsOrders(props) {
             color: "danger",
             variant: "contained",
             icon: DeleteSweepIcon,
-            onClick: handleOpenConfirmation,
+            onClick: openConfirmation,
           },
         ]}
         centerButtons={[

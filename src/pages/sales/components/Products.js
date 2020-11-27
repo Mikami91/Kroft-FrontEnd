@@ -7,17 +7,16 @@ import ReactToPrint from "react-to-print";
 import { connect } from "react-redux";
 // Actions Creators
 import { close as closeModalProducts } from "../../../redux/actions/creators/productCreator";
-import {
-  orders,
-  add_obs,
-  delete_obs,
-  delete_all,
-} from "../../../redux/actions/creators/productCreator";
+import { delete_all } from "../../../redux/actions/creators/productCreator";
 import {
   useProductsOrdersModal,
   useTotalAmountModal,
   useHistoryPrintsModal,
 } from "../../../hooks/useModal";
+import {
+  useObservationPopover,
+  useConfirmationPopover,
+} from "../../../hooks/usePopover";
 // UI Material Components
 import Drawer from "@material-ui/core/Drawer";
 // Local components
@@ -93,6 +92,18 @@ function Products(props) {
     setHistoryPrints,
     toggleHistoryPrints,
   ] = useHistoryPrintsModal();
+  const [
+    observationState,
+    openObservation,
+    closeObservation,
+    saveObservation,
+    deleteObservation,
+  ] = useObservationPopover();
+  const [
+    confirmationState,
+    openConfirmation,
+    closeConfirmation,
+  ] = useConfirmationPopover();
 
   // Set state, amount and order_id of current Table
   let table_state = 0;
@@ -139,83 +150,9 @@ function Products(props) {
     console.log(`%c PRODUCTS QUANTITY: ${global_quantity}`, "color: skyblue");
   }, [open, global_quantity, global_amount, product_orders_list]);
 
-  // POPOVERS
-
-  // Open and Close Observation Popopver
-  const [observationState, setObservationState] = useState({
-    open: false,
-    anchorEl: null,
-    product_id: null,
-    observation: "",
-  });
-
-  // Open observation
-  const handleOpenObservation = (e, id, observation) => {
-    setObservationState({
-      open: true,
-      anchorEl: e.currentTarget,
-      product_id: id,
-      observation: observation,
-    });
-  };
-
-  // Close observation
-  const handleCloseObservation = () => {
-    setObservationState({
-      open: false,
-      anchorEl: null,
-      product_id: null,
-      observation: "",
-    });
-  };
-
-  // Delete observation
-  const handleDelete = () => {
-    delete_obs({ product_id: observationState.product_id });
-    handleCloseObservation();
-  };
-
-  // Save observation
-  const handleSave = () => {
-    add_obs({
-      product_id: observationState.product_id,
-      observation: document.getElementById("textarea").value,
-    });
-    handleCloseObservation();
-  };
-
-  // Open and Close Confirmation Popopver
-  const [confirmationState, setConfirmationState] = useState({
-    open: false,
-    anchorEl: null,
-  });
-
-  // Open confirmation
-  const handleOpenConfirmation = (e) => {
-    setConfirmationState({
-      open: true,
-      anchorEl: e.currentTarget,
-    });
-  };
-
-  // Close confirmation
-  const handleCloseConfirmation = () => {
-    setConfirmationState({
-      open: false,
-      anchorEl: null,
-    });
-  };
-
   let btn = document.getElementById("printOrder");
   let btn2 = document.getElementById("printHistory");
   let btn3 = document.getElementById("printTotal");
-
-  // Print Order History
-  async function handleHistoryPrint(e, arg) {
-    e.preventDefault();
-    await setHistoryPrints(orders_detail_payload, arg);
-    btn2.click();
-  }
 
   // ORDERS ACTIONS
 
@@ -244,7 +181,7 @@ function Products(props) {
   // Delete Orders List function
   const handleDeleteOrders = () => {
     delete_all();
-    handleCloseConfirmation();
+    closeConfirmation();
     toggleProductsOrders();
   };
 
@@ -278,7 +215,12 @@ function Products(props) {
     });
   };
 
-  // PRINTS
+  // Print Order History
+  async function handleHistoryPrint(e, arg) {
+    e.preventDefault();
+    await setHistoryPrints(orders_detail_payload, arg);
+    btn2.click();
+  }
 
   // Total Amount Print
   const handleTotalAmountPrint = async (e) => {
@@ -330,25 +272,22 @@ function Products(props) {
           toggleHistoryPrints={toggleHistoryPrints}
           toggleTotalAmount={toggleTotalAmount}
         />
-
         <ModalProductsOrders
           open={openProductsOrders}
           toggle={toggleProductsOrders}
           product_orders_list={product_orders_list}
-          handleOpenObservation={handleOpenObservation}
-          handleOpenConfirmation={handleOpenConfirmation}
+          openObservation={openObservation}
+          openConfirmation={openConfirmation}
           handleCreateOrder={handleCreateOrder}
           global_quantity={global_quantity}
           global_amount={global_amount}
           observationState={observationState}
         />
-
         <ModalHistoryPrints
           open={historyPrints.open}
           toggle={toggleHistoryPrints}
           handleHistoryPrint={handleHistoryPrint}
         />
-
         <ModalTotalAmount
           open={totalAmount.open}
           toggle={toggleTotalAmount}
@@ -356,21 +295,19 @@ function Products(props) {
           table_amount={table_amount}
           handleTotalAmountPrint={handleTotalAmountPrint}
         />
-
         <PopoverObservation
           open={observationState.open}
-          close={handleCloseObservation}
+          close={closeObservation}
           state={observationState}
-          saveObs={handleSave}
-          deleteObs={handleDelete}
+          saveObs={saveObservation}
+          deleteObs={deleteObservation}
         />
         <PopoverConfirmation
           open={confirmationState.open}
-          close={handleCloseConfirmation}
+          close={closeConfirmation}
           state={confirmationState}
           deleteOrders={handleDeleteOrders}
         />
-
         <TabPanel value={1} index={0}>
           <ReactToPrint
             trigger={() => (
@@ -380,7 +317,6 @@ function Products(props) {
             )}
             content={() => componentRef}
           />
-
           <ReactToPrint
             trigger={() => (
               <button id="printHistory" style={{ display: "none" }}>
@@ -389,7 +325,6 @@ function Products(props) {
             )}
             content={() => componentRef2}
           />
-
           <ComponentToPrint2
             ref={(el) => (componentRef = el)}
             data={product_orders_list}
@@ -401,7 +336,6 @@ function Products(props) {
             refresh={historyPrints}
           />
         </TabPanel>
-
         <ComponentToPrint
           btnID="printTotal"
           printList={totalAmount.list}
