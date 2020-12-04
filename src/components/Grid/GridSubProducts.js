@@ -18,6 +18,8 @@ const useStyles = makeStyles(styles);
 
 function GridSubProducts(props) {
   const {
+    // Redux
+    current,
     // props
     data,
     keyData,
@@ -92,7 +94,7 @@ function GridSubProducts(props) {
         })}
       </Grid>
     );
-  }, [data, renderRefresh]);
+  }, [data, current.global_quantity]);
 }
 // Proptypes
 GridSubProducts.defaultProps = {
@@ -127,11 +129,10 @@ GridSubProducts.propTypes = {
   ]),
 };
 // Connect to Store State
-// const mapStateToProps = (state) => {
-//   const { product } = state;
-//   return {
-//     orders_list: product.orders,
-//     current: product.current,
-//   }
-// };
-export default connect(null, null)(GridSubProducts);
+const mapStateToProps = (state) => {
+  const { product } = state;
+  return {
+    current: product.current,
+  };
+};
+export default connect(mapStateToProps, null)(GridSubProducts);

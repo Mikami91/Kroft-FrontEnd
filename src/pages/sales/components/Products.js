@@ -4,12 +4,17 @@ import PropTypes from "prop-types";
 // Print
 import ReactToPrint from "react-to-print";
 // Conecction to Store
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // Actions Creators
-import { close as closeModalProducts } from "../../../redux/actions/creators/productCreator";
+import {
+  close as closeModalProducts,
+  product_orders,
+} from "../../../redux/actions/creators/productCreator";
 import { delete_all } from "../../../redux/actions/creators/productCreator";
 import {
   useProductsOrdersModal,
+  useSubCategoryModal,
   useTotalAmountModal,
   useHistoryPrintsModal,
 } from "../../../hooks/useModal";
@@ -23,6 +28,7 @@ import Drawer from "@material-ui/core/Drawer";
 import CategoriesAppBar from "./products/CategoriesAppBar";
 import ListProducts from "./products/ListProducts";
 import ProductsFooterBar from "./products/ProductsFooterBar";
+import ModalSubProducts from "./products/ModalSubProducts";
 import ModalProductsOrders from "./products/ModalProductsOrders";
 import ModalHistoryPrints from "./products/ModalHistoryPrints";
 import ModalTotalAmount from "./products/ModalTotalAmount";
@@ -60,16 +66,15 @@ function Products(props) {
     currentOpenTable,
     orders_detail_payload,
     order_loading,
+    setProductToOrder,
     /* Props */
     direction,
     variant,
-    open,
-    close,
     background,
     currentTable,
   } = props;
 
-  console.log(currentTable);
+  console.log(props);
 
   console.log(`%c PRODUCTS RENDER`, "color: lightgreen; font-size: large");
 
@@ -82,6 +87,11 @@ function Products(props) {
 
   // Hooks
   const [openProductsOrders, toggleProductsOrders] = useProductsOrdersModal();
+  const [
+    subCategory,
+    openSubCategory,
+    closeSubCategory,
+  ] = useSubCategoryModal();
   const [
     totalAmount,
     setTotalAmount,
@@ -148,7 +158,11 @@ function Products(props) {
       console.log(`%c RESPONSE`, "color: orange");
     }
     console.log(`%c PRODUCTS QUANTITY: ${global_quantity}`, "color: skyblue");
-  }, [open, global_quantity, global_amount, product_orders_list]);
+  }, [
+    currentOpenTable.open,
+    currentOpenTable.global_quantity,
+    product_orders_list,
+  ]);
 
   let btn = document.getElementById("printOrder");
   let btn2 = document.getElementById("printHistory");
@@ -194,7 +208,7 @@ function Products(props) {
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response === true) {
-          close();
+          closeModalProducts();
         }
       }
     });
@@ -238,8 +252,8 @@ function Products(props) {
     // Render
     return (
       <Drawer
-        open={open}
-        onClose={close}
+        open={currentOpenTable.open}
+        onClose={closeModalProducts}
         variant={variant}
         anchor={direction}
         ModalProps={{
@@ -259,7 +273,9 @@ function Products(props) {
           changeTabIndex={changeTabIndex}
           product_orders_list={product_orders_list}
           global_quantity={global_quantity}
-          open={open}
+          open={currentOpenTable.open}
+          setProductToOrder={setProductToOrder}
+          openSubCategory={openSubCategory}
         />
         <ProductsFooterBar
           table_state={table_state}
@@ -271,6 +287,12 @@ function Products(props) {
           toggleProductsOrders={toggleProductsOrders}
           toggleHistoryPrints={toggleHistoryPrints}
           toggleTotalAmount={toggleTotalAmount}
+        />
+        <ModalSubProducts
+          subCategory={subCategory}
+          close={closeSubCategory}
+          product_orders_list={product_orders_list}
+          setProductToOrder={setProductToOrder}
         />
         <ModalProductsOrders
           open={openProductsOrders}
@@ -344,16 +366,18 @@ function Products(props) {
       </Drawer>
     );
   }, [
-    open,
-    tabIndex,
-    global_quantity,
+    currentOpenTable.open,
+    currentOpenTable.global_quantity,
     tables,
+    tabIndex,
     table_state,
+    subCategory.open,
     openProductsOrders,
     totalAmount,
     historyPrints,
     observationState.open,
     confirmationState.open,
+    orders_list,
     order_loading,
   ]);
 }
@@ -383,5 +407,10 @@ const mapStateToProps = (state) => {
     order_loading: orders.loading,
   };
 };
+// Functions to dispatching
+const setProductToOrder = (payload) => product_orders(payload);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setProductToOrder }, dispatch);
+}
 
-export default connect(mapStateToProps, null)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

@@ -46,7 +46,6 @@ function CollectsPage(props) {
     tables,
     environments_loading,
     tables_loading,
-    currentOpenTable,
     snackbar_show,
     snackbar_message,
     snackbar_severity,
@@ -128,9 +127,6 @@ function CollectsPage(props) {
       }
     }
   };
-  const handleCloseProducts = () => {
-    close_products();
-  };
 
   return (
     <CurrentTableContext.Provider
@@ -169,8 +165,6 @@ function CollectsPage(props) {
         direction="bottom"
         variant="temporary"
         background={image}
-        open={currentOpenTable.open}
-        close={handleCloseProducts}
         currentTable={currentTableState}
       />
     </CurrentTableContext.Provider>
@@ -178,13 +172,12 @@ function CollectsPage(props) {
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { tables, environments, product, snackbar } = state;
+  const { tables, environments, snackbar } = state;
   return {
     environments: environments.payload,
     environments_loading: environments.loading,
     tables: tables.payload,
     tables_loading: tables.loading,
-    currentOpenTable: product.current,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,

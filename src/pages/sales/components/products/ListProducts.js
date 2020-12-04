@@ -25,9 +25,11 @@ function ListProducts(props) {
     background,
     global_quantity,
     open,
+    setProductToOrder,
+    openSubCategory,
   } = props;
 
-  console.log(`%c LIST RENDER`, "color: lightgreen; font-size: large");
+  console.log(`%c LIST RENDER ${open}`, "color: lightgreen; font-size: large");
 
   // Styles
   const classes = useStyles();
@@ -57,8 +59,11 @@ function ListProducts(props) {
                     imagePath="images/products/"
                     imagePath2="images/sub_categories/"
                     color="secondary"
-                    orders={product_orders_list}
+                    product_orders_list={product_orders_list}
                     global_quantity={global_quantity}
+                    setProductToOrder={setProductToOrder}
+                    openSubCategory={openSubCategory}
+                    renderRefresh={open}
                   />
                 </Grid>
               </TabPanel>

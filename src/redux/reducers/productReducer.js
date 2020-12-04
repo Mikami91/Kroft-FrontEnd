@@ -11,8 +11,8 @@ import {
   DELETE_OBSERVATION,
   DELETE_ORDERS,
   PRODUCT_FETCHING,
-  PRODUCT_LOADING
-} from '../actions/actionsTypes';
+  PRODUCT_LOADING,
+} from "../actions/actionsTypes";
 
 // Default State
 const productState = {
@@ -21,11 +21,14 @@ const productState = {
   current: {
     open: false,
     environment_id: null,
+    environment_name: null,
     table_id: null,
     table_name: null,
     table_number: null,
     env_index: null,
-    table_index: null
+    table_index: null,
+    global_quantity: 0,
+    global_amount: 0,
   },
   fetching: false,
   loading: false,
@@ -35,37 +38,37 @@ const productState = {
 let exist = false;
 let index = null;
 // Check is exist function
-const is_exist = (array_to_search, value_to_check, value_to_find) => {
+const is_exist = (array_to_search, value_to_find) => {
   // Search...
   for (let i = 0; i < array_to_search.length; i++) {
-    if (array_to_search[i][value_to_check] === value_to_find) {
+    if (array_to_search[i].environment_id === value_to_find) {
       exist = true;
       index = i;
       return {
         exist: exist,
         index: index,
-        id: array_to_search[i][value_to_check]
+        id: array_to_search[i].environment_id,
       };
     }
-  };
+  }
 };
 
 // Cath the last index from objects array
 let env_index = -1;
-const lastIndexOfEnv = (array, field, key) => {
+const lastIndexOfEnv = (array, key) => {
   for (let index = 0; index < array.length; index++) {
-    if (array[index][field] === key) {
-      return env_index = index;
+    if (array[index].environment_id === key) {
+      return (env_index = index);
     }
   }
   return -1;
 };
 
 let table_index = -1;
-const lastIndexOfTable = (array, field, key) => {
+const lastIndexOfTable = (array, key) => {
   for (let index = 0; index < array.length; index++) {
-    if (array[index][field] === key) {
-      return table_index = index;
+    if (array[index].table_id === key) {
+      return (table_index = index);
     }
   }
   return -1;
@@ -74,158 +77,162 @@ const lastIndexOfTable = (array, field, key) => {
 let global_amount = 0;
 let global_amount_sum = (array) => {
   array.reduce(function (prev, current) {
-    return global_amount = prev + +current.product_price * current.product_quantity;
+    return (global_amount =
+      prev + current.product_price * current.product_quantity);
   }, 0);
-}
-
+};
 
 export function productReducer(state = productState, action) {
-
-  // Copy initial state
-  let new_state = { ...state };
-
+  // Find current location to update
+  let location =
+    env_index > -1 && table_index > -1
+      ? state.orders[env_index].tables[table_index]
+      : [];
   switch (action.type) {
     case PRODUCT_LIST:
       return {
         ...state,
-        payload: action.payload
+        payload: action.payload,
       };
 
     case OPEN_PRODUCTS:
-      // Check if Environment ID exist
-      if (typeof is_exist(state.orders, 'environment_id', action.payload.environment_id) !== "undefined") {
-        if (exist === true) {
-          // Call new state and update current object
-          new_state = {
+      let {
+        environment_id,
+        environment_name,
+        id,
+        name,
+        number,
+        is_busy,
+        amount,
+      } = action.payload;
+
+      let orders = state.orders;
+
+      // IF EXIST ENV ID
+      if (typeof is_exist(orders, environment_id) !== "undefined") {
+        // IF EXIST TABLE ID
+        if (orders[env_index].tables.findIndex((i) => i.table_id === id) > -1) {
+          return {
             ...state,
-            // Update the current values
             current: {
               open: true,
-              environment_id: action.payload.environment_id,
-              table_id: action.payload.id,
-              table_name: action.payload.name,
-              table_number: action.payload.number,
-              env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
-              table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
-            }
-          };
-          // Find value want to update
-          let array = new_state.orders[index].tables;
-          // Check if Table ID exist
-          let is_exist_table = array.findIndex(i => i.table_id === action.payload.id);
-          // If not exist
-          if (is_exist_table === -1) {
-            // Push array in to new state
-            array.push({
-              // Add Table info
-              table_id: action.payload.id,
-              table_name: action.payload.name,
-              table_is_busy: action.payload.is_busy,
-              table_number: action.payload.number,
-              table_amount: action.payload.amount,
+              environment_id: environment_id,
+              environment_name: environment_name,
+              table_id: id,
+              table_name: name,
+              table_number: number,
+              env_index: lastIndexOfEnv(orders, environment_id),
+              table_index: lastIndexOfTable(orders[env_index].tables, id),
               global_quantity: 0,
-              global_amount: 0,
-              // Add products array
-              products: [],
-            });
-            // Return updated state
-            return {
-              ...new_state,
-              // Update the current values
-              current: {
-                open: true,
-                environment_id: action.payload.environment_id,
-                table_id: action.payload.id,
-                table_name: action.payload.name,
-                table_number: action.payload.number,
-                env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
-                table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
-              }
-            };
-          }
-          // If exist
-          else return {
-            // Return initial state
-            ...state,
-            // Update the current values
-            current: {
-              open: true,
-              environment_id: action.payload.environment_id,
-              table_id: action.payload.id,
-              table_name: action.payload.name,
-              table_number: action.payload.number,
-              env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
-              table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
-            }
+              global_amount:
+                orders[env_index].tables[table_index].global_amount,
+            },
           };
         }
-      }
-      // If not exist
-
-      // Call new state
-      new_state.orders.push({
-        // Add Environment info
-        environment_id: action.payload.environment_id,
-        environment_name: action.payload.environment_name,
-        // Add tables array
-        tables: [
-          {
-            // Add Table info
-            table_id: action.payload.id,
-            table_name: action.payload.name,
-            table_is_busy: action.payload.is_busy,
-            table_number: action.payload.number,
-            table_amount: action.payload.amount,
+        orders[env_index].tables.push({
+          table_id: id,
+          table_name: name,
+          table_is_busy: is_busy,
+          table_number: number,
+          table_amount: amount,
+          global_quantity: 0,
+          global_amount: 0,
+          products: [],
+        });
+        return {
+          ...state,
+          current: {
+            open: true,
+            environment_id: environment_id,
+            environment_name: environment_name,
+            table_id: id,
+            table_name: name,
+            table_number: number,
+            env_index: lastIndexOfEnv(orders, environment_id),
+            table_index: lastIndexOfTable(orders[env_index].tables, id),
             global_quantity: 0,
-            global_amount: 0,
-            // Add products array
-            products: [],
-          }
-        ]
-      });
-
-      return {
-        ...state,
-        // Update the current values
-        current: {
-          open: true,
-          environment_id: action.payload.environment_id,
-          table_id: action.payload.id,
-          table_name: action.payload.name,
-          table_number: action.payload.number,
-          env_index: lastIndexOfEnv(state.orders, 'environment_id', action.payload.environment_id),
-          table_index: lastIndexOfTable(state.orders[env_index].tables, 'table_id', action.payload.id),
-        },
-      };
+            global_amount: orders[env_index].tables[table_index].global_amount,
+          },
+        };
+      }
+      // IF NOT EXIST ENV ID
+      else {
+        orders.push({
+          environment_id: environment_id,
+          environment_name: environment_name,
+          tables: [
+            {
+              table_id: id,
+              table_name: name,
+              table_is_busy: is_busy,
+              table_number: number,
+              table_amount: amount,
+              global_quantity: 0,
+              global_amount: 0,
+              products: [],
+            },
+          ],
+        });
+        return {
+          ...state,
+          current: {
+            open: true,
+            environment_id: environment_id,
+            environment_name: environment_name,
+            table_id: id,
+            table_name: name,
+            table_number: number,
+            env_index: lastIndexOfEnv(orders, environment_id),
+            table_index: lastIndexOfTable(orders[env_index].tables, id),
+            global_quantity: 0,
+            global_amount: orders[env_index].tables[table_index].global_amount,
+          },
+        };
+      }
 
     case CLOSE_PRODUCTS:
-
       return {
         ...state,
         current: {
           open: false,
           environment_id: null,
+          environment_name: null,
           table_id: null,
           table_name: null,
           table_number: null,
           env_index: null,
-          table_index: null
-        }
+          table_index: null,
+          global_quantity: 0,
+        },
       };
 
     case PRODUCT_ORDERS:
-
-      // Find value want to update
-      let array = new_state.orders[env_index].tables[table_index].products;
       // Plus global quantity
-      new_state.orders[env_index].tables[table_index].global_quantity += 1;
-      // Check if Product ID exist
-      let is_exist_product = array.findIndex(i => i.product_id === action.payload.id);
-      // If not exist
-      if (is_exist_product === -1) {
-        // Push array in to new state
-        array.push({
-          // Add Product info
+      let current_quantity = (location.global_quantity += 1);
+      // Check if Product ID exist in Products array
+      let is_exist_product = location.products.findIndex(
+        (i) => i.product_id === action.payload.id
+      );
+      // IF EXIST PRODUCT ID
+      if (is_exist_product > -1) {
+        location.products.find((i) =>
+          i.product_id === action.payload.id ? (i.product_quantity += 1) : 0
+        );
+        // Sum global amount
+        global_amount_sum(location.products);
+        location.global_amount = global_amount;
+        return {
+          ...state,
+          current: {
+            ...state.current,
+            global_quantity: current_quantity,
+            global_amount: global_amount,
+          },
+        };
+      }
+      // IF NOT EXIST PRODUCT ID
+      else {
+        location.products.push({
           product_id: action.payload.id,
           product_name: action.payload.name,
           product_price: action.payload.price,
@@ -238,108 +245,143 @@ export function productReducer(state = productState, action) {
           environment_id: state.current.environment_id,
           table_id: state.current.table_id,
         });
-
         // Sum global amount
-        global_amount_sum(array);
-        new_state.orders[env_index].tables[table_index].global_amount = global_amount;
+        global_amount_sum(location.products);
+        location.global_amount = global_amount;
 
-        // Return updated state
-        return new_state;
-
-      } else {
-        // If exist add quantity to current product
-        array[is_exist_product].product_quantity += 1;
-
-        // Sum global amount
-        global_amount_sum(array);
-        new_state.orders[env_index].tables[table_index].global_amount = global_amount;
-
-        return new_state
+        return {
+          ...state,
+          current: {
+            ...state.current,
+            global_quantity: current_quantity,
+            global_amount: global_amount,
+          },
+        };
       }
 
     case MORE_QUANTITY:
-
-      let product_array1 = new_state.orders[env_index].tables[table_index].products;
-      let current_product1 = product_array1.findIndex(i => i.product_id === action.id.product_id);
       // Add quantity
-      product_array1[current_product1].product_quantity += 1;
-      // Add to global quantity and global amount
-      global_amount_sum(product_array1);
-      new_state.orders[env_index].tables[table_index].global_quantity += 1;
-      new_state.orders[env_index].tables[table_index].global_amount = global_amount;
-      // Return update state
-      return new_state;
+      location.products[
+        location.products.findIndex(
+          (i) => i.product_id === action.id.product_id
+        )
+      ].product_quantity += 1;
+      // Sum global amount
+      global_amount_sum(location.products);
+      location.global_amount = global_amount;
+
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          global_quantity: (location.global_quantity += 1),
+          global_amount: global_amount,
+        },
+      };
 
     case LESS_QUANTITY:
+      if (
+        location.products[
+          location.products.findIndex(
+            (i) => i.product_id === action.id.product_id
+          )
+        ].product_quantity > 1
+      ) {
+        // Rest quantity
+        location.products[
+          location.products.findIndex(
+            (i) => i.product_id === action.id.product_id
+          )
+        ].product_quantity -= 1;
+        // Sum global amount
+        global_amount_sum(location.products);
+        location.global_amount = global_amount;
 
-      let product_array2 = new_state.orders[env_index].tables[table_index].products;
-      let current_product2 = product_array2.findIndex(i => i.product_id === action.id.product_id);
-      // Rest quantity
-      if (product_array2[current_product2].product_quantity > 1) {
-        product_array2[current_product2].product_quantity -= 1;
-        // Rest to global quantity and global amount
-        global_amount_sum(product_array2);
-        new_state.orders[env_index].tables[table_index].global_quantity -= 1;
-        new_state.orders[env_index].tables[table_index].global_amount = global_amount;
+        return {
+          ...state,
+          current: {
+            ...state.current,
+            global_quantity: (location.global_quantity -= 1),
+            global_amount: global_amount,
+          },
+        };
       }
-      // Return update state
-      return new_state;
+      return state;
 
     case REMOVE_PRODUCT:
-
-      let product_array3 = new_state.orders[env_index].tables[table_index].products;
-      let current_product3 = product_array3.findIndex(i => i.product_id === action.id.product_id);
-
-      // Cath remove product quantity
-      let product_quantity = product_array3[current_product3].product_quantity;
-
+      let remove = location.products.find(
+        (i) => i.product_id === action.id.product_id
+      );
       // Remove Product from Orders array
-      product_array3.splice(current_product3, 1);
+      location.products.splice(
+        location.products.findIndex(
+          (i) => i.product_id === action.id.product_id
+        ),
+        1
+      );
+      // Sum global amount
+      global_amount_sum(location.products);
+      location.global_amount =
+        location.products.length === 0 ? 0 : global_amount;
 
-      // Rest to global quantity and global amount
-      global_amount_sum(product_array3);
-      new_state.orders[env_index].tables[table_index].global_quantity -= product_quantity;
-      new_state.orders[env_index].tables[table_index].global_amount = global_amount;
-
-      // Return update state
-      return new_state;
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          global_quantity: (location.global_quantity -=
+            remove.product_quantity),
+          global_amount: location.products.length === 0 ? 0 : global_amount,
+        },
+      };
 
     case ADD_OBSERVATION:
-      let product_array4 = new_state.orders[env_index].tables[table_index].products;
-      let current_product4 = product_array4.findIndex(i => i.product_id === action.payload.product_id);
-      product_array4[current_product4].product_observation = action.payload.observation;
-      return new_state;
+      // Add observation
+      location.products[
+        location.products.findIndex(
+          (i) => i.product_id === action.payload.product_id
+        )
+      ].product_observation = action.payload.observation;
+
+      return state;
 
     case DELETE_OBSERVATION:
-      let product_array5 = new_state.orders[env_index].tables[table_index].products;
-      let current_product5 = product_array5.findIndex(i => i.product_id === action.payload.product_id);
-      product_array5[current_product5].product_observation = "";
-      return new_state;
+      // Add observation
+      location.products[
+        location.products.findIndex(
+          (i) => i.product_id === action.payload.product_id
+        )
+      ].product_observation = "";
+
+      return state;
 
     case DELETE_ORDERS:
+      // Remove all Products
+      location.products = [];
+      location.global_quantity = 0;
+      location.global_amount = 0;
 
-      new_state.orders[env_index].tables[table_index].products = [];
-
-      // Update to global quantity and global amount
-      new_state.orders[env_index].tables[table_index].global_quantity = 0;
-      new_state.orders[env_index].tables[table_index].global_amount = 0;
-
-      // Return update state
-      return new_state;
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          global_quantity: 0,
+          global_amount: 0,
+        },
+      };
 
     case PRODUCT_FETCHING:
       return {
         ...state,
-        fetching: action.value
+        fetching: action.value,
       };
 
     case PRODUCT_LOADING:
       return {
         ...state,
-        loading: action.value
+        loading: action.value,
       };
 
     default:
       return state;
-  };
-};
+  }
+}

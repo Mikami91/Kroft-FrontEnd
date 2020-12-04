@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 // Conecction to Store
 import { connect } from "react-redux";
-// Actions Creators
-import { orders as makeOrder } from "../../redux/actions/creators/productCreator";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -24,7 +22,6 @@ const useStyles = makeStyles(styles);
 function CardProduct(props) {
   const {
     // Props
-    current_product,
     photo,
     name,
     prefix,
@@ -32,6 +29,7 @@ function CardProduct(props) {
     quantity,
     color,
     variant,
+    onClick,
   } = props;
 
   console.log(`%c CARD RENDER`, "color: lightgreen; font-size: large");
@@ -46,7 +44,7 @@ function CardProduct(props) {
   return useMemo(() => {
     return (
       <Badge badgeContent={quantity} color={color} variant={variant} max={99}>
-        <CardActionArea onClick={() => makeOrder(current_product)}>
+        <CardActionArea onClick={onClick}>
           <Card className={cardClasses}>
             <CardMedia
               component="img"
@@ -76,6 +74,7 @@ CardProduct.defaultProps = {
   quantity: 0,
   color: "primary",
   variant: "standard",
+  onClick: null,
 };
 CardProduct.propTypes = {
   current_product: PropTypes.object,
@@ -94,6 +93,7 @@ CardProduct.propTypes = {
     "rose",
   ]),
   variant: PropTypes.oneOf(["standard", "dot"]),
+  onClick: PropTypes.func,
 };
 
 export default connect(null, null)(CardProduct);

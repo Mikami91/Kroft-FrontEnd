@@ -104,3 +104,30 @@ export const useHistoryPrintsModal = () => {
     });
   return [historyPrints, setHistoryPrints, toggleHistoryPrints];
 };
+
+export const useSubCategoryModal = () => {
+  const [subCategory, setSubCategory] = useState({
+    open: false,
+    name: "",
+    key: null,
+    payload: [],
+  });
+  const openSubCategory = (name, key, array) => {
+    setSubCategory({
+      open: true,
+      name: name,
+      key: key,
+      payload: array.filter((index) => index.sub_category_id === key),
+    });
+  };
+  const closeSubCategory = () => {
+    setSubCategory({
+      open: false,
+      name: "",
+      key: null,
+      payload: [],
+    });
+  };
+  console.log(subCategory);
+  return [subCategory, openSubCategory, closeSubCategory];
+};
