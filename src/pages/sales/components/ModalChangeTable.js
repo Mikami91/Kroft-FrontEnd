@@ -34,8 +34,6 @@ function ModalChangeTable(props) {
     emptyTableChangeState,
   ] = useChangeTable();
 
-  console.log(open);
-
   const handleChangeTable = (e) => {
     e.preventDefault();
     tableChange(tableChangeState).then((response) => {

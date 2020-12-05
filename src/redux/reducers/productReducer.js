@@ -34,24 +34,9 @@ const productState = {
   loading: false,
 };
 
-// variables to return
-let exist = false;
-let index = null;
 // Check is exist function
-const is_exist = (array_to_search, value_to_find) => {
-  // Search...
-  for (let i = 0; i < array_to_search.length; i++) {
-    if (array_to_search[i].environment_id === value_to_find) {
-      exist = true;
-      index = i;
-      return {
-        exist: exist,
-        index: index,
-        id: array_to_search[i].environment_id,
-      };
-    }
-  }
-};
+const isEnvExist = (key) =>
+  productState.orders.some((i) => i.environment_id === key);
 
 // Cath the last index from objects array
 let env_index = -1;
@@ -75,12 +60,12 @@ const lastIndexOfTable = (array, key) => {
 };
 
 let global_amount = 0;
-let global_amount_sum = (array) => {
-  array.reduce(function (prev, current) {
-    return (global_amount =
-      prev + current.product_price * current.product_quantity);
-  }, 0);
-};
+const globalAmountSum = (array) =>
+  array.reduce(
+    (total, item) =>
+      (global_amount = total + item.product_price * item.product_quantity),
+    0
+  );
 
 export function productReducer(state = productState, action) {
   // Find current location to update
@@ -88,6 +73,9 @@ export function productReducer(state = productState, action) {
     env_index > -1 && table_index > -1
       ? state.orders[env_index].tables[table_index]
       : [];
+
+  let orders = state.orders;
+
   switch (action.type) {
     case PRODUCT_LIST:
       return {
@@ -106,12 +94,12 @@ export function productReducer(state = productState, action) {
         amount,
       } = action.payload;
 
-      let orders = state.orders;
-
       // IF EXIST ENV ID
-      if (typeof is_exist(orders, environment_id) !== "undefined") {
+      if (isEnvExist(environment_id) === true) {
         // IF EXIST TABLE ID
         if (orders[env_index].tables.findIndex((i) => i.table_id === id) > -1) {
+          lastIndexOfEnv(orders, environment_id);
+          lastIndexOfTable(orders[env_index].tables, id);
           return {
             ...state,
             current: {
@@ -121,9 +109,10 @@ export function productReducer(state = productState, action) {
               table_id: id,
               table_name: name,
               table_number: number,
-              env_index: lastIndexOfEnv(orders, environment_id),
-              table_index: lastIndexOfTable(orders[env_index].tables, id),
-              global_quantity: 0,
+              env_index: env_index,
+              table_index: table_index,
+              global_quantity:
+                orders[env_index].tables[table_index].global_quantity,
               global_amount:
                 orders[env_index].tables[table_index].global_amount,
             },
@@ -139,6 +128,8 @@ export function productReducer(state = productState, action) {
           global_amount: 0,
           products: [],
         });
+        lastIndexOfEnv(orders, environment_id);
+        lastIndexOfTable(orders[env_index].tables, id);
         return {
           ...state,
           current: {
@@ -148,10 +139,10 @@ export function productReducer(state = productState, action) {
             table_id: id,
             table_name: name,
             table_number: number,
-            env_index: lastIndexOfEnv(orders, environment_id),
-            table_index: lastIndexOfTable(orders[env_index].tables, id),
+            env_index: env_index,
+            table_index: table_index,
             global_quantity: 0,
-            global_amount: orders[env_index].tables[table_index].global_amount,
+            global_amount: 0,
           },
         };
       }
@@ -173,6 +164,8 @@ export function productReducer(state = productState, action) {
             },
           ],
         });
+        lastIndexOfEnv(orders, environment_id);
+        lastIndexOfTable(orders[env_index].tables, id);
         return {
           ...state,
           current: {
@@ -182,10 +175,10 @@ export function productReducer(state = productState, action) {
             table_id: id,
             table_name: name,
             table_number: number,
-            env_index: lastIndexOfEnv(orders, environment_id),
-            table_index: lastIndexOfTable(orders[env_index].tables, id),
+            env_index: env_index,
+            table_index: table_index,
             global_quantity: 0,
-            global_amount: orders[env_index].tables[table_index].global_amount,
+            global_amount: 0,
           },
         };
       }
@@ -203,6 +196,7 @@ export function productReducer(state = productState, action) {
           env_index: null,
           table_index: null,
           global_quantity: 0,
+          global_amount: 0,
         },
       };
 
@@ -219,7 +213,7 @@ export function productReducer(state = productState, action) {
           i.product_id === action.payload.id ? (i.product_quantity += 1) : 0
         );
         // Sum global amount
-        global_amount_sum(location.products);
+        globalAmountSum(location.products);
         location.global_amount = global_amount;
         return {
           ...state,
@@ -246,7 +240,7 @@ export function productReducer(state = productState, action) {
           table_id: state.current.table_id,
         });
         // Sum global amount
-        global_amount_sum(location.products);
+        globalAmountSum(location.products);
         location.global_amount = global_amount;
 
         return {
@@ -267,7 +261,7 @@ export function productReducer(state = productState, action) {
         )
       ].product_quantity += 1;
       // Sum global amount
-      global_amount_sum(location.products);
+      globalAmountSum(location.products);
       location.global_amount = global_amount;
 
       return {
@@ -294,7 +288,7 @@ export function productReducer(state = productState, action) {
           )
         ].product_quantity -= 1;
         // Sum global amount
-        global_amount_sum(location.products);
+        globalAmountSum(location.products);
         location.global_amount = global_amount;
 
         return {
@@ -320,7 +314,7 @@ export function productReducer(state = productState, action) {
         1
       );
       // Sum global amount
-      global_amount_sum(location.products);
+      globalAmountSum(location.products);
       location.global_amount =
         location.products.length === 0 ? 0 : global_amount;
 

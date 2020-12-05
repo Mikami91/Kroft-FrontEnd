@@ -63,7 +63,7 @@ function Products(props) {
     /* Redux */
     tables,
     orders_list,
-    currentOpenTable,
+    current,
     orders_detail_payload,
     order_loading,
     setProductToOrder,
@@ -73,8 +73,6 @@ function Products(props) {
     background,
     currentTable,
   } = props;
-
-  console.log(props);
 
   console.log(`%c PRODUCTS RENDER`, "color: lightgreen; font-size: large");
 
@@ -122,7 +120,7 @@ function Products(props) {
 
   tables.reduce(
     (index, cur) =>
-      cur.id === currentOpenTable.table_id
+      cur.id === current.table_id
         ? [
             (table_state = cur.is_busy),
             (current_order_id = cur.order_id),
@@ -140,29 +138,19 @@ function Products(props) {
   let global_amount = 0;
 
   useMemo(() => {
-    console.log(`%c ENTER FUNC`, "color: orange");
     if (
-      currentOpenTable.env_index !== null &&
-      currentOpenTable.table_index !== null
+      current.env_index !== null &&
+      current.env_index > -1 &&
+      current.table_index !== null &&
+      current.table_index > -1
     ) {
-      console.log(`%c IF PASS`, "color: orange");
-
       let current_location =
-        orders_list[currentOpenTable.env_index].tables[
-          currentOpenTable.table_index
-        ];
+        orders_list[current.env_index].tables[current.table_index];
       product_orders_list = current_location.products;
       global_quantity = current_location.global_quantity;
       global_amount = current_location.global_amount;
-
-      console.log(`%c RESPONSE`, "color: orange");
     }
-    console.log(`%c PRODUCTS QUANTITY: ${global_quantity}`, "color: skyblue");
-  }, [
-    currentOpenTable.open,
-    currentOpenTable.global_quantity,
-    product_orders_list,
-  ]);
+  }, [current.open, current.global_quantity, product_orders_list]);
 
   let btn = document.getElementById("printOrder");
   let btn2 = document.getElementById("printHistory");
@@ -175,7 +163,7 @@ function Products(props) {
     toggleProductsOrders();
     orderCreate({
       employee_id: localStorage.getItem("employee_id"),
-      table_id: currentOpenTable.table_id,
+      table_id: current.table_id,
       total_amount: global_amount,
       products: product_orders_list,
     }).then((response) => {
@@ -204,7 +192,7 @@ function Products(props) {
     e.preventDefault();
     orderSend({
       order_id: current_order_id,
-      table_id: currentOpenTable.table_id,
+      table_id: current.table_id,
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response === true) {
@@ -219,7 +207,7 @@ function Products(props) {
     e.preventDefault();
     orderCancel({
       order_id: current_order_id,
-      table_id: currentOpenTable.table_id,
+      table_id: current.table_id,
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response === true) {
@@ -252,7 +240,7 @@ function Products(props) {
     // Render
     return (
       <Drawer
-        open={currentOpenTable.open}
+        open={current.open}
         onClose={closeModalProducts}
         variant={variant}
         anchor={direction}
@@ -273,7 +261,7 @@ function Products(props) {
           changeTabIndex={changeTabIndex}
           product_orders_list={product_orders_list}
           global_quantity={global_quantity}
-          open={currentOpenTable.open}
+          isProductOpen={current.open}
           setProductToOrder={setProductToOrder}
           openSubCategory={openSubCategory}
         />
@@ -366,8 +354,8 @@ function Products(props) {
       </Drawer>
     );
   }, [
-    currentOpenTable.open,
-    currentOpenTable.global_quantity,
+    current.open,
+    current.global_quantity,
     tables,
     tabIndex,
     table_state,
@@ -402,7 +390,7 @@ const mapStateToProps = (state) => {
   return {
     tables: tables.payload,
     orders_list: product.orders,
-    currentOpenTable: product.current,
+    current: product.current,
     orders_detail_payload: orders.orders_detail,
     order_loading: orders.loading,
   };

@@ -24,12 +24,15 @@ function ListProducts(props) {
     product_orders_list,
     background,
     global_quantity,
-    open,
+    isProductOpen,
     setProductToOrder,
     openSubCategory,
   } = props;
 
-  console.log(`%c LIST RENDER ${open}`, "color: lightgreen; font-size: large");
+  console.log(
+    `%c LIST RENDER ${isProductOpen}`,
+    "color: lightgreen; font-size: large"
+  );
 
   // Styles
   const classes = useStyles();
@@ -63,7 +66,7 @@ function ListProducts(props) {
                     global_quantity={global_quantity}
                     setProductToOrder={setProductToOrder}
                     openSubCategory={openSubCategory}
-                    renderRefresh={open}
+                    renderRefresh={isProductOpen}
                   />
                 </Grid>
               </TabPanel>
@@ -72,7 +75,7 @@ function ListProducts(props) {
         </SwipeableViews>
       </div>
     );
-  }, [open, tabIndex, global_quantity]);
+  }, [isProductOpen, tabIndex, global_quantity]);
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
