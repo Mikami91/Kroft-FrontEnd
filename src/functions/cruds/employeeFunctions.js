@@ -3,6 +3,7 @@ import {
   loginFetch,
   loginPinFetch,
   logoutFetch,
+  isLogged,
   createFetch,
   showFetch,
   updateFetch,
@@ -100,6 +101,34 @@ export async function employeeLogout(data) {
   loading(true);
   try {
     const response = await logoutFetch(data);
+    if (response.status === 200) {
+      switch (response.data.success) {
+        case true:
+          loading(false);
+          break;
+
+        case false:
+          loading(false);
+          dangerSnackbar(response.data.message);
+          break;
+
+        default:
+          break;
+      }
+    }
+    return response.data;
+  } catch (error) {
+    loading(false);
+    warningSnackbar("Error de servidor.");
+  }
+}
+
+/*::::::::::::::::::::IS LOGGED::::::::::::::::::::*/
+export async function isLoggedEmployee(data) {
+  loading(true);
+  try {
+    const response = await isLogged(data);
+    console.log(response);
     if (response.status === 200) {
       switch (response.data.success) {
         case true:

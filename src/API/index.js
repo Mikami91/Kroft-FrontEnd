@@ -59,6 +59,7 @@ export const employee_delete = "api/employee_delete";
 export const employee_login = "api/employee_login";
 export const employee_login_pin = "api/employee_login_pin";
 export const employee_logout = "api/employee_logout";
+export const employee_logged = "api/employee_logged";
 
 /*::::::::::::::::::::ENVIRONMENT::::::::::::::::::::*/
 export const environment_create = "api/environment_create";

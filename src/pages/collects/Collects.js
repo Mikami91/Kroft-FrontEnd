@@ -4,7 +4,11 @@ import { withRouter, useHistory } from "react-router-dom";
 // Conecction to Store
 import { connect } from "react-redux";
 // Actions Creators
-import { hideSnackbar } from "../../redux/actions/creators/snackbarCreator";
+import {
+  infoSnackbar,
+  dangerSnackbar,
+  hideSnackbar,
+} from "../../redux/actions/creators/snackbarCreator";
 // Hooks
 import { useDrawer } from "../../hooks/useDrawer";
 import { useCurrentTable } from "../../hooks/useCurrentTable";
@@ -31,6 +35,7 @@ import ModalAmountToPay from "./components/ModalAmountToPay";
 import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
 // Functions
+import { isLoggedEmployee } from "../../functions/cruds/employeeFunctions";
 import {
   boxShow,
   boxState as boxStateFunc,
@@ -107,8 +112,8 @@ function CollectsPage(props) {
 
   let history = useHistory();
 
-  // Loading payloads state
-  const [is_payload, set_is_payload] = useState(false);
+  // Is Logged Employee state
+  const [isLogged, setIsLogged] = useState(false);
 
   const handleOpenTotalAmount = (args) => {
     if (args.is_busy === 1) {
@@ -138,15 +143,28 @@ function CollectsPage(props) {
     collectShow();
   };
 
-  // Payloads
   useEffect(() => {
-    if (is_payload === false) {
-      handleRefresh();
-
-      // Change is_payload state
-      set_is_payload(true);
-    }
-  }, [is_payload, environments, tables]);
+    isLoggedEmployee({ token: localStorage.getItem("token") }).then(
+      (response) => {
+        if (typeof response === "string") {
+          if (response.includes("401")) {
+            dangerSnackbar("Autentificación incorrecta, inicie sesión.");
+            history.push("/");
+          }
+        }
+        if (typeof response !== "undefined") {
+          if (response.success === true) {
+            infoSnackbar("You are logged");
+            setIsLogged(true);
+            handleRefresh();
+          } else {
+            dangerSnackbar("Autentificación incorrecta, inicie sesión.");
+            history.push("/");
+          }
+        }
+      }
+    );
+  }, [isLogged]);
 
   // Logout function
   const handleLogout = () => {
@@ -191,7 +209,7 @@ function CollectsPage(props) {
     });
   };
 
-  return (
+  return isLogged ? (
     <CurrentTableContext.Provider
       value={{
         state: currentTableState,
@@ -266,7 +284,7 @@ function CollectsPage(props) {
         refresh={[openPassCollect, currentTableState.id]}
       />
     </CurrentTableContext.Provider>
-  );
+  ) : null;
 }
 // Connect to Store State
 const mapStateToProps = (state) => {

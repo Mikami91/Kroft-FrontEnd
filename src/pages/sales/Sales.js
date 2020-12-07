@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 import { open, close } from "../../redux/actions/creators/productCreator";
 import {
   infoSnackbar,
+  dangerSnackbar,
   hideSnackbar,
 } from "../../redux/actions/creators/snackbarCreator";
 // Hooks
@@ -28,6 +29,7 @@ import ModalChangeTable from "./components/ModalChangeTable";
 import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
 // Functions
+import { isLoggedEmployee } from "../../functions/cruds/employeeFunctions";
 import { environmentShow } from "../../functions/cruds/environmentFunctions";
 import { tableShow } from "../../functions/cruds/tableFunctions";
 import { categoryShow } from "../../functions/cruds/categoryFunctions";
@@ -74,8 +76,8 @@ function CollectsPage(props) {
 
   let history = useHistory();
 
-  // Loading payloads state
-  const [is_payload, set_is_payload] = useState(false);
+  // Is Logged Employee state
+  const [isLogged, setIsLogged] = useState(false);
 
   // Events
   salesWebsocket();
@@ -93,15 +95,38 @@ function CollectsPage(props) {
     orderShow();
   };
 
-  // Payloads
   useEffect(() => {
-    if (is_payload === false) {
-      handleRefresh();
+    isLoggedEmployee({ token: localStorage.getItem("token") }).then(
+      (response) => {
+        if (typeof response === "string") {
+          if (response.includes("401")) {
+            dangerSnackbar("Autentificación incorrecta, inicie sesión.");
+            history.push("/");
+          }
+        }
+        if (typeof response !== "undefined") {
+          if (response.success === true) {
+            infoSnackbar("You are logged");
+            setIsLogged(true);
+            handleRefresh();
+          } else {
+            dangerSnackbar("Autentificación incorrecta, inicie sesión.");
+            history.push("/");
+          }
+        }
+      }
+    );
+  }, [isLogged]);
 
-      // Change is_payload state
-      set_is_payload(true);
-    }
-  }, [is_payload, environments, tables]);
+  // // Payloads
+  // useEffect(() => {
+  //   if (is_payload === false) {
+  //     handleRefresh();
+
+  //     // Change is_payload state
+  //     set_is_payload(true);
+  //   }
+  // }, [is_payload, environments, tables]);
 
   // Logout function
   const handleLogout = () => {
@@ -128,7 +153,7 @@ function CollectsPage(props) {
     }
   };
 
-  return (
+  return isLogged ? (
     <CurrentTableContext.Provider
       value={{
         state: currentTableState,
@@ -168,7 +193,7 @@ function CollectsPage(props) {
         currentTable={currentTableState}
       />
     </CurrentTableContext.Provider>
-  );
+  ) : null;
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
