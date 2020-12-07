@@ -9,6 +9,7 @@ import { bindActionCreators } from "redux";
 import { open, close } from "../redux/actions/creators/productCreator";
 import {
   infoSnackbar,
+  dangerSnackbar,
   hideSnackbar,
 } from "../redux/actions/creators/snackbarCreator";
 // @material-ui/core components
@@ -37,6 +38,7 @@ import CustomSnackbar from "../components/Snackbar/CustomSnackbar";
 // Assets
 import image from "../assets/img/backgrounds/productbackground.jpg";
 // Functions
+import { isLoggedEmployee } from "../../functions/cruds/employeeFunctions";
 import { environmentShow } from "../functions/cruds/environmentFunctions";
 import { tableShow, tableChange } from "../functions/cruds/tableFunctions";
 import { categoryShow } from "../functions/cruds/categoryFunctions";
@@ -64,6 +66,7 @@ const useStyles = makeStyles(styles);
 function SalesPage(props) {
   // Props
   const {
+    employee_loading,
     environments,
     tables,
     orders_list,
@@ -75,8 +78,9 @@ function SalesPage(props) {
     snackbar_message,
     snackbar_severity,
   } = props;
-  // Loading payloads state
-  const [is_payload, set_is_payload] = useState(false);
+
+  // Is Logged Employee state
+  const [isLogged, setIsLogged] = useState(false);
 
   let history = useHistory();
 
@@ -230,15 +234,32 @@ function SalesPage(props) {
     orderShow();
   };
 
-  // Payloads
   useEffect(() => {
-    if (is_payload === false) {
-      handleRefresh();
-
-      // Change is_payload state
-      set_is_payload(true);
+    if (isLogged === false) {
+      // localStorage.setItem("rol", "waiter");
+      // isLoggedEmployee({
+      //   // token: localStorage.getItem("token"),
+      //   employee_id: localStorage.getItem("employee_id"),
+      //   rol: localStorage.getItem("rol"),
+      // }).then((response) => {
+      //   if (typeof response === "string") {
+      //     if (response.includes("401")) {
+      //       dangerSnackbar("Autentificación incorrecta, inicie sesión.");
+      //       // history.push("/");
+      //     }
+      //   }
+      //   if (typeof response !== "undefined") {
+      //     if (response.success === true) {
+      //       setIsLogged(true);
+      //       handleRefresh();
+      //     } else {
+      //       dangerSnackbar("Autentificación incorrecta, inicie sesión.");
+      //       // history.push("/");
+      //     }
+      //   }
+      // });
     }
-  }, [is_payload, environments, tables]);
+  }, [isLogged]);
 
   // Products Orders List
   let product_orders_list = [];
@@ -266,215 +287,215 @@ function SalesPage(props) {
 
   return (
     <Fragment>
-      <CustomLoading open={loading} />
+      <CustomLoading open={employee_loading || loading} />
       <CustomSnackbar
         open={snackbar_show}
         message={snackbar_message}
         severity={snackbar_severity}
         onClose={handleCloseSnackbar}
       />
-
-      <AppBarTabs
-        color="inherit"
-        data={environments}
-        iconType="img"
-        imagePath="images/environments/"
-        value={value}
-        onChange={handleChange}
-        variant="fullWidth"
-        scrollButtons="auto"
-        orders={product_orders_list}
-      />
-
-      <div className={classes.rootMenu}>
-        <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
-          {environments.map((index, key) => {
-            return (
-              <TabPanel key={key} value={value} index={key}>
-                <Grid
-                  container
-                  spacing={0}
-                  direction="row"
-                  className={classes.content}
-                  justify="flex-start"
-                  alignItems="flex-start"
-                >
-                  <GridTables
-                    // value={value}
-                    keyData={"environment_id"}
-                    filter={index.id}
-                    data={tables}
-                    onClick={handleOpenProducts}
-                    color="primary"
-                  />
-                </Grid>
-              </TabPanel>
-            );
-          })}
-        </SwipeableViews>
-      </div>
-
-      <FooterAppBar
-        color="inherit"
-        variant="dense"
-        fabButton={{
-          disabled: false,
-          color: "primary",
-          label: "Actualizar",
-          float: false,
-          align: "center",
-          icon: RefreshIcon,
-          onClick: handleRefresh,
-        }}
-        leftButtons={[
-          {
-            type: "fab",
-            text: "Salir",
-            color: "secondary",
-            icon: KeyboardBackspaceIcon,
-            size: "large",
-            disabled: false,
-            onClick: handleLogout,
-          },
-          {
-            type: "icon",
-            text: "Perfil",
-            color: "default",
-            icon: PersonIcon,
-            edge: "end",
-            size: "large",
-            disabled: false,
-            onClick: null,
-          },
-          {
-            type: "text",
-            text: localStorage.getItem("user"),
-            color: "default",
-            margin: true,
-            autoSize: true,
-          },
-        ]}
-        rightButtons={[
-          {
-            type: "icon",
-            text: "Cambiar de Mesa",
-            color: "default",
-            icon: SwapHorizIcon,
-            edge: "start",
-            size: "large",
-            disabled: localStorage.getItem("head_area") === "1" ? false : true,
-            onClick: handleOpenChangeTables,
-          },
-          {
-            type: "icon",
-            text: "Lista de Mesas",
-            color: "default",
-            icon: FormatListNumberedRtlIcon,
-            edge: "end",
-            size: "large",
-            disabled: false,
-            onClick: handleOpenDrawer,
-          },
-        ]}
-      />
-
-      <CustomModal
-        open={openProfile}
-        close={handleCloseProfile}
-        title={{
-          text: "Perfil de Usuario",
-          size: "medium",
-        }}
-        content={<EmployeeAdd />}
-        maxWidth="sm"
-        fullWidth
-      />
-
-      <CustomModal
-        open={openChangeTables}
-        close={handleCloseChangeTables}
-        closeIcon={tables_fetching === true ? false : true}
-        title={{
-          text: "Cambio de mesas",
-          size: "medium",
-        }}
-        content={
-          <ChangeTable
-            environments={environments}
-            tables={tables}
-            state={state}
-            onChangeFrom={handleChangeFrom}
-            onChangeTo={handleChangeTo}
+      {isLogged ? (
+        <Fragment>
+          <AppBarTabs
+            color="inherit"
+            data={environments}
+            iconType="img"
+            imagePath="images/environments/"
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            scrollButtons="auto"
+            orders={product_orders_list}
           />
-        }
-        centerButtons={[
-          {
-            type: "fab",
-            text: "Realizar cambio",
-            color: "primary",
-            icon: SwapHorizIcon,
-            size: "large",
-            disabled: state.from_table && state.to_table !== "" ? false : true,
-            onClick: handleChangeTable,
-          },
-        ]}
-        leftButtons={[
-          {
-            type: "button",
-            text: state.from_table_name + " " + state.from_table_number,
-            color: "danger",
-            // icon: TableChartIcon,
-            edge: "end",
-            size: "small",
-            variant: "contained",
-            disabled: false,
-          },
-        ]}
-        rightButtons={[
-          {
-            type: "button",
-            text: state.to_table_name + " " + state.to_table_number,
-            color: "success",
-            // icon: TableChartIcon,
-            edge: "start",
-            size: "large",
-            variant: "contained",
-            disabled: false,
-          },
-        ]}
-        renderRefresh={[state, tables_fetching]}
-        loading={tables_fetching}
-        scroll="paper"
-        maxWidth="sm"
-        fullWidth
-      />
-
-      <DrawerList
-        direction="right"
-        open={openDrawer}
-        close={handleCloseDrawer}
-        categoryList={environments}
-        itemList={tables}
-        itemOnClick={handleOpenProducts}
-        filter="environment_id"
-        refresh={[openDrawer, environments, tables]}
-      />
-
-      <DrawerProducts
-        direction="bottom"
-        variant="temporary"
-        background={image}
-        open={current.open}
-        close={handleCloseProducts}
-        table={currentTable}
-      />
+          <div className={classes.rootMenu}>
+            <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
+              {environments.map((index, key) => {
+                return (
+                  <TabPanel key={key} value={value} index={key}>
+                    <Grid
+                      container
+                      spacing={0}
+                      direction="row"
+                      className={classes.content}
+                      justify="flex-start"
+                      alignItems="flex-start"
+                    >
+                      <GridTables
+                        // value={value}
+                        keyData={"environment_id"}
+                        filter={index.id}
+                        data={tables}
+                        onClick={handleOpenProducts}
+                        color="primary"
+                      />
+                    </Grid>
+                  </TabPanel>
+                );
+              })}
+            </SwipeableViews>
+          </div>
+          <FooterAppBar
+            color="inherit"
+            variant="dense"
+            fabButton={{
+              disabled: false,
+              color: "primary",
+              label: "Actualizar",
+              float: false,
+              align: "center",
+              icon: RefreshIcon,
+              onClick: handleRefresh,
+            }}
+            leftButtons={[
+              {
+                type: "fab",
+                text: "Salir",
+                color: "secondary",
+                icon: KeyboardBackspaceIcon,
+                size: "large",
+                disabled: false,
+                onClick: handleLogout,
+              },
+              {
+                type: "icon",
+                text: "Perfil",
+                color: "default",
+                icon: PersonIcon,
+                edge: "end",
+                size: "large",
+                disabled: false,
+                onClick: null,
+              },
+              {
+                type: "text",
+                text: localStorage.getItem("user"),
+                color: "default",
+                margin: true,
+                autoSize: true,
+              },
+            ]}
+            rightButtons={[
+              {
+                type: "icon",
+                text: "Cambiar de Mesa",
+                color: "default",
+                icon: SwapHorizIcon,
+                edge: "start",
+                size: "large",
+                disabled:
+                  localStorage.getItem("head_area") === "1" ? false : true,
+                onClick: handleOpenChangeTables,
+              },
+              {
+                type: "icon",
+                text: "Lista de Mesas",
+                color: "default",
+                icon: FormatListNumberedRtlIcon,
+                edge: "end",
+                size: "large",
+                disabled: false,
+                onClick: handleOpenDrawer,
+              },
+            ]}
+          />
+          <CustomModal
+            open={openProfile}
+            close={handleCloseProfile}
+            title={{
+              text: "Perfil de Usuario",
+              size: "medium",
+            }}
+            content={<EmployeeAdd />}
+            maxWidth="sm"
+            fullWidth
+          />
+          <CustomModal
+            open={openChangeTables}
+            close={handleCloseChangeTables}
+            closeIcon={tables_fetching === true ? false : true}
+            title={{
+              text: "Cambio de mesas",
+              size: "medium",
+            }}
+            content={
+              <ChangeTable
+                environments={environments}
+                tables={tables}
+                state={state}
+                onChangeFrom={handleChangeFrom}
+                onChangeTo={handleChangeTo}
+              />
+            }
+            centerButtons={[
+              {
+                type: "fab",
+                text: "Realizar cambio",
+                color: "primary",
+                icon: SwapHorizIcon,
+                size: "large",
+                disabled:
+                  state.from_table && state.to_table !== "" ? false : true,
+                onClick: handleChangeTable,
+              },
+            ]}
+            leftButtons={[
+              {
+                type: "button",
+                text: state.from_table_name + " " + state.from_table_number,
+                color: "danger",
+                // icon: TableChartIcon,
+                edge: "end",
+                size: "small",
+                variant: "contained",
+                disabled: false,
+              },
+            ]}
+            rightButtons={[
+              {
+                type: "button",
+                text: state.to_table_name + " " + state.to_table_number,
+                color: "success",
+                // icon: TableChartIcon,
+                edge: "start",
+                size: "large",
+                variant: "contained",
+                disabled: false,
+              },
+            ]}
+            renderRefresh={[state, tables_fetching]}
+            loading={tables_fetching}
+            scroll="paper"
+            maxWidth="sm"
+            fullWidth
+          />
+          <DrawerList
+            direction="right"
+            open={openDrawer}
+            close={handleCloseDrawer}
+            categoryList={environments}
+            itemList={tables}
+            itemOnClick={handleOpenProducts}
+            filter="environment_id"
+            refresh={[openDrawer, environments, tables]}
+          />
+          <DrawerProducts
+            direction="bottom"
+            variant="temporary"
+            background={image}
+            open={current.open}
+            close={handleCloseProducts}
+            table={currentTable}
+          />{" "}
+        </Fragment>
+      ) : null}
     </Fragment>
   );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { tables, environments, product, snackbar } = state;
+  const { employee, tables, environments, product, snackbar } = state;
   return {
+    employee_loading: employee.loading,
     environments: environments.payload,
     loading: environments.loading,
     tables: tables.payload,

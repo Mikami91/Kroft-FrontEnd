@@ -38,6 +38,7 @@ export const box_update = "api/box_update";
 export const box_open = "api/box_open";
 export const box_opening = "api/box_opening";
 export const box_closing = "api/box_closing";
+export const box_check = "api/box_check";
 export const box_state = "api/box_state";
 export const box_delete = "api/box_delete";
 

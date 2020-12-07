@@ -15,7 +15,7 @@ export const customFetch = (props) => {
             'Authorization': token === true ? 'Bearer ' + localStorage.getItem('token') : null,
             'Token': token === true ? localStorage.getItem('token') : null,
         },
-        timeout: typeof timeout !== 'undefined' ? timeout : 15000,
+        timeout: typeof timeout !== 'undefined' ? timeout : 30000,
         data: typeof data !== 'undefined' ? data : null
     });
 };

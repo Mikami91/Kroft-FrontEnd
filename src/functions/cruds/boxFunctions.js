@@ -5,6 +5,7 @@ import {
   updateFetch,
   openingFetch,
   closingFetch,
+  checkFetch,
   stateFetch,
   deleteFetch,
 } from "../fetchs/boxFetch";
@@ -150,6 +151,35 @@ export async function boxClosing(data) {
         case true:
           fetching(false);
           infoSnackbar(response.data.message);
+          break;
+
+        case false:
+          fetching(false);
+          dangerSnackbar(response.data.message);
+          break;
+
+        default:
+          break;
+      }
+    }
+    return response.data;
+  } catch (error) {
+    fetching(false);
+    warningSnackbar("Error de servidor.");
+    return error.message;
+  }
+}
+
+/*::::::::::::::::::::CHECK::::::::::::::::::::*/
+export async function boxChech(data) {
+  fetching(true);
+  try {
+    const response = await checkFetch(data);
+    if (response.status === 200) {
+      switch (response.data.success) {
+        case true:
+          fetching(false);
+          // infoSnackbar(response.data.message);
           break;
 
         case false:

@@ -1,11 +1,10 @@
 // Dependencies
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 // Conecction to Store
 import { connect } from "react-redux";
 // Actions Creators
 import {
-  infoSnackbar,
   dangerSnackbar,
   hideSnackbar,
 } from "../../redux/actions/creators/snackbarCreator";
@@ -36,31 +35,20 @@ import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
 // Functions
 import { isLoggedEmployee } from "../../functions/cruds/employeeFunctions";
-import {
-  boxShow,
-  boxState as boxStateFunc,
-} from "../../functions/cruds/boxFunctions";
+import { boxShow } from "../../functions/cruds/boxFunctions";
 import { paymentShow } from "../../functions/cruds/paymentFunctions";
 import { environmentShow } from "../../functions/cruds/environmentFunctions";
 import { tableShow } from "../../functions/cruds/tableFunctions";
 import { orderShow } from "../../functions/cruds/orderFunctions";
-import {
-  collectCreate,
-  collectShow,
-} from "../../functions/cruds/collectFunctions";
-import {
-  orderCreate,
-  orderSend,
-  orderCancel,
-} from "../../functions/cruds/orderFunctions";
+import { collectShow } from "../../functions/cruds/collectFunctions";
+import { orderCancel } from "../../functions/cruds/orderFunctions";
 // Events
 import { collectWebsocket } from "../../events";
 
 function CollectsPage(props) {
   // Props
   const {
-    environments,
-    tables,
+    employee_loading,
     orders_detail_payload,
     environments_loading,
     tables_loading,
@@ -79,7 +67,12 @@ function CollectsPage(props) {
   };
 
   // Hooks for Modals
-  const [selectBoxState, setSelectBox, toggleSelectBox] = useBoxSelectModal();
+  const [
+    selectBoxState,
+    setSelectBox,
+    toggleSelectBox,
+    checkOpeningBox,
+  ] = useBoxSelectModal();
   const [openBox, toggleBox] = useBoxModal();
   const [openPassCollect, togglePassCollect] = usePassCollectModal();
   const [openAmountPay, toggleAmountPay] = useAmountPay();
@@ -144,8 +137,13 @@ function CollectsPage(props) {
   };
 
   useEffect(() => {
-    isLoggedEmployee({ token: localStorage.getItem("token") }).then(
-      (response) => {
+    if (isLogged === false) {
+      localStorage.setItem("rol", "cashier");
+      isLoggedEmployee({
+        token: localStorage.getItem("token"),
+        employee_id: localStorage.getItem("employee_id"),
+        rol: localStorage.getItem("rol"),
+      }).then((response) => {
         if (typeof response === "string") {
           if (response.includes("401")) {
             dangerSnackbar("Autentificación incorrecta, inicie sesión.");
@@ -154,16 +152,16 @@ function CollectsPage(props) {
         }
         if (typeof response !== "undefined") {
           if (response.success === true) {
-            infoSnackbar("You are logged");
             setIsLogged(true);
+            checkOpeningBox();
             handleRefresh();
           } else {
             dangerSnackbar("Autentificación incorrecta, inicie sesión.");
             history.push("/");
           }
         }
-      }
-    );
+      });
+    }
   }, [isLogged]);
 
   // Logout function
@@ -209,34 +207,15 @@ function CollectsPage(props) {
     });
   };
 
-  return isLogged ? (
-    <CurrentTableContext.Provider
-      value={{
-        state: currentTableState,
-        setState: setCurrentTable,
-        emptyState: emptyCurrentTable,
-        changeBs: changeAmountBS,
-        changeUs: changeAmountUS,
-        changePaymentType: changePaymentType,
-        changeCard1: changeCreditCard1,
-        changeCard2: changeCreditCard2,
-        changeCard3: changeCreditCard3,
-        changeWillPay: changeWillPay,
-        TO_PAY: TO_PAY,
-        WITHOUT_CHANGE: WITHOUT_CHANGE,
-        WITH_CHANGE: WITH_CHANGE,
-        PAID_OKAY: PAID_OKAY,
-        CARD_OKAY: CARD_OKAY,
-        cashValid: cashValid,
-        cardValid: cardValid,
-        cashCardValid: cashCardValid,
-        variousCardsValid: variousCardsValid,
-        willPayValid: willPayValid,
-        makeDynamicState: makeDynamicState,
-      }}
-    >
+  return (
+    <Fragment>
       <CustomLoading
-        open={environments_loading || tables_loading || boxes_loading}
+        open={
+          employee_loading ||
+          environments_loading ||
+          tables_loading ||
+          boxes_loading
+        }
       />
       <CustomSnackbar
         open={snackbar_show}
@@ -244,55 +223,84 @@ function CollectsPage(props) {
         severity={snackbar_severity}
         onClose={handleCloseSnackbar}
       />
+      {isLogged ? (
+        <CurrentTableContext.Provider
+          value={{
+            state: currentTableState,
+            setState: setCurrentTable,
+            emptyState: emptyCurrentTable,
+            changeBs: changeAmountBS,
+            changeUs: changeAmountUS,
+            changePaymentType: changePaymentType,
+            changeCard1: changeCreditCard1,
+            changeCard2: changeCreditCard2,
+            changeCard3: changeCreditCard3,
+            changeWillPay: changeWillPay,
+            TO_PAY: TO_PAY,
+            WITHOUT_CHANGE: WITHOUT_CHANGE,
+            WITH_CHANGE: WITH_CHANGE,
+            PAID_OKAY: PAID_OKAY,
+            CARD_OKAY: CARD_OKAY,
+            cashValid: cashValid,
+            cardValid: cardValid,
+            cashCardValid: cashCardValid,
+            variousCardsValid: variousCardsValid,
+            willPayValid: willPayValid,
+            makeDynamicState: makeDynamicState,
+          }}
+        >
+          <EnvironmentsAppBar
+            tabIndex={tabIndex}
+            changeTabIndex={changeTabIndex}
+          />
+          <TablesGrid
+            tabIndex={tabIndex}
+            changeTabIndex={changeTabIndex}
+            onClick={handleOpenTotalAmount}
+          />
+          <CollectFooterBar
+            refresh={handleRefresh}
+            logout={handleLogout}
+            openDrawer={toggleDrawer}
+            openBox={toggleBox}
+          />
 
-      <EnvironmentsAppBar tabIndex={tabIndex} changeTabIndex={changeTabIndex} />
-      <TablesGrid
-        tabIndex={tabIndex}
-        changeTabIndex={changeTabIndex}
-        onClick={handleOpenTotalAmount}
-      />
-      <CollectFooterBar
-        refresh={handleRefresh}
-        logout={handleLogout}
-        openDrawer={toggleDrawer}
-        openBox={toggleBox}
-      />
+          <ModalPassCollect
+            open={openPassCollect}
+            close={togglePassCollect}
+            state={currentTableState}
+            handleTotalPrint={handleTotalPrint}
+          />
 
-      <ModalPassCollect
-        open={openPassCollect}
-        close={togglePassCollect}
-        state={currentTableState}
-        handleTotalPrint={handleTotalPrint}
-      />
+          <ModalSelectBox
+            state={selectBoxState}
+            set={setSelectBox}
+            close={toggleSelectBox}
+            logout={handleLogout}
+          />
 
-      <ModalSelectBox
-        state={selectBoxState}
-        set={setSelectBox}
-        close={toggleSelectBox}
-        logout={handleLogout}
-      />
+          <ModalBox open={openBox} close={toggleBox} />
 
-      <ModalBox open={openBox} close={toggleBox} />
+          <ModalAmountToPay open={openAmountPay} close={toggleAmountPay} />
 
-      <ModalAmountToPay open={openAmountPay} close={toggleAmountPay} />
+          <DrawerTablesList open={openDrawer} close={toggleDrawer} />
 
-      <DrawerTablesList open={openDrawer} close={toggleDrawer} />
-
-      <ComponentToPrint
-        btnID="printTotal"
-        printList={printList}
-        refresh={[openPassCollect, currentTableState.id]}
-      />
-    </CurrentTableContext.Provider>
-  ) : null;
+          <ComponentToPrint
+            btnID="printTotal"
+            printList={printList}
+            refresh={[openPassCollect, currentTableState.id]}
+          />
+        </CurrentTableContext.Provider>
+      ) : null}
+    </Fragment>
+  );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { tables, environments, orders, boxes, snackbar } = state;
+  const { employee, tables, environments, orders, boxes, snackbar } = state;
   return {
-    environments: environments.payload,
+    employee_loading: employee.loading,
     environments_loading: environments.loading,
-    tables: tables.payload,
     tables_loading: tables.loading,
     boxes_loading: boxes.loading,
     orders_detail_payload: orders.orders_detail,

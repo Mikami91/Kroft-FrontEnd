@@ -1,5 +1,7 @@
 // Dependencies
 import { useState } from "react";
+// Funcitons
+import { boxChech } from "../functions/cruds/boxFunctions";
 
 export const useBoxModal = (initialState = false) => {
   const [openBox, setOpenBox] = useState(initialState);
@@ -28,7 +30,28 @@ export const useBoxSelectModal = (newValue = null) => {
       ...selectBoxState,
       open: !selectBoxState.open,
     });
-  return [selectBoxState, setSelectBox, toggleSelectBox];
+
+  const checkOpeningBox = () =>
+    boxChech({
+      cashier_id: localStorage.getItem("employee_id"),
+    }).then((res) => {
+      if (typeof res !== "undefined") {
+        if (res.success === true) {
+          setSelectBoxState({
+            open: false,
+            box_id: res.data.box_id,
+          });
+          localStorage.setItem("box_id", res.data.box_id);
+        } else {
+          setSelectBoxState({
+            open: true,
+            box_id: null,
+          });
+          localStorage.setItem("box_id", null);
+        }
+      }
+    });
+  return [selectBoxState, setSelectBox, toggleSelectBox, checkOpeningBox];
 };
 
 export const usePassCollectModal = (initialState = false) => {

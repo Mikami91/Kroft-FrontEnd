@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import { withRouter, useHistory } from "react-router-dom";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -42,10 +42,8 @@ import { salesWebsocket } from "../../events";
 import image from "../../assets/img/backgrounds/productbackground.jpg";
 
 function CollectsPage(props) {
-  // Props
   const {
-    environments,
-    tables,
+    employee_loading,
     environments_loading,
     tables_loading,
     snackbar_show,
@@ -96,8 +94,13 @@ function CollectsPage(props) {
   };
 
   useEffect(() => {
-    isLoggedEmployee({ token: localStorage.getItem("token") }).then(
-      (response) => {
+    if (isLogged === false) {
+      localStorage.setItem("rol", "waiter");
+      isLoggedEmployee({
+        token: localStorage.getItem("token"),
+        employee_id: localStorage.getItem("employee_id"),
+        rol: localStorage.getItem("rol"),
+      }).then((response) => {
         if (typeof response === "string") {
           if (response.includes("401")) {
             dangerSnackbar("Autentificación incorrecta, inicie sesión.");
@@ -106,7 +109,6 @@ function CollectsPage(props) {
         }
         if (typeof response !== "undefined") {
           if (response.success === true) {
-            infoSnackbar("You are logged");
             setIsLogged(true);
             handleRefresh();
           } else {
@@ -114,19 +116,9 @@ function CollectsPage(props) {
             history.push("/");
           }
         }
-      }
-    );
+      });
+    }
   }, [isLogged]);
-
-  // // Payloads
-  // useEffect(() => {
-  //   if (is_payload === false) {
-  //     handleRefresh();
-
-  //     // Change is_payload state
-  //     set_is_payload(true);
-  //   }
-  // }, [is_payload, environments, tables]);
 
   // Logout function
   const handleLogout = () => {
@@ -153,55 +145,63 @@ function CollectsPage(props) {
     }
   };
 
-  return isLogged ? (
-    <CurrentTableContext.Provider
-      value={{
-        state: currentTableState,
-        setState: setCurrentTable,
-        emptyState: emptyCurrentTable,
-      }}
-    >
-      <CustomLoading open={environments_loading || tables_loading} />
+  return (
+    <Fragment>
+      <CustomLoading
+        open={employee_loading || environments_loading || tables_loading}
+      />
       <CustomSnackbar
         open={snackbar_show}
         message={snackbar_message}
         severity={snackbar_severity}
         onClose={handleCloseSnackbar}
       />
-      <EnvironmentsAppBar tabIndex={tabIndex} changeTabIndex={changeTabIndex} />
-      <TablesGrid
-        tabIndex={tabIndex}
-        changeTabIndex={changeTabIndex}
-        onClick={handleOpenProducts}
-      />
-      <SalesFooterBar
-        refresh={handleRefresh}
-        logout={handleLogout}
-        openDrawer={toggleDrawer}
-        toggleChangeTable={toggleChangeTable}
-      />
-      <ModalChangeTable open={changeTableOpen} close={toggleChangeTable} />
-      <DrawerTablesList
-        open={openDrawer}
-        close={toggleDrawer}
-        openProducts={handleOpenProducts}
-      />
-      <Products
-        direction="bottom"
-        variant="temporary"
-        background={image}
-        currentTable={currentTableState}
-      />
-    </CurrentTableContext.Provider>
-  ) : null;
+      {isLogged ? (
+        <CurrentTableContext.Provider
+          value={{
+            state: currentTableState,
+            setState: setCurrentTable,
+            emptyState: emptyCurrentTable,
+          }}
+        >
+          <EnvironmentsAppBar
+            tabIndex={tabIndex}
+            changeTabIndex={changeTabIndex}
+          />
+          <TablesGrid
+            tabIndex={tabIndex}
+            changeTabIndex={changeTabIndex}
+            onClick={handleOpenProducts}
+          />
+          <SalesFooterBar
+            refresh={handleRefresh}
+            logout={handleLogout}
+            openDrawer={toggleDrawer}
+            toggleChangeTable={toggleChangeTable}
+          />
+          <ModalChangeTable open={changeTableOpen} close={toggleChangeTable} />
+          <DrawerTablesList
+            open={openDrawer}
+            close={toggleDrawer}
+            openProducts={handleOpenProducts}
+          />
+          <Products
+            direction="bottom"
+            variant="temporary"
+            background={image}
+            currentTable={currentTableState}
+          />
+        </CurrentTableContext.Provider>
+      ) : null}
+    </Fragment>
+  );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { tables, environments, snackbar } = state;
+  const { employee, tables, environments, snackbar } = state;
   return {
-    environments: environments.payload,
+    employee_loading: employee.loading,
     environments_loading: environments.loading,
-    tables: tables.payload,
     tables_loading: tables.loading,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
