@@ -11,6 +11,7 @@ function DrawerTablesList(props) {
     // Local
     open,
     close,
+    openTable,
     // Redux
     environments,
     tables,
@@ -23,7 +24,7 @@ function DrawerTablesList(props) {
       close={close}
       categoryList={environments}
       itemList={tables}
-      itemOnClick={close}
+      itemOnClick={openTable}
       filter="environment_id"
       refresh={[open, environments, tables]}
     />

@@ -23,7 +23,12 @@ function GridTables(props) {
   const classes = useStyles();
   const {
     // Props
-    filter, data, keyData, onClick, color } = props;
+    filter,
+    data,
+    keyData,
+    onClick,
+    color,
+  } = props;
   // Using useMemo hook
   return useMemo(() => {
     // Render
@@ -34,7 +39,11 @@ function GridTables(props) {
         });
         const cardClasses = classNames({
           [classes[
-            index.is_busy === 0 ? "green" : index.is_busy === 1 ? "red" : "yellow"
+            index.is_busy === 0
+              ? "green"
+              : index.is_busy === 1
+              ? "red"
+              : "yellow"
           ]]: true,
         });
 
@@ -90,10 +99,7 @@ GridTables.defaultProps = {
 GridTables.propTypes = {
   filter: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   data: PropTypes.array,
-  keyData: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  keyData: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onClick: PropTypes.func,
   color: PropTypes.oneOf([
     "primary",

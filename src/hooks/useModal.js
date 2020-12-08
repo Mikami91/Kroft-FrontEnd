@@ -20,11 +20,13 @@ export const useBoxSelectModal = (newValue = null) => {
     open: parseInt(localStorage.getItem("box_id")) === 0 || null ? true : false,
     box_id: newValue,
   });
-  const setSelectBox = (newValue) =>
+  const setSelectBox = (newValue) => {
+    console.log(newValue);
     setSelectBoxState({
       ...selectBoxState,
       box_id: newValue,
     });
+  }
   const toggleSelectBox = () =>
     setSelectBoxState({
       ...selectBoxState,

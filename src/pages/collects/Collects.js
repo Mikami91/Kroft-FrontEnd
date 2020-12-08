@@ -8,6 +8,10 @@ import {
   dangerSnackbar,
   hideSnackbar,
 } from "../../redux/actions/creators/snackbarCreator";
+import {
+  open as setCurrentReduxState,
+  close as emptyCurrentReduxState,
+} from "../../redux/actions/creators/productCreator";
 // Hooks
 import { useDrawer } from "../../hooks/useDrawer";
 import { useCurrentTable } from "../../hooks/useCurrentTable";
@@ -21,6 +25,7 @@ import {
 import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Layouts
 import ComponentToPrint from "../../layouts/Prints/ComponentToPrint";
+import ComponentPrintTotal from "../../layouts/Prints/ComponentPrintTotal";
 // Local components
 import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
 import TablesGrid from "./components/TablesGrid";
@@ -34,6 +39,7 @@ import ModalAmountToPay from "./components/ModalAmountToPay";
 import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
 // Functions
+import { companyShow } from "../../functions/cruds/companyFunctions";
 import { isLoggedEmployee } from "../../functions/cruds/employeeFunctions";
 import { boxShow } from "../../functions/cruds/boxFunctions";
 import { paymentShow } from "../../functions/cruds/paymentFunctions";
@@ -112,12 +118,19 @@ function CollectsPage(props) {
     if (args.is_busy === 1) {
       togglePassCollect();
       setCurrentTable(args);
+      setCurrentReduxState(args);
     }
     if (args.is_busy === 2) {
       toggleAmountPay();
       setCurrentTable(args);
+      setCurrentReduxState(args);
     }
     return null;
+  };
+
+  const handleCloseModalPassCollect = () => {
+    emptyCurrentReduxState();
+    togglePassCollect();
   };
 
   // Events
@@ -128,6 +141,7 @@ function CollectsPage(props) {
 
   // Refresh fetches
   const handleRefresh = () => {
+    companyShow();
     boxShow();
     environmentShow();
     tableShow();
@@ -173,6 +187,13 @@ function CollectsPage(props) {
     localStorage.setItem("head_area", "");
     // Redirect to login page
     history.push("/");
+  };
+
+  const handleOpenTable = (args) => {
+    if (args.is_busy > 0) {
+      handleOpenTotalAmount(args);
+    }
+    toggleDrawer();
   };
 
   // State for Modal Prints
@@ -264,32 +285,31 @@ function CollectsPage(props) {
             openDrawer={toggleDrawer}
             openBox={toggleBox}
           />
-
           <ModalPassCollect
             open={openPassCollect}
-            close={togglePassCollect}
+            close={handleCloseModalPassCollect}
             state={currentTableState}
             handleTotalPrint={handleTotalPrint}
           />
-
           <ModalSelectBox
             state={selectBoxState}
             set={setSelectBox}
             close={toggleSelectBox}
             logout={handleLogout}
           />
-
           <ModalBox open={openBox} close={toggleBox} />
-
           <ModalAmountToPay open={openAmountPay} close={toggleAmountPay} />
-
-          <DrawerTablesList open={openDrawer} close={toggleDrawer} />
-
-          <ComponentToPrint
+          <DrawerTablesList
+            open={openDrawer}
+            close={toggleDrawer}
+            openTable={handleOpenTable}
+          />
+          {/* <ComponentToPrint
             btnID="printTotal"
             printList={printList}
             refresh={[openPassCollect, currentTableState.id]}
-          />
+          /> */}
+          <ComponentPrintTotal btnID="printTotal" refresh={[openPassCollect]} />
         </CurrentTableContext.Provider>
       ) : null}
     </Fragment>

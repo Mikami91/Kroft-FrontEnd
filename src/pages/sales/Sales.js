@@ -29,6 +29,7 @@ import ModalChangeTable from "./components/ModalChangeTable";
 import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
 // Functions
+import { companyShow } from "../../functions/cruds/companyFunctions";
 import { isLoggedEmployee } from "../../functions/cruds/employeeFunctions";
 import { environmentShow } from "../../functions/cruds/environmentFunctions";
 import { tableShow } from "../../functions/cruds/tableFunctions";
@@ -85,6 +86,7 @@ function CollectsPage(props) {
 
   // Refresh fetches
   const handleRefresh = () => {
+    companyShow();
     environmentShow();
     tableShow();
     categoryShow();

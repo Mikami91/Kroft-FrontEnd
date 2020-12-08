@@ -58,7 +58,7 @@ function ModalSelectBox(props) {
           list={boxes}
           keyValue="id"
           value="name"
-          checked={state.id}
+          checked={state.box_id}
           onChange={handleChangeBox}
           fontSize="medium"
           fontColor="warning"

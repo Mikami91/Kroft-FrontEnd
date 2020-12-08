@@ -1,39 +1,25 @@
 // Dependencies
-import React, { Component } from "react";
+import React from "react";
 // Conecction to Store
 import { connect } from "react-redux";
 // @material-ui/icons
 import SendIcon from "@material-ui/icons/Send";
 import PrintIcon from "@material-ui/icons/Print";
 // core components
-import TabPanel from "../../../components/Panel/TabPanel";
 import CustomModal from "../../../components/Modal/CustomModal.js";
-import CustomTableFilter from "../../../components/Table/CustomTableFilter.js";
-import CustomTableToPrints from "../../../components/Table/CustomTableToPrints";
+import CustomTableListFilter from "../../../components/Table/CustomTableListFilter.js";
 // Functions
 import { orderSend } from "../../../functions/cruds/orderFunctions";
 
-class ComponentToPrint extends Component {
-  render() {
-    return (
-      <CustomTableToPrints
-        data={this.props.data}
-        renderRefresh={this.props.refresh}
-      />
-    );
-  }
-}
-
 function ModalPassCollect(props) {
-  // Props
   const {
-    // Local
+    // Props
     open,
     close,
     state,
     handleTotalPrint,
     // Redux
-    orders_detail_payload,
+    orders_detail,
     order_loading,
     collect_fetching,
   } = props;
@@ -61,27 +47,23 @@ function ModalPassCollect(props) {
   const COLUMNS = [
     {
       field: "id",
-      type: "text",
       align: "center",
       color: "default",
     },
     {
       field: "product_name",
-      type: "text",
       align: "left",
       color: "default",
       colSpan: 2,
     },
     {
       field: "product_price",
-      type: "text",
       align: "right",
       variant: "h6",
       color: "warning",
     },
     {
       field: "product_quantity",
-      type: "text",
       align: "right",
       variant: "h6",
       color: "warning",
@@ -122,14 +104,14 @@ function ModalPassCollect(props) {
         bold: true,
       }}
       content={
-        <CustomTableFilter
+        <CustomTableListFilter
           padding="default"
           header={HEADERS}
           columns={COLUMNS}
-          data={orders_detail_payload}
+          data={orders_detail}
           key_field="table_id"
           filter={state.id}
-          renderRefresh={[state, open]}
+          renderRefresh={open}
         />
       }
       leftButtons={[
@@ -169,7 +151,7 @@ function ModalPassCollect(props) {
 const mapStateToProps = (state) => {
   const { orders } = state;
   return {
-    orders_detail_payload: orders.orders_detail,
+    orders_detail: orders.orders_detail,
     order_loading: orders.loading,
   };
 };
