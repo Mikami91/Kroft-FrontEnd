@@ -9,6 +9,8 @@ import {
 } from "react-router-dom";
 // Routes
 import routes from "./routes/routes";
+// Pages
+import NotFound from "./pages/NotFound";
 // Assets
 import logo from "./logo.svg";
 // Styles
@@ -18,22 +20,22 @@ function App() {
   return (
     <Fragment>
       {/* <Router> */}
-        <Switch>
-          {routes.map((prop, key) => {
-            if (prop.path !== null) {
-              return (
-                <Route
-                  exact
-                  path={prop.path}
-                  component={() => <prop.component />}
-                  // component={prop.component}
-                  key={key}
-                />
-              );
-            }
-            return <Route component={"NoFound"} />;
-          })}
-        </Switch>
+      <Switch>
+        {routes.map((prop, key) => {
+          if (prop.path !== null) {
+            return (
+              <Route
+                exact
+                path={prop.path}
+                component={() => <prop.component />}
+                // component={prop.component}
+                key={key}
+              />
+            );
+          }
+        })}
+        <Route component={NotFound} />
+      </Switch>
       {/* </Router> */}
     </Fragment>
   );

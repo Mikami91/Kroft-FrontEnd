@@ -24,7 +24,6 @@ import {
 // Contexts
 import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Layouts
-import ComponentToPrint from "../../layouts/Prints/ComponentToPrint";
 import ComponentPrintTotal from "../../layouts/Prints/ComponentPrintTotal";
 // Local components
 import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
@@ -55,7 +54,7 @@ function CollectsPage(props) {
   // Props
   const {
     employee_loading,
-    orders_detail_payload,
+    orders_detail,
     environments_loading,
     tables_loading,
     boxes_loading,
@@ -206,7 +205,7 @@ function CollectsPage(props) {
   const handleTotalPrint = async (e) => {
     e.preventDefault();
     await setPrintList(
-      orders_detail_payload.filter(
+      orders_detail.filter(
         (index) => index.order_id === currentTableState.order_id
       )
     );
@@ -323,7 +322,7 @@ const mapStateToProps = (state) => {
     environments_loading: environments.loading,
     tables_loading: tables.loading,
     boxes_loading: boxes.loading,
-    orders_detail_payload: orders.orders_detail,
+    orders_detail: orders.orders_detail,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,

@@ -39,7 +39,8 @@ import TabPanel from "../../../components/Panel/TabPanel";
 import CustomTableToPrints from "../../../components/Table/CustomTableToPrints";
 import ComponentToPrint from "../../../layouts/Prints/ComponentToPrint";
 import CustomLoading from "../../../components/Loading/CustomLoading";
-
+// Layouts
+import ComponentPrintTotal from "../../../layouts/Prints/ComponentPrintTotal";
 // Functions
 import {
   orderCreate,
@@ -346,11 +347,7 @@ function Products(props) {
             refresh={historyPrints}
           />
         </TabPanel>
-        <ComponentToPrint
-          btnID="printTotal"
-          printList={totalAmount.list}
-          refresh={totalAmount}
-        />
+        <ComponentPrintTotal btnID="printTotal" refresh={totalAmount} />
       </Drawer>
     );
   }, [

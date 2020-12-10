@@ -18,8 +18,8 @@ function ModalTotalAmount(props) {
     table_amount,
     handleTotalAmountPrint,
     // Redux
-    currentOpenTable,
-    orders_detail_payload,
+    current,
+    orders_filter,
   } = props;
 
   // Using useMemo hook
@@ -83,10 +83,10 @@ function ModalTotalAmount(props) {
                 color: "warning",
               },
             ]}
-            data={orders_detail_payload}
+            data={orders_filter.filter((i) => i.table_id === current.table_id)}
             key_field="table_id"
-            filter={currentOpenTable.table_id}
-            renderRefresh={[orders_detail_payload, global_quantity]}
+            filter={current.table_id}
+            renderRefresh={[orders_filter, global_quantity]}
           />
         }
         leftButtons={[
@@ -135,14 +135,14 @@ function ModalTotalAmount(props) {
         fullWidth
       />
     );
-  }, [open, orders_detail_payload]);
+  }, [open, orders_filter]);
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
   const { product, orders } = state;
   return {
-    currentOpenTable: product.current,
-    orders_detail_payload: orders.orders_detail,
+    current: product.current,
+    orders_filter: orders.orders_filter,
   };
 };
 

@@ -19,7 +19,8 @@ function ModalPassCollect(props) {
     state,
     handleTotalPrint,
     // Redux
-    orders_detail,
+    current,
+    orders_filter,
     order_loading,
     collect_fetching,
   } = props;
@@ -108,7 +109,7 @@ function ModalPassCollect(props) {
           padding="default"
           header={HEADERS}
           columns={COLUMNS}
-          data={orders_detail}
+          data={orders_filter.filter((i) => i.table_id === current.table_id)}
           key_field="table_id"
           filter={state.id}
           renderRefresh={open}
@@ -149,10 +150,11 @@ function ModalPassCollect(props) {
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { orders } = state;
+  const { orders, product } = state;
   return {
-    orders_detail: orders.orders_detail,
+    orders_filter: orders.orders_filter,
     order_loading: orders.loading,
+    current: product.current,
   };
 };
 

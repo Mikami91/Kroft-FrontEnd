@@ -25,30 +25,6 @@ function CustomTableListFilter(props) {
     renderRefresh,
   } = props;
 
-  let filterr = renderRefresh ? filter : 0;
-
-  console.log(renderRefresh);
-
-  // let data_filtered = [];
-  // for (let x in data) {
-  //   if (data[x][key_field] === filter) {
-  //     if (check(data[x])) {
-  //       data_filtered.push(data[x]);
-  //     }
-  //   }
-  // }
-  // function check(index) {
-  //   let flag = 0;
-  //   for (let y in data_filtered) {
-  //     if (data_filtered[y].product_id === index.product_id) {
-  //       data_filtered[y].product_quantity += index.product_quantity;
-  //       flag = 1;
-  //     }
-  //   }
-  //   if (flag === 0) return true;
-  //   else return false;
-  // }
-
   // Using useMemo hook
   return useMemo(() => {
     return (
@@ -72,7 +48,7 @@ function CustomTableListFilter(props) {
             {data.map((index, key) => (
               <TableRow key={key + "row"}>
                 {columns.map((col) => {
-                  if (index[key_field] === filterr) {
+                  if (index[key_field] === filter) {
                     return (
                       <TableCell
                         key={key + "cell-" + col.field}

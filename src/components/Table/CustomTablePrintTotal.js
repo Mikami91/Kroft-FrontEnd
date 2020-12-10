@@ -20,61 +20,13 @@ const useStyles = makeStyles(printTotalStyle);
 const CustomTablePrintTotal = (props) => {
   const {
     // Redux
-    list,
+    orders_filter,
     current,
     company,
     // Props
     renderRefresh,
   } = props;
   let { table_id, table_name, table_number } = current;
-
-  console.log(list);
-
-  let data_filtered = [];
-  for (let x in list) {
-    if (list[x].table_id === table_id) {
-      if (check(list[x])) {
-        data_filtered.push(list[x]);
-      }
-    }
-  }
-  function check(index) {
-    let flag = 0;
-    for (let y in data_filtered) {
-      if (data_filtered[y].product_id === index.product_id) {
-        data_filtered[y].product_quantity += index.product_quantity;
-        flag = 1;
-      }
-    }
-    if (flag === 0) return true;
-    else return false;
-  }
-
-  console.log(data_filtered);
-
-  //   const filter_list = list.filter((i) => i.table_id === table_id);
-
-  //   console.log(filter_list);
-
-  //   let output = filter_list.reduce(function (arr, cur) {
-  //     let product_name = cur.product_name;
-  //     let found = arr.find((i) => i.product_name === product_name);
-  //     if (found) found.product_quantity += cur.product_quantity;
-  //     else arr.push(cur);
-  //     return arr;
-  //   }, []);
-  //   console.log(output);
-
-  //   filter_list.forEach(function (a) {
-  //     if (!this[a.product_id]) {
-  //       this[a.product_id] = { ...a };
-  //       result.push(this[a.product_id]);
-  //     }
-  //     console.log(a.product_quantity);
-  //     this[a.product_quantity] += a.product_quantity;
-  //   }, {});
-
-  //   console.log(result);
 
   const company_name =
     Object.keys(company).length === 0 ? "---" : company.name.toUpperCase();
@@ -141,33 +93,35 @@ const CustomTablePrintTotal = (props) => {
         </TableHead>
 
         <TableBody>
-          {list.map((i) =>
-            i.table_id === table_id ? (
-              <TableRow key={i.id}>
-                <TableCell className={style.tQuantity} align="right">
-                  {i.product_quantity}
-                </TableCell>
-                <TableCell className={style.tDetail} align="left">
-                  {i.product_name}
-                </TableCell>
-                <TableCell className={style.tPrice} align="right">
-                  {i.product_price}
-                </TableCell>
-                <TableCell className={style.tSubtotal} align="right">
-                  <NumberFormat
-                    value={i.product_price * i.product_quantity}
-                    displayType={"text"}
-                    thousandSeparator={true}
-                    allowNegative={false}
-                    allowEmptyFormatting={true}
-                    allowLeadingZeros={true}
-                    decimalScale={2}
-                    isNumericString={true}
-                  />
-                </TableCell>
-              </TableRow>
-            ) : null
-          )}
+          {orders_filter
+            .filter((i) => i.table_id === current.table_id)
+            .map((i) =>
+              i.table_id === table_id ? (
+                <TableRow key={i.id}>
+                  <TableCell className={style.tQuantity} align="right">
+                    {i.product_quantity}
+                  </TableCell>
+                  <TableCell className={style.tDetail} align="left">
+                    {i.product_name}
+                  </TableCell>
+                  <TableCell className={style.tPrice} align="right">
+                    {i.product_price}
+                  </TableCell>
+                  <TableCell className={style.tSubtotal} align="right">
+                    <NumberFormat
+                      value={i.product_price * i.product_quantity}
+                      displayType={"text"}
+                      thousandSeparator={true}
+                      allowNegative={false}
+                      allowEmptyFormatting={true}
+                      allowLeadingZeros={true}
+                      decimalScale={2}
+                      isNumericString={true}
+                    />
+                  </TableCell>
+                </TableRow>
+              ) : null
+            )}
 
           <TableRow>
             <TableCell className={style.tTotal} align="right" colSpan={3}>
@@ -213,7 +167,7 @@ const mapStateToProps = (state) => {
 
   return {
     current: product.current,
-    list: orders.orders_detail,
+    orders_filter: orders.orders_filter,
     company: company.payload,
   };
 };
