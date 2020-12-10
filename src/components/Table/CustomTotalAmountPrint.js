@@ -17,7 +17,7 @@ import printTotalStyle from "../../styles/components/printTotalStyle";
 
 const useStyles = makeStyles(printTotalStyle);
 
-const CustomTablePrintTotal = (props) => {
+const CustomTotalAmountPrint = (props) => {
   const {
     // Redux
     orders_filter,
@@ -133,24 +133,6 @@ const CustomTablePrintTotal = (props) => {
           </TableRow>
 
           <TableRow>
-            <TableCell className={style.tClientName} align="left" colSpan={4}>
-              Nombre:......................................................................
-            </TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell className={style.tClientCI} align="left" colSpan={4}>
-              CI:..................................................................................
-            </TableCell>
-          </TableRow>
-
-          <TableRow>
-            <TableCell className={style.tThanks} align="center" colSpan={4}>
-              Gracias por su preferencia!!!
-            </TableCell>
-          </TableRow>
-
-          <TableRow>
             <TableCell className={style.tBrand} align="center" colSpan={4}>
               KROFT SOLUTIONS
             </TableCell>
@@ -172,4 +154,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(CustomTablePrintTotal);
+export default connect(mapStateToProps, null)(CustomTotalAmountPrint);

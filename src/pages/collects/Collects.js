@@ -24,7 +24,7 @@ import {
 // Contexts
 import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Layouts
-import ComponentPrintTotal from "../../layouts/Prints/ComponentPrintTotal";
+import ComponentPrintTotalAmount from "../../layouts/Prints/ComponentPrintTotalAmount";
 // Local components
 import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
 import TablesGrid from "./components/TablesGrid";
@@ -308,7 +308,7 @@ function CollectsPage(props) {
             printList={printList}
             refresh={[openPassCollect, currentTableState.id]}
           /> */}
-          <ComponentPrintTotal btnID="printTotal" refresh={[openPassCollect]} />
+          <ComponentPrintTotalAmount btnID="printTotal" refresh={[openPassCollect]} />
         </CurrentTableContext.Provider>
       ) : null}
     </Fragment>

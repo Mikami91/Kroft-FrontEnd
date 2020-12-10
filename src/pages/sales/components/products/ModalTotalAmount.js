@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import PrintRounded from "@material-ui/icons/PrintRounded";
 // Core components
 import CustomModal from "../../../../components/Modal/CustomModal.js";
-import CustomTableFilter from "../../../../components/Table/CustomTableFilter.js";
+import CustomTotalAmountList from "../../../../components/Table/CustomTotalAmountList.js";
 
 function ModalTotalAmount(props) {
   const {
@@ -22,6 +22,58 @@ function ModalTotalAmount(props) {
     orders_filter,
   } = props;
 
+  const HEADERS = [
+    {
+      text: "Cant.",
+      align: "right",
+    },
+    {
+      text: "Detalle",
+      align: "left",
+      colSpan: 2,
+    },
+    {
+      text: "P./U.",
+      align: "right",
+    },
+
+    {
+      text: "SubTotal",
+      align: "right",
+    },
+  ];
+
+  const COLUMNS = [
+    {
+      field: "product_quantity",
+      type: "text",
+      align: "right",
+      variant: "h6",
+      color: "warning",
+    },
+    {
+      field: "product_name",
+      type: "text",
+      align: "left",
+      color: "default",
+      colSpan: 2,
+    },
+    {
+      field: "product_price",
+      type: "number",
+      align: "right",
+      variant: "h6",
+      color: "warning",
+    },
+    {
+      multiplyFields: ["product_price", "product_quantity"],
+      type: "multiply",
+      align: "right",
+      variant: "h6",
+      color: "warning",
+    },
+  ];
+
   // Using useMemo hook
   return useMemo(() => {
     return (
@@ -33,56 +85,10 @@ function ModalTotalAmount(props) {
           size: "medium",
         }}
         content={
-          <CustomTableFilter
+          <CustomTotalAmountList
             padding="default"
-            header={[
-              {
-                text: "ID",
-                align: "center",
-              },
-              {
-                text: "Producto",
-                align: "left",
-                colSpan: 2,
-              },
-              {
-                text: "P./U.",
-                align: "right",
-              },
-              {
-                text: "Cantidad",
-                align: "right",
-              },
-            ]}
-            columns={[
-              {
-                field: "id",
-                type: "text",
-                align: "center",
-                color: "default",
-              },
-              {
-                field: "product_name",
-                type: "text",
-                align: "left",
-                color: "default",
-                colSpan: 2,
-              },
-              {
-                field: "product_price",
-                type: "text",
-                align: "right",
-                variant: "h6",
-                color: "warning",
-              },
-              {
-                field: "product_quantity",
-                type: "text",
-                align: "right",
-                variant: "h6",
-                color: "warning",
-              },
-            ]}
+            header={HEADERS}
+            columns={COLUMNS}
             data={orders_filter.filter((i) => i.table_id === current.table_id)}
             key_field="table_id"
             filter={current.table_id}

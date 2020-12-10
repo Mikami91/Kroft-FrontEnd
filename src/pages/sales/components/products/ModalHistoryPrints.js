@@ -16,7 +16,7 @@ function ModalHistoryPrints(props) {
     handleHistoryPrint,
     // Redux
     currentOpenTable,
-    orders_detail_payload,
+    orders_detail,
   } = props;
 
   // Using useMemo hook
@@ -81,7 +81,7 @@ function ModalHistoryPrints(props) {
                 onClick: handleHistoryPrint,
               },
             ]}
-            data={orders_detail_payload}
+            data={orders_detail}
             key_field="table_id"
             filter={currentOpenTable.table_id}
             renderRefresh={[open]}
@@ -99,7 +99,7 @@ const mapStateToProps = (state) => {
   const { product, orders } = state;
   return {
     currentOpenTable: product.current,
-    orders_detail_payload: orders.orders_detail,
+    orders_detail: orders.orders_detail,
   };
 };
 

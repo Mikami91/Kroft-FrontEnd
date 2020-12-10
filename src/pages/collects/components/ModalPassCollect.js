@@ -7,7 +7,7 @@ import SendIcon from "@material-ui/icons/Send";
 import PrintIcon from "@material-ui/icons/Print";
 // core components
 import CustomModal from "../../../components/Modal/CustomModal.js";
-import CustomTableListFilter from "../../../components/Table/CustomTableListFilter.js";
+import CustomTotalAmountList from "../../../components/Table/CustomTotalAmountList.js";
 // Functions
 import { orderSend } from "../../../functions/cruds/orderFunctions";
 
@@ -27,11 +27,11 @@ function ModalPassCollect(props) {
 
   const HEADERS = [
     {
-      text: "ID",
-      align: "center",
+      text: "Cant.",
+      align: "right",
     },
     {
-      text: "Producto",
+      text: "Detalle",
       align: "left",
       colSpan: 2,
     },
@@ -39,32 +39,38 @@ function ModalPassCollect(props) {
       text: "P./U.",
       align: "right",
     },
+
     {
-      text: "Cantidad",
+      text: "SubTotal",
       align: "right",
     },
   ];
 
   const COLUMNS = [
     {
-      field: "id",
-      align: "center",
-      color: "default",
+      field: "product_quantity",
+      type: "text",
+      align: "right",
+      variant: "h6",
+      color: "warning",
     },
     {
       field: "product_name",
+      type: "text",
       align: "left",
       color: "default",
       colSpan: 2,
     },
     {
       field: "product_price",
+      type: "number",
       align: "right",
       variant: "h6",
       color: "warning",
     },
     {
-      field: "product_quantity",
+      multiplyFields: ["product_price", "product_quantity"],
+      type: "multiply",
       align: "right",
       variant: "h6",
       color: "warning",
@@ -105,7 +111,7 @@ function ModalPassCollect(props) {
         bold: true,
       }}
       content={
-        <CustomTableListFilter
+        <CustomTotalAmountList
           padding="default"
           header={HEADERS}
           columns={COLUMNS}

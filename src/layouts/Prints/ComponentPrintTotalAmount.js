@@ -7,15 +7,15 @@ import { connect } from "react-redux";
 import ReactToPrint from "react-to-print";
 // core components
 import TabPanel from "../../components/Panel/TabPanel";
-import CustomTablePrintTotal from "../../components/Table/CustomTablePrintTotal";
+import CustomTotalAmountPrint from "../../components/Table/CustomTotalAmountPrint";
 
 class ComponentPrint extends Component {
   render() {
-    return <CustomTablePrintTotal renderRefresh={this.props.refresh} />;
+    return <CustomTotalAmountPrint renderRefresh={this.props.refresh} />;
   }
 }
 
-function ComponentPrintTotal(props) {
+function ComponentPrintTotalAmount(props) {
   const {
     // Redux
     current,
@@ -45,12 +45,12 @@ function ComponentPrintTotal(props) {
   }, [refresh, current.open]);
 }
 // PropTypes
-ComponentPrintTotal.defaultProps = {
+ComponentPrintTotalAmount.defaultProps = {
   btnID: "",
   refresh: null,
 };
 
-ComponentPrintTotal.propTypes = {
+ComponentPrintTotalAmount.propTypes = {
   btnID: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   refresh: PropTypes.oneOfType([
     PropTypes.string,
@@ -69,4 +69,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(ComponentPrintTotal);
+export default connect(mapStateToProps, null)(ComponentPrintTotalAmount);
