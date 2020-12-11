@@ -26,7 +26,7 @@ export const useBoxSelectModal = (newValue = null) => {
       ...selectBoxState,
       box_id: newValue,
     });
-  }
+  };
   const toggleSelectBox = () =>
     setSelectBoxState({
       ...selectBoxState,
@@ -155,4 +155,10 @@ export const useSubCategoryModal = () => {
   };
   console.log(subCategory);
   return [subCategory, openSubCategory, closeSubCategory];
+};
+
+export const useLogoutModal = (initialState = false) => {
+  const [openLogout, setLogout] = useState(initialState);
+  const toggleLogout = () => setLogout(!openLogout);
+  return [openLogout, toggleLogout];
 };

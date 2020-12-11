@@ -14,7 +14,7 @@ import {
 // Hooks
 import { useDrawer } from "../../hooks/useDrawer";
 import { useCurrentTable } from "../../hooks/useCurrentTable";
-import { useChangeTableModal } from "../../hooks/useModal";
+import { useChangeTableModal, useLogoutModal } from "../../hooks/useModal";
 // Contexts
 import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Local Layouts
@@ -28,9 +28,14 @@ import ModalChangeTable from "./components/ModalChangeTable";
 // core components
 import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
+// Layouts
+import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
 // Functions
 import { companyShow } from "../../functions/cruds/companyFunctions";
-import { isLoggedEmployee } from "../../functions/cruds/employeeFunctions";
+import {
+  isLoggedEmployee,
+  employeeLogout,
+} from "../../functions/cruds/employeeFunctions";
 import { environmentShow } from "../../functions/cruds/environmentFunctions";
 import { tableShow } from "../../functions/cruds/tableFunctions";
 import { categoryShow } from "../../functions/cruds/categoryFunctions";
@@ -64,6 +69,8 @@ function CollectsPage(props) {
 
   // Hooks for Modals
   const [changeTableOpen, toggleChangeTable] = useChangeTableModal();
+  const [openLogout, toggleLogout] = useLogoutModal();
+
   // Hooks for Tables
   const [
     currentTableState,
@@ -123,14 +130,26 @@ function CollectsPage(props) {
   }, [isLogged]);
 
   // Logout function
-  const handleLogout = () => {
-    // Empty local storage
-    localStorage.setItem("user", "");
-    localStorage.setItem("employee_id", "");
-    localStorage.setItem("token", "");
-    localStorage.setItem("head_area", "");
-    // Redirect to login page
-    history.push("/");
+  const handleLogout = (e) => {
+    if (openLogout) {
+      toggleLogout();
+    }
+    e.preventDefault();
+    employeeLogout({
+      token: localStorage.getItem("token"),
+    }).then((response) => {
+      if (typeof response !== "undefined") {
+        if (response.success === true) {
+          // Empty local storage
+          localStorage.setItem("user", "");
+          localStorage.setItem("employee_id", "");
+          localStorage.setItem("token", "");
+          localStorage.setItem("head_area", "");
+          // Redirect to login page
+          history.push("/");
+        }
+      }
+    });
   };
 
   const handleOpenProducts = (args) => {
@@ -177,7 +196,7 @@ function CollectsPage(props) {
           />
           <SalesFooterBar
             refresh={handleRefresh}
-            logout={handleLogout}
+            logout={toggleLogout}
             openDrawer={toggleDrawer}
             toggleChangeTable={toggleChangeTable}
           />
@@ -192,6 +211,12 @@ function CollectsPage(props) {
             variant="temporary"
             background={image}
             currentTable={currentTableState}
+          />
+          <LogoutConfirmation
+            open={openLogout}
+            close={toggleLogout}
+            isCashier={false}
+            handleLogout={handleLogout}
           />
         </CurrentTableContext.Provider>
       ) : null}

@@ -13,10 +13,6 @@ import {
 } from "@material-ui/core";
 // Core Components
 import CustomText from "../Typography/CustomText";
-// Styles
-// import "../../styles/index.css";
-// Containers
-// import ObservationPopover from '../popovers/ObservationPopover';
 
 function CustomTableList(props) {
   const { size, padding, sticky, header, columns, data, renderRefresh } = props;

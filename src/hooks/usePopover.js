@@ -71,3 +71,25 @@ export const useConfirmationPopover = () => {
   };
   return [confirmationState, openConfirmation, closeConfirmation];
 };
+
+export const useLogoutPopover = () => {
+  const [logoutState, setLogoutState] = useState({
+    open: false,
+    anchorEl: null,
+  });
+  // Open confirmation
+  const openLogout = (e) => {
+    setLogoutState({
+      open: true,
+      anchorEl: e.currentTarget,
+    });
+  };
+  // Close confirmation
+  const closeLogout = () => {
+    setLogoutState({
+      open: false,
+      anchorEl: null,
+    });
+  };
+  return [logoutState, openLogout, closeLogout];
+};

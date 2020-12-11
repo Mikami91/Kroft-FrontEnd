@@ -14,11 +14,11 @@ import CardOpenBox from "../../../components/Card/CardOpenBox";
 import { boxClosing } from "../../../functions/cruds/boxFunctions";
 
 function ModalBox(props) {
-  // Props
   const {
-    // Local
+    // Props
     open,
     close,
+    handleLogout,
     // Redux
     box_opening,
     box_fetching,
@@ -36,6 +36,8 @@ function ModalBox(props) {
 
   // Close Box function
   const handleBoxClose = async (e) => {
+    close();
+    await handleLogout(e);
     e.preventDefault();
     let response = await boxClosing({
       box_id: current_box_id,

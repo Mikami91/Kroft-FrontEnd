@@ -21,10 +21,12 @@ import {
   usePassCollectModal,
   useAmountPay,
 } from "../../hooks/useModal";
+import { useLogoutModal } from "../../hooks/useModal";
 // Contexts
 import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Layouts
 import ComponentPrintTotalAmount from "../../layouts/Prints/ComponentPrintTotalAmount";
+import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
 // Local components
 import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
 import TablesGrid from "./components/TablesGrid";
@@ -39,7 +41,10 @@ import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
 // Functions
 import { companyShow } from "../../functions/cruds/companyFunctions";
-import { isLoggedEmployee } from "../../functions/cruds/employeeFunctions";
+import {
+  isLoggedEmployee,
+  employeeLogout,
+} from "../../functions/cruds/employeeFunctions";
 import { boxShow } from "../../functions/cruds/boxFunctions";
 import { paymentShow } from "../../functions/cruds/paymentFunctions";
 import { environmentShow } from "../../functions/cruds/environmentFunctions";
@@ -58,6 +63,7 @@ function CollectsPage(props) {
     environments_loading,
     tables_loading,
     boxes_loading,
+    boxes_fetching,
     snackbar_show,
     snackbar_message,
     snackbar_severity,
@@ -81,6 +87,7 @@ function CollectsPage(props) {
   const [openBox, toggleBox] = useBoxModal();
   const [openPassCollect, togglePassCollect] = usePassCollectModal();
   const [openAmountPay, toggleAmountPay] = useAmountPay();
+  const [openLogout, toggleLogout] = useLogoutModal();
   // Hooks for Tables
   const [
     currentTableState,
@@ -177,17 +184,6 @@ function CollectsPage(props) {
     }
   }, [isLogged]);
 
-  // Logout function
-  const handleLogout = () => {
-    // Empty local storage
-    localStorage.setItem("user", "");
-    localStorage.setItem("employee_id", "");
-    localStorage.setItem("token", "");
-    localStorage.setItem("head_area", "");
-    // Redirect to login page
-    history.push("/");
-  };
-
   const handleOpenTable = (args) => {
     if (args.is_busy > 0) {
       handleOpenTotalAmount(args);
@@ -227,6 +223,47 @@ function CollectsPage(props) {
     });
   };
 
+  // Logout function
+  const handleLogout = (e) => {
+    if (openLogout) {
+      toggleLogout();
+    }
+    e.preventDefault();
+    employeeLogout({
+      token: localStorage.getItem("token"),
+    }).then((response) => {
+      if (typeof response !== "undefined") {
+        if (response.success === true) {
+          // Empty local storage
+          localStorage.setItem("user", "");
+          localStorage.setItem("employee_id", "");
+          localStorage.setItem("token", "");
+          localStorage.setItem("head_area", "");
+          // Redirect to login page
+          history.push("/");
+        }
+      }
+    });
+  };
+
+  // Logout and Close Boxfunction
+  const handleLogoutCloseBox = (e) => {
+    e.preventDefault();
+    employeeLogout({
+      token: localStorage.getItem("token"),
+    }).then((response) => {
+      if (typeof response !== "undefined") {
+        if (response.success === true) {
+          // Empty local storage
+          localStorage.setItem("user", "");
+          localStorage.setItem("employee_id", "");
+          localStorage.setItem("token", "");
+          localStorage.setItem("head_area", "");
+        }
+      }
+    });
+  };
+
   return (
     <Fragment>
       <CustomLoading
@@ -234,7 +271,8 @@ function CollectsPage(props) {
           employee_loading ||
           environments_loading ||
           tables_loading ||
-          boxes_loading
+          boxes_loading ||
+          boxes_fetching
         }
       />
       <CustomSnackbar
@@ -280,7 +318,7 @@ function CollectsPage(props) {
           />
           <CollectFooterBar
             refresh={handleRefresh}
-            logout={handleLogout}
+            logout={toggleLogout}
             openDrawer={toggleDrawer}
             openBox={toggleBox}
           />
@@ -296,7 +334,11 @@ function CollectsPage(props) {
             close={toggleSelectBox}
             logout={handleLogout}
           />
-          <ModalBox open={openBox} close={toggleBox} />
+          <ModalBox
+            open={openBox}
+            close={toggleBox}
+            handleLogout={handleLogoutCloseBox}
+          />
           <ModalAmountToPay open={openAmountPay} close={toggleAmountPay} />
           <DrawerTablesList
             open={openDrawer}
@@ -308,7 +350,16 @@ function CollectsPage(props) {
             printList={printList}
             refresh={[openPassCollect, currentTableState.id]}
           /> */}
-          <ComponentPrintTotalAmount btnID="printTotal" refresh={[openPassCollect]} />
+          <LogoutConfirmation
+            open={openLogout}
+            close={toggleLogout}
+            isCashier={true}
+            handleLogout={handleLogout}
+          />
+          <ComponentPrintTotalAmount
+            btnID="printTotal"
+            refresh={[openPassCollect]}
+          />
         </CurrentTableContext.Provider>
       ) : null}
     </Fragment>
@@ -322,6 +373,7 @@ const mapStateToProps = (state) => {
     environments_loading: environments.loading,
     tables_loading: tables.loading,
     boxes_loading: boxes.loading,
+    boxes_fetching: boxes.fetching,
     orders_detail: orders.orders_detail,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,

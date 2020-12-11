@@ -150,7 +150,7 @@ export async function boxClosing(data) {
       switch (response.data.success) {
         case true:
           fetching(false);
-          infoSnackbar(response.data.message);
+          infoSnackbar("Cierre de caja realizada.");
           break;
 
         case false:
