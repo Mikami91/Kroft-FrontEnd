@@ -1,6 +1,6 @@
 // Pages
 import Login from "../pages/Login";
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/dashboard/Dashboard";
 import Sales from "../pages/sales/Sales";
 import Collects from "../pages/collects/Collects";
 import Products from "../pages/Products";

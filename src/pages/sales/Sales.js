@@ -144,6 +144,7 @@ function CollectsPage(props) {
           localStorage.setItem("employee_id", "");
           localStorage.setItem("token", "");
           localStorage.setItem("head_area", "");
+          localStorage.setItem("rol", "");
           // Redirect to login page
           history.push("/");
         }

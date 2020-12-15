@@ -198,6 +198,17 @@ function CollectsPage(props) {
   //   });
   // };
 
+  const getLoginPage = () => {
+    // Empty local storage
+    localStorage.setItem("user", "");
+    localStorage.setItem("employee_id", "");
+    localStorage.setItem("token", "");
+    localStorage.setItem("rol", "");
+    localStorage.setItem("head_area", "");
+    // Redirect to login page
+    history.push("/");
+  };
+
   // Logout function
   const handleLogout = (e) => {
     if (openLogout) {
@@ -209,13 +220,7 @@ function CollectsPage(props) {
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
-          // Empty local storage
-          localStorage.setItem("user", "");
-          localStorage.setItem("employee_id", "");
-          localStorage.setItem("token", "");
-          localStorage.setItem("head_area", "");
-          // Redirect to login page
-          history.push("/");
+          getLoginPage();
         }
       }
     });
@@ -234,6 +239,7 @@ function CollectsPage(props) {
           localStorage.setItem("employee_id", "");
           localStorage.setItem("token", "");
           localStorage.setItem("head_area", "");
+          localStorage.setItem("rol", "");
         }
       }
     });
