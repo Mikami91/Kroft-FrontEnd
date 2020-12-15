@@ -23,6 +23,7 @@ import {
 import { useLogoutModal } from "../../hooks/useModal";
 // Layouts
 import ComponentPrintTotalAmount from "../../layouts/Prints/ComponentPrintTotalAmount";
+import ComponentPrintTotal from "../../layouts/Prints/ComponentPrintTotal";
 import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
 // Local components
 import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
@@ -172,35 +173,30 @@ function CollectsPage(props) {
     toggleDrawer();
   };
 
-  // State for Modal Prints
-  const [printList, setPrintList] = useState([]);
-
   // Button for print
-  let btn = document.getElementById("printTotal");
+  let btnTotal = document.getElementById("printTotal");
+  let btnFinal = document.getElementById("printFinal");
 
   // Total Print
-  const handleTotalPrint = async (e) => {
-    e.preventDefault();
-    await setPrintList(
-      orders_detail.filter((index) => index.order_id === current.order_id)
-    );
-    btn.click();
-  };
+  const handleTotalPrint = () => btnTotal.click();
+
+  // Final Print
+  const handleFinalPrint = () => btnFinal.click();
 
   // Cancel Order function
-  const handleCancelOrder = (e) => {
-    e.preventDefault();
-    orderCancel({
-      order_id: current.order_id,
-      table_id: current.table_id,
-    }).then((response) => {
-      if (typeof response !== "undefined") {
-        if (response.success === true) {
-          togglePassCollect();
-        }
-      }
-    });
-  };
+  // const handleCancelOrder = (e) => {
+  //   e.preventDefault();
+  //   orderCancel({
+  //     order_id: current.order_id,
+  //     table_id: current.table_id,
+  //   }).then((response) => {
+  //     if (typeof response !== "undefined") {
+  //       if (response.success === true) {
+  //         togglePassCollect();
+  //       }
+  //     }
+  //   });
+  // };
 
   // Logout function
   const handleLogout = (e) => {
@@ -296,6 +292,7 @@ function CollectsPage(props) {
           <ModalAmountToPay
             open={openAmountPay}
             close={handleCloseModalAmountPay}
+            handleFinalPrint={handleFinalPrint}
           />
           <DrawerTablesList
             open={openDrawer}
@@ -315,8 +312,9 @@ function CollectsPage(props) {
           />
           <ComponentPrintTotalAmount
             btnID="printTotal"
-            refresh={[openPassCollect]}
+            refresh={openPassCollect}
           />
+          <ComponentPrintTotal btnID="printFinal" refresh={openAmountPay} />
         </Fragment>
       ) : null}
     </Fragment>

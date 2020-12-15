@@ -2,8 +2,11 @@
 import { useState } from "react";
 // Functions
 import { isEmptyValue } from "../functions/isEmptyValue";
+// Redux Store
+import store from "../redux/store";
 
 export const useCurrentTable = () => {
+  const { table_id, order_id, total_amount } = store.getState().product.current;
   const [currentTableState, setCurrentTableState] = useState({
     // Table variables
     id: null,
@@ -36,8 +39,6 @@ export const useCurrentTable = () => {
   });
 
   let {
-    id,
-    order_id,
     payment_type,
     payment_id,
     credit_card1_number,
@@ -47,7 +48,6 @@ export const useCurrentTable = () => {
     responsable,
     ci,
     phone,
-    total_amount,
     bs_amount,
     us_amount,
     change_amount,
@@ -204,7 +204,7 @@ export const useCurrentTable = () => {
   const makeDynamicState = () => {
     const dynamicState = {
       // Other parameters
-      table_id: id,
+      table_id: table_id,
       order_id: order_id,
       cashier_id: localStorage.getItem("employee_id"),
       box_id: localStorage.getItem("box_id"),

@@ -21,6 +21,7 @@ function ModalAmountToPay(props) {
     // Props
     open,
     close,
+    handleFinalPrint,
     // Redux
     current,
     collect_fetching,
@@ -51,8 +52,6 @@ function ModalAmountToPay(props) {
     makeDynamicState,
   ] = useCurrentTable();
 
-  console.log(cashValid);
-
   const handleCloseTotalAmount = () => {
     emptyCurrentTable();
     close();
@@ -62,26 +61,21 @@ function ModalAmountToPay(props) {
   const handleMakeCollected = async (e) => {
     e.preventDefault();
     const dynamicState = await makeDynamicState();
-    dynamicState["table_id"] = current.table_id;
-    dynamicState["order_id"] = current.order_id;
     collectCreate(dynamicState).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
+          handleFinalPrint();
           handleCloseTotalAmount();
         }
       }
     });
   };
 
-  let cashValid2 =
-    currentTableState.us_amount * 6.94 + currentTableState.bs_amount >=
-    current.total_amount;
-
   let btnDisabled = true;
 
   // Validated function
   useMemo(() => {
-    if (cashValid2) {
+    if (cashValid) {
       return (btnDisabled = false);
     }
 
@@ -114,7 +108,7 @@ function ModalAmountToPay(props) {
   return (
     <CustomModal
       open={open || (current.open && current.table_busy === 2)}
-      close={close}
+      close={handleCloseTotalAmount}
       closeIcon={collect_fetching === true ? false : true}
       title={{
         text: "Total:",
@@ -225,6 +219,11 @@ function ModalAmountToPay(props) {
         open,
         current.open,
         currentTableState.change_amount,
+        cashValid,
+        cardValid,
+        cashCardValid,
+        variousCardsValid,
+        willPayValid,
         collect_fetching,
       ]}
       loading={collect_fetching}
