@@ -9,25 +9,35 @@ import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 import CustomModal from "../../../components/Modal/CustomModal.js";
 // Local components
 import Payments from "./Payments";
+// Hooks
+import { useCurrentTable } from "../../../hooks/useCurrentTable";
 // Contexts
 import CurrentTableContext from "../../../hooks/contexts/TableContext";
 // Functions
 import { collectCreate } from "../../../functions/cruds/collectFunctions";
 
 function ModalAmountToPay(props) {
-  // Props
   const {
-    // Local
+    // Props
     open,
     close,
     // Redux
+    current,
     collect_fetching,
   } = props;
 
-  // Use Contexts
-  const {
-    state,
-    emptyState,
+  // Hooks for Tables
+  const [
+    currentTableState,
+    setCurrentTable,
+    emptyCurrentTable,
+    changeAmountBS,
+    changeAmountUS,
+    changePaymentType,
+    changeCreditCard1,
+    changeCreditCard2,
+    changeCreditCard3,
+    changeWillPay,
     TO_PAY,
     WITHOUT_CHANGE,
     WITH_CHANGE,
@@ -39,10 +49,12 @@ function ModalAmountToPay(props) {
     variousCardsValid,
     willPayValid,
     makeDynamicState,
-  } = useContext(CurrentTableContext);
+  ] = useCurrentTable();
+
+  console.log(cashValid);
 
   const handleCloseTotalAmount = () => {
-    emptyState();
+    emptyCurrentTable();
     close();
   };
 
@@ -50,6 +62,8 @@ function ModalAmountToPay(props) {
   const handleMakeCollected = async (e) => {
     e.preventDefault();
     const dynamicState = await makeDynamicState();
+    dynamicState["table_id"] = current.table_id;
+    dynamicState["order_id"] = current.order_id;
     collectCreate(dynamicState).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
@@ -59,11 +73,15 @@ function ModalAmountToPay(props) {
     });
   };
 
+  let cashValid2 =
+    currentTableState.us_amount * 6.94 + currentTableState.bs_amount >=
+    current.total_amount;
+
   let btnDisabled = true;
 
   // Validated function
   useMemo(() => {
-    if (cashValid) {
+    if (cashValid2) {
       return (btnDisabled = false);
     }
 
@@ -89,13 +107,13 @@ function ModalAmountToPay(props) {
     cashCardValid ||
     variousCardsValid ||
     willPayValid === true
-      ? state
+      ? currentTableState
       : null,
   ]);
 
   return (
     <CustomModal
-      open={open}
+      open={open || (current.open && current.table_busy === 2)}
       close={close}
       closeIcon={collect_fetching === true ? false : true}
       title={{
@@ -105,13 +123,41 @@ function ModalAmountToPay(props) {
         bold: true,
       }}
       subtitle={{
-        text: `Bs. ${state.total_amount}`,
+        text: `Bs. ${current.total_amount}`,
         color: "warning",
         margin: true,
         size: "medium",
         bold: true,
       }}
-      content={<Payments />}
+      content={
+        <CurrentTableContext.Provider
+          value={{
+            state: currentTableState,
+            setState: setCurrentTable,
+            emptyState: emptyCurrentTable,
+            changeBs: changeAmountBS,
+            changeUs: changeAmountUS,
+            changePaymentType: changePaymentType,
+            changeCard1: changeCreditCard1,
+            changeCard2: changeCreditCard2,
+            changeCard3: changeCreditCard3,
+            changeWillPay: changeWillPay,
+            TO_PAY: TO_PAY,
+            WITHOUT_CHANGE: WITHOUT_CHANGE,
+            WITH_CHANGE: WITH_CHANGE,
+            PAID_OKAY: PAID_OKAY,
+            CARD_OKAY: CARD_OKAY,
+            cashValid: cashValid,
+            cardValid: cardValid,
+            cashCardValid: cashCardValid,
+            variousCardsValid: variousCardsValid,
+            willPayValid: willPayValid,
+            makeDynamicState: makeDynamicState,
+          }}
+        >
+          <Payments />
+        </CurrentTableContext.Provider>
+      }
       leftButtons={[
         {
           type: "text",
@@ -140,7 +186,7 @@ function ModalAmountToPay(props) {
           text:
             TO_PAY || WITHOUT_CHANGE || WITH_CHANGE ? (
               <NumberFormat
-                value={state.change_amount}
+                value={currentTableState.change_amount}
                 displayType={"text"}
                 thousandSeparator={true}
                 allowNegative={false}
@@ -177,9 +223,8 @@ function ModalAmountToPay(props) {
       ]}
       renderRefresh={[
         open,
-        // state.change_amount,
-        // state.id,
-        // state.credit_card1_number,
+        current.open,
+        currentTableState.change_amount,
         collect_fetching,
       ]}
       loading={collect_fetching}
@@ -191,13 +236,10 @@ function ModalAmountToPay(props) {
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { tables, environments, collects, orders } = state;
+  const { product, collects } = state;
   return {
-    loading: environments.loading,
-    tables: tables.payload.filter((dataList) => dataList.state === 1),
+    current: product.current,
     collect_fetching: collects.fetching,
-    orders_detail_payload: orders.orders_detail,
-    order_loading: orders.loading,
   };
 };
 

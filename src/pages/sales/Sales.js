@@ -10,6 +10,7 @@ import {
   infoSnackbar,
   dangerSnackbar,
   hideSnackbar,
+  warningSnackbar,
 } from "../../redux/actions/creators/snackbarCreator";
 // Hooks
 import { useDrawer } from "../../hooks/useDrawer";
@@ -56,8 +57,6 @@ function CollectsPage(props) {
     snackbar_message,
     snackbar_severity,
   } = props;
-
-  console.log(`%c SALES RENDER`, "color: lightgreen; font-size: large");
 
   // Tabs index state
   const [tabIndex, setTabIndex] = useState(0);
@@ -161,7 +160,7 @@ function CollectsPage(props) {
         setCurrentTable(args);
         open_products(args);
       } else {
-        infoSnackbar("Mesa ya antedida por otro mesero.");
+        warningSnackbar("Mesa ya antedida por otro mesero.");
       }
     }
   };

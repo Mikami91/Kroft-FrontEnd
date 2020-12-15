@@ -14,7 +14,6 @@ import {
 } from "../../redux/actions/creators/productCreator";
 // Hooks
 import { useDrawer } from "../../hooks/useDrawer";
-import { useCurrentTable } from "../../hooks/useCurrentTable";
 import {
   useBoxSelectModal,
   useBoxModal,
@@ -22,8 +21,6 @@ import {
   useAmountPay,
 } from "../../hooks/useModal";
 import { useLogoutModal } from "../../hooks/useModal";
-// Contexts
-import CurrentTableContext from "../../hooks/contexts/TableContext";
 // Layouts
 import ComponentPrintTotalAmount from "../../layouts/Prints/ComponentPrintTotalAmount";
 import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
@@ -64,6 +61,7 @@ function CollectsPage(props) {
     tables_loading,
     boxes_loading,
     boxes_fetching,
+    current,
     snackbar_show,
     snackbar_message,
     snackbar_severity,
@@ -88,30 +86,6 @@ function CollectsPage(props) {
   const [openPassCollect, togglePassCollect] = usePassCollectModal();
   const [openAmountPay, toggleAmountPay] = useAmountPay();
   const [openLogout, toggleLogout] = useLogoutModal();
-  // Hooks for Tables
-  const [
-    currentTableState,
-    setCurrentTable,
-    emptyCurrentTable,
-    changeAmountBS,
-    changeAmountUS,
-    changePaymentType,
-    changeCreditCard1,
-    changeCreditCard2,
-    changeCreditCard3,
-    changeWillPay,
-    TO_PAY,
-    WITHOUT_CHANGE,
-    WITH_CHANGE,
-    PAID_OKAY,
-    CARD_OKAY,
-    cashValid,
-    cardValid,
-    cashCardValid,
-    variousCardsValid,
-    willPayValid,
-    makeDynamicState,
-  ] = useCurrentTable();
   // Hooks for Drawers
   const [openDrawer, toggleDrawer] = useDrawer();
 
@@ -123,20 +97,27 @@ function CollectsPage(props) {
   const handleOpenTotalAmount = (args) => {
     if (args.is_busy === 1) {
       togglePassCollect();
-      setCurrentTable(args);
       setCurrentReduxState(args);
     }
     if (args.is_busy === 2) {
       toggleAmountPay();
-      setCurrentTable(args);
       setCurrentReduxState(args);
     }
     return null;
   };
 
   const handleCloseModalPassCollect = () => {
-    emptyCurrentReduxState();
+    if (openPassCollect) {
+      emptyCurrentReduxState();
+    }
     togglePassCollect();
+  };
+
+  const handleCloseModalAmountPay = () => {
+    if (openAmountPay) {
+      emptyCurrentReduxState();
+    }
+    toggleAmountPay();
   };
 
   // Events
@@ -201,9 +182,7 @@ function CollectsPage(props) {
   const handleTotalPrint = async (e) => {
     e.preventDefault();
     await setPrintList(
-      orders_detail.filter(
-        (index) => index.order_id === currentTableState.order_id
-      )
+      orders_detail.filter((index) => index.order_id === current.order_id)
     );
     btn.click();
   };
@@ -212,8 +191,8 @@ function CollectsPage(props) {
   const handleCancelOrder = (e) => {
     e.preventDefault();
     orderCancel({
-      order_id: currentTableState.order_id,
-      table_id: currentTableState.id,
+      order_id: current.order_id,
+      table_id: current.table_id,
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
@@ -282,31 +261,7 @@ function CollectsPage(props) {
         onClose={handleCloseSnackbar}
       />
       {isLogged ? (
-        <CurrentTableContext.Provider
-          value={{
-            state: currentTableState,
-            setState: setCurrentTable,
-            emptyState: emptyCurrentTable,
-            changeBs: changeAmountBS,
-            changeUs: changeAmountUS,
-            changePaymentType: changePaymentType,
-            changeCard1: changeCreditCard1,
-            changeCard2: changeCreditCard2,
-            changeCard3: changeCreditCard3,
-            changeWillPay: changeWillPay,
-            TO_PAY: TO_PAY,
-            WITHOUT_CHANGE: WITHOUT_CHANGE,
-            WITH_CHANGE: WITH_CHANGE,
-            PAID_OKAY: PAID_OKAY,
-            CARD_OKAY: CARD_OKAY,
-            cashValid: cashValid,
-            cardValid: cardValid,
-            cashCardValid: cashCardValid,
-            variousCardsValid: variousCardsValid,
-            willPayValid: willPayValid,
-            makeDynamicState: makeDynamicState,
-          }}
-        >
+        <Fragment>
           <EnvironmentsAppBar
             tabIndex={tabIndex}
             changeTabIndex={changeTabIndex}
@@ -325,7 +280,6 @@ function CollectsPage(props) {
           <ModalPassCollect
             open={openPassCollect}
             close={handleCloseModalPassCollect}
-            state={currentTableState}
             handleTotalPrint={handleTotalPrint}
           />
           <ModalSelectBox
@@ -339,7 +293,10 @@ function CollectsPage(props) {
             close={toggleBox}
             handleLogout={handleLogoutCloseBox}
           />
-          <ModalAmountToPay open={openAmountPay} close={toggleAmountPay} />
+          <ModalAmountToPay
+            open={openAmountPay}
+            close={handleCloseModalAmountPay}
+          />
           <DrawerTablesList
             open={openDrawer}
             close={toggleDrawer}
@@ -360,14 +317,22 @@ function CollectsPage(props) {
             btnID="printTotal"
             refresh={[openPassCollect]}
           />
-        </CurrentTableContext.Provider>
+        </Fragment>
       ) : null}
     </Fragment>
   );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { employee, tables, environments, orders, boxes, snackbar } = state;
+  const {
+    employee,
+    tables,
+    environments,
+    orders,
+    boxes,
+    snackbar,
+    product,
+  } = state;
   return {
     employee_loading: employee.loading,
     environments_loading: environments.loading,
@@ -375,6 +340,7 @@ const mapStateToProps = (state) => {
     boxes_loading: boxes.loading,
     boxes_fetching: boxes.fetching,
     orders_detail: orders.orders_detail,
+    current: product.current,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,

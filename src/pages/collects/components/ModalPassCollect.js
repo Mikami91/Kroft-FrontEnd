@@ -16,7 +16,6 @@ function ModalPassCollect(props) {
     // Props
     open,
     close,
-    state,
     handleTotalPrint,
     // Redux
     current,
@@ -81,8 +80,8 @@ function ModalPassCollect(props) {
   const handleSendOrder = (e) => {
     e.preventDefault();
     orderSend({
-      order_id: state.order_id,
-      table_id: state.id,
+      order_id: current.order_id,
+      table_id: current.table_id,
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
@@ -94,17 +93,17 @@ function ModalPassCollect(props) {
 
   return (
     <CustomModal
-      open={open}
+      open={open || (current.open && current.table_busy === 1)}
       close={close}
       closeIcon={collect_fetching || order_loading === true ? false : true}
       title={{
-        text: `${state.name} ${state.number}: `,
+        text: `${current.table_name} ${current.table_number}: `,
         margin: true,
         size: "medium",
         bold: true,
       }}
       subtitle={{
-        text: `Bs. ${state.total_amount}`,
+        text: `Bs. ${current.total_amount}`,
         color: "warning",
         margin: true,
         size: "medium",
@@ -117,7 +116,7 @@ function ModalPassCollect(props) {
           columns={COLUMNS}
           data={orders_filter.filter((i) => i.table_id === current.table_id)}
           key_field="table_id"
-          filter={state.id}
+          filter={current.table_id}
           renderRefresh={open}
         />
       }
@@ -129,7 +128,7 @@ function ModalPassCollect(props) {
           icon: PrintIcon,
           edge: false,
           size: "large",
-          disabled: state.total_amount > 0 ? false : true,
+          disabled: current.total_amount > 0 ? false : true,
           onClick: handleTotalPrint,
         },
       ]}
@@ -142,11 +141,11 @@ function ModalPassCollect(props) {
           edge: "start",
           size: "large",
           variant: "contained",
-          disabled: state.total_amount > 0 ? false : true,
-          onClick: state.is_busy === 1 ? handleSendOrder : null,
+          disabled: current.total_amount > 0 ? false : true,
+          onClick: current.table_busy === 1 ? handleSendOrder : null,
         },
       ]}
-      renderRefresh={[open, state.change, state.id, collect_fetching]}
+      renderRefresh={[open, current.open, order_loading, collect_fetching]}
       loading={collect_fetching || order_loading}
       scroll="paper"
       maxWidth="sm"

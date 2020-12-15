@@ -29,11 +29,6 @@ function ListProducts(props) {
     openSubCategory,
   } = props;
 
-  console.log(
-    `%c LIST RENDER ${isProductOpen}`,
-    "color: lightgreen; font-size: large"
-  );
-
   // Styles
   const classes = useStyles();
 

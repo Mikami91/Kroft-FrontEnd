@@ -37,7 +37,6 @@ function ModalChangeTable(props) {
   const handleChangeTable = (e) => {
     e.preventDefault();
     tableChange(tableChangeState).then((response) => {
-      console.log(response);
       if (typeof response !== "undefined") {
         if (response.success === true) {
           close();

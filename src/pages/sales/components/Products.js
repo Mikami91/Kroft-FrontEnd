@@ -12,6 +12,8 @@ import {
   product_orders,
 } from "../../../redux/actions/creators/productCreator";
 import { delete_all } from "../../../redux/actions/creators/productCreator";
+import { infoSnackbar } from "../../../redux/actions/creators/snackbarCreator";
+// Hooks
 import {
   useProductsOrdersModal,
   useSubCategoryModal,
@@ -74,8 +76,6 @@ function Products(props) {
     background,
     currentTable,
   } = props;
-
-  console.log(`%c PRODUCTS RENDER`, "color: lightgreen; font-size: large");
 
   // Tabs index state
   const [tabIndex, setTabIndex] = useState(0);
@@ -212,7 +212,7 @@ function Products(props) {
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response === true) {
-          console.log("Order cancel");
+          infoSnackbar(response.message);
         }
       }
     });

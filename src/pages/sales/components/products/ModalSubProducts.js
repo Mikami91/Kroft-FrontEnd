@@ -25,8 +25,6 @@ function ModalSubProducts(props) {
     setProductToOrder,
   } = props;
 
-  console.log(`%c SUB-PRODUCTS RENDER`, "color: lightgreen; font-size: large");
-
   // Search Product ID in Orders list and return his quantity
   const handleQuantity = (product_id) => {
     // if (Array.isArray(orders) && orders.length) {

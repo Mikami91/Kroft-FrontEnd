@@ -135,7 +135,7 @@ CustomTotalAmountList.propTypes = {
     PropTypes.shape({
       field: PropTypes.string,
       multiplyFields: PropTypes.array,
-      type: PropTypes.oneOf(["text", "number", "sub_total"]),
+      type: PropTypes.oneOf(["text", "number", "multiply"]),
       size: PropTypes.oneOf(["medium", "small"]),
       fontSize: PropTypes.oneOf(["large", "medium", "small", "default"]),
       align: PropTypes.oneOf(["inherit", "right", "center", "left"]),
@@ -150,6 +150,7 @@ CustomTotalAmountList.propTypes = {
     PropTypes.number,
     PropTypes.array,
     PropTypes.object,
+    PropTypes.bool,
   ]),
 };
 
