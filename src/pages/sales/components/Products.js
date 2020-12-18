@@ -189,18 +189,19 @@ function Products(props) {
   };
 
   // Send Order function
-  const handleSendOrder = (e) => {
+  const handleSendOrder = async (e) => {
     e.preventDefault();
-    orderSend({
+    await orderSend({
       order_id: current_order_id,
       table_id: current.table_id,
     }).then((response) => {
       if (typeof response !== "undefined") {
-        if (response === true) {
-          closeModalProducts();
+        if (response.success === true) {
+          handleTotalAmountPrint();
         }
       }
     });
+    closeModalProducts();
   };
 
   // Cancel Order function
@@ -211,7 +212,7 @@ function Products(props) {
       table_id: current.table_id,
     }).then((response) => {
       if (typeof response !== "undefined") {
-        if (response === true) {
+        if (response.success === true) {
           infoSnackbar(response.message);
         }
       }
@@ -219,15 +220,13 @@ function Products(props) {
   };
 
   // Print Order History
-  async function handleHistoryPrint(e, arg) {
-    e.preventDefault();
+  const handleHistoryPrint = async (arg) => {
     await setHistoryPrints(orders_detail_payload, arg);
     btn2.click();
-  }
+  };
 
   // Total Amount Print
-  const handleTotalAmountPrint = async (e) => {
-    e.preventDefault();
+  const handleTotalAmountPrint = async () => {
     await setTotalAmount(orders_detail_payload, currentTable.order_id);
     btn3.click();
   };
