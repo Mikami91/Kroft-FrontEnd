@@ -85,7 +85,7 @@ function ModalPassCollect(props) {
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
-          close();
+          // close();
         }
       }
     });
@@ -93,7 +93,7 @@ function ModalPassCollect(props) {
 
   return (
     <CustomModal
-      open={open || (current.open && current.table_busy === 1)}
+      open={open}
       close={close}
       closeIcon={collect_fetching || order_loading === true ? false : true}
       title={{
@@ -114,10 +114,13 @@ function ModalPassCollect(props) {
           padding="default"
           header={HEADERS}
           columns={COLUMNS}
-          data={orders_filter.filter((i) => i.table_id === current.table_id)}
+          data={orders_filter.filter(
+            (i) =>
+              i.table_id === current.table_id && i.order_id === current.order_id
+          )}
           key_field="table_id"
           filter={current.table_id}
-          renderRefresh={open}
+          renderRefresh={[open, orders_filter]}
         />
       }
       leftButtons={[
@@ -145,7 +148,13 @@ function ModalPassCollect(props) {
           onClick: current.table_busy === 1 ? handleSendOrder : null,
         },
       ]}
-      renderRefresh={[open, current.open, order_loading, collect_fetching]}
+      renderRefresh={[
+        open,
+        current.open,
+        orders_filter,
+        order_loading,
+        collect_fetching,
+      ]}
       loading={collect_fetching || order_loading}
       scroll="paper"
       maxWidth="sm"

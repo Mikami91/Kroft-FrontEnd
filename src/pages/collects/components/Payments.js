@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import SwipeableViews from "react-swipeable-views";
 import moment from "moment";
 import "moment/locale/es";
@@ -27,12 +27,16 @@ moment.locale("es");
 moment().format("l");
 
 function Payments(props) {
-  // Props
-  const { paymentsTypes } = props;
+  const {
+    // Redux
+    paymentsTypes,
+    //Props
+    value,
+    setValue,
+  } = props;
   // Use Contexts
   const { changePaymentType } = useContext(CurrentTableContext);
   // State for Panel Tabs
-  const [value, setValue] = useState(0);
   const handleChangeValue = (event, newValue) => {
     setValue(newValue);
     changePaymentType(

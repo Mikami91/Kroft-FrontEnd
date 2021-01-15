@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useMemo } from "react";
+import React from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -74,74 +74,75 @@ function ModalTotalAmount(props) {
     },
   ];
 
-  // Using useMemo hook
-  return useMemo(() => {
-    return (
-      <CustomModal
-        open={open}
-        close={toggle}
-        title={{
-          text: "Cuenta total",
+  return (
+    <CustomModal
+      open={open}
+      close={toggle}
+      title={{
+        text: "Cuenta total",
+        size: "medium",
+      }}
+      content={
+        <CustomTotalAmountList
+          padding="default"
+          header={HEADERS}
+          columns={COLUMNS}
+          data={orders_filter.filter(
+            (i) =>
+              i.table_id === current.table_id && i.order_id === current.order_id
+          )}
+          key_field="table_id"
+          filter={current.table_id}
+          renderRefresh={[orders_filter, global_quantity]}
+        />
+      }
+      leftButtons={[
+        {
+          type: "icon",
+          text: "Imprimir",
           size: "medium",
-        }}
-        content={
-          <CustomTotalAmountList
-            padding="default"
-            header={HEADERS}
-            columns={COLUMNS}
-            data={orders_filter.filter((i) => i.table_id === current.table_id)}
-            key_field="table_id"
-            filter={current.table_id}
-            renderRefresh={[orders_filter, global_quantity]}
-          />
-        }
-        leftButtons={[
-          {
-            type: "icon",
-            text: "Imprimir",
-            size: "medium",
-            align: "center",
-            icon: PrintRounded,
-            iconColor: "secondary",
-            onClick: handleTotalAmountPrint,
-          },
-        ]}
-        rightButtons={[
-          {
-            type: "text",
-            text: "Total:",
-            margin: true,
-            size: "medium",
-            bold: true,
-          },
-          {
-            type: "text",
-            text: [
-              <NumberFormat
-                key={999}
-                value={table_amount}
-                displayType={"text"}
-                thousandSeparator={true}
-                allowNegative={false}
-                allowEmptyFormatting={false}
-                allowLeadingZeros={false}
-                decimalScale={2}
-                isNumericString={true}
-                renderText={(value) => <span>Bs. {value}</span>}
-              />,
-            ],
-            color: "warning",
-            margin: true,
-            size: "medium",
-            bold: true,
-          },
-        ]}
-        scroll="paper"
-        maxWidth="sm"
-        fullWidth
-      />
-    );
-  }, [open, orders_filter]);
+          align: "center",
+          icon: PrintRounded,
+          iconColor: "secondary",
+          onClick: handleTotalAmountPrint,
+        },
+      ]}
+      rightButtons={[
+        {
+          type: "text",
+          text: "Total:",
+          margin: true,
+          size: "medium",
+          bold: true,
+        },
+        {
+          type: "text",
+          text: [
+            <NumberFormat
+              key={999}
+              value={table_amount}
+              displayType={"text"}
+              thousandSeparator={true}
+              allowNegative={false}
+              allowEmptyFormatting={false}
+              allowLeadingZeros={false}
+              decimalScale={2}
+              isNumericString={true}
+              renderText={(value) => <span>Bs. {value}</span>}
+            />,
+          ],
+          color: "warning",
+          margin: true,
+          size: "medium",
+          bold: true,
+        },
+      ]}
+      scroll="paper"
+      maxWidth="sm"
+      renderRefresh={[open, current.open, orders_filter]}
+      fullWidth
+    />
+  );
 }
 // Connect to Store State
 const mapStateToProps = (state) => {

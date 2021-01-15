@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useState, useMemo } from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -27,6 +27,9 @@ function ModalAmountToPay(props) {
     collect_fetching,
   } = props;
 
+  // Payments State
+  const [value, setValue] = useState(0);
+
   // Hooks for Tables
   const [
     currentTableState,
@@ -53,15 +56,16 @@ function ModalAmountToPay(props) {
   ] = useCurrentTable();
 
   const handleCloseTotalAmount = () => {
-    emptyCurrentTable();
+    setValue(0);
     close();
+    emptyCurrentTable();
   };
 
   // Send Order function
   const handleMakeCollected = async (e) => {
     e.preventDefault();
     const dynamicState = await makeDynamicState();
-    collectCreate(dynamicState).then((response) => {
+    await collectCreate(dynamicState).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
           handleFinalPrint();
@@ -107,7 +111,7 @@ function ModalAmountToPay(props) {
 
   return (
     <CustomModal
-      open={open || (current.open && current.table_busy === 2)}
+      open={open}
       close={handleCloseTotalAmount}
       closeIcon={collect_fetching === true ? false : true}
       title={{
@@ -149,7 +153,7 @@ function ModalAmountToPay(props) {
             makeDynamicState: makeDynamicState,
           }}
         >
-          <Payments />
+          <Payments value={value} setValue={setValue} />
         </CurrentTableContext.Provider>
       }
       leftButtons={[
@@ -219,6 +223,7 @@ function ModalAmountToPay(props) {
         open,
         current.open,
         currentTableState.change_amount,
+        currentTableState.payment_type,
         cashValid,
         cardValid,
         cashCardValid,

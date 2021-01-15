@@ -3,6 +3,8 @@ import React, { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import "moment/locale/es";
+// Conecction to Store
+import { connect } from "react-redux";
 // UI Material Components
 import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
@@ -18,7 +20,17 @@ import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
 import ExpandLessRoundedIcon from "@material-ui/icons/ExpandLessRounded";
 
 function CustomTableListPrints(props) {
-  const { header, columns, data, key_field, filter, renderRefresh } = props;
+  const {
+    // Redux
+    current,
+    // Props
+    header,
+    columns,
+    data,
+    key_field,
+    filter,
+    renderRefresh,
+  } = props;
 
   // Local State
   const [state, setState] = useState({
@@ -32,7 +44,10 @@ function CustomTableListPrints(props) {
     setState({
       ...state,
       rowContent: data.filter(
-        (i) => i.order_number === index.order_number && i.table_id === filter
+        (i) =>
+          i.table_id === current.table_id &&
+          i.order_id === current.order_id &&
+          i.order_number === index.order_number
       ),
       isExpanded: true,
       index: index.order_number,
@@ -53,7 +68,10 @@ function CustomTableListPrints(props) {
 
   let orders_filtered = [];
   for (let x in data) {
-    if (data[x][key_field] === filter) {
+    if (
+      data[x][key_field] === current.table_id &&
+      data[x].order_id === current.order_id
+    ) {
       if (check(data[x])) {
         orders_filtered.push(data[x]);
       }
@@ -248,4 +266,12 @@ CustomTableListPrints.propTypes = {
   ]),
 };
 
-export default CustomTableListPrints;
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { product } = state;
+  return {
+    current: product.current,
+  };
+};
+
+export default connect(mapStateToProps)(CustomTableListPrints);

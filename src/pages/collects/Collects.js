@@ -17,8 +17,8 @@ import { useDrawer } from "../../hooks/useDrawer";
 import {
   useBoxSelectModal,
   useBoxModal,
-  usePassCollectModal,
-  useAmountPay,
+  // usePassCollectModal,
+  // useAmountPay,
 } from "../../hooks/useModal";
 import { useLogoutModal } from "../../hooks/useModal";
 // Layouts
@@ -52,6 +52,7 @@ import { collectShow } from "../../functions/cruds/collectFunctions";
 import { orderCancel } from "../../functions/cruds/orderFunctions";
 // Events
 import { collectWebsocket } from "../../events";
+import { closingFetch } from "../../functions/fetchs/boxFetch";
 
 function CollectsPage(props) {
   // Props
@@ -67,6 +68,22 @@ function CollectsPage(props) {
     snackbar_message,
     snackbar_severity,
   } = props;
+
+  // Make Collect keys State
+  const [keys, setKeys] = useState({
+    table_id: null,
+    order_id: null,
+    total_amount: 0,
+  });
+
+  useEffect(() => {
+    setKeys({
+      ...keys,
+      table_id: current.table_id,
+      order_id: current.order_id,
+      total_amount: current.total_amount,
+    });
+  }, [current]);
 
   // Tabs index state
   const [tabIndex, setTabIndex] = useState(0);
@@ -84,8 +101,8 @@ function CollectsPage(props) {
     checkOpeningBox,
   ] = useBoxSelectModal();
   const [openBox, toggleBox] = useBoxModal();
-  const [openPassCollect, togglePassCollect] = usePassCollectModal();
-  const [openAmountPay, toggleAmountPay] = useAmountPay();
+  // const [openPassCollect, togglePassCollect] = usePassCollectModal();
+  // const [openAmountPay, toggleAmountPay] = useAmountPay();
   const [openLogout, toggleLogout] = useLogoutModal();
   // Hooks for Drawers
   const [openDrawer, toggleDrawer] = useDrawer();
@@ -96,29 +113,12 @@ function CollectsPage(props) {
   const [isLogged, setIsLogged] = useState(false);
 
   const handleOpenTotalAmount = (args) => {
-    if (args.is_busy === 1) {
-      togglePassCollect();
-      setCurrentReduxState(args);
-    }
-    if (args.is_busy === 2) {
-      toggleAmountPay();
-      setCurrentReduxState(args);
-    }
-    return null;
+    setCurrentReduxState(args);
   };
 
-  const handleCloseModalPassCollect = () => {
-    if (openPassCollect) {
-      emptyCurrentReduxState();
-    }
-    togglePassCollect();
-  };
-
-  const handleCloseModalAmountPay = () => {
-    if (openAmountPay) {
-      emptyCurrentReduxState();
-    }
-    toggleAmountPay();
+  const closeCurrentTable = async () => {
+    await emptyCurrentReduxState();
+    setKeys({ table_id: null, order_id: null, total_amount: 0 });
   };
 
   // Events
@@ -279,11 +279,6 @@ function CollectsPage(props) {
             openDrawer={toggleDrawer}
             openBox={toggleBox}
           />
-          <ModalPassCollect
-            open={openPassCollect}
-            close={handleCloseModalPassCollect}
-            handleTotalPrint={handleTotalPrint}
-          />
           <ModalSelectBox
             state={selectBoxState}
             set={setSelectBox}
@@ -295,9 +290,14 @@ function CollectsPage(props) {
             close={toggleBox}
             handleLogout={handleLogoutCloseBox}
           />
+          <ModalPassCollect
+            open={current.open && current.table_busy === 1}
+            close={closeCurrentTable}
+            handleTotalPrint={handleTotalPrint}
+          />
           <ModalAmountToPay
-            open={openAmountPay}
-            close={handleCloseModalAmountPay}
+            open={current.open && current.table_busy === 2}
+            close={closeCurrentTable}
             handleFinalPrint={handleFinalPrint}
           />
           <DrawerTablesList
@@ -318,9 +318,13 @@ function CollectsPage(props) {
           />
           <ComponentPrintTotalAmount
             btnID="printTotal"
-            refresh={openPassCollect}
+            refresh={current.open && current.table_busy === 1}
           />
-          <ComponentPrintTotal btnID="printFinal" refresh={openAmountPay} />
+          <ComponentPrintTotal
+            btnID="printFinal"
+            keys={keys}
+            refresh={current.open && current.table_busy === 2}
+          />
         </Fragment>
       ) : null}
     </Fragment>

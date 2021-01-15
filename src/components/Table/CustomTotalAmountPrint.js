@@ -94,7 +94,11 @@ const CustomTotalAmountPrint = (props) => {
 
         <TableBody>
           {orders_filter
-            .filter((i) => i.table_id === current.table_id)
+            .filter(
+              (i) =>
+                i.table_id === current.table_id &&
+                i.order_id === current.order_id
+            )
             .map((i) =>
               i.table_id === table_id ? (
                 <TableRow key={i.id}>

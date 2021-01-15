@@ -39,7 +39,6 @@ import PopoverConfirmation from "./products/PopoverConfirmation";
 // core components
 import TabPanel from "../../../components/Panel/TabPanel";
 import CustomTableToPrints from "../../../components/Table/CustomTableToPrints";
-import ComponentToPrint from "../../../layouts/Prints/ComponentToPrint";
 import CustomLoading from "../../../components/Loading/CustomLoading";
 // Layouts
 import ComponentPrintTotalAmount from "../../../layouts/Prints/ComponentPrintTotalAmount";
@@ -114,23 +113,6 @@ function Products(props) {
     closeConfirmation,
   ] = useConfirmationPopover();
 
-  // Set state, amount and order_id of current Table
-  let table_state = 0;
-  let table_amount = 0;
-  let current_order_id = null;
-
-  tables.reduce(
-    (index, cur) =>
-      cur.id === current.table_id
-        ? [
-            (table_state = cur.is_busy),
-            (current_order_id = cur.order_id),
-            (table_amount = cur.total_amount),
-          ]
-        : null,
-    []
-  );
-
   // Products Orders List
   let product_orders_list = [];
 
@@ -162,7 +144,7 @@ function Products(props) {
   // Create Order function
   async function handleCreateOrder() {
     toggleProductsOrders();
-    orderCreate({
+    await orderCreate({
       employee_id: localStorage.getItem("employee_id"),
       table_id: current.table_id,
       total_amount: global_amount,
@@ -192,7 +174,7 @@ function Products(props) {
   const handleSendOrder = async (e) => {
     e.preventDefault();
     await orderSend({
-      order_id: current_order_id,
+      order_id: current.order_id,
       table_id: current.table_id,
     }).then((response) => {
       if (typeof response !== "undefined") {
@@ -208,7 +190,7 @@ function Products(props) {
   const handleCancelOrder = (e) => {
     e.preventDefault();
     orderCancel({
-      order_id: current_order_id,
+      order_id: current.order_id,
       table_id: current.table_id,
     }).then((response) => {
       if (typeof response !== "undefined") {
@@ -266,8 +248,8 @@ function Products(props) {
           openSubCategory={openSubCategory}
         />
         <ProductsFooterBar
-          table_state={table_state}
-          table_amount={table_amount}
+          table_state={current.table_busy}
+          table_amount={current.total_amount}
           global_quantity={global_quantity}
           handleSendOrder={handleSendOrder}
           handleCancelOrder={handleCancelOrder}
@@ -302,7 +284,7 @@ function Products(props) {
           open={totalAmount.open}
           toggle={toggleTotalAmount}
           global_quantity={global_quantity}
-          table_amount={table_amount}
+          table_amount={current.total_amount}
           handleTotalAmountPrint={handleTotalAmountPrint}
         />
         <PopoverObservation
@@ -350,11 +332,9 @@ function Products(props) {
       </Drawer>
     );
   }, [
-    current.open,
-    current.global_quantity,
+    current,
     tables,
     tabIndex,
-    table_state,
     subCategory.open,
     openProductsOrders,
     totalAmount,

@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import Echo from "laravel-echo";
 import Pusher from "pusher-js";
 // Actions Creators
-
+import store from "../redux/store";
 // import { payload as superAdminPayload } from '../redux/actions/creators/superAdminCreator';
 import { payload as companyPayload } from "../redux/actions/creators/companyCreator";
 import { payload as adminPayload } from "../redux/actions/creators/adminCreator";
@@ -21,7 +21,10 @@ import { payload as tablePayload } from "../redux/actions/creators/tableCreator"
 import { payload as printCategoryPayload } from "../redux/actions/creators/printCategoryCreator";
 import { payload as categoryPayload } from "../redux/actions/creators/categoryCreator";
 import { payload as subcategoryPayload } from "../redux/actions/creators/subcategoryCreator";
-import { payload as productPayload } from "../redux/actions/creators/productCreator";
+import {
+  payload as productPayload,
+  open as setCurrentReduxTable,
+} from "../redux/actions/creators/productCreator";
 import { payload as supplierPayload } from "../redux/actions/creators/supplierCreator";
 // import { payload as ingredientPayload } from '../redux/actions/creators/ingredientCreator';
 import {
@@ -40,7 +43,7 @@ export const websocketConnection = new Echo({
   key: "3351a028ec8f3033b9c3",
   // wsHost: 'http://kroftserver.test',
   // wsHost: window.location.hostname,
-  wsHost: "192.168.0.124",
+  wsHost: "192.168.0.135",
   wsPort: 6001,
   cluster: "mt1",
   auth: {
@@ -162,6 +165,10 @@ export const tables_WS = () =>
   useMemo(() => {
     websocketConnection.channel("tables").listen("TableEvent", (e) => {
       tablePayload(e.message);
+      const { open, table_id } = store.getState().product.current;
+      if (open === true && table_id !== null) {
+        setCurrentReduxTable(e.message.filter((i) => i.id === table_id)[0]);
+      }
     });
   }, []);
 

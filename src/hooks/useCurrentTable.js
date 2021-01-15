@@ -84,6 +84,8 @@ export const useCurrentTable = () => {
       environment_name: "",
       environment_prefix: "",
       // Payments
+      payment_type: "cash",
+      payment_id: 1,
       credit_card1_number: "",
       credit_card2_number: "",
       credit_card3_number: "",

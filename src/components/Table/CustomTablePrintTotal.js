@@ -24,9 +24,10 @@ const CustomTablePrintTotal = (props) => {
     current,
     company,
     // Props
+    keys,
     renderRefresh,
   } = props;
-  let { table_id, table_name, table_number } = current;
+  const { table_name, table_number } = current;
 
   const company_name =
     Object.keys(company).length === 0 ? "---" : company.name.toUpperCase();
@@ -94,41 +95,42 @@ const CustomTablePrintTotal = (props) => {
 
         <TableBody>
           {orders_filter
-            .filter((i) => i.table_id === current.table_id)
-            .map((i) =>
-              i.table_id === table_id ? (
-                <TableRow key={i.id}>
-                  <TableCell className={style.tQuantity} align="right">
-                    {i.product_quantity}
-                  </TableCell>
-                  <TableCell className={style.tDetail} align="left">
-                    {i.product_name}
-                  </TableCell>
-                  <TableCell className={style.tPrice} align="right">
-                    {i.product_price}
-                  </TableCell>
-                  <TableCell className={style.tSubtotal} align="right">
-                    <NumberFormat
-                      value={i.product_price * i.product_quantity}
-                      displayType={"text"}
-                      thousandSeparator={true}
-                      allowNegative={false}
-                      allowEmptyFormatting={true}
-                      allowLeadingZeros={true}
-                      decimalScale={2}
-                      isNumericString={true}
-                    />
-                  </TableCell>
-                </TableRow>
-              ) : null
-            )}
+            .filter(
+              (i) =>
+                i.table_id === keys.table_id && i.order_id === keys.order_id
+            )
+            .map((i) => (
+              <TableRow key={i.id}>
+                <TableCell className={style.tQuantity} align="right">
+                  {i.product_quantity}
+                </TableCell>
+                <TableCell className={style.tDetail} align="left">
+                  {i.product_name}
+                </TableCell>
+                <TableCell className={style.tPrice} align="right">
+                  {i.product_price}
+                </TableCell>
+                <TableCell className={style.tSubtotal} align="right">
+                  <NumberFormat
+                    value={i.product_price * i.product_quantity}
+                    displayType={"text"}
+                    thousandSeparator={true}
+                    allowNegative={false}
+                    allowEmptyFormatting={true}
+                    allowLeadingZeros={true}
+                    decimalScale={2}
+                    isNumericString={true}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
 
           <TableRow>
             <TableCell className={style.tTotal} align="right" colSpan={3}>
               Total:
             </TableCell>
             <TableCell className={style.tTotal} align="right">
-              {current.total_amount}
+              {keys.total_amount}
             </TableCell>
           </TableRow>
 
@@ -158,7 +160,7 @@ const CustomTablePrintTotal = (props) => {
         </TableBody>
       </Table>
     );
-  }, [renderRefresh, current.open]);
+  }, [renderRefresh, current]);
 };
 
 // Connect to Store State
