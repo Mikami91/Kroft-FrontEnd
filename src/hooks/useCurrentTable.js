@@ -32,6 +32,7 @@ export const useCurrentTable = () => {
     cards_amount: 0,
     will_pay_amount: 0,
     company_name: "",
+    nit: "",
     responsable: "",
     ci: "",
     phone: "",
@@ -45,6 +46,7 @@ export const useCurrentTable = () => {
     credit_card2_number,
     credit_card3_number,
     company_name,
+    nit,
     responsable,
     ci,
     phone,
@@ -95,6 +97,7 @@ export const useCurrentTable = () => {
       cards_amount: 0,
       will_pay_amount: 0,
       company_name: "",
+      nit: "",
       responsable: "",
       ci: "",
       phone: "",
@@ -171,7 +174,8 @@ export const useCurrentTable = () => {
     credit_card1_number.length === 16 && credit_card2_number.length === 16;
   const WILL_PAY_OKAY =
     company_name.length >= 2 &&
-    responsable.length >= 5 &&
+    nit.length >= 9 &&
+    responsable.length >= 4 &&
     ci.length >= 7 &&
     phone.length === 8;
 
@@ -224,6 +228,7 @@ export const useCurrentTable = () => {
       us_amount: isOne ? us_amount : 0,
       // Will pay type
       company_name: company_name,
+      nit: nit,
       responsable: responsable,
       ci: ci,
       phone: phone,

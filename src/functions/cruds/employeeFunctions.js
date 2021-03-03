@@ -40,6 +40,7 @@ export async function employeeLogin(data) {
             "rol",
             response.data.data.rol_id === 1 ? "waiter" : "cashier"
           );
+          localStorage.setItem("login_type", "normal");
           loading(false);
           break;
 
@@ -76,6 +77,7 @@ export async function employeeLoginPin(data) {
             "rol",
             response.data.data.rol_id === 1 ? "waiter" : "cashier"
           );
+          localStorage.setItem("login_type", "pin");
           loading(false);
           break;
 

@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import PersonIcon from "@material-ui/icons/Person";
 import RefreshIcon from "@material-ui/icons/Refresh";
+import ListAltIcon from "@material-ui/icons/ListAlt";
 import FormatListNumberedRtlIcon from "@material-ui/icons/FormatListNumberedRtl";
 import PaymentRoundedIcon from "@material-ui/icons/PaymentRounded";
 // core components
@@ -17,7 +18,8 @@ function CollectFooterBar(props) {
     // Local
     refresh,
     logout,
-    openBox,
+    toggleBox,
+    toggleFreeSale,
     openDrawer,
   } = props;
 
@@ -52,7 +54,7 @@ function CollectFooterBar(props) {
           size: "large",
           margin: true,
           disabled: false,
-          onClick: openBox,
+          onClick: toggleBox,
         },
         {
           type: "icon",
@@ -73,6 +75,16 @@ function CollectFooterBar(props) {
         },
       ]}
       rightButtons={[
+        {
+          type: "icon",
+          text: "Ventas libres",
+          color: "default",
+          icon: ListAltIcon,
+          edge: "start",
+          size: "large",
+          disabled: false,
+          onClick: toggleFreeSale,
+        },
         {
           type: "icon",
           text: "Lista de Mesas",

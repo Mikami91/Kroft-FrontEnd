@@ -42,8 +42,8 @@ export const websocketConnection = new Echo({
   broadcaster: "pusher",
   key: "3351a028ec8f3033b9c3",
   // wsHost: 'http://kroftserver.test',
-  // wsHost: window.location.hostname,
-  wsHost: "192.168.0.135",
+  wsHost: window.location.hostname,
+  // wsHost: "192.168.0.135",
   wsPort: 6001,
   cluster: "mt1",
   auth: {
@@ -131,6 +131,7 @@ export const roles_WS = () =>
 export const employees_WS = () =>
   useMemo(() => {
     websocketConnection.channel("employees").listen("EmployeeEvent", (e) => {
+      console.log(e.message);
       employeePayload(e.message);
     });
   }, []);

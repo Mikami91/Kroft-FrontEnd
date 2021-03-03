@@ -219,7 +219,7 @@ function CustomTableListPrints(props) {
         </Table>
       </TableContainer>
     );
-  }, [renderRefresh, state.index]);
+  }, [renderRefresh, state]);
 }
 // PropTypes
 CustomTableListPrints.defaultProps = {

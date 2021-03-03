@@ -156,10 +156,10 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
                     tabName: "Admin",
                     // tabIcon: AssignmentIndIcon,
                   },
-                  {
-                    tabName: "Super",
-                    // tabIcon: AccountBoxIcon,
-                  },
+                  // {
+                  //   tabName: "Super",
+                  //   // tabIcon: AccountBoxIcon,
+                  // },
                 ]}
               />
               <SwipeableViews
@@ -176,9 +176,9 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
                   <AdminLogin />
                 </TabPanel>
 
-                <TabPanel value={value} index={2}>
+                {/* <TabPanel value={value} index={2}>
                   <SuperAdminLogin />
-                </TabPanel>
+                </TabPanel> */}
 
               </SwipeableViews>
             </CardBody>

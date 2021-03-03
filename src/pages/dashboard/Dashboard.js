@@ -309,28 +309,28 @@ function DashboardPage(props) {
                     onClick: toggleLogout,
                   },
                 ]}
-                rightButtons={[
-                  {
-                    type: "button",
-                    text: "Ventas",
-                    color: "default",
-                    icon: Explore,
-                    size: "medium",
-                    variant: "text",
-                    disabled: false,
-                    onClick: null,
-                  },
-                  {
-                    type: "button",
-                    text: "Cobranzas",
-                    color: "default",
-                    icon: Face,
-                    size: "medium",
-                    variant: "text",
-                    disabled: false,
-                    onClick: null,
-                  },
-                ]}
+                // rightButtons={[
+                //   {
+                //     type: "button",
+                //     text: "Ventas",
+                //     color: "default",
+                //     icon: Explore,
+                //     size: "medium",
+                //     variant: "text",
+                //     disabled: false,
+                //     onClick: null,
+                //   },
+                //   {
+                //     type: "button",
+                //     text: "Cobranzas",
+                //     color: "default",
+                //     icon: Face,
+                //     size: "medium",
+                //     variant: "text",
+                //     disabled: false,
+                //     onClick: null,
+                //   },
+                // ]}
               />
 
               {/* Panel Render */}

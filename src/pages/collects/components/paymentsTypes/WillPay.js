@@ -1,6 +1,5 @@
 // Dependencies
-import React, { useContext, useState } from "react";
-import NumberFormat from "react-number-format";
+import React, { useContext } from "react";
 // Conecction to Store
 import { connect } from "react-redux";
 // @material-ui/core components
@@ -32,6 +31,21 @@ function WillPay(props) {
           value={state.company_name}
           full
           required
+        />
+      </Grid>
+      <Grid item xs={12}>
+        <NumberInput
+          variant={"standard"}
+          margin={"dense"}
+          color="primary"
+          disabled={fetching}
+          label={"NIT"}
+          name="nit"
+          value={state.nit}
+          onChange={changeWillPay}
+          maxLength={16}
+          required
+          phone
         />
       </Grid>
       <Grid item xs={12}>

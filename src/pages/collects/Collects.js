@@ -17,6 +17,7 @@ import { useDrawer } from "../../hooks/useDrawer";
 import {
   useBoxSelectModal,
   useBoxModal,
+  useFreeSaleModal,
   // usePassCollectModal,
   // useAmountPay,
 } from "../../hooks/useModal";
@@ -33,6 +34,7 @@ import DrawerTablesList from "./components/DrawerTablesList";
 import ModalPassCollect from "./components/ModalPassCollect";
 import ModalSelectBox from "./components/ModalSelectBox";
 import ModalBox from "./components/ModalBox";
+import ModalFreeSale from "./components/ModalFreeSale";
 import ModalAmountToPay from "./components/ModalAmountToPay";
 // core components
 import CustomLoading from "../../components/Loading/CustomLoading";
@@ -101,6 +103,7 @@ function CollectsPage(props) {
     checkOpeningBox,
   ] = useBoxSelectModal();
   const [openBox, toggleBox] = useBoxModal();
+  const [openFreeSale, toggleFreeSale] = useFreeSaleModal();
   // const [openPassCollect, togglePassCollect] = usePassCollectModal();
   // const [openAmountPay, toggleAmountPay] = useAmountPay();
   const [openLogout, toggleLogout] = useLogoutModal();
@@ -277,7 +280,8 @@ function CollectsPage(props) {
             refresh={handleRefresh}
             logout={toggleLogout}
             openDrawer={toggleDrawer}
-            openBox={toggleBox}
+            toggleBox={toggleBox}
+            toggleFreeSale={toggleFreeSale}
           />
           <ModalSelectBox
             state={selectBoxState}
@@ -300,6 +304,7 @@ function CollectsPage(props) {
             close={closeCurrentTable}
             handleFinalPrint={handleFinalPrint}
           />
+          <ModalFreeSale open={openFreeSale} close={toggleFreeSale} />
           <DrawerTablesList
             open={openDrawer}
             close={toggleDrawer}

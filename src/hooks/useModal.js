@@ -9,6 +9,11 @@ export const useBoxModal = (initialState = false) => {
   return [openBox, toggleBox];
 };
 
+export const useFreeSaleModal = (initialState = false) => {
+  const [openFreeSale, setOpenFreeSale] = useState(initialState);
+  const toggleFreeSale = () => setOpenFreeSale(!openFreeSale);
+  return [openFreeSale, toggleFreeSale];
+};
 export const useAmountPay = (initialState = false) => {
   const [openAmountPay, setAmountPay] = useState(initialState);
   const toggleAmountPay = () => setAmountPay(!openAmountPay);

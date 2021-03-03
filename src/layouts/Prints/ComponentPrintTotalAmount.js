@@ -57,6 +57,7 @@ ComponentPrintTotalAmount.propTypes = {
     PropTypes.number,
     PropTypes.array,
     PropTypes.object,
+    PropTypes.bool,
   ]),
 };
 
