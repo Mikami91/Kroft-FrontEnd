@@ -14,6 +14,9 @@ import {
   TableContainer,
   IconButton,
   Button,
+  Collapse,
+  Box,
+  Typography,
 } from "@material-ui/core";
 // Core Components
 import CustomText from "../Typography/CustomText";
@@ -22,15 +25,7 @@ import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
 import ExpandLessRoundedIcon from "@material-ui/icons/ExpandLessRounded";
 
 function CustomTotalAmountList(props) {
-  const {
-    size,
-    padding,
-    sticky,
-    header,
-    columns,
-    data,
-    renderRefresh,
-  } = props;
+  const { size, padding, sticky, header, columns, data, renderRefresh } = props;
 
   // Local State
   const [state, setState] = useState({
@@ -60,14 +55,15 @@ function CustomTotalAmountList(props) {
 
   let orders_filtered = [];
   for (let x in data) {
-      if (check(data[x])) {
-        orders_filtered.push(data[x]);
-      }
+    if (check(data[x])) {
+      orders_filtered.push({ ...data[x], pending_accounts: 1 });
+    }
   }
   function check(index) {
     let flag = 0;
     for (let y in orders_filtered) {
       if (orders_filtered[y].nit === index.nit) {
+        orders_filtered[y].pending_accounts++;
         flag = 1;
       }
     }
@@ -75,35 +71,73 @@ function CustomTotalAmountList(props) {
     else return false;
   }
 
-  const ExpandedRow = () => {
-    return state.rowContent.map((i) => (
-      <TableRow key={i.id + "expandible"} tabIndex={1}>
-        <TableCell colSpan={2} />
-        <TableCell colSpan={1.5} align="left">
-          {moment(i.created_at).format("d MMMM YYYY, h:m A")}
-        </TableCell>
-        <TableCell colSpan={1} align="right">
-          <NumberFormat
-            value={i.total_amount}
-            displayType={"text"}
-            thousandSeparator={true}
-            allowNegative={false}
-            allowEmptyFormatting={true}
-            allowLeadingZeros={true}
-            decimalScale={2}
-            isNumericString={true}
-            renderText={(value) => (
-              <CustomText text={`Bs ${value}`} size="default" color="warning" />
-            )}
-          />
-        </TableCell>
-        <TableCell colSpan={0.5} align="center">
-          <Button color="primary" variant="contained" onClick={() => alert(i.id)}>
-            Cobrar
-          </Button>
+  const ExpandedRow = ({ company }) => {
+    return (
+      <TableRow key={state.index + "expandible"} tabIndex={1}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+          <Collapse in={state.isExpanded} timeout="auto" unmountOnExit>
+            <Box margin={1}>
+              <Typography variant="h6" gutterBottom component="div">
+                {`Historial ${company}`}
+              </Typography>
+              <Table size="small" aria-label="history">
+                <TableHead>
+                  <TableRow>
+                    <TableCell colSpan={2}>Fecha</TableCell>
+                    <TableCell colSpan={2}>Responsable</TableCell>
+                    <TableCell align="center">Celular</TableCell>
+                    <TableCell align="right">Monto total (Bs)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {state.rowContent.map((i) => (
+                    <TableRow key={i.id + "expandible"} tabIndex={1}>
+                      <TableCell colSpan={2} align="left">
+                        {moment(i.created_at).format("d MMMM YYYY, h:m A")}
+                      </TableCell>
+                      <TableCell colSpan={2} align="left">
+                        {i.responsable}
+                      </TableCell>
+                      <TableCell colSpan={1} align="center">
+                        {i.phone}
+                      </TableCell>
+                      <TableCell colSpan={1} align="right">
+                        <NumberFormat
+                          value={i.total_amount}
+                          displayType={"text"}
+                          thousandSeparator={true}
+                          allowNegative={false}
+                          allowEmptyFormatting={true}
+                          allowLeadingZeros={true}
+                          decimalScale={2}
+                          isNumericString={true}
+                          renderText={(value) => (
+                            <CustomText
+                              text={value}
+                              size="default"
+                              color="warning"
+                            />
+                          )}
+                        />
+                      </TableCell>
+                      <TableCell colSpan={1} align="center">
+                        <Button
+                          color="primary"
+                          variant="contained"
+                          onClick={() => alert(i.id)}
+                        >
+                          Cobrar
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Box>
+          </Collapse>
         </TableCell>
       </TableRow>
-    ));
+    );
   };
 
   // Using useMemo hook
@@ -218,14 +252,14 @@ function CustomTotalAmountList(props) {
               </TableRow>,
 
               state.isExpanded && state.index === index.nit ? (
-                <ExpandedRow key={index.nit} />
+                <ExpandedRow key={index.nit} company={index.company_name} />
               ) : null,
             ])}
           </TableBody>
         </Table>
       </TableContainer>
     );
-  }, [renderRefresh, state]);
+  }, [renderRefresh, orders_filtered, state]);
 }
 // PropTypes
 CustomTotalAmountList.defaultProps = {

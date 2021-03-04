@@ -20,6 +20,10 @@ function ModalPassCollect(props) {
 
   const HEADERS = [
     {
+      text: "Detalle",
+      align: "center",
+    },
+    {
       text: "Empresa",
       align: "left",
       colSpan: 2,
@@ -30,17 +34,19 @@ function ModalPassCollect(props) {
       colSpan: 2,
     },
     {
-      text: "Responsable",
-      align: "left",
-      colSpan: 2,
-    },
-    {
-      text: "Detalle",
+      text: "Cuentas",
       align: "center",
+      colSpan: 1,
     },
   ];
 
   const COLUMNS = [
+    {
+      field: "detail",
+      type: "expand",
+      iconSize: "large",
+      align: "center",
+    },
     {
       field: "company_name",
       type: "text",
@@ -49,24 +55,19 @@ function ModalPassCollect(props) {
       colSpan: 2,
     },
     {
-      field: "phone",
+      field: "nit",
       type: "text",
       align: "left",
       color: "warning",
       colSpan: 2,
     },
     {
-      field: "responsable",
+      field: "pending_accounts",
       type: "text",
-      align: "left",
-      color: "default",
-      colSpan: 2,
-    },
-    {
-      field: "detail",
-      type: "expand",
-      iconSize: "large",
       align: "center",
+      fontSize: "large",
+      color: "secondary",
+      colSpan: 1,
     },
   ];
 
