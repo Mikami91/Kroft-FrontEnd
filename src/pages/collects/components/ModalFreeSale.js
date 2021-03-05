@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 // core components
 import CustomModal from "../../../components/Modal/CustomModal.js";
 import CustomTableFreeSalesList from "../../../components/Table/CustomTableFreeSalesList.js";
-// Functions
-import { orderSend } from "../../../functions/cruds/orderFunctions";
 
 function ModalPassCollect(props) {
   const {
@@ -15,6 +13,7 @@ function ModalPassCollect(props) {
     close,
     // Redux
     payload,
+    fetching,
     loading,
   } = props;
 
@@ -71,26 +70,11 @@ function ModalPassCollect(props) {
     },
   ];
 
-  // Send Order function
-  // const handleSendOrder = (e) => {
-  //   e.preventDefault();
-  //   orderSend({
-  //     order_id: current.order_id,
-  //     table_id: current.table_id,
-  //   }).then((response) => {
-  //     if (typeof response !== "undefined") {
-  //       if (response.success === true) {
-  //         // close();
-  //       }
-  //     }
-  //   });
-  // };
-
   return (
     <CustomModal
       open={open}
       close={close}
-      closeIcon={loading === true ? false : true}
+      closeIcon={fetching || loading ? false : true}
       title={{
         text: "Ventas libres",
         margin: true,
@@ -103,13 +87,11 @@ function ModalPassCollect(props) {
           header={HEADERS}
           columns={COLUMNS}
           data={payload}
-          key_field="payment_type"
-          filter="will_pay"
           renderRefresh={[open, payload]}
         />
       }
       renderRefresh={[open, payload, loading]}
-      loading={loading}
+      loading={fetching || loading}
       scroll="paper"
       maxWidth="md"
       fullWidth
@@ -121,8 +103,9 @@ const mapStateToProps = (state) => {
   const { collects } = state;
   return {
     payload: collects.payload.filter(
-      (i) => i.state === 1 && i.payment_type === "will_pay"
+      (i) => i.state === 0 && i.payment_type === "will_pay"
     ),
+    fetching: collects.fetching,
     loading: collects.loading,
   };
 };

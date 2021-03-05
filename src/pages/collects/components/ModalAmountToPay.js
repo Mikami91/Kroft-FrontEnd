@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useContext, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
@@ -209,7 +209,10 @@ function ModalAmountToPay(props) {
       rightButtons={[
         {
           type: "button",
-          text: "Cobrar",
+          text:
+            currentTableState.payment_type === "will_pay"
+              ? "Registrar"
+              : "Cobrar",
           color: "primary",
           icon: DoneRoundedIcon,
           edge: "start",

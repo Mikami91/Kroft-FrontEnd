@@ -17,9 +17,14 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Store with Middleware
 const store = createStore(
-  mainReducer
+  mainReducer,
   /*{ state: {data: false}  },*/
-  // composeEnhancers(applyMiddleware(logger, thunk))
+  composeEnhancers(
+    applyMiddleware(
+      // logger,
+      thunk
+    )
+  )
 );
 
 export default store;

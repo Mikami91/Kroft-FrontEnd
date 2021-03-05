@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import "moment/locale/es";
 import NumberFormat from "react-number-format";
+// Conecction to Store
+import { connect } from "react-redux";
 // UI Material Components
 import {
   Table,
@@ -23,9 +25,22 @@ import CustomText from "../Typography/CustomText";
 // Icons
 import ExpandMoreRoundedIcon from "@material-ui/icons/ExpandMoreRounded";
 import ExpandLessRoundedIcon from "@material-ui/icons/ExpandLessRounded";
+// Functions
+import { checkWillPay } from "../../functions/cruds/collectFunctions";
 
-function CustomTotalAmountList(props) {
-  const { size, padding, sticky, header, columns, data, renderRefresh } = props;
+function CustomTableFreeSalesList(props) {
+  const {
+    // Props
+    size,
+    padding,
+    sticky,
+    header,
+    columns,
+    data,
+    renderRefresh,
+    //Redux
+    fetching,
+  } = props;
 
   // Local State
   const [state, setState] = useState({
@@ -53,17 +68,17 @@ function CustomTotalAmountList(props) {
     });
   };
 
-  let orders_filtered = [];
+  let collects_filtered = [];
   for (let x in data) {
     if (check(data[x])) {
-      orders_filtered.push({ ...data[x], pending_accounts: 1 });
+      collects_filtered.push({ ...data[x], pending_accounts: 1 });
     }
   }
   function check(index) {
     let flag = 0;
-    for (let y in orders_filtered) {
-      if (orders_filtered[y].nit === index.nit) {
-        orders_filtered[y].pending_accounts++;
+    for (let y in collects_filtered) {
+      if (collects_filtered[y].nit === index.nit) {
+        collects_filtered[y].pending_accounts++;
         flag = 1;
       }
     }
@@ -71,73 +86,20 @@ function CustomTotalAmountList(props) {
     else return false;
   }
 
-  const ExpandedRow = ({ company }) => {
-    return (
-      <TableRow key={state.index + "expandible"} tabIndex={1}>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={state.isExpanded} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
-                {`Historial ${company}`}
-              </Typography>
-              <Table size="small" aria-label="history">
-                <TableHead>
-                  <TableRow>
-                    <TableCell colSpan={2}>Fecha</TableCell>
-                    <TableCell colSpan={2}>Responsable</TableCell>
-                    <TableCell align="center">Celular</TableCell>
-                    <TableCell align="right">Monto total (Bs)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {state.rowContent.map((i) => (
-                    <TableRow key={i.id + "expandible"} tabIndex={1}>
-                      <TableCell colSpan={2} align="left">
-                        {moment(i.created_at).format("d MMMM YYYY, h:m A")}
-                      </TableCell>
-                      <TableCell colSpan={2} align="left">
-                        {i.responsable}
-                      </TableCell>
-                      <TableCell colSpan={1} align="center">
-                        {i.phone}
-                      </TableCell>
-                      <TableCell colSpan={1} align="right">
-                        <NumberFormat
-                          value={i.total_amount}
-                          displayType={"text"}
-                          thousandSeparator={true}
-                          allowNegative={false}
-                          allowEmptyFormatting={true}
-                          allowLeadingZeros={true}
-                          decimalScale={2}
-                          isNumericString={true}
-                          renderText={(value) => (
-                            <CustomText
-                              text={value}
-                              size="default"
-                              color="warning"
-                            />
-                          )}
-                        />
-                      </TableCell>
-                      <TableCell colSpan={1} align="center">
-                        <Button
-                          color="primary"
-                          variant="contained"
-                          onClick={() => alert(i.id)}
-                        >
-                          Cobrar
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </TableRow>
-    );
+  // Send Order function
+  const handleCheckWillPay = (id) => {
+    checkWillPay({ id }).then((response) => {
+      if (typeof response !== "undefined") {
+        if (response.success === true) {
+          setState({
+            rowContent: [],
+            isExpanded: false,
+            index: null,
+          });
+          console.log("Check success");
+        }
+      }
+    });
   };
 
   // Using useMemo hook
@@ -160,7 +122,7 @@ function CustomTotalAmountList(props) {
           </TableHead>
 
           <TableBody>
-            {orders_filtered.map((index, key) => [
+            {collects_filtered.map((index, key) => [
               <TableRow key={key + "row"}>
                 {columns.map((col) => {
                   if (col.type === "text") {
@@ -252,17 +214,93 @@ function CustomTotalAmountList(props) {
               </TableRow>,
 
               state.isExpanded && state.index === index.nit ? (
-                <ExpandedRow key={index.nit} company={index.company_name} />
+                // <ExpandedRow key={index.nit} index={index} />
+                <TableRow key={state.index + "expandible"} tabIndex={1}>
+                  <TableCell
+                    style={{ paddingBottom: 0, paddingTop: 0 }}
+                    colSpan={6}
+                  >
+                    <Collapse
+                      in={state.isExpanded}
+                      timeout="auto"
+                      unmountOnExit
+                    >
+                      <Box margin={1}>
+                        <Typography variant="h6" gutterBottom component="div">
+                          {`Historial ${index.company_name}`}
+                        </Typography>
+                        <Table size="small" aria-label="history">
+                          <TableHead>
+                            <TableRow>
+                              <TableCell colSpan={2}>Fecha</TableCell>
+                              <TableCell colSpan={2}>Responsable</TableCell>
+                              <TableCell align="center">Celular</TableCell>
+                              <TableCell align="right">
+                                Monto total (Bs)
+                              </TableCell>
+                            </TableRow>
+                          </TableHead>
+                          <TableBody>
+                            {state.rowContent.map((i) => (
+                              <TableRow key={i.id + "expandible"} tabIndex={1}>
+                                <TableCell colSpan={2} align="left">
+                                  {moment(i.created_at).format(
+                                    "d MMMM YYYY, h:m A"
+                                  )}
+                                </TableCell>
+                                <TableCell colSpan={2} align="left">
+                                  {i.responsable}
+                                </TableCell>
+                                <TableCell colSpan={1} align="center">
+                                  {i.phone}
+                                </TableCell>
+                                <TableCell colSpan={1} align="right">
+                                  <NumberFormat
+                                    value={i.total_amount}
+                                    displayType={"text"}
+                                    thousandSeparator={true}
+                                    allowNegative={false}
+                                    allowEmptyFormatting={true}
+                                    allowLeadingZeros={true}
+                                    decimalScale={2}
+                                    isNumericString={true}
+                                    renderText={(value) => (
+                                      <CustomText
+                                        text={value}
+                                        size="default"
+                                        color="warning"
+                                      />
+                                    )}
+                                  />
+                                </TableCell>
+                                <TableCell colSpan={1} align="right">
+                                  <Button
+                                    color="primary"
+                                    variant="contained"
+                                    disabled={fetching}
+                                    onClick={() => handleCheckWillPay(i.id)}
+                                  >
+                                    Cobrar
+                                  </Button>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </Table>
+                      </Box>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
               ) : null,
             ])}
           </TableBody>
         </Table>
       </TableContainer>
     );
-  }, [renderRefresh, orders_filtered, state]);
+  }, [renderRefresh, collects_filtered, state, fetching]);
 }
 // PropTypes
-CustomTotalAmountList.defaultProps = {
+CustomTableFreeSalesList.defaultProps = {
   size: "medium",
   padding: "default",
   sticky: false,
@@ -271,7 +309,7 @@ CustomTotalAmountList.defaultProps = {
   data: [],
   renderRefresh: null,
 };
-CustomTotalAmountList.propTypes = {
+CustomTableFreeSalesList.propTypes = {
   size: PropTypes.oneOf(["small", "medium"]),
   padding: PropTypes.oneOf(["default", "checkbox", "none"]),
   sticky: PropTypes.bool,
@@ -313,5 +351,12 @@ CustomTotalAmountList.propTypes = {
     PropTypes.bool,
   ]),
 };
+// Connect to Store State
+const mapStateToProps = (state) => {
+  const { collects } = state;
+  return {
+    fetching: collects.fetching,
+  };
+};
 
-export default CustomTotalAmountList;
+export default connect(mapStateToProps, null)(CustomTableFreeSalesList);

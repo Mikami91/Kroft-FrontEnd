@@ -151,6 +151,7 @@ export const payment_delete = "api/payment_delete";
 
 /*::::::::::::::::::::COLLECT::::::::::::::::::::*/
 export const collect_create = "api/collect_create";
+export const collect_check_will_pay = "api/collect_check_will_pay";
 export const collect_index = "api/collect_index";
 export const collect_show = "api/collect_show";
 
