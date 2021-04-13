@@ -26,7 +26,6 @@ export default function NavPills(props) {
   const handleChange = (event, active) => {
     setActive(active);
     onChange();
-    console.log(active)
   };
   const handleChangeIndex = index => {
     setActive(index);

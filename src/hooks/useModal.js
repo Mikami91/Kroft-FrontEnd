@@ -26,7 +26,6 @@ export const useBoxSelectModal = (newValue = null) => {
     box_id: newValue,
   });
   const setSelectBox = (newValue) => {
-    console.log(newValue);
     setSelectBoxState({
       ...selectBoxState,
       box_id: newValue,
@@ -158,7 +157,6 @@ export const useSubCategoryModal = () => {
       payload: [],
     });
   };
-  console.log(subCategory);
   return [subCategory, openSubCategory, closeSubCategory];
 };
 

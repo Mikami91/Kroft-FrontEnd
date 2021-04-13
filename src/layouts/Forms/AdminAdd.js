@@ -7,8 +7,6 @@ import { connect } from "react-redux";
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 // @material-ui/icons
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -27,20 +25,19 @@ import CustomBotton from "../../components/CustomButtons/CustomButton.js";
 import CustomLoading from "../../components/Loading/CustomLoading.js";
 import CustomDivider from "../../components/Divider/CustomDivider.js";
 // Functions
-import { employeeCreate } from "../../functions/cruds/employeeFunctions";
+import { adminCreate } from "../../functions/cruds/adminFunctions";
 // Assets
 import image from "../../assets/img/defaults/user.png";
 // Configs
-moment.locale("en");
+moment.locale("es");
 moment().format("l");
 
-function EmployeeAdd(props) {
-  const { fetching, roles } = props;
+function AdminAdd(props) {
+  const { fetching } = props;
   // Local State
   const [state, setState] = useState({
     // Others
-    admin_id: localStorage.getItem("admin_id"),
-    rol_id: "",
+    super_admin_id: localStorage.getItem("admin_id"),
     // Employee
     first_name: "",
     last_name: "",
@@ -48,11 +45,9 @@ function EmployeeAdd(props) {
     gender: "",
     phone: null,
     address: "",
-    reference_phone: null,
     entry_date: null,
     user: "",
     password: "",
-    pin: "",
     head_area: false,
     // Salary
     salary_month: null,
@@ -71,28 +66,19 @@ function EmployeeAdd(props) {
     });
   };
 
-  const handleChangeHeadArea = (e) => {
-    setState({
-      ...state,
-      head_area: !state.head_area,
-    });
-  };
   // Empty State values
   const handleEmpty = (e) => {
     setState({
-      admin_id: localStorage.getItem("admin_id"),
-      rol_id: "",
+      super_admin_id: localStorage.getItem("admin_id"),
       first_name: "",
       last_name: "",
       birthdate: null,
       gender: "",
       phone: null,
       address: "",
-      reference_phone: null,
       entry_date: null,
       user: "",
       password: "",
-      pin: "",
       head_area: false,
       salary_month: null,
       paid_amount: null,
@@ -142,7 +128,7 @@ function EmployeeAdd(props) {
   // Register function
   const handleRegister = (e) => {
     e.preventDefault();
-    employeeCreate(state).then((response) => {
+    adminCreate(state).then((response) => {
       if (typeof response !== "undefined") {
         if (response.success === true) {
           handleEmpty();
@@ -152,7 +138,7 @@ function EmployeeAdd(props) {
   };
   return (
     <form
-      id="employee-add"
+      id="admin-add"
       onSubmit={handleRegister}
       encType="multipart/form-data"
     >
@@ -272,7 +258,6 @@ function EmployeeAdd(props) {
                 openTo="year"
                 required
               />
-
               <SelectInput
                 variant="standard"
                 margin="dense"
@@ -329,21 +314,45 @@ function EmployeeAdd(props) {
                 // icon={<AccountBoxIcon />}
                 iconPosition="end"
               />
-              <NumberInput
+
+              <CustomDivider
+                text="Perfil"
+                color="warning"
+                margin="dense"
+                bold
+              />
+
+              <IconInput
                 variant={"standard"}
                 margin={"dense"}
                 color="primary"
                 disabled={fetching}
-                label={"Celular de referencia"}
-                name="reference_phone"
-                value={state.reference_phone}
+                type="text"
+                label={"Usuario"}
+                name="user"
                 onChange={handleChange}
-                maxLength={9}
+                value={state.user}
                 required
-                phone
+                // icon={<PersonIcon />}
+                iconPosition="end"
+              />
+              <IconInput
+                variant={"standard"}
+                margin={"dense"}
+                color="primary"
+                disabled={fetching}
+                type="text"
+                label={"Contraseña"}
+                name="password"
+                onChange={handleChange}
+                value={state.password}
+                required
+                // icon={<LockIcon />}
+                iconPosition="end"
               />
             </Grid>
-            <Grid
+
+            {/* <Grid
               item
               xs={12}
               sm={12}
@@ -353,7 +362,12 @@ function EmployeeAdd(props) {
               elevation={6}
               square="true"
             >
-              <CustomDivider text="Cargo" color="warning" margin="dense" bold />
+              <CustomDivider
+                text="Ingreso"
+                color="warning"
+                margin="dense"
+                bold
+              />
 
               <DateInput
                 variant={"standard"}
@@ -369,37 +383,6 @@ function EmployeeAdd(props) {
                 maxDate={moment().add(3, "months").format("YYYY/MM/DD")}
                 openTo="month"
                 required
-              />
-
-              <SelectInput
-                variant="standard"
-                margin="dense"
-                color="primary"
-                hoverColor="primary"
-                disabled={fetching}
-                id="position"
-                label="Cargo"
-                name="rol_id"
-                onChange={handleChange}
-                value={state.rol_id}
-                itemList={{
-                  data: roles,
-                  key: "id",
-                  value: "name",
-                }}
-                required
-              />
-
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={state.head_area}
-                    onChange={handleChangeHeadArea}
-                    name="head_area"
-                  />
-                }
-                label="Jefe de área"
-                labelPlacement="end"
               />
 
               <CustomDivider
@@ -439,63 +422,13 @@ function EmployeeAdd(props) {
                 autoOk
                 required
               />
-
-              <CustomDivider
-                text="Perfil"
-                color="warning"
-                margin="dense"
-                bold
-              />
-
-              <IconInput
-                variant={"standard"}
-                margin={"dense"}
-                color="primary"
-                disabled={fetching}
-                type="text"
-                label={"Usuario"}
-                name="user"
-                onChange={handleChange}
-                value={state.user}
-                required
-                // icon={<PersonIcon />}
-                iconPosition="end"
-              />
-              <IconInput
-                variant={"standard"}
-                margin={"dense"}
-                color="primary"
-                disabled={fetching}
-                type="text"
-                label={"Contraseña"}
-                name="password"
-                onChange={handleChange}
-                value={state.password}
-                required
-                // icon={<LockIcon />}
-                iconPosition="end"
-              />
-              <IconInput
-                variant={"standard"}
-                margin={"dense"}
-                color="primary"
-                disabled={fetching}
-                type="text"
-                label={"Pin"}
-                name="pin"
-                onChange={handleChange}
-                value={state.pin}
-                required
-                // icon={<VpnKeyIcon />}
-                iconPosition="end"
-              />
-            </Grid>
+            </Grid> */}
           </Grid>
         </CardBody>
 
         <CardFooter form>
           <CustomBotton
-            form="employee-add"
+            form="admin-add"
             size="sm"
             type="submit"
             disabled={state.isUpload}
@@ -509,11 +442,10 @@ function EmployeeAdd(props) {
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const { employee, rol } = state;
+  const { employee } = state;
   return {
     fetching: employee.fetching,
-    roles: rol.payload,
   };
 };
 
-export default connect(mapStateToProps, null)(EmployeeAdd);
+export default connect(mapStateToProps, null)(AdminAdd);

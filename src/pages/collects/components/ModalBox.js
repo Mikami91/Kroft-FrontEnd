@@ -1,15 +1,15 @@
 // Dependencies
-import React, { Fragment, useMemo } from "react";
-import { useHistory } from "react-router-dom";
-import moment from "moment";
-import "moment/locale/es";
-// Conecction to Store
-import { connect } from "react-redux";
 // @material-ui/icons
 import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
+import moment from "moment";
+import "moment/locale/es";
+import React, { useMemo } from "react";
+// Conecction to Store
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import CardOpenBox from "../../../components/Card/CardOpenBox";
 // Core components
 import CustomModal from "../../../components/Modal/CustomModal.js";
-import CardOpenBox from "../../../components/Card/CardOpenBox";
 // Funtions
 import { boxClosing } from "../../../functions/cruds/boxFunctions";
 

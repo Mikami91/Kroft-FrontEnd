@@ -1,12 +1,12 @@
 // Dependencies
-import React, { useContext } from "react";
-import SwipeableViews from "react-swipeable-views";
-import moment from "moment";
-import "moment/locale/es";
-// Conecction to Store
-import { connect } from "react-redux";
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
+import moment from "moment";
+import "moment/locale/es";
+import React, { useContext } from "react";
+// Conecction to Store
+import { connect } from "react-redux";
+import SwipeableViews from "react-swipeable-views";
 // core components
 import CardBody from "../../../components/Card/CardBody.js";
 import PaymentsTabs from "../../../components/CustomTabs/PaymentsTabs";
@@ -15,13 +15,10 @@ import TabPanel from "../../../components/Panel/TabPanel.js";
 import CurrentTableContext from "../../../hooks/contexts/TableContext";
 // Local components
 import Cash from "./paymentsTypes/Cash";
-import CreditCard from "./paymentsTypes/CreditCard";
 import CashCreditCard from "./paymentsTypes/CashCreditCard";
+import CreditCard from "./paymentsTypes/CreditCard";
 import VariousCreditCard from "./paymentsTypes/VariousCreditCard";
 import WillPay from "./paymentsTypes/WillPay";
-// Icons
-import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
-import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
 // Configs
 moment.locale("es");
 moment().format("l");

@@ -96,7 +96,6 @@ function CustomTableFreeSalesList(props) {
             isExpanded: false,
             index: null,
           });
-          console.log("Check success");
         }
       }
     });

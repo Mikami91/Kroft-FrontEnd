@@ -130,7 +130,6 @@ export async function isLoggedEmployee(data) {
   loading(true);
   try {
     const response = await isLogged(data);
-    console.log(response);
     if (response.status === 200) {
       switch (response.data.success) {
         case true:

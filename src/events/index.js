@@ -131,7 +131,6 @@ export const roles_WS = () =>
 export const employees_WS = () =>
   useMemo(() => {
     websocketConnection.channel("employees").listen("EmployeeEvent", (e) => {
-      console.log(e.message);
       employeePayload(e.message);
     });
   }, []);

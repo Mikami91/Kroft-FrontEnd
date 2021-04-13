@@ -1,32 +1,28 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
-import SwipeableViews from "react-swipeable-views";
-// Conecction to Store
-import { connect } from "react-redux";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
-// Core Components
-import CustomTable from "../../components/Table/CustomTable.js";
-import AvatarTable from "../../components/Avatar/AvatarTable";
+import PropTypes from "prop-types";
+import React, { Fragment, useState } from "react";
+// Conecction to Store
+import { connect } from "react-redux";
+import SwipeableViews from "react-swipeable-views";
 import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
+import CardHeader from "../../components/Card/CardHeader.js";
+import SingleTabs from "../../components/CustomTabs/SingleTabs";
 import CustomLoading from "../../components/Loading/CustomLoading.js";
 import CustomModal from "../../components/Modal/CustomModal";
-import SingleTabs from "../../components/CustomTabs/SingleTabs";
 import TabPanel from "../../components/Panel/TabPanel.js";
-// Layouts
-import NewSupplierAdd from "../Forms/NewSupplierAdd";
-import ExistSupplierAdd from "../Forms/ExistSupplierAdd";
-import SupplierUpdate from "../Forms/SupplierUpdate";
+// Core Components
+import CustomTable from "../../components/Table/CustomTable.js";
 // Functions
 import {
-  supplierShow,
-  supplierDelete,
+  supplierDelete, supplierShow
 } from "../../functions/cruds/supplierFunctions";
-// API
-import { API } from "../../API/index";
+import ExistSupplierAdd from "../Forms/ExistSupplierAdd";
+// Layouts
+import NewSupplierAdd from "../Forms/NewSupplierAdd";
+import SupplierUpdate from "../Forms/SupplierUpdate";
 
 function Suppliers({ suppliers, fetching, loading }) {
   // State for Panel Tabs

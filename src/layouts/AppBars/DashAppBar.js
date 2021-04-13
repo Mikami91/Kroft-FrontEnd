@@ -14,7 +14,6 @@ const DashAppBar = ({ style }) => {
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log(newValue);
   };
   const handleChangeIndex = (index) => {
     setValue(index);

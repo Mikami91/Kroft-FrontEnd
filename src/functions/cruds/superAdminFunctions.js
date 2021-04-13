@@ -71,6 +71,8 @@ export async function superAdminLogout(data) {
           localStorage.setItem("rol", "");
           localStorage.setItem("first_name", "");
           localStorage.setItem("last_name", "");
+          payload({});
+
           loading(false);
           break;
 
@@ -96,7 +98,6 @@ export async function isLoggedSuperAdmin(data) {
   loading(true);
   try {
     const response = await isLogged(data);
-    console.log(response);
     if (response.status === 200) {
       switch (response.data.success) {
         case true:

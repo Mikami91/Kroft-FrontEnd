@@ -1,15 +1,15 @@
-import React, { Fragment } from "react";
-import PropTypes from "prop-types";
-import NumberFormat from "react-number-format";
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import NumberFormat from "react-number-format";
+import CustomDivider from "../../components/Divider/CustomDivider.js";
 // core components
 import CustomText from "../../components/Typography/CustomText";
-import CustomDivider from "../../components/Divider/CustomDivider.js";
 
 export default function CardOpenBox(props) {
   // Props
-  const { data, keyValue, filter, amount, change, income } = props;
+  const { data } = props;
   const {
     initial_amount,
     bs_income_amount,

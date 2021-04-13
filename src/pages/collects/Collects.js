@@ -1,66 +1,61 @@
 // Dependencies
-import React, { useState, useEffect, Fragment } from "react";
-import { withRouter, useHistory } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
 // Conecction to Store
 import { connect } from "react-redux";
+import { useHistory, withRouter } from "react-router-dom";
+// core components
+import CustomLoading from "../../components/Loading/CustomLoading";
+import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
+// Events
+import { collectWebsocket } from "../../events";
+import { boxShow } from "../../functions/cruds/boxFunctions";
+import { collectShow } from "../../functions/cruds/collectFunctions";
+// Functions
+import { companyShow } from "../../functions/cruds/companyFunctions";
+import {
+  employeeLogout,
+  isLoggedEmployee,
+} from "../../functions/cruds/employeeFunctions";
+import { environmentShow } from "../../functions/cruds/environmentFunctions";
+import { orderShow } from "../../functions/cruds/orderFunctions";
+import { paymentShow } from "../../functions/cruds/paymentFunctions";
+import { tableShow } from "../../functions/cruds/tableFunctions";
+// Hooks
+import { useDrawer } from "../../hooks/useDrawer";
+import {
+  useBoxModal,
+  useBoxSelectModal,
+  useFreeSaleModal,
+  useLogoutModal,
+} from "../../hooks/useModal";
+import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
+import ComponentPrintTotal from "../../layouts/Prints/ComponentPrintTotal";
+// Layouts
+import ComponentPrintTotalAmount from "../../layouts/Prints/ComponentPrintTotalAmount";
+import {
+  close as emptyCurrentReduxState,
+  open as setCurrentReduxState,
+} from "../../redux/actions/creators/productCreator";
 // Actions Creators
 import {
   dangerSnackbar,
   hideSnackbar,
 } from "../../redux/actions/creators/snackbarCreator";
-import {
-  open as setCurrentReduxState,
-  close as emptyCurrentReduxState,
-} from "../../redux/actions/creators/productCreator";
-// Hooks
-import { useDrawer } from "../../hooks/useDrawer";
-import {
-  useBoxSelectModal,
-  useBoxModal,
-  useFreeSaleModal,
-  // usePassCollectModal,
-  // useAmountPay,
-} from "../../hooks/useModal";
-import { useLogoutModal } from "../../hooks/useModal";
-// Layouts
-import ComponentPrintTotalAmount from "../../layouts/Prints/ComponentPrintTotalAmount";
-import ComponentPrintTotal from "../../layouts/Prints/ComponentPrintTotal";
-import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
-// Local components
-import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
-import TablesGrid from "./components/TablesGrid";
 import CollectFooterBar from "./components/CollectFooterBar";
 import DrawerTablesList from "./components/DrawerTablesList";
-import ModalPassCollect from "./components/ModalPassCollect";
-import ModalSelectBox from "./components/ModalSelectBox";
+// Local components
+import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
+import ModalAmountToPay from "./components/ModalAmountToPay";
 import ModalBox from "./components/ModalBox";
 import ModalFreeSale from "./components/ModalFreeSale";
-import ModalAmountToPay from "./components/ModalAmountToPay";
-// core components
-import CustomLoading from "../../components/Loading/CustomLoading";
-import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
-// Functions
-import { companyShow } from "../../functions/cruds/companyFunctions";
-import {
-  isLoggedEmployee,
-  employeeLogout,
-} from "../../functions/cruds/employeeFunctions";
-import { boxShow } from "../../functions/cruds/boxFunctions";
-import { paymentShow } from "../../functions/cruds/paymentFunctions";
-import { environmentShow } from "../../functions/cruds/environmentFunctions";
-import { tableShow } from "../../functions/cruds/tableFunctions";
-import { orderShow } from "../../functions/cruds/orderFunctions";
-import { collectShow } from "../../functions/cruds/collectFunctions";
-import { orderCancel } from "../../functions/cruds/orderFunctions";
-// Events
-import { collectWebsocket } from "../../events";
-import { closingFetch } from "../../functions/fetchs/boxFetch";
+import ModalPassCollect from "./components/ModalPassCollect";
+import ModalSelectBox from "./components/ModalSelectBox";
+import TablesGrid from "./components/TablesGrid";
 
 function CollectsPage(props) {
   // Props
   const {
     employee_loading,
-    orders_detail,
     environments_loading,
     tables_loading,
     boxes_loading,
@@ -337,22 +332,13 @@ function CollectsPage(props) {
 }
 // Connect to Store State
 const mapStateToProps = (state) => {
-  const {
-    employee,
-    tables,
-    environments,
-    orders,
-    boxes,
-    snackbar,
-    product,
-  } = state;
+  const { employee, tables, environments, boxes, snackbar, product } = state;
   return {
     employee_loading: employee.loading,
     environments_loading: environments.loading,
     tables_loading: tables.loading,
     boxes_loading: boxes.loading,
     boxes_fetching: boxes.fetching,
-    orders_detail: orders.orders_detail,
     current: product.current,
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,

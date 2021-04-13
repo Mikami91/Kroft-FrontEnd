@@ -27,7 +27,6 @@ export default function IconInput2(props) {
     inputRootCustomClasses,
     success
   } = props;
-  console.log(inputProps);
 
   const labelClasses = classNames({
     [" " + classes.labelRootError]: error,

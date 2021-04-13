@@ -37,18 +37,15 @@ const useStyles = makeStyles(styles);
 
 function ProductsPage(props) {
   const { handleClose } = props;
-  // console.log(props.location.state);
   // State for Panels
   const [value, setValue] = useState(0);
   const handleChange = (newValue) => {
-    console.log(newValue);
     setValue(newValue);
   };
   // State for Modal
   const [open, setOpen] = useState(false);
   const handleOpenList = () => {
     setOpen(true);
-    console.log(open);
   };
   const handleCloseList = () => {
     setOpen(false);

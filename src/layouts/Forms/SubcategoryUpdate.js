@@ -120,7 +120,6 @@ function SubcategoryUpdate(props) {
                 if (response.success === true) {
                     close();
                     handleEmpty();
-                    console.log("registrado");
                 }
             }
         });

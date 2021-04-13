@@ -36,7 +36,6 @@ export default function SuperAdminLogin(props) {
     e.preventDefault();
     superAdminLogin(state).then((response) => {
       if (typeof response !== "undefined") {
-        console.log(response);
         if (response.success === true) {
           history.push("/dashboard");
         }

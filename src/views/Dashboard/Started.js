@@ -1,45 +1,33 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
-import ChartistGraph from "react-chartist";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-// Core Components
-import GridItem from "../../components/Grid/GridItem.js";
-import GridContainer from "../../components/Grid/GridContainer.js";
-import CustomTabs from "../../components/CustomTabs/CustomTabs.js";
-import CustomTable from "../../components/Table/CustomTable.js";
-import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
-import CardBody from "../../components/Card/CardBody.js";
-import CardIcon from "../../components/Card/CardIcon.js";
-import CardFooter from "../../components/Card/CardFooter.js";
-import Tasks from "../../components/Tasks/Tasks.js";
-import Danger from "../../components/Typography/Danger.js";
+import Accessibility from "@material-ui/icons/Accessibility";
+import AccessTime from "@material-ui/icons/AccessTime";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import DateRange from "@material-ui/icons/DateRange";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import LocalOffer from "@material-ui/icons/LocalOffer";
+import SdStorageOutlinedIcon from "@material-ui/icons/SdStorageOutlined";
 // @material-ui/icons
 import Store from "@material-ui/icons/Store";
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
-import SdStorageOutlinedIcon from "@material-ui/icons/SdStorageOutlined";
-import Warning from "@material-ui/icons/Warning";
-import DateRange from "@material-ui/icons/DateRange";
-import LocalOffer from "@material-ui/icons/LocalOffer";
 import Update from "@material-ui/icons/Update";
-import ArrowUpward from "@material-ui/icons/ArrowUpward";
-import AccessTime from "@material-ui/icons/AccessTime";
-import Accessibility from "@material-ui/icons/Accessibility";
-import BugReportIcon from "@material-ui/icons/BugReport";
-import Code from "@material-ui/icons/Code";
-import Cloud from "@material-ui/icons/Cloud";
-// Variables
-import { bugs, website, server } from "../../variables/general.js";
-import {
-  dailySalesChart,
-  emailsSubscriptionChart,
-  completedTasksChart,
-} from "../../variables/charts.js";
+import Warning from "@material-ui/icons/Warning";
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import ChartistGraph from "react-chartist";
+import Card from "../../components/Card/Card.js";
+import CardBody from "../../components/Card/CardBody.js";
+import CardFooter from "../../components/Card/CardFooter.js";
+import CardHeader from "../../components/Card/CardHeader.js";
+import CardIcon from "../../components/Card/CardIcon.js";
+import Danger from "../../components/Typography/Danger.js";
 // Styles
 import styles from "../../styles/views/Dashboard/StartedStyle.js";
+import {
+  dailySalesChart,
+  emailsSubscriptionChart
+} from "../../variables/charts.js";
 
 const useStyles = makeStyles(styles);
 

@@ -64,7 +64,6 @@ function Products(props) {
             value={value}
             onChange={handleChangeIndex}
           />
-          {console.log("REner")}
           <DialogContent className={classes.content}>
             <SwipeableViews index={value} onChangeIndex={handleChangeIndex}>
               {categories.map((index, key) => {

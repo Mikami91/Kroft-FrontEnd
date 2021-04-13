@@ -1,87 +1,88 @@
 // Dependencies
-import React, { Fragment, useState, useMemo, useEffect } from "react";
-import { withRouter, useHistory } from "react-router-dom";
-// Conecction to Store
-import { connect } from "react-redux";
-// Actions Creators
-import {
-  hideSnackbar,
-  dangerSnackbar,
-} from "../../redux/actions/creators/snackbarCreator";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
-import Divider from "@material-ui/core/Divider";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-// @material-ui/icons
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import Explore from "@material-ui/icons/Explore";
 import Face from "@material-ui/icons/Face";
-// Layouts
-import Sidebar from "../../layouts/Sidebars/Sidebar.js";
-import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
-// Local components
-import SideBar from "./components/SideBar";
+// @material-ui/icons
+import MenuIcon from "@material-ui/icons/Menu";
+import React, { Fragment, useEffect, useState } from "react";
+// Conecction to Store
+import { connect } from "react-redux";
+import { useHistory, withRouter } from "react-router-dom";
+// Assets
+import logo from "../../assets/img/brands/kroft-horizontal.svg";
 // Core Components
 import CustomAppBar from "../../components/AppBar/CustomAppBar";
 import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
-// Functions
-import {
-  superAdminLogout,
-  isLoggedSuperAdmin,
-} from "../../functions/cruds/superAdminFunctions";
-import { companyShow } from "../../functions/cruds/companyFunctions";
-import {
-  adminShow,
-  adminLogout,
-  isLoggedAdmin,
-} from "../../functions/cruds/adminFunctions";
-import { employeeShow } from "../../functions/cruds/employeeFunctions";
-import { boxShow } from "../../functions/cruds/boxFunctions";
-import { rolShow } from "../../functions/cruds/rolFunctions";
-import { environmentShow } from "../../functions/cruds/environmentFunctions";
-import { tableShow } from "../../functions/cruds/tableFunctions";
-import { printCategoryShow } from "../../functions/cruds/printCategoryFunctions";
-import { categoryShow } from "../../functions/cruds/categoryFunctions";
-import { subcategoryShow } from "../../functions/cruds/subcategoryFunctions";
-import { productShow } from "../../functions/cruds/productFunctions";
-import { customerShow } from "../../functions/cruds/customerFunctions";
-import { supplierShow } from "../../functions/cruds/supplierFunctions";
-import { orderShow } from "../../functions/cruds/orderFunctions";
-// Hooks
-import { useLogoutModal } from "../../hooks/useModal";
 // Events
 import { dashboardWebsocket } from "../../events";
-// Assets
-import logo from "../../assets/img/brands/kroft-horizontal.svg";
+// Functions
+import {
+  adminLogout,
+  adminShow,
+  isLoggedAdmin,
+} from "../../functions/cruds/adminFunctions";
+import { boxShow } from "../../functions/cruds/boxFunctions";
+import { categoryShow } from "../../functions/cruds/categoryFunctions";
+import { companyShow } from "../../functions/cruds/companyFunctions";
+import { customerShow } from "../../functions/cruds/customerFunctions";
+import { employeeShow } from "../../functions/cruds/employeeFunctions";
+import { environmentShow } from "../../functions/cruds/environmentFunctions";
+import { orderShow } from "../../functions/cruds/orderFunctions";
+import { printCategoryShow } from "../../functions/cruds/printCategoryFunctions";
+import { productShow } from "../../functions/cruds/productFunctions";
+import { rolShow } from "../../functions/cruds/rolFunctions";
+import { subcategoryShow } from "../../functions/cruds/subcategoryFunctions";
+import {
+  isLoggedSuperAdmin,
+  superAdminShow,
+  superAdminLogout,
+} from "../../functions/cruds/superAdminFunctions";
+import { supplierShow } from "../../functions/cruds/supplierFunctions";
+import { tableShow } from "../../functions/cruds/tableFunctions";
+// Hooks
+import { useLogoutModal } from "../../hooks/useModal";
+import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
+// Layouts
+import Sidebar from "../../layouts/Sidebars/Sidebar.js";
+// Actions Creators
+import {
+  dangerSnackbar,
+  hideSnackbar,
+} from "../../redux/actions/creators/snackbarCreator";
 // Styles
 import styles from "../../styles/pages/DashboardStyle.js";
+// Local components
+import SideBar from "./components/SideBar";
 
 const useStyles = makeStyles(styles);
 
 function DashboardPage(props) {
   // Props
   const {
-    companies_loading,
+    // companies_loading,
     superadmin_loading,
     admins_loading,
-    boxes_loading,
-    roles_loading,
-    employees_loading,
-    environments_loading,
-    tables_loading,
-    printcategories_loading,
-    categories_loading,
-    subcategories_loading,
-    products_loading,
-    customers_loading,
-    suppliers_loading,
-    orders_loading,
-    collects_loading,
+    // boxes_loading,
+    // roles_loading,
+    // employees_loading,
+    // environments_loading,
+    // tables_loading,
+    // printcategories_loading,
+    // categories_loading,
+    // subcategories_loading,
+    // products_loading,
+    // customers_loading,
+    // suppliers_loading,
+    // orders_loading,
+    // collects_loading,
     snackbar_show,
     snackbar_message,
     snackbar_severity,
@@ -184,6 +185,7 @@ function DashboardPage(props) {
             if (typeof response !== "undefined") {
               if (response.success === true) {
                 setIsLogged(true);
+                superAdminShow();
                 handleRefresh();
               } else {
                 dangerSnackbar("Autentificación incorrecta, inicie sesión.");

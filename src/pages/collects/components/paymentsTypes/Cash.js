@@ -1,10 +1,10 @@
 // Dependencies
-import React, { useContext, useState } from "react";
+// @material-ui/core components
+import Grid from "@material-ui/core/Grid";
+import React, { useContext } from "react";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
-// @material-ui/core components
-import Grid from "@material-ui/core/Grid";
 // core components
 import CustomMoneyInput from "../../../../components/CustomInput/CustomMoneyInput.js";
 // Contexts

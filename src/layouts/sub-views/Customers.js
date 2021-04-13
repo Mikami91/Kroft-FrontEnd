@@ -1,25 +1,22 @@
 // Dependencies
-import React, { Fragment, useState } from "react";
-import PropTypes from "prop-types";
-// Conecction to Store
-import { connect } from 'react-redux';
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
-// Core Components
-import CustomTable from "../../components/Table/CustomTable.js";
-import AvatarTable from "../../components/Avatar/AvatarTable";
+import PropTypes from "prop-types";
+import React, { Fragment, useState } from "react";
+// Conecction to Store
+import { connect } from 'react-redux';
 import Card from "../../components/Card/Card.js";
-import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
+import CardHeader from "../../components/Card/CardHeader.js";
 import CustomLoading from '../../components/Loading/CustomLoading.js';
 import CustomModal from '../../components/Modal/CustomModal';
+// Core Components
+import CustomTable from "../../components/Table/CustomTable.js";
+// Functions
+import { customerDelete, customerShow } from "../../functions/cruds/customerFunctions";
+import CustomerUpdate from '../../layouts/Forms/CustomerUpdate';
 // Layouts
 import CustomerAdd from '../Forms/CustomerAdd.js';
-import CustomerUpdate from '../../layouts/Forms/CustomerUpdate';
-// Functions
-import { customerShow, customerDelete } from "../../functions/cruds/customerFunctions";
-// API
-import { API } from '../../API/index';
 
 function Customers({ customers, fetching, loading }) {
     const [state, setState] = useState({

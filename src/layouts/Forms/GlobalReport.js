@@ -51,7 +51,6 @@ function GlobalReport(props) {
     });
     // Change State for Inputs
     const handleChange = (e) => {
-        console.log(e);
         setState({
             ...state,
             [e.target.name]: e.target.value

@@ -3,7 +3,7 @@ import { SUPER_ADMIN_LIST, SUPER_ADMIN_FETCHING, SUPER_ADMIN_LOADING } from '../
 
 // Default State
 const superAdminState = {
-  payload: [],
+  payload: {},
   loading: false,
 };
 

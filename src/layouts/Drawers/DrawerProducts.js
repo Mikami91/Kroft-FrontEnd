@@ -226,7 +226,6 @@ function DrawerProducts(props) {
   });
 
   const handleOpenConfirmation = (e) => {
-    console.log(e);
     setState2({
       open: true,
       anchorEl: e.currentTarget,
@@ -310,7 +309,6 @@ function DrawerProducts(props) {
     }).then((response) => {
       if (typeof response !== "undefined") {
         if (response === true) {
-          console.log("Order cancel");
         }
       }
     });

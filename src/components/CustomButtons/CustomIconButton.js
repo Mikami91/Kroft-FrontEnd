@@ -16,7 +16,6 @@ const makeComponentStyles = makeStyles(() => ({
 }));
 
 function CustomIconButton(props) { 
-  console.log(props)
   const {
     html,
     color,

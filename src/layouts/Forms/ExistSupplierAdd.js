@@ -1,26 +1,22 @@
 // Dependencies
-import React, { useState } from "react";
-import moment from 'moment';
-import 'moment/locale/es';
-// Conecction to Store
-import { connect } from 'react-redux';
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
 import TextField from '@material-ui/core/TextField';
+import moment from 'moment';
+import 'moment/locale/es';
+import React, { useState } from "react";
+// Conecction to Store
+import { connect } from 'react-redux';
 // core components
 import CardBody from "../../components/Card/CardBody.js";
 import CardFooter from "../../components/Card/CardFooter.js";
-import IconInput from '../../components/CustomInput/IconInput.js';
-import SelectInput from '../../components/CustomInput/SelectInput.js';
-import NumberInput from '../../components/CustomInput/NumberInput.js';
+import CustomBotton from '../../components/CustomButtons/CustomButton.js';
 import DateInput from '../../components/CustomInput/DateInput.js';
-import CustomBotton from '../../components/CustomButtons/CustomButton.js'
-import CustomLoading from '../../components/Loading/CustomLoading.js';
+import NumberInput from '../../components/CustomInput/NumberInput.js';
+import SelectInput from '../../components/CustomInput/SelectInput.js';
 import CustomDivider from '../../components/Divider/CustomDivider.js';
 // Functions
 import { supplierExist } from "../../functions/cruds/supplierFunctions";
-// Variables
-import { presentationTypes } from '../../variables/presentationTypes.js';
 // Configs
 moment.locale("es");
 moment().format('l');

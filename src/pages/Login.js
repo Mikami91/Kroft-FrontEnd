@@ -2,15 +2,15 @@
 import React, { Fragment, useState, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 // Conecction to Store
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 // Actions Creators
-import { hideSnackbar } from '../redux/actions/creators/snackbarCreator';
+import { hideSnackbar } from "../redux/actions/creators/snackbarCreator";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
-import SendRoundedIcon from '@material-ui/icons/SendRounded';
+import SendRoundedIcon from "@material-ui/icons/SendRounded";
 // Layouts
 import EmployeeLogin from "../layouts/Forms/EmployeeLogin.js";
 import PinLogin from "../layouts/Forms/PinLogin.js";
@@ -27,14 +27,14 @@ import CardBody from "../components/Card/CardBody.js";
 import CardFooter from "../components/Card/CardFooter.js";
 import TabPanel from "../components/Panel/TabPanel.js";
 import CustomModal from "../components/Modal/CustomModal.js";
-import CustomLoading from '../components/Loading/CustomLoading';
-import CustomSnackbar from '../components/Snackbar/CustomSnackbar';
+import CustomLoading from "../components/Loading/CustomLoading";
+import CustomSnackbar from "../components/Snackbar/CustomSnackbar";
 // Functions
 import { companyShow } from "../functions/cruds/companyFunctions";
 // Events
-import { companies_WS } from '../events';
+import { companies_WS } from "../events";
 // Apis
-import { API } from '../API/index';
+import { API } from "../API/index";
 // Assets
 import logo from "../assets/img/brands/kroft-vertical.svg";
 // Styles
@@ -42,15 +42,20 @@ import styles from "../styles/pages/LoginStyle.js";
 
 const useStyles = makeStyles(styles);
 
-function LoginPage({ company, admin_loading, employee_loading, snackbar_show, snackbar_message, snackbar_severity }) {
-
+function LoginPage({
+  company,
+  admin_loading,
+  employee_loading,
+  snackbar_show,
+  snackbar_message,
+  snackbar_severity,
+}) {
   // Loading payloads state
   const [is_payload, set_is_payload] = useState(false);
 
   // Payloads
   useEffect(() => {
     if (is_payload === false) {
-
       companyShow();
 
       // Change is_payload state
@@ -94,7 +99,12 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
         justify="center"
         alignItems="center"
       >
-        <CustomSnackbar open={snackbar_show} message={snackbar_message} severity={snackbar_severity} onClose={handleCloseSnackbar} />
+        <CustomSnackbar
+          open={snackbar_show}
+          message={snackbar_message}
+          severity={snackbar_severity}
+          onClose={handleCloseSnackbar}
+        />
 
         <Hidden only={["xs", "sm"]}>
           <Grid
@@ -129,8 +139,11 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
           className={classes.container}
         >
           <Card className={classes[cardAnimaton]} variant="cardLogin">
-
-            <CustomLoading open={admin_loading || employee_loading} text={""} inside />
+            <CustomLoading
+              open={admin_loading || employee_loading}
+              text={""}
+              inside
+            />
 
             <CardHeader color="primary" className={classes.cardHeaderLogin}>
               <img
@@ -140,7 +153,6 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
               />
             </CardHeader>
             <CardBody login>
-
               <SingleTabs
                 centered
                 value={value}
@@ -156,10 +168,10 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
                     tabName: "Admin",
                     // tabIcon: AssignmentIndIcon,
                   },
-                  // {
-                  //   tabName: "Super",
-                  //   // tabIcon: AccountBoxIcon,
-                  // },
+                  {
+                    tabName: "Super",
+                    // tabIcon: AccountBoxIcon,
+                  },
                 ]}
               />
               <SwipeableViews
@@ -176,14 +188,15 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
                   <AdminLogin />
                 </TabPanel>
 
-                {/* <TabPanel value={value} index={2}>
+                <TabPanel value={value} index={2}>
                   <SuperAdminLogin />
-                </TabPanel> */}
-
+                </TabPanel>
               </SwipeableViews>
             </CardBody>
             <CardFooter className="cardFooterLogin">
-              {value === 2 ? (<h4 onClick={handleOpen}>¿Olvidaste tu contraseña?</h4>) : null}
+              {value === 2 ? (
+                <h4 onClick={handleOpen}>¿Olvidaste tu contraseña?</h4>
+              ) : null}
             </CardFooter>
           </Card>
           {/* <Link to="/sales">
@@ -246,7 +259,7 @@ function LoginPage({ company, admin_loading, employee_loading, snackbar_show, sn
       />
     </Fragment>
   );
-};
+}
 
 // Connect to Store State
 const mapStateToProps = (state) => {
@@ -258,7 +271,7 @@ const mapStateToProps = (state) => {
     snackbar_show: snackbar.show,
     snackbar_message: snackbar.message,
     snackbar_severity: snackbar.severity,
-  }
+  };
 };
 
 export default connect(mapStateToProps, null)(LoginPage);

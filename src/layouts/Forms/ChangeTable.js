@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useState } from "react";
+import React from "react";
 // @material-ui/core components
 import Grid from "@material-ui/core/Grid";
 // core components
@@ -8,53 +8,6 @@ import CustomLoading from "../../components/Loading/CustomLoading.js";
 
 export default function ChangeTable(props) {
   const { environments, tables, state, onChangeFrom, onChangeTo } = props;
-  // // Local State
-  // const [state, setState] = useState({
-  //   from_table: "",
-  //   to_table: "",
-  //   isFetch: false
-  // });
-
-  // // Changes State values
-  // const handleChangeFrom = (e) => {
-  //   // console.log(e.target)
-  //   setState({
-  //     ...state,
-  //     from_table: e.target.value,
-  //   });
-  // };
-
-  // const handleChangeTo = (e) => {
-  //   setState({
-  //     ...state,
-  //     to_table: e.target.value,
-  //   });
-  // };
-
-  // // Empty State values
-  // const handleEmpty = () => {
-  //   setState({
-  //     ...state,
-  //     from_table: "",
-  //     to_table: "",
-  //     isFetch: false
-  //   });
-  // };
-
-  // Change function
-  //   const handleChangeTable = (e) => {
-  //     e.preventDefault();
-  // setState({ ...state, isFetch : true });
-  //     tableChangeAction(state).then((response) => {
-  //       //console.log(response)
-  //       if (typeof response !== 'undefined') {
-  //         if (response === true) {
-  //           handleEmpty();
-  //           close();
-  //         }
-  //       }
-  //     })
-  //   };
   return (
     <form id="table-change" /*onSubmit={handleLogin}*/>
       {/* <Card variant="cardForm"> */}

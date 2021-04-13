@@ -36,16 +36,12 @@ function CustomSnackbar(props) {
     [classes[severity]]: true,
   });
 
-  // console.log(message);
   // if (typeof message === 'object') {
 
   //     // for (let [key, value] of Object.entries(message)) {
-  //     //     console.log(`key=${key} value=${value}`);
-  //     //     console.log(value);
   //     // }
 
   //     Object.entries(message).map((key, value) =>
-  //         console.log(key[1])
   //     )
   // }
   return (

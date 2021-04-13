@@ -1,19 +1,18 @@
 // Dependencies
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-// Conecction to Store
-import { connect } from "react-redux";
+import Grid from "@material-ui/core/Grid";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-// Core components
-import CardProduct from "../../components/Card/CardProduct.js";
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
+// Conecction to Store
+import { connect } from "react-redux";
 // API
 import { API } from "../../API/index";
+// Core components
+import CardProduct from "../../components/Card/CardProduct.js";
 // Styles
 import styles from "../../styles/components/gridStyle";
-import { product } from "../../redux/actions/creators/collectCreator.js";
 
 const useStyles = makeStyles(styles);
 
@@ -32,8 +31,6 @@ function GridProducts(props) {
     imagePath2,
     color,
   } = props;
-
-  console.log(`%c GRID RENDER`, "color: lightgreen; font-size: large");
 
   // Search Product ID in Orders list and return his quantity
   const handleQuantity = (product_id) => {

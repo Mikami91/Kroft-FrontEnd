@@ -1,34 +1,21 @@
 // Dependencies
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-// @material-ui/core components
-import { makeStyles } from "@material-ui/core/styles";
+import Checkbox from "@material-ui/core/Checkbox";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Checkbox from "@material-ui/core/Checkbox";
-import Avatar from "@material-ui/core/Avatar";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
 // Styles
 import styles from "../../styles/components/selectInputStyle.js";
 
 const useStyles = makeStyles(styles);
 
 function CustomCheckList(props) {
-  const {
-    list,
-    keyValue,
-    value,
-    onChange,
-    checked,
-    margin,
-
-    fontSize,
-    fontColor,
-    fontBold,
-  } = props;
+  const { list, keyValue, value, onChange, checked } = props;
 
   // Styles
   const classes = useStyles();
@@ -67,11 +54,6 @@ CustomCheckList.defaultProps = {
   list: [],
   keyValue: "id",
   value: "",
-  margin: "normal",
-  // Text
-  fontSize: "medium",
-  fontColor: "default",
-  fontBold: false,
 };
 
 CustomCheckList.propTypes = {
@@ -79,20 +61,6 @@ CustomCheckList.propTypes = {
   list: PropTypes.array,
   keyValue: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  margin: PropTypes.oneOf(["dense", "none", "normal"]),
-  // Text
-  fontSize: PropTypes.oneOf(["medium", "small", "large"]),
-  fontColor: PropTypes.oneOf([
-    "default",
-    "primary",
-    "secondary",
-    "info",
-    "success",
-    "warning",
-    "danger",
-    "rose",
-  ]),
-  fontBold: PropTypes.bool,
 };
 
 export default CustomCheckList;

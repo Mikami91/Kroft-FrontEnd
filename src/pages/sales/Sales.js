@@ -1,52 +1,50 @@
 // Dependencies
-import React, { Fragment, useState, useEffect } from "react";
-import { withRouter, useHistory } from "react-router-dom";
+import React, { Fragment, useEffect, useState } from "react";
 // Conecction to Store
 import { connect } from "react-redux";
+import { useHistory, withRouter } from "react-router-dom";
 // Actions Creators
 import { bindActionCreators } from "redux";
-import { open, close } from "../../redux/actions/creators/productCreator";
-import {
-  infoSnackbar,
-  dangerSnackbar,
-  hideSnackbar,
-  warningSnackbar,
-} from "../../redux/actions/creators/snackbarCreator";
-// Hooks
-import { useDrawer } from "../../hooks/useDrawer";
-import { useCurrentTable } from "../../hooks/useCurrentTable";
-import { useChangeTableModal, useLogoutModal } from "../../hooks/useModal";
-// Contexts
-import CurrentTableContext from "../../hooks/contexts/TableContext";
-// Local Layouts
-import Products from "./components/Products";
-// Local components
-import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
-import TablesGrid from "./components/TablesGrid";
-import SalesFooterBar from "./components/SalesFooterBar";
-import DrawerTablesList from "./components/DrawerTablesList";
-import ModalChangeTable from "./components/ModalChangeTable";
+// Assets
+import image from "../../assets/img/backgrounds/productbackground.jpg";
 // core components
 import CustomLoading from "../../components/Loading/CustomLoading";
 import CustomSnackbar from "../../components/Snackbar/CustomSnackbar";
-// Layouts
-import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
+// Events
+import { salesWebsocket } from "../../events";
+import { categoryShow } from "../../functions/cruds/categoryFunctions";
 // Functions
 import { companyShow } from "../../functions/cruds/companyFunctions";
 import {
-  isLoggedEmployee,
-  employeeLogout,
+  employeeLogout, isLoggedEmployee
 } from "../../functions/cruds/employeeFunctions";
 import { environmentShow } from "../../functions/cruds/environmentFunctions";
-import { tableShow } from "../../functions/cruds/tableFunctions";
-import { categoryShow } from "../../functions/cruds/categoryFunctions";
-import { subcategoryShow } from "../../functions/cruds/subcategoryFunctions";
-import { productShow } from "../../functions/cruds/productFunctions";
 import { orderShow } from "../../functions/cruds/orderFunctions";
-// Events
-import { salesWebsocket } from "../../events";
-// Assets
-import image from "../../assets/img/backgrounds/productbackground.jpg";
+import { productShow } from "../../functions/cruds/productFunctions";
+import { subcategoryShow } from "../../functions/cruds/subcategoryFunctions";
+import { tableShow } from "../../functions/cruds/tableFunctions";
+// Contexts
+import CurrentTableContext from "../../hooks/contexts/TableContext";
+import { useCurrentTable } from "../../hooks/useCurrentTable";
+// Hooks
+import { useDrawer } from "../../hooks/useDrawer";
+import { useChangeTableModal, useLogoutModal } from "../../hooks/useModal";
+// Layouts
+import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
+import { close, open } from "../../redux/actions/creators/productCreator";
+import {
+  dangerSnackbar,
+  hideSnackbar,
+  warningSnackbar
+} from "../../redux/actions/creators/snackbarCreator";
+import DrawerTablesList from "./components/DrawerTablesList";
+// Local components
+import EnvironmentsAppBar from "./components/EnvironmentsAppBar";
+import ModalChangeTable from "./components/ModalChangeTable";
+// Local Layouts
+import Products from "./components/Products";
+import SalesFooterBar from "./components/SalesFooterBar";
+import TablesGrid from "./components/TablesGrid";
 
 function CollectsPage(props) {
   const {

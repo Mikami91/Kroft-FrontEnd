@@ -54,7 +54,6 @@ function GridProducts(props) {
     let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
     let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
     let array_list_products = orders_list[env_index].tables[table_index].products;
-    console.log("Ruuuun");
     return array_list_products;
   }, [orders_list, current]);
   // console.timeEnd("products_orders");
@@ -65,7 +64,6 @@ function GridProducts(props) {
     // let env_index = orders_list.findIndex(index => index.environment_id === current.environment_id);
     // let table_index = orders_list[env_index].tables.findIndex(index => index.table_id === current.table_id);
     // let array_list_products = orders_list[env_index].tables[table_index].products;
-    console.log("Calculating...")
 
     for (let index = 0; index < products_orders.length; index++) {
       if (products_orders[index].product_id === product_id) {
@@ -83,7 +81,6 @@ function GridProducts(props) {
   // Using useMemo hook
   return useMemo(() => {
     // Render
-    console.log("RENDER");
     return (
       <Fragment>
         {data.map((index, key) => {

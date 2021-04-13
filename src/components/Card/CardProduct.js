@@ -32,8 +32,6 @@ function CardProduct(props) {
     onClick,
   } = props;
 
-  console.log(`%c CARD RENDER`, "color: lightgreen; font-size: large");
-
   // Styles
   const classes = useStyles();
   const cardClasses = classNames({

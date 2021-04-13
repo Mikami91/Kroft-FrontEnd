@@ -1,12 +1,12 @@
 // Dependencies
+import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
+// @material-ui/icons
+import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import React from "react";
 import { connect } from "react-redux";
 // core components
 import CustomCheckList from "../../../components/List/CustomCheckList";
 import CustomModal from "../../../components/Modal/CustomModal.js";
-// @material-ui/icons
-import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
-import DoneRoundedIcon from "@material-ui/icons/DoneRounded";
 // Functions
 import { boxOpening } from "../../../functions/cruds/boxFunctions";
 

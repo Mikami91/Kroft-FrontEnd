@@ -1,94 +1,23 @@
 // Dependencies
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import { Link, withRouter } from "react-router-dom";
 // @material-ui/Componentes
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Fab from "@material-ui/core/Fab";
 import Badge from '@material-ui/core/Badge';
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Tooltip from "@material-ui/core/Tooltip";
+import Fab from "@material-ui/core/Fab";
 import { makeStyles } from "@material-ui/core/styles";
-// Core Components
-import DialogButton from "../CustomButtons/DialogButton";
-import DialogIcon from "../CustomButtons/DialogIcon";
-import DialogFab from "../CustomButtons/DialogFab";
-import DialogText from "../Typography/DialogText";
+import Toolbar from "@material-ui/core/Toolbar";
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
 import FloatChip from "../../components/Chip/FloatChip";
 // Styles
 import styles from "../../styles/components/footerStyle";
+// Core Components
+import DialogButton from "../CustomButtons/DialogButton";
+import DialogFab from "../CustomButtons/DialogFab";
+import DialogIcon from "../CustomButtons/DialogIcon";
+import DialogText from "../Typography/DialogText";
 
 const useStyles = makeStyles(styles);
-
-// Childs Components
-// function IconChlid(props) {
-//   const { index } = props;
-//   const classes = useStyles();
-//   if (index.disabled) {
-//     return (
-//       <IconButton edge={index.edge} disabled>
-//         <index.icon className={classes.icons} />
-//       </IconButton>
-//     );
-//   } else {
-//     return (
-//       <Tooltip placement="top" title={index.text}>
-//         <IconButton
-//           edge={index.edge}
-//           color={index.color}
-//           onClick={index.onClick}
-//         >
-//           <index.icon className={classes.icons} />
-//         </IconButton>
-//       </Tooltip>
-//     );
-//   }
-// }
-// function FabChild(props) {
-//   const { index, align } = props;
-//   const classes = useStyles();
-//   if (index.disabled) {
-//     return (
-//       <Fab
-//         disabled
-//         color={index.color}
-//         // size="small"
-//         aria-label={index.label}
-//         className={classes.fabButton + " " + classes[align]}
-//       >
-//         <index.icon className={classes.icons} />
-//       </Fab>
-//     );
-//   } else {
-//     return (
-//       <Link to="/Kroft-FrontEnd/">
-//         <Tooltip placement="top" title={index.text}>
-//           <Fab
-//             color={index.color}
-//             // size="small"
-//             aria-label={index.label}
-//             onClick={index.onClick}
-//             className={classes.fabButton + " " + classes[align]}
-//           >
-//             <index.icon className={classes.icons} />
-//           </Fab>
-//         </Tooltip>
-//       </Link>
-//     );
-//   }
-// }
-// function TextChlid(props) {
-//   const { index } = props;
-//   const classes = useStyles();
-//   return (
-//     <Typography className={classes.text} noWrap>
-//       {index.text}
-//     </Typography>
-//   );
-// }
 
 // Parent Component
 function FooterAppBar(props) {

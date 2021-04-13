@@ -1,20 +1,13 @@
 // Dependencies
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import { Link, withRouter } from "react-router-dom";
 // @material-ui/Componentes
 import AppBar from "@material-ui/core/AppBar";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-// Core Components
-import DialogButton from "../CustomButtons/DialogButton";
-import DialogIcon from "../CustomButtons/DialogIcon";
-import DialogFab from "../CustomButtons/DialogFab";
-import DialogText from "../Typography/DialogText";
-import FloatChip from "../Chip/FloatChip";
+import Typography from "@material-ui/core/Typography";
+import classNames from "classnames";
+import PropTypes from "prop-types";
+import React from "react";
 // Styles
 import styles from "../../styles/components/footerStyle";
 
