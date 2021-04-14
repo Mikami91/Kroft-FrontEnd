@@ -39,7 +39,8 @@ const PasswordInput = (props) => {
             name={name}
             onChange={onChange}
             value={value}
-            InputProps={{
+            inputProps={{
+                maxLength: 15,
                 endAdornment: (
                     <InputAdornment position="end">
                         <IconButton
