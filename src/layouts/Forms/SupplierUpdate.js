@@ -251,7 +251,7 @@ function SupplierUpdate(props) {
                             color="primary"
                             margin="dense"
                             disabled={fetching}
-                            id="observation"
+                            id="observation-update"
                             label="Observación"
                             name="observation"
                             onChange={handleChange}

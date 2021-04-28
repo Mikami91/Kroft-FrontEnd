@@ -185,7 +185,7 @@ function ExistSupplierAdd(props) {
                             color="primary"
                             margin="dense"
                             disabled={fetching}
-                            id="observation"
+                            id="observation-exist"
                             label="Observación"
                             name="observation"
                             onChange={handleChange}

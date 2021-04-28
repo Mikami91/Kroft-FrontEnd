@@ -52,34 +52,8 @@ function Boxes({ data, fetching, loading }) {
                   },
                   { title: "Caja", field: "name", type: "string" },
                   {
-                    title: "Monto",
-                    field: "total_amount",
-                    type: "currency",
-                    currencySetting: {
-                      locale: "es-BO",
-                      currencyCode: "BOB",
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    },
-                    editComponent: (props) => (
-                      <NumberFormat
-                        displayType={"input"}
-                        value={props.value}
-                        onValueChange={(e) => props.onChange(e.value)}
-                        thousandSeparator={true}
-                        allowNegative={false}
-                        allowEmptyFormatting={false}
-                        allowLeadingZeros={true}
-                        decimalScale={2}
-                        isNumericString={false}
-                        prefix="Bs "
-                        customInput={CustomMoneyInput}
-                      />
-                    ),
-                  },
-                  {
-                    title: "Cambio",
-                    field: "change_amount",
+                    title: "Monto Inicial",
+                    field: "initial_amount",
                     type: "currency",
                     currencySetting: {
                       locale: "es-BO",
@@ -114,6 +88,72 @@ function Boxes({ data, fetching, loading }) {
                       maximumFractionDigits: 2,
                     },
                     editable: "never",
+                  },
+                  {
+                    title: "Cambios",
+                    field: "change_amount",
+                    type: "currency",
+                    currencySetting: {
+                      locale: "es-BO",
+                      currencyCode: "BOB",
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    },
+                    editable: "never",
+                    editComponent: (props) => (
+                      <NumberFormat
+                        displayType={"input"}
+                        value={props.value}
+                        onValueChange={(e) => props.onChange(e.value)}
+                        thousandSeparator={true}
+                        allowNegative={false}
+                        allowEmptyFormatting={false}
+                        allowLeadingZeros={true}
+                        decimalScale={2}
+                        isNumericString={false}
+                        prefix="Bs "
+                        customInput={CustomMoneyInput}
+                      />
+                    ),
+                  },
+                  {
+                    title: "Ingresos Totales",
+                    field: "total_income_amount",
+                    type: "currency",
+                    currencySetting: {
+                      locale: "es-BO",
+                      currencyCode: "BOB",
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    },
+                    editable: "never",
+                  },
+                  {
+                    title: "Monto Total",
+                    field: "total_amount",
+                    type: "currency",
+                    currencySetting: {
+                      locale: "es-BO",
+                      currencyCode: "BOB",
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    },
+                    editable: "never",
+                    editComponent: (props) => (
+                      <NumberFormat
+                        displayType={"input"}
+                        value={props.value}
+                        onValueChange={(e) => props.onChange(e.value)}
+                        thousandSeparator={true}
+                        allowNegative={false}
+                        allowEmptyFormatting={false}
+                        allowLeadingZeros={true}
+                        decimalScale={2}
+                        isNumericString={false}
+                        prefix="Bs "
+                        customInput={CustomMoneyInput}
+                      />
+                    ),
                   },
                 ]}
                 data={data}
