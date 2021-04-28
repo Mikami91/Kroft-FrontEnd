@@ -42,8 +42,8 @@ export const websocketConnection = new Echo({
   broadcaster: "pusher",
   key: "3351a028ec8f3033b9c3",
   // wsHost: 'http://kroftserver.test',
+  // wsHost: "192.168.0.103",
   wsHost: window.location.hostname,
-  // wsHost: "192.168.0.135",
   wsPort: 6001,
   cluster: "mt1",
   auth: {

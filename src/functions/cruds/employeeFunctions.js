@@ -102,7 +102,11 @@ export async function employeeLoginPin(data) {
 export async function employeeLogout(data) {
   loading(true);
   try {
-    const response = await logoutFetch(data);
+    const response = await logoutFetch({
+      ...data,
+      employee_id: localStorage.getItem("employee_id"),
+      login_type: localStorage.getItem("login_type"),
+    });
     if (response.status === 200) {
       switch (response.data.success) {
         case true:
@@ -129,7 +133,10 @@ export async function employeeLogout(data) {
 export async function isLoggedEmployee(data) {
   loading(true);
   try {
-    const response = await isLogged(data);
+    const response = await isLogged({
+      ...data,
+      login_type: localStorage.getItem("login_type"),
+    });
     if (response.status === 200) {
       switch (response.data.success) {
         case true:

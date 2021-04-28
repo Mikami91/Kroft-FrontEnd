@@ -11,7 +11,7 @@ import styles from "../../styles/components/customInputStyle.js";
 
 const useStyles = makeStyles(styles);
 
-const IconInput = (props) => {
+const UserInput = (props) => {
   const {
     disabled,
     required,
@@ -51,7 +51,7 @@ const IconInput = (props) => {
       onChange={onChange}
       value={value}
       inputProps={{
-        maxLength: 50,
+        maxLength: type === "email" ? 40 : 15,
         [iconPosition + "Adornment"]: (
           <InputAdornment
             position={iconPosition}
@@ -67,7 +67,7 @@ const IconInput = (props) => {
   );
 };
 // PropTypes
-IconInput.defaultProps = {
+UserInput.defaultProps = {
   type: "text",
   icon: {},
   onChange: null,
@@ -89,7 +89,7 @@ IconInput.defaultProps = {
   white: true,
 };
 
-IconInput.propTypes = {
+UserInput.propTypes = {
   type: PropTypes.oneOf(["text", "number", "email", "date"]),
   icon: PropTypes.object,
   onChange: PropTypes.func,
@@ -111,4 +111,4 @@ IconInput.propTypes = {
   white: PropTypes.bool,
 };
 
-export default IconInput;
+export default UserInput;

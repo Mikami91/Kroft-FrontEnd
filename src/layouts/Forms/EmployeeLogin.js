@@ -8,7 +8,7 @@ import PersonIcon from "@material-ui/icons/Person";
 // core components
 import CustomButton from "../../components/CustomButtons/CustomButton.js";
 import PasswordInput from "../../components/CustomInput/PasswordInput.js";
-import IconInput from "../../components/CustomInput/IconInput.js";
+import UserInput from "../../components/CustomInput/UserInput.js";
 // Styles
 import styles from "../../styles/pages/LoginStyle.js";
 // Functions
@@ -63,7 +63,7 @@ export default function EmployeeLogin(props) {
       autoComplete="off"
     >
       {/* <p className={classes.divider}>Or Be Classical</p> */}
-      <IconInput
+      <UserInput
         variant={"standard"}
         margin={"dense"}
         color="primary"

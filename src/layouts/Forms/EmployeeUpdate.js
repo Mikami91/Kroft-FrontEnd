@@ -89,7 +89,7 @@ function EmployeeUpdate(props) {
         reference_phone: data.reference_phone,
         entry_date: data.entry_date,
         user: data.user,
-        password: data.password,
+        password: "",
         pin: data.pin,
         head_area: data.head_area === 0 ? false : true,
         // Salary
