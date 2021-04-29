@@ -23,7 +23,7 @@ ReactDOM.render(
   <Provider store={store}>
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={esLocale}>
       <MuiThemeProvider theme={theme}>
-        <Router history={HashRouter} basename={"kroft/"}>
+        <Router history={HashRouter} basename={"sansilvestre/"}>
           <App />
         </Router>
       </MuiThemeProvider>
