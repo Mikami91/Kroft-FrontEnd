@@ -113,21 +113,21 @@ function DashboardPage(props) {
 
   // Refresh fetches
   const handleRefresh = () => {
-    companyShow();
-    adminShow();
+    // companyShow();
+    // adminShow();
     boxShow();
-    rolShow();
-    employeeShow();
-    environmentShow();
-    tableShow();
-    printCategoryShow();
-    categoryShow();
-    subcategoryShow();
-    productShow();
-    customerShow();
-    supplierShow();
-    orderShow();
-    paymentShow();
+    // rolShow();
+    // employeeShow();
+    // environmentShow();
+    // tableShow();
+    // printCategoryShow();
+    // categoryShow();
+    // subcategoryShow();
+    // productShow();
+    // customerShow();
+    // supplierShow();
+    // orderShow();
+    // paymentShow();
   };
 
   let rol_type = localStorage.getItem("rol");

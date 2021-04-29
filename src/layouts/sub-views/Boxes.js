@@ -1,27 +1,39 @@
 // Dependencies
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import NumberFormat from "react-number-format";
 // Conecction to Store
 import { connect } from "react-redux";
 // @material-ui/Componentes
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 // Core Components
 import CustomTable from "../../components/Table/CustomTable.js";
 import Card from "../../components/Card/Card.js";
 import CardHeader from "../../components/Card/CardHeader.js";
 import CardBody from "../../components/Card/CardBody.js";
+import CustomModal from "../../components/Modal/CustomModal";
 import CustomLoading from "../../components/Loading/CustomLoading.js";
 import CustomMoneyInput from "../../components/CustomInput/CustomMoneyInput.js";
 // Functions
 import {
   boxCreate,
   boxShow,
+  boxExtract,
   boxUpdate,
   boxDelete,
 } from "../../functions/cruds/boxFunctions";
 
 function Boxes({ data, fetching, loading }) {
+  const [state, setState] = useState({
+    data: {
+      total_amount: 0.0,
+    },
+    open: false,
+  });
+  const handleOpen = (rowData) =>
+    setState({ ...state, data: rowData, open: true });
+  const handleClose = () => setState({ data: {}, open: false });
   return (
     <Fragment>
       <Grid container justify="center" alignItems="flex-start" spacing={3}>
@@ -160,12 +172,86 @@ function Boxes({ data, fetching, loading }) {
                 add={boxCreate}
                 refresh={boxShow}
                 updates={boxUpdate}
+                customUpdate={handleOpen}
                 deletes={boxDelete}
               />
             </CardBody>
           </Card>
         </Grid>
       </Grid>
+      <CustomModal
+        title={{
+          text: "Extraer Monto Total",
+          size: "medium",
+        }}
+        loading={fetching || loading}
+        open={state.open}
+        close={handleClose}
+        closeIcon={fetching || loading ? false : true}
+        // content={
+        //   <Grid container justify="center" alignItems="center" spacing={1}>
+        //     <Typography
+        //       variant="h5"
+        //       gutterBottom
+        //       style={{ paddingTop: "2rem" }}
+        //     >
+        //       {`Bs ${state.data.total_amount}`}
+        //     </Typography>
+        //   </Grid>
+        // }
+        // content={<SupplierUpdate data={data} close={handleClose} />}
+        leftButtons={[
+          {
+            type: "text",
+            text: (
+              <NumberFormat
+                value={state.data.total_amount}
+                displayType={"text"}
+                thousandSeparator={true}
+                allowNegative={false}
+                allowEmptyFormatting={false}
+                allowLeadingZeros={false}
+                decimalScale={2}
+                fixedDecimalScale={true}
+                isNumericString={true}
+                renderText={(value) => <span>Bs. {value}</span>}
+              />
+            ),
+            size: "default",
+            align: "right",
+            margin: true,
+            color: "warning",
+            display: "inline",
+            bold: true,
+          },
+        ]}
+        rightButtons={[
+          {
+            type: "button",
+            size: "medium",
+            align: "center",
+            text: "Cancelar",
+            color: "default",
+            variant: "text",
+            autoAdjust: false,
+            margin: true,
+            onClick: handleClose,
+          },
+          {
+            type: "button",
+            size: "medium",
+            align: "center",
+            text: "Extraer",
+            color: "primary",
+            variant: "contained",
+            onClick: () => boxExtract(state.data),
+          },
+        ]}
+        renderRefresh={[state.data, fetching, loading]}
+        maxWidth="xs"
+        fullWidth
+        scroll="paper"
+      />
     </Fragment>
   );
 }
