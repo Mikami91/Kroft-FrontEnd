@@ -34,6 +34,16 @@ function Boxes({ data, fetching, loading }) {
   const handleOpen = (rowData) =>
     setState({ ...state, data: rowData, open: true });
   const handleClose = () => setState({ data: {}, open: false });
+
+  const handleBoxExtract = async (rowData) => {
+    boxExtract(rowData).then((response) => {
+      if (typeof response !== "undefined") {
+        if (response.success === true) {
+          handleClose();
+        }
+      }
+    });
+  };
   return (
     <Fragment>
       <Grid container justify="center" alignItems="flex-start" spacing={3}>
@@ -172,7 +182,7 @@ function Boxes({ data, fetching, loading }) {
                 add={boxCreate}
                 refresh={boxShow}
                 updates={boxUpdate}
-                customUpdate={handleOpen}
+                onExtract={handleOpen}
                 deletes={boxDelete}
               />
             </CardBody>
@@ -244,7 +254,7 @@ function Boxes({ data, fetching, loading }) {
             text: "Extraer",
             color: "primary",
             variant: "contained",
-            onClick: () => boxExtract(state.data),
+            onClick: () => handleBoxExtract(state.data),
           },
         ]}
         renderRefresh={[state.data, fetching, loading]}

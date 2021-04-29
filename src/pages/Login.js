@@ -193,11 +193,11 @@ function LoginPage({
                 </TabPanel>
               </SwipeableViews>
             </CardBody>
-            <CardFooter className="cardFooterLogin">
+            {/* <CardFooter className="cardFooterLogin">
               {value === 2 ? (
                 <h4 onClick={handleOpen}>¿Olvidaste tu contraseña?</h4>
               ) : null}
-            </CardFooter>
+            </CardFooter> */}
           </Card>
           {/* <Link to="/sales">
             Home
