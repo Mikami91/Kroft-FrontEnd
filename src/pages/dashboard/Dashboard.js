@@ -36,6 +36,7 @@ import { customerShow } from "../../functions/cruds/customerFunctions";
 import { employeeShow } from "../../functions/cruds/employeeFunctions";
 import { environmentShow } from "../../functions/cruds/environmentFunctions";
 import { orderShow } from "../../functions/cruds/orderFunctions";
+import { paymentShow } from "../../functions/cruds/paymentFunctions";
 import { printCategoryShow } from "../../functions/cruds/printCategoryFunctions";
 import { productShow } from "../../functions/cruds/productFunctions";
 import { rolShow } from "../../functions/cruds/rolFunctions";
@@ -126,6 +127,7 @@ function DashboardPage(props) {
     customerShow();
     supplierShow();
     orderShow();
+    paymentShow();
   };
 
   let rol_type = localStorage.getItem("rol");
@@ -301,6 +303,8 @@ function DashboardPage(props) {
                     disabled: false,
                     onClick: handleDrawerToggle,
                   },
+                ]}
+                rightButtons={[
                   {
                     type: "icon",
                     text: user_complete_name,
@@ -369,40 +373,50 @@ function DashboardPage(props) {
                 color="primary"
                 variant="regular"
                 drawer
-                leftButtons={[
+                rightButtons={[
                   {
                     type: "button",
                     text: user_complete_name,
                     color: "default",
+                    size: "small",
+                    variant: "text",
+                    disabled: false,
+                    onClick: null,
+                  },
+                  {
+                    type: "icon",
+                    text: "Cerrar sesion",
+                    color: "default",
                     icon: AccountBoxIcon,
+                    edge: "end",
                     size: "small",
                     variant: "text",
                     disabled: false,
                     onClick: toggleLogout,
                   },
                 ]}
-                rightButtons={[
-                  {
-                    type: "button",
-                    text: "Ventas",
-                    color: "default",
-                    icon: Explore,
-                    size: "small",
-                    variant: "text",
-                    disabled: false,
-                    onClick: null,
-                  },
-                  {
-                    type: "button",
-                    text: "Cobranzas",
-                    color: "default",
-                    icon: Face,
-                    size: "small",
-                    variant: "text",
-                    disabled: false,
-                    onClick: null,
-                  },
-                ]}
+                // rightButtons={[
+                //   {
+                //     type: "button",
+                //     text: "Ventas",
+                //     color: "default",
+                //     icon: Explore,
+                //     size: "small",
+                //     variant: "text",
+                //     disabled: false,
+                //     onClick: null,
+                //   },
+                //   {
+                //     type: "button",
+                //     text: "Cobranzas",
+                //     color: "default",
+                //     icon: Face,
+                //     size: "small",
+                //     variant: "text",
+                //     disabled: false,
+                //     onClick: null,
+                //   },
+                // ]}
               />
 
               {/* Panel Render */}

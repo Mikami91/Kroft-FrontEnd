@@ -9,6 +9,7 @@ import {
   box_opening,
   box_closing,
   box_check,
+  box_extract,
   box_state,
   box_delete,
 } from "../../API";
@@ -68,6 +69,16 @@ export const checkFetch = (data) => {
     method: "POST",
     token: true,
     url: box_check,
+    data: data,
+  });
+};
+
+/*::::::::::::::::::::EXTRACT::::::::::::::::::::*/
+export const extractFetch = (data) => {
+  return customFetch({
+    method: "POST",
+    token: true,
+    url: box_extract,
     data: data,
   });
 };

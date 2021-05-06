@@ -6,6 +6,7 @@ import {
   openingFetch,
   closingFetch,
   checkFetch,
+  extractFetch,
   stateFetch,
   deleteFetch,
 } from "../fetchs/boxFetch";
@@ -180,6 +181,35 @@ export async function boxChech(data) {
         case true:
           fetching(false);
           // infoSnackbar(response.data.message);
+          break;
+
+        case false:
+          fetching(false);
+          dangerSnackbar(response.data.message);
+          break;
+
+        default:
+          break;
+      }
+    }
+    return response.data;
+  } catch (error) {
+    fetching(false);
+    warningSnackbar("Error de servidor.");
+    return error.message;
+  }
+}
+
+/*::::::::::::::::::::EXTRACt::::::::::::::::::::*/
+export async function boxExtract(data) {
+  fetching(true);
+  try {
+    const response = await extractFetch(data);
+    if (response.status === 200) {
+      switch (response.data.success) {
+        case true:
+          fetching(false);
+          infoSnackbar("Extracción realizada.");
           break;
 
         case false:

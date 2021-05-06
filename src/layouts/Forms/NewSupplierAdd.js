@@ -228,7 +228,7 @@ function NewSupplierAdd(props) {
                             color="primary"
                             margin="dense"
                             disabled={fetching}
-                            id="observation"
+                            id="observation-new"
                             label="Observación"
                             name="observation"
                             onChange={handleChange}

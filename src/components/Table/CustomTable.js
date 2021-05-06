@@ -2,13 +2,13 @@
 import React, { useMemo, forwardRef } from "react";
 import PropTypes from "prop-types";
 import MaterialTable from "material-table";
-import moment from 'moment';
-import 'moment/locale/es';
+import moment from "moment";
+import "moment/locale/es";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
-import CustomLoading from '../Loading/CustomLoading';
-import CustomText from '../Typography/CustomText';
+import CustomLoading from "../Loading/CustomLoading";
+import CustomText from "../Typography/CustomText";
 // Styles
 import styles from "../../styles/components/tableStyle.js";
 // Icons
@@ -55,7 +55,7 @@ const icons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowUpward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
-  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
+  ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
 const useStyles = makeStyles(styles);
@@ -76,12 +76,13 @@ export default function CustomTable(props) {
     add,
     updates,
     customUpdate,
+    onExtract,
     deletes,
     loading,
   } = props;
   // Configs
   moment.locale("es");
-  moment().format('l');
+  moment().format("l");
   // Styles
   const classes = useStyles();
   // Using useMemo hook
@@ -107,10 +108,10 @@ export default function CustomTable(props) {
             padding: padding,
             selection: false,
             headerStyle: {
-              color: '#ff9800',
-              fontSize: 'small',
-              fontWeight: 'bold',
-            }
+              color: "#ff9800",
+              fontSize: "small",
+              fontWeight: "bold",
+            },
           }}
           localization={{
             pagination: {
@@ -119,125 +120,140 @@ export default function CustomTable(props) {
               firstTooltip: "Primera página",
               previousTooltip: "Anterior página",
               nextTooltip: "Siguiente página",
-              lastTooltip: "Ultima página"
+              lastTooltip: "Ultima página",
             },
             header: {
-              actions: "Acciones"
+              actions: "Acciones",
             },
             body: {
               emptyDataSourceMessage: "No hay registros que mostrar.",
               filterRow: {
-                filterTooltip: "Filtrar"
+                filterTooltip: "Filtrar",
               },
               editRow: {
                 saveTooltip: "Guardar",
                 cancelTooltip: "Cancelar",
-                deleteText: "¿Estás seguro de que deseas eliminar?"
+                deleteText: "¿Estás seguro de que deseas eliminar?",
               },
               addTooltip: "Agregar",
               deleteTooltip: "Eliminar",
-              editTooltip: "Editar"
+              editTooltip: "Editar",
             },
             toolbar: {
               searchTooltip: "Buscar",
-              searchPlaceholder: "Buscar"
-            }
+              searchPlaceholder: "Buscar",
+            },
           }}
           editable={{
             onRowAdd:
               add !== null
                 ? (newData, oldData) =>
-                  new Promise(resolve => {
-                    add(newData);
-                    resolve();
-                  })
+                    new Promise((resolve) => {
+                      add(newData);
+                      resolve();
+                    })
                 : null,
 
             onRowUpdate:
               updates !== null
                 ? (newData, oldData) =>
-                  new Promise(resolve => {
-                    updates(newData);
-                    resolve();
-                  })
+                    new Promise((resolve) => {
+                      updates(newData);
+                      resolve();
+                    })
                 : null,
 
             onRowDelete:
               deletes !== null
                 ? (newData, oldData) =>
-                  new Promise(resolve => {
-                    deletes({ id: newData.id });
-                    resolve();
-                  })
+                    new Promise((resolve) => {
+                      deletes({ id: newData.id });
+                      resolve();
+                    })
                 : null,
           }}
-          actions={
-            [
-              refresh !== null ?
-                {
+          actions={[
+            refresh !== null
+              ? {
                   icon: icons.Refresh,
                   tooltip: "Actualizar lista",
                   isFreeAction: true,
-                  onClick: () => refresh()
+                  onClick: () => refresh(),
                 }
-                : null,
-              customUpdate !== null ?
-                {
+              : null,
+            customUpdate !== null
+              ? {
                   icon: icons.Edit,
                   tooltip: "Editar",
                   isFreeAction: false,
-                  onClick: (event, rowData) => customUpdate(rowData)
+                  onClick: (event, rowData) => customUpdate(rowData),
                 }
-                : null
-            ]
-          }
+              : null,
+            onExtract !== null
+              ? {
+                  icon: icons.Check,
+                  tooltip: "Extraer",
+                  isFreeAction: false,
+                  onClick: (event, rowData) => onExtract(rowData),
+                }
+              : null,
+          ]}
           // other props
           components={{
-            OverlayLoading: props => (<CustomLoading open={loading} inside />)
+            OverlayLoading: (props) => <CustomLoading open={loading} inside />,
           }}
-          detailPanel={typeof detailPanel !== 'undefined' && detailPanel.length > 0 ? [
-            {
-              tooltip: 'Mas información',
-              render: rowData => {
-                return (
-                  <div
-                    style={{
-                      fontSize: '0.75re',
-                      textAlign: 'left',
-                      color: 'white',
-                      margin: '20px 50px',
-                      display: 'inline-grid',
-                      // backgroundColor: '#43A047',
-                    }}
-                  >
-                    {
-                      detailPanel.map((index, key) =>
-                        <div key={key}
+          detailPanel={
+            typeof detailPanel !== "undefined" && detailPanel.length > 0
+              ? [
+                  {
+                    tooltip: "Mas información",
+                    render: (rowData) => {
+                      return (
+                        <div
                           style={{
-                            display: 'flex',
-                          }}>
-                          <CustomText text={`${index.title}:`} color="warning" />
-                          <CustomText
-                            text={
-                              index.type === "bool" ?
-                                rowData[index.field] === 0 ?
-                                  index.options[0] :
-                                  index.options[1] :
-                                index.type === "date" ?
-                                  moment(rowData[index.field]).format('D MMMM YYYY, h:mm a') :
-                                  rowData[index.field]
-                            }
-                            margin={true}
-                            color="default"
-                          />
+                            fontSize: "0.75re",
+                            textAlign: "left",
+                            color: "white",
+                            margin: "20px 50px",
+                            display: "inline-grid",
+                            // backgroundColor: '#43A047',
+                          }}
+                        >
+                          {detailPanel.map((index, key) => (
+                            <div
+                              key={key}
+                              style={{
+                                display: "flex",
+                              }}
+                            >
+                              <CustomText
+                                text={`${index.title}:`}
+                                color="warning"
+                              />
+                              <CustomText
+                                text={
+                                  index.type === "bool"
+                                    ? rowData[index.field] === 0
+                                      ? index.options[0]
+                                      : index.options[1]
+                                    : index.type === "date"
+                                    ? moment(rowData[index.field]).format(
+                                        "D MMMM YYYY, h:mm a"
+                                      )
+                                    : rowData[index.field]
+                                }
+                                margin={true}
+                                color="default"
+                              />
+                            </div>
+                          ))}
                         </div>
-                      )
-                    }
-                  </div>
-                )
-              },
-            },
-          ] : null}
+                      );
+                    },
+                  },
+                ]
+              : null
+          }
         />
       </div>
     );
@@ -260,8 +276,9 @@ CustomTable.defaultProps = {
   add: null,
   updates: null,
   customUpdate: null,
+  onExtract: null,
   deletes: null,
-  loading: false
+  loading: false,
 };
 
 CustomTable.propTypes = {
@@ -279,6 +296,7 @@ CustomTable.propTypes = {
   add: PropTypes.func,
   updates: PropTypes.func,
   customUpdate: PropTypes.func,
+  onExtract: PropTypes.func,
   deletes: PropTypes.func,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
 };

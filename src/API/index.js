@@ -1,5 +1,5 @@
 // API URL
-export const API = "http://192.168.0.103:8000/";
+export const API = "http://192.168.0.165:8000/";
 // export const API = "http://kroft-backend.test/";
 // export const API = 'http://c1870854.ferozo.com/kroft/';
 
@@ -42,6 +42,7 @@ export const box_open = "api/box_open";
 export const box_opening = "api/box_opening";
 export const box_closing = "api/box_closing";
 export const box_check = "api/box_check";
+export const box_extract = "api/box_extract";
 export const box_state = "api/box_state";
 export const box_delete = "api/box_delete";
 
