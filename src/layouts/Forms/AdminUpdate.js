@@ -101,7 +101,7 @@ function AdminUpdate(props) {
   };
 
   // Empty State values
-  const handleEmpty = (e) => {
+  const handleEmpty = () => {
     setState({
       id: localStorage.getItem("id"),
       rol_id: "",
@@ -189,7 +189,7 @@ function AdminUpdate(props) {
         <input
           // disabled={state.isUpload || showProgress ? true : false}
           accept="image/png, image/jpeg, image/jpg"
-          id="employee-file-update"
+          id="admin-file-update"
           type="file"
           name="image"
           onChange={handleImage}
@@ -215,7 +215,7 @@ function AdminUpdate(props) {
             edge="end"
             disabled={state.isUpload ? true : false}
             onClick={() => {
-              document.getElementById("employee-file-update").click();
+              document.getElementById("admin-file-update").click();
             }}
           >
             <label>

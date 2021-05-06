@@ -158,7 +158,7 @@ function AdminAdd(props) {
           <input
             // disabled={state.isUpload || showProgress ? true : false}
             accept="image/png, image/jpeg, image/jpg"
-            id="employee-file-create"
+            id="admin-file-create"
             type="file"
             name="image"
             onChange={handleImage}
@@ -180,7 +180,7 @@ function AdminAdd(props) {
               edge="end"
               disabled={state.isUpload ? true : false}
               onClick={() => {
-                document.getElementById("employee-file-create").click();
+                document.getElementById("admin-file-create").click();
               }}
             >
               <label>
