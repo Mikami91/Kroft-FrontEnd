@@ -1,7 +1,7 @@
 // API URL
-export const API = "http://192.168.0.165:8000/";
-// export const API = "http://kroft-backend.test/";
-// export const API = 'http://c1870854.ferozo.com/kroft/';
+export const API = "http://127.0.0.1:8000/";
+// export const API = "http://192.168.0.103:8000/";
+// export const API = "http://kroftserver.c2230294.ferozo.com/";
 
 /*::::::::::::::::::::SUPER ADMIN::::::::::::::::::::*/
 export const super_admin_create = "api/super_admin_create";

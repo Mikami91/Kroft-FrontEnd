@@ -41,9 +41,9 @@ import { payload as collectPayload } from "../redux/actions/creators/collectCrea
 export const websocketConnection = new Echo({
   broadcaster: "pusher",
   key: "3351a028ec8f3033b9c3",
-  // wsHost: 'http://kroftserver.test',
-  wsHost: "192.168.0.165",
-  // wsHost: window.location.hostname,
+  // wsHost: "http://kroftserver.c2230294.ferozo.com",
+  // wsHost: '192.168.0.103',
+  wsHost: window.location.hostname,
   wsPort: 6001,
   cluster: "mt1",
   auth: {
