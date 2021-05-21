@@ -182,8 +182,8 @@ function Boxes({ data, fetching, loading }) {
                 add={boxCreate}
                 refresh={boxShow}
                 updates={boxUpdate}
-                // onExtract={handleOpen}
-                deletes={boxDelete}
+                onExtract={handleOpen}
+                // deletes={boxDelete}
               />
             </CardBody>
           </Card>
@@ -198,18 +198,6 @@ function Boxes({ data, fetching, loading }) {
         open={state.open}
         close={handleClose}
         closeIcon={fetching || loading ? false : true}
-        // content={
-        //   <Grid container justify="center" alignItems="center" spacing={1}>
-        //     <Typography
-        //       variant="h5"
-        //       gutterBottom
-        //       style={{ paddingTop: "2rem" }}
-        //     >
-        //       {`Bs ${state.data.total_amount}`}
-        //     </Typography>
-        //   </Grid>
-        // }
-        // content={<SupplierUpdate data={data} close={handleClose} />}
         leftButtons={[
           {
             type: "text",
