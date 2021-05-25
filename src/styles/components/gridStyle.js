@@ -48,7 +48,9 @@ const gridStyle = {
 	},
 	products: {
 		position: 'relative',
-		width: '100%',
+		// width: '100%',
+		width: '100rem',
+		height: '100rem',
 		minHeight: '1px',
 		paddingTop: theme.spacing(1),
 		paddingRight: theme.spacing(1),

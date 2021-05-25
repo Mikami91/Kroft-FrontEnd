@@ -11,6 +11,10 @@ import {
 } from "../../themes/theme.js";
 
 const cardProductStyle = {
+  product: {
+    // with: 200,
+    // height: 200,
+  },
   cardHeader: {
     width: "100%",
     marginTop: "-0.5rem",
@@ -25,7 +29,8 @@ const cardProductStyle = {
   },
   price: {
     color: theme.palette.type === "light" ? "#000" : "#ff9800",
-    minHeight: "auto",
+    // minHeight: "auto",
+    minHeight: "1rem",
     fontSize: "0.8rem",
     textAlign: "left",
     // position: "absolute",
@@ -44,30 +49,29 @@ const cardProductStyle = {
     },
   },
   image: {
-    // background: "brown",
     color: "black",
     objectFit: "cover",
     objectPosition: "center",
     width: "100%",
-    height: 65,
+    height: 70,
     margin: "auto",
     borderRadius: "3px",
     alignItems: "center",
     [theme.breakpoints.only("sm")]: {
-      // width: 90,
-      height: 90,
+      width: 130,
+      height: 110,
     },
     [theme.breakpoints.only("md")]: {
-      // width: 100,
-      height: 100,
+      width: 150,
+      height: 130,
     },
     [theme.breakpoints.only("lg")]: {
-      // width: 115,
-      height: 115,
+      width: 190,
+      height: 170,
     },
     [theme.breakpoints.only("xl")]: {
-      // width: 120,
-      height: 120,
+      width: 190,
+      height: 170,
     },
   },
   cardFooter: {
@@ -75,13 +79,11 @@ const cardProductStyle = {
     textOverflow: "ellipsis",
     wordBreak: "break-word",
     display: "-webkit-box",
-    "-webkit-line-clamp": 1,
-    [theme.breakpoints.up("md")]: {
-      "-webkit-line-clamp": 2,
-    },
+    "-webkit-line-clamp": 2,
+    // [theme.breakpoints.up("md")]: {
+    //   "-webkit-line-clamp": 2,
+    // },
     "-webkit-box-orient": "vertical",
-
-    // borderTop: "1px solid #eee",
     marginTop: "8px",
     alignItems: "center",
     paddingTop: "0px",
@@ -91,6 +93,18 @@ const cardProductStyle = {
     marginLeft: "8px",
     marginRight: "8px",
     width: "auto",
+    [theme.breakpoints.only("sm")]: {
+      width: 120,
+    },
+    [theme.breakpoints.only("md")]: {
+      width: 140,
+    },
+    [theme.breakpoints.only("lg")]: {
+      width: 170,
+    },
+    [theme.breakpoints.only("xl")]: {
+      width: 180,
+    },
   },
   name: {
     color: grayColor[4],

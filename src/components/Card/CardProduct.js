@@ -34,6 +34,7 @@ function CardProduct(props) {
 
   // Styles
   const classes = useStyles();
+
   const cardClasses = classNames({
     [classes.products]: true,
   });

@@ -373,7 +373,6 @@ function DrawerProducts(props) {
                     container
                     spacing={0}
                     direction="row"
-                    // className={classes.content}
                     justify="flex-start"
                     alignItems="flex-start"
                   >
