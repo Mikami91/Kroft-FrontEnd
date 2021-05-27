@@ -50,7 +50,7 @@ const gridStyle = {
 		position: 'relative',
 		// width: '100%',
 		width: '100rem',
-		height: '100rem',
+		height: 'auto',
 		minHeight: '1px',
 		paddingTop: theme.spacing(1),
 		paddingRight: theme.spacing(1),

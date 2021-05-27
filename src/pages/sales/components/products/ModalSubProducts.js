@@ -11,6 +11,8 @@ import CustomModal from "../../../../components/Modal/CustomModal.js";
 import CardProduct from "../../../../components/Card/CardProduct.js";
 // Styles
 import styles from "../../../../styles/components/gridStyle";
+// Api
+import { API } from "../../../../API/index";
 
 const useStyles = makeStyles(styles);
 
@@ -78,10 +80,7 @@ function ModalSubProducts(props) {
                       color="secondary"
                       prefix="Bs."
                       price={index.price}
-                      photo={
-                        "https://source.unsplash.com/300x300/?food,breakfast"
-                      }
-                      // photo={API + imagePath + index.photo}
+                      photo={`${API}images/products/${index.photo}`}
                       name={index.name}
                       quantity={handleQuantity(index.id)}
                       onClick={() => setProductToOrder(index)}

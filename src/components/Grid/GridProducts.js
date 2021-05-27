@@ -55,6 +55,8 @@ function GridProducts(props) {
     [classes.products]: true,
   });
 
+  // photo={"https://source.unsplash.com/300x300/?food,breakfast"}
+
   // Render
   return products.map((index, key) =>
     index[keyCategory] === filter ? (
@@ -75,7 +77,6 @@ function GridProducts(props) {
             prefix={"Bs."}
             price={index.price}
             photo={API + imagePath + index.photo}
-            // photo={"https://source.unsplash.com/300x300/?food,breakfast"}
             name={index.name}
             quantity={handleQuantity(index.id)}
             current_product={index}
@@ -87,8 +88,7 @@ function GridProducts(props) {
             color={color}
             prefix={""}
             price={""}
-            photo={API + imagePath2 + index.photo}
-            // photo={"https://source.unsplash.com/300x300/?food,breakfast"}
+            photo={API + imagePath2 + index.sub_category_photo}
             name={index.sub_category_name}
             quantity={found_sub_category_id(index[keySubcategory])}
             current_product={index}

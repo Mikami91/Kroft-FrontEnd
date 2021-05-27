@@ -80,9 +80,6 @@ const cardProductStyle = {
     wordBreak: "break-word",
     display: "-webkit-box",
     "-webkit-line-clamp": 2,
-    // [theme.breakpoints.up("md")]: {
-    //   "-webkit-line-clamp": 2,
-    // },
     "-webkit-box-orient": "vertical",
     marginTop: "8px",
     alignItems: "center",

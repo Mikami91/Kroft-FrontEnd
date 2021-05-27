@@ -16,6 +16,8 @@ import CardNumber from "../../components/Card/CardNumber.js";
 import styles from "../../styles/components/gridStyle";
 // Assets
 import image from "../../assets/img/defaults/table.png";
+// Api
+import { API } from "../../API/index";
 
 const useStyles = makeStyles(styles);
 
@@ -63,9 +65,9 @@ function GridTables(props) {
               <Card className={cardClasses} onClick={() => onClick(index)}>
                 <CardMedia
                   component="img"
-                  // height="140"
+                  height="140"
                   className={classes.image}
-                  image={image}
+                  image={`${API}images/tables/${index.photo}`}
                   title={index.name}
                   loading="lazy"
                 />
