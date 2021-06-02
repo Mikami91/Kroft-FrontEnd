@@ -28,10 +28,11 @@ import {
   useFreeSaleModal,
   useLogoutModal,
 } from "../../hooks/useModal";
+// Layouts
 import LogoutConfirmation from "../../layouts/Dialogs/LogoutConfirmation";
 import ComponentPrintTotal from "../../layouts/Prints/ComponentPrintTotal";
-// Layouts
 import ComponentPrintTotalAmount from "../../layouts/Prints/ComponentPrintTotalAmount";
+import ComponentPrintBoxClose from "../../layouts/Prints/ComponentPrintBoxClose";
 import {
   close as emptyCurrentReduxState,
   open as setCurrentReduxState,
@@ -174,12 +175,16 @@ function CollectsPage(props) {
   // Button for print
   let btnTotal = document.getElementById("printTotal");
   let btnFinal = document.getElementById("printFinal");
+  let btnBoxClose = document.getElementById("printBoxClose");
 
   // Total Print
   const handleTotalPrint = () => btnTotal.click();
 
   // Final Print
   const handleFinalPrint = () => btnFinal.click();
+  
+  // Box Close Print
+  const handleBoxClosePrint = () => btnBoxClose.click();
 
   // Cancel Order function
   // const handleCancelOrder = (e) => {
@@ -288,6 +293,7 @@ function CollectsPage(props) {
             open={openBox}
             close={toggleBox}
             handleLogout={handleLogoutCloseBox}
+            handleBoxClosePrint={handleBoxClosePrint}
           />
           <ModalPassCollect
             open={current.open && current.table_busy === 1}
@@ -305,11 +311,6 @@ function CollectsPage(props) {
             close={toggleDrawer}
             openTable={handleOpenTable}
           />
-          {/* <ComponentToPrint
-            btnID="printTotal"
-            printList={printList}
-            refresh={[openPassCollect, currentTableState.id]}
-          /> */}
           <LogoutConfirmation
             open={openLogout}
             close={toggleLogout}
@@ -324,6 +325,10 @@ function CollectsPage(props) {
             btnID="printFinal"
             keys={keys}
             refresh={current.open && current.table_busy === 2}
+          />
+          <ComponentPrintBoxClose
+            btnID="printBoxClose"
+            refresh={openBox}
           />
         </Fragment>
       ) : null}

@@ -19,6 +19,7 @@ function ModalBox(props) {
     open,
     close,
     handleLogout,
+    handleBoxClosePrint,
     // Redux
     box_opening,
     box_fetching,
@@ -37,6 +38,7 @@ function ModalBox(props) {
   // Close Box function
   const handleBoxClose = async (e) => {
     close();
+    await handleBoxClosePrint();
     await handleLogout(e);
     e.preventDefault();
     let response = await boxClosing({
