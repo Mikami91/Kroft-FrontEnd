@@ -55,56 +55,79 @@ function GridProducts(props) {
     [classes.products]: true,
   });
 
-  // photo={"https://source.unsplash.com/300x300/?food,breakfast"}
+  // Remove duplicate Subcategories in the Products list  
+  function removeDuplicates(originalArray, prop) {
+    var newArray = [];
+
+    originalArray.map(i => {
+      if (i[prop] === null) {
+        newArray.push(i);
+      } else {
+        let exitsID = newArray.some(e => e[prop] === i[prop]);
+        if (!exitsID) {
+          newArray.push(i);
+        }
+      }
+    })
+
+    return newArray;
+  }
+
+  const uniqueArray = removeDuplicates(products, "sub_category_id");
+
 
   // Render
-  return products.map((index, key) =>
-    index[keyCategory] === filter ? (
-      <Grid
-        key={key}
-        item
-        xs={4}
-        sm={3}
-        md={2}
-        lg={2}
-        xl={2}
-        elevation={0}
-        className={gridClasses}
-      >
-        {index[keySubcategory] === null ? (
-          <CardProduct
-            color={color}
-            prefix={"Bs."}
-            price={index.price}
-            photo={API + imagePath + index.photo}
-            name={index.name}
-            quantity={handleQuantity(index.id)}
-            current_product={index}
-            variant={"standard"}
-            onClick={() => setProductToOrder(index)}
-          />
-        ) : (
-          <CardProduct
-            color={color}
-            prefix={""}
-            price={""}
-            photo={API + imagePath2 + index.sub_category_photo}
-            name={index.sub_category_name}
-            quantity={found_sub_category_id(index[keySubcategory])}
-            current_product={index}
-            variant={"dot"}
-            onClick={() =>
-              openSubCategory(
-                index.sub_category_name,
-                index[keySubcategory],
-                products
-              )
-            }
-          />
-        )}
-      </Grid>
-    ) : null
-  );
+  return uniqueArray.map((index, key) => {
+
+    if (index[keyCategory] === filter) {
+      return (
+        <Grid
+          key={key}
+          item
+          xs={4}
+          sm={3}
+          md={2}
+          lg={2}
+          xl={2}
+          elevation={0}
+          className={gridClasses}
+        >
+          {index[keySubcategory] === null ? (
+            <CardProduct
+              color={color}
+              prefix={"Bs."}
+              price={index.price}
+              photo={API + imagePath + index.photo}
+              name={index.name}
+              quantity={handleQuantity(index.id)}
+              current_product={index}
+              variant={"standard"}
+              onClick={() => setProductToOrder(index)}
+            />
+          ) : (
+            <CardProduct
+              color={color}
+              prefix={""}
+              price={""}
+              photo={API + imagePath2 + index.sub_category_photo}
+              name={index.sub_category_name}
+              quantity={found_sub_category_id(index[keySubcategory])}
+              current_product={index}
+              variant={"dot"}
+              onClick={() =>
+                openSubCategory(
+                  index.sub_category_name,
+                  index[keySubcategory],
+                  products
+                )
+              }
+            />
+          )}
+        </Grid>
+      );
+    }
+
+  });
 }
 // Proptypes
 GridProducts.defaultProps = {
