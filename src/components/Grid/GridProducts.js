@@ -86,7 +86,7 @@ function GridProducts(props) {
           item
           xs={4}
           sm={3}
-          md={2}
+          md={3}
           lg={2}
           xl={2}
           elevation={0}
